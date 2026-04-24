@@ -17,22 +17,11 @@ export default function Home() {
   return (
     <main className="homepage-demo-design">
       <HeroHeader />
-
-      <div className="top-divider trinery-bg"></div>
       <WhyChooseUs />
-      <div className="bottom-divider trinery-bg"></div>
-
       <PlanTabSec />
-
-      {/* <TourPackage /> */}
-      <div className="top-divider trinery-bg"></div>
-      <ServicesTabSec />
-      <div className="bottom-divider trinery-bg"></div>
-
-      {/* <RentalCar /> */}
       <TouristVisitSection />
+      <ServicesTabSec />
       <BathingDates />
-      {/* <HotelsBookSection /> */}
       <BlogSection />
       <VideoGallery />
     </main>

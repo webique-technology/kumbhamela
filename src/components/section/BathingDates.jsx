@@ -64,7 +64,8 @@ export const BathingDates = () => {
             </section> */}
 
             {/* bathing dates with slider */}
-            <section className="bathing-count-main">
+            <section className="bathing-count-main position-relative">
+                <div className="top-divider position-absolute td-trinery-bg z-3 td-top"></div>
                 <div className="bathing-row-count">
                     <Container fluid="lg" className="bathing-count-left d-flex flex-column align-items-center justify-content-center">
                         <div className="d-flex flex-column align-items-center justify-content-center">
@@ -75,7 +76,7 @@ export const BathingDates = () => {
                             </div>
                             <div>
                                 <KumbhCountdown
-                                    isActive={false}
+                                    isActive={true}
                                 />
                             </div>
                         </div>
@@ -126,11 +127,11 @@ export const BathingDates = () => {
                                             slidesPerView: 2,
                                             spaceBetween: 30,
                                         },
-                                        1024: {
-                                            slidesPerView: 2,
+                                        1120: {
+                                            slidesPerView: 3,
                                             spaceBetween: 30,
                                         },
-                                        1440: {
+                                        1600: {
                                             slidesPerView: 4,
                                             spaceBetween: 30,
                                         },
@@ -139,12 +140,12 @@ export const BathingDates = () => {
                                     {bathingDates.map((date, index) => (
                                         <SwiperSlide key={index} className="h-auto">
                                             <div className="date-card w-100 h-100 d-grid">
-                                                <div className="card-img">
+                                                {/* <div className="card-img">
                                                     <img src="/images/tour-demo-2.png" alt="" className="bathing-card-img img-fluid" />
-                                                </div>
+                                                </div> */}
                                                 <div className="card-body p-2">
                                                     <p className="title">{date.title}</p>
-                                                    <div className="d-flex align-items-center justify-content-between">
+                                                    <div className="d-flex flex-column align-items-center justify-content-between">
                                                         <span className="m-0">{date.day}</span>
                                                         <p className="month">
                                                             {date.month} {date.year}
@@ -159,6 +160,7 @@ export const BathingDates = () => {
                         </div>
                     </Container>
                 </div>
+                <div className="bottom-divider position-absolute z-3 bd-bottom bd-light-bg"></div>
             </section>
         </>
     );

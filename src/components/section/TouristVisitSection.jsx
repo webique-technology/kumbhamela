@@ -11,7 +11,8 @@ import { ArrowRight, ArrowLeft } from "lucide-react";
 
 const TouristVisitSection = () => {
     return (
-        <section className='section-padding sacred-destinations'>
+        <section className='section-padding-2 sacred-destinations position-relative'>
+            <div className="bottom-divider trinery-bg position-absolute top-0"></div>
             <Container>
                 <div className="d-flex mb-4 position-relative justify-content-between align-items-center">
                     <div>
@@ -52,7 +53,6 @@ const TouristVisitSection = () => {
                     slidesPerView={4}
                     navigation={false}
                     spaceBetween={20}
-                    timeDelay={4000}
                     breakpoints={{
                         0: {
                             slidesPerView: 1,
@@ -71,6 +71,8 @@ const TouristVisitSection = () => {
                             spaceBetween: 40,
                         },
                     }}
+                    disableAutoplay={false}
+                    loop={false}
                     navigation={{
                         prevEl: '.destination-prev-btn',
                         nextEl: '.destination-next-btn',
@@ -83,7 +85,7 @@ const TouristVisitSection = () => {
                                     src={value.image}
                                     alt={value.name}
                                     width={200}
-                                    height={600}
+                                    height={750}
                                     className="card-img-top object-fit-cover"
                                     style={{ width: '100%', height: 'auto' }}
                                 />
@@ -103,6 +105,7 @@ const TouristVisitSection = () => {
                     iconRight={<ArrowRight size={16} />}
                 />
             </Container>
+            <div className="top-divider trinery-bg position-absolute bottom-0"></div>
         </section>
     )
 }

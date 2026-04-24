@@ -13,7 +13,8 @@ const PlanTabSec = () => {
     const icons = [Plane, Hotel, UtilityPole, MapPin, PhoneCall, Car];
 
     return (
-        <section className='section-padding plan-tab-section'>
+        <section className='section-padding trinery-bg plan-tab-section position-relative'>
+            {/* <div className="top-divider position-absolute top-0"></div> */}
             <Container>
                 <TitleComponent
                     title="Plan your Pilgrimage"
@@ -103,6 +104,7 @@ const PlanTabSec = () => {
                     </Row>
                 </Tab.Container>
             </Container>
+            {/* <div className="bottom-divider position-absolute bottom-0"></div> */}
         </section>
     );
 }

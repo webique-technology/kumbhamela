@@ -54,7 +54,8 @@ const ServicesTabSec = () => {
     };
 
     return (
-        <section className='section-padding trinery-bg services-section'>
+        <section className='section-padding position-relative trinery-bg services-section'>
+            {/* <div className="bottom-divider position-absolute top-0"></div> */}
             <Container fluid>
                 <Tab.Container
                     id="services-tabs"
@@ -106,7 +107,7 @@ const ServicesTabSec = () => {
                                                     <SwiperSlide key={i}>
                                                         {/* {renderCard(tab.type, item)} */}
                                                         <div className="service-item-card d-flex align-itemx-end"
-                                                        style={{ backgroundImage: `url(${backgroundImagePath})` }}
+                                                            style={{ backgroundImage: `url(${backgroundImagePath})` }}
                                                         >
                                                             <div className="service-item-card-content w-100 d-flex flex-column justify-content-end z-3">
                                                                 <div className="badge service-item-badge">
@@ -174,6 +175,7 @@ const ServicesTabSec = () => {
                 type={activeTab === "hotel" ? "hotel" : "car"}
                 selectedItem={selectedItem}
             />
+            {/* <div className="top-divider position-absolute bottom-0"></div> */}
         </section >
     );
 };

@@ -43,7 +43,6 @@ export default async function RootLayout({ children, params }) {
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Navbar />
           {children}
-          <div className="top-divider bg-dark-custom divider-filter02"></div>
           <Footer />
         </NextIntlClientProvider>
       </body>

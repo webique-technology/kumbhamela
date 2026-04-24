@@ -52,7 +52,8 @@ const VideoGallery = () => {
     };
 
     return (
-        <section className="section-padding video-gallery-main">
+        <section className="section-padding-2 trinery-bg position-relative video-gallery-main">
+            <div className="top-divider position-absolute z-3 td-top bd-light-bg"></div>
             <Container>
                 <TitleComponent
                     title={"Divine Experiences"}
@@ -130,6 +131,7 @@ const VideoGallery = () => {
                     )}
                 </Modal.Body>
             </Modal>
+            <div className="bottom-divider position-absolute z-3 bd-bottom d-black-filter"></div>
         </section>
     );
 };

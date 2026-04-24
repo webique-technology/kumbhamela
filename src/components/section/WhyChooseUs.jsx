@@ -30,7 +30,8 @@ const WhyChooseUs = () => {
 
     return (
         <>
-            <section className="why-choose-us-section section-padding trinery-bg">
+            <section className="why-choose-us-section section-padding-2 position-relative">
+                {/* <div className="bottom-divider position-absolute z-3 top-0"></div> */}
                 <Container>
                     <Row>
                         <Col md={6}>
@@ -79,6 +80,7 @@ const WhyChooseUs = () => {
                     </Row>
 
                 </Container>
+                <div className="top-divider trinery-bg position-absolute bottom-0"></div>
             </section>
         </>
     )
