@@ -1,0 +1,346 @@
+@use "../assets/scss/variable.scss" as *;
+
+// bathin section
+.bathing-section {
+    position: relative;
+    background: url("/images/water-bg.jpg") no-repeat center center/cover;
+    color: $text-color-light;
+    overflow: hidden;
+
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    .section-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 40px;
+
+        svg {
+            color: $primary-color;
+        }
+    }
+
+    .date-card {
+        background: $bg-light;
+        color: $text-color-dark;
+        border-radius: $border-radius-sm;
+        padding: 15px 10px;
+        text-align: center;
+        border: 2px solid $primary-color;
+        transition: 0.3s;
+
+        .title {
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        span {
+            font-size: 42px;
+            font-weight: 800;
+            color: $text-color-dark;
+        }
+
+        .month {
+            font-size: $font-size-xs;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+    }
+
+}
+
+// bathing section 2 with slider
+.bathing-count-main {
+    position: relative;
+
+    // for top bg divider
+    &::before {
+        content: "";
+        background-image: url("/images/bg-divider-1.png");
+        background-size: cover;
+        background-position: bottom;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 70px;
+        position: absolute;
+        top: -1;
+        left: 0;
+        z-index: 2;
+    }
+
+    // for bottom bg divider
+    &:after {
+        content: "";
+        background-image: url("/images/bg-divider-bottom.png");
+        background-size: cover;
+        background-position: bottom;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 89px;
+        position: absolute;
+        bottom: -1;
+        left: 0;
+        z-index: 2;
+        filter: invert(0.02);
+    }
+
+    .bathing-row-count {
+        background-color: $bg-drak-2;
+        // grid-template-columns: 31% 69%;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        z-index: 1;
+
+        // bathing-left
+        .bathing-count-left {
+            background-color: $primary-color;
+            color: $text-color-light;
+            flex: 0 0 100%;
+            width: 100%;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 32px;
+            gap: 60px;
+
+            @media(max-width:768px) {
+                padding: 80px 32px 50px;
+            }
+
+            .bathing-title {
+                font-weight: 900 !important;
+                font-size: 90px !important;
+                line-height: 1 !important;
+                text-transform: uppercase;
+                -webkit-text-stroke: 2px $text-color-light;
+                color: transparent;
+
+                @media (max-width: 375px) {
+                    font-size: 70px !important;
+                }
+            }
+
+            .bathing-title-2 {
+                color: $text-color-light;
+                font-weight: 700;
+                font-size: clamp(1.5rem, 3vw, 1.875rem);
+            }
+
+            .countdown-divider {
+                width: 100%;
+                height: 2px;
+                background-color: $text-color-light;
+            }
+
+            .kumbh-countdown-section {
+                grid-template-columns: repeat(4, 92px);
+                padding: 60px 0 10px;
+
+                @media (max-width: 1400px) {
+                    grid-template-columns: repeat(4, 78px);
+                    padding: 30px 0 10px;
+                }
+
+                @media (max-width: 400px) {
+                    grid-template-columns: repeat(4, 72px);
+                    padding: 20px 0 10px;
+                }
+            }
+
+            .countdown-box {
+                border: 0.5px solid $bg-light;
+                border-radius: 12px; // Rounded corners from the image
+                overflow: hidden;
+                background: radial-gradient(157.24% 123.22% at 47.19% -.63%, #fff6, #fff0);
+            }
+
+            .countdown-value {
+                padding: 20px 7px 10px;
+                margin-bottom: 0;
+            }
+
+            .countdown-label {
+                color: $text-color-light;
+                padding: 8px 4px;
+                text-transform: capitalize;
+            }
+
+            /* 
+ * The Glitch Effect (Optional, but present in your reference image)
+ * This replicates the subtle cyan/magenta offset on the numbers.
+ */
+            .glitch-text {
+                font-size: clamp(1.75rem, 3vw, $font-size-xl) !important; // Adjust size for your layout
+                font-weight: 800;
+                color: $text-color-light;
+                line-height: 1 !important;
+                position: relative;
+                text-shadow: 0.05em 0 0 $primary-color, -0.025em -0.05em 0 $secondary-color, -0.05em 0.025em 0 #00ff00;
+                animation: glitch 1s infinite linear alternate-reverse;
+            }
+
+            @keyframes glitch {
+                0% {
+                    text-shadow: 0.5px 0 0 $primary-color, -0.2px -0.5px 0 $secondary-color;
+                }
+
+                100% {
+                    text-shadow: -0.5px 0 0 $primary-color, 0.2px 0.5px 0 $secondary-color;
+                }
+            }
+        }
+
+        // bathing-right
+        .bathing-count-right {
+            background-color: $bg-drak-2;
+            color: $text-color-light;
+            flex: 0 0 100%;
+            width: 100%;
+
+            .date-card {
+                background: $bg-light;
+                color: $text-color-dark;
+                border-radius: $border-radius-sm;
+                padding: 15px 10px;
+                text-align: center;
+                border: 2px solid $primary-color;
+                transition: 0.3s;
+
+                .bathing-card-img {
+                    border-radius: $border-radius-sm;
+                }
+
+                .title {
+                    font-size: $font-size-base;
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
+                    margin-bottom: 8px;
+                }
+
+                span {
+                    font-size: $font-size-xl;
+                    font-weight: 800;
+                    color: $text-color-dark;
+                }
+
+                .month {
+                    font-size: $font-size-xs;
+                    font-weight: 600;
+                    margin-top: 5px;
+                }
+
+            }
+
+            .nav-custom-btn {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                border: 1px solid $primary-color;
+                background: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                color: $primary-color;
+
+                &:hover {
+                    background-color: $primary-color;
+                    color: $text-color-light;
+                    border-color: $primary-color;
+                }
+
+                // Swiper adds a 'swiper-button-disabled' class automatically
+                &:disabled,
+                &.swiper-button-disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                    pointer-events: none;
+                }
+            }
+
+
+        }
+
+        @media (max-width: 1400px) {
+            .bathing-count-left {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .bathing-count-right {
+                padding-bottom: 60px !important;
+            }
+        }
+
+        // Tablet / Small Desktop
+        @media (min-width: 768px) {
+            .bathing-count-left {
+                flex: 0 0 385px; // Matching your right-side calc
+                width: 385px;
+
+                .bathing-title {
+                    font-size: 90px !important;
+                }
+            }
+
+            .bathing-count-right {
+                flex: 0 0 calc(100% - 385px);
+                width: calc(100% - 385px);
+                padding-left: 2rem;
+            }
+        }
+
+        // Standard Desktop
+        @media (min-width: 1200px) {
+            .bathing-count-left {
+                flex: 0 0 400px;
+                width: 400px;
+            }
+
+            .bathing-count-right {
+                flex: 0 0 calc(100% - 400px);
+                width: calc(100% - 400px);
+                padding-left: 3rem;
+            }
+        }
+
+        // Large Desktop / Ultra-wide
+        @media (min-width: 1400px) {
+            .bathing-count-left {
+                flex: 0 0 580px;
+                width: 580px;
+            }
+
+            .bathing-count-right {
+                flex: 0 0 calc(100% - 580px);
+                width: calc(100% - 580px);
+                padding-left: 60px;
+            }
+        }
+
+    }
+}

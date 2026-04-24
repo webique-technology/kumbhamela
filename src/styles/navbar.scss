@@ -1,0 +1,208 @@
+@use "../assets/scss/variable" as *;
+
+.custom-navbar {
+  position: sticky;
+  top: 0;
+  padding: 12.205 0;
+  z-index: 999;
+  background: $bg-light;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  &.scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Logo */
+.logo-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $primary-color, $secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-color-light;
+  margin-right: 10px;
+}
+
+.logo-text h1 {
+  font-size: $font-size-md-2;
+  font-weight: 800;
+  margin: 0;
+  color: $text-color-dark;
+}
+
+.logo-text p {
+  font-size: $font-size-xs;
+  margin: 0;
+  color: $primary-color;
+}
+
+/* Nav Links */
+.nav-link-custom {
+  padding: 8px 12px;
+  text-decoration: none;
+  color: $text-color-dark;
+  font-size: $font-size-sm;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: $primary-color;
+    background: $primery-bg-color;
+  }
+  @media(max-width:1440px){
+    font-size: $font-size-base;
+  }
+}
+
+/* Buttons */
+.lang-btn {
+  border: none;
+  background: transparent;
+  gap: 5px;
+  padding: 6px 10px;
+  border-radius: 6px;
+
+  span {
+    color: $text-color-dark;
+    font-weight: 600;
+  }
+
+  &:hover {
+    color: $primary-color;
+    background: $primery-bg-color;
+  }
+}
+
+.whatsapp-btn {
+  background: $color-green-500;
+  border-radius: 6px;
+  padding: 8px 14px;
+  gap: 6px;
+
+  span {
+    color: $text-color-light;
+  }
+
+  &:hover {
+    background: $color-green-500;
+  }
+}
+
+/* Mobile */
+
+/* 1. Background Overlay Animation (Right to Left Ease) */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+
+  // Initial hidden state
+  opacity: 0;
+  visibility: hidden;
+  clip-path: inset(0 0 0 100%); // Starts from the right
+  transition: clip-path 0.3s ease-in, opacity 0.5s ease, visibility 0.5s;
+  backdrop-filter: blur(4px);
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    clip-path: inset(0 0 0 0); // Slides to cover the left
+  }
+}
+
+/* 2. Mobile Sidebar Fixed */
+.mobile-menu {
+  position: fixed; // Important: stay fixed to viewport
+  width: 300px;
+  top: 0;
+  right: 0;
+  background: $bg-light;
+  z-index: 1001;
+  height: 100vh;
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: all 0.25s ease-in-out;
+
+  &.open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+}
+
+.mobile-nav {
+  padding-top: 71px; // Padding for the header area
+  height: 100%;
+  overflow-y: auto;
+}
+
+.mobile-toggle {
+  border: none;
+  background: transparent;
+  z-index: 1002;
+}
+
+
+.mobile-link {
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+  color: $text-color-dark;
+  border-bottom: 1px solid $color-gray-200;
+
+  &:hover {
+    color: $primary-color;
+    background: $primery-bg-color;
+  }
+}
+
+.mobile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: $bg-light;
+  border-radius: 8px;
+  padding: 10px;
+  min-width: 120px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; // 2 columns for 8 languages
+  gap: 5px;
+  z-index: 1000;
+  margin-top: 10px;
+
+  .lang-item {
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 13px;
+    border-radius: 4px;
+
+    &:hover {
+      background: $trinery-bg-color;
+    }
+
+    &.active {
+      color: $primary-color;
+      font-weight: bold;
+    }
+  }
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}

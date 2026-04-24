@@ -1,0 +1,159 @@
+@use "../assets/scss/variable.scss" as *;
+
+.tour-pack-detail-sec {
+    position: relative;
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+
+    &::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        // inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        color: $text-color-light;
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: $border-radius-xl;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            // font-size: 48px;
+            font-weight: 800;
+        }
+    }
+}
+
+.main-section {
+    padding: 60px 0;
+
+    @media(max-width:992px) {
+        padding: 40px 0;
+    }
+
+    @media(max-width:768px) {
+        padding: 30px 0;
+    }
+
+    @media(max-width:576px) {
+        padding: 20px 0;
+    }
+}
+
+.section-block {
+    margin-bottom: 60px;
+}
+
+.feature-card {
+    padding: 20px;
+    border-radius: $border-radius-sm;
+    background: $trinery-bg-color;
+    transition: 0.3s;
+    height: 100%;
+    display: grid;
+
+    h5 {
+        font-size: $font-size-sm;
+        font-weight: 600;
+    }
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 40px;
+
+    .timeline-dot {
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 12px;
+        height: 12px;
+        background: $primary-color;
+        border-radius: 50%;
+
+        @media(max-width:576px) {
+            top: 8px;
+        }
+    }
+
+    .day-label {
+        font-size: $font-size-xs;
+        color: $primary-color;
+        font-weight: bold;
+    }
+
+    .timeline-img {
+        width: 100%;
+        border-radius: 10px;
+    }
+}
+
+.map-section {
+    position: relative;
+    margin-top: 40px;
+
+    img {
+        width: 100%;
+        border-radius: 20px;
+        aspect-ratio: 3/1.5;
+    }
+
+    .map-label {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        background: $bg-light;
+        padding: 10px;
+        border-radius: $border-radius-md;
+    }
+}
+
+.booking-card {
+    position: sticky;
+    top: 100px;
+    padding: 25px;
+    border-radius: $border-radius-lg;
+    background: $bg-light;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+    .price {
+        font-size: $font-size-lg;
+        font-weight: bold;
+    }
+
+    .info-box {
+        margin: 20px 0;
+    }
+
+
+    .note {
+        font-size: $font-size-xs;
+        margin-top: 10px;
+    }
+}
+
+// tour package section
+.tour-package-sec {
+    // background-image: url("/images/tour-section-bg.png");
+    // background-repeat: no-repeat;
+    // background-size: contain;
+    // background-position: bottom;
+}

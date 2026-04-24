@@ -1,0 +1,113 @@
+@use "../assets/scss/variable" as *;
+
+.custom-footer {
+  background: linear-gradient(to bottom, #111111, #000000);
+}
+
+/* Logo */
+.footer-logo-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff6a00, #d4af37);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    color: $text-color-light;
+  }
+}
+
+.footer-text,
+.footer-link,
+span {
+  font-size: $font-size-base;
+  color: $color-gray-400;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+/* Text */
+.footer-title {
+  font-size: $font-size-md;
+  margin: 0;
+}
+
+.footer-subtitle {
+  font-size: $font-size-xs;
+  color: $primary-color;
+  margin: 0;
+}
+
+/* Links */
+
+.footer-link:hover {
+  color: $primary-color;
+}
+
+/* Heading */
+.footer-heading {
+  font-size: $font-size-sm;
+  margin-bottom: 15px;
+}
+
+/* Icons */
+.icon {
+  color: $primary-color;
+}
+
+/* Social */
+.social-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-color-light;
+}
+
+.social-icon:hover {
+  background: $primary-color;
+}
+
+/* WhatsApp */
+.whatsapp-btn {
+  background: $color-green-500;
+  color: $text-color-light;
+}
+
+.whatsapp-btn:hover {
+  background: $color-green-500;
+  color: $text-color-light;
+}
+
+/* Newsletter */
+.newsletter-box {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 8px;
+
+  p {
+    font-size: $font-size-xs;
+    color: $color-gray-400;
+    line-height: $line-height-sm;
+  }
+}
+
+.btn-subscribe {
+  background: $primary-color;
+  color: $text-color-light;
+}
+
+.btn-subscribe:hover {
+  background: $primary-color;
+  color: $text-color-light;
+}
+
+/* Bottom */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}

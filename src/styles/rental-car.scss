@@ -1,0 +1,292 @@
+@use "../assets/scss/variable" as *;
+
+.hero-rental-section {
+    position: relative;
+    background-color: $bg-light;
+    overflow: hidden;
+
+    .hero-content {
+        .badge-wrapper {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 16px;
+            background-color: $primery-bg-color; // Light orange/brown tint
+            color: $primary-color;
+            border-radius: $border-radius-round;
+            font-size: $font-size-xs;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+
+        .hero-title {
+            // font-weight: 800;
+            // line-height: 1.1;
+            color: $text-color-dark;
+            // margin-bottom: 24px;
+            // letter-spacing: -2px;
+        }
+
+        .hero-description {
+            font-size: $font-size-md;
+            color: $text-color-dark;
+            line-height: 1.7;
+            max-width: 500px;
+        }
+    }
+
+    .hero-image-wrapper {
+        position: relative;
+
+        .main-image-container {
+            position: relative;
+            aspect-ratio: 4/3;
+            border-radius: 30px;
+            overflow: visible; // To allow support-card to overflow
+
+            .hero-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 30px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            }
+        }
+
+        .support-card {
+            position: absolute;
+            bottom: -25px;
+            left: -25px;
+            background: $bg-light;
+            padding: 24px;
+            border-radius: 20px;
+            border-left: 5px solid $primary-color;
+            min-width: 180px;
+
+            .support-number {
+                font-size: $font-size-lg-2;
+                font-weight: 800;
+                color: $primary-color;
+                line-height: 1;
+            }
+
+            .support-text {
+                font-size: $font-size-xs ;
+                font-weight: 700;
+                color: $text-color-dark;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-top: 4px;
+            }
+
+            @media (max-width: 576px) {
+                left: 10px;
+                bottom: 10px;
+                padding: 15px;
+                min-width: 140px;
+
+                .support-number {
+                    font-size: $font-size-lg;
+                }
+            }
+        }
+    }
+}
+
+// tab section
+.car-nav-pills {
+    background: $trinery-bg-color;
+}
+
+.car-tab-item {
+    // background: $secondary-color;
+    width: fit-content;
+    padding: 4px 20px !important;
+    color: $primary-color;
+
+
+}
+
+.car-tab-item {
+    &.nav-link {
+        // Base state
+        color: $primary-color;
+        transition: all 0.3s ease;
+
+        // Active state
+        &.active {
+            background-color: $primary-color !important;
+            color: $text-color-light !important;
+            border-color: $primary-color !important;
+        }
+
+        &:hover:not(.active) {
+            background-color: $primery-bg-color;
+            color: $primary-color;
+        }
+    }
+}
+
+// bento grid
+
+.bento-features-section {
+    background-color: $bg-light;
+
+}
+
+// .bento-grid {
+//     display: grid;
+//     grid-template-columns: repeat(4, 1fr);
+//     grid-auto-rows: minmax(300px, auto);
+//     gap: 20px;
+
+//     // --- Tablet Breakpoint (992px to 576px) ---
+//     @media (max-width: 992px) {
+//         grid-template-columns: repeat(2, 1fr); // Two equal columns
+//     }
+
+//     // --- Mobile Breakpoint (Below 576px) ---
+//     @media (max-width: 576px) {
+//         display: flex;
+//         flex-direction: column;
+//     }
+// }
+
+.bento-item {
+    background: $bg-light;
+    border-radius: 32px;
+    height: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+
+    // --- Bento Spans Logic ---
+    &.item-large {
+        // grid-column: span 2; // Full width on Desktop (3-col)
+        justify-content: space-between;
+
+        // Reset to 1 column on Tablet to allow 2 items per row
+        @media (max-width: 992px) and (min-width: 577px) {
+            // grid-column: span 1; 
+        }
+    }
+
+    &.item-wide {
+        // grid-column: span 2; // Full width on Desktop (3-col)
+
+        // Reset to 1 column on Tablet to allow 2 items per row
+        @media (max-width: 992px) and (min-width: 577px) {
+            // grid-column: span 1;
+            
+            .flex-content {
+                flex-direction: column; // Stack content if it gets too tight
+                align-items: flex-start;
+                
+                .image-side {
+                    width: 100%; // Make image full width inside the smaller card
+                    margin-top: 20px;
+                }
+            }
+        }
+
+        .flex-content {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: space-between;
+            height: 100%;
+
+            @media (max-width: 576px) {
+                flex-direction: column;
+            }
+        }
+
+        .image-side {
+            width: 200px;
+            height: 120px;
+            flex-shrink: 0;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 16px;
+            }
+        }
+    }
+
+    &.item-highlight {
+        background-color: $primary-color;
+        color: $bg-light;
+        justify-content: center;
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0;
+        }
+
+        .stat-label {
+            font-size: 1.25rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .stat-desc {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 15px;
+        }
+    }
+
+    &.item-secondary {
+        background-color: $primery-bg-color; 
+    }
+}
+
+// Reusable Inner Elements
+.icon-primary {
+    color: $primary-color;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $text-color-dark;
+}
+
+.card-text {
+    color: $text-color-dark;
+    line-height: 1.6;
+}
+
+.driver-avatars {
+    display: flex;
+    margin-left: 10px;
+
+    .avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 4px solid $bg-light;
+        margin-left: -15px;
+        object-fit: cover;
+
+        &.count-badge {
+            background-color: $primary-color;
+            color: $bg-light;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+    }
+}

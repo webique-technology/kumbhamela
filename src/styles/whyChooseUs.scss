@@ -1,0 +1,182 @@
+@use "../assets/scss/variable.scss" as *;
+
+// why choose us
+.why-choose-us-section {
+    .why-choose-us-card {
+        .icon {
+            padding: 15px;
+            border-radius: 50%;
+            background-color: $bg-light;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+
+            &::before {
+                content: " ";
+                width: 100%;
+                height: 100%;
+                border-radius: $border-radius-full;
+                background: $primary-color;
+                position: absolute;
+                top: -6px;
+                left: -6px;
+                z-index: 0;
+            }
+
+            &::after {
+                content: " ";
+                width: 100%;
+                height: 100%;
+                border-radius: $border-radius-full;
+                background: $bg-light;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+            }
+
+            img {
+                width: 40px;
+                height: 40px;
+                position: relative;
+                z-index: 2;
+
+            }
+        }
+
+        .content {
+            .title {
+                font-size: $font-size-md !important;
+                font-weight: 600;
+                margin-bottom: 5px;
+            }
+
+            .description {
+                font-size: $font-size-base;
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .image-layout {
+        min-height: 500px;
+
+        // padding-left: 75px;
+        @media(max-width:450px) {
+            min-height: 400px;
+        }
+    }
+
+    /* Common image style */
+    .img-box {
+        position: absolute;
+        overflow: hidden;
+        border-radius: 20px;
+    }
+
+    .img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Top Left Image */
+    .img-1 {
+        max-width: 350px;
+        height: 360px;
+        top: 0;
+        left: 75px;
+        z-index: 2;
+
+        @media(max-width:450px) {
+            width: auto;
+            height: auto;
+        }
+    }
+
+    /* Right Big Image */
+    .img-2 {
+        max-width: 350px;
+        height: 347px;
+        top: 175px;
+        right: 0;
+        z-index: 3;
+        border: 6px solid $trinery-bg-color;
+
+        @media(max-width:450px) {
+            top: 135px !important;
+            width: auto;
+            height: auto;
+        }
+    }
+
+    /* Bottom Small Image */
+    .img-3 {
+        width: 35%;
+        height: 150px;
+        bottom: 0;
+        left: 30%;
+        z-index: 4;
+        border-radius: 16px;
+        border: 6px solid $trinery-bg-color;
+    }
+
+    @media(max-width:1400px) {
+        .img-1 {
+            left: 20px;
+        }
+
+        .img-2 {
+            right: 0px;
+        }
+
+        .img-3 {
+            width: 45%;
+            height: 150px;
+            bottom: 50px;
+            left: 17%;
+        }
+    }
+
+    @media(max-width:1200px) {
+        .img-2 {
+            top: 250px;
+            right: 0px;
+        }
+
+        .img-3 {
+            width: 45%;
+            height: 150px;
+            bottom: 50px;
+            left: 17%;
+        }
+    }
+
+    @media(max-width:992px) {
+        .img-2 {
+            right: -5%;
+        }
+
+        .img-3 {
+            display: none;
+        }
+    }
+
+    @media(max-width:768px) {
+        .img-1 {
+            left: 12px;
+        }
+
+        .img-2 {
+            right: 12px;
+            top: 175px;
+        }
+
+        .img-3 {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+{
+  "Common": {
+    "loading": "Loading..."
+  },
+  "Navbar": {
+    "home": "Home",
+    "about": "About Us",
+    "hotel": "Hotel",
+    "rentalCar": "Rental Car",
+    "tourPackage": "Tour Package",
+    "blog": "Blog",
+    "contact": "Contact Us"
+  }
+}
