@@ -4,16 +4,17 @@ import { BookingFormHandler } from './bookingFormHandler';
 import { MessageCircle } from "lucide-react";
 
 import "../../assets/scss/main.scss"
+import Link from 'next/link';
 
 
 export const PrimeryBtn = ({ iconLeft, iconRight, title, btnLink, className }) => {
     return (
         <div className="text-center">
-            <a href={btnLink} className={`${className} text-decoration-none d-inline-flex align-items-center gap-2`}>
+            <Link href={btnLink || "#"} className={`${className} text-decoration-none d-inline-flex align-items-center gap-2`}>
                 {iconLeft && iconLeft}
                 {title}
                 {iconRight && iconRight}
-            </a>
+            </Link>
         </div>
     )
 }

@@ -5,11 +5,12 @@ import { SwiperSliderComp, TitleComponent } from '../ui/common';
 import { HotelCards, RentalCarCard, TourPackageCard } from '../ui/card';
 import { hotels, rentalCar, tourPackages } from '@/lib/data';
 import { SwiperSlide } from 'swiper/react';
-import { WhatsappBtn } from '../ui/button';
-import { MessageCircle, MapPin, Clock, Users } from 'lucide-react'
+import { PrimeryBtn, WhatsappBtn } from '../ui/button';
+import { MessageCircle, MapPin, Clock, Users, ArrowRight } from 'lucide-react'
 import { BookingForm } from '../ui/bookingFormHandler';
 import Link from 'next/link';
 import { slugify } from '@/lib/utils';
+import { usePathname } from 'next/navigation';
 
 
 const ServicesTabSec = () => {
@@ -20,6 +21,7 @@ const ServicesTabSec = () => {
         setShow(true);
     };
     const [activeTab, setActiveTab] = useState("tour-package");
+    const pathname = usePathname();
 
     const tabData = [
         {
@@ -58,6 +60,7 @@ const ServicesTabSec = () => {
             {/* <div className="bottom-divider position-absolute top-0"></div> */}
             <Container fluid>
                 <Tab.Container
+                    key={pathname + activeTab}
                     id="services-tabs"
                     activeKey={activeTab}
                     onSelect={(k) => setActiveTab(k)}
@@ -84,17 +87,27 @@ const ServicesTabSec = () => {
                         <Col xs={12}>
                             <Tab.Content>
                                 {tabData.map((tab) => (
-                                    <Tab.Pane key={tab.key} eventKey={tab.key}>
+                                    <Tab.Pane key={tab.key + activeTab} eventKey={tab.key}>
                                         <SwiperSliderComp
-                                            slidesPerView={4}
-                                            spaceBetween={20}
                                             breakpoints={{
-                                                0: { slidesPerView: 1 },
-                                                576: { slidesPerView: 2 },
-                                                992: { slidesPerView: 3 },
-                                                1400: { slidesPerView: 4 },
+                                                0: {
+                                                    slidesPerView: 1,
+                                                    spaceBetween: 20
+                                                },
+                                                576: {
+                                                    slidesPerView: 2,
+                                                    spaceBetween: 20
+                                                },
+                                                992: {
+                                                    slidesPerView: 3,
+                                                    spaceBetween: 20
+                                                },
+                                                1400: {
+                                                    slidesPerView: 4,
+                                                    spaceBetween: 20
+                                                },
                                             }}
-                                            loop={false}
+                                            loop={true}
                                             navigation={false}
                                             className="mySwiper"
                                         >
@@ -163,6 +176,20 @@ const ServicesTabSec = () => {
                                         </SwiperSliderComp>
                                     </Tab.Pane>
                                 ))}
+
+                                <PrimeryBtn
+                                    title="View All"
+                                    btnLink={
+                                        activeTab === "hotel"
+                                            ? "/hotel"
+                                            : activeTab === "rental-car"
+                                                ? "/rental-car"
+                                                : "/tour-package"
+                                    }
+                                    className="primery-btn mt-5"
+                                    iconRight={<ArrowRight size={20} />}
+                                />
+
                             </Tab.Content>
                         </Col>
                     </Row>

@@ -99,7 +99,7 @@ export const HotelCards = ({ hotel, onBookNow }) => {
                                     width={400}
                                     height={250}
                                     className="card-img-top object-fit-cover"
-                                    style={{ width: '100%', height: 'auto' }}
+                                    style={{ width: '100%', height: 'auto', maxWidth: '100%' }}
                                     priority
                                 />
                             </SwiperSlide>

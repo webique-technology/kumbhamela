@@ -65,7 +65,7 @@ export const BathingDates = () => {
 
             {/* bathing dates with slider */}
             <section className="bathing-count-main position-relative">
-                <div className="top-divider position-absolute td-trinery-bg z-3 td-top"></div>
+                <div className="top-divider position-absolute td-trinery-bg z-3 td-top" style={{ pointerEvents: 'none' }}></div>
                 <div className="bathing-row-count">
                     <Container fluid="lg" className="bathing-count-left d-flex flex-column align-items-center justify-content-center">
                         <div className="d-flex flex-column align-items-center justify-content-center">
@@ -160,7 +160,7 @@ export const BathingDates = () => {
                         </div>
                     </Container>
                 </div>
-                <div className="bottom-divider position-absolute z-3 bd-bottom bd-light-bg"></div>
+                <div className="bottom-divider position-absolute z-3 bd-bottom bd-light-bg" style={{ pointerEvents: 'none' }}></div>
             </section>
         </>
     );

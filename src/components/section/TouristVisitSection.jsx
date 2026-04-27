@@ -1,58 +1,52 @@
 "use client";
-import React from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
-import { SwiperSliderComp, TitleComponent } from '../ui/common'
-import { sacredDestinations } from '../../lib/data'
-import { SwiperSlide } from 'swiper/react'
-import Image from 'next/image'
-import { PrimeryBtn } from '../ui/button'
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import { SwiperSliderComp, TitleComponent } from '../ui/common';
+import { sacredDestinations } from '../../lib/data';
+import { SwiperSlide } from 'swiper/react';
+import Image from 'next/image';
+import { PrimeryBtn } from '../ui/button';
 import { ArrowRight, ArrowLeft } from "lucide-react";
-
+import { usePathname } from 'next/navigation'; // Fix 1: Import usePathname
 
 const TouristVisitSection = () => {
+    const pathname = usePathname(); // Fix 1: Get current path
+
     return (
         <section className='section-padding-2 sacred-destinations position-relative'>
             <div className="bottom-divider trinery-bg position-absolute top-0"></div>
+            {/* copy section */}
             <Container>
-                <div className="d-flex mb-4 position-relative justify-content-between align-items-center">
-                    <div>
-                        <TitleComponent
-                            title="Sacred Destinations"
-                            // description="Stay Informed About Kumbh Mela"
-                            className="mb-4 md-md-5"
-                            divider={false}
-                            montezSubTitle="Must-Visit Temples & Holy Sites"
-                            montezClass="montez-sub-heading primery-color"
-                        />
-                    </div>
+                {/* Flex Header for Title + Buttons */}
+                <div className="d-flex position-relative justify-content-center justify-content-sm-between align-items-center mb-4">
+                    <TitleComponent
+                        title="Sacred Destinations"
+                        className="mb-4 md-md-5"
+                        divider={false}
+                        montezSubTitle="Must-Visit Temples & Holy Sites"
+                        montezClass="montez-sub-heading primery-color"
+                    />
+
                     {/* Custom Navigation Buttons */}
-                    <div className="me-0">
-                        <div className="slider-nav-wrapper d-flex gap-2 me-0 me-lg-1">
-                            <button className="destination-prev-btn slider-prev-btn nav-custom-btn">
-                                <ArrowLeft size={20} />
-                            </button>
-                            <button className="destination-next-btn slider-next-btn nav-custom-btn">
-                                <ArrowRight size={20} />
-                            </button>
-                        </div>
+                    <div className="slider-nav-wrapper d-none d-sm-flex gap-2">
+                        <button className="destination-prev-btn nav-custom-btn">
+                            <ArrowLeft size={20} />
+                        </button>
+                        <button className="destination-next-btn nav-custom-btn">
+                            <ArrowRight size={20} />
+                        </button>
                     </div>
                 </div>
-                {/* grid cards */}
-                {/* <Row className='g-4'>
-                    {sacredDestinations.map((value, index) => (
-                        <Col key={index} lg={4} md={6} sm={12} xs={12}>
-                            <SacredDestinationsCard
-                                destination={value}
-                            />
-                        </Col>
-                    ))}
-                </Row> */}
 
                 {/* slider */}
                 <SwiperSliderComp
-                    slidesPerView={4}
-                    navigation={false}
+                    slidesPerView={3}
+                    navigation={{
+                        prevEl: '.destination-prev-btn',
+                        nextEl: '.destination-next-btn',
+                    }}
                     spaceBetween={20}
+                    timeDelay={4000}
                     breakpoints={{
                         0: {
                             slidesPerView: 1,
@@ -66,48 +60,37 @@ const TouristVisitSection = () => {
                             slidesPerView: 3,
                             spaceBetween: 30,
                         },
-                        1024: {
-                            slidesPerView: 4,
-                            spaceBetween: 40,
-                        },
-                    }}
-                    disableAutoplay={false}
-                    loop={false}
-                    navigation={{
-                        prevEl: '.destination-prev-btn',
-                        nextEl: '.destination-next-btn',
                     }}
                 >
-                    {sacredDestinations.map((value, index) => (
-                        <SwiperSlide key={index}>
-                            <div className='card-image-wrapper rounded-4 overflow-hidden'>
-                                <Image
-                                    src={value.image}
-                                    alt={value.name}
-                                    width={200}
-                                    height={750}
-                                    className="card-img-top object-fit-cover"
-                                    style={{ width: '100%', height: 'auto' }}
-                                />
-                                <div className="sd-body">
-                                    <h4 className='text-light mb-1'>{value.name}</h4>
-                                    <p className='text-white m-0'>{value.description}</p>
+                    {sacredDestinations.map((card, index) => (
+                        <SwiperSlide key={index} className="h-auto">
+                            <div className="card card-image-wrapper history-card h-100 border-0 shadow-md overflow-hidden">
+                                {/* Image Container with Overlay */}
+                                <div className="position-relative overflow-hidden">
+                                    <Image
+                                        src={card.image}
+                                        alt={card.name}
+                                        width={200}
+                                        height={250}
+                                        className="card-img-top object-fit-cover transition-transform"
+                                        style={{ maxWidth: '100%', height: 'auto' }}
+                                    />
+
+                                    {/* Badge Left */}
+                                    <div className="position-absolute bottom-0 start-0 m-3 z-2">
+                                        <h4 className='text-light mb-1'>{card.name}</h4>
+                                        <p className='text-white m-0'>{card.description}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </div >
                         </SwiperSlide>
                     ))}
                 </SwiperSliderComp>
 
-                <PrimeryBtn
-                    className="primery-btn mt-4"
-                    title="View All"
-                    btnLink="/tourist-visit"
-                    iconRight={<ArrowRight size={16} />}
-                />
             </Container>
-            <div className="top-divider trinery-bg position-absolute bottom-0"></div>
+            <div className="top-divider trinery-bg position-absolute bottom-0" style={{ pointerEvents: 'none' }}></div>
         </section>
-    )
+    );
 }
 
-export default TouristVisitSection
+export default TouristVisitSection;

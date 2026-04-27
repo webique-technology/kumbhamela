@@ -31,10 +31,7 @@ const TourPackageDetailPage = async ({ params }) => {
                 <Container className="hero-content pb-5">
                     <div className="tag mb-3">✨ {tour.duration}</div>
                     <h1 className="display-4 fw-bold text-white">{tour.name}</h1>
-                    <p className="lead text-white-75">
-                        A curated immersion into Nashik’s spiritual heritage,
-                        featuring private ceremonies and sunset meditations.
-                    </p>
+                    <p className="lead text-white-75">{tour.mainDesc}</p>
                 </Container>
             </section>
 

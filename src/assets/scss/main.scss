@@ -487,6 +487,30 @@ p {
             color: $text-color-light !important;
             // border-color: $primary-color;
         }
+
+
+    }
+
+    @media(max-width:576px) {
+        .nav-link {
+            padding: 10px 14px !important;
+        }
+    }
+
+    @media(max-width:500px) {
+        .nav-tab-count {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: flex-start !important;
+            overflow-x: auto !important;
+            scroll-snap-type: x mandatory !important;
+            gap: 1rem !important;
+            flex-wrap: nowrap !important;
+        }
+
+        .nav-item {
+            flex: 0 0 75% !important;
+        }
     }
 
     // services card
@@ -643,4 +667,12 @@ p {
         color: $text-color-light;
         border-color: $primary-color;
     }
+}
+
+.top-divider,
+.bottom-divider,
+.hero-overlay,
+.overlay {
+    pointer-events: none !important;
+    /* Clicks will pass right through these */
 }

@@ -25,6 +25,13 @@
         .content {
             color: $text-color-light;
         }
+
+        @media(max-width:500px) {
+            .content h3 {
+                font-size: $font-size-base !important;
+            }
+            padding: 5px !important;
+        }
     }
 
     // top grid
@@ -133,9 +140,10 @@
 
 }
 
-.nav-pills .nav-link.active{
+.nav-pills .nav-link.active {
     background: $primary-color;
-    .icon-box{
+
+    .icon-box {
         background-color: $bg-light !important;
         color: $primary-color !important;
     }

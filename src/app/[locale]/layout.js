@@ -14,6 +14,13 @@ const sora = Sora({
   variable: "--font-heading",
 });
 
+
+const poppins = Poppins({
+  weight: ['400', '500', '600', '700', '800'],
+  subsets: ["latin"],
+  variable: "--font-poppins",
+});
+
 const sora2 = Sora({
   subsets: ["latin"],
   variable: "--font-body",
@@ -38,7 +45,7 @@ export default async function RootLayout({ children, params }) {
   const messages = await getMessages(locale);
 
   return (
-    <html lang={locale} className={`${sora.variable} ${sora2.variable} ${montez.variable}`}>
+    <html lang={locale} className={`${sora.variable} ${poppins.variable} ${sora2.variable} ${montez.variable}`}>
       <body className="antialiased">
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Navbar />

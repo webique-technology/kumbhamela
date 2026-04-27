@@ -110,6 +110,10 @@ export const SwiperSliderComp = ({
             navigation={navigation}
             loop={loop}
             className={className}
+            observer={true}
+            observeParents={true}
+            resizeObserver={true}
+            touchStartPreventDefault={false}
             autoplay={
                 disableAutoplay
                     ? false

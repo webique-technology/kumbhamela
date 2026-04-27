@@ -49,7 +49,7 @@ const WhyChooseUs = () => {
                                 {whyChooseUsData.map((item, index) => (
                                     <Col md={6} key={index}>
                                         <div className="why-choose-us-card d-flex align-items-start gap-2">
-                                            <div className="icon">
+                                            <div className="icon shadow-sm">
                                                 <img src={item.icon} alt={item.title} />
                                             </div>
                                             <div className="content">

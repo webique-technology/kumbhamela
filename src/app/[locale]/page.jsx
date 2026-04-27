@@ -1,10 +1,10 @@
 import "../../assets/scss/main.scss"
 import { BathingDates } from "@/components/section/BathingDates";
 import BlogSection from "@/components/section/blog";
-import HotelsBookSection from "@/components/section/HotelsBookSection";
-import RentalCar from "@/components/section/RentalCar";
+// import HotelsBookSection from "@/components/section/HotelsBookSection";
+// import RentalCar from "@/components/section/RentalCar";
 import TouristVisitSection from "@/components/section/TouristVisitSection";
-import TourPackage from "@/components/section/TourPackage";
+// import TourPackage from "@/components/section/TourPackage";
 import PlanTabSec from "@/components/section/PlanTabSec";
 import ServicesTabSec from "@/components/section/ServicesTabSec";
 import WhyChooseUs from "@/components/section/WhyChooseUs";

@@ -53,7 +53,7 @@ const VideoGallery = () => {
 
     return (
         <section className="section-padding-2 trinery-bg position-relative video-gallery-main">
-            <div className="top-divider position-absolute z-3 td-top bd-light-bg"></div>
+            <div className="top-divider position-absolute z-3 td-top bd-light-bg" style={{ pointerEvents: 'none' }}></div>
             <Container>
                 <TitleComponent
                     title={"Divine Experiences"}
@@ -126,12 +126,13 @@ const VideoGallery = () => {
                             src={activeVideo}
                             controls
                             autoPlay
+                            preload="metadata"
                             className="modal-video"
                         />
                     )}
                 </Modal.Body>
             </Modal>
-            <div className="bottom-divider position-absolute z-3 bd-bottom d-black-filter"></div>
+            <div className="bottom-divider position-absolute z-3 bd-bottom d-black-filter" style={{ pointerEvents: 'none' }}></div>
         </section>
     );
 };

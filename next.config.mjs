@@ -11,6 +11,16 @@ const withNextIntl = createNextIntlPlugin(
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '192.168.1.3',
+        port: '3000',
+        pathname: '/**',
+      },
+    ],
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'src', 'assets', 'scss')],
   },

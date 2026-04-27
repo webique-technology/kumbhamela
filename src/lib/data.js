@@ -54,6 +54,7 @@ export const tourPackages = [
         duration: "3 Days / 2 Nights",
         price: 12999,
         priceUnit: "per person",
+        mainDesc: "A curated immersion into Nashik’s spiritual heritage, featuring private ceremonies and sunset meditations.",
         inclusion: [
             {
                 in_title: "Deluxe Hotel Stay",
@@ -105,6 +106,7 @@ export const tourPackages = [
         duration: "5 Days / 4 Nights",
         price: 24999,
         priceUnit: "per person",
+        mainDesc: "A curated immersion into Nashik’s spiritual heritage, featuring private ceremonies and sunset meditations.",
         inclusion: [
             {
                 in_title: "Deluxe Hotel Stay",
@@ -156,6 +158,7 @@ export const tourPackages = [
         duration: "7 Days / 6 Nights",
         price: 49999,
         priceUnit: "per person",
+        mainDesc: "A curated immersion into Nashik’s spiritual heritage, featuring private ceremonies and sunset meditations.",
         inclusion: [
             {
                 in_title: "Deluxe Hotel Stay",
@@ -202,106 +205,206 @@ export const tourPackages = [
     },
     {
         id: 4,
-        name: "Ethical Spiritual",
-        image: "/images/luxury.png",
-        duration: "7 Days / 6 Nights",
-        price: 49999,
+        name: "Jyotirlinga Maharashtra Darshan",
+        image: "/images/jyotirlinga-banner.jpg", // main banner
+        duration: "6 Days / 5 Nights",
+        price: 28999,
         priceUnit: "per person",
+        mainDesc: "Embark on a divine journey to Maharashtra’s sacred Jyotirlinga shrines. Experience the spiritual energy of Trimbakeshwar, Grishneshwar, Bhimashankar, and seek blessings at Shirdi and Shani Shingnapur. A perfect blend of devotion, culture, and natural beauty.",
+
         inclusion: [
-            {
-                in_title: "Deluxe Hotel Stay",
-                in_icon: ""
-            },
-            {
-                in_title: "All Meals Included",
-                in_icon: ""
-            },
-            {
-                in_title: "Guided Tours",
-                in_icon: ""
-            },
-            {
-                in_title: "VIP Darshan Pass",
-                in_icon: ""
-            }
+            { in_title: "3-Star Hotel Stay", in_icon: "" },
+            { in_title: "All Meals Included", in_icon: "" },
+            { in_title: "AC Travel Vehicle", in_icon: "" },
+            { in_title: "Sightseeing", in_icon: "" }
         ],
+
         journey: [
             {
-                journey_title: "Spiritual Experience Day 1",
-                journey_desc: "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
+                journey_title: "Trimbakeshwar – Origin of Godavari",
+                journey_desc: "Begin your sacred journey at Trimbakeshwar Jyotirlinga, nestled in the Brahmagiri hills. Perform rituals and explore the origin of the holy Godavari river.",
                 journey_src: ""
             },
             {
-                journey_title: "Spiritual Experience Day 2",
-                journey_desc: "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
+                journey_title: "Grishneshwar & Ellora Caves",
+                journey_desc: "Visit Grishneshwar Jyotirlinga near Ellora caves. Witness ancient rock-cut architecture and divine spiritual vibrations.",
                 journey_src: ""
             },
             {
-                journey_title: "Spiritual Experience Day 3",
-                journey_desc: "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
+                journey_title: "Bhimashankar – Forest Shrine",
+                journey_desc: "Travel through scenic Sahyadri forests to Bhimashankar Jyotirlinga. Experience peaceful surroundings and sacred darshan.",
+                journey_src: ""
+            },
+            {
+                journey_title: "Shirdi – Sai Baba Darshan",
+                journey_desc: "Seek blessings at the holy town of Shirdi. Visit Sai Baba Temple and experience spiritual peace and devotion.",
+                journey_src: ""
+            },
+            {
+                journey_title: "Shani Shingnapur – Divine Justice",
+                journey_desc: "Visit the famous Shani temple village known for houses without doors and strong faith in Lord Shani.",
                 journey_src: ""
             }
         ],
+
         features: [
-            "5-Star Accommodation",
-            "Private Car & Driver",
-            "Personal Guide",
-            "Airport Transfers"
+            "Jyotirlinga Temple Visits",
+            "Comfortable Stay",
+            "Private Transport",
+            "Spiritual Guide",
+            "Daily Meals"
         ],
-        isPopular: false,
-        type: "Ethical"
+
+        isPopular: true,
+        type: "Jyotirlinga"
     },
     {
         id: 5,
-        name: "Special Pilgrimage",
-        image: "/images/premium.png",
-        duration: "5 Days / 4 Nights",
-        price: 24999,
+        name: "Nashik to Saptashrungi & Dindori Darshan",
+        image: "/images/saptashrungi-tour-banner.jpg",
+        duration: "1 Day Trip",
+        price: 1999,
         priceUnit: "per person",
+
         inclusion: [
-            {
-                in_title: "Deluxe Hotel Stay",
-                in_icon: ""
-            },
-            {
-                in_title: "All Meals Included",
-                in_icon: ""
-            },
-            {
-                in_title: "Guided Tours",
-                in_icon: ""
-            },
-            {
-                in_title: "VIP Darshan Pass",
-                in_icon: ""
-            }
+            { in_title: "AC Vehicle Travel", in_icon: "" },
+            { in_title: "Temple Darshan Assistance", in_icon: "" },
+            { in_title: "Experienced Driver", in_icon: "" },
+            { in_title: "Pickup & Drop", in_icon: "" }
         ],
+
         journey: [
             {
-                journey_title: "Spiritual Experience Day 1",
-                journey_desc: "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
-                journey_src: ""
+                journey_title: "Departure from Nashik",
+                journey_desc: "Start your spiritual journey early morning from Nashik with a comfortable drive towards the sacred hills of Vani.",
+                journey_src: "/images/nashik-start.jpg"
             },
             {
-                journey_title: "Spiritual Experience Day 2",
-                journey_desc: "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
-                journey_src: ""
+                journey_title: "Saptashrungi Devi Darshan",
+                journey_desc: "Visit the powerful Saptashrungi Mata temple located in the Sahyadri hills. Seek blessings of the goddess and enjoy scenic surroundings.",
+                journey_src: "/images/saptashrungi.jpg"
             },
             {
-                journey_title: "Spiritual Experience Day 3",
-                journey_desc: "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
-                journey_src: ""
+                journey_title: "Swami Samarth Mandir Dindori",
+                journey_desc: "Proceed to Dindori to visit the peaceful Swami Samarth temple. Experience divine calm and spiritual energy.",
+                journey_src: "/images/dindori-swami-samarth.jpg"
+            },
+            {
+                journey_title: "Return to Nashik",
+                journey_desc: "After completing darshan, return comfortably to Nashik by evening with divine memories.",
+                journey_src: "/images/return-nashik.jpg"
             }
         ],
+
         features: [
-            "Deluxe Hotel Stay",
-            "All Meals Included",
-            "Guided Tours",
-            "VIP Darshan Pass"
+            "Same Day Return",
+            "Temple Darshan",
+            "Comfort Travel",
+            "Scenic Route",
+            "Spiritual Experience"
         ],
-        isPopular: true, // For the "Most Popular" badge
-        type: "Special"
+
+        isPopular: false,
+        type: "One Day Trip"
     },
+    {
+        id: 6,
+        name: "Nashik to Shani Shingnapur & Shirdi Sai Darshan",
+        image: "/images/shani-shignapur-tour-banner.jpg",
+        duration: "1 Day Trip",
+        price: 2499,
+        priceUnit: "per person",
+
+        inclusion: [
+            { in_title: "AC Vehicle Travel", in_icon: "" },
+            { in_title: "Pickup & Drop", in_icon: "" },
+            { in_title: "Temple Darshan Assistance", in_icon: "" },
+            { in_title: "Experienced Driver", in_icon: "" }
+        ],
+
+        journey: [
+            {
+                journey_title: "Early Departure from Nashik",
+                journey_desc: "Begin your journey early morning from Nashik towards Shani Shingnapur with a comfortable drive.",
+                journey_src: "/images/nashik-start.jpg"
+            },
+            {
+                journey_title: "Shani Shingnapur Darshan",
+                journey_desc: "Visit the famous Shani temple known for its unique open shrine and strong faith traditions.",
+                journey_src: "/images/shani-shingnapur.jpg"
+            },
+            {
+                journey_title: "Shirdi Sai Baba Temple",
+                journey_desc: "Proceed to Shirdi for Sai Baba darshan. Experience devotion at one of India's most sacred pilgrimage sites.",
+                journey_src: "/images/shirdi.jpg"
+            },
+            {
+                journey_title: "Return to Nashik",
+                journey_desc: "After completing darshan, return to Nashik by evening with peaceful and divine memories.",
+                journey_src: "/images/return-nashik.jpg"
+            }
+        ],
+
+        features: [
+            "Same Day Return",
+            "Shani & Sai Darshan",
+            "Comfort Travel",
+            "Spiritual Experience",
+            "Well-Planned Route"
+        ],
+
+        isPopular: true,
+        type: "One Day Trip"
+    },
+    {
+        id: 9,
+        name: "Trimbakeshwar Jyotirling & Nashik Sightseeing",
+        image: "/images/trimbakeshwar-tour-banner.jpg",
+        duration: "1 Day Trip",
+        price: 1799,
+        priceUnit: "per person",
+
+        inclusion: [
+            { in_title: "AC Vehicle Travel", in_icon: "" },
+            { in_title: "Pickup & Drop", in_icon: "" },
+            { in_title: "Temple Darshan Assistance", in_icon: "" },
+            { in_title: "Local Sightseeing", in_icon: "" }
+        ],
+
+        journey: [
+            {
+                journey_title: "Departure from Nashik",
+                journey_desc: "Start your journey from Nashik with a scenic drive towards Trimbakeshwar through lush green hills.",
+                journey_src: "/images/nashik-start.jpg"
+            },
+            {
+                journey_title: "Trimbakeshwar Jyotirling Darshan",
+                journey_desc: "Visit the sacred Trimbakeshwar temple, one of the twelve Jyotirlingas and source of the Godavari river.",
+                journey_src: "/images/trimbakeshwar.jpg"
+            },
+            {
+                journey_title: "Nashik Local Sightseeing",
+                journey_desc: "Explore Ramkund, Panchavati, Sita Gufa and Kalaram Temple, key spiritual and historical landmarks.",
+                journey_src: "/images/panchavati.jpg"
+            },
+            {
+                journey_title: "Return to Nashik",
+                journey_desc: "Complete your trip and return comfortably with divine blessings and memorable experiences.",
+                journey_src: "/images/return-nashik.jpg"
+            }
+        ],
+
+        features: [
+            "Jyotirlinga Darshan",
+            "Local Sightseeing",
+            "Same Day Return",
+            "Comfort Travel",
+            "Spiritual Experience"
+        ],
+
+        isPopular: true,
+        type: "One Day Trip"
+    }
 ];
 
 export const rentalCar = [
