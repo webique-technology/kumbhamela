@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { BookingFormHandler } from './bookingFormHandler';
 import { MessageCircle } from "lucide-react";
-
+import { usePathname } from "next/navigation";
 import "../../assets/scss/main.scss"
 import Link from 'next/link';
 
@@ -54,5 +54,48 @@ export const TourBtn = ({ title, className, tourName }) => {
                 tourName={tourName}
             />
         </>
+    );
+};
+
+export const WhatsAppShareBtn = ({ tour }) => {
+    // This hook gets the path (e.g., /tour-package/essential-darshan)
+    const pathname = usePathname();
+
+    const handleWhatsAppShare = () => {
+        const origin = window.location.origin;
+        const currentUrl = origin + pathname;
+
+        const itinerarySummary = tour.journey
+            .map((day, i) => `Day ${i + 1}: ${day.journey_title}`)
+            .join("\n");
+
+        // Remove the Preview Image link line. 
+        // The main link at the bottom triggers the SEO card.
+        const message =
+            `*Tour Itinerary: ${tour.name}*\n\n` +
+            `*Duration:* ${tour.duration}\n` +
+            `*Description:* ${tour.mainDesc}\n\n` +
+            `*Itinerary Overview:*\n${itinerarySummary}\n\n` +
+            `*Full Details:* ${currentUrl}`;
+
+        const encodedMessage = encodeURIComponent(message);
+        window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");
+    };
+
+    return (
+        <button
+            onClick={handleWhatsAppShare}
+            className="itinerary-summary p-2 border-0 bg-white rounded d-flex flex-column align-items-center justify-content-center mt-3"
+            style={{ cursor: 'pointer', transition: 'all 0.3s ease' }}
+        >
+            <img
+                src="/images/whatsapp.png"
+                alt="whatsapp"
+                style={{ width: '28px', marginBottom: '5px' }}
+            />
+            <p className="m-0 fw-bold text-success" style={{ fontSize: '12px' }}>
+                Send Itinerary
+            </p>
+        </button>
     );
 };

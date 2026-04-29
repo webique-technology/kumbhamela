@@ -103,6 +103,10 @@ p {
     color: $primary-color;
 }
 
+.small-12{
+    font-size: $font-size-xs;
+}
+
 // Common Utilities
 .label-sm {
     display: block;
@@ -509,7 +513,11 @@ p {
         }
 
         .nav-item {
-            flex: 0 0 75% !important;
+            flex: 0 0 50% !important;
+
+            .nav-link {
+                text-align: center !important;
+            }
         }
     }
 

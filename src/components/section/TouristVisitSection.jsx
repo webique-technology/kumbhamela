@@ -40,7 +40,7 @@ const TouristVisitSection = () => {
 
                 {/* slider */}
                 <SwiperSliderComp
-                    slidesPerView={3}
+                    slidesPerView={4}
                     navigation={{
                         prevEl: '.destination-prev-btn',
                         nextEl: '.destination-next-btn',
@@ -58,7 +58,11 @@ const TouristVisitSection = () => {
                         },
                         768: {
                             slidesPerView: 3,
-                            spaceBetween: 30,
+                            spaceBetween: 20,
+                        },
+                        992: {
+                            slidesPerView: 4,
+                            spaceBetween: 20,
                         },
                     }}
                 >

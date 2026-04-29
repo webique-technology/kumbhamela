@@ -57,19 +57,19 @@ export const tourPackages = [
         mainDesc: "A curated immersion into Nashik’s spiritual heritage, featuring private ceremonies and sunset meditations.",
         inclusion: [
             {
-                in_title: "Deluxe Hotel Stay",
+                in_title: "Hotel",
                 in_icon: ""
             },
             {
-                in_title: "All Meals Included",
+                in_title: "Meals",
                 in_icon: ""
             },
             {
-                in_title: "Guided Tours",
+                in_title: "Sightseeing",
                 in_icon: ""
             },
             {
-                in_title: "VIP Darshan Pass",
+                in_title: "Transport",
                 in_icon: ""
             }
         ],
@@ -96,7 +96,14 @@ export const tourPackages = [
             "Temple Visits",
             "Local Transport"
         ],
+        cancellationPolicy: [
+            { days: "61-120", percent: 10 },
+            { days: "31-60", percent: 25 },
+            { days: "15-30", percent: 50 },
+            { days: "0-14", percent: 100 },
+        ],
         isPopular: false,
+        departureDate: "19 Oct 2026",
         type: "Essential"
     },
     {
@@ -109,19 +116,19 @@ export const tourPackages = [
         mainDesc: "A curated immersion into Nashik’s spiritual heritage, featuring private ceremonies and sunset meditations.",
         inclusion: [
             {
-                in_title: "Deluxe Hotel Stay",
+                in_title: "Hotel",
                 in_icon: ""
             },
             {
-                in_title: "All Meals Included",
+                in_title: "Meals",
                 in_icon: ""
             },
             {
-                in_title: "Guided Tours",
+                in_title: "Sightseeing",
                 in_icon: ""
             },
             {
-                in_title: "VIP Darshan Pass",
+                in_title: "Transport",
                 in_icon: ""
             }
         ],
@@ -148,7 +155,14 @@ export const tourPackages = [
             "Guided Tours",
             "VIP Darshan Pass"
         ],
+        cancellationPolicy: [
+            { days: "91-180", percent: 10, color: "green" },
+            { days: "46-90", percent: 20, color: "green" },
+            { days: "16-45", percent: 40, color: "orange" },
+            { days: "0-15", percent: 100, color: "red" },
+        ],
         isPopular: true, // For the "Most Popular" badge
+        departureDate: "20 Oct 2026",
         type: "Premium"
     },
     {
@@ -161,19 +175,19 @@ export const tourPackages = [
         mainDesc: "A curated immersion into Nashik’s spiritual heritage, featuring private ceremonies and sunset meditations.",
         inclusion: [
             {
-                in_title: "Deluxe Hotel Stay",
+                in_title: "Hotel",
                 in_icon: ""
             },
             {
-                in_title: "All Meals Included",
+                in_title: "Meals",
                 in_icon: ""
             },
             {
-                in_title: "Guided Tours",
+                in_title: "Sightseeing",
                 in_icon: ""
             },
             {
-                in_title: "VIP Darshan Pass",
+                in_title: "Transport",
                 in_icon: ""
             }
         ],
@@ -200,7 +214,14 @@ export const tourPackages = [
             "Personal Guide",
             "Airport Transfers"
         ],
+        cancellationPolicy: [
+            { days: "121-365", percent: 5, color: "green" },
+            { days: "61-120", percent: 15, color: "green" },
+            { days: "31-60", percent: 30, color: "orange" },
+            { days: "0-30", percent: 100, color: "red" },
+        ],
         isPopular: false,
+        departureDate: "21 Oct 2026",
         type: "Luxury"
     },
     {
@@ -211,14 +232,24 @@ export const tourPackages = [
         price: 28999,
         priceUnit: "per person",
         mainDesc: "Embark on a divine journey to Maharashtra’s sacred Jyotirlinga shrines. Experience the spiritual energy of Trimbakeshwar, Grishneshwar, Bhimashankar, and seek blessings at Shirdi and Shani Shingnapur. A perfect blend of devotion, culture, and natural beauty.",
-
         inclusion: [
-            { in_title: "3-Star Hotel Stay", in_icon: "" },
-            { in_title: "All Meals Included", in_icon: "" },
-            { in_title: "AC Travel Vehicle", in_icon: "" },
-            { in_title: "Sightseeing", in_icon: "" }
+            {
+                in_title: "Hotel",
+                in_icon: ""
+            },
+            {
+                in_title: "Meals",
+                in_icon: ""
+            },
+            {
+                in_title: "Sightseeing",
+                in_icon: ""
+            },
+            {
+                in_title: "Transport",
+                in_icon: ""
+            }
         ],
-
         journey: [
             {
                 journey_title: "Trimbakeshwar – Origin of Godavari",
@@ -246,7 +277,6 @@ export const tourPackages = [
                 journey_src: ""
             }
         ],
-
         features: [
             "Jyotirlinga Temple Visits",
             "Comfortable Stay",
@@ -254,8 +284,13 @@ export const tourPackages = [
             "Spiritual Guide",
             "Daily Meals"
         ],
-
+        cancellationPolicy: [
+            { days: "45-90", percent: 15, color: "green" },
+            { days: "15-44", percent: 50, color: "orange" },
+            { days: "0-14", percent: 100, color: "red" },
+        ],
         isPopular: true,
+        departureDate: "17 Oct 2026",
         type: "Jyotirlinga"
     },
     {
@@ -265,14 +300,24 @@ export const tourPackages = [
         duration: "1 Day Trip",
         price: 1999,
         priceUnit: "per person",
-
         inclusion: [
-            { in_title: "AC Vehicle Travel", in_icon: "" },
-            { in_title: "Temple Darshan Assistance", in_icon: "" },
-            { in_title: "Experienced Driver", in_icon: "" },
-            { in_title: "Pickup & Drop", in_icon: "" }
+            {
+                in_title: "Hotel",
+                in_icon: ""
+            },
+            {
+                in_title: "Meals",
+                in_icon: ""
+            },
+            {
+                in_title: "Sightseeing",
+                in_icon: ""
+            },
+            {
+                in_title: "Transport",
+                in_icon: ""
+            }
         ],
-
         journey: [
             {
                 journey_title: "Departure from Nashik",
@@ -295,7 +340,6 @@ export const tourPackages = [
                 journey_src: "/images/return-nashik.jpg"
             }
         ],
-
         features: [
             "Same Day Return",
             "Temple Darshan",
@@ -303,8 +347,13 @@ export const tourPackages = [
             "Scenic Route",
             "Spiritual Experience"
         ],
-
+        cancellationPolicy: [
+            { days: "45-90", percent: 15, color: "green" },
+            { days: "15-44", percent: 50, color: "orange" },
+            { days: "0-14", percent: 100, color: "red" },
+        ],
         isPopular: false,
+        departureDate: "19 Oct 2026",
         type: "One Day Trip"
     },
     {
@@ -314,14 +363,24 @@ export const tourPackages = [
         duration: "1 Day Trip",
         price: 2499,
         priceUnit: "per person",
-
         inclusion: [
-            { in_title: "AC Vehicle Travel", in_icon: "" },
-            { in_title: "Pickup & Drop", in_icon: "" },
-            { in_title: "Temple Darshan Assistance", in_icon: "" },
-            { in_title: "Experienced Driver", in_icon: "" }
+            {
+                in_title: "Hotel",
+                in_icon: ""
+            },
+            {
+                in_title: "Meals",
+                in_icon: ""
+            },
+            {
+                in_title: "Sightseeing",
+                in_icon: ""
+            },
+            {
+                in_title: "Transport",
+                in_icon: ""
+            }
         ],
-
         journey: [
             {
                 journey_title: "Early Departure from Nashik",
@@ -344,7 +403,6 @@ export const tourPackages = [
                 journey_src: "/images/return-nashik.jpg"
             }
         ],
-
         features: [
             "Same Day Return",
             "Shani & Sai Darshan",
@@ -352,8 +410,13 @@ export const tourPackages = [
             "Spiritual Experience",
             "Well-Planned Route"
         ],
-
+        cancellationPolicy: [
+            { days: "45-90", percent: 15, color: "green" },
+            { days: "15-44", percent: 50, color: "orange" },
+            { days: "0-14", percent: 100, color: "red" },
+        ],
         isPopular: true,
+        departureDate: "25 Oct 2026",
         type: "One Day Trip"
     },
     {
@@ -363,14 +426,24 @@ export const tourPackages = [
         duration: "1 Day Trip",
         price: 1799,
         priceUnit: "per person",
-
         inclusion: [
-            { in_title: "AC Vehicle Travel", in_icon: "" },
-            { in_title: "Pickup & Drop", in_icon: "" },
-            { in_title: "Temple Darshan Assistance", in_icon: "" },
-            { in_title: "Local Sightseeing", in_icon: "" }
+            {
+                in_title: "Hotel",
+                in_icon: ""
+            },
+            {
+                in_title: "Meals",
+                in_icon: ""
+            },
+            {
+                in_title: "Sightseeing",
+                in_icon: ""
+            },
+            {
+                in_title: "Transport",
+                in_icon: ""
+            }
         ],
-
         journey: [
             {
                 journey_title: "Departure from Nashik",
@@ -393,7 +466,6 @@ export const tourPackages = [
                 journey_src: "/images/return-nashik.jpg"
             }
         ],
-
         features: [
             "Jyotirlinga Darshan",
             "Local Sightseeing",
@@ -401,8 +473,13 @@ export const tourPackages = [
             "Comfort Travel",
             "Spiritual Experience"
         ],
-
+        cancellationPolicy: [
+            { days: "45-90", percent: 15, color: "green" },
+            { days: "15-44", percent: 50, color: "orange" },
+            { days: "0-14", percent: 100, color: "red" },
+        ],
         isPopular: true,
+        departureDate: "28 Oct 2026",
         type: "One Day Trip"
     }
 ];

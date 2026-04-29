@@ -150,6 +150,15 @@
     }
 }
 
+.border-md-end {
+    border-right: 1px solid rgba($bg-drak, .2);
+
+    @media(max-width:767px) {
+        border-right: none;
+        border-bottom: 1px solid rgba($bg-drak, .2);
+    }
+}
+
 // tour package section
 .tour-package-sec {
     // background-image: url("/images/tour-section-bg.png");
