@@ -80,6 +80,23 @@
     padding-left: 30px;
     margin-bottom: 40px;
 
+    &::before {
+        content: "";
+        position: absolute;
+        top: 11px;
+        left: 5px;
+        width: 0; // Changed from 2px since the border provides the width
+        height: 100%;
+
+        // The Magic Sauce
+        border-left: 2px dashed $secondary-color;
+        background: none; // Remove the solid background
+
+        @media(max-width:576px) {
+            content: none;
+        }
+    }
+
     .timeline-dot {
         position: absolute;
         left: 0;
@@ -104,6 +121,14 @@
         width: 100%;
         border-radius: 10px;
     }
+
+    .scroll-itineary {
+        height: 144px;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
 }
 
 .map-section {
@@ -141,6 +166,7 @@
 
     .info-box {
         margin: 20px 0;
+        background-color: $bg-light2;
     }
 
 
@@ -156,6 +182,69 @@
     @media(max-width:767px) {
         border-right: none;
         border-bottom: 1px solid rgba($bg-drak, .2);
+    }
+}
+
+.tour-route {
+    width: fit-content;
+    border-radius: $border-radius-xm;
+    list-style: none;
+    background-color: $bg-light2;
+}
+
+.tour-tab-section {
+    .nav-tabs {
+        border-bottom: none;
+        display: grid;
+        grid-auto-flow: column;
+        gap: 10px;
+
+        .nav-link {
+            background: transparent;
+            border-bottom: none !important;
+            border: 1px solid $primary-color;
+            color: $text-color-dark;
+            margin-bottom: 0;
+            width: 100%;
+
+            &.active {
+                background: $trinery-bg-color;
+                color: $primary-color;
+                border-color: $primary-color;
+            }
+        }
+    }
+
+    .tab-content {
+        border: 1px solid $primary-color;
+        padding: 20px;
+        border-radius: 0 0 $border-radius-sm $border-radius-sm;
+    }
+}
+
+.tour-package-slider-main {
+    .swiper-slide {
+        aspect-ratio: 3/2.5;
+
+        @media(max-width:767px) {
+            height: 240px !important;
+        }
+
+        @media(max-width:349px) {
+            height: 280px !important;
+        }
+    }
+
+    .tour-package-card-small {
+        .tpcs-img {
+            width: 100%;
+            aspect-ratio: 2/1;
+            object-fit: cover;
+
+            @media(max-width:450px) {
+                aspect-ratio: 2/1.2;
+            }
+        }
     }
 }
 

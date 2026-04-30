@@ -12,6 +12,8 @@ import { Navigation, Autoplay } from 'swiper/modules';
 // Import Swiper styles (Required for it to look right)
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { Tab, Tabs } from 'react-bootstrap';
+import { PaymentTerms } from './card';
 
 
 // make this component for decorative title divider
@@ -83,46 +85,37 @@ export const SwiperSliderComp = ({
     navigation = true,
     timeDelay = 2500,
     loop = true,
-    slidesPerView = 1, // Fixed typo: sliderPerView -> slidesPerView
-    spaceBetween = 50,
-    breakpoints = {
-        640: {
-            slidesPerView: 1,
-            spaceBetween: 50,
-        },
-        768: {
-            slidesPerView: 1,
-            spaceBetween: 50,
-        },
-        1024: {
-            slidesPerView: 1,
-            spaceBetween: 50,
-        },
-    },
-    disableAutoplay = false, // Use a boolean to toggle autoplay instead
+    slidesPerView = 1,
+    spaceBetween = 20,
+    breakpoints,
+    disableAutoplay = false,
+    ...props // Capture extra props like onSlideChange
 }) => {
     return (
         <Swiper
-            // Pass the imported modules directly here
             modules={[Navigation, Autoplay]}
             spaceBetween={spaceBetween}
             slidesPerView={slidesPerView}
             navigation={navigation}
+            // grabCursor makes it feel like an app and helps with "stuck" drags
+            grabCursor={true}
+            // This ensures the transition finishes even if the user stops dragging mid-way
+            shortSwipes={true}
+            longSwipes={true}
+            // Only loop if we have enough slides, otherwise Swiper gets "stuck"
             loop={loop}
             className={className}
-            observer={true}
-            observeParents={true}
-            resizeObserver={true}
-            touchStartPreventDefault={false}
             autoplay={
                 disableAutoplay
                     ? false
                     : {
                         delay: timeDelay,
                         disableOnInteraction: false,
+                        pauseOnMouseEnter: true, // Good UX for sliders
                     }
             }
             breakpoints={breakpoints}
+            {...props}
         >
             {children}
         </Swiper>
@@ -336,4 +329,59 @@ export const KumbhCountdown = ({ targetDate, isActive = true }) => {
         </div>
     );
 };
+
+
+export const TourTabs = ({ tour }) => {
+    const [activeTab, setActiveTab] = useState('cancellation-policy');
+
+    const handleTabChange = (tab) => {
+        setActiveTab(tab);
+    };
+    return (
+        <>
+            <Tabs
+                activeKey={activeTab}
+                onSelect={handleTabChange}
+                className="border-0"
+            >
+                <Tab
+                    eventKey="cancellation-policy"
+                    title="Cancellation Policy"
+                >
+                    <h4 className="section-title fw-bold mb-3">Cancellation Policy</h4>
+                    <p className="text-muted small mb-4">
+                        Cancellation charges rise closer to departure, with the exact amount deducted shown below.
+                    </p>
+
+                    <div className="cancellation-timeline">
+                        {tour.cancellationPolicy?.map((item, index) => {
+                            const charge = Math.round((tour.price * item.percent) / 100);
+                            const statusColor = item.percent <= 25 ? '#08c718' : item.percent <= 75 ? '#fd7e14' : '#dc3545';
+
+                            return (
+                                <div key={index} className="d-flex align-items-center justify-content-between border p-3 mb-2 bg-white rounded shadow-sm"
+                                    style={{
+                                        borderLeft: `6px solid ${statusColor} !important`,
+                                        transition: 'transform 0.2s ease'
+                                    }}>
+                                    <div>
+                                        <span className="fw-bold h6 mb-0">₹{charge.toLocaleString()}</span>
+                                        <span className="text-muted small ms-2">({item.percent}% deduction from tour amount)</span>
+                                    </div>
+                                    <p className="fw-semibold m-0 text-secondary small-12">
+                                        {item.days} days prior
+                                    </p>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </Tab>
+                <Tab eventKey="payment-terms" title="Payment Terms">
+                    <PaymentTerms />
+                </Tab>
+            </Tabs>
+        </>
+    );
+
+}
 

@@ -58,25 +58,25 @@ export const tourPackages = [
         inclusion: [
             {
                 in_title: "Hotel",
-                in_icon: ""
+                in_icon: "Building2"
             },
             {
                 in_title: "Meals",
-                in_icon: ""
+                in_icon: "Utensils"
             },
             {
                 in_title: "Sightseeing",
-                in_icon: ""
+                in_icon: "Camera"
             },
             {
                 in_title: "Transport",
-                in_icon: ""
+                in_icon: "CarTaxiFront"
             }
         ],
         journey: [
             {
                 journey_title: "Arrival & Purification at Ramkund",
-                journey_desc: "Welcome to the spiritual heart of Maharashtra. Upon arrival, check into your heritage suite. As the sun dips below the horizon, witness the mesmerizing Ganga Aarti at Ramkund, where thousands of diyas light up the Godavari.",
+                journey_desc: "Welcome to the spiritual heart of Maharashtra. Upon arrival, check into your heritage suite. As the sun dips below the horizon, witness the mesmerizing Ganga Aarti at Ramkund, where thousands of diyas light up the Godavari. Welcome to the spiritual heart of Maharashtra. Upon arrival, check into your heritage suite. As the sun dips below the horizon, witness the mesmerizing Ganga Aarti at Ramkund, where thousands of diyas light up the Godavari.",
                 journey_src: "/images/tour-demo-1.png"
             },
             {
@@ -96,6 +96,7 @@ export const tourPackages = [
             "Temple Visits",
             "Local Transport"
         ],
+        tourRoute: ["Nashik", "Trimbakeshwar", "Ramkund", "Saptashrungi Temple"],
         cancellationPolicy: [
             { days: "61-120", percent: 10 },
             { days: "31-60", percent: 25 },
@@ -117,19 +118,19 @@ export const tourPackages = [
         inclusion: [
             {
                 in_title: "Hotel",
-                in_icon: ""
+                in_icon: "Building2"
             },
             {
                 in_title: "Meals",
-                in_icon: ""
+                in_icon: "Utensils"
             },
             {
                 in_title: "Sightseeing",
-                in_icon: ""
+                in_icon: "Camera"
             },
             {
                 in_title: "Transport",
-                in_icon: ""
+                in_icon: "CarTaxiFront"
             }
         ],
         journey: [
@@ -155,6 +156,7 @@ export const tourPackages = [
             "Guided Tours",
             "VIP Darshan Pass"
         ],
+        tourRoute: ["Nashik", "Trimbakeshwar", "Ramkund", "Saptashrungi Temple"],
         cancellationPolicy: [
             { days: "91-180", percent: 10, color: "green" },
             { days: "46-90", percent: 20, color: "green" },
@@ -176,19 +178,19 @@ export const tourPackages = [
         inclusion: [
             {
                 in_title: "Hotel",
-                in_icon: ""
+                in_icon: "Building2"
             },
             {
                 in_title: "Meals",
-                in_icon: ""
+                in_icon: "Utensils"
             },
             {
                 in_title: "Sightseeing",
-                in_icon: ""
+                in_icon: "Camera"
             },
             {
                 in_title: "Transport",
-                in_icon: ""
+                in_icon: "CarTaxiFront"
             }
         ],
         journey: [
@@ -214,6 +216,7 @@ export const tourPackages = [
             "Personal Guide",
             "Airport Transfers"
         ],
+        tourRoute: ["Nashik", "Trimbakeshwar", "Ramkund", "Saptashrungi Temple"],
         cancellationPolicy: [
             { days: "121-365", percent: 5, color: "green" },
             { days: "61-120", percent: 15, color: "green" },
@@ -232,22 +235,22 @@ export const tourPackages = [
         price: 28999,
         priceUnit: "per person",
         mainDesc: "Embark on a divine journey to Maharashtra’s sacred Jyotirlinga shrines. Experience the spiritual energy of Trimbakeshwar, Grishneshwar, Bhimashankar, and seek blessings at Shirdi and Shani Shingnapur. A perfect blend of devotion, culture, and natural beauty.",
-        inclusion: [
+       inclusion: [
             {
                 in_title: "Hotel",
-                in_icon: ""
+                in_icon: "Building2"
             },
             {
                 in_title: "Meals",
-                in_icon: ""
+                in_icon: "Utensils"
             },
             {
                 in_title: "Sightseeing",
-                in_icon: ""
+                in_icon: "Camera"
             },
             {
                 in_title: "Transport",
-                in_icon: ""
+                in_icon: "CarTaxiFront"
             }
         ],
         journey: [
@@ -284,6 +287,7 @@ export const tourPackages = [
             "Spiritual Guide",
             "Daily Meals"
         ],
+        tourRoute: ["Nashik", "Trimbakeshwar", "Grishneshwar", "Ellora Caves", "Bhimashankar"],
         cancellationPolicy: [
             { days: "45-90", percent: 15, color: "green" },
             { days: "15-44", percent: 50, color: "orange" },
@@ -303,19 +307,19 @@ export const tourPackages = [
         inclusion: [
             {
                 in_title: "Hotel",
-                in_icon: ""
+                in_icon: "Building2"
             },
             {
                 in_title: "Meals",
-                in_icon: ""
+                in_icon: "Utensils"
             },
             {
                 in_title: "Sightseeing",
-                in_icon: ""
+                in_icon: "Camera"
             },
             {
                 in_title: "Transport",
-                in_icon: ""
+                in_icon: "CarTaxiFront"
             }
         ],
         journey: [
@@ -347,6 +351,7 @@ export const tourPackages = [
             "Scenic Route",
             "Spiritual Experience"
         ],
+        tourRoute: ["Nashik", "Saptashrungi Devi", "Swami Samarth Mandir Dindori"],
         cancellationPolicy: [
             { days: "45-90", percent: 15, color: "green" },
             { days: "15-44", percent: 50, color: "orange" },
@@ -366,19 +371,19 @@ export const tourPackages = [
         inclusion: [
             {
                 in_title: "Hotel",
-                in_icon: ""
+                in_icon: "Building2"
             },
             {
                 in_title: "Meals",
-                in_icon: ""
+                in_icon: "Utensils"
             },
             {
                 in_title: "Sightseeing",
-                in_icon: ""
+                in_icon: "Camera"
             },
             {
                 in_title: "Transport",
-                in_icon: ""
+                in_icon: "CarTaxiFront"
             }
         ],
         journey: [
@@ -410,6 +415,7 @@ export const tourPackages = [
             "Spiritual Experience",
             "Well-Planned Route"
         ],
+        tourRoute: ["Nashik", "Shani Shingnapur", "Shirdi Sai Baba Temple"],
         cancellationPolicy: [
             { days: "45-90", percent: 15, color: "green" },
             { days: "15-44", percent: 50, color: "orange" },
@@ -429,19 +435,19 @@ export const tourPackages = [
         inclusion: [
             {
                 in_title: "Hotel",
-                in_icon: ""
+                in_icon: "Building2"
             },
             {
                 in_title: "Meals",
-                in_icon: ""
+                in_icon: "Utensils"
             },
             {
                 in_title: "Sightseeing",
-                in_icon: ""
+                in_icon: "Camera"
             },
             {
                 in_title: "Transport",
-                in_icon: ""
+                in_icon: "CarTaxiFront"
             }
         ],
         journey: [
@@ -473,6 +479,7 @@ export const tourPackages = [
             "Comfort Travel",
             "Spiritual Experience"
         ],
+        tourRoute: ["Nashik", "Trimbakeshwar", "Ramkund", "Sita Gufa", "Kalaram Temple"],
         cancellationPolicy: [
             { days: "45-90", percent: 15, color: "green" },
             { days: "15-44", percent: 50, color: "orange" },

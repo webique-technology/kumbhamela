@@ -293,7 +293,7 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                 {/* Content Body */}
                 <div className="card-body p-4">
                     <div className='d-flex flex-column align-items-start justify-content-between'>
-                        <h3 className="h5 fw-bold text-brand-dark mb-2">
+                        <h3 className="sub-heading text-dark mb-2">
                             {tour.name}
                         </h3>
                         <p className="card-text d-flex align-items-center gap-2 text-muted small mb-2 leading-relaxed">
@@ -301,19 +301,21 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                             {tour.duration}
                         </p>
                     </div>
+
                     {/* Footer Logic */}
                     <div className="d-flex align-items-center justify-content-between mt-auto mb-2">
                         <div className='d-flex align-items-end'>
-                            <span className="h4 fw-bold text-brand-orange mb-0">{tour.price} /&nbsp;</span>
-                            <small className="text-muted d-block smaller mb-1">per Day</small>
+                            <span className="h5 fw-bold text-brand-orange mb-0">{tour.price} /&nbsp;</span>
+                            <small className="text-muted d-block smaller mb-1">per Person</small>
                         </div>
                     </div>
+
                     {/* Features */}
-                    <ul className="d-flex flex-column flex-wrap gap-2 mb-3 p-0">
+                    <ul className="d-flex flex-column flex-wrap gap-1 mb-3 p-0">
                         {tour.features.map((feature, idx) => (
                             <li
                                 key={idx}
-                                className="d-flex align-items-center justify-content-start gap-2"
+                                className="d-flex paragraph align-items-center justify-content-start gap-1"
                             >
                                 <span className='primery-color'><ChevronRight size={16} /></span>
                                 {feature}
@@ -322,12 +324,6 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                     </ul>
 
                     {/* link btn */}
-                    {/* <WhatsappBtn
-                        type='button'
-                        // onClick={onBookNow}
-                        title="Book Now"
-                        className="primery-btn w-100 d-flex justify-content-center align-items-center border-0 shadow-sm"
-                    /> */}
                     <Link
                         href={tourLink || "#"}
                         className="primery-btn py-2 text-decoration-none w-100 d-flex justify-content-center align-items-center mt-auto"
@@ -342,7 +338,6 @@ export const TourPackageCard = ({ tour, tourLink }) => {
 }
 
 // Header Hero Card
-
 export const HeroHeaderCard = ({ heroTitle, heroSubtitle, heroImage = "/images/contact-page-bg.png", imgClass = "hero-img" }) => {
     return (
         <>
@@ -369,7 +364,7 @@ export const HeroHeaderCard = ({ heroTitle, heroSubtitle, heroImage = "/images/c
 export const PaymentTerms = ({ terms = "No cancellation charges for booking modification or cancellation done 24 hours before the scheduled tour date.A 5% charge will be applicable for cancellations made within 24 hours of the tour." }) => {
     return (
         <>
-            <div className="mt-4 p-3 bg-light rounded">
+            <div className="p-3 bg-light rounded">
                 <h6 className="fw-bold">Payment Terms</h6>
                 <p className="text-secondary small mb-0">{terms}</p>
             </div>

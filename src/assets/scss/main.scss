@@ -98,6 +98,11 @@ p {
     line-height: $line-height-text;
 }
 
+.paragraph{
+    font-size: $font-size-base;
+    line-height: $line-height-text;
+}
+
 .sub-heading {
     font-size: $font-size-md;
     color: $primary-color;
@@ -105,6 +110,11 @@ p {
 
 .small-12{
     font-size: $font-size-xs;
+}
+
+.departure-date-l{
+    background-color: $secondary-color;
+    width: fit-content;
 }
 
 // Common Utilities
