@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { Search, ChevronDown, DollarSign } from "lucide-react";
+import { Search, ChevronDown, DollarSign, X } from "lucide-react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useTranslations } from 'next-intl';
+import { motion, AnimatePresence } from "framer-motion";
 
 // swiper imports
 import { Swiper } from 'swiper/react';
@@ -385,3 +386,71 @@ export const TourTabs = ({ tour }) => {
 
 }
 
+
+export const HighlightsModal = ({ children }) => {
+    const [open, setOpen] = useState(false);
+
+    // Helper to toggle state
+    const handleToggle = () => setOpen(!open);
+
+    return (
+        <>
+            <motion.button
+                onClick={handleToggle}
+                className="px-2 py-1 mt-2 small-12 rounded-2 primery-btn text-decoration-none"
+                whileHover={{ scale: 1.01 }}
+            >
+                View all highlights →
+            </motion.button>
+
+            {/* AnimatePresence must wrap the conditional to handle the 'exit' animation */}
+            <AnimatePresence>
+                {open && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="modal-backdrop"
+                        style={{
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            backgroundColor: 'rgba(0,0,0,0.5)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            zIndex: 1050,
+                            backdropFilter: 'blur(4px)', // Premium touch
+                            overflow: 'hidden'
+                        }}
+                        onClick={handleToggle}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                            className="modal-content bg-white p-4 rounded-4 shadow-lg"
+                            style={{ maxWidth: '500px', width: '90%', position: 'relative' }}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Close Button */}
+                            <button
+                                onClick={handleToggle}
+                                style={{ position: 'absolute', top: '15px', right: '15px', border: 'none', background: 'none' }}
+                            >
+                                <X size={20} className="text-muted" />
+                            </button>
+
+                            <h3 className="h5 fw-bold mb-4">Tour Highlights</h3>
+                            <div className="modal-body-scroll" style={{ maxHeight: '60vh', overflowY: 'auto' }}>
+                                {children}
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
+    );
+};
