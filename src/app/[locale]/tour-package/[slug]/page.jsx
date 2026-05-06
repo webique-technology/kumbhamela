@@ -11,7 +11,7 @@ const BASE_URL =
 export const generateMetadata = async ({ params }) => {
     const resolvedParams = await params;
 
-    const slug = resolvedParams.package;
+    const slug = resolvedParams.slug;
 
     const tour = tourPackages.find(
         (p) => slugify(p.name) === slug
@@ -28,6 +28,9 @@ export const generateMetadata = async ({ params }) => {
     const fullImageUrl = tour.image.startsWith("http")
         ? tour.image
         : `${BASE_URL}${tour.image}`;
+
+    console.log(fullImageUrl);
+
 
     return {
         title: `${tour.name} | Kumbh Mela Tours`,
@@ -60,7 +63,7 @@ export const generateMetadata = async ({ params }) => {
 const TourDetailPage = async ({ params }) => {
     const resolvedParams = await params;
 
-    const slug = resolvedParams.package;
+    const slug = resolvedParams.slug;
 
     const tour = tourPackages.find(
         (p) => slugify(p.name) === slug

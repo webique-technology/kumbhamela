@@ -1,7 +1,7 @@
 "use client";
 import { SwiperSlide } from "swiper/react";
 import { SwiperSliderComp } from "./common";
-import Link from "next/link";
+import { Link } from '@/i18n/routing';
 import { slugify } from "@/lib/utils";
 
 export const TourPackageSlider = ({ packages, title }) => {
@@ -11,7 +11,7 @@ export const TourPackageSlider = ({ packages, title }) => {
             <SwiperSliderComp
                 className={"py-1"}
                 navigation={false}
-                loop={true}
+                loop={packages.length > 4}
                 timeDelay={3500}
                 disableAutoplay={true}
                 breakpoints={{

@@ -2,7 +2,7 @@
 import React from 'react'
 import Image from "next/image";
 import { Calendar, Clock, ArrowRight, Star, MapPin, MessageCircle, Users, ChevronRight } from "lucide-react";
-import Link from "next/link"; // Add this import
+import { Link } from '@/i18n/routing';
 import { useParams } from 'next/navigation';
 import { WhatsappBtn } from './button';
 import { SwiperSliderComp } from './common';
@@ -88,7 +88,7 @@ export const HotelCards = ({ hotel, onBookNow }) => {
                 <div className="position-relative hotel-img-container">
                     <SwiperSliderComp
                         navigation={false}
-                        loop={true}
+                        loop={hotel.images.length > 1}
                         timeDelay={3000}
                     >
                         {hotel.images.map((value, index) => (

@@ -223,39 +223,39 @@
             flex: 0 0 100%;
             width: 100%;
 
-            .date-card {
-                background: $bg-light;
-                color: $text-color-dark;
-                border-radius: $border-radius-sm;
-                padding: 15px 10px;
-                text-align: center;
-                border: 2px solid $primary-color;
-                transition: 0.3s;
+            // .date-card {
+            //     background: $bg-light;
+            //     color: $text-color-dark;
+            //     border-radius: $border-radius-sm;
+            //     padding: 15px 10px;
+            //     text-align: center;
+            //     border: 2px solid $primary-color;
+            //     transition: 0.3s;
 
-                .bathing-card-img {
-                    border-radius: $border-radius-sm;
-                }
+            //     .bathing-card-img {
+            //         border-radius: $border-radius-sm;
+            //     }
 
-                .title {
-                    font-size: $font-size-base;
-                    letter-spacing: 1px;
-                    text-transform: uppercase;
-                    margin-bottom: 8px;
-                }
+            //     .title {
+            //         font-size: $font-size-base;
+            //         letter-spacing: 1px;
+            //         text-transform: uppercase;
+            //         margin-bottom: 8px;
+            //     }
 
-                span {
-                    font-size: clamp($font-size-xl, 5vw, $font-size-3xl);
-                    font-weight: 800;
-                    color: $text-color-dark;
-                }
+            //     span {
+            //         font-size: clamp($font-size-xl, 5vw, $font-size-3xl);
+            //         font-weight: 800;
+            //         color: $text-color-dark;
+            //     }
 
-                .month {
-                    font-size: clamp($font-size-md, 4vw, $font-size-lg);
-                    font-weight: 600;
-                    margin-top: 5px;
-                }
+            //     .month {
+            //         font-size: clamp($font-size-md, 4vw, $font-size-lg);
+            //         font-weight: 600;
+            //         margin-top: 5px;
+            //     }
 
-            }
+            // }
 
             .nav-custom-btn {
                 width: 45px;
@@ -346,4 +346,98 @@
         }
 
     }
+}
+
+
+
+
+.festival-card-wrapper {
+    height: 100%;
+    // box-shadow: rgba(222, 222, 228, 0.74) 0px 7px 29px 0px;
+}
+
+.festival-card {
+    height: 100%;
+    background: #ffffff4d;
+    backdrop-filter: blur(18px);
+    overflow: hidden;
+    transition: all 0.5s ease;
+    // box-shadow: 0 40px 80px rgba(255, 255, 255, 0.4);
+
+    &:hover {
+        .festival-btn {
+            gap: 1.2rem;
+        }
+    }
+
+    &:before {
+        content: "";
+        background-image: url("../../public/images/stars-group-bg.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: absolute;
+        right: -4px;
+        bottom: 0;
+        width: 100px !important;
+        height: 100px !important;
+        z-index: -1;
+        // filter: invert(1.1);
+    }
+}
+
+.festival-card-line {
+    left: 0px;
+    top: 3rem;
+    bottom: 3rem;
+    width: 2px;
+    background: $primary-color;
+    box-shadow: 0 0 15px rgba(255, 153, 51, 0.5);
+}
+
+.festival-label {
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.3em;
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.festival-title {
+    color: $text-color-light;
+    font-size: 2rem;
+    line-height: 1.4;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+}
+
+.festival-day {
+    font-size: clamp($font-size-3xl, 5vw, $fs-hero-1);
+    line-height: 1;
+    color: $primary-color
+}
+
+.festival-month {
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.15em;
+    font-size: $font-size-xs;
+}
+
+.festival-year {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: $font-size-base;
+}
+
+.festival-footer {
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.festival-subtitle {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.95rem;
+}
+
+.festival-btn {
+    color: $primary-color;
+    transition: all 0.3s ease;
+    font-size: $font-size-xs;
+    letter-spacing: 0.15em;
 }

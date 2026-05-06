@@ -2,9 +2,8 @@
 import React, { useState } from 'react';
 import { BookingFormHandler } from './bookingFormHandler';
 import { MessageCircle } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from '@/i18n/routing';
 import "../../assets/scss/main.scss"
-import Link from 'next/link';
 
 
 export const PrimeryBtn = ({ iconLeft, iconRight, title, btnLink, className }) => {

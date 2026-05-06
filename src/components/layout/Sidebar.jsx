@@ -12,6 +12,8 @@ const NavSidebar = ({ languages, handleLanguageChange, setIsMenuOpen }) => {
       <nav className="mobile-nav">
         <Link href="/" className="mobile-link" onClick={setIsMenuOpen}>{t('home')}</Link>
         <Link href="/about-us" className="mobile-link" onClick={setIsMenuOpen}>{t('about')}</Link>
+        <Link href="/hotel" className="mobile-link" onClick={setIsMenuOpen}>{t('hotel')}</Link>
+        <Link href="/rental-car" className="mobile-link" onClick={setIsMenuOpen}>{t('rentalCar')}</Link>
         <Link href="/tour-package" className="mobile-link" onClick={setIsMenuOpen}>{t('tourPackage')}</Link>
         <Link href="/blog" className="mobile-link" onClick={setIsMenuOpen}>{t('blog')}</Link>
         <Link href="/contact-us" className="mobile-link" onClick={setIsMenuOpen}>{t('contact')}</Link>

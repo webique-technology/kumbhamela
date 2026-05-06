@@ -33,6 +33,9 @@
         background-repeat: no-repeat;
         height: 95vh;
         width: 100%;
+        @media(max-width: 768px){
+            height: 70vh;
+        }
     }
 
     .hero-overlay {

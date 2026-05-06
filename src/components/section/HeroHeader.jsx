@@ -13,7 +13,7 @@ const HeroHeader = () => {
                 <SwiperSliderComp
                     slidesPerView={1}
                     spaceBetween={1}
-                    loop={true}
+                    loop={heroSliderData.length > 1}
                     autoplay={{
                         delay: 4500,
                         disableOnInteraction: false,

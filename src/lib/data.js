@@ -235,7 +235,7 @@ export const tourPackages = [
         price: 28999,
         priceUnit: "per person",
         mainDesc: "Embark on a divine journey to Maharashtra’s sacred Jyotirlinga shrines. Experience the spiritual energy of Trimbakeshwar, Grishneshwar, Bhimashankar, and seek blessings at Shirdi and Shani Shingnapur. A perfect blend of devotion, culture, and natural beauty.",
-       inclusion: [
+        inclusion: [
             {
                 in_title: "Hotel",
                 in_icon: "Building2"
@@ -640,34 +640,39 @@ export const sacredDestinations = [
 
 export const bathingDates = [
     {
-        title: "Official Commencement (Dhwajarohan – Flag Hoisting)",
+        dateOccation: "Dhwajarohan – Flag Hoisting",
+        title: "Official Commencement",
         day: "31",
         month: "October",
         year: "2026",
         isKeyDate: false
     },
     {
-        title: "Flag Hoisting Ceremony (Nashik Kumbh Mela 2027)",
+        dateOccation: "Nashik Kumbh Mela 2027",
+        title: "Flag Hoisting Ceremony",
         day: "24",
         month: "July",
         year: "2027",
         isKeyDate: false
     },
     {
-        title: "First Amrit Snan (Ashadh Somvati Amavasya)",
+        dateOccation: "Ashadh Somvati Amavasya",
+        title: "First Amrit Snan",
         day: "2",
         month: "August",
         year: "2027",
         isKeyDate: true
     },
     {
-        title: "Second Amrit Snan (Shravan Amavasya)",
+        dateOccation: "Shravan Amavasya",
+        title: "Second Amrit Snan",
         day: "31",
         month: "August",
         year: "2027",
         isKeyDate: true
     },
     {
+        dateOccation: "",
         title: "Rishi Panchami",
         day: "5",
         month: "September",
@@ -675,20 +680,23 @@ export const bathingDates = [
         isKeyDate: false
     },
     {
-        title: "Third Amrit Snan - Vaishnava (Bhadrapada Shuddha Ekadashi)",
+        dateOccation: "Bhadrapada Shuddha Ekadashi",
+        title: "Third Amrit Snan - Vaishnava",
         day: "11",
         month: "September",
         year: "2027",
         isKeyDate: true
     },
     {
-        title: "Third Amrit Snan - Shaiva (Kushavarta Tirtha, Trimbakeshwar)",
+        dateOccation: "Kushavarta Tirtha, Trimbakeshwar",
+        title: "Third Amrit Snan - Shaiva",
         day: "12",
         month: "September",
         year: "2027",
         isKeyDate: true
     },
     {
+        dateOccation: "",
         title: "Bhadrapada Purnima",
         day: "15",
         month: "September",
@@ -696,6 +704,7 @@ export const bathingDates = [
         isKeyDate: false
     },
     {
+        dateOccation: "",
         title: "Ashwin Shudh Ekadashi",
         day: "11",
         month: "October",
@@ -703,6 +712,7 @@ export const bathingDates = [
         isKeyDate: false
     },
     {
+        dateOccation: "",
         title: "Ashwin Purnima",
         day: "15",
         month: "October",
@@ -710,6 +720,7 @@ export const bathingDates = [
         isKeyDate: false
     },
     {
+        dateOccation: "",
         title: "Kartik Shudh Ekadashi",
         day: "10",
         month: "November",
@@ -717,13 +728,15 @@ export const bathingDates = [
         isKeyDate: false
     },
     {
+        dateOccation: "",
         title: "Kartik Purnima",
-        day: "", // Note: Image only specifies 'November 2027'
+        day: "22", // Note: Image only specifies 'November 2027'
         month: "November",
         year: "2027",
         isKeyDate: false
     },
     {
+        dateOccation: "",
         title: "Mouni Amavasya",
         day: "26",
         month: "January",
@@ -731,6 +744,7 @@ export const bathingDates = [
         isKeyDate: true
     },
     {
+        dateOccation: "",
         title: "Vasant Panchami",
         day: "1",
         month: "February",
@@ -738,6 +752,7 @@ export const bathingDates = [
         isKeyDate: false
     },
     {
+        dateOccation: "",
         title: "Ganga Godavari Mahotsav",
         day: "8",
         month: "February",
@@ -745,6 +760,7 @@ export const bathingDates = [
         isKeyDate: false
     },
     {
+        dateOccation: "",
         title: "Maha Shivratri",
         day: "27",
         month: "February",
@@ -752,6 +768,7 @@ export const bathingDates = [
         isKeyDate: false
     },
     {
+        dateOccation: "",
         title: "Ganga Dussehra Utsav",
         day: "25",
         month: "May - June",
@@ -759,7 +776,8 @@ export const bathingDates = [
         isKeyDate: false
     },
     {
-        title: "Official Conclusion (Flag Lowering Ceremony)",
+        dateOccation: "Flag Lowering Ceremony",
+        title: "Official Conclusion",
         day: "24",
         month: "July",
         year: "2028",
@@ -773,17 +791,18 @@ export const planTabData = [
         tabIcon: "",
         tabName: "How to Reach",
         tabDesc: "Explore seamless travel options by air, rail, or road, and start your journey effortlessly.",
-        tabImages: [
+        list: [
             {
                 top: [
-                    "/images/tab-img-1.png",
-                    "/images/tab-img-2.png",
-                    "/images/tab-img-3.png"
+                    "By Air: Nearest airport is Mumbai (180 km) or Shirdi (80 km)",
+                    "By Train: Nashik Road Railway Station connects to major cities",
+                    "By Road: Well-connected via NH3, NH50 from Mumbai, Pune",
+                    "Local Transport: Auto-rickshaws, taxis, and buses available"
                 ],
                 bottom: [
-                    "/images/tab-img-4.png",
-                    "/images/tab-img-5.png",
-                    "/images/tab-img-6.png"
+                    "",
+                    "",
+                    ""
                 ]
             }
         ],
@@ -793,17 +812,18 @@ export const planTabData = [
         tabIcon: "",
         tabName: "Where to Stay",
         tabDesc: "Explore our curated list of accommodations and book your serene retreat.",
-        tabImages: [
+        list: [
             {
                 top: [
-                    "/images/tour-demo-1.png",
-                    "/images/tour-demo-2.png",
-                    "/images/tour-demo-3.png"
+                    "Hotels range from budget to luxury options",
+                    "Dharamshalas offer affordable pilgrim stays",
+                    "Tent cities set up during Kumbh period",
+                    "Book well in advance for Shahi Snan dates"
                 ],
                 bottom: [
-                    "/images/tour-demo-1.png",
-                    "/images/tour-demo-2.png",
-                    "/images/tour-demo-3.png"
+                    "",
+                    "",
+                    ""
                 ]
             }
         ],
@@ -811,39 +831,20 @@ export const planTabData = [
     {
         id: 3,
         tabIcon: "",
-        tabName: "Public Utilities",
+        tabName: "Safety Guidelines",
         tabDesc: "Categorized list of public utilities, designed to make it accessible for tourists and pilgrims",
-        tabImages: [
+        list: [
             {
                 top: [
-                    "/images/tour-demo-1.png",
-                    "/images/tour-demo-2.png",
-                    "/images/tour-demo-3.png"
+                    "Keep belongings secure and minimal",
+                    "Stay hydrated and carry basic medicines",
+                    "Follow crowd management instructions",
+                    "Keep emergency contacts handy"
                 ],
                 bottom: [
-                    "/images/tour-demo-4.png",
-                    "/images/tour-demo-5.png",
-                    "/images/tour-demo-6.png"
-                ]
-            }
-        ],
-    },
-    {
-        id: 4,
-        tabIcon: "",
-        tabName: "Nearby Attractions",
-        tabDesc: "Explore nearby attractions, including popular locations like Varanasi, Ayodhya Dham, and more.",
-        tabImages: [
-            {
-                top: [
-                    "/images/tour-demo-1.png",
-                    "/images/tour-demo-2.png",
-                    "/images/tour-demo-3.png"
-                ],
-                bottom: [
-                    "/images/tour-demo-4.png",
-                    "/images/tour-demo-5.png",
-                    "/images/tour-demo-6.png"
+                    "",
+                    "",
+                    ""
                 ]
             }
         ],
@@ -853,17 +854,17 @@ export const planTabData = [
         tabIcon: "",
         tabName: "Helpline",
         tabDesc: "Emergency: 100 | Tourist Helpline: 1800-XXX-XXXX | Medical Help: 108 | Available 24/7",
-        tabImages: [
+        list: [
             {
                 top: [
-                    "/images/tour-demo-1.png",
-                    "/images/tour-demo-2.png",
-                    "/images/tour-demo-3.png"
+                    "",
+                    "",
+                    ""
                 ],
                 bottom: [
-                    "/images/tour-demo-4.png",
-                    "/images/tour-demo-5.png",
-                    "/images/tour-demo-6.png"
+                    "",
+                    "",
+                    ""
                 ]
             }
         ],
@@ -871,19 +872,25 @@ export const planTabData = [
     {
         id: 6,
         tabIcon: "",
-        tabName: "Parking & Transport",
+        tabName: "Do's & Don'ts",
         tabDesc: "Designated parking areas available. Use local transport, shuttles, or auto-rickshaws for ghat access.",
-        tabImages: [
+        list: [
             {
                 top: [
-                    "/images/tour-demo-1.png",
-                    "/images/tour-demo-2.png",
-                    "/images/tour-demo-3.png"
+                    "Dress modestly in traditional attire",
+                    "Respect local customs and traditions",
+                    "Take only holy dips at designated ghats",
+                    "Carry sufficient drinking water",
+                    "Keep identity documents with you",
+                    "Follow instructions of volunteers"
                 ],
                 bottom: [
-                    "/images/tour-demo-4.png",
-                    "/images/tour-demo-5.png",
-                    "/images/tour-demo-6.png"
+                    "Don't litter the ghats or river",
+                    "Avoid plastic bags and bottles",
+                    "Don't take photographs without permission",
+                    "Don't push or rush in crowds",
+                    "Avoid carrying valuables",
+                    "Don't ignore health advisories"
                 ]
             }
         ],

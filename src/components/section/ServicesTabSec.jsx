@@ -8,9 +8,9 @@ import { SwiperSlide } from 'swiper/react';
 import { PrimeryBtn, WhatsappBtn } from '../ui/button';
 import { MessageCircle, MapPin, Clock, Users, ArrowRight } from 'lucide-react'
 import { BookingForm } from '../ui/bookingFormHandler';
-import Link from 'next/link';
+import { Link, usePathname } from '@/i18n/routing';
 import { slugify } from '@/lib/utils';
-import { usePathname } from 'next/navigation';
+import "../../styles/servicesSec.scss"
 
 
 const ServicesTabSec = () => {
@@ -44,16 +44,6 @@ const ServicesTabSec = () => {
             type: "hotel"
         }
     ];
-
-    // Helper function to render the correct card based on type
-    const renderCard = (type, data) => {
-        switch (type) {
-            case "tour": return <TourPackageCard tour={data} />;
-            case "hotel": return <HotelCards hotel={data} />;
-            case "car": return <RentalCarCard car={data} />;
-            default: return null;
-        }
-    };
 
     return (
         <section className='section-padding position-relative trinery-bg services-section'>
@@ -98,16 +88,24 @@ const ServicesTabSec = () => {
                                                     slidesPerView: 2,
                                                     spaceBetween: 20
                                                 },
-                                                992: {
+                                                768: {
                                                     slidesPerView: 3,
                                                     spaceBetween: 20
                                                 },
-                                                1400: {
+                                                992: {
                                                     slidesPerView: 4,
                                                     spaceBetween: 20
                                                 },
+                                                1220: {
+                                                    slidesPerView: 5,
+                                                    spaceBetween: 20
+                                                },
+                                                1400: {
+                                                    slidesPerView: 6,
+                                                    spaceBetween: 20
+                                                },
                                             }}
-                                            loop={true}
+                                            loop={tab.mapData.length > 6}
                                             navigation={false}
                                             className="mySwiper"
                                         >

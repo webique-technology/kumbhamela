@@ -7,6 +7,43 @@ import "../../../../styles/blog.scss";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { PrimeryBtn } from "@/components/ui/button";
 
+const BASE_URL =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://yourkumbhdomain.com";
+
+export const generateMetadata = async ({ params }) => {
+    const { slug } = await params;
+    const blog = blogs.find((b) => slugify(b.blogTitle) === slug);
+    return {
+        title: blog.blogTitle,
+        description: blog.description,
+        alternates: {
+            canonical: `${BASE_URL}/blog/${slugify(blog.blogTitle)}`,
+        },
+        openGraph: {
+            title: blog.blogTitle,
+            description: blog.description,
+            url: `${BASE_URL}/blog/${slugify(blog.blogTitle)}`,
+            siteName: "Kumbh Mela",
+            images: [
+                {
+                    url: blog.image,
+                    width: 1200,
+                    height: 630,
+                },
+            ],
+            locale: "en_US",
+            type: "article",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: blog.blogTitle,
+            description: blog.description,
+            images: [blog.image],
+        },
+    };
+};
+
 // 1. Make the component async
 const BlogDetails = async ({ params }) => {
 

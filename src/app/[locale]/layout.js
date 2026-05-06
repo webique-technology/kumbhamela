@@ -45,8 +45,8 @@ export default async function RootLayout({ children, params }) {
   const messages = await getMessages(locale);
 
   return (
-    <html lang={locale} className={`${sora.variable} ${poppins.variable} ${sora2.variable} ${montez.variable}`}>
-      <body className="antialiased">
+    <html lang={locale} className={`${sora.variable} ${poppins.variable} ${sora2.variable} ${montez.variable}`} suppressHydrationWarning={true}>
+      <body className="antialiased" suppressHydrationWarning={true}>
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Navbar />
           {children}

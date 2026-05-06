@@ -1,18 +1,30 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import Link from "next/link";
+import { Link } from '@/i18n/routing';
 import Image from "next/image";
 import * as Icons from "lucide-react";
 import { Circle, FileText } from "lucide-react";
+import { motion } from "framer-motion";
+
 import { slugify } from "@/lib/utils";
 import { WhatsAppShareBtn } from "@/components/ui/button";
 import { HighlightsModal, TourTabs, } from "@/components/ui/common";
 import { TourPackageSlider } from "@/components/ui/TourPackageSlider";
 import { tourPackages } from "@/lib/data";
 
+
 const TourPackageDetail = ({ tour }) => {
+
+    const [expandedItems, setExpandedItems] = useState({});
+    const loadMore = (index) => {
+        setExpandedItems((prev) => ({
+            ...prev,
+            [index]: !prev[index],
+        }));
+    };
+
     return (
         <main>
             {/* HERO SECTION */}
@@ -174,7 +186,7 @@ const TourPackageDetail = ({ tour }) => {
 
                                             <Row className="align-items-start">
                                                 <Col md={9}>
-                                                    <span className="badge bg-brand-light primery-color">
+                                                    <span className="badge bg-brand-light primery-color ms-2 ms-sm-0">
                                                         Day {i + 1}
                                                     </span>
 
@@ -182,9 +194,22 @@ const TourPackageDetail = ({ tour }) => {
                                                         {day.journey_title}
                                                     </h5>
 
-                                                    <p className="text-secondary">
+                                                    <p
+                                                        className={`text-secondary ${expandedItems[i] ? "" : "line-clamp-5"
+                                                            }`}
+                                                    >
                                                         {day.journey_desc}
                                                     </p>
+
+                                                    {day.journey_desc?.length > 261 && (
+                                                        <motion.button
+                                                            whileTap={{ scale: 0.95 }}
+                                                            onClick={() => loadMore(i)}
+                                                            className="primery-btn py-1 px-2 small-12 rounded-2"
+                                                        >
+                                                            {expandedItems[i] ? "Show Less" : "Load More"}
+                                                        </motion.button>
+                                                    )}
                                                 </Col>
 
                                                 <Col md={3}>
@@ -201,7 +226,7 @@ const TourPackageDetail = ({ tour }) => {
                                                                     day.journey_title
                                                                 }
                                                                 fill
-                                                                className="rounded shadow-sm object-fit-cover"
+                                                                className="rounded shadow-sm object-fit-cover mt-3"
                                                             />
                                                         </div>
                                                     )}

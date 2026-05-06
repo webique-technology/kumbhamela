@@ -12,57 +12,6 @@ import "../../styles/bathingDates.scss"
 export const BathingDates = () => {
     return (
         <>
-            {/*<section className="section-padding bathing-section">
-                <div className="overlay"></div>
-
-                <Container>
-                    <div className="section-title text-center">
-                        <Calendar size={40} />
-                        <h2>Bathing Dates</h2>
-                    </div>
-
-                    <Row className="justify-content-center">
-                        {bathingDates.map((item, index) => (
-                            <Col
-                                key={index}
-                                lg={2}
-                                md={4}
-                                sm={6}
-                                xs={6}
-                                className="mb-4 d-flex justify-content-center"
-                            >
-                                <div className="date-card w-100">
-                                    <p className="title">{item.title}</p>
-                                    <span className="m-0">{item.day}</span>
-                                    <p className="month">
-                                        {item.month} <br /> {item.year}
-                                    </p>
-                                </div>
-                            </Col>
-                        ))}
-                    </Row>
-
-                    <Row className="justify-content-center">
-                        <Col lg={8}>
-                            <p className="description text-center mb-4">
-                                Bathing ritual is the most significant ritual performed at Kumbh.
-                                Although taking a dip in the sacred waters on all days of Prayagraj
-                                Maha Kumbh beginning from Makar Sankranti is considered holy, yet
-                                there are some specific auspicious bathing dates. Mark your calendar
-                                for these divine bathing dates.
-                            </p>
-                        </Col>
-                    </Row>
-
-                    <PrimeryBtn
-                        title="Read More"
-                        btnLink="/"
-                        className={"primery-btn-style-2"}
-                        iconRight={<ArrowRight size={16} />}
-                    />
-                </Container>
-            </section> */}
-
             {/* bathing dates with slider */}
             <section className="bathing-count-main position-relative">
                 <div className="top-divider position-absolute td-trinery-bg z-3 td-top" style={{ pointerEvents: 'none' }}></div>
@@ -112,6 +61,7 @@ export const BathingDates = () => {
                                         prevEl: '.bathing-prev-btn',
                                         nextEl: '.bathing-next-btn',
                                     }}
+                                    disableAutoplay={true}
                                     spaceBetween={20}
                                     timeDelay={4000}
                                     breakpoints={{
@@ -124,6 +74,14 @@ export const BathingDates = () => {
                                             spaceBetween: 20,
                                         },
                                         768: {
+                                            slidesPerView: 1,
+                                            spaceBetween: 30,
+                                        },
+                                        885: {
+                                            slidesPerView: 1,
+                                            spaceBetween: 30,
+                                        },
+                                        992: {
                                             slidesPerView: 2,
                                             spaceBetween: 30,
                                         },
@@ -139,10 +97,7 @@ export const BathingDates = () => {
                                 >
                                     {bathingDates.map((date, index) => (
                                         <SwiperSlide key={index} className="h-auto">
-                                            <div className="date-card w-100 h-100 d-grid">
-                                                {/* <div className="card-img">
-                                                    <img src="/images/tour-demo-2.png" alt="" className="bathing-card-img img-fluid" />
-                                                </div> */}
+                                            {/* <div className="date-card w-100 h-100 d-grid">
                                                 <div className="card-body p-2">
                                                     <p className="title">{date.title}</p>
                                                     <div className="d-flex flex-column align-items-center justify-content-between">
@@ -150,6 +105,56 @@ export const BathingDates = () => {
                                                         <p className="month">
                                                             {date.month} {date.year}
                                                         </p>
+                                                    </div>
+                                                </div>
+                                            </div> */}
+                                            <div className="festival-card-wrapper snap-start group">
+                                                <div className="festival-card glass-card inner-glow position-relative p-4 d-grid rounded-4 transition-card">
+
+                                                    {/* LEFT GLOW BORDER */}
+                                                    <div className="festival-card-line position-absolute"></div>
+
+                                                    {/* TOP CONTENT */}
+                                                    <div className="festival-card-header">
+                                                        <div className="d-flex align-items-center ">
+                                                            <span className="festival-label text-uppercase d-block">
+                                                                {date.dateOccation}
+                                                            </span>
+
+                                                            {/* <div className="key-date"></div> */}
+                                                        </div>
+
+                                                        <h3 className="festival-title my-3 text-capitalize">
+                                                            {date.title}
+                                                        </h3>
+                                                    </div>
+
+                                                    {/* DATE SECTION */}
+                                                    <div className="festival-date d-flex align-items-end gap-3">
+                                                        <span className="festival-day fw-bold">
+                                                            {date.day}
+                                                        </span>
+
+                                                        <div className="d-flex flex-column">
+                                                            <span className="festival-month text-uppercase">
+                                                                {date.month}
+                                                            </span>
+
+                                                            <span className="festival-year">
+                                                                2027
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* FOOTER */}
+                                                    <div className="festival-footer w-100 pt-4 border-top d-flex justify-content-between align-items-center">
+                                                        <span className="festival-subtitle">
+                                                            Sacred Immersion
+                                                        </span>
+
+                                                        {/* <button className="festival-btn d-flex align-items-center gap-2 border-0 bg-transparent">
+                                                            DETAILS
+                                                        </button> */}
                                                     </div>
                                                 </div>
                                             </div>

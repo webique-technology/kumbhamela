@@ -54,30 +54,38 @@ const AboutUs = () => {
     const cycleCards = [
         {
             id: "01",
-            title: "Celestial Alignment",
-            text: "The mela is held when Jupiter enters Leo (Simha) and the Sun enters Aries, creating a unique resonance.",
-            img: "/images/year-cycle-1.png",
+            title: "Sadhus & Saints",
+            text: "Holy men who have renounced worldly life gather from across India, representing ancient spiritual lineages.",
+            img: "/images/sadhus-saints.webp",
             variant: "#FF6A00"
         },
         {
             id: "02",
-            title: "The Wait of Years",
-            text: "The twelve-year gap represents a period of internal purification, preparing for the influx of energy.",
+            title: "Akharas",
+            text: "The traditional monastic orders that preserve and transmit Hindu spiritual knowledge through generations.",
             img: "/images/year-cycle-2.png",
             variant: "#CBA533"
         },
         {
             id: "03",
-            title: "The Great Awakening",
-            text: "When the time comes, millions descend upon Nashik to participate in the Shahi Snan.",
-            img: "/images/year-cycle-3.png",
+            title: "River Rituals",
+            text: "Sacred bathing ceremonies performed at auspicious times, believed to cleanse karma and grant liberation.",
+            img: "/images/river-rituals.webp",
             variant: "#20BA5A"
+        },
+        {
+            id: "04",
+            title: "Evening Aarti",
+            text: "Mesmerizing lamp ceremonies on the ghats create a divine atmosphere of devotion and peace.",
+            img: "/images/evening-aarti.webp",
+            variant: "#6a7282"
         }
     ];
 
     return (
         <main className="about-kumbh-page spiritual-legacy">
             {/* Editorial Hero Section */}
+
             <section className="kumbh-hero">
                 <div className="hero-bg">
                     <img src="/images/about-hero-1.png" alt="Godavari River" />
@@ -85,7 +93,7 @@ const AboutUs = () => {
                 </div>
                 <Container className="hero-content-wrapper">
                     <div className="max-w-700">
-                        <span className="hero-label">The Great Bathing Festival</span>
+                        <span className="montez-sub-heading primery-color">The Great Bathing Festival</span>
                         <h1 className="hero-title text-light">
                             The Soul of <span className="hero-span secondary-color">Nashik</span>
                         </h1>
@@ -100,18 +108,18 @@ const AboutUs = () => {
             </section>
 
             {/* History Carousel Section */}
+
             <section className="history-section section-padding">
                 <Container>
-                    {/* Flex Header for Title + Buttons */}
                     <div className="d-flex position-relative justify-content-between align-items-center mb-4">
                         <TitleComponent
                             className='text-start mb-0'
                             title="Sacred History"
-                            description="Our Collections"
+                            montezClass="primery-color montez-sub-heading"
+                            montezSubTitle="Through the Ages"
                             divider={false}
                         />
 
-                        {/* Custom Navigation Buttons */}
                         <div className="slider-nav-wrapper d-flex gap-2">
                             <button className="history-prev-btn nav-custom-btn">
                                 <ArrowLeft size={20} />
@@ -122,7 +130,6 @@ const AboutUs = () => {
                         </div>
                     </div>
 
-                    {/* slider */}
                     <SwiperSliderComp
                         slidesPerView={3}
                         navigation={{
@@ -149,7 +156,6 @@ const AboutUs = () => {
                         {historyCards.map((card, index) => (
                             <SwiperSlide key={index} className="h-auto">
                                 <div className="card history-card h-100 border-0 shadow-md overflow-hidden">
-                                    {/* Image Container with Overlay */}
                                     <div className="position-relative overflow-hidden">
                                         <Image
                                             src={card.img}
@@ -159,7 +165,6 @@ const AboutUs = () => {
                                             className="card-img-top object-fit-cover transition-transform"
                                         />
 
-                                        {/* Badge Left */}
                                         <div className="position-absolute top-0 start-0 m-3 z-2">
                                             <span className="features-badge rounded-pill bg-brand-orange">
                                                 {card.badge}
@@ -167,9 +172,8 @@ const AboutUs = () => {
                                         </div>
                                     </div>
 
-                                    {/* Content Body */}
                                     <div className="card-body p-4">
-                                        <div className='d-grid'>
+                                        <div className=''>
                                             <h3 className="h5 fw-bold text-brand-dark mb-2">
                                                 {card.title}
                                             </h3>
@@ -187,11 +191,12 @@ const AboutUs = () => {
             </section>
 
             {/* Spiritual Insights Bento */}
-            <section className="insights-section section-padding bg-light2">
+
+            <section className="insights-section section-padding bg-light2 secondary-bg">
                 <Container>
-                    <Row className="g-4 g-sm-1 g-md-4">
+                    <Row className="">
                         <Col lg={4}>
-                            <div className="wisdom-card">
+                            <div className="wisdom-card mb-4">
                                 <img src="/images/about-baba.png" alt="Spiritual Sage" />
                                 <div className="wisdom-overlay">
                                     <h4>Wisdom of Sages</h4>
@@ -201,35 +206,34 @@ const AboutUs = () => {
                         </Col>
                         <Col lg={8}>
                             <div className="d-flex flex-column gap-4">
-                                <Row className="g-4 g-sm-1 g-md-4">
-                                    <Col md={6}>
-                                        <div className="stat-card stat-orange">
-                                            <Waves size={40} className="mb-3" />
-                                            <h5>30M+</h5>
-                                            <p>Projected pilgrims for Shahi Snan.</p>
-                                        </div>
-                                    </Col>
-                                    <Col md={6}>
-                                        <div className="stat-card stat-yellow">
-                                            <Calendar size={40} className="mb-3" />
-                                            <h5>12 Yrs</h5>
-                                            <p>Sacred cycle of Simhastha Kumbh.</p>
-                                        </div>
-                                    </Col>
-                                </Row>
+                                <TitleComponent
+                                    title={"Rituals & Key Events"}
+                                    divider={false}
+                                    montezSubTitle={"Sacred Ceremonies"}
+                                    montezClass="montez-sub-heading primery-color"
+                                    className="text-start"
+                                />
 
                                 <div className="accordion-card p-4 shadow-sm bg-white">
                                     <h3 className="mb-4 fw-bold">Spiritual Insights</h3>
                                     <Accordion defaultActiveKey="0" flush>
-                                        <Accordion.Item eventKey="0" className="border-bottom">
-                                            <Accordion.Header>Why is Shahi Snan auspicious?</Accordion.Header>
+                                        <Accordion.Item eventKey="0" className="border-bottom border mb-2 rounded-3">
+                                            <Accordion.Header className="rounded-3 bg-transparent">Shahi Snan Royal Bath {"(Most Auspicious Event)"}</Accordion.Header>
                                             <Accordion.Body>
-                                                Planetary alignments maximize spiritual vibration, believed to dissolve lifetimes of karma.
+                                                The most auspicious bathing ritual led by Akharas in grand processions. These dates are determined by celestial alignments and are considered the most spiritually powerful
                                             </Accordion.Body>
                                         </Accordion.Item>
-                                        <Accordion.Item eventKey="1">
-                                            <Accordion.Header>Significance of Kushavarta Ghat?</Accordion.Header>
-                                            <Accordion.Body>It is the source where the Godavari reappears after disappearing from Brahmagiri.</Accordion.Body>
+                                        <Accordion.Item eventKey="1" className=" border mb-2 rounded-3">
+                                            <Accordion.Header className="rounded-3 bg-transparent">Pravachans & Bhajans Spiritual Discourses</Accordion.Header>
+                                            <Accordion.Body>Renowned saints and scholars deliver spiritual discourses, while devotional music fills the air throughout the Kumbh grounds.</Accordion.Body>
+                                        </Accordion.Item>
+                                        <Accordion.Item eventKey="2" className=" border mb-2 rounded-3">
+                                            <Accordion.Header className="rounded-3 bg-transparent">Yagna & Puja Sacred Ceremonies</Accordion.Header>
+                                            <Accordion.Body>Ancient Vedic fire rituals and elaborate pujas performed for world peace, prosperity, and spiritual upliftment of all beings.</Accordion.Body>
+                                        </Accordion.Item>
+                                        <Accordion.Item eventKey="3" className=" border mb-2 rounded-3">
+                                            <Accordion.Header className="rounded-3 bg-transparent">Nagas & Sadhus</Accordion.Header>
+                                            <Accordion.Body>Ancient Vedic fire rituals and elaborate pujas performed for world peace, prosperity, and spiritual upliftment of all beings.</Accordion.Body>
                                         </Accordion.Item>
                                     </Accordion>
                                 </div>
@@ -240,6 +244,7 @@ const AboutUs = () => {
             </section>
 
             {/* CTA Section */}
+
             <section className="cta-section section-padding">
                 <Container>
                     <div className="cta-box">
@@ -262,11 +267,12 @@ const AboutUs = () => {
             {/* 2nd hero header */}
 
             {/* 2. header  */}
-            <section className="legacy-hero section-padding">
+            <section className="legacy-hero section-padding secondary-bg">
                 <Container>
-                    <Row className="align-items-center justify-content-center g-0 g-md-5">
+                    <Row className="align-items-center justify-content-center">
                         <Col md={6} className="hero-text-col">
-                            <span className="label-sm">The Sacred Tradition</span>
+                            <span className="montez-sub-heading primery-color">The Sacred Tradition</span>
+
                             <h1 className="hero-title mt-3">
                                 Where Time Meets the <span className="hero-span primery-color">Divine</span>
                             </h1>
@@ -300,34 +306,39 @@ const AboutUs = () => {
             </section>
 
             {/* 2. History of Simhastha (Bento) */}
+
             <section className="history-bento section-padding">
                 <Container>
-                    <div className="section-header mb-5">
-                        <h2 className="section-heading">History of Simhastha</h2>
-                        <div className="heading-divider"></div>
-                    </div>
+                    <TitleComponent
+                        title={"Historical Significance"}
+                        montezSubTitle={"Through the Ages"}
+                        montezClass="montez-sub-heading primery-color"
+                        divider={false}
+                        className="mb-4"
+                        h2_class={"text-start"}
+                    />
                     <div className="bento-grid">
                         <div className="bento-item item-origin shadow-sm">
                             <img src="/images/cosmic-history.png" alt="Origin" className="bg-img" />
                             <div className="bento-content">
-                                <span className="label-xs">The Cosmic Origin</span>
-                                <h3>The Churning of the Ocean</h3>
-                                <p>According to the Puranas, drops of 'Amrit' fell at Nashik, Haridwar, Ujjain, and Prayagraj.</p>
+                                <span className="label-xs">Vedic Period - 1500 BCE</span>
+                                <h3>Ancient Origins</h3>
+                                <p>References to sacred bathing rituals at river confluences appear in the Rigveda and other Vedic texts, establishing the spiritual foundation for Kumbh traditions.</p>
                             </div>
                         </div>
                         <div className="bento-item item-legacy text-center">
                             <CheckCircle size={48} className="mb-4" />
-                            <h3>The Peshwa Legacy</h3>
-                            <p>Nashik's prominence grew under the Peshwas, who revitalized the city's temples and the sacred Ram Kund.</p>
+                            <h3>Mythological Foundation</h3>
+                            <p> The Puranas document the Samudra Manthan legend, establishing Nashik as one of the four sites where drops of Amrit fell from the sacred Kumbh {"(pot)"}.</p>
                         </div>
                         <div className="bento-item item-quote">
-                            <p className="quote-text">"Nashik is the gateway to salvation, where the lion meets the spirit."</p>
+                            <p className="quote-text">Lord Rama's exile brought him to Nashik's Panchavati. The Godavari banks became sanctified by his presence, forever linking the region to the epic.</p>
                             <div className="d-flex align-items-center gap-2 mt-auto">
                                 <CheckCircle size={20} className="text-primary" />
-                                <span className="fw-bold small">Vedic Chronicles</span>
+                                <span className="fw-bold small">Ramayana Connection</span>
                             </div>
                         </div>
-                        <div className="bento-item item-visual">
+                        <div className="bento-item item-visual d-none d-md-block">
                             <img src="/images/diva-lamp.png" alt="Floating Lamp" className="w-100 h-100 object-fit-cover" />
                         </div>
                     </div>
@@ -335,9 +346,10 @@ const AboutUs = () => {
             </section>
 
             {/* 3. Holy Godavari (Asymmetric) */}
-            <section className="river-section section-padding bg-light2">
+
+            <section className="river-section section-padding bg-light2 secondary-bg">
                 <Container>
-                    <Row className="align-items-center g-0 g-md-5">
+                    <Row className="align-items-center">
                         <Col lg={6} className="order-2 order-lg-1">
                             <div className="river-img-wrapper position-relative">
                                 <img src="/images/dakshin-ganga.png" alt="Godavari Valley" className="img-fluid rounded-large shadow-2xl" />
@@ -347,8 +359,14 @@ const AboutUs = () => {
                             </div>
                         </Col>
                         <Col lg={6} className="order-1 order-lg-2">
-                            <span className="label-sm text-secondary">Dakshin Ganga</span>
-                            <h2 className="section-heading-large mt-3">The Holy Godavari: A River of Life</h2>
+                            <TitleComponent
+                                montezSubTitle={"Dakshin Ganga"}
+                                montezClass="primery-color montez-sub-heading"
+                                title={"The Holy Godavari: A River of Life"}
+                                h2_class="section-heading-large"
+                                divider={false}
+                                className="mb-4 text-start"
+                            />
                             <p className="description-text mt-4">
                                 Devotees believe that a dip in the 'Ram Kund' cleanses the soul of lifetimes of karma.
                             </p>
@@ -363,17 +381,20 @@ const AboutUs = () => {
             </section>
 
             {/* 4. 12-Year Cycle */}
+
             <section className="cycle-section section-padding">
                 <Container>
                     <TitleComponent
-                        title="The 12-Year Cycle"
-                        description="Aligned with the position of Jupiter (Guru) and the Sun, the Kumbh Mela follows a cosmic calendar."
-                        className="text-center max-w-700 mx-auto mb-5"
+                        title="Cultural Showcase"
+                        montezSubTitle="Visual Journey"
+                        className="text-center max-w-700 mx-auto"
                         h2_class="section-heading"
+                        divider={false}
+                        montezClass="montez-sub-heading primery-color"
                     />
-                    <Row className="g-0 g-sm-1 g-md-5 mt-4">
+                    <Row className="mt-2">
                         {cycleCards.map((card) => (
-                            <Col md={4} key={card.id}>
+                            <Col sm={6} lg={3} key={card.id}>
                                 <div className="cycle-card">
                                     <div className="img-box">
                                         <img src={card.img} alt={card.title} className="grayscale-hover" />
@@ -389,7 +410,8 @@ const AboutUs = () => {
             </section>
 
             {/* 5. Significance Quote */}
-            <section className="quote-section py-5 bg-white">
+
+            <section className="quote-section py-5 secondary-bg">
                 <Container className="text-center">
                     <CheckCircle size={60} className="text-primary-light mb-4" />
                     <h2 className="quote-main mb-4">

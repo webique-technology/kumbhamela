@@ -5,7 +5,7 @@ import { Col, Container, Row, Tab, Nav } from 'react-bootstrap';
 import Image from 'next/image';
 import { TitleComponent } from '../ui/common';
 import { planTabData } from '../../lib/data';
-import { Plane, Hotel, UtilityPole, MapPin, PhoneCall, Car } from 'lucide-react'; // Example icons
+import { Plane, Hotel, UtilityPole, MapPin, PhoneCall, Car, CircleCheck, TriangleAlert } from 'lucide-react'; // Example icons
 import "../../styles/planTab.scss";
 
 const PlanTabSec = () => {
@@ -55,47 +55,53 @@ const PlanTabSec = () => {
                             <Tab.Content className="ps-lg-5 h-100">
                                 {planTabData.map((tab, i) => (
                                     <Tab.Pane eventKey={`tab-${i}`} key={tab.id} className="h-100">
-                                        <div className="h-100 rounded-4 overflow-hidden bg-white tab-grid-bg p-3">
-                                            {tab.tabImages.map((value, num) => {
-                                                return (
-                                                    <div className='d-flex flex-column gap-3' key={num}>
-                                                        <div className={`image-grid-layout-1 d-grid`}>
-                                                            {value.top.map((img, index) => {
-                                                                return (
-                                                                    <div className={`grid-item top-grid-item-${index + 1}`} key={index}>
-                                                                        {/* <img src={img} alt="" /> */}
-                                                                        <Image
-                                                                            src={img}
-                                                                            alt=""
-                                                                            width={200}
-                                                                            height={200}
-                                                                            className='object-fit-cover'
-                                                                            priority
-                                                                        />
-                                                                    </div>
-                                                                )
-                                                            })}
+                                        <div className="h-100 rounded-4 overflow-hidden bg-white d-flex flex-column flex-md-row flex-lg-column justify-content-between justify-content-lg-start p-3">
+                                            {tab.list.map((value, num) => (
+                                                <React.Fragment key={`list-group-${num}`}>
+
+                                                    {/* Top List Logic */}
+                                                    {value.top?.some(item => item !== "") && (
+                                                        <div>
+                                                            <h4>{tab.tabName === "Do's & Don'ts" ? "Do's" : tab.tabName}</h4>
+                                                            <ul className="d-flex flex-column gap-3 mb-4 list-unstyled">
+                                                                {value.top.filter(item => item !== "").map((item, itd) => (
+                                                                    <li key={`top-${itd}`} className="d-flex align-items-start justify-content-start gap-2">
+                                                                        <span className="text-success">
+                                                                            <CircleCheck size={18} />
+                                                                        </span>
+                                                                        <p className="m-0 text-muted">{item}</p>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
                                                         </div>
-                                                        <div className={`image-grid-layout-2 d-grid`}>
-                                                            {value.bottom.map((img, index) => {
-                                                                return (
-                                                                    <div className={`grid-item bottom-grid-item-${index + 1}`} key={index}>
-                                                                        {/* <img src={img} alt="" /> */}
-                                                                        <Image
-                                                                            src={img}
-                                                                            alt=""
-                                                                            width={200}
-                                                                            height={200}
-                                                                            className='object-fit-cover'
-                                                                            priority
-                                                                        />
-                                                                    </div>
-                                                                )
-                                                            })}
+                                                    )}
+
+                                                    {/* Bottom List Logic (Conditional Icons) */}
+                                                    {value.bottom?.some(item => item !== "") && (
+                                                        <div>
+                                                            <h4>{tab.tabName === "Do's & Don'ts" ? "Don'ts " : ""}</h4>
+                                                            <ul className="d-flex flex-column gap-3 list-unstyled">
+                                                                {value.bottom.filter(item => item !== "").map((item, idb) => (
+                                                                    <li key={`bottom-${idb}`} className="d-flex align-items-start justify-content-start gap-2">
+                                                                        {/* Conditional Icon based on Tab Name */}
+                                                                        {tab.tabName === "Do's & Don'ts" ? (
+                                                                            <span className="text-danger">
+                                                                                <TriangleAlert size={18} />
+                                                                            </span>
+                                                                        ) : (
+                                                                            <span className="text-success">
+                                                                                <CircleCheck size={18} />
+                                                                            </span>
+                                                                        )}
+                                                                        <p className="m-0 text-muted">{item}</p>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
                                                         </div>
-                                                    </div>
-                                                )
-                                            })}
+                                                    )}
+
+                                                </React.Fragment>
+                                            ))}
                                         </div>
                                     </Tab.Pane>
                                 ))}

@@ -64,16 +64,17 @@ const VideoGallery = () => {
                 />
                 <Swiper
                     modules={[Autoplay]}
-                    slidesPerView={4}
+                    slidesPerView={6}
                     spaceBetween={15}
-                    loop={true}
+                    loop={reels.length > 6}
                     speed={800}
                     watchSlidesProgress={true}
                     breakpoints={{
                         0: { slidesPerView: 1 },
                         450: { slidesPerView: 2 },
                         1024: { slidesPerView: 3 },
-                        1240: { slidesPerView: 4 }
+                        1240: { slidesPerView: 4 },
+                        1440: { slidesPerView: 6 }
                     }}
                     onSlideChange={handleSlideChange}
                     onSwiper={(swiper) => {

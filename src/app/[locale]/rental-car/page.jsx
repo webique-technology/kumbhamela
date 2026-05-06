@@ -61,13 +61,14 @@ const RentalCarContent = () => {
                             <TitleComponent
                                 className='text-start mb-0'
                                 title="Select your preferred transport"
-                                description="Our Collections"
+                                montezSubTitle="Our Collections"
+                                montezClass="primery-color montez-sub-heading"
                                 divider={false}
                             />
                         </Col>
                         <Col md={5} className="mt-4 mt-md-0">
                             <div className=''>
-                                <Nav variant="pills" className="justify-content-md-between p-1 gap-2 rounded-2 car-nav-pills">
+                                <Nav variant="pills" className="p-1 gap-2 rounded-2 car-nav-pills">
                                     <Nav.Item>
                                         <Nav.Link eventKey="all-car" className="car-tab-item">All Cars</Nav.Link>
                                     </Nav.Item>
@@ -124,7 +125,7 @@ export default function RentalCar() {
                 <section className="hero-rental-section section-padding">
                     <Container>
                         <Row className="align-items-center gy-5">
-                            <Col lg={6} className="hero-content">
+                            <Col md={6} className="hero-content">
                                 <div className="badge-wrapper">
                                     <Sparkles size={14} className="me-2" />
                                     <span>Premium Pilgrimage Fleet</span>
@@ -138,7 +139,7 @@ export default function RentalCar() {
                                 </p>
                             </Col>
 
-                            <Col lg={6} className="hero-image-wrapper">
+                            <Col md={6} className="hero-image-wrapper">
                                 <div className="main-image-container">
                                     <Image
                                         src="/images/car-page-img-1.png"
@@ -148,7 +149,7 @@ export default function RentalCar() {
                                         className="img-fluid hero-img"
                                         priority
                                     />
-                                    <div className="support-card shadow-lg">
+                                    <div className="support-card shadow-sm">
                                         <div className="support-number">24/7</div>
                                         <div className="support-text">Driver Support</div>
                                     </div>
@@ -159,7 +160,7 @@ export default function RentalCar() {
                 </section>
 
                 {/* Filter Section */}
-                <section className="filter-section section-padding pt-0">
+                <section className="filter-section section-padding">
                     <Container>
                         <div className="search-fleet-wrapper">
                             <SearchFleet />
@@ -176,6 +177,7 @@ export default function RentalCar() {
                         <TitleComponent
                             title="The Pilgrim's Standard"
                             description=""
+                            divider={false}
                         />
                         <Row className="bento-grid g-4">
                             {/* Card 1: Vetted Drivers (Large) */}

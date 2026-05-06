@@ -153,7 +153,7 @@ export const SearchFleet = () => {
 
     return (
         <div className="search-fleet-container">
-            <form className="search-fleet-card shadow-sm" onSubmit={handleSearch}>
+            <form className="search-fleet-card shadow-sm border" onSubmit={handleSearch}>
 
                 {/* 1. Name Search */}
                 <div className="filter-group">
@@ -390,8 +390,23 @@ export const TourTabs = ({ tour }) => {
 export const HighlightsModal = ({ children }) => {
     const [open, setOpen] = useState(false);
 
-    // Helper to toggle state
-    const handleToggle = () => setOpen(!open);
+    const handleToggle = () => {
+        setOpen((prev) => !prev);
+    };
+
+    // LOCK BODY SCROLL
+    useEffect(() => {
+        if (open) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+
+        // cleanup
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [open]);
 
     return (
         <>
@@ -403,7 +418,6 @@ export const HighlightsModal = ({ children }) => {
                 View all highlights →
             </motion.button>
 
-            {/* AnimatePresence must wrap the conditional to handle the 'exit' animation */}
             <AnimatePresence>
                 {open && (
                     <motion.div
@@ -412,39 +426,73 @@ export const HighlightsModal = ({ children }) => {
                         exit={{ opacity: 0 }}
                         className="modal-backdrop"
                         style={{
-                            position: 'fixed',
+                            position: "fixed",
                             top: 0,
                             left: 0,
-                            width: '100%',
-                            height: '100%',
-                            backgroundColor: 'rgba(0,0,0,0.5)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
+                            width: "100%",
+                            height: "100%",
+                            backgroundColor: "rgba(0,0,0,0.5)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
                             zIndex: 1050,
-                            backdropFilter: 'blur(4px)', // Premium touch
-                            overflow: 'hidden'
+                            backdropFilter: "blur(4px)",
+                            overflow: "hidden",
                         }}
                         onClick={handleToggle}
                     >
                         <motion.div
-                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-                            animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                            initial={{
+                                scale: 0.9,
+                                opacity: 0,
+                                y: 20,
+                            }}
+                            animate={{
+                                scale: 1,
+                                opacity: 1,
+                                y: 0,
+                            }}
+                            exit={{
+                                scale: 0.9,
+                                opacity: 0,
+                                y: 20,
+                            }}
                             className="modal-content bg-white p-4 rounded-4 shadow-lg"
-                            style={{ maxWidth: '500px', width: '90%', position: 'relative' }}
+                            style={{
+                                maxWidth: "500px",
+                                width: "90%",
+                                position: "relative",
+                            }}
                             onClick={(e) => e.stopPropagation()}
                         >
-                            {/* Close Button */}
+                            {/* CLOSE BUTTON */}
                             <button
                                 onClick={handleToggle}
-                                style={{ position: 'absolute', top: '15px', right: '15px', border: 'none', background: 'none' }}
+                                style={{
+                                    position: "absolute",
+                                    top: "15px",
+                                    right: "15px",
+                                    border: "none",
+                                    background: "none",
+                                }}
                             >
-                                <X size={20} className="text-muted" />
+                                <X
+                                    size={20}
+                                    className="text-muted"
+                                />
                             </button>
 
-                            <h3 className="h5 fw-bold mb-4">Tour Highlights</h3>
-                            <div className="modal-body-scroll" style={{ maxHeight: '60vh', overflowY: 'auto' }}>
+                            <h3 className="h5 fw-bold mb-4">
+                                Tour Highlights
+                            </h3>
+
+                            <div
+                                className="modal-body-scroll"
+                                style={{
+                                    maxHeight: "60vh",
+                                    overflowY: "auto",
+                                }}
+                            >
                                 {children}
                             </div>
                         </motion.div>
