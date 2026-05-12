@@ -3,6 +3,7 @@ import { SwiperSlide } from "swiper/react";
 import { SwiperSliderComp } from "./common";
 import { Link } from '@/i18n/routing';
 import { slugify } from "@/lib/utils";
+import { ArrowRight } from 'lucide-react';
 
 export const TourPackageSlider = ({ packages, title }) => {
     return (
@@ -36,7 +37,7 @@ export const TourPackageSlider = ({ packages, title }) => {
                 {packages.map((item, index) => (
                     <SwiperSlide key={index} className="h-100">
                         <Link href={`/tour-package/${slugify(item.name)}`} className="h-100 text-decoration-none" aria-label={item.name}>
-                            <div className="tour-package-card-small rounded-2 shadow-sm border p-3 h-100">
+                            <div className="tour-package-card-small d-flex flex-column justify-content-between rounded-2 shadow-sm border p-3 h-100">
                                 <div className="image-wrapper rounded-2">
                                     <img
                                         src={item.image}
@@ -45,8 +46,16 @@ export const TourPackageSlider = ({ packages, title }) => {
                                     />
                                 </div>
                                 <div className="card-body d-grid">
-                                    <h6 className="text-dark">{item.name}</h6>
-                                    <p className="m-0 fw-medium primery-color">₹ {item.price}</p>
+                                    <h6 className="text-dark mb-1">{item.name}</h6>
+                                    <div className="d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <span className="small-12">Starting From</span>
+                                            <p className="m-0 fw-medium primery-color">₹ {item.price}</p>
+                                        </div>
+                                        <span className="card-arrow d-flex align-items-center justify-content-center">
+                                            <ArrowRight size={16}/>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </Link>

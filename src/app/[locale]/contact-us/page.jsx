@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Container, Row, Col, Form, Accordion } from "react-bootstrap";
 import { MessageCircle, MapPin } from "lucide-react";
 import "../../../styles/contactPage.scss";
@@ -84,6 +85,7 @@ const ContactUs = () => {
                         heroSubtitle="Connect With Us"
                         heroImage="/images/contact-page-bg.png"
                         imgClass="hero-img"
+                        showSearch={false}
                     />
                 {/* </Container> */}
             </section>

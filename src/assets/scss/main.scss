@@ -98,7 +98,7 @@ p {
     line-height: $line-height-text;
 }
 
-.paragraph{
+.paragraph {
     font-size: $font-size-base;
     line-height: $line-height-text;
 }
@@ -108,11 +108,11 @@ p {
     color: $primary-color;
 }
 
-.small-12{
+.small-12 {
     font-size: $font-size-xs;
 }
 
-.departure-date-l{
+.departure-date-l {
     background-color: $secondary-color;
     width: fit-content;
 }
@@ -559,4 +559,50 @@ p {
 .overlay {
     pointer-events: none !important;
     /* Clicks will pass right through these */
+}
+
+// contact page
+.hero-header-card {
+    position: relative;
+    height: 350px;
+    // border-radius: $border-radius-2xl;
+    overflow: hidden;
+    padding: 40px 0;
+
+    &:before{
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.1);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        content: "";
+    }
+
+    .hero-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        z-index: 2;
+        display: flex;
+        align-items: flex-end;
+        padding: 40px;
+    }
+
+    .hero-subtitle {
+        color: $primary-color; // Or #ff9f43 for the orange tone
+        text-transform: uppercase;
+        font-weight: 800;
+        letter-spacing: 2px;
+        font-size: $font-size-base;
+        display: block;
+        margin-bottom: 8px;
+    }
 }

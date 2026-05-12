@@ -3,11 +3,12 @@ import React, { useState, Suspense } from 'react'
 import { Col, Container, Nav, Row, Tab } from 'react-bootstrap'
 import { TitleComponent, SearchFleet } from '@/components/ui/common'
 import { rentalCar } from '@/lib/data'
-import { RentalCarCard } from '@/components/ui/card'
+import { HeroHeaderCard, RentalCarCard } from '@/components/ui/card'
 import { BookingForm } from '@/components/ui/bookingFormHandler'
 import { useRouter, useSearchParams } from "next/navigation";
 import { Sparkles, ShieldCheck, SprayCan, PhoneCall, Award } from "lucide-react";
 import Image from "next/image";
+import { useSearchFilter } from "@/hooks/useSearchFilter";
 import "../../../styles/rental-car.scss";
 import "../../../assets/scss/main.scss"
 
@@ -16,34 +17,13 @@ const RentalCarContent = () => {
     const [selectedCar, setSelectedCar] = useState("");
     const [activeTab, setActiveTab] = useState("all-car"); // State to track active tab
 
-    const router = useRouter();
-    const searchParams = useSearchParams();
-
-    // Filters from URL
-    const nameFilter = searchParams.get("name");
-    const categoryFilter = searchParams.get("category");
-    const priceFilter = searchParams.get("price");
-
     const handleOpenBooking = (carName) => {
         setSelectedCar(carName);
         setShow(true);
     };
+    const filteredCars = useSearchFilter(rentalCar);
 
-    // 1. Initial Filtering (Search Results)
-    const searchFilteredCars = rentalCar.filter((car) => {
-        const matchesName = nameFilter ? car.name.toLowerCase().includes(nameFilter.toLowerCase()) : true;
-        const matchesCat = categoryFilter && categoryFilter !== 'all' ? car.type === categoryFilter : true;
-
-        let matchesPrice = true;
-        if (priceFilter && priceFilter !== 'all') {
-            const [min, max] = priceFilter.split("-").map(Number);
-            matchesPrice = car.price >= min && car.price <= max;
-        }
-        return matchesName && matchesCat && matchesPrice;
-    });
-
-    // 2. Tab Filtering (Category Results)
-    const finalDisplayCars = searchFilteredCars.filter((car) => {
+    const finalDisplayCars = filteredCars.filter((car) => {
         if (activeTab === "all-car") return true;
         return car.type === activeTab;
     });
@@ -122,7 +102,16 @@ export default function RentalCar() {
         <main>
             <Suspense fallback={<div className="section-padding text-center">Loading Fleet...</div>}>
                 {/* Hero Section */}
-                <section className="hero-rental-section section-padding">
+                <section>
+                    <HeroHeaderCard
+                        heroTitle="Pilgrim Concierge & Support"
+                        heroSubtitle="Connect With Us"
+                        heroImage="/images/contact-page-bg.png"
+                        imgClass="hero-img"
+                        showSearch={true}
+                    />
+                </section>
+                {/* <section className="hero-rental-section section-padding">
                     <Container>
                         <Row className="align-items-center gy-5">
                             <Col md={6} className="hero-content">
@@ -157,16 +146,16 @@ export default function RentalCar() {
                             </Col>
                         </Row>
                     </Container>
-                </section>
+                </section> */}
 
                 {/* Filter Section */}
-                <section className="filter-section section-padding">
+                {/* <section className="filter-section section-padding">
                     <Container>
                         <div className="search-fleet-wrapper">
                             <SearchFleet />
                         </div>
                     </Container>
-                </section>
+                </section> */}
 
                 {/* card section */}
                 <RentalCarContent />
@@ -240,155 +229,3 @@ export default function RentalCar() {
         </main>
     );
 }
-
-
-// const RentalCarContent = () => {
-//     const [show, setShow] = useState(false);
-//     const [selectedCar, setSelectedCar] = useState("");
-//     const router = useRouter();
-//     const searchParams = useSearchParams();
-
-//     // Filters from URL
-//     const nameFilter = searchParams.get("name");
-//     const categoryFilter = searchParams.get("category");
-//     const priceFilter = searchParams.get("price");
-
-//     /* --- Pagination logic commented out as requested ---
-//     const currentPage = Number(searchParams.get("page")) || 1;
-//     const itemsPerPage = 6;
-//     */
-
-//     const handleOpenBooking = (carName) => {
-//         setSelectedCar(carName);
-//         setShow(true);
-//     };
-
-//     // Filter Logic
-//     const filteredCars = rentalCar.filter((car) => {
-//         const matchesName = nameFilter ? car.name.toLowerCase().includes(nameFilter.toLowerCase()) : true;
-//         const matchesCat = categoryFilter && categoryFilter !== 'all' ? car.type === categoryFilter : true;
-
-//         let matchesPrice = true;
-//         if (priceFilter && priceFilter !== 'all') {
-//             const [min, max] = priceFilter.split("-").map(Number);
-//             matchesPrice = car.price >= min && car.price <= max;
-//         }
-//         return matchesName && matchesCat && matchesPrice;
-//     });
-
-//     /* --- Pagination slicing commented out - showing all filtered results instead --- */
-//     // const totalPages = Math.ceil(filteredCars.length / itemsPerPage);
-//     // const currentItems = filteredCars.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-//     const currentItems = filteredCars;
-
-//     /* --- Page change handler commented out ---
-//     const handlePageChange = (pageNum) => {
-//         if (pageNum < 1 || pageNum > totalPages) return;
-//         const params = new URLSearchParams(searchParams);
-//         params.set("page", pageNum);
-//         router.push(`/rental-car?${params.toString()}`);
-//     };
-//     */
-
-//     return (
-//         <section className="section-padding">
-//             <Container>
-//                 <Tab.Container defaultActiveKey="all-car">
-//                     <Row className="align-items-center mb-5">
-//                         <Col md={8}>
-//                             <TitleComponent
-//                                 className='text-start mb-0'
-//                                 title="Select your preferred transport"
-//                                 description="Our Collections"
-//                                 divider={false}
-//                             />
-//                         </Col>
-//                         <Col md={4} className="mt-4 mt-md-0">
-//                             <Nav variant="pills" className="justify-content-md-between gap-2">
-//                                 <Nav.Item>
-//                                     <Nav.Link eventKey="all-car" className="car-tab-item shadow-sm">
-//                                         All Cars
-//                                     </Nav.Link>
-//                                 </Nav.Item>
-//                             </Nav>
-//                         </Col>
-//                     </Row>
-
-//                     <Tab.Content>
-//                         <Tab.Pane eventKey="all-car">
-//                             {currentItems.length > 0 ? (
-//                                 <Row className='g-4'>
-//                                     {currentItems.map((value, index) => (
-//                                         <Col key={index} lg={4} md={6}>
-//                                             <RentalCarCard car={value} onBook={() => handleOpenBooking(value.name)} />
-//                                         </Col>
-//                                     ))}
-//                                 </Row>
-//                             ) : (
-//                                 <div className="text-center py-5">
-//                                     <h4>No cars found matching your search.</h4>
-//                                 </div>
-//                             )}
-//                         </Tab.Pane>
-//                     </Tab.Content>
-//                 </Tab.Container>
-
-//                 {/* --- Pagination UI Block Commented Out ---
-//                 {totalPages > 1 && (
-//                     <div className="d-flex justify-content-center align-items-center gap-3 mt-5">
-//                         <button 
-//                             className={`pagination-item arrow ${currentPage === 1 ? 'disabled' : ''}`}
-//                             onClick={() => handlePageChange(currentPage - 1)}
-//                             disabled={currentPage === 1}
-//                         >
-//                             <ChevronLeft size={20} />
-//                         </button>
-//                         <div className="d-flex gap-2">
-//                             {[...Array(totalPages)].map((_, i) => (
-//                                 <button
-//                                     key={i}
-//                                     className={`pagination-number ${currentPage === i + 1 ? 'active' : ''}`}
-//                                     onClick={() => handlePageChange(i + 1)}
-//                                 >
-//                                     {i + 1}
-//                                 </button>
-//                             ))}
-//                         </div>
-//                         <button 
-//                             className={`pagination-item arrow ${currentPage === totalPages ? 'disabled' : ''}`}
-//                             onClick={() => handlePageChange(currentPage + 1)}
-//                             disabled={currentPage === totalPages}
-//                         >
-//                             <ChevronRight size={20} />
-//                         </button>
-//                     </div>
-//                 )}
-//                 */}
-
-//                 <CarBookingForm show={show} handleClose={() => setShow(false)} selectedCar={selectedCar} />
-//             </Container>
-//         </section>
-//     );
-// }
-
-{/* <Row className='g-4 mb-5'>
-    {currentItems.length > 0 ? (
-        currentItems.map((value, index) => (
-            <Col key={index} lg={4} md={6}>
-                <RentalCarCard car={value} onBook={() => handleOpenBooking(value.name)} />
-            </Col>
-        ))
-    ) : (
-        <Col className="text-center py-5">
-            <div className="text-center py-5">
-                <h3>No packages found matching your criteria.</h3>
-                <button
-                    className="primery-btn py-3"
-                    onClick={() => router.push('/rental-car')}
-                >
-                    Clear All Filters
-                </button>
-            </div>
-        </Col>
-    )}
-</Row> */}

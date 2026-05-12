@@ -152,7 +152,7 @@ export const SearchFleet = () => {
     };
 
     return (
-        <div className="search-fleet-container">
+        <div className="search-fleet-container position-relative z-3">
             <form className="search-fleet-card shadow-sm border" onSubmit={handleSearch}>
 
                 {/* 1. Name Search */}

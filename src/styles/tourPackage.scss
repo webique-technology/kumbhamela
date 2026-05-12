@@ -217,14 +217,19 @@
 
 .tour-package-slider-main {
     .swiper-slide {
-        aspect-ratio: 3/2.5;
+        // aspect-ratio: 3/2.5;
+        height: 270px !important;
+
+        @media(max-width:992px) {
+            height: 285px !important;
+        }
 
         @media(max-width:767px) {
-            height: 240px !important;
+            height: 260px !important;
         }
 
         @media(max-width:349px) {
-            height: 280px !important;
+            height: 300px !important;
         }
     }
 
@@ -237,6 +242,14 @@
             @media(max-width:450px) {
                 aspect-ratio: 2/1.2;
             }
+        }
+
+        .card-arrow {
+            width: 30px;
+            height: 30px;
+            background: $primary-color;
+            color: $text-color-light;
+            border-radius: $border-radius-full;
         }
     }
 }

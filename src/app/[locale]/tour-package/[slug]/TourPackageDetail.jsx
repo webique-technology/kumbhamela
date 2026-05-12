@@ -68,7 +68,7 @@ const TourPackageDetail = ({ tour }) => {
                 <Row className="gy-1 gy-md-4 gy-xl-5 m-0">
                     {/* LEFT CONTENT */}
                     <Col lg={8}>
-                        <div className="trinery-bg p-3 rounded-2 shadow-sm">
+                        <div className="trinery-bg p-3 mt-4 mt-md-0 rounded-2 shadow-sm">
                             <Row>
                                 {/* EXPERIENCE INCLUSIONS */}
                                 <Col md={6} className="border-md-end m-0">

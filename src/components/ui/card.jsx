@@ -5,7 +5,7 @@ import { Calendar, Clock, ArrowRight, Star, MapPin, MessageCircle, Users, Chevro
 import { Link } from '@/i18n/routing';
 import { useParams } from 'next/navigation';
 import { WhatsappBtn } from './button';
-import { SwiperSliderComp } from './common';
+import { SearchFleet, SwiperSliderComp } from './common';
 import { SwiperSlide } from 'swiper/react';
 import { Col, Container, Row } from 'react-bootstrap';
 import IconResolver from './iconResolver';
@@ -338,24 +338,25 @@ export const TourPackageCard = ({ tour, tourLink }) => {
 }
 
 // Header Hero Card
-export const HeroHeaderCard = ({ heroTitle, heroSubtitle, heroImage = "/images/contact-page-bg.png", imgClass = "hero-img" }) => {
+export const HeroHeaderCard = ({ showSearch = true, heroTitle, heroSubtitle, heroImage = "/images/contact-page-bg.png", imgClass = "hero-img" }) => {
+
     return (
         <>
-            <div className="contact-hero-card">
-                <div className="hero-overlay">
+            <div
+                className="hero-header-card d-flex align-items-center"
+                style={{ backgroundImage: `url(${heroImage})` }}
+            >
                     <Container>
-                        <div className="hero-content">
+                        <div className="hero-content position-relative z-3">
                             <span className="hero-subtitle">{heroSubtitle}</span>
                             <h1 className="hero-title">{heroTitle}</h1>
                         </div>
+                        {showSearch && (
+                            <div className="hero-search-wrapper mt-4">
+                                <SearchFleet />
+                            </div>
+                        )}
                     </Container>
-                </div>
-                <Image
-                    src={heroImage}
-                    alt="Godavari River Nashik"
-                    fill
-                    className={imgClass}
-                />
             </div>
         </>
     )
