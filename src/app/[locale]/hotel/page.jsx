@@ -1,8 +1,9 @@
 "use client";
-import React, { useState, Suspense } from 'react'
+// import React, { useState, Suspense } from 'react'
+import React, { useState, Suspense, useEffect } from 'react'
 import { TitleComponent, SearchFleet } from '@/components/ui/common';
 import { Col, Container, Row } from 'react-bootstrap';
-import { hotels } from '@/lib/data';
+// import { hotels } from '@/lib/data';
 import { HeroHeaderCard, HotelCards } from '@/components/ui/card';
 import { BookingForm } from '@/components/ui/bookingFormHandler';
 import { useRouter, useSearchParams } from "next/navigation";
@@ -10,6 +11,7 @@ import { ChevronLeft, ChevronRight, Section } from "lucide-react";
 import { useSearchFilter } from "@/hooks/useSearchFilter";
 import "../../../styles/hotel-accomodation.scss";
 import "../../../assets/scss/main.scss"
+import { getHotels } from "./hotelApi";
 
 const HotelPageContent = () => {
 
@@ -17,6 +19,9 @@ const HotelPageContent = () => {
     const [selectedHotel, setSelectedHotel] = useState("");
     const router = useRouter();
     const searchParams = useSearchParams();
+
+    const [hotels, setHotels] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const currentPage = Number(searchParams.get("page")) || 1;
     const itemsPerPage = 6;
@@ -35,6 +40,21 @@ const HotelPageContent = () => {
         const params = new URLSearchParams(searchParams);
         params.set("page", pageNum);
         router.push(`/hotel?${params.toString()}`);
+    };
+
+    useEffect(() => {
+        fetchHotels();
+    }, []);
+
+    const fetchHotels = async () => {
+        try {
+            const data = await getHotels();
+            setHotels(data);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
