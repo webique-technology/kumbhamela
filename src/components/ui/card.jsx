@@ -95,12 +95,13 @@ export const HotelCards = ({ hotel, onBookNow }) => {
                             <SwiperSlide key={index}>
                                 <Image
                                     src={value}
-                                    alt={hotel.name}
+                                    alt={value.title || "Hotel Image"}
                                     width={400}
                                     height={250}
                                     className="card-img-top object-fit-cover"
                                     style={{ width: '100%', height: 'auto', maxWidth: '100%' }}
                                     priority
+                                    unoptimized={process.env.NODE_ENV === "development"}
                                 />
                             </SwiperSlide>
                         ))}
@@ -116,7 +117,7 @@ export const HotelCards = ({ hotel, onBookNow }) => {
                     {/* Badge Left */}
                     <div className="position-absolute top-0 start-0 m-3 z-2">
                         <span className="badge badge-left rounded-pill bg-brand-orange">
-                            {hotel.type}
+                            {hotel.category}
                         </span>
                     </div>
 
@@ -129,7 +130,7 @@ export const HotelCards = ({ hotel, onBookNow }) => {
 
                 {/* Card Body */}
                 <div className="card-body p-4">
-                    <h3 className="h5 fw-bold text-brand-dark mb-2">{hotel.name}</h3>
+                    <h3 className="h5 fw-bold text-brand-dark mb-2">{hotel.title}</h3>
 
                     <div className="d-flex align-items-center gap-2 text-muted small mb-3">
                         <MapPin size={16} className="text-brand-orange" />
@@ -152,7 +153,7 @@ export const HotelCards = ({ hotel, onBookNow }) => {
                     <div className="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
                         <div>
                             <small className="text-muted d-block">Starting from</small>
-                            <span className="h4 text-brand-orange mb-0">{hotel.price}</span>
+                            <span className="h4 text-brand-orange mb-0">{hotel.base_price}</span>
                             <small className="text-muted d-block smaller">per night</small>
                         </div>
 
