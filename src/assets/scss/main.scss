@@ -363,13 +363,38 @@ p {
 }
 
 .search-fleet-card {
-    background: $bg-light;
-    border-radius: $border-radius-xl; // Very rounded as per image
+    background: rgba(255, 255, 255, 0.5);
+
+    border: 1px solid rgba(255, 255, 255, 0.6);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(255, 255, 255, 0.3);
+
+    border-radius: $border-radius-xl;
     padding: 30px 45px;
+
     display: grid;
     grid-template-columns: 1fr 1fr 1fr auto;
     gap: 25px;
     align-items: flex-end;
+
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.35),
+            rgba(255, 255, 255, 0.05)
+        );
+
+        pointer-events: none;
+    }
 
     @media (max-width: 991px) {
         grid-template-columns: 1fr 1fr;
