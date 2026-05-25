@@ -17,7 +17,7 @@ const nextConfig = {
         protocol: process.env.NEXT_PUBLIC_IMAGE_PROTOCOL || 'https',
         hostname:
           process.env.NEXT_PUBLIC_IMAGE_HOSTNAME ||
-          'api.mahakumbhtourstravelsnashik.com',
+          'api.mahakumbhtourstravelsnashik.com/api',
         port: process.env.NEXT_PUBLIC_IMAGE_PORT || '',
         pathname: '/uploads/**',
       },
