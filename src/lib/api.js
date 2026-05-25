@@ -3,7 +3,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://api.mahakumbhtourstravelsnashik.com/api",
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 export default API;

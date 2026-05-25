@@ -7,8 +7,8 @@ import API from "@/lib/api";
 export const getHotels = async () => {
   const response = await API.get("/hotels");
 
-  console.log("hotel get all data:", response.data?.data);
+  console.log("hotel get all data:", response.data.data.data);
 
 
-  return response.data.data.data;
+  return response.data?.data;
 };

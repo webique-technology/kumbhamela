@@ -278,8 +278,8 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                     <Image
                         src={tour.image}
                         alt={tour.name}
-                        width={auto}
-                        height={auto}
+                        width={200}
+                        height={200}
                         className="card-img-top object-fit-cover transition-transform"
                     />
                 </div>
