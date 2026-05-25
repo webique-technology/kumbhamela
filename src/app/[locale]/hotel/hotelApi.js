@@ -10,5 +10,5 @@ export const getHotels = async () => {
   console.log("hotel get all data:", response.data?.data);
 
 
-  return response.data;
+  return response.data.data.data;
 };
