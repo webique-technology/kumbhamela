@@ -88,10 +88,10 @@ export const HotelCards = ({ hotel, onBookNow }) => {
                 <div className="position-relative hotel-img-container">
                     <SwiperSliderComp
                         navigation={false}
-                        loop={hotel.images.length > 1}
+                        loop={hotel.images?.length > 1}
                         timeDelay={3000}
                     >
-                        {hotel.images.map((value, index) => (
+                        {hotel.images?.map((value, index) => (
                             <SwiperSlide key={index}>
                                 <Image
                                     src={value}
@@ -106,13 +106,6 @@ export const HotelCards = ({ hotel, onBookNow }) => {
                             </SwiperSlide>
                         ))}
                     </SwiperSliderComp>
-                    {/* <Image
-                        src={hotel.images}
-                        alt={hotel.name}
-                        width={400}
-                        height={250}
-                        className="card-img-top object-fit-cover"
-                    /> */}
 
                     {/* Badge Left */}
                     <div className="position-absolute top-0 start-0 m-3 z-2">
@@ -139,7 +132,7 @@ export const HotelCards = ({ hotel, onBookNow }) => {
 
                     {/* Features */}
                     <div className="d-flex flex-wrap gap-2 mb-4">
-                        {hotel.features.map((feature, idx) => (
+                        {hotel.features?.map((feature, idx) => (
                             <span
                                 key={idx}
                                 className="badge d-flex align-items-center justify-content-center rounded-pill border border-light"
@@ -435,17 +428,17 @@ export const HeroHeaderCard = ({ showSearch = true, heroTitle, heroSubtitle, her
                 className="hero-header-card d-flex align-items-center"
                 style={{ backgroundImage: `url(${heroImage})` }}
             >
-                    <Container>
-                        <div className="hero-content position-relative z-3">
-                            <span className="hero-subtitle">{heroSubtitle}</span>
-                            <h1 className="hero-title">{heroTitle}</h1>
+                <Container>
+                    <div className="hero-content position-relative z-3">
+                        <span className="hero-subtitle">{heroSubtitle}</span>
+                        <h1 className="hero-title">{heroTitle}</h1>
+                    </div>
+                    {showSearch && (
+                        <div className="hero-search-wrapper mt-4">
+                            <SearchFleet />
                         </div>
-                        {showSearch && (
-                            <div className="hero-search-wrapper mt-4">
-                                <SearchFleet />
-                            </div>
-                        )}
-                    </Container>
+                    )}
+                </Container>
             </div>
         </>
     )
