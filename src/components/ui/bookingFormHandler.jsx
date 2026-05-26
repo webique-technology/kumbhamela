@@ -3,40 +3,43 @@ import React, { useState } from 'react';
 import { Form, Row, Col, Button, Modal } from 'react-bootstrap';
 import { MessageCircle, Calendar, User, Smartphone, Mail, Hotel, Car } from 'lucide-react';
 
+import { createTourEnquiry } from "../../app/[locale]/tour-package/tourApi";
+
 /**
  * @param {string} type - Either 'car' or 'hotel'
  * @param {string} selectedItem - The name of the car or hotel being booked
  */
 
 // Tour package boking form
-export const BookingFormHandler = ({ tourName }) => {
+export const BookingFormHandler = ({ tourId,tourName }) => {
     const [formData, setFormData] = useState({
-        fullName: '',
+        full_name: '',
         email: '',
-        phone: '',
-        travelers: 'Solo Pilgrim',
-        date: '',
-        requirements: ''
+        phone_number: '',
+        number_of_travelers: 'Solo Pilgrim',
+        preferred_dates: '',
+        special_requirements: ''
     });
 
     const [validated, setValidated] = useState(false);
     const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
 
     // Regex patterns for validation
     const patterns = {
         email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-        phone: /^[6-9]\d{9}$/ // Basic Indian mobile validation (10 digits starting with 6-9)
+        phone_number: /^[6-9]\d{9}$/ // Basic Indian mobile validation (10 digits starting with 6-9)
     };
 
     const validateField = (name, value) => {
         let error = "";
-        if (!value && name !== 'requirements') {
+        if (!value && name !== 'special_requirements') {
             error = "This field is required";
         } else if (name === 'email' && !patterns.email.test(value)) {
             error = "Please enter a valid email address";
-        } else if (name === 'phone' && !patterns.phone.test(value)) {
+        } else if (name === 'phone_number' && !patterns.phone_number.test(value)) {
             error = "Please enter a valid 10-digit mobile number";
-        } else if (name === 'date') {
+        } else if (name === 'preferred_dates') {
             const selectedDate = new Date(value);
             const today = new Date();
             today.setHours(0, 0, 0, 0);
@@ -57,38 +60,140 @@ export const BookingFormHandler = ({ tourName }) => {
         }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const form = e.currentTarget;
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     const form = e.currentTarget;
 
-        // Perform manual validation check
-        const newErrors = {};
-        Object.keys(formData).forEach(key => {
-            const error = validateField(key, formData[key]);
-            if (error) newErrors[key] = error;
+    //     // Perform manual validation check
+    //     const newErrors = {};
+    //     Object.keys(formData).forEach(key => {
+    //         const error = validateField(key, formData[key]);
+    //         if (error) newErrors[key] = error;
+    //     });
+
+    //     if (Object.keys(newErrors).length > 0 || form.checkValidity() === false) {
+    //         e.stopPropagation();
+    //         setErrors(newErrors);
+    //         setValidated(true);
+    //         return;
+    //     }
+
+    //     // If valid, proceed to WhatsApp
+    //     const phoneNumber = "919022093522";
+    //     const message = `*New Booking Enquiry*%0A` +
+    //         `*Name:* ${formData.fullName}%0A` +
+    //         `*Mobile No:* ${formData.phone}%0A` +
+    //         `*Email:* ${formData.email}%0A` +
+    //         `*Tour Package:* ${tourName}%0A` +
+    //         `*Date:* ${formData.date}%0A` +
+    //         `*Travelers:* ${formData.travelers}%0A` +
+    //         `*Requirements:* ${formData.requirements || 'no any requirements'}`;
+
+    //     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+    // };
+
+
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+
+    const newErrors = {};
+
+    Object.keys(formData).forEach((key) => {
+        const error = validateField(
+            key,
+            formData[key]
+        );
+
+        if (error) {
+            newErrors[key] = error;
+        }
+    });
+
+    if (
+        Object.keys(newErrors).length > 0 ||
+        form.checkValidity() === false
+    ) {
+        e.stopPropagation();
+        setErrors(newErrors);
+        setValidated(true);
+        return;
+    }
+
+    try {
+        setLoading(true);
+
+        // save in database
+        await createTourEnquiry({
+            full_name:
+                formData.full_name,
+
+            email:
+                formData.email,
+
+            phone_number:
+                formData.phone_number,
+
+            number_of_travelers:
+                formData.number_of_travelers,
+
+            preferred_dates:
+                formData.preferred_dates,
+
+            special_requirements:
+                formData.special_requirements,
+
+            // tour_package:
+            //     tourName,
+            tour_id:
+                tourId,
         });
 
-        if (Object.keys(newErrors).length > 0 || form.checkValidity() === false) {
-            e.stopPropagation();
-            setErrors(newErrors);
-            setValidated(true);
-            return;
-        }
+        // whatsapp after DB save
+        const phoneNumber =
+            "919022093522";
 
-        // If valid, proceed to WhatsApp
-        const phoneNumber = "919022093522";
-        const message = `*New Booking Enquiry*%0A` +
-            `*Name:* ${formData.fullName}%0A` +
-            `*Mobile No:* ${formData.phone}%0A` +
+        const message =
+            `*New Booking Enquiry*%0A` +
+            `*Name:* ${formData.full_name}%0A` +
+            `*Mobile No:* ${formData.phone_number}%0A` +
             `*Email:* ${formData.email}%0A` +
             `*Tour Package:* ${tourName}%0A` +
-            `*Date:* ${formData.date}%0A` +
-            `*Travelers:* ${formData.travelers}%0A` +
-            `*Requirements:* ${formData.requirements || 'no any requirements'}`;
+            `*Date:* ${formData.preferred_dates}%0A` +
+            `*Travelers:* ${formData.number_of_travelers}%0A` +
+            `*Requirements:* ${
+                formData.special_requirements ||
+                "no any requirements"
+            }`;
 
-        window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
-    };
+        window.open(
+            `https://wa.me/${phoneNumber}?text=${message}`,
+            "_blank"
+        );
 
+        // reset form
+        setFormData({
+            full_name: "",
+            email: "",
+            phone_number: "",
+            number_of_travelers:
+                "Solo Pilgrim",
+            preferred_dates: "",
+            special_requirements: "",
+        });
+
+        setErrors({});
+        setValidated(false);
+
+    } catch (error) {
+        alert(
+            "Unable to submit booking. Please try again."
+        );
+    } finally {
+        setLoading(false);
+    }
+};
     return (
         <div>
             <Form noValidate validated={validated} onSubmit={handleSubmit} className="booking-form">
@@ -99,14 +204,14 @@ export const BookingFormHandler = ({ tourName }) => {
                             <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">Full Name</Form.Label>
                             <Form.Control
                                 required
-                                name="fullName"
+                                name="full_name"
                                 type="text"
                                 placeholder="Enter Your Name"
                                 className="custom-input"
-                                isInvalid={!!errors.fullName}
+                                isInvalid={!!errors.full_name}
                                 onChange={handleChange}
                             />
-                            <Form.Control.Feedback type="invalid">{errors.fullName}</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">{errors.full_name}</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
                     {/* mail */}
@@ -131,14 +236,14 @@ export const BookingFormHandler = ({ tourName }) => {
                             <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">Phone Number</Form.Label>
                             <Form.Control
                                 required
-                                name="phone"
+                                name="phone_number"
                                 type="tel"
                                 placeholder="10-digit mobile number"
                                 className="custom-input"
-                                isInvalid={!!errors.phone}
+                                isInvalid={!!errors.phone_number}
                                 onChange={handleChange}
                             />
-                            <Form.Control.Feedback type="invalid">{errors.phone}</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">{errors.phone_number}</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
                     {/* travelers how many persons */}
@@ -146,7 +251,7 @@ export const BookingFormHandler = ({ tourName }) => {
                         <Form.Group controlId="bookingTravelers">
                             <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">Number of Travelers</Form.Label>
                             <Form.Select
-                                name="travelers"
+                                name="number_of_travelers"
                                 className="custom-input"
                                 onChange={handleChange}
                             >
@@ -163,13 +268,13 @@ export const BookingFormHandler = ({ tourName }) => {
                             <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">Preferred Dates</Form.Label>
                             <Form.Control
                                 required
-                                name="date"
+                                name="preferred_dates"
                                 type="date"
                                 className="custom-input"
-                                isInvalid={!!errors.date}
+                                isInvalid={!!errors.preferred_dates}
                                 onChange={handleChange}
                             />
-                            <Form.Control.Feedback type="invalid">{errors.date}</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">{errors.preferred_dates}</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
                     {/* tour package */}
@@ -190,7 +295,7 @@ export const BookingFormHandler = ({ tourName }) => {
                         <Form.Group controlId="bookingRequirements">
                             <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">Special Requirements</Form.Label>
                             <Form.Control
-                                name="requirements"
+                                name="special_requirements"
                                 as="textarea"
                                 rows={4}
                                 placeholder="Food preferences, accessibility needs, etc."
@@ -201,8 +306,18 @@ export const BookingFormHandler = ({ tourName }) => {
                     </Col>
                 </Row>
 
-                <Button type="submit" className="whatsapp-btn mt-4 px-4 py-3 border-0">
+                {/* <Button type="submit" className="whatsapp-btn mt-4 px-4 py-3 border-0">
                     Confirm & Send on WhatsApp
+                </Button> */}
+
+                <Button
+                    type="submit"
+                    disabled={loading}
+                    className="whatsapp-btn mt-4 px-4 py-3 border-0"
+                >
+                    {loading
+                        ? "Submitting..."
+                        : "Confirm & Send on WhatsApp"}
                 </Button>
             </Form>
         </div>

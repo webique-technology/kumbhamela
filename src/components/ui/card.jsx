@@ -272,53 +272,142 @@ export const RentalCarCard = ({ car, onBook }) => {
     )
 }
 
+// // tour package card
+// export const TourPackageCard = ({ tour, tourLink }) => {
+//     const params = useParams();
+//     const currentLocale = params?.locale || 'en';
+
+//     return (
+//         <>
+//             <div className='tour-package-card card h-100 border-0 shadow-sm overflow-hidden'>
+//                 {/* Image Container with Overlay */}
+//                 <div className="position-relative card-image-wrapper overflow-hidden">
+//                     <Image
+//                         src={tour.image}
+//                         alt={tour.name}
+//                         width={200}
+//                         height={200}
+//                         className="card-img-top object-fit-cover transition-transform"
+//                     />
+//                 </div>
+
+//                 {/* Content Body */}
+//                 <div className="card-body p-4">
+//                     <div className='d-flex flex-column align-items-start justify-content-between'>
+//                         <h3 className="sub-heading text-dark mb-2">
+//                             {tour.name}
+//                         </h3>
+//                         <p className="card-text d-flex align-items-center gap-2 text-muted small mb-2 leading-relaxed">
+//                             <Clock size={16} />
+//                             {tour.duration}
+//                         </p>
+//                     </div>
+
+//                     {/* Footer Logic */}
+//                     <div className="d-flex align-items-center justify-content-between mt-auto mb-2">
+//                         <div className='d-flex align-items-end'>
+//                             <span className="h5 fw-bold text-brand-orange mb-0">{tour.price} /&nbsp;</span>
+//                             <small className="text-muted d-block smaller mb-1">per Person</small>
+//                         </div>
+//                     </div>
+
+//                     {/* Features */}
+//                     <ul className="d-flex flex-column flex-wrap gap-1 mb-3 p-0">
+//                         {tour.features.map((feature, idx) => (
+//                             <li
+//                                 key={idx}
+//                                 className="d-flex paragraph align-items-center justify-content-start gap-1"
+//                             >
+//                                 <span className='primery-color'><ChevronRight size={16} /></span>
+//                                 {feature}
+//                             </li>
+//                         ))}
+//                     </ul>
+
+//                     {/* link btn */}
+//                     <Link
+//                         href={tourLink || "#"}
+//                         className="primery-btn py-2 text-decoration-none w-100 d-flex justify-content-center align-items-center mt-auto"
+//                     >
+//                         View Details
+//                     </Link>
+//                 </div>
+//             </div>
+
+//         </>
+//     )
+// }
+
 // tour package card
 export const TourPackageCard = ({ tour, tourLink }) => {
     const params = useParams();
-    const currentLocale = params?.locale || 'en';
+    const currentLocale = params?.locale || "en";
+
+    // Features safe for array/string/null
+    const features = Array.isArray(tour?.features)
+        ? tour.features
+        : tour?.features
+            ? tour.features.split(",")
+            : [];
+
+    // Image safe
+    const imageSrc =
+        // tour?.image || "/images/default-tour.jpg";
+        tour?.image_url && tour.image_url.trim() !== "" ? tour.image_url : "/images/default-tour.jpg";
+        
 
     return (
         <>
-            <div className='tour-package-card card h-100 border-0 shadow-sm overflow-hidden'>
+            <div className="tour-package-card card h-100 border-0 shadow-sm overflow-hidden">
                 {/* Image Container with Overlay */}
                 <div className="position-relative card-image-wrapper overflow-hidden">
-                    <Image
-                        src={tour.image}
-                        alt={tour.name}
+                    <img
+                        src={imageSrc}
+                        alt={tour?.title || "Tour"}
                         width={200}
                         height={200}
+                       
                         className="card-img-top object-fit-cover transition-transform"
                     />
                 </div>
 
                 {/* Content Body */}
                 <div className="card-body p-4">
-                    <div className='d-flex flex-column align-items-start justify-content-between'>
+                    <div className="d-flex flex-column align-items-start justify-content-between">
                         <h3 className="sub-heading text-dark mb-2">
-                            {tour.name}
+                            {tour?.title}
                         </h3>
+
                         <p className="card-text d-flex align-items-center gap-2 text-muted small mb-2 leading-relaxed">
                             <Clock size={16} />
-                            {tour.duration}
+                            {tour?.duration}
                         </p>
                     </div>
 
                     {/* Footer Logic */}
                     <div className="d-flex align-items-center justify-content-between mt-auto mb-2">
-                        <div className='d-flex align-items-end'>
-                            <span className="h5 fw-bold text-brand-orange mb-0">{tour.price} /&nbsp;</span>
-                            <small className="text-muted d-block smaller mb-1">per Person</small>
+                        <div className="d-flex align-items-end">
+                            <span className="h5 fw-bold text-brand-orange mb-0">
+                                {tour?.base_price} /&nbsp;
+                            </span>
+
+                            <small className="text-muted d-block smaller mb-1">
+                                per Person
+                            </small>
                         </div>
                     </div>
 
                     {/* Features */}
                     <ul className="d-flex flex-column flex-wrap gap-1 mb-3 p-0">
-                        {tour.features.map((feature, idx) => (
+                        {tour?.highlights.map((feature, idx) => (
                             <li
                                 key={idx}
                                 className="d-flex paragraph align-items-center justify-content-start gap-1"
                             >
-                                <span className='primery-color'><ChevronRight size={16} /></span>
+                                <span className="primery-color">
+                                    <ChevronRight size={16} />
+                                </span>
+
                                 {feature}
                             </li>
                         ))}
@@ -333,10 +422,9 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                     </Link>
                 </div>
             </div>
-
         </>
-    )
-}
+    );
+};
 
 // Header Hero Card
 export const HeroHeaderCard = ({ showSearch = true, heroTitle, heroSubtitle, heroImage = "/images/contact-page-bg.png", imgClass = "hero-img" }) => {
