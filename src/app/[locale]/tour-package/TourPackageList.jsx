@@ -6,7 +6,7 @@ import { TourPackageCard } from "@/components/ui/card";
 import { Col, Row, Container } from "react-bootstrap";
 import { SearchFleet, TitleComponent } from "@/components/ui/common";
 import { slugify } from "@/lib/utils";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, useParams  } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "../../../styles/blog.scss";
 import React, { useEffect, useState } from "react";
@@ -19,9 +19,13 @@ const TourPageContent = () => {
     // 1. Get Filter Values from URL
     const categoryFilter = searchParams.get("category");
     const priceFilter = searchParams.get("price");
+    const nameFilter = searchParams.get("name");
     const currentPage = Number(searchParams.get("page")) || 1;
     // const postsPerPage = 9;
-     const itemsPerPage = 9;
+    // const itemsPerPage = 9;
+    const params = useParams();
+
+    const locale = params.locale;
 
     // const [tourPackages, setTourPackages] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -29,13 +33,39 @@ const TourPageContent = () => {
 
     const [tours, setTours] = useState([]);
 
+     const [pagination, setPagination] = useState({
+        current_page: 1,
+        last_page: 1,
+        total: 0,
+    });
+
 
       // Filter Logic
+    // const filteredTours = tours.filter((tour) => {
+    //     const matchesCategory = categoryFilter
+    //         ? (tour.name || "")
+    //               .toLowerCase()
+    //               .includes(categoryFilter.toLowerCase())
+    //         : true;
+
+    //     let matchesPrice = true;
+
+    //     if (priceFilter) {
+    //         const [min, max] = priceFilter.split("-").map(Number);
+
+    //         matchesPrice =
+    //             Number(tour.price || 0) >= min &&
+    //             Number(tour.price || 0) <= max;
+    //     }
+
+    //     return matchesCategory && matchesPrice;
+    // });
+
     const filteredTours = tours.filter((tour) => {
         const matchesCategory = categoryFilter
-            ? (tour.name || "")
-                  .toLowerCase()
-                  .includes(categoryFilter.toLowerCase())
+            ? (tour.name || tour.title || "")
+                .toLowerCase()
+                .includes(categoryFilter.toLowerCase())
             : true;
 
         let matchesPrice = true;
@@ -52,31 +82,50 @@ const TourPageContent = () => {
     });
 
     // Pagination
-    const totalPages = Math.ceil(
-        filteredTours.length / itemsPerPage
-    );
+    // const totalPages = Math.ceil(
+    //     filteredTours.length / itemsPerPage
+    // );
 
-    const currentItems = filteredTours.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
+    // const currentItems = filteredTours.slice(
+    //     (currentPage - 1) * itemsPerPage,
+    //     currentPage * itemsPerPage
+    // );
+    const currentItems = filteredTours;
+
+    const totalPages = pagination.last_page;
 
     const handlePageChange = (pageNum) => {
-        const params = new URLSearchParams(searchParams);
-        params.set("page", pageNum);
+        // const params = new URLSearchParams(searchParams);
+        // params.set("page", pageNum);
 
-        router.push(`/tour-package?${params.toString()}`);
+        // router.push(`/tour-package?${params.toString()}`);
+
+        const queryParams = new URLSearchParams(searchParams);
+
+        queryParams.set("page", pageNum);
+
+        router.push(`/${locale}/tour-package?${queryParams.toString()}`);
     };
 
      // API call
     useEffect(() => {
-        fetchTours();
-    }, []);
+        fetchTours( currentPage,nameFilter,categoryFilter,priceFilter);
+    }, [currentPage, nameFilter, categoryFilter, priceFilter]);
 
-    const fetchTours = async () => {
+    const fetchTours = async (page = 1,name = "",category = "",price = "") => {
         try {
-            const data = await getTours();
-            setTours(data || []);
+            // const data = await getTours();
+            // setTours(data || []);
+        setLoading(true);
+        const response = await getTours( page,name,category,price);
+        const apiData = response;
+        setTours(apiData.data || []);
+
+        setPagination({
+            current_page: apiData.current_page,
+            last_page: apiData.last_page,
+            total: apiData.total,
+        });
         } catch (error) {
             console.log(error);
         } finally {
@@ -151,7 +200,7 @@ const TourPageContent = () => {
                         <h3>No packages found matching your criteria.</h3>
                         <button
                             className="primery-btn py-3"
-                            onClick={() => router.push('/tour-package')}
+                            onClick={() => router.push(`/${locale}/tour-package`)}
                         >
                             Clear All Filters
                         </button>

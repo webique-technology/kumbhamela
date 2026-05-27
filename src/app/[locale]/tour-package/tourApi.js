@@ -4,15 +4,48 @@ import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // Get all tours
-export const getTours = async () => {
-  try {
-    const response = await api.get("/tours");
-    return response.data.data.data;
-  } catch (error) {
-    console.log("Tours API Error:", error);
-    throw error;
-  }
-};
+// export const getTours = async (page = 1) => {
+//   try {
+//     const response = await api.get(`/tours?page=${page}`);
+//     return response.data.data;
+//   } catch (error) {
+//     console.log("Tours API Error:", error);
+//     throw error;
+//   }
+// };
+export const getTours = async (
+    page = 1,
+    name = "",
+    category = "",
+    price = ""
+    ) => {
+        try {
+            const params = new URLSearchParams();
+
+            params.set("page", page);
+
+            if (name) {
+                params.set("name", name);
+            }
+
+            if (category && category !== "all") {
+                params.set("category", category);
+            }
+
+            if (price && price !== "all") {
+                params.set("price", price);
+            }
+
+            const response = await api.get(
+                `/tours?${params.toString()}`
+            );
+
+            return response.data.data;
+        } catch (error) {
+            console.log("Tours API Error:", error);
+            throw error;
+        }
+    };
 
 export const createTourEnquiry = async (payload) => {
     try {
