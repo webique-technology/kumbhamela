@@ -1,101 +1,211 @@
 "use client";
-import React, { useState, Suspense } from 'react'
-import { Col, Container, Nav, Row, Tab } from 'react-bootstrap'
-import { TitleComponent, SearchFleet } from '@/components/ui/common'
-import { rentalCar } from '@/lib/data'
-import { HeroHeaderCard, RentalCarCard } from '@/components/ui/card'
-import { BookingForm } from '@/components/ui/bookingFormHandler'
+import React, { useState, useEffect, Suspense } from "react";
+
+import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
+
+import { TitleComponent, SearchFleet } from "@/components/ui/common";
+
+import { HeroHeaderCard, RentalCarCard } from "@/components/ui/card";
+
+import { BookingForm } from "@/components/ui/bookingFormHandler";
+
 import { useRouter, useSearchParams } from "next/navigation";
-import { Sparkles, ShieldCheck, SprayCan, PhoneCall, Award } from "lucide-react";
+
+import {
+  Sparkles,
+  ShieldCheck,
+  SprayCan,
+  PhoneCall,
+  Award,
+} from "lucide-react";
+
 import Image from "next/image";
-import { useSearchFilter } from "@/hooks/useSearchFilter";
+
 import "../../../styles/rental-car.scss";
-import "../../../assets/scss/main.scss"
+import "../../../assets/scss/main.scss";
+
+import { getCars } from "./carApi";
 
 const RentalCarContent = () => {
-    const [show, setShow] = useState(false);
-    const [selectedCar, setSelectedCar] = useState("");
-    const [activeTab, setActiveTab] = useState("all-car"); // State to track active tab
+  const router = useRouter();
 
-    const handleOpenBooking = (carName) => {
-        setSelectedCar(carName);
-        setShow(true);
-    };
-    const filteredCars = useSearchFilter(rentalCar);
+  const [show, setShow] = useState(false);
+  const [selectedCar, setSelectedCar] = useState("");
 
-    const finalDisplayCars = filteredCars.filter((car) => {
-        if (activeTab === "all-car") return true;
-        return car.type === activeTab;
-    });
+  const [activeTab, setActiveTab] = useState("all-car");
 
-    return (
-        <section className="section-padding secondary-bg">
-            <Container>
-                <Tab.Container
-                    id="car-tabs"
-                    activeKey={activeTab}
-                    onSelect={(k) => setActiveTab(k)}
+  const [cars, setCars] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+
+  const [pagination, setPagination] = useState({
+    current_page: 1,
+    last_page: 1,
+    total: 0,
+  });
+
+  const searchParams = useSearchParams();
+
+  const nameFilter = searchParams.get("name");
+
+  const categoryFilter = searchParams.get("category");
+
+  const priceFilter = searchParams.get("price");
+
+  const currentPage = Number(searchParams.get("page")) || 1;
+
+  const handleOpenBooking = (carName) => {
+    setSelectedCar(carName);
+    setShow(true);
+  };
+
+  const finalDisplayCars = cars.filter((car) => {
+    if (activeTab === "all-car") return true;
+
+    return car.category === activeTab;
+  });
+
+  useEffect(() => {
+    fetchCars(currentPage, nameFilter, categoryFilter, priceFilter);
+  }, [currentPage, nameFilter, categoryFilter, priceFilter]);
+
+  const fetchCars = async (page = 1, name = "", category = "", price = "") => {
+    try {
+      setLoading(true);
+
+      const apiData = await getCars(page, name, category, price);
+
+      setCars(apiData.data || []);
+
+      setPagination({
+        current_page: apiData.current_page,
+        last_page: apiData.last_page,
+        total: apiData.total,
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return <div className="text-center py-5">Loading cars...</div>;
+  }
+
+  return (
+    <section className="section-padding secondary-bg">
+      <Container>
+        <Tab.Container
+          id="car-tabs"
+          activeKey={activeTab}
+          onSelect={(k) => setActiveTab(k)}
+        >
+          <Row className="align-items-center mb-5">
+            <Col md={7}>
+              <TitleComponent
+                className="text-start mb-0"
+                title="Select your preferred transport"
+                montezSubTitle="Our Collections"
+                montezClass="primery-color montez-sub-heading"
+                divider={false}
+              />
+            </Col>
+
+            <Col md={5} className="mt-4 mt-md-0">
+              <Nav
+                variant="pills"
+                className="p-1 gap-2 rounded-2 car-nav-pills"
+              >
+                <Nav.Item>
+                  <Nav.Link eventKey="all-car" className="car-tab-item">
+                    All Cars
+                  </Nav.Link>
+                </Nav.Item>
+
+                <Nav.Item>
+                  <Nav.Link eventKey="Sedan" className="car-tab-item">
+                    Sedan
+                  </Nav.Link>
+                </Nav.Item>
+
+                <Nav.Item>
+                  <Nav.Link eventKey="SUV" className="car-tab-item">
+                    SUV/MUV
+                  </Nav.Link>
+                </Nav.Item>
+
+                <Nav.Item>
+                  <Nav.Link eventKey="Traveller" className="car-tab-item">
+                    Traveller
+                  </Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Col>
+          </Row>
+
+          <Tab.Content>
+            <Tab.Pane eventKey={activeTab}>
+              {finalDisplayCars.length > 0 ? (
+                <Row className="g-4">
+                  {finalDisplayCars.map((value, index) => (
+                    <Col key={index} lg={4} md={6}>
+                      <RentalCarCard
+                        car={value}
+                        onBook={() => handleOpenBooking(value.name)}
+                      />
+                    </Col>
+                  ))}
+                </Row>
+              ) : (
+                <div className="text-center py-5">
+                  <h4 className="text-muted">
+                    No {activeTab === "all-car" ? "" : activeTab} cars available
+                    in this search.
+                  </h4>
+                </div>
+              )}
+            </Tab.Pane>
+          </Tab.Content>
+        </Tab.Container>
+
+        {/* Pagination */}
+        {pagination.last_page > 1 && (
+          <div className="d-flex justify-content-center gap-2 mt-5">
+            {[...Array(pagination.last_page)].map((_, i) => {
+              const pageNum = i + 1;
+
+              return (
+                <button
+                  key={pageNum}
+                  className={`pagination-number ${
+                    currentPage === pageNum ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    const params = new URLSearchParams(searchParams.toString());
+
+                    params.set("page", pageNum);
+
+                    router.push(`?${params.toString()}`);
+                  }}
                 >
-                    <Row className="align-items-center mb-5">
-                        <Col md={7}>
-                            <TitleComponent
-                                className='text-start mb-0'
-                                title="Select your preferred transport"
-                                montezSubTitle="Our Collections"
-                                montezClass="primery-color montez-sub-heading"
-                                divider={false}
-                            />
-                        </Col>
-                        <Col md={5} className="mt-4 mt-md-0">
-                            <div className=''>
-                                <Nav variant="pills" className="p-1 gap-2 rounded-2 car-nav-pills">
-                                    <Nav.Item>
-                                        <Nav.Link eventKey="all-car" className="car-tab-item">All Cars</Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item>
-                                        <Nav.Link eventKey="Sedan" className="car-tab-item">Sedan</Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item>
-                                        <Nav.Link eventKey="SUV" className="car-tab-item">SUV/MUV</Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item>
-                                        <Nav.Link eventKey="Traveller" className="car-tab-item">Traveller</Nav.Link>
-                                    </Nav.Item>
-                                </Nav>
-                            </div>
-                        </Col>
-                    </Row>
+                  {pageNum}
+                </button>
+              );
+            })}
+          </div>
+        )}
 
-                    <Tab.Content>
-                        {/* We use one Tab.Pane but swap the content dynamically for better performance */}
-                        <Tab.Pane eventKey={activeTab}>
-                            {finalDisplayCars.length > 0 ? (
-                                <Row className='g-4'>
-                                    {finalDisplayCars.map((value, index) => (
-                                        <Col key={index} lg={4} md={6}>
-                                            <RentalCarCard car={value} onBook={() => handleOpenBooking(value.name)} />
-                                        </Col>
-                                    ))}
-                                </Row>
-                            ) : (
-                                <div className="text-center py-5">
-                                    <h4 className="text-muted">No {activeTab === "all-car" ? "" : activeTab} cars available in this search.</h4>
-                                </div>
-                            )}
-                        </Tab.Pane>
-                    </Tab.Content>
-                </Tab.Container>
-
-                <BookingForm
-                    show={show}
-                    handleClose={() => setShow(false)}
-                    type="car"
-                    selectedItem={selectedCar}
-                />
-            </Container>
-        </section>
-    );
-}
+        <BookingForm
+          show={show}
+          handleClose={() => setShow(false)}
+          type="car"
+          selectedItem={selectedCar}
+        />
+      </Container>
+    </section>
+  );
+};
 
 export default function RentalCar() {
     return (

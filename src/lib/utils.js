@@ -23,17 +23,39 @@ export const slugify = (text = "") => {
 
 
 // Image URL helper
-export const imageUrl = (path = "") => {
+// export const imageUrl = (path = "") => {
+//     if (!path) return null;
+
+//     // already full URL
+//     if (path.startsWith("http")) {
+//         return path;
+//     }
+
+//     // remove /api only for images
+//     const baseUrl =
+//         process.env.NEXT_PUBLIC_API_URL?.replace(/\/api\/?$/, "") || "";
+
+//     return `${baseUrl}${path}`;
+// };
+
+export const imageUrl = (
+    path = ""
+) => {
     if (!path) return null;
 
-    // already full URL
-    if (path.startsWith("http")) {
-        return path;
-    }
-
-    // remove /api only for images
     const baseUrl =
-        process.env.NEXT_PUBLIC_API_URL?.replace(/\/api\/?$/, "") || "";
+        process.env.NEXT_PUBLIC_API_URL?.replace(
+            /\/api\/?$/,
+            ""
+        ) || "";
 
-    return `${baseUrl}${path}`;
+    const fullPath =
+        path.startsWith("http")
+            ? path
+            : `${baseUrl}${path}`;
+
+    // decode if already encoded
+    return encodeURI(
+        decodeURI(fullPath)
+    );
 };

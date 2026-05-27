@@ -9,6 +9,7 @@ import { SearchFleet, SwiperSliderComp } from './common';
 import { SwiperSlide } from 'swiper/react';
 import { Col, Container, Row } from 'react-bootstrap';
 import IconResolver from './iconResolver';
+import { imageUrl } from "@/lib/utils";
 
 // for blogs card
 export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_width = "100%", img_count_height = "220px" }) => {
@@ -207,18 +208,27 @@ export const SacredDestinationsCard = ({ destination }) => {
 export const RentalCarCard = ({ car, onBook }) => {
     const params = useParams();
     const currentLocale = params?.locale || 'en';
-
+console.log("car:", car);
+console.log("image:", car?.car_image_url);
+console.log("final:", imageUrl(car?.car_image_url));
     return (
         <div className="card rental-car-card h-100 border-0 shadow-sm overflow-hidden">
             {/* Image Container with Overlay */}
             <div className="position-relative overflow-hidden">
-                <Image
-                    src={car.image}
+                {car?.car_image_url ? (
+                <img
+                    src={imageUrl(car.car_image_url)}
                     alt={car.name}
                     width={200}
                     height={200}
                     className="card-img-top object-fit-cover transition-transform"
                 />
+                ) : (
+                    <div
+                    style={{ width: "100%", height: "200px" }}
+                    className="card-img-top bg-light"
+                />
+            )}
             </div>
 
             {/* Content Body */}
@@ -229,7 +239,7 @@ export const RentalCarCard = ({ car, onBook }) => {
                     </h3>
                     <p className="card-text d-flex align-items-center mb-2 gap-2 text-muted small leading-relaxed">
                         <Users size={16} />
-                        {car.capacity}
+                        {car.total_seats}
                     </p>
                 </div>
                 {/* Features */}
@@ -248,7 +258,7 @@ export const RentalCarCard = ({ car, onBook }) => {
                 {/* Footer Logic */}
                 < div className="d-flex align-items-center justify-content-between mt-auto border-top pt-3" >
                     <div className='d-flex align-items-end'>
-                        <span className="h4 fw-bold text-brand-orange mb-0">{car.price} /&nbsp;</span>
+                        <span className="h4 fw-bold text-brand-orange mb-0">{car.base_price} /&nbsp;</span>
                         <small className="text-muted d-block smaller mb-1">per Day</small>
                     </div>
 
