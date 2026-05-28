@@ -5,6 +5,7 @@ import { TitleComponent, SearchFleet } from "@/components/ui/common";
 import { HeroHeaderCard, RentalCarCard } from "@/components/ui/card";
 import { BookingForm } from "@/components/ui/bookingFormHandler";
 import { useRouter, useSearchParams, useParams } from "next/navigation";
+import "../../../styles/blog.scss";
 
 import {
   Sparkles,
@@ -12,6 +13,7 @@ import {
   SprayCan,
   PhoneCall,
   Award,
+  ChevronLeft, ChevronRight 
 } from "lucide-react";
 
 import Image from "next/image";
@@ -40,6 +42,7 @@ const RentalCarContent = () => {
     current_page: 1,
     last_page: 1,
     total: 0,
+    links: [],
   });
 
   const searchParams = useSearchParams();
@@ -51,6 +54,7 @@ const RentalCarContent = () => {
   const priceFilter = searchParams.get("price");
 
   const currentPage = Number(searchParams.get("page")) || 1;
+  const totalPages = pagination.last_page;
 
   const handleOpenBooking = (carName) => {
     setSelectedCar(carName);
@@ -62,7 +66,13 @@ const RentalCarContent = () => {
 
     return car.category === activeTab;
   });
+  const handlePageChange = (pageNum) => {
+        const queryParams = new URLSearchParams(searchParams);
 
+        queryParams.set("page", pageNum);
+
+        router.push(`/${locale}/rental-car?${queryParams.toString()}`);
+    };
   useEffect(() => {
     fetchCars(currentPage, nameFilter, categoryFilter, priceFilter);
   }, [currentPage, nameFilter, categoryFilter, priceFilter]);
@@ -71,14 +81,19 @@ const RentalCarContent = () => {
     try {
       setLoading(true);
 
-      const apiData = await getCars(page, name, category, price);
+      // const apiData = await getCars(page, name, category, price);
 
-      setCars(apiData.data || []);
+      // setCars(apiData.data || []);
+
+       const response = await getCars( page,name,category,price);
+              const apiData = response;
+              setCars(apiData.data || []);
 
       setPagination({
         current_page: apiData.current_page,
         last_page: apiData.last_page,
         total: apiData.total,
+        links: apiData.links || [],
       });
     } catch (error) {
       console.log(error);
@@ -169,31 +184,39 @@ const RentalCarContent = () => {
         </Tab.Container>
 
         {/* Pagination */}
-        {pagination.last_page > 1 && (
-          <div className="d-flex justify-content-center gap-2 mt-5">
-            {[...Array(pagination.last_page)].map((_, i) => {
-              const pageNum = i + 1;
 
-              return (
-                <button
-                  key={pageNum}
-                  className={`pagination-number ${
-                    currentPage === pageNum ? "active" : ""
-                  }`}
-                  onClick={() => {
-                    const params = new URLSearchParams(searchParams.toString());
+         {totalPages > 1 && (
+                    <div className="d-flex justify-content-center align-items-center pagination-wrapper gap-2 mt-5">
+                        <button
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            className={`pagination-item arrow ${currentPage === 1 ? 'disabled' : ''}`}
+                            disabled={currentPage === 1}
+                        >
+                            <ChevronLeft size={18} />
+                        </button>
 
-                    params.set("page", pageNum);
+                        {[...Array(totalPages)].map((_, i) => {
+                            const pageNum = i + 1;
+                            return (
+                                <button
+                                    key={pageNum}
+                                    onClick={() => handlePageChange(pageNum)}
+                                    className={`pagination-number number ${currentPage === pageNum ? 'active' : ''}`}
+                                >
+                                    {pageNum}
+                                </button>
+                            );
+                        })}
 
-                    router.push(`?${params.toString()}`);
-                  }}
-                >
-                  {pageNum}
-                </button>
-              );
-            })}
-          </div>
-        )}
+                        <button
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            className={`pagination-item arrow ${currentPage === totalPages ? 'disabled' : ''}`}
+                            disabled={currentPage === totalPages}
+                        >
+                            <ChevronRight size={18} />
+                        </button>
+                    </div>
+                )}
 
         <BookingForm
           show={show}
