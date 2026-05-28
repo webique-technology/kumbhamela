@@ -97,6 +97,60 @@ const Footer = () => {
                             </ul>
                         </Col>
 
+
+
+
+
+                        {/* <Col md={6} lg={3}>
+                        
+                            <h3 className="footer-heading">Get In Touch</h3>
+
+                            <a
+                                href="https://wa.me/1234567890"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn whatsapp-btn w-100 mb-4 d-flex align-items-center justify-content-center gap-2"
+                            >
+                                <MessageCircle size={20} />
+                                <div>
+                                    <p className="mb-0 small fw-semibold">WhatsApp Support</p>
+                                    <small>Available 24/7</small>
+                                </div>
+                            </a>
+
+                            <div className="newsletter-box">
+                                <h4 className="small fw-semibold mb-2">Stay Updated</h4>
+                                <p className="small mb-3">
+                                    Get latest updates about Kumbh Mela events and schedules
+                                </p>
+
+                                <div className="d-flex gap-2">
+                                    <input
+                                        type="email"
+                                        placeholder="Your email"
+                                        className="form-control form-control-sm"
+                                    />
+                                    <button className="btn btn-subscribe btn-sm">
+                                        Subscribe
+                                    </button>
+                                </div>
+                            </div>
+                        </Col> */}
+                        <Col md={6} lg={3}>
+                            <h3 className="footer-heading">Other Services We Offer:</h3>
+
+                            <ul className='services-link'>
+                                <li className='mb-2'>Car Rental Pan India</li>
+                                <li className='mb-2'>Luxury Car Marriage Corporate</li>
+                                <li className='mb-2'>Traveller & Bus</li>
+                                <li className='mb-2'>Flight Ticketing</li>
+                                <li className='mb-2'>Holidays Packages</li>
+                                <li className='mb-2'>Hotel Reservations</li>
+                                <li className='mb-2'>Visa Services</li>
+                                <li className='mb-2'>Passport Assistance</li>
+                            </ul>
+
+                        </Col>
                         {/* Contact Info */}
                         <Col md={6} lg={3}>
                             <h3 className="footer-heading">Contact Information</h3>
@@ -132,42 +186,6 @@ const Footer = () => {
                             </ul>
                         </Col>
 
-                        {/* WhatsApp & Newsletter */}
-                        <Col md={6} lg={3}>
-                            <h3 className="footer-heading">Get In Touch</h3>
-
-                            <a
-                                href="https://wa.me/1234567890"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="btn whatsapp-btn w-100 mb-4 d-flex align-items-center justify-content-center gap-2"
-                            >
-                                <MessageCircle size={20} />
-                                <div>
-                                    <p className="mb-0 small fw-semibold">WhatsApp Support</p>
-                                    <small>Available 24/7</small>
-                                </div>
-                            </a>
-
-                            <div className="newsletter-box">
-                                <h4 className="small fw-semibold mb-2">Stay Updated</h4>
-                                <p className="small mb-3">
-                                    Get latest updates about Kumbh Mela events and schedules
-                                </p>
-
-                                <div className="d-flex gap-2">
-                                    <input
-                                        type="email"
-                                        placeholder="Your email"
-                                        className="form-control form-control-sm"
-                                    />
-                                    <button className="btn btn-subscribe btn-sm">
-                                        Subscribe
-                                    </button>
-                                </div>
-                            </div>
-                        </Col>
-
                     </Row>
                 </div>
 
@@ -179,9 +197,9 @@ const Footer = () => {
                         </p>
 
                         <div className="d-flex gap-3">
-                            <a href="#" className="footer-link small">Privacy Policy</a>
-                            <a href="#" className="footer-link small">Terms & Conditions</a>
-                            <a href="#" className="footer-link small">Disclaimer</a>
+                            <p>Design and Developed by <a href="https://webique.in/" target="_blank" className='footer-link'>Webique Technology</a></p>
+                            {/* <a href="#" className="footer-link small">Terms & Conditions</a>
+                            <a href="#" className="footer-link small">Disclaimer</a> */}
                         </div>
                     </div>
                 </div>
