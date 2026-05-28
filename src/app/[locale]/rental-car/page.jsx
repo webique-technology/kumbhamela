@@ -118,39 +118,54 @@ const RentalCarContent = () => {
             <Col md={7}>
               <TitleComponent
                 className="text-start mb-0"
-                title="Select your preferred transport"
-                montezSubTitle="Our Collections"
+                // title="Select your preferred transport"
+                // montezSubTitle="Our Collections"
                 montezClass="primery-color montez-sub-heading"
                 divider={false}
               />
             </Col>
 
-            <Col md={5} className="mt-4 mt-md-0">
+            <Col md={12} className="mt-4 mt-md-0">
               <Nav
                 variant="pills"
-                className="p-1 gap-2 rounded-2 car-nav-pills"
+                className="p-1 gap-2 rounded-2 car-nav-pills" 
               >
                 <Nav.Item>
                   <Nav.Link eventKey="all-car" className="car-tab-item">
-                    All Cars
+                   All Cars
                   </Nav.Link>
                 </Nav.Item>
-
                 <Nav.Item>
                   <Nav.Link eventKey="Sedan" className="car-tab-item">
-                    Sedan
+                   Sedan
                   </Nav.Link>
                 </Nav.Item>
 
                 <Nav.Item>
                   <Nav.Link eventKey="SUV" className="car-tab-item">
-                    SUV/MUV
+                    SUV
                   </Nav.Link>
                 </Nav.Item>
 
                 <Nav.Item>
                   <Nav.Link eventKey="Traveller" className="car-tab-item">
-                    Traveller
+                    Tempo Traveller
+                  </Nav.Link>
+                </Nav.Item>
+
+                <Nav.Item>
+                  <Nav.Link eventKey="Urbania" className="car-tab-item">
+                    Urbania
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="Minibus" className="car-tab-item">
+                    Mini Bus
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="Luxurycar" className="car-tab-item">
+                    Luxury Car
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
@@ -236,9 +251,9 @@ export default function RentalCar() {
                 {/* Hero Section */}
                 <section>
                     <HeroHeaderCard
-                        heroTitle="Pilgrim Concierge & Support"
-                        heroSubtitle="Connect With Us"
-                        heroImage="/images/contact-page-bg.png"
+                        heroTitle="Select your preferred transport"
+                        // heroSubtitle="Connect With Us"
+                        heroImage="/images/carrental-page-bg.png"
                         imgClass="hero-img"
                         showSearch={true}
                     />

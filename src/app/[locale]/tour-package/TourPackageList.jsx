@@ -175,7 +175,7 @@ const TourPageContent = () => {
         <section>
             <HeroHeaderCard
                         heroTitle="Tour Packages"
-                        heroSubtitle={categoryFilter ? `Showing ${categoryFilter} results` : "Explore our specially curated spiritual journeys"}
+                        // heroSubtitle={categoryFilter ? `Showing ${categoryFilter} results` : "Explore our specially curated spiritual journeys"}
                         heroImage="/images/carrental-page-bg.png"
                         imgClass="hero-img"
                         showSearch={true}

@@ -81,7 +81,7 @@ const ContactUs = () => {
                     </div> */}
                 <HeroHeaderCard
                     heroTitle="Pilgrim Concierge & Support"
-                    heroSubtitle="Connect With Us"
+                    // heroSubtitle="Connect With Us"
                     heroImage="/images/contact-page-bg.png"
                     imgClass="hero-img"
                     showSearch={false}
