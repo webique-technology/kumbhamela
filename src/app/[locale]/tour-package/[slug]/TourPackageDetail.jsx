@@ -7,7 +7,7 @@ import Image from "next/image";
 import * as Icons from "lucide-react";
 import { Circle, FileText } from "lucide-react";
 import { motion } from "framer-motion";
-
+import { FaCalendarCheck } from "react-icons/fa";
 import { slugify, imageUrl } from "@/lib/utils";
 import { WhatsAppShareBtn } from "@/components/ui/button";
 import { HighlightsModal, TourTabs, } from "@/components/ui/common";
@@ -62,11 +62,11 @@ const TourPackageDetail = ({ tour }) => {
                     </ul>
                     )} */}
                     {tour?.location && (
-                    <ul className="px-2 m-0 bg-light tour-route d-flex flex-wrap justify-content-start align-items-center">
-                        <li className="p-1 small-12 rounded bg-primery-color text-decoration-none text-dark">
-                        {tour.location}
-                        </li>
-                    </ul>
+                        <ul className="px-2 m-0 bg-light tour-route d-flex flex-wrap justify-content-start align-items-center">
+                            <li className="p-1 small-12 rounded bg-primery-color text-decoration-none text-dark">
+                                {tour.location}
+                            </li>
+                        </ul>
                     )}
                 </Container>
             </section>
@@ -240,24 +240,24 @@ const TourPackageDetail = ({ tour }) => {
                                                     )}
                                                 </Col> */}
                                                 <Col md={3}>
-                                                {day.itineraries_image_url && (
-                                                    <div
-                                                    className="position-relative"
-                                                    style={{
-                                                        width: "100%",
-                                                        height: "120px",
-                                                    }}
-                                                    >
-                                                    <Image
-                                                         src={imageUrl(day.itineraries_image_url)}
-                                                        alt={day.itinerary_title || "Itinerary"}
-                                                        fill
-                                                        unoptimized
-                                                        sizes="(max-width: 768px) 100vw, 25vw"
-                                                        className="rounded shadow-sm object-fit-cover mt-3"
-                                                    />
-                                                    </div>
-                                                )}
+                                                    {day.itineraries_image_url && (
+                                                        <div
+                                                            className="position-relative"
+                                                            style={{
+                                                                width: "100%",
+                                                                height: "120px",
+                                                            }}
+                                                        >
+                                                            <Image
+                                                                src={imageUrl(day.itineraries_image_url)}
+                                                                alt={day.itinerary_title || "Itinerary"}
+                                                                fill
+                                                                unoptimized
+                                                                sizes="(max-width: 768px) 100vw, 25vw"
+                                                                className="rounded shadow-sm object-fit-cover mt-3"
+                                                            />
+                                                        </div>
+                                                    )}
                                                 </Col>
                                             </Row>
                                         </div>
@@ -292,8 +292,9 @@ const TourPackageDetail = ({ tour }) => {
                             </div >
                             <Link
                                 href={`/tour-package/book/${slugify(tour.title)}`}
-                                className="primery-btn d-flex align-items-center justify-content-center w-100 py-3 text-center text-decoration-none fw-bold rounded shadow-sm mb-3"
+                                className="primery-btn d-flex align-items-center justify-content-center gap-2 w-100 py-3 text-center text-decoration-none fw-bold rounded shadow-sm mb-3"
                             >
+                                <FaCalendarCheck size={18} />
                                 Book Now
                             </Link>
 

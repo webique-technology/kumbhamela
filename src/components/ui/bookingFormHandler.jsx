@@ -290,6 +290,23 @@ export const BookingFormHandler = ({ tourId,tourName }) => {
                             />
                         </Form.Group>
                     </Col>
+                    <Col md={6}>
+                        <Form.Group controlId="bookingTravelers">
+                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">vechicle cateogry</Form.Label>
+                            <Form.Select
+                                name="number_of_travelers"
+                                className="custom-input"
+                                onChange={handleChange}
+                            >
+                                <option value="Sedan">Sedan</option>
+                                <option value="SUV">SUV</option>
+                                <option value="TempoTraveller">Tempo Traveller</option>
+                                <option value="Urbania">Urbania</option>
+                                <option value="MiniBus">Mini Bus</option>
+                                <option value="LuxuryCar">Luxury Car</option>
+                            </Form.Select>
+                        </Form.Group>
+                    </Col>
                     {/* special requirements */}
                     <Col xs={12}>
                         <Form.Group controlId="bookingRequirements">

@@ -2,7 +2,7 @@
 
 // import React from "react";
 // import { tourPackages } from "@/lib/data";
-import { TourPackageCard } from "@/components/ui/card";
+import { HeroHeaderCard, TourPackageCard } from "@/components/ui/card";
 import { Col, Row, Container } from "react-bootstrap";
 import { SearchFleet, TitleComponent } from "@/components/ui/common";
 import { slugify } from "@/lib/utils";
@@ -11,6 +11,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import "../../../styles/blog.scss";
 import React, { useEffect, useState } from "react";
 import { getTours } from "./tourApi";
+import HeroHeader from "@/components/section/HeroHeader";
 
 const TourPageContent = () => {
     const router = useRouter();
@@ -171,16 +172,24 @@ const TourPageContent = () => {
     // };
 
     return (
-        <section className="section-padding bg-light">
+        <section>
+            <HeroHeaderCard
+                        heroTitle="Tour Packages"
+                        heroSubtitle={categoryFilter ? `Showing ${categoryFilter} results` : "Explore our specially curated spiritual journeys"}
+                        heroImage="/images/carrental-page-bg.png"
+                        imgClass="hero-img"
+                        showSearch={true}
+            />
+            <section className="section-padding secondary-bg">
             <Container>
-                <TitleComponent
+                {/* <TitleComponent
                     title="Tour Packages"
-                    description={categoryFilter ? `Showing ${categoryFilter} results` : "Explore our specially curated spiritual journeys"}
+                    
                 />
 
                 <div className="mb-5">
                     <SearchFleet />
-                </div>
+                </div> */}
 
                 {/* --- Equal Grid: 3 cards per row on LG, 2 on MD --- */}
                 {currentItems.length > 0 ? (
@@ -241,6 +250,7 @@ const TourPageContent = () => {
                     </div>
                 )}
             </Container>
+            </section>
         </section>
     );
 };

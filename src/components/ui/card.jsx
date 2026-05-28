@@ -430,7 +430,7 @@ export const TourPackageCard = ({ tour, tourLink }) => {
 };
 
 // Header Hero Card
-export const HeroHeaderCard = ({ showSearch = true, heroTitle, heroSubtitle, heroImage = "/images/contact-page-bg.png", imgClass = "hero-img" }) => {
+export const HeroHeaderCard = ({ showSearch = true, heroTitle, description, heroSubtitle, heroImage = "/images/contact-page-bg.png", imgClass = "hero-img" }) => {
 
     return (
         <>

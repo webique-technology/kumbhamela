@@ -53,6 +53,17 @@
     color: $primary-color;
     background: $primery-bg-color;
   }
+
+  &.active {
+    color: $primary-color;
+    background: $primery-bg-color;
+    font-weight: 600;
+  }
+
+
+
+
+
   @media(max-width:1440px){
     font-size: $font-size-base;
   }

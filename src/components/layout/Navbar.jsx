@@ -6,8 +6,8 @@ import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { useTranslations, useLocale } from "next-intl";
 import "../../styles/navbar.scss";
 import NavSidebar from "./Sidebar";
-
 const Navbar = () => {
+
     const [isMenuOpen, setIsMenuOpen] = useState(false); // Controls the Overlay
     const [showSidebar, setShowSidebar] = useState(false); // Controls the Sidebar
     const [scrolled, setScrolled] = useState(false);
@@ -96,13 +96,54 @@ const Navbar = () => {
 
                     {/* Desktop Menu */}
                     <nav className="d-none d-lg-flex align-items-center nav-links">
-                        <Link href="/" className="nav-link-custom">{t('home')}</Link>
-                        <Link href="/about-us" className="nav-link-custom">{t('about')}</Link>
-                        <Link href="/hotel" className="nav-link-custom">{t('hotel')}</Link>
-                        <Link href="/rental-car" className="nav-link-custom">{t('rentalCar')}</Link>
-                        <Link href="/tour-package" className="nav-link-custom">{t('tourPackage')}</Link>
-                        <Link href="/blog" className="nav-link-custom">{t('blog')}</Link>
-                        <Link href="/contact-us" className="nav-link-custom">{t('contact')}</Link>
+                        <Link
+                            href="/"
+                            className={`nav-link-custom ${pathname === "/" ? "active" : ""}`}
+                        >
+                            {t("home")}
+                        </Link>
+
+                        <Link
+                            href="/about-us"
+                            className={`nav-link-custom ${pathname === "/about-us" ? "active" : ""}`}
+                        >
+                            {t("about")}
+                        </Link>
+
+                        <Link
+                            href="/hotel"
+                            className={`nav-link-custom ${pathname === "/hotel" ? "active" : ""}`}
+                        >
+                            {t("hotel")}
+                        </Link>
+
+                        <Link
+                            href="/rental-car"
+                            className={`nav-link-custom ${pathname === "/rental-car" ? "active" : ""}`}
+                        >
+                            {t("rentalCar")}
+                        </Link>
+
+                        <Link
+                            href="/tour-package"
+                            className={`nav-link-custom ${pathname === "/tour-package" ? "active" : ""}`}
+                        >
+                            {t("tourPackage")}
+                        </Link>
+
+                        <Link
+                            href="/blog"
+                            className={`nav-link-custom ${pathname === "/blog" ? "active" : ""}`}
+                        >
+                            {t("blog")}
+                        </Link>
+
+                        <Link
+                            href="/contact-us"
+                            className={`nav-link-custom ${pathname === "/contact-us" ? "active" : ""}`}
+                        >
+                            {t("contact")}
+                        </Link>
                     </nav>
 
                     {/* Right Side Actions */}
