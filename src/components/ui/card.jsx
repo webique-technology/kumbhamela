@@ -208,8 +208,8 @@ export const SacredDestinationsCard = ({ destination }) => {
 export const RentalCarCard = ({ car, onBook }) => {
     const params = useParams();
     const currentLocale = params?.locale || 'en';
-console.log("car:", car);
-console.log("image:", car?.car_image_url);
+// console.log("car:", car);
+// console.log("image:", car?.car_image_url);
 console.log("final:", imageUrl(car?.car_image_url));
     return (
         <div className="card rental-car-card h-100 border-0 shadow-sm overflow-hidden">

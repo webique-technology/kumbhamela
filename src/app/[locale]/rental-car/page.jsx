@@ -1,15 +1,10 @@
 "use client";
 import React, { useState, useEffect, Suspense } from "react";
-
 import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
-
 import { TitleComponent, SearchFleet } from "@/components/ui/common";
-
 import { HeroHeaderCard, RentalCarCard } from "@/components/ui/card";
-
 import { BookingForm } from "@/components/ui/bookingFormHandler";
-
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, useParams } from "next/navigation";
 
 import {
   Sparkles,
@@ -28,6 +23,9 @@ import { getCars } from "./carApi";
 
 const RentalCarContent = () => {
   const router = useRouter();
+
+  const params = useParams();
+  const locale = params.locale;
 
   const [show, setShow] = useState(false);
   const [selectedCar, setSelectedCar] = useState("");
@@ -163,6 +161,7 @@ const RentalCarContent = () => {
                     No {activeTab === "all-car" ? "" : activeTab} cars available
                     in this search.
                   </h4>
+                   <button className="primery-btn py-3" onClick={() => router.push(`/${locale}/rental-car`)}> Clear All Filters </button>
                 </div>
               )}
             </Tab.Pane>
