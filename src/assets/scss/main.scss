@@ -65,6 +65,7 @@ h6 {
     color: $text-color-light;
     font-weight: 900;
     font-size: clamp(2rem, 5vw, 3.5rem);
+    text-shadow: 0px 1px 10px #000;
 }
 
 h2 {
@@ -363,13 +364,38 @@ p {
 }
 
 .search-fleet-card {
-    background: $bg-light;
-    border-radius: $border-radius-xl; // Very rounded as per image
+    background: rgba(0, 4, 4, 0.7);
+
+     border: var(--bs-border-width) var(--bs-border-style) #868686 !important;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(255, 255, 255, 0.3);
+
+    border-radius: $border-radius-xl;
     padding: 30px 45px;
+
     display: grid;
     grid-template-columns: 1fr 1fr 1fr auto;
     gap: 25px;
     align-items: flex-end;
+
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.35),
+            rgba(255, 255, 255, 0.05)
+        );
+
+        pointer-events: none;
+    }
 
     @media (max-width: 991px) {
         grid-template-columns: 1fr 1fr;
@@ -381,6 +407,7 @@ p {
         grid-template-columns: 1fr;
         margin-top: -30px;
     }
+
 }
 
 .filter-group {
@@ -568,6 +595,7 @@ p {
     // border-radius: $border-radius-2xl;
     overflow: hidden;
     padding: 40px 0;
+    background-size: cover;
 
     &:before{
         position: absolute;

@@ -30,7 +30,7 @@ const WhyChooseUs = () => {
 
     return (
         <>
-            <section className="why-choose-us-section section-padding-2 position-relative">
+            <section id="whyChooseUs" className="why-choose-us-section section-padding-2 position-relative">
                 {/* <div className="bottom-divider position-absolute z-3 top-0"></div> */}
                 <Container>
                     <Row>

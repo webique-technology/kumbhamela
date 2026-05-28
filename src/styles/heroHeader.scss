@@ -5,7 +5,124 @@
     color: $text-color-light;
     transition: all 0.4s ease-in;
 
-    &:hover { 
+    .hero-slide-content {
+        overflow: hidden;
+
+        .hero-subheading {
+            display: inline-block;
+            opacity: 0;
+            animation: fadeTop 0.8s ease both;
+            animation-delay: 0.2s;
+            display: none;
+        }
+
+        .hero-title {
+            opacity: 0;
+            animation: fadeRight 1s ease both;
+            animation-delay: 0.7s;
+        }
+
+        .hero-description-animate {
+            opacity: 0;
+            animation: fadeBottom 1s ease both;
+            animation-delay: 1.2s;
+        }
+    }
+
+    /* Subheading */
+    @keyframes fadeTop {
+        from {
+            opacity: 0;
+            transform: translateY(-40px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Title */
+    @keyframes fadeRight {
+        from {
+            opacity: 0;
+            transform: translateX(60px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* Description */
+    @keyframes fadeBottom {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .scroll-indicator {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 5;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+
+        color: $bg-light;
+        cursor: pointer;
+
+
+
+        .scroll-oval {
+            width: 38px;
+            height: 60px;
+            border: 2px dotted $bg-light;
+            border-radius: 999px;
+
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+
+            padding-top: 8px;
+            overflow: hidden;
+        }
+
+        .scroll-down-icon {
+            animation: arrowMove 1.5s infinite;
+            stroke-width: 2.5;
+        }
+    }
+
+    @keyframes arrowMove {
+        0% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        50% {
+            transform: translateY(10px);
+            opacity: 0.6;
+        }
+
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    &:hover {
         .nav-custom-btn {
             display: flex;
         }
@@ -31,20 +148,20 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        height: 95vh;
+        height: 80vh;
         width: 100%;
-        @media(max-width: 768px){
+
+        @media(max-width: 768px) {
             height: 70vh;
         }
     }
 
+
     .hero-overlay {
+        z-index: 1;
+        background: linear-gradient(90deg, #595959 -40.19%, #ff6a000f 69.92%);
         position: absolute;
         inset: 0;
-        background: linear-gradient(90deg,
-                $primary-color -40.19%,
-                rgba($primary-color, 0.06) 69.92%);
-        z-index: 1; // ✅ below content
     }
 
     .hero-slide-content {
@@ -56,29 +173,36 @@
             color: $bg-light;
             opacity: 1;
         }
+
+
     }
 
     .hero-title-h1 {
         font-size: Clamp($font-size-lg-3, 6vw, $fs-hero);
         line-height: 1.2;
-        font-weight: 600;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        text-shadow: 0 2px 3px #828282;
     }
 
 
     .nav-custom-btn {
         position: absolute;
         top: 50%;
-        transform: translate(0%, -165%);
+        transform: translateY(-50%);
         z-index: 10;
+
         width: 50px;
         height: 50px;
         border-radius: $border-radius-full;
         border: 1px solid $primary-color;
         background-color: $bg-light;
         color: $primary-color;
-        display: none;
+
+        display: flex;
         align-items: center;
         justify-content: center;
+
         cursor: pointer;
         transition: all 0.3s ease;
 

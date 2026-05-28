@@ -2,14 +2,13 @@
 import React, { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Container, Row, Col, Form, Accordion } from "react-bootstrap";
-import { MessageCircle, MapPin } from "lucide-react";
 import "../../../styles/contactPage.scss";
 import "../../../assets/scss/main.scss";
 import { PrimeryBtn, WhatsappBtn } from "@/components/ui/button";
 import { faqData } from "@/lib/data";
 import { TitleComponent } from "@/components/ui/common";
 import { HeroHeaderCard } from "@/components/ui/card";
-
+import { MapPin, Phone, Mail, Building2, MessageCircle } from "lucide-react";
 const ContactUs = () => {
     // 1. Form State
     const [formData, setFormData] = useState({
@@ -67,7 +66,7 @@ const ContactUs = () => {
             {/* Header Hero Card */}
             <section className="contact-page-wrapper">
                 {/* <Container> */}
-                    {/* <div className="contact-hero-card">
+                {/* <div className="contact-hero-card">
                         <div className="hero-overlay">
                             <div className="hero-content">
                                 <span className="hero-subtitle">Connect With Us</span>
@@ -80,20 +79,20 @@ const ContactUs = () => {
                             className="hero-img"
                         />
                     </div> */}
-                    <HeroHeaderCard 
-                        heroTitle="Pilgrim Concierge & Support"
-                        heroSubtitle="Connect With Us"
-                        heroImage="/images/contact-page-bg.png"
-                        imgClass="hero-img"
-                        showSearch={false}
-                    />
+                <HeroHeaderCard
+                    heroTitle="Pilgrim Concierge & Support"
+                    heroSubtitle="Connect With Us"
+                    heroImage="/images/contact-page-bg.png"
+                    imgClass="hero-img"
+                    showSearch={false}
+                />
                 {/* </Container> */}
             </section>
 
             {/* form */}
             <section className="contact-page-wrapper section-padding">
                 <Container>
-                    <Row className="g-4">
+                    <Row className="g-4 align-items-start">
                         <Col lg={7}>
                             <div className="form-container shadow-sm h-100">
                                 <h2 className="form-heading">Submit an Inquiry</h2>
@@ -188,8 +187,106 @@ const ContactUs = () => {
                         </Col>
 
                         <Col lg={5}>
+                            <div className="support-card shadow-sm h-100">
+                                <div className="branches-wrapper">
+
+                                    {/* Nashik */}
+                                    <div className="branch-card">
+                                        <div className="branch-city">
+                                            <Building2 size={22} />
+                                            <h3>Nashik</h3>
+                                        </div>
+
+                                        <div className="branch-info">
+                                            <MapPin size={18} />
+                                            <p>
+                                                 Sakal Office Basement, BA 4, Thakkar Bazar, New CBS, Police Staff Colony, Nashik, Maharashtra 422002
+                                            </p>
+                                        </div>
+
+                                        <div className="branch-info">
+                                            <Phone size={18} />
+                                            <a href="tel:+7507778070">+91 7507778070</a>
+                                        </div>
+
+                                    </div>
+
+                                    {/* Pune */}
+                                    <div className="branch-card">
+                                        <div className="branch-city">
+                                            <Building2 size={22} />
+                                            <h3>Pune</h3>
+                                        </div>
+
+                                        <div className="branch-info">
+                                            <MapPin size={18} />
+                                            <p>
+                                                2nd Floor, Pride Icon, Baner Road,
+                                                Pune, Maharashtra 411045
+                                            </p>
+                                        </div>
+
+                                        <div className="branch-info">
+                                            <Phone size={18} />
+                                            <a href="tel:+917507778075">+91 7507778075</a>
+                                        </div>
+
+                           
+                                    </div>
+
+                                    {/* Shirdi */}
+                                    <div className="branch-card">
+                                        <div className="branch-city">
+                                            <Building2 size={22} />
+                                            <h3>Shirdi</h3>
+                                        </div>
+
+                                        <div className="branch-info">
+                                            <MapPin size={18} />
+                                            <p>
+                                                Sai Plaza Complex, Near Temple Road,
+                                                Shirdi, Maharashtra 423109
+                                            </p>
+                                        </div>
+
+                                        <div className="branch-info">
+                                            <Phone size={18} />
+                                            <a href="tel:+917507778095">+91 7507778095</a>
+                                        </div>
+
+                            
+                                    </div>
+
+                                    {/* Chatrapati Sambhaji Nagar */}
+                                    <div className="branch-card">
+                                        <div className="branch-city">
+                                            <Building2 size={22} />
+                                            <h3>Mumbai</h3>
+                                        </div>
+
+                                        <div className="branch-info">
+                                            <MapPin size={18} />
+                                            <p>
+                                                Plot No. 12, CIDCO Area,
+                                                Chatrapati Sambhaji Nagar, Maharashtra 431001
+                                            </p>
+                                        </div>
+
+                                        <div className="branch-info">
+                                            <Phone size={18} />
+                                            <a href="tel:+919876543213">+91 7507778085</a>
+                                        </div>
+
+                               
+                                    </div>
+
+                                </div>
+                            </div>
+                        </Col>
+
+                        {/* <Col lg={5}>
                             <Row className="sidebar-wrapper g-4">
-                                {/* WhatsApp Support Card */}
+                                
                                 <Col md={6} lg={12}>
                                     <div className="support-card shadow-sm h-100">
                                         <div className="support-content h-100 d-grid">
@@ -209,7 +306,7 @@ const ContactUs = () => {
                                         <div className="card-blob"></div>
                                     </div>
                                 </Col>
-                                {/* Location Card */}
+                               
                                 <Col md={6} lg={12}>
                                     <div className="location-card shadow-sm">
                                         <div className="d-flex align-items-center gap-3 h-100 mb-4">
@@ -235,7 +332,7 @@ const ContactUs = () => {
                                     </div>
                                 </Col>
                             </Row>
-                        </Col>
+                        </Col> */}
                     </Row>
                 </Container>
             </section>

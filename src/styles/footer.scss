@@ -18,6 +18,20 @@
     color: $text-color-light;
   }
 }
+.services-link {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    font-size: 14px;
+    color: lab(65.9269% -.832707 -8.17474);
+
+    li{background: url(../../public/images/dot-bullet.png); 
+    background-position: 0 center;
+    background-size: 8px;
+    padding-left: 15px;
+    background-repeat: no-repeat;
+    }
+}
 
 .footer-text,
 .footer-link,
@@ -109,5 +123,4 @@ span {
 
 /* Bottom */
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
+  border-top: 1px solid rgba(255, 255, 255, 0.1);}

@@ -65,7 +65,10 @@ const HotelPageContent = () => {
 
             <section className="section-padding">
                 <Container>
-                    <TitleComponent title="Hotels" description="Discover the best hotels for your pilgrimage." />
+                    {/* <TitleComponent
+                        title="Hotels"
+                        divider={false}
+                    /> */}
 
                     {/* <div className="mb-5">
                         <SearchFleet />
