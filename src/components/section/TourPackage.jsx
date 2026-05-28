@@ -21,7 +21,7 @@ const TourPackage = () => {
                     <Col key={index} lg={3} md={6} sm={12} xs={12}>
                         <TourPackageCard
                             tour={value}
-                            tourLink={`/tour-package/${slugify(value.name || "")}`}
+                            tourLink={`/tour-package/${slugify(value.title || "")}`}
                         />
                     </Col>
                 ))}

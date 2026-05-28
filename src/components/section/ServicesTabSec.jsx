@@ -142,7 +142,7 @@ const ServicesTabSec = () => {
                                                                     {/* Case 1: Only for Tour Packages */}
                                                                     {tab.key === "tour-package" && (
                                                                         <Link
-                                                                            href={`/tour-package/${slugify(item.name || "")}`}
+                                                                            href={`/tour-package/${slugify(item.title || "")}`}
                                                                             className="service-btn text-decoration-none d-flex justify-content-center align-items-center mt-auto"
                                                                         >
                                                                             View Details

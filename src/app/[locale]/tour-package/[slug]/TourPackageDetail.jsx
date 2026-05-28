@@ -8,7 +8,7 @@ import * as Icons from "lucide-react";
 import { Circle, FileText } from "lucide-react";
 import { motion } from "framer-motion";
 
-import { slugify } from "@/lib/utils";
+import { slugify, imageUrl } from "@/lib/utils";
 import { WhatsAppShareBtn } from "@/components/ui/button";
 import { HighlightsModal, TourTabs, } from "@/components/ui/common";
 import { TourPackageSlider } from "@/components/ui/TourPackageSlider";
@@ -31,7 +31,7 @@ const TourPackageDetail = ({ tour }) => {
             <section
                 className="tour-pack-detail-sec d-flex align-items-end justify-content-start position-relative"
                 style={{
-                    backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url(${tour.image})`,
+                    backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url(${tour.image_url})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     minHeight: "60vh",
@@ -43,23 +43,31 @@ const TourPackageDetail = ({ tour }) => {
                     </div>
 
                     <h1 className="display-4 fw-bold text-white">
-                        {tour.name}
+                        {tour.title}
                     </h1>
 
                     <p className="lead text-white-75">
-                        {tour.mainDesc}
+                        {tour.description}
                     </p>
-
+                    {/* {tour?.tourRoute?.length > 0 && (
                     <ul className="px-2 m-0 bg-light tour-route d-flex flex-wrap justify-content-start align-items-center">
-                        {tour.tourRoute.map((route, i) => (
+                        {(tour.tourRoute || []).map((route, i) => (
                             <li
                                 key={i}
                                 className="p-1 small-12 rounded bg-primery-color text-decoration-none text-dark"
                             >
-                                {route} &nbsp; {i !== tour.tourRoute.length - 1 && "---"}
+                                {route} &nbsp; {i !== (tour.tourRoute?.length || 0) - 1 && "---"}
                             </li>
                         ))}
                     </ul>
+                    )} */}
+                    {tour?.location && (
+                    <ul className="px-2 m-0 bg-light tour-route d-flex flex-wrap justify-content-start align-items-center">
+                        <li className="p-1 small-12 rounded bg-primery-color text-decoration-none text-dark">
+                        {tour.location}
+                        </li>
+                    </ul>
+                    )}
                 </Container>
             </section>
 
@@ -72,15 +80,15 @@ const TourPackageDetail = ({ tour }) => {
                             <Row>
                                 {/* EXPERIENCE INCLUSIONS */}
                                 <Col md={6} className="border-md-end m-0">
-                                    {tour.inclusion &&
-                                        tour.inclusion.length > 0 && (
+                                    {tour.inclusions &&
+                                        tour.inclusions.length > 0 && (
                                             <div className="section-block m-0">
                                                 <h4 className="section-title fw-bold mb-4 h6 text-capitalize">
                                                     Tour Includes
                                                 </h4>
 
                                                 <div className="d-flex flex-row flex-wrap justify-content-start gap-3 mb-3 mb-md-0">
-                                                    {tour.inclusion.map(
+                                                    {(tour.inclusions || []).map(
                                                         (item, i) => {
                                                             const LucideIcon =
                                                                 Icons[item.in_icon];
@@ -103,7 +111,7 @@ const TourPackageDetail = ({ tour }) => {
                                                                     )}
 
                                                                     <p className="m-0 small-12 text-center">
-                                                                        {item.in_title}
+                                                                        {item}
                                                                     </p>
                                                                 </div>
                                                             );
@@ -122,7 +130,7 @@ const TourPackageDetail = ({ tour }) => {
                                         </h4>
 
                                         <Row>
-                                            {tour.features
+                                            {(tour.highlights || [])
                                                 .slice(0, 4)
                                                 .map((item, i) => (
                                                     <Col
@@ -146,7 +154,7 @@ const TourPackageDetail = ({ tour }) => {
                                         </Row>
 
                                         <HighlightsModal>
-                                            {tour.features.map((item, i) => (
+                                            {(tour.highlights || []).map((item, i) => (
                                                 <div
                                                     key={i}
                                                     className="p-1 rounded h-100 d-flex flex-row justify-content-start align-items-center gap-2 text-start"
@@ -166,18 +174,18 @@ const TourPackageDetail = ({ tour }) => {
                         </div>
 
                         {/* ITINERARY */}
-                        {tour.journey &&
-                            tour.journey.length > 0 && (
+                        {tour.itineraries &&
+                            tour.itineraries.length > 0 && (
                                 <div className="section-block mb-0 mt-4">
                                     <h4 className="section-title fw-bold mb-2">
                                         The Itinerary
                                     </h4>
 
-                                    {tour.journey.map((day, i) => (
+                                    {(tour.itineraries || []).map((day, i) => (
                                         <div
-                                            key={i}
+                                            key={day.id}
                                             className={`timeline-item mb-0 position-relative ps-0 ps-sm-4 ${i !==
-                                                tour.journey.length - 1
+                                                (tour.itineraries?.length || 0) - 1
                                                 ? "pb-4"
                                                 : ""
                                                 }`}
@@ -191,17 +199,17 @@ const TourPackageDetail = ({ tour }) => {
                                                     </span>
 
                                                     <h5 className="fw-bold sub-heading text-dark">
-                                                        {day.journey_title}
+                                                        {day.itinerary_title}
                                                     </h5>
 
                                                     <p
                                                         className={`text-secondary ${expandedItems[i] ? "" : "line-clamp-5"
                                                             }`}
                                                     >
-                                                        {day.journey_desc}
+                                                        {day.description}
                                                     </p>
 
-                                                    {day.journey_desc?.length > 261 && (
+                                                    {day.description?.length > 261 && (
                                                         <motion.button
                                                             whileTap={{ scale: 0.95 }}
                                                             onClick={() => loadMore(i)}
@@ -212,8 +220,8 @@ const TourPackageDetail = ({ tour }) => {
                                                     )}
                                                 </Col>
 
-                                                <Col md={3}>
-                                                    {day.journey_src && (
+                                                {/* <Col md={3}>
+                                                    {day.itineraries_image_url && (
                                                         <div
                                                             className="position-relative"
                                                             style={{
@@ -221,15 +229,35 @@ const TourPackageDetail = ({ tour }) => {
                                                             }}
                                                         >
                                                             <Image
-                                                                src={day.journey_src}
+                                                                src={day.itineraries_image_url}
                                                                 alt={
-                                                                    day.journey_title
+                                                                    day.itinerary_title
                                                                 }
                                                                 fill
                                                                 className="rounded shadow-sm object-fit-cover mt-3"
                                                             />
                                                         </div>
                                                     )}
+                                                </Col> */}
+                                                <Col md={3}>
+                                                {day.itineraries_image_url && (
+                                                    <div
+                                                    className="position-relative"
+                                                    style={{
+                                                        width: "100%",
+                                                        height: "120px",
+                                                    }}
+                                                    >
+                                                    <Image
+                                                         src={imageUrl(day.itineraries_image_url)}
+                                                        alt={day.itinerary_title || "Itinerary"}
+                                                        fill
+                                                        unoptimized
+                                                        sizes="(max-width: 768px) 100vw, 25vw"
+                                                        className="rounded shadow-sm object-fit-cover mt-3"
+                                                    />
+                                                    </div>
+                                                )}
                                                 </Col>
                                             </Row>
                                         </div>
@@ -251,18 +279,19 @@ const TourPackageDetail = ({ tour }) => {
                                 <h4 className="text-start m-0">Booking Summery</h4>
                             </div>
                             <div className="price mb-4">
-                                <span className="h3 fw-bold primery-color">₹ {tour.price.toLocaleString()}</span>
+                                <span className="h3 fw-bold primery-color">₹ {(tour.base_price || 0).toLocaleString()}</span>
                                 <span className="text-muted"> / person</span>
                             </div>
                             <div className="info-box mb-4 p-3 rounded">
                                 <p className="mb-1"><strong>Group:</strong> &nbsp;2-6 People</p>
-                                <p className="mb-1"><strong>Duration:</strong> &nbsp;{tour.duration}</p>
+                                {/* <p className="mb-1"><strong>Duration:</strong> &nbsp;{tour.duration}</p> */}
+                                <p className="mb-1"><strong>Duration:</strong> &nbsp;5 Days / 4 Nights</p>
                                 <p className="departure-date m-0">
                                     <strong>Departure:</strong> &nbsp;{tour.departureDate || 'Check Availability'}
                                 </p>
                             </div >
                             <Link
-                                href={`/tour-package/book/${slugify(tour.name)}`}
+                                href={`/tour-package/book/${slugify(tour.title)}`}
                                 className="primery-btn d-flex align-items-center justify-content-center w-100 py-3 text-center text-decoration-none fw-bold rounded shadow-sm mb-3"
                             >
                                 Book Now
@@ -279,8 +308,8 @@ const TourPackageDetail = ({ tour }) => {
                     {/* SIMILAR PACKAGES */}
                     <Col xs={12}>
                         <TourPackageSlider
-                            packages={tourPackages.filter(
-                                (item) => item.name !== tour.name
+                            packages={(tourPackages || []).filter(
+                                (item) => item.name !== tour.title
                             )}
                             title="Similar Packages"
                         />

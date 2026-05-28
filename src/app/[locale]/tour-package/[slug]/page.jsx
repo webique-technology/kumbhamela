@@ -1,79 +1,112 @@
+import axios from "axios";
 import { notFound } from "next/navigation";
-import { tourPackages } from "@/lib/data";
 import { slugify } from "@/lib/utils";
 import TourPackageDetail from "./TourPackageDetail";
 import "../../../../styles/tourPackage.scss";
 
 const BASE_URL =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://yourkumbhdomain.com";
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "http://localhost:3000";
 
-export const generateMetadata = async ({ params }) => {
-    const resolvedParams = await params;
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL;
 
-    const slug = resolvedParams.slug;
-
-    const tour = tourPackages.find(
-        (p) => slugify(p.name) === slug
+async function getTours() {
+  try {
+    const response = await axios.get(
+      `${API_URL}/tours`
     );
 
-    if (!tour) {
-        return {
-            title: "Package Not Found",
-        };
-    }
+    return response.data?.data?.data || [];
+  } catch (error) {
+    console.error(
+      "Tour API Error:",
+      error.response?.data || error.message
+    );
 
-    const fullUrl = `${BASE_URL}/tour-package/${slug}`;
+    return [];
+  }
+}
 
-    const fullImageUrl = tour.image.startsWith("http")
-        ? tour.image
-        : `${BASE_URL}${tour.image}`;
+export async function generateMetadata({
+  params,
+}) {
+  const { slug, locale } =
+    await params;
 
-    console.log(fullImageUrl);
+  const tours = await getTours();
 
+  const tour = tours.find(
+    (item) =>
+      slugify(item.title || "") === slug
+  );
 
+  if (!tour) {
     return {
-        title: `${tour.name} | Kumbh Mela Tours`,
-        description: tour.mainDesc,
-
-        openGraph: {
-            title: tour.name,
-            description: tour.mainDesc,
-            url: fullUrl,
-            siteName: "Kumbh Mela Tours",
-            images: [
-                {
-                    url: fullImageUrl,
-                    width: 1200,
-                    height: 630,
-                },
-            ],
-            type: "website",
-        },
-
-        twitter: {
-            card: "summary_large_image",
-            title: tour.name,
-            description: tour.mainDesc,
-            images: [fullImageUrl],
-        },
+      title: "Package Not Found",
     };
-};
+  }
 
-const TourDetailPage = async ({ params }) => {
-    const resolvedParams = await params;
+  const fullUrl =
+    `${BASE_URL}/${locale}/tour-package/${slug}`;
 
-    const slug = resolvedParams.slug;
+  return {
+    title: `${tour.title} | Kumbh Mela Tours`,
+    description:
+      tour.description || "",
 
-    const tour = tourPackages.find(
-        (p) => slugify(p.name) === slug
+    openGraph: {
+      title: tour.title,
+      description:
+        tour.description || "",
+      url: fullUrl,
+      siteName:
+        "Kumbh Mela Tours",
+      images: [
+        {
+          url: tour.image_url,
+          width: 1200,
+          height: 630,
+        },
+      ],
+      type: "website",
+    },
+
+    twitter: {
+      card:
+        "summary_large_image",
+      title: tour.title,
+      description:
+        tour.description || "",
+      images: [tour.image_url],
+    },
+  };
+}
+
+export default async function TourDetailPage({
+  params,
+}) {
+  const { slug } =
+    await params;
+
+  const tours =
+    await getTours();
+
+  const tour =
+    tours.find(
+      (item) =>
+        slugify(
+          item.title || ""
+        ) === slug
     );
 
-    if (!tour) {
-        notFound();
-    }
+  if (!tour) {
+    notFound();
+  }
 
-    return <TourPackageDetail tour={tour} />;
-};
-
-export default TourDetailPage;
+  return (
+    <TourPackageDetail
+      tour={tour}
+    />
+  );
+}

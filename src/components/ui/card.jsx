@@ -9,6 +9,7 @@ import { SearchFleet, SwiperSliderComp } from './common';
 import { SwiperSlide } from 'swiper/react';
 import { Col, Container, Row } from 'react-bootstrap';
 import IconResolver from './iconResolver';
+import { imageUrl } from "@/lib/utils";
 
 // for blogs card
 export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_width = "100%", img_count_height = "220px" }) => {
@@ -88,10 +89,10 @@ export const HotelCards = ({ hotel, onBookNow }) => {
                 <div className="position-relative hotel-img-container">
                     <SwiperSliderComp
                         navigation={false}
-                        loop={hotel.images.length > 1}
+                        loop={hotel.images?.length > 1}
                         timeDelay={3000}
                     >
-                        {hotel.images.map((value, index) => (
+                        {hotel.images?.map((value, index) => (
                             <SwiperSlide key={index}>
                                 <Image
                                     src={value}
@@ -106,13 +107,6 @@ export const HotelCards = ({ hotel, onBookNow }) => {
                             </SwiperSlide>
                         ))}
                     </SwiperSliderComp>
-                    {/* <Image
-                        src={hotel.images}
-                        alt={hotel.name}
-                        width={400}
-                        height={250}
-                        className="card-img-top object-fit-cover"
-                    /> */}
 
                     {/* Badge Left */}
                     <div className="position-absolute top-0 start-0 m-3 z-2">
@@ -139,7 +133,7 @@ export const HotelCards = ({ hotel, onBookNow }) => {
 
                     {/* Features */}
                     <div className="d-flex flex-wrap gap-2 mb-4">
-                        {hotel.features.map((feature, idx) => (
+                        {hotel.features?.map((feature, idx) => (
                             <span
                                 key={idx}
                                 className="badge d-flex align-items-center justify-content-center rounded-pill border border-light"
@@ -214,18 +208,27 @@ export const SacredDestinationsCard = ({ destination }) => {
 export const RentalCarCard = ({ car, onBook }) => {
     const params = useParams();
     const currentLocale = params?.locale || 'en';
-
+console.log("car:", car);
+console.log("image:", car?.car_image_url);
+console.log("final:", imageUrl(car?.car_image_url));
     return (
         <div className="card rental-car-card h-100 border-0 shadow-sm overflow-hidden">
             {/* Image Container with Overlay */}
             <div className="position-relative overflow-hidden">
-                <Image
-                    src={car.image}
+                {car?.car_image_url ? (
+                <img
+                    src={imageUrl(car.car_image_url)}
                     alt={car.name}
                     width={200}
                     height={200}
                     className="card-img-top object-fit-cover transition-transform"
                 />
+                ) : (
+                    <div
+                    style={{ width: "100%", height: "200px" }}
+                    className="card-img-top bg-light"
+                />
+            )}
             </div>
 
             {/* Content Body */}
@@ -236,7 +239,7 @@ export const RentalCarCard = ({ car, onBook }) => {
                     </h3>
                     <p className="card-text d-flex align-items-center mb-2 gap-2 text-muted small leading-relaxed">
                         <Users size={16} />
-                        {car.capacity}
+                        {car.total_seats}
                     </p>
                 </div>
                 {/* Features */}
@@ -255,7 +258,7 @@ export const RentalCarCard = ({ car, onBook }) => {
                 {/* Footer Logic */}
                 < div className="d-flex align-items-center justify-content-between mt-auto border-top pt-3" >
                     <div className='d-flex align-items-end'>
-                        <span className="h4 fw-bold text-brand-orange mb-0">{car.price} /&nbsp;</span>
+                        <span className="h4 fw-bold text-brand-orange mb-0">{car.base_price} /&nbsp;</span>
                         <small className="text-muted d-block smaller mb-1">per Day</small>
                     </div>
 
@@ -272,53 +275,142 @@ export const RentalCarCard = ({ car, onBook }) => {
     )
 }
 
+// // tour package card
+// export const TourPackageCard = ({ tour, tourLink }) => {
+//     const params = useParams();
+//     const currentLocale = params?.locale || 'en';
+
+//     return (
+//         <>
+//             <div className='tour-package-card card h-100 border-0 shadow-sm overflow-hidden'>
+//                 {/* Image Container with Overlay */}
+//                 <div className="position-relative card-image-wrapper overflow-hidden">
+//                     <Image
+//                         src={tour.image}
+//                         alt={tour.name}
+//                         width={200}
+//                         height={200}
+//                         className="card-img-top object-fit-cover transition-transform"
+//                     />
+//                 </div>
+
+//                 {/* Content Body */}
+//                 <div className="card-body p-4">
+//                     <div className='d-flex flex-column align-items-start justify-content-between'>
+//                         <h3 className="sub-heading text-dark mb-2">
+//                             {tour.name}
+//                         </h3>
+//                         <p className="card-text d-flex align-items-center gap-2 text-muted small mb-2 leading-relaxed">
+//                             <Clock size={16} />
+//                             {tour.duration}
+//                         </p>
+//                     </div>
+
+//                     {/* Footer Logic */}
+//                     <div className="d-flex align-items-center justify-content-between mt-auto mb-2">
+//                         <div className='d-flex align-items-end'>
+//                             <span className="h5 fw-bold text-brand-orange mb-0">{tour.price} /&nbsp;</span>
+//                             <small className="text-muted d-block smaller mb-1">per Person</small>
+//                         </div>
+//                     </div>
+
+//                     {/* Features */}
+//                     <ul className="d-flex flex-column flex-wrap gap-1 mb-3 p-0">
+//                         {tour.features.map((feature, idx) => (
+//                             <li
+//                                 key={idx}
+//                                 className="d-flex paragraph align-items-center justify-content-start gap-1"
+//                             >
+//                                 <span className='primery-color'><ChevronRight size={16} /></span>
+//                                 {feature}
+//                             </li>
+//                         ))}
+//                     </ul>
+
+//                     {/* link btn */}
+//                     <Link
+//                         href={tourLink || "#"}
+//                         className="primery-btn py-2 text-decoration-none w-100 d-flex justify-content-center align-items-center mt-auto"
+//                     >
+//                         View Details
+//                     </Link>
+//                 </div>
+//             </div>
+
+//         </>
+//     )
+// }
+
 // tour package card
 export const TourPackageCard = ({ tour, tourLink }) => {
     const params = useParams();
-    const currentLocale = params?.locale || 'en';
+    const currentLocale = params?.locale || "en";
+
+    // Features safe for array/string/null
+    const features = Array.isArray(tour?.features)
+        ? tour.features
+        : tour?.features
+            ? tour.features.split(",")
+            : [];
+
+    // Image safe
+    const imageSrc =
+        // tour?.image || "/images/default-tour.jpg";
+        tour?.image_url && tour.image_url.trim() !== "" ? tour.image_url : "/images/default-tour.jpg";
+        
 
     return (
         <>
-            <div className='tour-package-card card h-100 border-0 shadow-sm overflow-hidden'>
+            <div className="tour-package-card card h-100 border-0 shadow-sm overflow-hidden">
                 {/* Image Container with Overlay */}
                 <div className="position-relative card-image-wrapper overflow-hidden">
-                    <Image
-                        src={tour.image}
-                        alt={tour.name}
+                    <img
+                        src={imageSrc}
+                        alt={tour?.title || "Tour"}
                         width={200}
                         height={200}
+                       
                         className="card-img-top object-fit-cover transition-transform"
                     />
                 </div>
 
                 {/* Content Body */}
                 <div className="card-body p-4">
-                    <div className='d-flex flex-column align-items-start justify-content-between'>
+                    <div className="d-flex flex-column align-items-start justify-content-between">
                         <h3 className="sub-heading text-dark mb-2">
-                            {tour.name}
+                            {tour?.title}
                         </h3>
+
                         <p className="card-text d-flex align-items-center gap-2 text-muted small mb-2 leading-relaxed">
                             <Clock size={16} />
-                            {tour.duration}
+                            {tour?.duration}
                         </p>
                     </div>
 
                     {/* Footer Logic */}
                     <div className="d-flex align-items-center justify-content-between mt-auto mb-2">
-                        <div className='d-flex align-items-end'>
-                            <span className="h5 fw-bold text-brand-orange mb-0">{tour.price} /&nbsp;</span>
-                            <small className="text-muted d-block smaller mb-1">per Person</small>
+                        <div className="d-flex align-items-end">
+                            <span className="h5 fw-bold text-brand-orange mb-0">
+                                {tour?.base_price} /&nbsp;
+                            </span>
+
+                            <small className="text-muted d-block smaller mb-1">
+                                per Person
+                            </small>
                         </div>
                     </div>
 
                     {/* Features */}
                     <ul className="d-flex flex-column flex-wrap gap-1 mb-3 p-0">
-                        {tour.features.map((feature, idx) => (
+                        {tour?.highlights.map((feature, idx) => (
                             <li
                                 key={idx}
                                 className="d-flex paragraph align-items-center justify-content-start gap-1"
                             >
-                                <span className='primery-color'><ChevronRight size={16} /></span>
+                                <span className="primery-color">
+                                    <ChevronRight size={16} />
+                                </span>
+
                                 {feature}
                             </li>
                         ))}
@@ -333,10 +425,9 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                     </Link>
                 </div>
             </div>
-
         </>
-    )
-}
+    );
+};
 
 // Header Hero Card
 export const HeroHeaderCard = ({ showSearch = true, heroTitle, heroSubtitle, heroImage = "/images/contact-page-bg.png", imgClass = "hero-img" }) => {
@@ -347,17 +438,17 @@ export const HeroHeaderCard = ({ showSearch = true, heroTitle, heroSubtitle, her
                 className="hero-header-card d-flex align-items-center"
                 style={{ backgroundImage: `url(${heroImage})` }}
             >
-                    <Container>
-                        <div className="hero-content position-relative z-3">
-                            <span className="hero-subtitle">{heroSubtitle}</span>
-                            <h1 className="hero-title">{heroTitle}</h1>
+                <Container>
+                    <div className="hero-content position-relative z-3">
+                        <span className="hero-subtitle">{heroSubtitle}</span>
+                        <h1 className="hero-title">{heroTitle}</h1>
+                    </div>
+                    {showSearch && (
+                        <div className="hero-search-wrapper mt-4">
+                            <SearchFleet />
                         </div>
-                        {showSearch && (
-                            <div className="hero-search-wrapper mt-4">
-                                <SearchFleet />
-                            </div>
-                        )}
-                    </Container>
+                    )}
+                </Container>
             </div>
         </>
     )

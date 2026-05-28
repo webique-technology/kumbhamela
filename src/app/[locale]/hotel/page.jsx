@@ -49,7 +49,10 @@ const HotelPageContent = () => {
     const fetchHotels = async () => {
         try {
             const data = await getHotels();
-            setHotels(data);
+
+            console.log("hotel get all data:", data);
+
+            setHotels(data.data || []);
         } catch (error) {
             console.log(error);
         } finally {
