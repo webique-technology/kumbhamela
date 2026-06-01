@@ -70,3 +70,23 @@ export const createTourEnquiry = async (payload) => {
         throw error;
     }
 };
+
+export const getCancellationPolicy = async () => {
+  try {
+    const response = await api.get("/privacy-policy");
+    return response.data;
+  } catch (error) {
+    console.log("Cancellation Policy API Error:", error);
+    return [];
+  }
+};
+
+export const getPaymentPolicy = async () => {
+  try {
+    const response = await api.get("/payment-policy");
+    return response.data;
+  } catch (error) {
+    console.log("Payment Policy API Error:", error);
+    return [];
+  }
+};

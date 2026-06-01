@@ -40,17 +40,17 @@ export const TourPackageSlider = ({ packages, title }) => {
                             <div className="tour-package-card-small d-flex flex-column justify-content-between rounded-2 shadow-sm border p-3 h-100">
                                 <div className="image-wrapper rounded-2">
                                     <img
-                                        src={item.image}
-                                        alt={item.name}
+                                        src={item.image_url}
+                                        alt={item.title}
                                         className="tpcs-img rounded-2 mb-2"
                                     />
                                 </div>
                                 <div className="card-body d-grid">
-                                    <h6 className="text-dark mb-1">{item.name}</h6>
+                                    <h6 className="text-dark mb-1">{item.title}</h6>
                                     <div className="d-flex align-items-center justify-content-between">
                                         <div>
                                             <span className="small-12">Starting From</span>
-                                            <p className="m-0 fw-medium primery-color">₹ {item.price}</p>
+                                            <p className="m-0 fw-medium primery-color">₹ {item.base_price}</p>
                                         </div>
                                         <span className="card-arrow d-flex align-items-center justify-content-center">
                                             <ArrowRight size={16}/>

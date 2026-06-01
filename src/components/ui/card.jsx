@@ -454,12 +454,12 @@ export const HeroHeaderCard = ({ showSearch = true, heroTitle, description, hero
     )
 }
 
-export const PaymentTerms = ({ terms = "No cancellation charges for booking modification or cancellation done 24 hours before the scheduled tour date.A 5% charge will be applicable for cancellations made within 24 hours of the tour." }) => {
+export const PaymentTerms = ({ terms = "No cancellation charges for booking modification or cancellation done 24 hours before the scheduled tour date.A 5% charge will be applicable for cancellations made within 24 hours of the tour." ,policy}) => {
     return (
         <>
             <div className="p-3 bg-light rounded">
                 <h6 className="fw-bold">Payment Terms</h6>
-                <p className="text-secondary small mb-0">{terms}</p>
+                <p className="text-secondary small mb-0">{policy.content}</p>
             </div>
         </>
     )

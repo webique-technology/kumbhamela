@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from '@/i18n/routing';
 import Image from "next/image";
@@ -12,9 +12,14 @@ import { WhatsAppShareBtn } from "@/components/ui/button";
 import { HighlightsModal, TourTabs, } from "@/components/ui/common";
 import { TourPackageSlider } from "@/components/ui/TourPackageSlider";
 import { tourPackages } from "@/lib/data";
+import { getCancellationPolicy, getPaymentPolicy,getTours} from "../tourApi";
 
 
 const TourPackageDetail = ({ tour }) => {
+
+    const [cancellationPolicy, setCancellationPolicy] = useState([]);
+    const [paymentPolicy, setPaymentPolicy] = useState([]);
+    const [recentPackages, setRecentPackages] = useState([]);
 
     const [expandedItems, setExpandedItems] = useState({});
     const loadMore = (index) => {
@@ -23,6 +28,54 @@ const TourPackageDetail = ({ tour }) => {
             [index]: !prev[index],
         }));
     };
+
+    // useEffect(() => {
+    // const fetchPolicies = async () => {
+    //     try {
+    //     const [cancelData, paymentData] = await Promise.all([
+    //         getCancellationPolicy(),
+    //         getPaymentPolicy(),
+    //     ]);
+
+    //     setCancellationPolicy(cancelData || []);
+    //     setPaymentPolicy(paymentData || []);
+    //     } catch (error) {
+    //     console.error(error);
+    //     }
+    // };
+
+    // fetchPolicies();
+    // }, []);
+
+    useEffect(() => {
+    const fetchData = async () => {
+        try {
+        const [
+            cancelData,
+            paymentData,
+            toursData
+        ] = await Promise.all([
+            getCancellationPolicy(),
+            getPaymentPolicy(),
+            getTours(1),
+        ]);
+
+        setCancellationPolicy(cancelData || []);
+        setPaymentPolicy(paymentData || []);
+
+        const filteredTours =
+            (toursData?.data || toursData || []).filter(
+            (item) => item.id !== tour.id
+            );
+
+        setRecentPackages(filteredTours);
+        } catch (error) {
+        console.error(error);
+        }
+    };
+
+    fetchData();
+    }, [tour.id]);
 
     return (
         <main>
@@ -48,25 +101,25 @@ const TourPackageDetail = ({ tour }) => {
                     <p className="lead text-white-75">
                         {tour.description}
                     </p>
-                    {/* {tour?.tourRoute?.length > 0 && (
+                    {tour?.routes?.length > 0 && (
                     <ul className="px-2 m-0 bg-light tour-route d-flex flex-wrap justify-content-start align-items-center">
-                        {(tour.tourRoute || []).map((route, i) => (
+                        {(tour.routes || []).map((route, i) => (
                             <li
                                 key={i}
                                 className="p-1 small-12 rounded bg-primery-color text-decoration-none text-dark"
                             >
-                                {route} &nbsp; {i !== (tour.tourRoute?.length || 0) - 1 && "---"}
+                                {route} &nbsp; {i !== (tour.routes?.length || 0) - 1 && "---"}
                             </li>
                         ))}
                     </ul>
-                    )} */}
-                    {tour?.location && (
+                    )}
+                    {/* {tour?.location && (
                         <ul className="px-2 m-0 bg-light tour-route d-flex flex-wrap justify-content-start align-items-center">
                             <li className="p-1 small-12 rounded bg-primery-color text-decoration-none text-dark">
                                 {tour.location}
                             </li>
                         </ul>
-                    )}
+                    )} */}
                 </Container>
             </section>
 
@@ -194,7 +247,8 @@ const TourPackageDetail = ({ tour }) => {
                                             <Row className="align-items-start">
                                                 <Col md={9}>
                                                     <span className="badge bg-brand-light primery-color ms-2 ms-sm-0">
-                                                        Day {i + 1}
+                                                        {/* Day {i + 1} */}
+                                                         {i + 1}
                                                     </span>
 
                                                     <h5 className="fw-bold sub-heading text-dark">
@@ -266,7 +320,10 @@ const TourPackageDetail = ({ tour }) => {
 
                         {/* TABS */}
                         <div className="section-block tour-tab-section mb-4 mb-md-0 mt-5 border-top pt-4">
-                            <TourTabs tour={tour} />
+                            <TourTabs tour={tour} 
+                             cancellationPolicy={cancellationPolicy}
+                             paymentPolicy={paymentPolicy}
+                             />
                         </div>
                     </Col>
 
@@ -282,12 +339,12 @@ const TourPackageDetail = ({ tour }) => {
                                 <span className="text-muted"> / person</span>
                             </div>
                             <div className="info-box mb-4 p-3 rounded">
-                                <p className="mb-1"><strong>Group:</strong> &nbsp;2-6 People</p>
+                                {/* <p className="mb-1"><strong>Group:</strong> &nbsp;2-6 People</p> */}
                                 {/* <p className="mb-1"><strong>Duration:</strong> &nbsp;{tour.duration}</p> */}
                                 <p className="mb-1"><strong>Duration:</strong> &nbsp;5 Days / 4 Nights</p>
-                                <p className="departure-date m-0">
+                                {/* <p className="departure-date m-0">
                                     <strong>Departure:</strong> &nbsp;{tour.departureDate || 'Check Availability'}
-                                </p>
+                                </p> */}
                             </div >
                             <Link
                                 href={`/tour-package/book/${slugify(tour.title)}`}
@@ -306,13 +363,19 @@ const TourPackageDetail = ({ tour }) => {
                     </Col>
 
                     {/* SIMILAR PACKAGES */}
-                    <Col xs={12}>
+                    {/* <Col xs={12}>
                         <TourPackageSlider
                             packages={(tourPackages || []).filter(
                                 (item) => item.name !== tour.title
                             )}
-                            title="Similar Packages"
+                            title="Recent Packages"
                         />
+                    </Col> */}
+                    <Col xs={12}>
+                    <TourPackageSlider
+                        packages={recentPackages}
+                        title="Recent Packages"
+                    />
                     </Col>
                 </Row>
             </Container>
