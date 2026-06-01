@@ -334,7 +334,7 @@ export const KumbhCountdown = ({ targetDate, isActive = true }) => {
 };
 
 
-export const TourTabs = ({ tour }) => {
+export const TourTabs = ({ tour,cancellationPolicy, paymentPolicy }) => {
     const [activeTab, setActiveTab] = useState('cancellation-policy');
 
     const handleTabChange = (tab) => {
@@ -351,12 +351,13 @@ export const TourTabs = ({ tour }) => {
                     eventKey="cancellation-policy"
                     title="Cancellation Policy"
                 >
-                    <h4 className="section-title fw-bold mb-3">Cancellation Policy</h4>
+                    <h4 className="section-title fw-bold mb-3">Privacy Policy</h4>
                     <p className="text-muted small mb-4">
-                        Cancellation charges rise closer to departure, with the exact amount deducted shown below.
+                        {cancellationPolicy.content}
+                        {/* Cancellation charges rise closer to departure, with the exact amount deducted shown below. */}
                     </p>
 
-                    <div className="cancellation-timeline">
+                    {/* <div className="cancellation-timeline">
                         {tour.cancellationPolicy?.map((item, index) => {
                             const charge = Math.round((tour.price * item.percent) / 100);
                             const statusColor = item.percent <= 25 ? '#08c718' : item.percent <= 75 ? '#fd7e14' : '#dc3545';
@@ -377,10 +378,10 @@ export const TourTabs = ({ tour }) => {
                                 </div>
                             );
                         })}
-                    </div>
+                    </div> */}
                 </Tab>
                 <Tab eventKey="payment-terms" title="Payment Terms">
-                    <PaymentTerms />
+                    <PaymentTerms policy ={paymentPolicy}/>
                 </Tab>
             </Tabs>
         </>

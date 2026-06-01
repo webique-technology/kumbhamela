@@ -31,6 +31,28 @@ async function getTours() {
   }
 }
 
+
+async function getVehicleCategories(id) {
+    try {
+        const response = await axios.get(
+            `${API_URL}/tours/${id}/vehicle-categories`
+        );
+        console.log(
+          "Vehicle Categories API:",
+          response.data
+        );
+        return response.data || [];
+    } catch (error) {
+        console.error(
+            "Vehicle category API error:",
+            error.response?.data ||
+                error.message
+        );
+
+        return [];
+    }
+}
+
 const BookingPage = async ({
   params,
 }) => {
@@ -48,6 +70,11 @@ const BookingPage = async ({
   if (!tour) {
     notFound();
   }
+
+  const vehicleCategories =
+    await getVehicleCategories(
+        tour.id
+  );
 
   return (
     <main>
@@ -73,6 +100,7 @@ const BookingPage = async ({
               <BookingFormHandler
                 tourId={tour.id}
                 tourName={tour.title}
+                 vehicleCategories={ vehicleCategories }
               />
             </Col>
 

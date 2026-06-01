@@ -11,14 +11,15 @@ import { createTourEnquiry } from "../../app/[locale]/tour-package/tourApi";
  */
 
 // Tour package boking form
-export const BookingFormHandler = ({ tourId,tourName }) => {
+export const BookingFormHandler = ({ tourId,tourName, vehicleCategories = [] }) => {
     const [formData, setFormData] = useState({
         full_name: '',
         email: '',
         phone_number: '',
         number_of_travelers: 'Solo Pilgrim',
         preferred_dates: '',
-        special_requirements: ''
+        special_requirements: '',
+        vehicle_category_id: ""
     });
 
     const [validated, setValidated] = useState(false);
@@ -147,7 +148,9 @@ export const BookingFormHandler = ({ tourId,tourName }) => {
             // tour_package:
             //     tourName,
             tour_id:
-                tourId,
+                tourId, 
+            vehicle_category_id:
+                formData.vehicle_category_id,
         });
 
         // whatsapp after DB save
@@ -181,6 +184,7 @@ export const BookingFormHandler = ({ tourId,tourName }) => {
                 "Solo Pilgrim",
             preferred_dates: "",
             special_requirements: "",
+            vehicle_category_id :""
         });
 
         setErrors({});
@@ -290,7 +294,7 @@ export const BookingFormHandler = ({ tourId,tourName }) => {
                             />
                         </Form.Group>
                     </Col>
-                    <Col md={6}>
+                    {/* <Col md={6}>
                         <Form.Group controlId="bookingTravelers">
                             <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">vechicle cateogry</Form.Label>
                             <Form.Select
@@ -305,6 +309,39 @@ export const BookingFormHandler = ({ tourId,tourName }) => {
                                 <option value="MiniBus">Mini Bus</option>
                                 <option value="LuxuryCar">Luxury Car</option>
                             </Form.Select>
+                        </Form.Group>
+                    </Col> */}
+                    <Col md={6}>
+                        <Form.Group controlId="bookingVehicleCategory">
+                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">
+                                Vehicle Category
+                            </Form.Label>
+
+                            <Form.Select
+                                required
+                                name="vehicle_category_id"
+                                className="custom-input"
+                                value={formData.vehicle_category_id}
+                                isInvalid={!!errors.vehicle_category_id}
+                                onChange={handleChange}
+                            >
+                                <option value="">
+                                    Select Vehicle Category
+                                </option>
+
+                                {vehicleCategories.map((item) => (
+                                    <option
+                                        key={item.id}
+                                        value={item.id}
+                                    >
+                                        {item.category}
+                                    </option>
+                                ))}
+                            </Form.Select>
+
+                            <Form.Control.Feedback type="invalid">
+                                {errors.vehicle_category_id}
+                            </Form.Control.Feedback>
                         </Form.Group>
                     </Col>
                     {/* special requirements */}
