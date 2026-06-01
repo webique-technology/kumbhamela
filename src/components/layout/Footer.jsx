@@ -6,6 +6,7 @@ import {
     MapPin,
     MessageCircle,
 } from "lucide-react";
+import { Link } from "@/i18n/routing";
 import "../../styles/footer.scss"
 import Image from "next/image";
 import { NAV_LINKS } from "@/lib/constants";
@@ -83,62 +84,22 @@ const Footer = () => {
                         {/* Quick Links */}
                         <Col md={6} lg={3}>
                             <h3 className="footer-heading">Quick Links</h3>
+
                             <ul className="list-unstyled">
                                 {NAV_LINKS.map((link, index) => (
                                     <li key={index} className="mb-2">
-                                        <a
-                                            href={`${link.path.toLowerCase().replace(/ /g, "-")}`}
+                                        <Link
+                                            href={link.path}
                                             className="footer-link"
                                         >
                                             {link.name}
-                                        </a>
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
                         </Col>
-
-
-
-
-
-                        {/* <Col md={6} lg={3}>
-                        
-                            <h3 className="footer-heading">Get In Touch</h3>
-
-                            <a
-                                href="https://wa.me/1234567890"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="btn whatsapp-btn w-100 mb-4 d-flex align-items-center justify-content-center gap-2"
-                            >
-                                <MessageCircle size={20} />
-                                <div>
-                                    <p className="mb-0 small fw-semibold">WhatsApp Support</p>
-                                    <small>Available 24/7</small>
-                                </div>
-                            </a>
-
-                            <div className="newsletter-box">
-                                <h4 className="small fw-semibold mb-2">Stay Updated</h4>
-                                <p className="small mb-3">
-                                    Get latest updates about Kumbh Mela events and schedules
-                                </p>
-
-                                <div className="d-flex gap-2">
-                                    <input
-                                        type="email"
-                                        placeholder="Your email"
-                                        className="form-control form-control-sm"
-                                    />
-                                    <button className="btn btn-subscribe btn-sm">
-                                        Subscribe
-                                    </button>
-                                </div>
-                            </div>
-                        </Col> */}
                         <Col md={6} lg={3}>
                             <h3 className="footer-heading">Other Services We Offer:</h3>
-
                             <ul className='services-link'>
                                 <li className='mb-2'>Car Rental Pan India</li>
                                 <li className='mb-2'>Luxury Car Marriage Corporate</li>
@@ -197,7 +158,7 @@ const Footer = () => {
                         </p>
 
                         <div className="d-flex gap-3">
-                            <p>Design and Developed by <a href="https://webique.in/" target="_blank" className='footer-link'>Webique Technology</a></p>
+                            <p className="footer-text m-0">Design and Developed by <a href="https://webique.in/" target="_blank" className='footer-link--webname'>Webique Technology</a></p>
                             {/* <a href="#" className="footer-link small">Terms & Conditions</a>
                             <a href="#" className="footer-link small">Disclaimer</a> */}
                         </div>

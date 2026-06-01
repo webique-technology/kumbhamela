@@ -107,7 +107,10 @@ const ServicesTabSec = () => {
                                             }}
                                             loop={tab.mapData.length > 6}
                                             navigation={false}
-                                            className="mySwiper"
+                                            className={`mySwiper ${tabData.find(tab => tab.key === activeTab)?.mapData?.length <= 5
+                                                ? "center-tabs"
+                                                : ""
+                                                }`}
                                         >
                                             {tab.mapData.map((item, i) => {
                                                 // check if the images have array

@@ -4,14 +4,12 @@
 // import { tourPackages } from "@/lib/data";
 import { HeroHeaderCard, TourPackageCard } from "@/components/ui/card";
 import { Col, Row, Container } from "react-bootstrap";
-import { SearchFleet, TitleComponent } from "@/components/ui/common";
 import { slugify } from "@/lib/utils";
-import { useRouter, useSearchParams, useParams  } from "next/navigation";
+import { useRouter, useSearchParams, useParams } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "../../../styles/blog.scss";
 import React, { useEffect, useState } from "react";
 import { getTours } from "./tourApi";
-import HeroHeader from "@/components/section/HeroHeader";
 
 const TourPageContent = () => {
     const router = useRouter();
@@ -34,14 +32,13 @@ const TourPageContent = () => {
 
     const [tours, setTours] = useState([]);
 
-     const [pagination, setPagination] = useState({
+    const [pagination, setPagination] = useState({
         current_page: 1,
         last_page: 1,
         total: 0,
     });
 
-
-      // Filter Logic
+    // Filter Logic
     // const filteredTours = tours.filter((tour) => {
     //     const matchesCategory = categoryFilter
     //         ? (tour.name || "")
@@ -108,25 +105,25 @@ const TourPageContent = () => {
         router.push(`/${locale}/tour-package?${queryParams.toString()}`);
     };
 
-     // API call
+    // API call
     useEffect(() => {
-        fetchTours( currentPage,nameFilter,categoryFilter,priceFilter);
+        fetchTours(currentPage, nameFilter, categoryFilter, priceFilter);
     }, [currentPage, nameFilter, categoryFilter, priceFilter]);
 
-    const fetchTours = async (page = 1,name = "",category = "",price = "") => {
+    const fetchTours = async (page = 1, name = "", category = "", price = "") => {
         try {
             // const data = await getTours();
             // setTours(data || []);
-        setLoading(true);
-        const response = await getTours( page,name,category,price);
-        const apiData = response;
-        setTours(apiData.data || []);
+            setLoading(true);
+            const response = await getTours(page, name, category, price);
+            const apiData = response;
+            setTours(apiData.data || []);
 
-        setPagination({
-            current_page: apiData.current_page,
-            last_page: apiData.last_page,
-            total: apiData.total,
-        });
+            setPagination({
+                current_page: apiData.current_page,
+                last_page: apiData.last_page,
+                total: apiData.total,
+            });
         } catch (error) {
             console.log(error);
         } finally {
@@ -174,15 +171,15 @@ const TourPageContent = () => {
     return (
         <section>
             <HeroHeaderCard
-                        heroTitle="Tour Packages"
-                        // heroSubtitle={categoryFilter ? `Showing ${categoryFilter} results` : "Explore our specially curated spiritual journeys"}
-                        heroImage="/images/carrental-page-bg.png"
-                        imgClass="hero-img"
-                        showSearch={true}
+                heroTitle="Tour Packages"
+                // heroSubtitle={categoryFilter ? `Showing ${categoryFilter} results` : "Explore our specially curated spiritual journeys"}
+                heroImage="/images/carrental-page-bg.png"
+                imgClass="hero-img"
+                showSearch={true}
             />
             <section className="section-padding secondary-bg">
-            <Container>
-                {/* <TitleComponent
+                <Container>
+                    {/* <TitleComponent
                     title="Tour Packages"
                     
                 />
@@ -191,65 +188,65 @@ const TourPageContent = () => {
                     <SearchFleet />
                 </div> */}
 
-                {/* --- Equal Grid: 3 cards per row on LG, 2 on MD --- */}
-                {currentItems.length > 0 ? (
-                    <Row className="g-4 mb-5">
-                        {currentItems.map((tour, index) => (
-                            <Col lg={4} md={6} key={tour.id || index}>
-                                <TourPackageCard
-                                    tour={tour}
-                                    tourLink={`/tour-package/${slugify(tour.title || "")}`}
-                                    img_height={250}
-                                />
-                            </Col>
-                        ))}
-                    </Row>
-                ) : (
-                    <div className="text-center py-5">
-                        <h3>No packages found matching your criteria.</h3>
-                        <button
-                            className="primery-btn py-3"
-                            onClick={() => router.push(`/${locale}/tour-package`)}
-                        >
-                            Clear All Filters
-                        </button>
-                    </div>
-                )}
+                    {/* --- Equal Grid: 3 cards per row on LG, 2 on MD --- */}
+                    {currentItems.length > 0 ? (
+                        <Row className="g-4 mb-5">
+                            {currentItems.map((tour, index) => (
+                                <Col lg={4} md={6} key={tour.id || index}>
+                                    <TourPackageCard
+                                        tour={tour}
+                                        tourLink={`/tour-package/${slugify(tour.title || "")}`}
+                                        img_height={250}
+                                    />
+                                </Col>
+                            ))}
+                        </Row>
+                    ) : (
+                        <div className="text-center py-5">
+                            <h3>No packages found matching your criteria.</h3>
+                            <button
+                                className="primery-btn py-3"
+                                onClick={() => router.push(`/${locale}/tour-package`)}
+                            >
+                                Clear All Filters
+                            </button>
+                        </div>
+                    )}
 
-                {/* --- Pagination --- */}
-                {totalPages > 1 && (
-                    <div className="d-flex justify-content-center align-items-center pagination-wrapper gap-2">
-                        <button
-                            onClick={() => handlePageChange(currentPage - 1)}
-                            className={`pagination-item arrow ${currentPage === 1 ? 'disabled' : ''}`}
-                            disabled={currentPage === 1}
-                        >
-                            <ChevronLeft size={18} />
-                        </button>
+                    {/* --- Pagination --- */}
+                    {totalPages > 1 && (
+                        <div className="d-flex justify-content-center align-items-center pagination-wrapper gap-2">
+                            <button
+                                onClick={() => handlePageChange(currentPage - 1)}
+                                className={`pagination-item arrow ${currentPage === 1 ? 'disabled' : ''}`}
+                                disabled={currentPage === 1}
+                            >
+                                <ChevronLeft size={18} />
+                            </button>
 
-                        {[...Array(totalPages)].map((_, i) => {
-                            const pageNum = i + 1;
-                            return (
-                                <button
-                                    key={pageNum}
-                                    onClick={() => handlePageChange(pageNum)}
-                                    className={`pagination-number number ${currentPage === pageNum ? 'active' : ''}`}
-                                >
-                                    {pageNum}
-                                </button>
-                            );
-                        })}
+                            {[...Array(totalPages)].map((_, i) => {
+                                const pageNum = i + 1;
+                                return (
+                                    <button
+                                        key={pageNum}
+                                        onClick={() => handlePageChange(pageNum)}
+                                        className={`pagination-number number ${currentPage === pageNum ? 'active' : ''}`}
+                                    >
+                                        {pageNum}
+                                    </button>
+                                );
+                            })}
 
-                        <button
-                            onClick={() => handlePageChange(currentPage + 1)}
-                            className={`pagination-item arrow ${currentPage === totalPages ? 'disabled' : ''}`}
-                            disabled={currentPage === totalPages}
-                        >
-                            <ChevronRight size={18} />
-                        </button>
-                    </div>
-                )}
-            </Container>
+                            <button
+                                onClick={() => handlePageChange(currentPage + 1)}
+                                className={`pagination-item arrow ${currentPage === totalPages ? 'disabled' : ''}`}
+                                disabled={currentPage === totalPages}
+                            >
+                                <ChevronRight size={18} />
+                            </button>
+                        </div>
+                    )}
+                </Container>
             </section>
         </section>
     );

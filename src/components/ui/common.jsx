@@ -83,6 +83,7 @@ export const TitleComponent = ({
 export const SwiperSliderComp = ({
     children,
     className,
+    style,
     navigation = true,
     timeDelay = 2500,
     loop = true,
@@ -117,6 +118,7 @@ export const SwiperSliderComp = ({
             }
             breakpoints={breakpoints}
             {...props}
+            style={style}
         >
             {children}
         </Swiper>

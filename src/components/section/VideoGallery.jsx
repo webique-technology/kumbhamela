@@ -3,11 +3,12 @@
 import React, { useRef, useState } from "react";
 import { Container, Modal } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
+import { ArrowRight, ArrowLeft } from "lucide-react"
 
 import "swiper/css";
 import "../../styles/videoGallery.scss";
-import { TitleComponent } from "../ui/common";
+import { SwiperSliderComp, TitleComponent } from "../ui/common";
 
 const VideoGallery = () => {
     const videoRefs = useRef([]);
@@ -21,7 +22,10 @@ const VideoGallery = () => {
         { id: 2, video: "/videos/GramFetchr_98506378.mp4", title: "Evening Aarti", location: "Nashik" },
         { id: 3, video: "/videos/GramFetchr_98506378.mp4", title: "Holy Dip", location: "Haridwar" },
         { id: 4, video: "/videos/GramFetchr_98506378.mp4", title: "Sadhu Procession", location: "Ujjain" },
-        { id: 5, video: "/videos/GramFetchr_98506378.mp4", title: "Goda Ghat", location: "Nashik" }
+        { id: 5, video: "/videos/GramFetchr_98506378.mp4", title: "Goda Ghat", location: "Nashik" },
+        { id: 6, video: "/videos/GramFetchr_98506378.mp4", title: "Goda Ghat", location: "Nashik" },
+        { id: 7, video: "/videos/GramFetchr_98506378.mp4", title: "Goda Ghat", location: "Nashik" },
+        { id: 8, video: "/videos/GramFetchr_98506378.mp4", title: "Goda Ghat", location: "Nashik" }
     ];
 
     const handleSlideChange = (swiper) => {
@@ -55,23 +59,39 @@ const VideoGallery = () => {
         <section className="section-padding-2 trinery-bg position-relative video-gallery-main">
             <div className="top-divider position-absolute z-3 td-top bd-light-bg" style={{ pointerEvents: 'none' }}></div>
             <Container>
-                <TitleComponent
-                    title={"Divine Experiences"}
-                    className='text-center mb-4 mb-md-5'
-                    divider={false}
-                    montezSubTitle={"video stories"}
-                    montezClass='montez-sub-heading primery-color'
-                />
-                <Swiper
-                    modules={[Autoplay]}
+                <div className="d-flex justify-content-between align-items-center">
+                    <TitleComponent
+                        title="Divine Experiences"
+                        className="mb-4 md-md-5"
+                        divider={false}
+                        montezSubTitle="video stories"
+                        montezClass="montez-sub-heading primery-color"
+                    />
+
+                    {/* Custom Navigation Buttons */}
+                    <div className="slider-nav-wrapper d-none d-sm-flex gap-2">
+                        <button className="video-prev-btn nav-custom-btn">
+                            <ArrowLeft size={20} />
+                        </button>
+                        <button className="video-next-btn nav-custom-btn">
+                            <ArrowRight size={20} />
+                        </button>
+                    </div>
+                </div>
+                <SwiperSliderComp
                     slidesPerView={6}
+                    navigation={{
+                        prevEl: '.video-prev-btn',
+                        nextEl: '.video-next-btn',
+                    }}
                     spaceBetween={15}
                     loop={reels.length > 6}
                     speed={800}
                     watchSlidesProgress={true}
+                    // disableAutoplay={true}
                     breakpoints={{
-                        0: { slidesPerView: 1 },
-                        450: { slidesPerView: 2 },
+                        0: { slidesPerView: 3 },
+                        450: { slidesPerView: 3 },
                         1024: { slidesPerView: 3 },
                         1240: { slidesPerView: 4 },
                         1440: { slidesPerView: 6 }
@@ -110,7 +130,7 @@ const VideoGallery = () => {
                             </div>
                         </SwiperSlide>
                     ))}
-                </Swiper>
+                </SwiperSliderComp>
             </Container>
 
             {/* fullscreen modale to opern reel */}
