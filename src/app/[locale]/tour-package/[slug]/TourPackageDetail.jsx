@@ -7,7 +7,6 @@ import Image from "next/image";
 import * as Icons from "lucide-react";
 import { Circle, FileText, CalendarCheck } from "lucide-react";
 import { motion } from "framer-motion";
-
 import { slugify, imageUrl } from "@/lib/utils";
 import { WhatsAppShareBtn } from "@/components/ui/button";
 import { HighlightsModal, TourTabs, } from "@/components/ui/common";
@@ -294,7 +293,7 @@ const TourPackageDetail = ({ tour }) => {
                                 href={`/tour-package/book/${slugify(tour.title)}`}
                                 className="primery-btn d-flex align-items-center justify-content-center gap-2 w-100 py-3 text-center text-decoration-none fw-bold rounded shadow-sm mb-3"
                             >
-                                <CalendarCheck />
+                                <CalendarCheck size={18}/>
                                 Book Now
                             </Link>
 
