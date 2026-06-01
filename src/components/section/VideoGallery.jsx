@@ -92,8 +92,8 @@ const VideoGallery = () => {
                     breakpoints={{
                         0: { slidesPerView: 3 },
                         450: { slidesPerView: 3 },
-                        1024: { slidesPerView: 3 },
-                        1240: { slidesPerView: 4 },
+                        1024: { slidesPerView: 4 },
+                        1240: { slidesPerView: 5 },
                         1440: { slidesPerView: 6 }
                     }}
                     onSlideChange={handleSlideChange}
