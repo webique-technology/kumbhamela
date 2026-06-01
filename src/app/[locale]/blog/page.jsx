@@ -1,8 +1,8 @@
 // src/app/blog/page.jsx
 "use client";
 
-import React, { Suspense } from "react";
-import { blogs } from "@/lib/blog";
+import React, { Suspense, useState, useEffect } from "react";
+// import { blogs } from "@/lib/blog";
 import { BlogCard } from "@/components/ui/card";
 import { Col, Row, Container, Pagination } from "react-bootstrap";
 import { TitleComponent } from "@/components/ui/common";
@@ -10,16 +10,23 @@ import { slugify } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "../../../styles/blog.scss";
+// import { useState, useEffect, Suspense } from "react";
+import { getBlogs } from "./blogApi";
 
 const BlogPageContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // --- 1.get current page from url ---
   const currentPage = Number(searchParams.get("page")) || 1;
 
   // --- 2. sorting all blogs by date ---
-  const sortedBlogs = [...blogs].sort((a, b) => new Date(b.date) - new Date(a.date));
+  // const sortedBlogs = [...blogs].sort((a, b) => new Date(b.date) - new Date(a.date));
+  const sortedBlogs = [...blogs].sort(
+  (a, b) => new Date(b.created_at) - new Date(a.created_at)
+  );
   const totalBlogs = sortedBlogs.length;
 
   // --- 3. pagination math & total pages ---
@@ -40,6 +47,30 @@ const BlogPageContent = () => {
   const handlePageChange = (pageNum) => {
     router.push(`/blog?page=${pageNum}`);
   };
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const data = await getBlogs();
+
+        setBlogs(data || []);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="text-center section-padding">
+        Loading blogs...
+      </div>
+    );
+  }
 
   return (
     <section className="section-padding bg-light blog-page">
@@ -68,7 +99,8 @@ const BlogPageContent = () => {
               <Col lg={colSize} md={6} key={index}>
                 <BlogCard
                   blog={blog}
-                  blogLink={`/blog/${slugify(blog.blogTitle)}`}
+                  // blogLink={`/blog/${slugify(blog.blogTitle)}`}
+                  blogLink={`/blog/${blog.id}`}
                   img_width={100}
                   img_height={420}
                   img_count_width={"100%"}
