@@ -29,8 +29,8 @@ export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_widt
                     alt={blog.title}
                     className="blog-img"
                 /> */}
-                <Image
-                    src={blog.image_url}
+                <img
+                    src={blog.image_url || "/images/tour-section-bg.png"}
                     alt={blog.title}
                     width={img_width}
                     height={img_height}
@@ -53,10 +53,10 @@ export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_widt
                         {/* <span>{blog.date}</span> */}
                         <span> {new Date(blog.created_at).toLocaleDateString()}</span>
                     </div>
-                    <div className="d-flex align-items-center gap-1">
+                    {/* <div className="d-flex align-items-center gap-1">
                         <Clock size={14} />
                         <span>{blog.readTime}</span>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Title */}
@@ -67,8 +67,14 @@ export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_widt
                 </Link>
 
                 {/* Excerpt */}
-                <p className="card-text text-muted small blog-excerpt">
+                {/* <p className="card-text text-muted small blog-excerpt">
                     {blog.description}
+                </p> */}
+                <p className="card-text text-muted small blog-excerpt">
+                    {blog.description
+                        ?.replace(/<[^>]*>/g, "")
+                        ?.slice(0, 150)}
+                    ...
                 </p>
 
                 {/* Button */}

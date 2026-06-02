@@ -99,8 +99,8 @@ const BlogPageContent = () => {
               <Col lg={colSize} md={6} key={index}>
                 <BlogCard
                   blog={blog}
-                  // blogLink={`/blog/${slugify(blog.blogTitle)}`}
-                  blogLink={`/blog/${blog.id}`}
+                  blogLink={`/blog/${slugify(blog.title)}`}
+                  // blogLink={`/blog/${blog.title}`}
                   img_width={100}
                   img_height={420}
                   img_count_width={"100%"}
