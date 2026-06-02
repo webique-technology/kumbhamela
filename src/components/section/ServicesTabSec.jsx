@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Col, Container, Nav, Row, Tab } from 'react-bootstrap';
 import { SwiperSliderComp, TitleComponent } from '../ui/common';
 import { HotelCards, RentalCarCard, TourPackageCard } from '../ui/card';
@@ -45,6 +45,24 @@ const ServicesTabSec = () => {
         }
     ];
 
+    const [isDesktop, setIsDesktop] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsDesktop(window.innerWidth >= 1400);
+        };
+
+        handleResize();
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    const activeTabData = tabData.find(tab => tab.key === activeTab);
+
+    const shouldCenterTabs =
+        activeTabData?.mapData?.length <= 5 &&
+        isDesktop;
     return (
         <section className='section-padding position-relative trinery-bg services-section'>
             {/* <div className="bottom-divider position-absolute top-0"></div> */}
@@ -107,7 +125,7 @@ const ServicesTabSec = () => {
                                             }}
                                             loop={tab.mapData.length > 6}
                                             navigation={false}
-                                            className="mySwiper"
+                                            className={`mySwiper ${shouldCenterTabs ? "center-tabs" : ""}`}
                                         >
                                             {tab.mapData.map((item, i) => {
                                                 // check if the images have array

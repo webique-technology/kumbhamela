@@ -95,7 +95,7 @@ const Navbar = () => {
                     </Link>
 
                     {/* Desktop Menu */}
-                    <nav className="d-none d-lg-flex align-items-center nav-links">
+                    <nav className="d-none d-lg-flex align-items-center gap-4 nav-links">
                         <Link
                             href="/"
                             className={`nav-link-custom ${pathname === "/" ? "active" : ""}`}

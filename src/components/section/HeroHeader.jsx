@@ -38,18 +38,25 @@ const HeroHeader = () => {
                         >
                             <div className="hero-overlay"></div>
                             <Container>
-                                <div className="hero-slide-content">
-                                    <span className='montez-sub-heading mb-4 hero-subheading'>
-                                        {item.subHeading}
-                                    </span>
+                                <div className="d-flex align-items-center justify-content-center">
+                                    <div className="hero-slide-content text-center">
+                                        <span className='mb-3 hero-subheading'>
+                                            {item.subHeading}
+                                        </span>
 
-                                    <h1 className='hero-title-h1 mb-4 hero-title'>
-                                        {item.title}
-                                    </h1>
+                                        <h1 className='hero-title-h1 mb-2 hero-title'>
+                                            {item.title}
+                                        </h1>
 
-                                    <p className='hero-description text-md mb-5 hero-description-animate'>
-                                        {item.description}
-                                    </p>
+                                        <p className='hero-description text-md mb-4 hero-description-animate'>
+                                            {item.description}
+                                        </p>
+
+                                        <div className='d-flex align-items-center justify-content-center gap-4 pt-1'>
+                                            <button className='primery-btn'>View Bathing Dates</button>
+                                            <button className='primery-btn-style-2'>WhatsApp Inquiry</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </Container>
                         </SwiperSlide>

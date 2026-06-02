@@ -929,7 +929,7 @@ export const heroSliderData = [
         id: 2,
         image: "/images/hero-bg-3.jpg",
         subHeading: "The Sacred Confluence of Faith & Time",
-        title: "Nashik Kumbh Mela",
+        title: "Nashik Kumbh Mela 2027",
         description: "Where millions gather on the banks of the holy Godavari to seek spiritual liberation. Experience the world's largest spiritual congregation at one of India's most sacred pilgrimage sites."
     },
     // {
