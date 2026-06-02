@@ -7,7 +7,8 @@ import { BlogCard } from "@/components/ui/card";
 import { Col, Row, Container, Pagination } from "react-bootstrap";
 import { TitleComponent } from "@/components/ui/common";
 import { slugify } from "@/lib/utils";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useRouter, usePathname } from "@/i18n/routing";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "../../../styles/blog.scss";
 // import { useState, useEffect, Suspense } from "react";
@@ -16,44 +17,45 @@ import { getBlogs } from "./blogApi";
 const BlogPageContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // --- 1.get current page from url ---
+const [blogs, setBlogs] = useState([]);
+const [totalPages, setTotalPages] = useState(1);
+const [currentPageApi, setCurrentPageApi] = useState(1);
+
   const currentPage = Number(searchParams.get("page")) || 1;
 
-  // --- 2. sorting all blogs by date ---
+  
   // const sortedBlogs = [...blogs].sort((a, b) => new Date(b.date) - new Date(a.date));
-  const sortedBlogs = [...blogs].sort(
-  (a, b) => new Date(b.created_at) - new Date(a.created_at)
-  );
-  const totalBlogs = sortedBlogs.length;
+  // const sortedBlogs = [...blogs].sort(
+  // (a, b) => new Date(b.created_at) - new Date(a.created_at)
+  // );
+  // const totalBlogs = sortedBlogs.length;
 
   // --- 3. pagination math & total pages ---
-  const totalPages = Math.ceil((totalBlogs - 8) / 9) + 1;
+  // const totalPages = Math.ceil((totalBlogs - 8) / 9) + 1;
 
   // --- 4. slicing logic ---
-  let startIndex = 0;
-  let endIndex = 8;
+  // let startIndex = 0;
+  // let endIndex = 8;
 
-  if (currentPage > 1) {
-    startIndex = 8 + (currentPage - 2) * 9;
-    endIndex = startIndex + 9;
-  }
+  // if (currentPage > 1) {
+  //   startIndex = 8 + (currentPage - 2) * 9;
+  //   endIndex = startIndex + 9;
+  // }
 
-  const currentBlogs = sortedBlogs.slice(startIndex, endIndex);
+  // const currentBlogs = sortedBlogs.slice(startIndex, endIndex);
 
-  // --- 5. routing function rout to the page numbers ---
-  const handlePageChange = (pageNum) => {
-    router.push(`/blog?page=${pageNum}`);
-  };
-
-  useEffect(() => {
+ useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const data = await getBlogs();
+        setLoading(true);
 
-        setBlogs(data || []);
+        const response = await getBlogs(currentPage);
+
+        setBlogs(response?.data || []);
+        setTotalPages(response?.last_page || 1);
+        setCurrentPageApi(response?.current_page || 1);
       } catch (error) {
         console.error(error);
       } finally {
@@ -62,7 +64,34 @@ const BlogPageContent = () => {
     };
 
     fetchBlogs();
-  }, []);
+  }, [currentPage]);
+
+  // --- 5. routing function rout to the page numbers ---
+  // const handlePageChange = (pageNum) => {
+  //   router.push(`/blog?page=${pageNum}`);
+  // };
+  const handlePageChange = (pageNum) => {
+    router.push({
+      pathname: "/blog",
+      query: { page: pageNum },
+    });
+  };
+
+  // useEffect(() => {
+  //   const fetchBlogs = async () => {
+  //     try {
+  //       const data = await getBlogs();
+
+  //       setBlogs(data || []);
+  //     } catch (error) {
+  //       console.error(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchBlogs();
+  // }, []);
 
   if (loading) {
     return (
@@ -82,7 +111,7 @@ const BlogPageContent = () => {
 
         {/* --- grid --- */}
         <Row className="g-4 mb-5">
-          {currentBlogs.map((blog, index) => {
+          {blogs.map((blog, index) => {
             // Layout Check: Ensure the col-8 logic only applies when currentPage === 1 AND index === 0.
             // 1. Grid Logic: Only Page 1 has a special 8-4 layout
             let colSize = 4;
@@ -115,22 +144,27 @@ const BlogPageContent = () => {
         {/* left arrow */}
         {totalPages > 1 && (
           <div className="d-flex justify-content-center align-items-center pagination-wrapper gap-2">
-            <button
-              onClick={() => handlePageChange(currentPage - 1)}
-              className={`pagination-item arrow ${currentPage === 1 ? 'disabled' : ''}`}
-              disabled={currentPage === 1}
-            >
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                className={`pagination-item arrow ${
+                  currentPage === 1 ? "disabled" : ""
+                }`}
+                disabled={currentPage === 1}
+              >
               <ChevronLeft size={18} />
             </button>
 
             {/* page numbers */}
-            {[...Array(totalPages)].map((_, i) => {
+           {[...Array(totalPages)].map((_, i) => {
               const pageNum = i + 1;
+
               return (
                 <button
                   key={pageNum}
                   onClick={() => handlePageChange(pageNum)}
-                  className={`pagination-number number ${currentPage === pageNum ? 'active' : ''}`}
+                  className={`pagination-number number ${
+                    currentPage === pageNum ? "active" : ""
+                  }`}
                 >
                   {pageNum}
                 </button>
@@ -138,13 +172,15 @@ const BlogPageContent = () => {
             })}
 
             {/* right arrow */}
-            <button
-              onClick={() => handlePageChange(currentPage + 1)}
-              className={`pagination-item arrow ${currentPage === totalPages ? 'disabled' : ''}`}
-              disabled={currentPage === totalPages}
-            >
-              <ChevronRight size={18} />
-            </button>
+             <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                className={`pagination-item arrow ${
+                  currentPage === totalPages ? "disabled" : ""
+                }`}
+                disabled={currentPage === totalPages}
+              >
+                <ChevronRight size={18} />
+              </button>
           </div>
         )}
       </Container>

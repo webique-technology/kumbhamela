@@ -6,7 +6,7 @@ import { slugify } from "@/lib/utils";
 import "../../../../styles/blog.scss";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { PrimeryBtn } from "@/components/ui/button";
-import { getBlogs } from "../blogApi";
+import { getBlogs,getBlogBySlug } from "../blogApi";
 import { Link } from "@/i18n/routing";
 
 const BASE_URL =
@@ -51,10 +51,14 @@ const BASE_URL =
 
 export async function generateMetadata({ params }) {
     const { slug } = await params;
-    const blogs = await getBlogs();
-    const blog = blogs.find(
-        (item) => slugify(item.title) === slug
-    );
+    // const blogs = await getBlogs();
+    const response = await getBlogs();
+    const blogs = response.data || [];
+     const blog = await getBlogBySlug(slug);
+
+    // const blog = blogs.find(
+    //     (item) => slugify(item.title) === slug
+    // );
 
     if (!blog) {
         return {};
@@ -79,23 +83,17 @@ export async function generateMetadata({ params }) {
 }
 const BlogDetails = async ({ params }) => {
 
-    // // 2. Await the params to get the slug
-    // const { slug } = await params;
-
-    // // Find the blog where the slugified title matches the URL slug
-    // const blog = blogs.find((b) => slugify(b.blogTitle) === slug);
-
-    // // If no blog found, show 404
-    // if (!blog) {
-    //     notFound();
-    // }
     // const locale = params.locale;
     const { slug } = await params;
-    const blogs = await getBlogs();
-
-    const blog = blogs.find(
-        (item) => slugify(item.title) === slug
-    );
+    // const blogs = await getBlogs();
+    const response = await getBlogs();
+    const blogs = response.data || [];
+    console.log("Slug:", slug);
+    const blog = await getBlogBySlug(slug);
+    console.log("Blog Found:", blog);
+    // const blog = blogs.find(
+    //     (item) => slugify(item.title) === slug
+    // );
     if (!blog) {
         notFound();
     }
