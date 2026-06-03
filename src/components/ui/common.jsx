@@ -8,11 +8,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // swiper imports
 import { Swiper } from 'swiper/react';
-import { Navigation, Autoplay } from 'swiper/modules';
+import { Navigation, Autoplay, EffectFade } from 'swiper/modules';
 
 // Import Swiper styles (Required for it to look right)
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/effect-fade';
 import { Tab, Tabs } from 'react-bootstrap';
 import { PaymentTerms } from './card';
 
@@ -89,18 +90,29 @@ export const SwiperSliderComp = ({
     loop = true,
     slidesPerView = 1,
     spaceBetween = 20,
+    effect, // Added explicit effect parameter
+    module,
     breakpoints,
     disableAutoplay = false,
     ...props // Capture extra props like onSlideChange
 }) => {
+    // Explicit array assignment guarantees modules assemble correctly
+    const activeModules = [Navigation, Autoplay];
+    if (module) activeModules.push(module);
+    if (effect === 'fade' && !activeModules.includes(EffectFade)) {
+        activeModules.push(EffectFade);
+    }
+
+    const isFade = effect === 'fade';
     return (
         <Swiper
-            modules={[Navigation, Autoplay]}
-            spaceBetween={spaceBetween}
-            slidesPerView={slidesPerView}
+            modules={activeModules}
+            effect={effect} // Decides if slider uses 'slide' or 'fade'
+            // Crucial: Fade configurations break if spaceBetween is greater than zero
+            spaceBetween={isFade ? 0 : spaceBetween}
+            slidesPerView={isFade ? 1 : slidesPerView}
             navigation={navigation}
-            // grabCursor makes it feel like an app and helps with "stuck" drags
-            grabCursor={true}
+            grabCursor={!isFade} // Disable swipe tracking cursor feel for static crossfades
             // This ensures the transition finishes even if the user stops dragging mid-way
             shortSwipes={true}
             longSwipes={true}
@@ -116,7 +128,7 @@ export const SwiperSliderComp = ({
                         pauseOnMouseEnter: true, // Good UX for sliders
                     }
             }
-            breakpoints={breakpoints}
+            breakpoints={isFade ? undefined : breakpoints}
             {...props}
             style={style}
         >
@@ -334,7 +346,7 @@ export const KumbhCountdown = ({ targetDate, isActive = true }) => {
 };
 
 
-export const TourTabs = ({ tour,cancellationPolicy, paymentPolicy }) => {
+export const TourTabs = ({ tour, cancellationPolicy, paymentPolicy }) => {
     const [activeTab, setActiveTab] = useState('cancellation-policy');
 
     const handleTabChange = (tab) => {
@@ -381,7 +393,7 @@ export const TourTabs = ({ tour,cancellationPolicy, paymentPolicy }) => {
                     </div> */}
                 </Tab>
                 <Tab eventKey="payment-terms" title="Payment Terms">
-                    <PaymentTerms policy ={paymentPolicy}/>
+                    <PaymentTerms policy={paymentPolicy} />
                 </Tab>
             </Tabs>
         </>

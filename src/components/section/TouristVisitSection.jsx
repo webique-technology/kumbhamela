@@ -21,10 +21,10 @@ const TouristVisitSection = () => {
                 <div className="d-flex position-relative justify-content-center justify-content-sm-between align-items-center mb-4">
                     <TitleComponent
                         title="Sacred Destinations"
-                        className="mb-4 md-md-5"
+                        className="mb-0 mb-md-4 md-md-5"
                         divider={false}
                         montezSubTitle="Must-Visit Temples & Holy Sites"
-                        montezClass="montez-sub-heading primery-color"
+                        montezClass="montez-sub-heading primery-color d-none d-md-block"
                     />
 
                     {/* Custom Navigation Buttons */}

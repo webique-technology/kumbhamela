@@ -1,7 +1,7 @@
 "use client"; // Required for Framer Motion client-side hooks in Next.js App Router
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useInView, useAnimationControls } from 'framer-motion';
 
 /**
  * AnimationSecComponent - Reusable layout, section, and text wrapper.
@@ -68,3 +68,104 @@ export const AnimationSecComponent = ({
         </motion.div>
     );
 };
+
+
+export const FadeContent = ({
+    children,
+    container,                // Handled natively via Framer Motion's intersection viewport bounding box
+    blur = false,
+    duration = 1000,          // Supports both Milliseconds (e.g., 1000) and Seconds (e.g., 1)
+    ease = 'easeOut',         // Mapped power2.out to framer motion equivalents
+    delay = 0,
+    threshold = 0.1,
+    initialOpacity = 0,
+    disappearAfter = 0,
+    disappearDuration = 0.5,
+    disappearEase = 'easeIn', // Mapped power2.in to framer motion equivalents
+    onComplete,
+    onDisappearanceComplete,
+    className = '',
+    style,
+    ...props
+}) => {
+    const ref = useRef(null);
+    const controls = useAnimationControls();
+
+    // Custom utility function matching your GSAP configuration pattern 
+    // (Converts values over 10 assumed as milliseconds down into standard seconds)
+    const getSeconds = val => (typeof val === 'number' && val > 10 ? val / 1000 : val);
+
+    // Hook directly looking for element presence matching your 'threshold' settings
+    const isInView = useInView(ref, {
+        once: true,
+        amount: threshold,
+    });
+
+    // GSAP ease conversion mapping to native cubic-beziers/names
+    const getEase = (easeName) => {
+        const maps = {
+            'power2.out': [0.25, 1, 0.5, 1], // clean easeOut
+            'power2.in': [0.55, 0, 1, 0.45], // clean easeIn
+            'easeOut': [0.25, 1, 0.5, 1],
+            'easeIn': [0.55, 0, 1, 0.45]
+        };
+        return maps[easeName] || easeName;
+    };
+
+    useEffect(() => {
+        if (isInView) {
+            // 1. Fire Entry Fade Animation
+            controls.start({
+                opacity: 1,
+                filter: 'blur(0px)',
+                transition: {
+                    duration: getSeconds(duration),
+                    delay: getSeconds(delay),
+                    ease: getEase(ease)
+                }
+            }).then(() => {
+                // Fire original onComplete callback
+                if (onComplete) onComplete();
+
+                // 2. Check if item needs to disappear after a threshold timeout
+                if (disappearAfter > 0) {
+                    controls.start({
+                        opacity: initialOpacity,
+                        filter: blur ? 'blur(10px)' : 'blur(0px)',
+                        transition: {
+                            duration: getSeconds(disappearDuration),
+                            delay: getSeconds(disappearAfter),
+                            ease: getEase(disappearEase)
+                        }
+                    }).then(() => {
+                        if (onDisappearanceComplete) onDisappearanceComplete();
+                    });
+                }
+            });
+        }
+    }, [isInView, controls]);
+
+    // Initial styling declarations matching your GSAP configuration setup
+    const initialVariants = {
+        hidden: {
+            opacity: initialOpacity,
+            filter: blur ? 'blur(10px)' : 'blur(0px)',
+            willChange: 'opacity, filter, transform'
+        }
+    };
+
+    return (
+        <motion.div
+            ref={ref}
+            initial="hidden"
+            variants={initialVariants}
+            animate={controls}
+            className={className}
+            style={style}
+            {...props}
+        >
+            {children}
+        </motion.div>
+    );
+};
+

@@ -215,27 +215,27 @@ export const SacredDestinationsCard = ({ destination }) => {
 export const RentalCarCard = ({ car, onBook }) => {
     const params = useParams();
     const currentLocale = params?.locale || 'en';
-// console.log("car:", car);
-// console.log("image:", car?.car_image_url);
-console.log("final:", imageUrl(car?.car_image_url));
+    // console.log("car:", car);
+    // console.log("image:", car?.car_image_url);
+    console.log("final:", imageUrl(car?.car_image_url));
     return (
         <div className="card rental-car-card h-100 border-0 shadow-sm overflow-hidden">
             {/* Image Container with Overlay */}
             <div className="position-relative overflow-hidden">
                 {car?.car_image_url ? (
-                <img
-                    src={imageUrl(car.car_image_url)}
-                    alt={car.name}
-                    width={200}
-                    height={200}
-                    className="card-img-top object-fit-cover transition-transform"
-                />
+                    <img
+                        src={imageUrl(car.car_image_url)}
+                        alt={car.name}
+                        width={200}
+                        height={200}
+                        className="card-img-top object-fit-cover transition-transform"
+                    />
                 ) : (
                     <div
-                    style={{ width: "100%", height: "200px" }}
-                    className="card-img-top bg-light"
-                />
-            )}
+                        style={{ width: "100%", height: "200px" }}
+                        className="card-img-top bg-light"
+                    />
+                )}
             </div>
 
             {/* Content Body */}
@@ -364,7 +364,7 @@ export const TourPackageCard = ({ tour, tourLink }) => {
     const imageSrc =
         // tour?.image || "/images/default-tour.jpg";
         tour?.image_url && tour.image_url.trim() !== "" ? tour.image_url : "/images/river-rituals.webp";
-        
+
 
     return (
         <>
@@ -376,7 +376,7 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                         alt={tour?.title || "Tour"}
                         width={200}
                         height={200}
-                       
+
                         className="card-img-top object-fit-cover transition-transform"
                     />
                 </div>
@@ -388,22 +388,24 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                             {tour?.title}
                         </h3>
 
-                        <p className="card-text d-flex align-items-center gap-2 text-muted small mb-2 leading-relaxed">
+                        {/* <p className="card-text d-flex align-items-center gap-2 text-muted small mb-2 leading-relaxed">
                             <Clock size={16} />
                             {tour?.duration}
-                        </p>
+                        </p> */}
                     </div>
 
                     {/* Footer Logic */}
                     <div className="d-flex align-items-center justify-content-between mt-auto mb-2">
                         <div className="d-flex align-items-end">
-                            <span className="h5 fw-bold text-brand-orange mb-0">
-                                {tour?.base_price} /&nbsp;
-                            </span>
-
-                            <small className="text-muted d-block smaller mb-1">
-                                per Person
-                            </small>
+                            <p className="mb-0 fw-semibold">
+                                Starting from : &nbsp;
+                                <span className="h5 fw-bold text-brand-orange mb-0">
+                                    ₹{tour?.base_price};
+                                </span>
+                                {/* <small className="text-muted d-block smaller mb-1">
+                                    per Person
+                                </small> */}
+                            </p>
                         </div>
                     </div>
 
@@ -461,7 +463,7 @@ export const HeroHeaderCard = ({ showSearch = true, heroTitle, description, hero
     )
 }
 
-export const PaymentTerms = ({ terms = "No cancellation charges for booking modification or cancellation done 24 hours before the scheduled tour date.A 5% charge will be applicable for cancellations made within 24 hours of the tour." ,policy}) => {
+export const PaymentTerms = ({ terms = "No cancellation charges for booking modification or cancellation done 24 hours before the scheduled tour date.A 5% charge will be applicable for cancellations made within 24 hours of the tour.", policy }) => {
     return (
         <>
             <div className="p-3 bg-light rounded">

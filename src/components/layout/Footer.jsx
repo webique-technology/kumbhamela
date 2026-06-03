@@ -32,12 +32,12 @@ const Footer = () => {
                                     <p className="footer-subtitle">Mela 2027</p>
                                 </div>
                             </div>
-                            <p className="footer-text">
+                            <p className="footer-text d-none d-md-block">
                                 Your trusted guide to the sacred Nashik Kumbh Mela pilgrimage.
                                 Experience the divine gathering with complete information and support.
                             </p>
                             {/* social links */}
-                            <div className="d-flex gap-2 mt-3">
+                            <div className="d-flex gap-2 mt-3 mb-3">
                                 {/* facebook */}
                                 <a href="#" className="social-icon">
                                     <Image
@@ -82,7 +82,7 @@ const Footer = () => {
                         </Col>
 
                         {/* Quick Links */}
-                        <Col md={6} lg={3}>
+                        <Col md={6} lg={3} className='d-none d-md-block'>
                             <h3 className="footer-heading">Quick Links</h3>
 
                             <ul className="list-unstyled">
@@ -101,19 +101,19 @@ const Footer = () => {
                         <Col md={6} lg={3}>
                             <h3 className="footer-heading">Other Services We Offer:</h3>
                             <ul className='services-link'>
-                                <li className='mb-2'>Car Rental Pan India</li>
-                                <li className='mb-2'>Luxury Car Marriage Corporate</li>
-                                <li className='mb-2'>Traveller & Bus</li>
-                                <li className='mb-2'>Flight Ticketing</li>
-                                <li className='mb-2'>Holidays Packages</li>
-                                <li className='mb-2'>Hotel Reservations</li>
-                                <li className='mb-2'>Visa Services</li>
-                                <li className='mb-2'>Passport Assistance</li>
+                                <li className='mb-0 mb-md-2'>Car Rental Pan India</li>
+                                <li className='mb-0 mb-md-2'>Luxury Car Marriage Corporate</li>
+                                <li className='mb-0 mb-md-2'>Traveller & Bus</li>
+                                <li className='mb-0 mb-md-2'>Flight Ticketing</li>
+                                <li className='mb-0 mb-md-2'>Holidays Packages</li>
+                                <li className='mb-0 mb-md-2'>Hotel Reservations</li>
+                                <li className='mb-0 mb-md-2'>Visa Services</li>
+                                <li className='mb-0 mb-md-2'>Passport Assistance</li>
                             </ul>
 
                         </Col>
                         {/* Contact Info */}
-                        <Col md={6} lg={3}>
+                        <Col md={6} lg={3} className='d-none d-md-block'>
                             <h3 className="footer-heading">Contact Information</h3>
 
                             <ul className="list-unstyled footer-contact">

@@ -19,13 +19,12 @@ const VideoGallery = () => {
 
     const reels = [
         { id: 1, video: "/videos/GramFetchr_98506378.mp4", title: "Kumbh Mela Experience", location: "Prayagraj" },
-        { id: 2, video: "/videos/GramFetchr_98506378.mp4", title: "Evening Aarti", location: "Nashik" },
-        { id: 3, video: "/videos/GramFetchr_98506378.mp4", title: "Holy Dip", location: "Haridwar" },
-        { id: 4, video: "/videos/GramFetchr_98506378.mp4", title: "Sadhu Procession", location: "Ujjain" },
+        { id: 2, video: "/videos/GramFetchr_98506378.mp4", title: "Holy Dip", location: "Haridwar" },
+        { id: 3, video: "/videos/GramFetchr_98506378.mp4", title: "Sadhu Procession", location: "Ujjain" },
+        { id: 4, video: "/videos/GramFetchr_98506378.mp4", title: "Goda Ghat", location: "Nashik" },
         { id: 5, video: "/videos/GramFetchr_98506378.mp4", title: "Goda Ghat", location: "Nashik" },
         { id: 6, video: "/videos/GramFetchr_98506378.mp4", title: "Goda Ghat", location: "Nashik" },
-        { id: 7, video: "/videos/GramFetchr_98506378.mp4", title: "Goda Ghat", location: "Nashik" },
-        { id: 8, video: "/videos/GramFetchr_98506378.mp4", title: "Goda Ghat", location: "Nashik" }
+        { id: 7, video: "/videos/GramFetchr_98506378.mp4", title: "Goda Ghat", location: "Nashik" }
     ];
 
     const handleSlideChange = (swiper) => {
@@ -59,13 +58,13 @@ const VideoGallery = () => {
         <section className="section-padding-2 trinery-bg position-relative video-gallery-main">
             <div className="top-divider position-absolute z-3 td-top bd-light-bg" style={{ pointerEvents: 'none' }}></div>
             <Container>
-                <div className="d-flex justify-content-between align-items-center">
+                <div className="d-flex justify-content-center mb-4 mb-md-0 justify-content-sm-between align-items-center">
                     <TitleComponent
                         title="Divine Experiences"
-                        className="mb-4 md-md-5"
+                        className="mb-0 md-md-5"
                         divider={false}
                         montezSubTitle="video stories"
-                        montezClass="montez-sub-heading primery-color"
+                        montezClass="montez-sub-heading primery-color d-none d-md-block"
                     />
 
                     {/* Custom Navigation Buttons */}

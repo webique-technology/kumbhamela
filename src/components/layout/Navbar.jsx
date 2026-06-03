@@ -147,7 +147,7 @@ const Navbar = () => {
                     </nav>
 
                     {/* Right Side Actions */}
-                    <div className="d-none d-lg-flex align-items-center gap-3 right-actions">
+                    <div className="d-flex align-items-center gap-3 right-actions">
                         <div className="position-relative">
                             <button className="lang-btn d-flex align-items-center gap-1" onClick={() => setIsLangOpen(!isLangOpen)}>
                                 <Globe size={18} />
@@ -168,12 +168,13 @@ const Navbar = () => {
                             <MessageCircle size={18} />
                             <span>WhatsApp</span>
                         </a> */}
+                        {/* Mobile Toggle */}
+                        <button className="mobile-toggle d-lg-none" onClick={toggleMenu}>
+                            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
                     </div>
 
-                    {/* Mobile Toggle */}
-                    <button className="mobile-toggle d-lg-none" onClick={toggleMenu}>
-                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
+
                 </div>
             </div>
 

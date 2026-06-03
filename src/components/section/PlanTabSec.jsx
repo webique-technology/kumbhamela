@@ -18,14 +18,14 @@ const PlanTabSec = () => {
             <Container>
                 <TitleComponent
                     title="Plan your Pilgrimage"
-                    className="mb-5 text-center"
+                    className="mb-1 text-center"
                     divider={false}
                     montezSubTitle="Discover the Sacred"
-                    montezClass="montez-sub-heading primery-color"
+                    montezClass="montez-sub-heading primery-color d-none d-md-block"
                 />
 
                 <Tab.Container id="left-tabs-example" defaultActiveKey="tab-0">
-                    <Row className="mt-5 g-4">
+                    <Row className="mt-2 mt-md-4 g-4">
                         {/* LEFT SIDE: Navigation Buttons */}
                         <Col lg={6} className='tab-btn-count'>
                             <Nav variant="pills" className="flex-row flex-lg-column w-100 gap-2 gap-md-3 plan-nav-pills">
@@ -35,7 +35,7 @@ const PlanTabSec = () => {
                                         <Nav.Item key={tab.id}>
                                             <Nav.Link eventKey={`tab-${i}`} className="plan-tab-item p-2 p-lg-4">
                                                 <div className='d-flex align-items-center gap-2 gap-md-3 gap-lg-4 text-start'>
-                                                    <div className='icon-box text-white'>
+                                                    <div className='icon-box text-white d-none d-md-block'>
                                                         <Icon size={18} />
                                                     </div>
                                                     <div className='content'>

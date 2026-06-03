@@ -193,3 +193,38 @@
         display: none;
     }
 }
+
+.hero-slider-main {
+  position: relative;
+  overflow: hidden;
+  height: 100vh; /* Or your custom container dimension */
+
+  // Isolated background element
+  .hero-bg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    
+    // Smooth transition back and forth when active states change
+    transition: transform 20s cubic-bezier(0.25, 1, 0.5, 1);
+    transform: scale(1); // Default initial zoom scale for incoming hidden slides
+  }
+
+  // Text container layers overriding the layout position
+  .z-index-2 {
+    z-index: 2;
+  }
+}
+
+// Global hook applied dynamically by Swiper onto the active DOM node
+.swiper-slide-active {
+  .hero-bg-layer {
+    transform: scale(1.25) !important; // Smoothly shifts scale configuration down to base target size
+  }
+}
