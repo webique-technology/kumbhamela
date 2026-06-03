@@ -29,9 +29,9 @@ export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_widt
                     alt={blog.title}
                     className="blog-img"
                 /> */}
-                <Image
-                    src={blog.image}
-                    alt={blog.blogTitle}
+                <img
+                    src={blog.image_url || "/images/tour-section-bg.png"}
+                    alt={blog.title}
                     width={img_width}
                     height={img_height}
                     className="blog-img card-img-top"
@@ -50,24 +50,31 @@ export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_widt
                 <div className="d-flex gap-3 text-muted small mb-2">
                     <div className="d-flex align-items-center gap-1">
                         <Calendar size={14} />
-                        <span>{blog.date}</span>
+                        {/* <span>{blog.date}</span> */}
+                        <span> {new Date(blog.created_at).toLocaleDateString()}</span>
                     </div>
-                    <div className="d-flex align-items-center gap-1">
+                    {/* <div className="d-flex align-items-center gap-1">
                         <Clock size={14} />
                         <span>{blog.readTime}</span>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Title */}
                 <Link href={blogLink} className="text-decoration-none">
                     <h3 className="card-title mb-3 fw-semibold text-dark blog-title">
-                        {blog.blogTitle}
+                        {blog.title}
                     </h3>
                 </Link>
 
                 {/* Excerpt */}
-                <p className="card-text text-muted small blog-excerpt">
+                {/* <p className="card-text text-muted small blog-excerpt">
                     {blog.description}
+                </p> */}
+                <p className="card-text text-muted small blog-excerpt">
+                    {blog.description
+                        ?.replace(/<[^>]*>/g, "")
+                        ?.slice(0, 150)}
+                    ...
                 </p>
 
                 {/* Button */}
@@ -356,7 +363,7 @@ export const TourPackageCard = ({ tour, tourLink }) => {
     // Image safe
     const imageSrc =
         // tour?.image || "/images/default-tour.jpg";
-        tour?.image_url && tour.image_url.trim() !== "" ? tour.image_url : "/images/default-tour.jpg";
+        tour?.image_url && tour.image_url.trim() !== "" ? tour.image_url : "/images/river-rituals.webp";
         
 
     return (
