@@ -90,3 +90,16 @@ export const getPaymentPolicy = async () => {
     return [];
   }
 };
+
+export const getTourBySlug = async (slug) => {
+  try {
+    const response = await api.get(
+      `/tours/slug/${encodeURIComponent(slug)}`
+    );
+
+    return response.data.data;
+  } catch (error) {
+    console.log("Tour Slug API Error:", error);
+    return null;
+  }
+};
