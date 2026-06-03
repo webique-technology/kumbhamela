@@ -79,7 +79,7 @@ const ServicesTabSec = () => {
                                 className='text-center'
                                 divider={false}
                                 montezSubTitle={"Our Services"}
-                                montezClass='montez-sub-heading primery-color'
+                                montezClass='montez-sub-heading primery-color d-none d-md-block'
                             />
 
                             <Nav variant="pills" className="flex-row gap-2 mt-3 justify-content-center nav-tab-count">

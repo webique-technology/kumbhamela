@@ -8,6 +8,7 @@ import { bathingDates } from "@/lib/data";
 import { PrimeryBtn } from "../ui/button";
 import "../../assets/scss/main.scss"
 import "../../styles/bathingDates.scss"
+import { AnimationSecComponent } from "../ui/AnimationSecComponent";
 
 export const BathingDates = () => {
     return (
@@ -18,7 +19,7 @@ export const BathingDates = () => {
                 <div className="bathing-row-count">
                     <Container fluid="lg" className="bathing-count-left d-flex flex-column align-items-center justify-content-center">
                         <div className="d-flex flex-column align-items-center justify-content-center">
-                            <div className="text-start">
+                            <div className="text-center text-md-start">
                                 {/* <h2 className="m-0 bathing-title">Nashik–Trimbakeshwar</h2> */}
                                 <h2 className="m-0 bathing-title">Nashik</h2>
                                 <span className="m-0 bathing-title-2">Kumbh Mela 2027–2028</span>
@@ -32,13 +33,12 @@ export const BathingDates = () => {
                     </Container>
                     <Container fluid="md" className="bathing-count-right section-padding">
                         <div className="py-5">
-                            <div className="d-flex mb-4 justify-content-between align-items-center">
-                                <div>
-                                    <span className="montez-sub-heading">Deals & Offers</span>
+                            <div className="d-flex mb-4 justify-content-center justify-content-md-between align-items-center">
+                                <div className="text-center">
                                     <TitleComponent
                                         title="Bathing Dates"
                                         divider={false}
-                                        h2_class={"text-start white-color"}
+                                        h2_class={"text-center text-md-start white-color"}
                                         className="mb-3"
                                     />
                                 </div>
@@ -164,25 +164,48 @@ export const BathingDates = () => {
                                 </SwiperSliderComp>
                             </div>
                             {/* bathing dates list for display on screen < 768px */}
-                            <div className="d-block d-md-none">
-                                <ul className="list-unstyled mb-0">
+                            {/* bathing dates list for display on screen < 768px */}
+                            <Container className="d-block d-md-none px-2">
+                                <Row className="row g-3"> {/* Bootstrap Row handling uniform responsive margins and dynamic wrapping */}
                                     {bathingDates.map((date, index) => (
-                                        <li key={index} className="mb-3">
-                                            <div className="date-card w-100 h-100 d-grid">
-                                                <div className="card-body p-2">
-                                                    <p className="title">{date.title}</p>
-                                                    <div className="d-flex flex-column align-items-center justify-content-between">
-                                                        <span className="m-0">{date.day}</span>
-                                                        <p className="month">
-                                                            {date.month} {date.year}
+                                        <Col key={index} xs={4} sm={4}> {/* Perfectly constraints exactly 3 items per row on mobile layout viewports */}
+
+                                            <AnimationSecComponent
+                                                type="vertical"
+                                                direction="up"
+                                                delay={(index % 3) * 0.1} // Dynamically resets the cascade stagger timer for every row iteration
+                                                distance={20}
+                                                className="h-100"
+                                            >
+                                                <div className={`festival-card border calendar-style w-100 h-100 text-center d-flex flex-column justify-content-between ${date.isKeyDate ? 'key-date-highlight' : ''}`}>
+
+                                                    {/* Header Title Section of Calendar Badge */}
+                                                    <div className="calendar-header p-1">
+                                                        <p className="title mb-0 text-truncate px-1" title={date.title}>
+                                                            {date.title}
                                                         </p>
                                                     </div>
+
+                                                    {/* Core Date Numerical Representation Block */}
+                                                    <div className="calendar-body py-2 d-flex flex-column align-items-center justify-content-center">
+                                                        <span className="display-date m-0 font-weight-bold">
+                                                            {date.day}
+                                                        </span>
+                                                    </div>
+
+                                                    {/* Lower Calendar Card Metadata Footer */}
+                                                    <div className="calendar-footer p-1">
+                                                        <p className="month-year mb-0 text-truncate">
+                                                            {date.month} '{date.year.slice(-2)}
+                                                        </p>
+                                                    </div>
+
                                                 </div>
-                                            </div>
-                                        </li>
+                                            </AnimationSecComponent>
+                                        </Col>
                                     ))}
-                                </ul>
-                            </div>
+                                </Row>
+                            </Container>
                         </div>
                     </Container>
                 </div>

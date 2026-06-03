@@ -381,7 +381,13 @@
         width: 100px !important;
         height: 100px !important;
         z-index: -1;
+
         // filter: invert(1.1);
+        @media(max-width:768px) {
+            width: 40px !important;
+            height: 40px !important;
+            // filter: invert(1.1);
+        }
     }
 }
 
@@ -407,7 +413,8 @@
     line-height: 1.4;
     letter-spacing: 0.15em;
     font-weight: 600;
-    @media(max-width:992px){
+
+    @media(max-width:992px) {
         font-size: $font-size-sm !important;
     }
 }
@@ -443,4 +450,72 @@
     transition: all 0.3s ease;
     font-size: $font-size-xs;
     letter-spacing: 0.15em;
+}
+
+
+
+// Custom Calendar Badge Styling Structure
+.calendar-style {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    //   background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    font-family: inherit;
+
+    .calendar-header {
+        // background-color: #f8f9fa;
+        border-bottom: 1px dashed #e0e0e0;
+
+        .title {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: $primary-color;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+    }
+
+    .calendar-body {
+        .display-date {
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.1;
+            color: $primary-color;
+        }
+    }
+
+    .calendar-footer {
+        // background-color: #fff;
+        // border-top: 1px solid #f1f3f5;
+
+        .month-year {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #ffffff;
+        }
+    }
+
+    // Highlight modifier variant for Shahi Snan dates (isKeyDate)
+    &.key-date-highlight {
+        border-color: #fd7e14; // Vibrant saffron accent color scheme
+
+        .calendar-header {
+            background-color: #fff3cd;
+            border-bottom-color: #ffeba2;
+
+            .title {
+                color: $primary-color;
+                font-weight: 700;
+            }
+        }
+
+        .calendar-body {
+            // background-color: #fffaf0;
+
+            .display-date {
+                color: $secondary-color;
+            }
+        }
+    }
 }

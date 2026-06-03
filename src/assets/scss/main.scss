@@ -603,6 +603,11 @@ p {
         color: $text-color-light;
         border-color: $primary-color;
     }
+
+    @media(max-width:768px) {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 .top-divider,
@@ -669,5 +674,18 @@ p {
 
     @media(max-width:576px) {
         aspect-ratio: 4/2;
+    }
+}
+
+@media(max-width:992px) {
+    .title-width {
+        width: 65%;
+    }
+}
+
+@media(max-width:576px) {
+    .title-width {
+        max-width: 324px;
+        width: 100%;
     }
 }

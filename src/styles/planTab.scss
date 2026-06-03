@@ -1,9 +1,9 @@
 @use "../assets/scss/variable" as *;
 
-.plan-tab-section {
-    // background-color: $bg-drak;
-    // background-color: $bg-light;
-}
+// .plan-tab-section {
+//     // background-color: $bg-drak;
+//     // background-color: $bg-light;
+// }
 
 // plan tab section
 .plan-tab-section {
@@ -26,12 +26,23 @@
             color: $text-color-light;
         }
 
-        @media(max-width:500px) {
+        @media(max-width:767px) {
+            background-color: $bg-light;
+            border-radius: $border-radius-round !important;
+            padding: 10px 14px !important;
             .content h3 {
+                color: $text-color-dark;
                 font-size: $font-size-base !important;
             }
-            padding: 5px !important;
         }
+
+        // @media(max-width:500px) {
+        //     .content h3 {
+        //         font-size: $font-size-base !important;
+        //     }
+
+        //     padding: 5px !important;
+        // }
     }
 
     // top grid
@@ -146,5 +157,11 @@
     .icon-box {
         background-color: $bg-light !important;
         color: $primary-color !important;
+    }
+
+    @media(max-width:768px){
+        .content h3 {
+            color: $bg-light !important;
+        }
     }
 }

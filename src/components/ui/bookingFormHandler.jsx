@@ -378,7 +378,7 @@ export const BookingFormHandler = ({ tourId,tourName, vehicleCategories = [] }) 
     );
 };
 
-// make this form foe Hotel & Car
+// make this form for Hotel & Car
 export const BookingForm = ({ show, handleClose, type, selectedItem }) => {
     const [formData, setFormData] = useState({
         name: '',

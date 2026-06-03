@@ -255,8 +255,8 @@ const TourPackageDetail = ({ tour }) => {
                                             <Row className="align-items-start">
                                                 <Col md={9}>
                                                     <span className="badge bg-brand-light primery-color ms-2 ms-sm-0">
-                                                        {/* Day {i + 1} */}
-                                                         {i + 1}
+                                                        Day {i + 1}
+                                                         {/* {i + 1} */}
                                                     </span>
 
                                                     <h5 className="fw-bold sub-heading text-dark">
