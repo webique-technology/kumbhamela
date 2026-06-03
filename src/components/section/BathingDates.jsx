@@ -43,7 +43,7 @@ export const BathingDates = () => {
                                     />
                                 </div>
                                 {/* Custom Navigation Buttons */}
-                                <div className="me-0">
+                                <div className="me-0 d-none d-md-block">
                                     <div className="slider-nav-wrapper d-flex gap-2 me-0 me-lg-1">
                                         <button className="bathing-prev-btn slider-prev-btn nav-custom-btn">
                                             <ArrowLeft size={20} />
@@ -54,7 +54,8 @@ export const BathingDates = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="div">
+                            {/* bathing dates slider for display on screen 768 or  > grater than 768px */}
+                            <div className="div d-none d-md-block">
                                 <SwiperSliderComp
                                     slidesPerView={4}
                                     navigation={{
@@ -77,8 +78,8 @@ export const BathingDates = () => {
                                             slidesPerView: 1,
                                             spaceBetween: 30,
                                         },
-                                        885: {
-                                            slidesPerView: 1,
+                                        865: {
+                                            slidesPerView: 2,
                                             spaceBetween: 30,
                                         },
                                         992: {
@@ -161,6 +162,26 @@ export const BathingDates = () => {
                                         </SwiperSlide>
                                     ))}
                                 </SwiperSliderComp>
+                            </div>
+                            {/* bathing dates list for display on screen < 768px */}
+                            <div className="d-block d-md-none">
+                                <ul className="list-unstyled mb-0">
+                                    {bathingDates.map((date, index) => (
+                                        <li key={index} className="mb-3">
+                                            <div className="date-card w-100 h-100 d-grid">
+                                                <div className="card-body p-2">
+                                                    <p className="title">{date.title}</p>
+                                                    <div className="d-flex flex-column align-items-center justify-content-between">
+                                                        <span className="m-0">{date.day}</span>
+                                                        <p className="month">
+                                                            {date.month} {date.year}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                         </div>
                     </Container>

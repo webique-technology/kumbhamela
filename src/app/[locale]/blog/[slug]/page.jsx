@@ -105,7 +105,7 @@ const BlogDetails = async ({ params }) => {
                 <div className="blog-detailed-bg-img" style={{ backgroundImage: `url(${blog.image_url})` }}>
                     <Container className='z-3'>
                         <div className="d-none d-sm-flex flex-column mb-4 align-items-start">
-                            <span className="badge bg-primary mb-2 text-uppercase">
+                            <span className="badge primary-badge mb-2 text-uppercase">
                                 {blog.category}
                             </span>
                             <h1 className="display-4 fw-bold blog-detail-page-title">{blog.title}</h1>

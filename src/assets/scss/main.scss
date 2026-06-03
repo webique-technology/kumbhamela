@@ -218,6 +218,15 @@ p {
     padding: 16px 32px;
     transition: all 0.2s ease-in;
 
+    @media(max-width:768px) {
+        padding: 10px 18px;
+        font-size: $font-size-base;
+    }
+
+    @media(max-width:576px) {
+        padding: 8px 12px;
+    }
+
     &:hover {
         background-color: #fff !important;
         color: $primary-color !important;
@@ -233,10 +242,27 @@ p {
     padding: 16px 32px;
     transition: all 0.2s ease-in;
 
+    @media(max-width:768px) {
+        padding: 10px 18px;
+        font-size: $font-size-base;
+    }
+
+    @media(max-width:576px) {
+        padding: 8px 12px;
+    }
+
     &:hover {
         background-color: $primary-color;
         color: $text-color-light;
     }
+}
+
+.primary-badge {
+    font-size: $font-size-sm;
+    color: $text-color-light;
+    background-color: $primary-color;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 // cards
@@ -635,5 +661,13 @@ p {
 }
 
 .center-tabs .swiper-wrapper {
-  justify-content: center !important;
+    justify-content: center !important;
+}
+
+.image-box {
+    aspect-ratio: 4/3;
+
+    @media(max-width:576px) {
+        aspect-ratio: 4/2;
+    }
 }
