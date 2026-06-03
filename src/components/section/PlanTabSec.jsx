@@ -55,50 +55,25 @@ const PlanTabSec = () => {
                             <Tab.Content className="ps-lg-5 h-100">
                                 {planTabData.map((tab, i) => (
                                     <Tab.Pane eventKey={`tab-${i}`} key={tab.id} className="h-100">
-                                        <div className="h-100 rounded-4 overflow-hidden bg-white d-flex flex-column flex-md-row flex-lg-column justify-content-between justify-content-lg-start p-3">
+                                        <div className="h-100 rounded-4 overflow-hidden bg-white d-flex flex-column gap-2 flex-column justify-content-between p-3">
                                             {tab.list.map((value, num) => (
                                                 <React.Fragment key={`list-group-${num}`}>
 
-                                                    {/* Top List Logic */}
-                                                    {value.top?.some(item => item !== "") && (
-                                                        <div>
-                                                            <h4>{tab.tabName === "Do's & Don'ts" ? "Do's" : tab.tabName}</h4>
-                                                            <ul className="d-flex flex-column gap-3 mb-4 list-unstyled">
-                                                                {value.top.filter(item => item !== "").map((item, itd) => (
-                                                                    <li key={`top-${itd}`} className="d-flex align-items-start justify-content-start gap-2">
-                                                                        <span className="text-success">
-                                                                            <CircleCheck size={18} />
-                                                                        </span>
-                                                                        <p className="m-0 text-muted">{item}</p>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        </div>
-                                                    )}
-
-                                                    {/* Bottom List Logic (Conditional Icons) */}
-                                                    {value.bottom?.some(item => item !== "") && (
-                                                        <div>
-                                                            <h4>{tab.tabName === "Do's & Don'ts" ? "Don'ts " : ""}</h4>
-                                                            <ul className="d-flex flex-column gap-3 list-unstyled">
-                                                                {value.bottom.filter(item => item !== "").map((item, idb) => (
-                                                                    <li key={`bottom-${idb}`} className="d-flex align-items-start justify-content-start gap-2">
-                                                                        {/* Conditional Icon based on Tab Name */}
-                                                                        {tab.tabName === "Do's & Don'ts" ? (
-                                                                            <span className="text-danger">
-                                                                                <TriangleAlert size={18} />
-                                                                            </span>
-                                                                        ) : (
-                                                                            <span className="text-success">
-                                                                                <CircleCheck size={18} />
-                                                                            </span>
-                                                                        )}
-                                                                        <p className="m-0 text-muted">{item}</p>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        </div>
-                                                    )}
+                                                    <Row className='gap-2 gap-sm-0'>
+                                                        {value.image && (
+                                                            <Col sm={4} className='d-block d-sm-flex align-items-center justify-content-center'>
+                                                                <div className='image-box'>
+                                                                    <img src={value.image} className='w-100 h-100 object-fit-cover rounded-2' alt={value.title} />
+                                                                </div>
+                                                            </Col>
+                                                        )}
+                                                        <Col sm={value.image ? 8 : 12} className=''>
+                                                            <div className='content-box'>
+                                                                {/* <h4 className='m-0 fs-6'>{value.title}</h4> */}
+                                                                <p className='m-0 small opacity-75'><span className='fw-bold text-dark fs-6'>{value.title} {value.title ? ": " : ""}</span>{value.description}</p>
+                                                            </div>
+                                                        </Col>
+                                                    </Row>
 
                                                 </React.Fragment>
                                             ))}

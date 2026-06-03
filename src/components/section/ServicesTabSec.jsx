@@ -12,7 +12,6 @@ import { Link, usePathname } from '@/i18n/routing';
 import { slugify } from '@/lib/utils';
 import "../../styles/servicesSec.scss"
 
-
 const ServicesTabSec = () => {
     const [show, setShow] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -39,7 +38,7 @@ const ServicesTabSec = () => {
         },
         {
             key: "hotel",
-            title: "Hotel & Accommodation",
+            title: "Accommodation",
             mapData: hotels,
             type: "hotel"
         }
@@ -66,7 +65,7 @@ const ServicesTabSec = () => {
     return (
         <section className='section-padding position-relative trinery-bg services-section'>
             {/* <div className="bottom-divider position-absolute top-0"></div> */}
-            <Container fluid>
+            <Container>
                 <Tab.Container
                     key={pathname + activeTab}
                     id="services-tabs"
@@ -74,7 +73,7 @@ const ServicesTabSec = () => {
                     onSelect={(k) => setActiveTab(k)}
                 >
                     <Row>
-                        <Col xs={12} className='d-flex flex-column mb-5 align-items-center justify-content-between'>
+                        <Col xs={12} className='d-flex flex-column mb-4 mb-sm-5 align-items-center justify-content-between'>
                             <TitleComponent
                                 title={tabData.find(t => t.key === activeTab)?.title || "Our Services"}
                                 className='text-center'
@@ -99,7 +98,7 @@ const ServicesTabSec = () => {
                                         <SwiperSliderComp
                                             breakpoints={{
                                                 0: {
-                                                    slidesPerView: 1,
+                                                    slidesPerView: 1.25,
                                                     spaceBetween: 20
                                                 },
                                                 576: {
@@ -111,21 +110,22 @@ const ServicesTabSec = () => {
                                                     spaceBetween: 20
                                                 },
                                                 992: {
+                                                    slidesPerView: 3,
+                                                    spaceBetween: 20
+                                                },
+                                                1366: {
                                                     slidesPerView: 4,
                                                     spaceBetween: 20
                                                 },
-                                                1220: {
-                                                    slidesPerView: 5,
-                                                    spaceBetween: 20
-                                                },
                                                 1400: {
-                                                    slidesPerView: 6,
+                                                    slidesPerView: 4,
                                                     spaceBetween: 20
                                                 },
                                             }}
-                                            loop={tab.mapData.length > 6}
+                                            loop={true}
                                             navigation={false}
-                                            className={`mySwiper ${shouldCenterTabs ? "center-tabs" : ""}`}
+                                            className={`mySwiper`}
+                                            // className={`mySwiper ${shouldCenterTabs ? "center-tabs" : ""}`}
                                         >
                                             {tab.mapData.map((item, i) => {
                                                 // check if the images have array
@@ -146,7 +146,7 @@ const ServicesTabSec = () => {
                                                                 <div className='d-flex align-items-center justify-content-between mt-2'>
                                                                     <h4 className="service-item-card-text text-light">
                                                                         {typeof item.price === 'number' ? `From : ₹${item.price.toLocaleString()}` : item.price}
-                                                                        <span className='text-decoration-line-through text-light-25 ms-4'>₹1,450</span>
+                                                                        {/* <span className='text-decoration-line-through text-light-25 ms-4'>₹1,450</span> */}
                                                                     </h4>
 
                                                                 </div>

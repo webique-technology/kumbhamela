@@ -28,60 +28,7 @@
             font-size: $font-size-xs;
             color: $text-color-light;
             // opacity: 0;
-            animation: fadeTop 0.8s ease both;
-            animation-delay: 0.2s;
             // display: none;
-        }
-
-        .hero-title {
-            opacity: 0;
-            animation: fadeRight 1s ease both;
-            animation-delay: 0.7s;
-        }
-
-        .hero-description-animate {
-            opacity: 0;
-            animation: fadeBottom 1s ease both;
-            animation-delay: 1.2s;
-        }
-    }
-
-    /* Subheading */
-    @keyframes fadeTop {
-        from {
-            opacity: 0;
-            transform: translateY(-40px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* Title */
-    @keyframes fadeRight {
-        from {
-            opacity: 0;
-            transform: translateX(60px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    /* Description */
-    @keyframes fadeBottom {
-        from {
-            opacity: 0;
-            transform: translateY(40px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
         }
     }
 
@@ -115,25 +62,7 @@
         }
 
         .scroll-down-icon {
-            animation: arrowMove 1.5s infinite;
             stroke-width: 2.5;
-        }
-    }
-
-    @keyframes arrowMove {
-        0% {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        50% {
-            transform: translateY(10px);
-            opacity: 0.6;
-        }
-
-        100% {
-            transform: translateY(0);
-            opacity: 1;
         }
     }
 
@@ -175,7 +104,7 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        height: 90vh;
+        height: 85vh;
         width: 100%;
 
         @media(max-width: 768px) {
@@ -221,7 +150,7 @@
         font-size: Clamp($font-size-lg-3, 6vw, $fs-hero);
         line-height: 1.2;
         font-weight: 800;
-        letter-spacing: -0.02em;
+        // letter-spacing: -0.02em;
         text-shadow: 0 2px 3px #828282;
     }
 

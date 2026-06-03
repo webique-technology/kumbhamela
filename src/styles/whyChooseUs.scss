@@ -2,6 +2,26 @@
 
 // why choose us
 .why-choose-us-section {
+    @media(max-width:1200) {
+        padding: 60px 0;
+    }
+
+    @media(max-width:1024) {
+        padding: 60px 0 90px 0;
+    }
+
+    @media(max-width:768) {
+        padding: 40px 0 90px 0;
+    }
+
+    @media(max-width:576) {
+        padding: 30px 0 100px 0;
+    }
+
+    @media(max-width:450px) {
+        padding-bottom: 45px;
+    }
+
     .why-choose-us-card {
         .icon {
             padding: 15px;
@@ -92,7 +112,7 @@
         z-index: 2;
 
         @media(max-width:450px) {
-            width: auto;
+            width: 280px;
             height: auto;
         }
     }
@@ -108,7 +128,7 @@
 
         @media(max-width:450px) {
             top: 135px !important;
-            width: auto;
+            width: 250px;
             height: auto;
         }
     }

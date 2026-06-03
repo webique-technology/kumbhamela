@@ -88,13 +88,13 @@ const VideoGallery = () => {
                     loop={reels.length > 6}
                     speed={800}
                     watchSlidesProgress={true}
-                    // disableAutoplay={true}
+                    disableAutoplay={true}
                     breakpoints={{
-                        0: { slidesPerView: 3 },
+                        0: { slidesPerView: 2.25 },
                         450: { slidesPerView: 3 },
                         1024: { slidesPerView: 4 },
                         1240: { slidesPerView: 5 },
-                        1440: { slidesPerView: 6 }
+                        1440: { slidesPerView: 5 }
                     }}
                     onSlideChange={handleSlideChange}
                     onSwiper={(swiper) => {

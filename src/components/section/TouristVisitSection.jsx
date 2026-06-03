@@ -47,9 +47,10 @@ const TouristVisitSection = () => {
                     }}
                     spaceBetween={20}
                     timeDelay={4000}
+                    disableAutoplay={true}
                     breakpoints={{
                         0: {
-                            slidesPerView: 1,
+                            slidesPerView: 1.25,
                             spaceBetween: 20,
                         },
                         450: {
