@@ -12,7 +12,7 @@ import { WhatsAppShareBtn } from "@/components/ui/button";
 import { HighlightsModal, TourTabs, } from "@/components/ui/common";
 import { TourPackageSlider } from "@/components/ui/TourPackageSlider";
 import { tourPackages } from "@/lib/data";
-import { getCancellationPolicy, getPaymentPolicy,getTours} from "../tourApi";
+import { getCancellationPolicy, getPaymentPolicy,getTours, getTourBySlug} from "../tourApi";
 
 
 const TourPackageDetail = ({ tour }) => {
@@ -142,8 +142,11 @@ const TourPackageDetail = ({ tour }) => {
                                                 <div className="d-flex flex-row flex-wrap justify-content-start gap-3 mb-3 mb-md-0">
                                                     {(tour.inclusions || []).map(
                                                         (item, i) => {
-                                                            const LucideIcon =
-                                                                Icons[item.in_icon];
+                                                             const iconName = typeof item === "object"
+                                                                        ? item.in_icon
+                                                                        : null;
+                                                            const LucideIcon =iconName && Icons[iconName];
+                                                                // Icons[item.in_icon];
 
                                                             return (
                                                                 <div
@@ -162,8 +165,13 @@ const TourPackageDetail = ({ tour }) => {
                                                                         />
                                                                     )}
 
-                                                                    <p className="m-0 small-12 text-center">
+                                                                    {/* <p className="m-0 small-12 text-center">
                                                                         {item}
+                                                                    </p> */}
+                                                                    <p className="m-0 small-12 text-center">
+                                                                        {typeof item === "object"
+                                                                            ? item.label
+                                                                            : item}
                                                                     </p>
                                                                 </div>
                                                             );
@@ -259,7 +267,7 @@ const TourPackageDetail = ({ tour }) => {
                                                         className={`text-secondary ${expandedItems[i] ? "" : "line-clamp-5"
                                                             }`}
                                                     >
-                                                        {day.description}
+                                                        {day.description || ""}
                                                     </p>
 
                                                     {day.description?.length > 261 && (
@@ -335,7 +343,8 @@ const TourPackageDetail = ({ tour }) => {
                                 <h4 className="text-start m-0">Booking Summery</h4>
                             </div>
                             <div className="price mb-4">
-                                <span className="h3 fw-bold primery-color">₹ {(tour.base_price || 0).toLocaleString()}</span>
+                                <span className="h3 fw-bold primery-color">₹ {Number(tour.base_price || 0).toLocaleString()}</span>
+                                {/* ₹ {(tour.base_price || 0).toLocaleString()}  */}
                                 <span className="text-muted"> / person</span>
                             </div>
                             <div className="info-box mb-4 p-3 rounded">

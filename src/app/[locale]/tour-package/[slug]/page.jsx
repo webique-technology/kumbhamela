@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { slugify } from "@/lib/utils";
 import TourPackageDetail from "./TourPackageDetail";
 import "../../../../styles/tourPackage.scss";
+import { getTourBySlug } from "../tourApi";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
@@ -31,15 +32,15 @@ async function getTours() {
 export async function generateMetadata({
   params,
 }) {
-  const { slug, locale } =
-    await params;
+  const { slug, locale } = await params;
 
   const tours = await getTours();
+  const tour = await getTourBySlug(slug);
 
-  const tour = tours.find(
-    (item) =>
-      slugify(item.title || "") === slug
-  );
+  // const tour = tours.find(
+  //   (item) =>
+  //     slugify(item.title || "") === slug
+  // );
 
   if (!tour) {
     return {
@@ -86,19 +87,18 @@ export async function generateMetadata({
 export default async function TourDetailPage({
   params,
 }) {
-  const { slug } =
-    await params;
+  const { slug } = await params;
 
-  const tours =
-    await getTours();
-
-  const tour =
-    tours.find(
-      (item) =>
-        slugify(
-          item.title || ""
-        ) === slug
-    );
+  const tours =await getTours();
+  const tour = await getTourBySlug(slug);
+  console.log("TOUR DATA", tour);
+  // const tour =
+  //   tours.find(
+  //     (item) =>
+  //       slugify(
+  //         item.title || ""
+  //       ) === slug
+  //   );
 
   if (!tour) {
     notFound();
