@@ -157,7 +157,7 @@ const AboutUs = () => {
                             <SwiperSlide key={index} className="h-auto">
                                 <div className="card history-card h-100 border-0 shadow-md overflow-hidden">
                                     <div className="position-relative overflow-hidden">
-                                        <Image
+                                        <img
                                             src={card.img}
                                             alt={card.title}
                                             width={200}

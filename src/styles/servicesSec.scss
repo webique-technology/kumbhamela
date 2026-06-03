@@ -8,6 +8,9 @@
         padding: 10px;
         border-radius: $border-radius-round;
 
+        @media(max-width:576px) {
+            background: none;
+        }
     }
 
     .nav-pills .nav-link {
@@ -34,29 +37,15 @@
 
     }
 
-    @media(max-width:576px) {
+    @media(max-width:768) {
         .nav-link {
             padding: 10px 14px !important;
         }
     }
 
-    @media(max-width:500px) {
-        .nav-tab-count {
-            display: flex !important;
-            flex-direction: row !important;
-            justify-content: flex-start !important;
-            overflow-x: auto !important;
-            scroll-snap-type: x mandatory !important;
-            gap: 1rem !important;
-            flex-wrap: nowrap !important;
-        }
-
-        .nav-item {
-            flex: 0 0 50% !important;
-
-            .nav-link {
-                text-align: center !important;
-            }
+    @media(max-width:576px) {
+        .nav-link {
+            background-color: $bg-light !important;
         }
     }
 
@@ -129,12 +118,12 @@
 
         .service-btn {
             font-size: $font-size-sm !important;
-            color: $text-color-light;
+            color: $primary-color;
             background: none;
             border: none;
 
             &:hover {
-                color: $primary-color !important;
+                color: $secondary-color !important;
             }
         }
     }

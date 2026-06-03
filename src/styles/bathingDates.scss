@@ -403,10 +403,13 @@
 
 .festival-title {
     color: $text-color-light;
-    font-size: 2rem;
+    font-size: $font-size-md-2;
     line-height: 1.4;
     letter-spacing: 0.15em;
     font-weight: 600;
+    @media(max-width:992px){
+        font-size: $font-size-sm !important;
+    }
 }
 
 .festival-day {

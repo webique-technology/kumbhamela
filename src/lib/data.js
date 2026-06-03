@@ -793,40 +793,44 @@ export const planTabData = [
         tabDesc: "Explore seamless travel options by air, rail, or road, and start your journey effortlessly.",
         list: [
             {
-                top: [
-                    "By Air: Nearest airport is Mumbai (180 km) or Shirdi (80 km)",
-                    "By Train: Nashik Road Railway Station connects to major cities",
-                    "By Road: Well-connected via NH3, NH50 from Mumbai, Pune",
-                    "Local Transport: Auto-rickshaws, taxis, and buses available"
-                ],
-                bottom: [
-                    "",
-                    "",
-                    ""
-                ]
+                image: "/images/by-air.webp", // Replace with your actual image path
+                title: "By Air (Flights)",
+                description: "Fly into Nashik Ozar Airport (ISK) located 20 km from the center for direct domestic flights from Mumbai and Delhi. Alternatively, international travelers can land at Mumbai Airport (BOM) and take a scenic 3–4 hour road or rail trip to Nashik."
+            },
+            {
+                image: "/images/by-train.webp", // Replace with your actual image path
+                title: "By Train (Railways)",
+                description: "Nashik Road Railway Station (NK) is a major central rail hub with excellent connectivity across India. Daily express and superfast trains connect Mumbai (CSMT/Dadar) directly to Nashik, completing the journey in just 3 to 3.5 hours."
+            },
+            {
+                image: "/images/by-road.webp", // Replace with your actual image path
+                title: "By Road (Highways & Buses)",
+                description: "Nashik is seamlessly connected via smooth national highways like the Mumbai-Nashik Expressway (NH-160). State-run MSRTC buses, luxury private AC sleepers, and outstation cabs operate 24/7 from Mumbai, Pune, and surrounding regions."
             }
-        ],
+        ]
     },
     {
         id: 2,
         tabIcon: "",
-        tabName: "Where to Stay",
+        tabName: "Local Transport",
         tabDesc: "Explore our curated list of accommodations and book your serene retreat.",
         list: [
             {
-                top: [
-                    "Hotels range from budget to luxury options",
-                    "Dharamshalas offer affordable pilgrim stays",
-                    "Tent cities set up during Kumbh period",
-                    "Book well in advance for Shahi Snan dates"
-                ],
-                bottom: [
-                    "",
-                    "",
-                    ""
-                ]
+                image: "/images/citilinc-bus.webp", // Replace with your actual image path
+                title: "Citilinc Public Buses (NMPML)",
+                description: "Nashik's official Citilinc bus network will operate special, high-frequency shuttle services during the event. These routes directly connect the railway station, main bus depots, and key city hubs straight to the primary Mela grounds."
+            },
+            {
+                image: "/images/auto-rickshaw.webp", // Replace with your actual image path
+                title: "Auto-Rickshaws",
+                description: "Three-wheelers are widely available for quick transit across the city. Note that auto-rickshaw access will be restricted or zoned off around the core bathing areas on peak shahi snan (holy bathing) days to manage crowd density."
+            },
+            {
+                image: "/images/walking-path.webp", // Replace with your actual image path
+                title: "Pedestrian Walkways (On Foot)",
+                description: "Walking is the most efficient way to navigate the immediate Mela zones and reach the bathing ghats. The administration is setting up dedicated pedestrian-only barricaded lanes to ensure safe, smooth, and vehicle-free movement."
             }
-        ],
+        ]
     },
     {
         id: 3,
@@ -835,19 +839,26 @@ export const planTabData = [
         tabDesc: "Categorized list of public utilities, designed to make it accessible for tourists and pilgrims",
         list: [
             {
-                top: [
-                    "Keep belongings secure and minimal",
-                    "Stay hydrated and carry basic medicines",
-                    "Follow crowd management instructions",
-                    "Keep emergency contacts handy"
-                ],
-                bottom: [
-                    "",
-                    "",
-                    ""
-                ]
+                image: "/images/crowd-safety.webp", // Replace with your actual image path
+                title: "Crowd Safety & Awareness",
+                description: "Stay with your group and establish clear meeting points. Follow directions from police and trained volunteers, and remain highly alert of your personal belongings in crowded areas to avoid pickpockets."
+            },
+            {
+                image: "/images/hydration-food.webp", // Replace with your actual image path
+                title: "Hydration & Safe Eating",
+                description: "Carry a reusable water bottle and stay well-hydrated throughout the day. Avoid unhygienic street food and strictly opt for freshly prepared meals to prevent stomach infections."
+            },
+            {
+                image: "/images/personal-hygiene.webp", // Replace with your actual image path
+                title: "Personal Hygiene & Protection",
+                description: "Keep a personal hygiene kit handy with hand sanitizer, tissues, and essential medications. Wear a face mask while moving around the grounds to safeguard against heavy dust and airborne pollutants."
+            },
+            {
+                image: "/images/medical-services.webp", // Replace with your actual image path
+                title: "Emergency Medical Services",
+                description: "Familiarize yourself with the location of emergency medical camps. The Mela administration will have multiple temporary medical tents and fully equipped first-aid centers distributed across the venue."
             }
-        ],
+        ]
     },
     {
         id: 5,
@@ -856,45 +867,53 @@ export const planTabData = [
         tabDesc: "Emergency: 100 | Tourist Helpline: 1800-XXX-XXXX | Medical Help: 108 | Available 24/7",
         list: [
             {
-                top: [
-                    "",
-                    "",
-                    ""
-                ],
-                bottom: [
-                    "",
-                    "",
-                    ""
-                ]
-            }
-        ],
-    },
-    {
-        id: 6,
-        tabIcon: "",
-        tabName: "Do's & Don'ts",
-        tabDesc: "Designated parking areas available. Use local transport, shuttles, or auto-rickshaws for ghat access.",
-        list: [
+                image: "",
+                title: "",
+                description: ""
+            },
             {
-                top: [
-                    "Dress modestly in traditional attire",
-                    "Respect local customs and traditions",
-                    "Take only holy dips at designated ghats",
-                    "Carry sufficient drinking water",
-                    "Keep identity documents with you",
-                    "Follow instructions of volunteers"
-                ],
-                bottom: [
-                    "Don't litter the ghats or river",
-                    "Avoid plastic bags and bottles",
-                    "Don't take photographs without permission",
-                    "Don't push or rush in crowds",
-                    "Avoid carrying valuables",
-                    "Don't ignore health advisories"
-                ]
+                image: "",
+                title: "",
+                description: ""
+            },
+            {
+                image: "",
+                title: "",
+                description: ""
+            },
+            {
+                image: "",
+                title: "",
+                description: ""
             }
         ],
     },
+    // {
+    //     id: 6,
+    //     tabIcon: "",
+    //     tabName: "Do's & Don'ts",
+    //     tabDesc: "Designated parking areas available. Use local transport, shuttles, or auto-rickshaws for ghat access.",
+    //     list: [
+    //         {
+    //             top: [
+    //                 "Dress modestly in traditional attire",
+    //                 "Respect local customs and traditions",
+    //                 "Take only holy dips at designated ghats",
+    //                 "Carry sufficient drinking water",
+    //                 "Keep identity documents with you",
+    //                 "Follow instructions of volunteers"
+    //             ],
+    //             bottom: [
+    //                 "Don't litter the ghats or river",
+    //                 "Avoid plastic bags and bottles",
+    //                 "Don't take photographs without permission",
+    //                 "Don't push or rush in crowds",
+    //                 "Avoid carrying valuables",
+    //                 "Don't ignore health advisories"
+    //             ]
+    //         }
+    //     ],
+    // },
 ]
 
 // faq
@@ -920,14 +939,14 @@ export const faqData = [
 export const heroSliderData = [
     {
         id: 1,
-        image: "/images/hero-bg-1.jpg",
+        image: "/images/banner-1.webp",
         subHeading: "Experience Unmatched Delight With Us.",
         title: "Where Exceptional Memories Begin",
         description: "Welcome to our Vitour website! We are a professional and reliable tours company that offers a wide range of printing services are many variations of passages.",
     },
     {
         id: 2,
-        image: "/images/hero-bg-3.jpg",
+        image: "/images/banner-2.webp",
         subHeading: "The Sacred Confluence of Faith & Time",
         title: "Nashik Kumbh Mela 2027",
         description: "Where millions gather on the banks of the holy Godavari to seek spiritual liberation. Experience the world's largest spiritual congregation at one of India's most sacred pilgrimage sites."
