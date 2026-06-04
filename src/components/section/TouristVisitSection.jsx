@@ -88,7 +88,7 @@ const TouristVisitSection = () => {
                                     {/* Badge Left */}
                                     <div className="position-absolute bottom-0 start-0 m-3 z-2">
                                         <h4 className='text-light mb-1'>{card.name}</h4>
-                                        <p className='text-white m-0'>{card.description}</p>
+                                        <p className='text-white text-excerpt m-0'>{card.description}</p>
                                     </div>
                                 </div>
                             </div >
@@ -97,7 +97,7 @@ const TouristVisitSection = () => {
                 </SwiperSliderComp>
 
             </Container>
-            <div className="top-divider trinery-bg position-absolute bottom-0" style={{ pointerEvents: 'none' }}></div>
+            {/* <div className="top-divider trinery-bg position-absolute bottom-0" style={{ pointerEvents: 'none' }}></div> */}
         </section>
     );
 }

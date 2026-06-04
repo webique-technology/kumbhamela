@@ -33,7 +33,7 @@ const PlanTabSec = () => {
                                     const Icon = icons[i] || MapPin;
                                     return (
                                         <Nav.Item key={tab.id}>
-                                            <Nav.Link eventKey={`tab-${i}`} className="plan-tab-item p-2 p-lg-4">
+                                            <Nav.Link eventKey={`tab-${i}`} className="plan-tab-item p-2 p-lg-4 shadow-sm">
                                                 <div className='d-flex align-items-center gap-2 gap-md-3 gap-lg-4 text-start'>
                                                     <div className='icon-box text-white d-none d-md-block'>
                                                         <Icon size={18} />

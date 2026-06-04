@@ -265,12 +265,12 @@ export const RentalCarCard = ({ car, onBook }) => {
                 {/* Footer Logic */}
                 < div className="d-flex align-items-center justify-content-between mt-auto border-top pt-3" >
                     <div className='d-flex align-items-end'>
-                        <span className="h4 fw-bold text-brand-orange mb-0">{car.base_price} /&nbsp;</span>
-                        <small className="text-muted d-block smaller mb-1">per Day</small>
+                        <span className="h4 fw-bold text-brand-orange mb-0">{car.base_price}</span>&nbsp;/&nbsp;
+                        <small className="text-muted d-block smaller mb-1">per km</small>
                     </div>
 
                     {/* whatsapp btn */}
-                    < WhatsappBtn
+                    <WhatsappBtn
                         type='button'
                         onClick={onBook}
                         title="Book Now"

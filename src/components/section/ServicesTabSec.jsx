@@ -63,7 +63,7 @@ const ServicesTabSec = () => {
         activeTabData?.mapData?.length <= 5 &&
         isDesktop;
     return (
-        <section className='section-padding position-relative trinery-bg services-section'>
+        <section className='section-padding-2 pt-5 position-relative trinery-bg  services-section'>
             {/* <div className="bottom-divider position-absolute top-0"></div> */}
             <Container>
                 <Tab.Container
@@ -218,7 +218,7 @@ const ServicesTabSec = () => {
                 type={activeTab === "hotel" ? "hotel" : "car"}
                 selectedItem={selectedItem}
             />
-            {/* <div className="top-divider position-absolute bottom-0"></div> */}
+            <div className="bottom-divider bd-light-bg position-absolute bottom-0" style={{ bottom: '-40px' }}></div>
         </section >
     );
 };

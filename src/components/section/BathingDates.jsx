@@ -15,7 +15,7 @@ export const BathingDates = () => {
         <>
             {/* bathing dates with slider */}
             <section className="bathing-count-main position-relative">
-                <div className="top-divider position-absolute td-trinery-bg z-3 td-top" style={{ pointerEvents: 'none' }}></div>
+                <div className="top-divider position-absolute td-trinery-bg z-3 td-top filter-graycsale" style={{ pointerEvents: 'none' }}></div>
                 <div className="bathing-row-count">
                     <Container fluid="lg" className="bathing-count-left d-flex flex-column align-items-center justify-content-center">
                         <div className="d-flex flex-column align-items-center justify-content-center">
@@ -31,7 +31,7 @@ export const BathingDates = () => {
                             </div>
                         </div>
                     </Container>
-                    <Container fluid="md" className="bathing-count-right section-padding">
+                    <Container fluid="md" className="bathing-count-right section-padding-2">
                         <div className="py-5">
                             <div className="d-flex mb-4 justify-content-center justify-content-md-between align-items-center">
                                 <div className="text-center">
@@ -209,7 +209,7 @@ export const BathingDates = () => {
                         </div>
                     </Container>
                 </div>
-                <div className="bottom-divider position-absolute z-3 bd-bottom bd-light-bg" style={{ pointerEvents: 'none' }}></div>
+                <div className="bottom-divider position-absolute z-3 bd-bottom td-trinery-bg" style={{ pointerEvents: 'none' }}></div>
             </section>
         </>
     );

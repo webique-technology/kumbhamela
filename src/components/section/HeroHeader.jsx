@@ -67,7 +67,7 @@ const HeroHeader = () => {
                                         </AnimationSecComponent>
 
                                         {/* Description Entrance */}
-                                        <AnimationSecComponent type="vertical" direction="up" delay={0.6} distance={30}>
+                                        <AnimationSecComponent type="vertical" direction="up" delay={0.6} distance={30} className={"d-none d-sm-block"}>
                                             <p className='hero-description text-md mb-4 hero-description-animate'>
                                                 {item.description}
                                             </p>
@@ -107,7 +107,7 @@ const HeroHeader = () => {
                             }
                         }}
                     >
-                        <div className="scroll-oval">
+                        {/* <div className="scroll-oval">
                             <motion.div
                                 animate={{
                                     opacity: [0.6, 1, 0.6],
@@ -121,7 +121,7 @@ const HeroHeader = () => {
                             >
                                 <ArrowDown className="scroll-down-icon" size={32} />
                             </motion.div>
-                        </div>
+                        </div> */}
                     </div>
                 </SwiperSliderComp>
             </section >
