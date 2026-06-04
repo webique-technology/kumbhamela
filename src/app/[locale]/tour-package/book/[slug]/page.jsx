@@ -24,7 +24,7 @@ async function getTours() {
     console.error(
       "Tour API Error:",
       error.response?.data ||
-        error.message
+      error.message
     );
 
     return [];
@@ -33,24 +33,24 @@ async function getTours() {
 
 
 async function getVehicleCategories(id) {
-    try {
-        const response = await axios.get(
-            `${API_URL}/tours/${id}/vehicle-categories`
-        );
-        console.log(
-          "Vehicle Categories API:",
-          response.data
-        );
-        return response.data || [];
-    } catch (error) {
-        console.error(
-            "Vehicle category API error:",
-            error.response?.data ||
-                error.message
-        );
+  try {
+    const response = await axios.get(
+      `${API_URL}/tours/${id}/vehicle-categories`
+    );
+    console.log(
+      "Vehicle Categories API:",
+      response.data
+    );
+    return response.data || [];
+  } catch (error) {
+    console.error(
+      "Vehicle category API error:",
+      error.response?.data ||
+      error.message
+    );
 
-        return [];
-    }
+    return [];
+  }
 }
 
 const BookingPage = async ({
@@ -73,12 +73,12 @@ const BookingPage = async ({
 
   const vehicleCategories =
     await getVehicleCategories(
-        tour.id
-  );
+      tour.id
+    );
 
   return (
     <main>
-      <section className="section-padding booking-form-page min-vh-100 d-flex align-items-center">
+      <section className="section-padding padding-bottom booking-form-page min-vh-100 d-flex align-items-center">
         <Container>
           <Row className="justify-content-center">
 
@@ -93,14 +93,14 @@ const BookingPage = async ({
                 </h1>
 
                 <p className="text-dark mb-1">
-                 Fill in the details below to begin your pilgrimage. Our journey coordinators will contact you within 24 hours to personalize your experience.
+                  Fill in the details below to begin your pilgrimage. Our journey coordinators will contact you within 24 hours to personalize your experience.
                 </p>
               </div>
 
               <BookingFormHandler
                 tourId={tour.id}
                 tourName={tour.title}
-                 vehicleCategories={ vehicleCategories }
+                vehicleCategories={vehicleCategories}
               />
             </Col>
 
@@ -153,7 +153,7 @@ const BookingPage = async ({
                           Access
                         </h6>
 
-                       <p className="small text-muted mb-0">Priority slots for restricted ritual areas and VIP viewing platforms.</p>
+                        <p className="small text-muted mb-0">Priority slots for restricted ritual areas and VIP viewing platforms.</p>
                       </div>
                     </div>
 
@@ -170,18 +170,18 @@ const BookingPage = async ({
                           Spiritual
                           Concierge
                         </h6>
-                       <p className="small text-muted mb-0">From Samagri arrangements to personalized Puja planning.</p>
+                        <p className="small text-muted mb-0">From Samagri arrangements to personalized Puja planning.</p>
                       </div>
                     </div>
 
                   </div>
 
                   <hr className="my-4 opacity-10" />
-                                    <div className="d-flex justify-content-between text-center">
-                                        <div><h5 className="fw-bold mb-0">15k+</h5><small className="text-muted smaller">PILGRIMS</small></div>
-                                        <div><h5 className="fw-bold mb-0">4.9/5</h5><small className="text-muted smaller">RATING</small></div>
-                                        <div><h5 className="fw-bold mb-0">24/7</h5><small className="text-muted smaller">SUPPORT</small></div>
-                                    </div>
+                  <div className="d-flex justify-content-between text-center">
+                    <div><h5 className="fw-bold mb-0">15k+</h5><small className="text-muted smaller">PILGRIMS</small></div>
+                    <div><h5 className="fw-bold mb-0">4.9/5</h5><small className="text-muted smaller">RATING</small></div>
+                    <div><h5 className="fw-bold mb-0">24/7</h5><small className="text-muted smaller">SUPPORT</small></div>
+                  </div>
                 </div>
               </div>
             </Col>

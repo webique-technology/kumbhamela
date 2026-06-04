@@ -250,18 +250,18 @@ export const RentalCarCard = ({ car, onBook }) => {
                     </p>
                 </div>
                 {/* Features */}
-                <Row className='px-2 mb-3 row-gap-2'>
+                <ul className='d-flex flex-wrap gap-2 mb-4 p-0'>
                     {car.features.map((feature, idx) => (
-                        <Col key={idx} lg={6} xs={6} className='px-2'>
+                        <li key={idx} className='badge trinery-bg py-1 d-flex align-items-center justify-content-center rounded-pill border border-light'>
                             <span
-                                className="primery-color d-flex align-items-center gap-2 fw-bold border-light"
+                                className="d-flex align-items-center small-12 gap-2 fw-semibold border-light"
                             >
-                                <IconResolver featureName={feature} />
+                                {/* <IconResolver featureName={feature} /> */}
                                 {feature}
                             </span>
-                        </Col>
+                        </li>
                     ))}
-                </Row>
+                </ul>
                 {/* Footer Logic */}
                 < div className="d-flex align-items-center justify-content-between mt-auto border-top pt-3" >
                     <div className='d-flex align-items-end'>

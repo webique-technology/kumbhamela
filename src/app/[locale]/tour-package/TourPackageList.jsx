@@ -95,7 +95,7 @@ const TourPageContent = () => {
                 showSearch={true}
             />
 
-            <section className="section-padding secondary-bg">
+            <section className="section-padding padding-bottom secondary-bg">
                 <Container>
 
                     {/* --- TARGETED DATA LOADING STATE LAYER --- */}

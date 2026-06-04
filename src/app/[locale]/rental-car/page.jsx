@@ -238,7 +238,7 @@ export default function RentalCar() {
           heroTitle="Select your preferred transport"
           heroImage="/images/carrental-page-bg.png"
           imgClass="hero-img"
-          showSearch={true}
+          showSearch={false}
         />
       </section>
 
@@ -248,7 +248,7 @@ export default function RentalCar() {
       </Suspense>
 
       {/* Bento feature matrix - Stays mounted securely below without popping layout layout shifts */}
-      <section className="bento-features-section section-padding">
+      <section className="bento-features-section padding-bottom section-padding">
         <Container>
           <TitleComponent
             title="The Pilgrim's Standard"

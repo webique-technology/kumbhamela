@@ -108,7 +108,7 @@ const VideoGallery = () => {
     };
 
     return (
-        <section className="section-padding-2 trinery-bg position-relative video-gallery-main">
+        <section className="section-padding-2 padding-bottom trinery-bg position-relative video-gallery-main">
             <div className="top-divider position-absolute z-3 td-top bd-light-bg" style={{ pointerEvents: 'none' }}></div>
             <Container>
                 <div className="d-flex justify-content-center mb-4 mb-md-0 justify-content-sm-between align-items-center">

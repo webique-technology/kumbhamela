@@ -7,7 +7,7 @@ import { ArrowRight } from 'lucide-react';
 
 export const TourPackageSlider = ({ packages, title }) => {
     return (
-        <div className="tour-package-slider-main">
+        <div className="tour-package-slider-main padding-bottom">
             <h4 className="section-title fw-bold mb-4">{title}</h4>
             <SwiperSliderComp
                 className={"py-1"}

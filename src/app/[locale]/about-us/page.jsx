@@ -411,7 +411,7 @@ const AboutUs = () => {
 
             {/* 5. Significance Quote */}
 
-            <section className="quote-section py-5 secondary-bg">
+            <section className="quote-section pt-5 padding-bottom secondary-bg">
                 <Container className="text-center">
                     <CheckCircle size={60} className="text-primary-light mb-4" />
                     <h2 className="quote-main mb-4">

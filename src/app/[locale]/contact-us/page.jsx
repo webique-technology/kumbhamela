@@ -250,7 +250,7 @@ const ContactUs = () => {
 
             {/* faq section */}
             {/* faq section */}
-            <section className="faq-section section-padding">
+            <section className="faq-section section-padding padding-bottom">
                 <Container>
                     {/* Section Header */}
                     <TitleComponent

@@ -63,7 +63,7 @@ const HotelPageContent = () => {
     return (
         <>
 
-            <section className="section-padding">
+            <section className="section-padding padding-bottom">
                 <Container>
 
                     {currentItems.length > 0 ? (
