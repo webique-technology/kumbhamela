@@ -137,7 +137,7 @@ export const SwiperSliderComp = ({
     );
 };
 
-// search fleet component
+// Search Bar
 export const SearchFleet = () => {
     const router = useRouter();
     const pathname = usePathname();
@@ -154,24 +154,69 @@ export const SearchFleet = () => {
         price: searchParams.get("price") || 'all',
     });
 
+    // Handle temporary dropdown open state flags
+    const [openDropdown, setOpenDropdown] = useState(null); // 'category' | 'price' | null
+
+    // Safe auto-closing event listener if the user clicks anywhere outside the card
+
+    useEffect(() => {
+        const closeAll = () => setOpenDropdown(null);
+        window.addEventListener("click", closeAll);
+        return () => window.removeEventListener("click", closeAll);
+    }, []);
+
+    const toggleDropdown = (e, name) => {
+        e.stopPropagation(); // Stops immediate closing via root click propagation
+        setOpenDropdown(openDropdown === name ? null : name);
+    };
+
+    const handleSelectOption = (field, value) => {
+        setFormData((prev) => ({ ...prev, [field]: value }));
+        setOpenDropdown(null);
+    };
+
     const handleSearch = (e) => {
         e.preventDefault();
         const params = new URLSearchParams();
         if (formData.name) params.set("name", formData.name);
         if (formData.category !== 'all') params.set("category", formData.category);
         if (formData.price !== 'all') params.set("price", formData.price);
-        params.set("page", "1"); // Reset to page 1 on new search
+        params.set("page", "1"); // Reset page offset on filter execution
 
         router.push(`${pathname}?${params.toString()}`);
+    };
+
+    // Label mapping helper to match display values cleanly
+    const getCategoryLabel = (val) => {
+        const labels = {
+            all: "All Types",
+            Sedan: "Sedan", SUV: "SUV", Traveller: "Tempo Traveller",
+            Luxury: "Luxury", Heritage: "Heritage", Budget: "Budget",
+            Essential: "Essential", Premium: "Premium"
+        };
+        return labels[val] || val;
+    };
+
+    const getPriceLabel = (val) => {
+        if (val === "all") return "Any Price";
+        if (val === "0-2000") return "Below ₹2,000";
+        if (val === "2000-10000") return "₹2,000 - ₹10,000";
+        if (val === "10000-999999") return "Above ₹10,000";
+        if (val === "2000-7000") return "₹2,000 - ₹7,000";
+        if (val === "7000-999999") return "Above ₹7,000";
+        if (val === "0-5000") return "Below ₹5,000";
+        if (val === "5000-15000") return "₹5,000 - ₹15,000";
+        if (val === "15000-999999") return "Above ₹15,000";
+        return val;
     };
 
     return (
         <div className="search-fleet-container position-relative z-3">
             <form className="search-fleet-card shadow-sm" onSubmit={handleSearch}>
 
-                {/* 1. Name Search */}
+                {/* 1. Name Search Text Box */}
                 <div className="filter-group">
-                    <label className="filter-label">SEARCH BY NAME</label>
+                    <label className="filter-label">Search By Name</label>
                     <div className="input-wrapper">
                         <input
                             type="text"
@@ -184,72 +229,85 @@ export const SearchFleet = () => {
                     </div>
                 </div>
 
-                {/* 2. Category Dropdown */}
-                <div className="filter-group">
+                {/* 2. Custom Category Selector Dropdown Matrix */}
+                <div className={`filter-group ${openDropdown === 'category' ? 'raise-z-index' : ''}`}>
                     <label className="filter-label">
-                        {isVehiclePage ? "VEHICLE TYPE" : isHotelPage ? "ACCOMMODATION" : "TOUR TYPE"}
+                        {isVehiclePage ? "Vehicle Type" : isHotelPage ? "Accommodation" : "Tour Type"}
                     </label>
-                    <div className="input-wrapper">
-                        <select className="filter-input" value={formData.category} onChange={(e) => setFormData({ ...formData, category: e.target.value })}>
-                            <option value="all">All Types</option>
+                    <div className="input-wrapper position-relative">
+                        <div
+                            className={`custom-select-trigger filter-input ${openDropdown === 'category' ? 'active-dropdown' : ''}`}
+                            onClick={(e) => toggleDropdown(e, 'category')}
+                        >
+                            <span>{getCategoryLabel(formData.category)}</span>
+                            <ChevronDown size={18} className={`select-arrow-transition ${openDropdown === 'category' ? 'rotate-arrow' : ''}`} />
+                        </div>
+
+                        {/* Dropdown item options list panel with collapse entry wrapper styles */}
+                        <div className={`custom-dropdown-options-box shadow-lg ${openDropdown === 'category' ? 'open-expanded' : ''}`}>
+                            <div className="option-item" onClick={() => handleSelectOption("category", "all")}>All Types</div>
                             {isVehiclePage && (
                                 <>
-                                    <option value="Sedan">Sedan</option>
-                                    <option value="SUV">SUV</option>
-                                    <option value="Traveller">Tempo Traveller</option>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Sedan")}>Sedan</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "SUV")}>SUV</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Traveller")}>Tempo Traveller</div>
                                 </>
                             )}
                             {isHotelPage && (
                                 <>
-                                    <option value="Luxury">Luxury</option>
-                                    <option value="Heritage">Heritage</option>
-                                    <option value="Budget">Budget</option>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Luxury")}>Luxury</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Heritage")}>Heritage</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Budget")}>Budget</div>
                                 </>
                             )}
                             {isTourPage && (
                                 <>
-                                    <option value="Essential">Essential</option>
-                                    <option value="Premium">Premium</option>
-                                    <option value="Luxury">Luxury</option>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Essential")}>Essential</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Premium")}>Premium</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Luxury")}>Luxury</div>
                                 </>
                             )}
-                        </select>
-                        <ChevronDown className="input-icon-right" size={16} />
+                        </div>
                     </div>
                 </div>
 
-                {/* 3. Price Filter */}
-                <div className="filter-group">
-                    <label className="filter-label">PRICE RANGE</label>
-                    <div className="input-wrapper">
-                        <select className="filter-input" value={formData.price} onChange={(e) => setFormData({ ...formData, price: e.target.value })}>
-                            <option value="all">Any Price</option>
-                            {/* <option value="0-3000">Below ₹3,000</option>
-                            <option value="3000-15000">₹3,000 - ₹15,000</option>
-                            <option value="15000-999999">Above ₹15,000</option> */}
+                {/* 3. Custom Price Selector Dropdown Matrix */}
+                <div className={`filter-group ${openDropdown === 'price' ? 'raise-z-index' : ''}`}>
+                    <label className="filter-label">Price Range</label>
+                    <div className="input-wrapper position-relative">
+                        <div
+                            className={`custom-select-trigger filter-input ${openDropdown === 'price' ? 'active-dropdown' : ''}`}
+                            onClick={(e) => toggleDropdown(e, 'price')}
+                        >
+                            <span>{getPriceLabel(formData.price)}</span>
+                            <ChevronDown size={18} className={`select-arrow-transition ${openDropdown === 'price' ? 'rotate-arrow' : ''}`} />
+                        </div>
+
+                        {/* Options List Container Box Wrapper */}
+                        <div className={`custom-dropdown-options-box shadow-lg ${openDropdown === 'price' ? 'open-expanded' : ''}`}>
+                            <div className="option-item" onClick={() => handleSelectOption("price", "all")}>Any Price</div>
                             {isVehiclePage && (
                                 <>
-                                    <option value="0-2000">Below ₹2,000</option>
-                                    <option value="2000-10000">Between ₹2,000 - ₹10,000</option>
-                                    <option value="10000-999999">Above ₹10,000</option>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "0-2000")}>Below ₹2,000</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "2000-10000")}>₹2,000 - ₹10,000</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "10000-999999")}>Above ₹10,000</div>
                                 </>
                             )}
                             {isHotelPage && (
                                 <>
-                                    <option value="0-2000">Below ₹2,000</option>
-                                    <option value="2000-7000">Between ₹2,000 - ₹7,000</option>
-                                    <option value="7000-999999">Above ₹7,000</option>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "0-2000")}>Below ₹2,000</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "2000-7000")}>₹2,000 - ₹7,000</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "7000-999999")}>Above ₹7,000</div>
                                 </>
                             )}
                             {isTourPage && (
                                 <>
-                                    <option value="0-5000">Below ₹5,000</option>
-                                    <option value="5000-15000">Between ₹5,000 - ₹15,000</option>
-                                    <option value="15000-999999">Above ₹15,000</option>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "0-5000")}>Below ₹5,000</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "5000-15000")}>₹5,000 - ₹15,000</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "15000-999999")}>Above ₹15,000</div>
                                 </>
                             )}
-                        </select>
-                        <DollarSign className="input-icon-right" size={16} />
+                        </div>
                     </div>
                 </div>
 

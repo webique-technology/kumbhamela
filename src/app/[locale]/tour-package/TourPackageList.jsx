@@ -89,9 +89,8 @@ const TourPageContent = () => {
         <section>
             {/* The static banner header stays completely visible and unaffected when components are updating */}
             <HeroHeaderCard
-                heroTitle="Tour Packages"
-                heroImage="/images/carrental-page-bg.png"
-                imgClass="hero-img"
+                heroTitle="Tour"
+                heroSpan={"Packages"}
                 showSearch={true}
             />
 

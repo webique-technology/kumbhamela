@@ -439,18 +439,21 @@ export const TourPackageCard = ({ tour, tourLink }) => {
 };
 
 // Header Hero Card
-export const HeroHeaderCard = ({ showSearch = true, heroTitle, description, heroSubtitle, heroImage = "/images/contact-page-bg.png", imgClass = "hero-img" }) => {
+export const HeroHeaderCard = ({ showSearch = true, heroTitle, description, heroSpan, heroSubtitle, heroImage, imgClass = "hero-img" }) => {
 
     return (
         <>
             <div
                 className="hero-header-card d-flex align-items-center"
-                style={{ backgroundImage: `url(${heroImage})` }}
+                style={{ backgroundImage: heroImage ? `url(${heroImage})` : "none" }}
             >
                 <Container>
-                    <div className="hero-content position-relative z-3">
-                        <span className="hero-subtitle">{heroSubtitle}</span>
-                        <h1 className="hero-title">{heroTitle}</h1>
+                    <div className="hero-content position-relative z-3 pb-2 pb-sm-0">
+                        <h1 className="hero-card-title">
+                            {heroTitle}&nbsp;
+                            <span className="">{heroSpan}</span>
+                        </h1>
+                        <p>{description}</p>
                     </div>
                     {showSearch && (
                         <div className="hero-search-wrapper mt-4">
