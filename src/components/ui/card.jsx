@@ -439,7 +439,7 @@ export const TourPackageCard = ({ tour, tourLink }) => {
 };
 
 // Header Hero Card
-export const HeroHeaderCard = ({ showSearch = true, heroTitle, description, heroSpan, heroSubtitle, heroImage, imgClass = "hero-img" }) => {
+export const HeroHeaderCard = ({ showSearch = true, heroTitle, heroTitleClass, description, heroSpan, heroSubtitle, heroImage, imgClass = "hero-img" }) => {
 
     return (
         <>
@@ -449,7 +449,7 @@ export const HeroHeaderCard = ({ showSearch = true, heroTitle, description, hero
             >
                 <Container>
                     <div className="hero-content position-relative z-3 pb-2 pb-sm-0">
-                        <h1 className="hero-card-title">
+                        <h1 className={`hero-card-title ${heroTitleClass}`}>
                             {heroTitle}&nbsp;
                             <span className="">{heroSpan}</span>
                         </h1>

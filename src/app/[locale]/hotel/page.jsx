@@ -117,6 +117,7 @@ export default function HotelPage() {
             <section>
                 <HeroHeaderCard
                     heroTitle="Pilgrim Concierge & Support"
+                    heroTitleClass={"text-light"}
                     // heroSubtitle="Connect With Us"
                     heroImage="/images/contact-page-bg.png"
                     imgClass="hero-img"

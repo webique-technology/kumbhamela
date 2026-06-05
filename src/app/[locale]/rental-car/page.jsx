@@ -235,8 +235,10 @@ export default function RentalCar() {
       {/* Hero Section Banner remains completely static, unaffected by state changes */}
       <section>
         <HeroHeaderCard
-          heroTitle="Select your preferred transport"
-          heroImage="/images/carrental-page-bg.png"
+          heroTitle="Select your preferred"
+          heroSpan="Transport"
+          // heroTitleClass={"text-light"}
+          // heroImage="/images/carrental-page-bg.png"
           imgClass="hero-img"
           showSearch={false}
         />

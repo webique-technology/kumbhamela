@@ -14,7 +14,7 @@ import { Navigation, Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Col, Row, Tab, Tabs } from 'react-bootstrap';
 import { PaymentTerms } from './card';
 
 
@@ -326,7 +326,7 @@ export const SearchFleet = () => {
 export const KumbhCountdown = ({ targetDate, isActive = true }) => {
     // Memoize the target date so the useEffect doesn't re-run unless the date prop changes
     const COUNTDOWN_TARGET = useMemo(() => {
-        return targetDate ? new Date(targetDate) : new Date("2027-10-14T00:00:00Z");
+        return targetDate ? new Date(targetDate) : new Date("2026-11-31T00:00:00Z");
     }, [targetDate]);
 
     const [timeLeft, setTimeLeft] = useState({
@@ -383,18 +383,18 @@ export const KumbhCountdown = ({ targetDate, isActive = true }) => {
         const formattedValue = String(value).padStart(label === "Days" ? 1 : 2, '0');
 
         return (
-            <div className="countdown-box w-100 h-100 shadow-sm flex-column d-flex align-items-center justify-content-center text-center">
-                <div className='countdown-value w-100'>
+            <div className="countdown-box shadow-sm flex-column d-flex align-items-center justify-content-center text-center">
+                <div className='countdown-value'>
                     <h3 className="glitch-text m-0">{formattedValue}</h3>
                 </div>
                 <div className="countdown-divider border-top"></div>
-                <p className="countdown-label m-0">{label}</p>
+                <p className="countdown-label text-primery m-0">{label}</p>
             </div>
         );
     };
 
     return (
-        <div className="d-grid kumbh-countdown-section gap-3 justify-content-center">
+        <div className="d-flex align-items-center gap-2 gap-sm-4 justify-content-center px-0 px-sm-5 kumbh-countdown-section">
             <CountdownBlock value={timeLeft.days} label="Days" />
             <CountdownBlock value={timeLeft.hours} label="Hours" />
             <CountdownBlock value={timeLeft.minutes} label="Mins" />
@@ -575,3 +575,95 @@ export const HighlightsModal = ({ children }) => {
         </>
     );
 };
+
+const BathingDatesSlider = () => {
+    return (
+        <div className="div d-none d-md-block">
+            <SwiperSliderComp
+                slidesPerView={4}
+                navigation={{
+                    prevEl: '.bathing-prev-btn',
+                    nextEl: '.bathing-next-btn',
+                }}
+                disableAutoplay={true}
+                spaceBetween={20}
+                timeDelay={4000}
+                breakpoints={{
+                    0: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                    },
+                    450: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 1,
+                        spaceBetween: 30,
+                    },
+                    865: {
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                    },
+                    992: {
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                    },
+                    1120: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    },
+                    1600: {
+                        slidesPerView: 4,
+                        spaceBetween: 30,
+                    },
+                }}
+            >
+                {bathingDates.map((date, index) => (
+                    <SwiperSlide key={index} className="h-auto">
+                        <div className="festival-card-wrapper snap-start group">
+                            <div className="festival-card glass-card inner-glow position-relative p-4 d-grid rounded-4 transition-card">
+
+                                <div className="festival-card-line position-absolute"></div>
+
+                                <div className="festival-card-header">
+                                    <div className="d-flex align-items-center ">
+                                        <span className="festival-label text-uppercase d-block">
+                                            {date.dateOccation}
+                                        </span>
+                                    </div>
+
+                                    <h3 className="festival-title my-3 text-capitalize">
+                                        {date.title}
+                                    </h3>
+                                </div>
+
+                                <div className="festival-date d-flex align-items-end gap-3">
+                                    <span className="festival-day fw-bold">
+                                        {date.day}
+                                    </span>
+
+                                    <div className="d-flex flex-column">
+                                        <span className="festival-month text-uppercase">
+                                            {date.month}
+                                        </span>
+
+                                        <span className="festival-year">
+                                            2027
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="festival-footer w-100 pt-4 border-top d-flex justify-content-between align-items-center">
+                                    <span className="festival-subtitle">
+                                        Sacred Immersion
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                ))}
+            </SwiperSliderComp>
+        </div>
+    )
+}
