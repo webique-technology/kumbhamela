@@ -3,7 +3,7 @@
 
 import React, { Suspense, useState, useEffect } from "react";
 // import { blogs } from "@/lib/blog";
-import { BlogCard } from "@/components/ui/card";
+import { BlogCard, HeroHeaderCard } from "@/components/ui/card";
 import { Col, Row, Container, Pagination } from "react-bootstrap";
 import { TitleComponent } from "@/components/ui/common";
 import { slugify } from "@/lib/utils";
@@ -19,13 +19,13 @@ const BlogPageContent = () => {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
 
-const [blogs, setBlogs] = useState([]);
-const [totalPages, setTotalPages] = useState(1);
-const [currentPageApi, setCurrentPageApi] = useState(1);
+  const [blogs, setBlogs] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [currentPageApi, setCurrentPageApi] = useState(1);
 
   const currentPage = Number(searchParams.get("page")) || 1;
 
-  
+
   // const sortedBlogs = [...blogs].sort((a, b) => new Date(b.date) - new Date(a.date));
   // const sortedBlogs = [...blogs].sort(
   // (a, b) => new Date(b.created_at) - new Date(a.created_at)
@@ -46,7 +46,7 @@ const [currentPageApi, setCurrentPageApi] = useState(1);
 
   // const currentBlogs = sortedBlogs.slice(startIndex, endIndex);
 
- useEffect(() => {
+  useEffect(() => {
     const fetchBlogs = async () => {
       try {
         setLoading(true);
@@ -102,89 +102,90 @@ const [currentPageApi, setCurrentPageApi] = useState(1);
   }
 
   return (
-    <section className="section-padding bg-light blog-page">
-      <Container>
-        <TitleComponent
-          title="All Insights"
-          description="Exploring the depths of Kumbh Mela"
+    <>
+      <section>
+        <HeroHeaderCard
+          heroTitle="All Insights"
+          // image="/images/kumbh-place.png"
+          showSearch={false}
         />
+      </section>
+      <section className="section-padding padding-bottom bg-light blog-page">
+        <Container>
+          {/* --- grid --- */}
+          <Row className="g-4 mb-5">
+            {blogs.map((blog, index) => {
+              // Layout Check: Ensure the col-8 logic only applies when currentPage === 1 AND index === 0.
+              // 1. Grid Logic: Only Page 1 has a special 8-4 layout
+              let colSize = 4;
+              if (currentPage === 1) {
+                if (index === 0) colSize = 8;
+                if (index === 1) colSize = 4;
+              }
 
-        {/* --- grid --- */}
-        <Row className="g-4 mb-5">
-          {blogs.map((blog, index) => {
-            // Layout Check: Ensure the col-8 logic only applies when currentPage === 1 AND index === 0.
-            // 1. Grid Logic: Only Page 1 has a special 8-4 layout
-            let colSize = 4;
-            if (currentPage === 1) {
-              if (index === 0) colSize = 8;
-              if (index === 1) colSize = 4;
-            }
-
-            // 2. Height Logic: Only first two items of Page 1 get 420px
-            const isSpecialCard = currentPage === 1 && (index === 0 || index === 1);
-            const customHeight = isSpecialCard ? 420 : 220;
-
-            return (
-              <Col lg={colSize} md={6} key={index}>
-                <BlogCard
-                  blog={blog}
-                  blogLink={`/blog/${slugify(blog.title)}`}
-                  // blogLink={`/blog/${blog.title}`}
-                  img_width={100}
-                  img_height={420}
-                  img_count_width={"100%"}
-                  img_count_height={customHeight}
-                />
-              </Col>
-            );
-          })}
-        </Row>
-
-        {/* --- dynamic pagination --- */}
-        {/* left arrow */}
-        {totalPages > 1 && (
-          <div className="d-flex justify-content-center align-items-center pagination-wrapper gap-2">
-              <button
-                onClick={() => handlePageChange(currentPage - 1)}
-                className={`pagination-item arrow ${
-                  currentPage === 1 ? "disabled" : ""
-                }`}
-                disabled={currentPage === 1}
-              >
-              <ChevronLeft size={18} />
-            </button>
-
-            {/* page numbers */}
-           {[...Array(totalPages)].map((_, i) => {
-              const pageNum = i + 1;
+              // 2. Height Logic: Only first two items of Page 1 get 420px
+              const isSpecialCard = currentPage === 1 && (index === 0 || index === 1);
+              const customHeight = isSpecialCard ? 420 : 220;
 
               return (
-                <button
-                  key={pageNum}
-                  onClick={() => handlePageChange(pageNum)}
-                  className={`pagination-number number ${
-                    currentPage === pageNum ? "active" : ""
-                  }`}
-                >
-                  {pageNum}
-                </button>
+                <Col lg={colSize} md={6} key={index}>
+                  <BlogCard
+                    blog={blog}
+                    blogLink={`/blog/${slugify(blog.title)}`}
+                    // blogLink={`/blog/${blog.title}`}
+                    img_width={100}
+                    img_height={420}
+                    img_count_width={"100%"}
+                    img_count_height={customHeight}
+                  />
+                </Col>
               );
             })}
+          </Row>
 
-            {/* right arrow */}
-             <button
+          {/* --- dynamic pagination --- */}
+          {/* left arrow */}
+          {totalPages > 1 && (
+            <div className="d-flex justify-content-center align-items-center pagination-wrapper gap-2">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                className={`pagination-item arrow ${currentPage === 1 ? "disabled" : ""
+                  }`}
+                disabled={currentPage === 1}
+              >
+                <ChevronLeft size={18} />
+              </button>
+
+              {/* page numbers */}
+              {[...Array(totalPages)].map((_, i) => {
+                const pageNum = i + 1;
+
+                return (
+                  <button
+                    key={pageNum}
+                    onClick={() => handlePageChange(pageNum)}
+                    className={`pagination-number number ${currentPage === pageNum ? "active" : ""
+                      }`}
+                  >
+                    {pageNum}
+                  </button>
+                );
+              })}
+
+              {/* right arrow */}
+              <button
                 onClick={() => handlePageChange(currentPage + 1)}
-                className={`pagination-item arrow ${
-                  currentPage === totalPages ? "disabled" : ""
-                }`}
+                className={`pagination-item arrow ${currentPage === totalPages ? "disabled" : ""
+                  }`}
                 disabled={currentPage === totalPages}
               >
                 <ChevronRight size={18} />
               </button>
-          </div>
-        )}
-      </Container>
-    </section>
+            </div>
+          )}
+        </Container>
+      </section>
+    </>
   );
 };
 

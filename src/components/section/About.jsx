@@ -44,7 +44,7 @@ const AboutSec = () => {
                                 montezSubTitle="Discover the Sacred"
                                 montezClass="montez-sub-heading primery-color d-none d-md-block"
                                 descClass='text-md'
-                                description={"The Kumbh Mela is the world's largest peaceful gathering, a spiritual congregation that transcends time and brings together millions in pursuit of divine grace. Nashik holds a special place among the four sacred Kumbh sites."}
+                                description={"The Kumbh Mela is the world's largest religious and cultural festival, celebrated every 12 years on the sacred banks of the Godavari River in Nashik. This festival stands as a symbol of centuries-old traditions and spiritual heritage."}
                             />
                             <Row className='g-4'>
                                 {aboutListData.map((item, index) => (

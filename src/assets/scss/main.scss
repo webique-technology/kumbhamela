@@ -30,6 +30,10 @@ body {
     }
 }
 
+.padding-bottom {
+    padding-bottom: 140px !important;
+}
+
 .secondary-bg {
     background-color: $secondary-bg-color;
 }
@@ -68,7 +72,8 @@ h6 {
     text-shadow: 0px 1px 10px #000;
 }
 
-h2 {
+h2,
+.count-up-text {
     font-size: clamp($font-size-lg-2, 4.5vw, $font-size-3xl) !important;
     font-weight: 600 !important;
     line-height: calc(1.5 / 1.25) !important;
@@ -225,6 +230,7 @@ p {
 
     @media(max-width:576px) {
         padding: 8px 12px;
+        font-size: $font-size-xs;
     }
 
     &:hover {
@@ -249,6 +255,7 @@ p {
 
     @media(max-width:576px) {
         padding: 8px 12px;
+        font-size: $font-size-xs;
     }
 
     &:hover {
@@ -380,136 +387,196 @@ p {
 }
 
 // filter search
-
 .search-fleet-container {
     width: 100%;
     margin: 0 auto;
-    // padding: 0 15px;
     position: relative;
     z-index: 20;
-    // This makes it float over the hero section
-}
 
-.search-fleet-card {
-    background: rgba(0, 4, 4, 0.7);
+    .search-fleet-card {
+        background: rgb(255, 255, 255);
+        // border: var(--bs-border-width) var(--bs-border-style) #868686 !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(255, 255, 255, 0.3);
+        border-radius: 10;
+        padding: 20px 35px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr auto;
+        gap: 25px;
+        align-items: flex-end;
+        position: relative;
 
-    border: var(--bs-border-width) var(--bs-border-style) #868686 !important;
+        @media (max-width: 991px) {
+            grid-template-columns: 1fr 1fr;
+            border-radius: 25px;
+            padding: 25px;
+        }
 
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.08),
-        0 2px 8px rgba(255, 255, 255, 0.3);
-
-    border-radius: $border-radius-xl;
-    padding: 30px 45px;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr auto;
-    gap: 25px;
-    align-items: flex-end;
-
-    position: relative;
-    overflow: hidden;
-
-    &::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-
-        background: linear-gradient(135deg,
-                rgba(255, 255, 255, 0.35),
-                rgba(255, 255, 255, 0.05));
-
-        pointer-events: none;
+        @media (max-width: 575px) {
+            grid-template-columns: 1fr;
+            margin-top: -30px;
+        }
     }
 
-    @media (max-width: 991px) {
-        grid-template-columns: 1fr 1fr;
-        border-radius: 25px;
-        padding: 25px;
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        position: relative;
+        z-index: 10;
+        transition: z-index 0.25s step-start;
+
+        // Dynamically raises the active dropdown stack layer above neighboring filters
+        &.raise-z-index {
+            z-index: 90 !important;
+        }
     }
 
-    @media (max-width: 575px) {
-        grid-template-columns: 1fr;
-        margin-top: -30px;
+    .filter-label {
+        font-size: $font-size-base;
+        font-weight: 600;
+        color: #a04100;
+        letter-spacing: 0.5px;
+        padding-left: 5px;
     }
 
-}
-
-.filter-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.filter-label {
-    font-size: $font-size-base;
-    font-weight: 800;
-    color: $primary-color; // Deep brown text
-    letter-spacing: 0.5px;
-    padding-left: 5px;
-}
-
-.input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-
-    .filter-input {
+    .input-wrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         width: 100%;
-        background: $trinery-bg-color; // Light beige/grey background
+
+        .filter-input {
+            width: 100%;
+            background: $trinery-bg-color;
+            border: 1px solid transparent;
+            border-radius: 25px; // Extended rounded curves from image spec
+            padding: 14px 22px;
+            font-size: 15px;
+            color: $primary-color; // Distinct deep teal text matches your theme
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+
+            &::placeholder {
+                color: #a04100;
+            }
+
+            &:focus {
+                background: #eeebe6;
+            }
+        }
+
+        // Dropdown Click State Interfacial Configuration Hooks
+        .custom-select-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+
+            &.active-dropdown {
+                background: #ffffff !important;
+                border-color: rgba(43, 92, 79, 0.25);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            }
+
+            .select-arrow-transition {
+                color: #a04100;
+                transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+                &.rotate-arrow {
+                    transform: rotate(180deg); // Perfectly matches image flip rotation handles
+                    color: $primary-color;
+                }
+            }
+        }
+
+        /* Premium Smooth Collapse Option Overlay Box (Matches image_419cc0.png tokens) */
+        .custom-dropdown-options-box {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            width: 100%;
+            background: #f8f9f8;
+            border: 1px solid rgba(43, 92, 79, 0.1);
+            border-radius: 22px; // Rounded image boundary framework tracking
+            padding: 10px;
+            max-height: 250px;
+            overflow-y: auto;
+            backdrop-filter: blur(12px);
+            z-index: 99;
+
+            // Core Animation Setup: Starts compact and invisible
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px) scale(0.97);
+            transform-origin: top center;
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.2s ease,
+                visibility 0.2s ease;
+
+            // Triggered active state class layer handling the smooth drop slide
+            &.open-expanded {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0) scale(1);
+            }
+
+            .option-item {
+                padding: 12px 18px;
+                font-size: 15px;
+                font-weight: 600;
+                color: #a04100;
+                border-radius: 14px;
+                transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+                cursor: pointer;
+
+                &:hover {
+                    background-color: rgba(43, 92, 79, 0.08);
+                    color: $primary-color;
+                    padding-left: 24px; // Easing push interaction highlights active choice
+                }
+            }
+        }
+
+        .input-icon-right {
+            position: absolute;
+            right: 18px;
+            color: #a04100;
+            pointer-events: none;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .search-fleet-btn {
+        background: #a04100;
+        color: $text-color-light;
         border: none;
-        border-radius: 15px;
-        padding: 14px 20px;
-        font-size: 15px;
-        color: #333;
-        font-weight: 500;
-        appearance: none;
-        outline: none;
+        border-radius: 25px;
+        padding: 14px 35px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        font-size: 18px;
+        transition: all 0.3s ease;
         cursor: pointer;
 
-        &::placeholder {
-            color: #888;
+        &:hover {
+            transform: scale(1.02);
         }
 
-        &:focus {
-            background: #eeebe6;
+        span {
+            color: $text-color-light;
+            white-space: nowrap;
         }
-    }
 
-    .input-icon-right {
-        position: absolute;
-        right: 18px;
-        color: $primary-color;
-        pointer-events: none;
-    }
-}
-
-.search-fleet-btn {
-    background: $primary-color; // Exact burnt orange color
-    color: $text-color-light;
-    border: none;
-    border-radius: 15px;
-    padding: 14px 35px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 700;
-    font-size: 18px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-
-    &:hover {
-        transform: scale(1.02);
-    }
-
-    span {
-        color: $text-color-light;
-        white-space: nowrap;
-    }
-
-    @media (max-width: 991px) {
-        width: 100%;
-        justify-content: center;
+        @media (max-width: 991px) {
+            width: 100%;
+            justify-content: center;
+        }
     }
 }
 
@@ -624,19 +691,24 @@ p {
     height: 350px;
     padding: 40px 0;
     position: relative;
-    overflow: hidden;
+    // overflow: hidden;
     background-position: 0;
+    background-color: $trinery-bg-color;
 
-    &:before {
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.1);
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        content: "";
+    @media(max-width:576px) {
+        height: 560px;
     }
+
+    // &:before {
+    //     position: absolute;
+    //     inset: 0;
+    //     background: rgba(0, 0, 0, 0.1);
+    //     top: 0;
+    //     left: 0;
+    //     width: 100%;
+    //     height: 100%;
+    //     content: "";
+    // }
 
     .hero-img {
         width: 100%;
@@ -652,6 +724,18 @@ p {
         display: flex;
         align-items: flex-end;
         padding: 40px;
+    }
+
+    .hero-card-title {
+        font-size: $font-size-lg-3;
+        font-weight: 700;
+        line-height: 1.2;
+
+        span {
+            font-size: $font-size-lg-3;
+            font-weight: 700;
+            color: #a04100;
+        }
     }
 
     .hero-subtitle {
@@ -688,4 +772,93 @@ p {
         max-width: 324px;
         width: 100%;
     }
+}
+
+.filter-graycsale {
+    filter: grayscale(1);
+}
+
+/* Excerpt Clamp */
+.text-excerpt {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+// dates countdown
+.countdown-box {
+    // border: 0.5px solid $bg-light;
+    border-radius: 12px; // Rounded corners from the image
+    // background: radial-gradient(157.24% 123.22% at 47.19% -.63%, #fff6, #fff0);
+
+    .countdown-value {
+        padding: 20px 15px;
+        margin-bottom: 0;
+        width: 90px;
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 0.5px solid gray;
+        border-radius: 12px; // Rounded corners from the image
+        background: radial-gradient(157.24% 123.22% at 47.19% -.63%, #ff6a00, #fff0);
+
+        // background: radial-gradient(157.24% 123.22% at 47.19% -.63%, #fff6, #fff0);
+
+    }
+
+    .countdown-label {
+        color: $text-color-light;
+        font-size: $font-size-md;
+        padding: 8px 4px;
+        text-transform: capitalize;
+        font-weight: 700;
+    }
+
+    @media(max-width:992px) {
+        .countdown-value {
+            width: 80px;
+            height: 80px;
+        }
+    }
+
+    @media(max-width:576px) {
+        .countdown-value {
+            width: 60px;
+            height: 60px;
+        }
+        .countdown-label{
+            font-size: $font-size-base;
+        }
+    }
+
+    /* 
+ * The Glitch Effect (Optional, but present in your reference image)
+ * This replicates the subtle cyan/magenta offset on the numbers.
+ */
+    .glitch-text {
+        font-size: clamp(1.75rem, 3vw, $font-size-2xl) !important; // Adjust size for your layout
+        font-weight: 800;
+        color: $text-color-light;
+        line-height: 1 !important;
+        position: relative;
+        text-shadow: 0.05em 0 0 $primary-color, -0.025em -0.05em 0 $secondary-color, -0.05em 0.025em 0 #00ff00;
+        animation: glitch 1s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch {
+        0% {
+            text-shadow: 0.5px 0 0 $primary-color, -0.2px -0.5px 0 $secondary-color;
+        }
+
+        100% {
+            text-shadow: -0.5px 0 0 $primary-color, 0.2px 0.5px 0 $secondary-color;
+        }
+    }
+}
+
+// Custom utility extending Bootstrap's border system
+.border-dashed {
+    //   border-style: dashed !important;
 }

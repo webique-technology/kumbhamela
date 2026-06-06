@@ -17,8 +17,8 @@ export default function Home() {
       <AboutSec />
       <PlanTabSec />
       <TouristVisitSection />
-      <ServicesTabSec />
       <BathingDates />
+      <ServicesTabSec />
       <BlogSection />
       <VideoGallery />
     </main>

@@ -371,15 +371,6 @@ const TourPackageDetail = ({ tour }) => {
                         </aside>
                     </Col>
 
-                    {/* SIMILAR PACKAGES */}
-                    {/* <Col xs={12}>
-                        <TourPackageSlider
-                            packages={(tourPackages || []).filter(
-                                (item) => item.name !== tour.title
-                            )}
-                            title="Recent Packages"
-                        />
-                    </Col> */}
                     <Col xs={12}>
                     <TourPackageSlider
                         packages={recentPackages}

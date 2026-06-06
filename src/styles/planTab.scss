@@ -30,9 +30,10 @@
             background-color: $bg-light;
             border-radius: $border-radius-round !important;
             padding: 10px 14px !important;
+
             .content h3 {
                 color: $text-color-dark;
-                font-size: $font-size-base !important;
+                font-size: $font-size-xs !important;
             }
         }
 
@@ -106,21 +107,6 @@
         }
     }
 
-    @media (max-width: 768px) {
-        .image-grid-layout {
-            grid-template-columns: 1fr;
-            grid-template-rows: auto;
-            height: auto;
-        }
-
-        .top-grid-item-1,
-        .top-grid-item-2,
-        .top-grid-item-3 {
-            grid-column: auto;
-            grid-row: auto;
-        }
-    }
-
     @media(max-width:992px) {
         .tab-btn-count {
             display: flex;
@@ -149,6 +135,27 @@
         }
     }
 
+    @media (max-width: 768px) {
+        .image-grid-layout {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            height: auto;
+        }
+
+        .top-grid-item-1,
+        .top-grid-item-2,
+        .top-grid-item-3 {
+            grid-column: auto;
+            grid-row: auto;
+        }
+
+        .tab-btn-count {
+            position: sticky;
+            top: 90px;
+            z-index: 5;
+        }
+    }
+
 }
 
 .nav-pills .nav-link.active {
@@ -159,7 +166,7 @@
         color: $primary-color !important;
     }
 
-    @media(max-width:768px){
+    @media(max-width:768px) {
         .content h3 {
             color: $bg-light !important;
         }

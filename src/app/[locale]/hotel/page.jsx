@@ -63,16 +63,8 @@ const HotelPageContent = () => {
     return (
         <>
 
-            <section className="section-padding">
+            <section className="section-padding padding-bottom">
                 <Container>
-                    {/* <TitleComponent
-                        title="Hotels"
-                        divider={false}
-                    /> */}
-
-                    {/* <div className="mb-5">
-                        <SearchFleet />
-                    </div> */}
 
                     {currentItems.length > 0 ? (
                         <Row className="g-4 mb-5">
@@ -122,16 +114,17 @@ const HotelPageContent = () => {
 export default function HotelPage() {
     return (
         <main>
-            <Suspense fallback={<div>Loading...</div>}>
-                <section>
-                    <HeroHeaderCard
-                        heroTitle="Pilgrim Concierge & Support"
-                        // heroSubtitle="Connect With Us"
-                        heroImage="/images/contact-page-bg.png"
-                        imgClass="hero-img"
-                        showSearch={true}
-                    />
-                </section>
+            <section>
+                <HeroHeaderCard
+                    heroTitle="Pilgrim Concierge & Support"
+                    heroTitleClass={"text-light"}
+                    // heroSubtitle="Connect With Us"
+                    heroImage="/images/contact-page-bg.png"
+                    imgClass="hero-img"
+                    showSearch={true}
+                />
+            </section>
+            <Suspense fallback={<div className="text-center py-5">Loading Page Layout...</div>}>
                 <HotelPageContent />
             </Suspense>
         </main>

@@ -15,9 +15,11 @@ import { Col, Row } from 'react-bootstrap';
 const Footer = () => {
     return (
         <>
-            <footer id="contact" className="custom-footer text-white">
+            <footer id="contact" className="custom-footer position-relative text-white">
+                <div className="bottom-divider position-absolute z-3" style={{ top: "-86px", filter: "invert(0.95)" }}></div>
+
                 {/* Main Footer */}
-                <div className="container py-2 py-sm-4 py-md-5">
+                <div className="container pb-2 pb-sm-4 pb-md-5">
 
                     <Row className="gy-2 gy-md-4">
                         {/* About */}

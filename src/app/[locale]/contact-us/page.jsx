@@ -9,6 +9,39 @@ import { faqData } from "@/lib/data";
 import { TitleComponent } from "@/components/ui/common";
 import { HeroHeaderCard } from "@/components/ui/card";
 import { MapPin, Phone, Mail, Building2, MessageCircle } from "lucide-react";
+import Link from "next/link";
+
+const branhesData = [
+    {
+        branchCity: "Nashik",
+        branchURL: "https://maps.app.goo.gl/GbHZtkYPSYTcdxhFA",
+        branchAddress: "Sakal Office Basement, BA 4, Thakkar Bazar, New CBS, Police Staff Colony, Nashik, Maharashtra 422002",
+        branchPhone: "7507778070",
+        // branchEmail: "",
+    },
+    {
+        branchCity: "Pune",
+        branchURL: "https://maps.app.goo.gl/8vsyB8s35RR1vdKYA",
+        branchAddress: "2nd Floor, Pride Icon, Baner Road, Pune, Maharashtra 411045",
+        branchPhone: "7507778075",
+        // branchEmail: "",
+    },
+    {
+        branchCity: "Shirdi",
+        branchURL: "https://maps.app.goo.gl/d1AJ7ZNXwKnwTNdU9",
+        branchAddress: "Sai Plaza Complex, Near Temple Road, Shirdi, Maharashtra 423109",
+        branchPhone: "7507778095",
+        // branchEmail: "",
+    },
+    {
+        branchCity: "Mumbai",
+        branchURL: "https://maps.app.goo.gl/VjmYdzxR6WM3bt1V8",
+        branchAddress: "Plot No. 12, CIDCO Area, Chatrapati Sambhaji Nagar, Maharashtra 431001",
+        branchPhone: "7507778085",
+        // branchEmail: "",
+    },
+]
+
 const ContactUs = () => {
     // 1. Form State
     const [formData, setFormData] = useState({
@@ -187,159 +220,37 @@ const ContactUs = () => {
                         </Col>
 
                         <Col lg={5}>
-                            <div className="support-card shadow-sm h-100">
-                                <div className="branches-wrapper">
-
-                                    {/* Nashik */}
-                                    <div className="branch-card">
+                            <div className="support-card d-flex flex-column justify-between gap-3 h-100 p-0">
+                                {/* Nashik */}
+                                {branhesData.map((branch, index) => (
+                                    <Link href={branch.branchURL} className="text-decoration-none shadow-sm branch-card" target="_blank" key={index}>
                                         <div className="branch-city">
-                                            <Building2 size={22} />
-                                            <h3>Nashik</h3>
+                                            <Building2 size={22} className="primery-color"/>
+                                            <h3>{branch.branchCity}</h3>
                                         </div>
 
                                         <div className="branch-info">
-                                            <MapPin size={18} />
-                                            <p>
-                                                 Sakal Office Basement, BA 4, Thakkar Bazar, New CBS, Police Staff Colony, Nashik, Maharashtra 422002
-                                            </p>
+                                            <MapPin size={18} className="primery-color"/>
+                                            <p>{branch.branchAddress}</p>
                                         </div>
 
                                         <div className="branch-info">
-                                            <Phone size={18} />
-                                            <a href="tel:+7507778070">+91 7507778070</a>
+                                            <Phone size={18} className="primery-color"/>
+                                            <Link href={`tel:+${branch.branchPhone}`}>{branch.branchPhone}</Link>
+                                            {/* <a href={`tel:+${branch.branchPhone}`}>{branch.branchPhone}</a> */}
                                         </div>
 
-                                    </div>
-
-                                    {/* Pune */}
-                                    <div className="branch-card">
-                                        <div className="branch-city">
-                                            <Building2 size={22} />
-                                            <h3>Pune</h3>
-                                        </div>
-
-                                        <div className="branch-info">
-                                            <MapPin size={18} />
-                                            <p>
-                                                2nd Floor, Pride Icon, Baner Road,
-                                                Pune, Maharashtra 411045
-                                            </p>
-                                        </div>
-
-                                        <div className="branch-info">
-                                            <Phone size={18} />
-                                            <a href="tel:+917507778075">+91 7507778075</a>
-                                        </div>
-
-                           
-                                    </div>
-
-                                    {/* Shirdi */}
-                                    <div className="branch-card">
-                                        <div className="branch-city">
-                                            <Building2 size={22} />
-                                            <h3>Shirdi</h3>
-                                        </div>
-
-                                        <div className="branch-info">
-                                            <MapPin size={18} />
-                                            <p>
-                                                Sai Plaza Complex, Near Temple Road,
-                                                Shirdi, Maharashtra 423109
-                                            </p>
-                                        </div>
-
-                                        <div className="branch-info">
-                                            <Phone size={18} />
-                                            <a href="tel:+917507778095">+91 7507778095</a>
-                                        </div>
-
-                            
-                                    </div>
-
-                                    {/* Chatrapati Sambhaji Nagar */}
-                                    <div className="branch-card">
-                                        <div className="branch-city">
-                                            <Building2 size={22} />
-                                            <h3>Mumbai</h3>
-                                        </div>
-
-                                        <div className="branch-info">
-                                            <MapPin size={18} />
-                                            <p>
-                                                Plot No. 12, CIDCO Area,
-                                                Chatrapati Sambhaji Nagar, Maharashtra 431001
-                                            </p>
-                                        </div>
-
-                                        <div className="branch-info">
-                                            <Phone size={18} />
-                                            <a href="tel:+919876543213">+91 7507778085</a>
-                                        </div>
-
-                               
-                                    </div>
-
-                                </div>
+                                    </Link>
+                                ))}
                             </div>
                         </Col>
-
-                        {/* <Col lg={5}>
-                            <Row className="sidebar-wrapper g-4">
-                                
-                                <Col md={6} lg={12}>
-                                    <div className="support-card shadow-sm h-100">
-                                        <div className="support-content h-100 d-grid">
-                                            <div className="live-badge d-flex py-1 align-items-center justify-content-center">
-                                                <span className="pulse-dot"></span>
-                                                Live Now
-                                            </div>
-                                            <h3>Immediate Support</h3>
-                                            <p>Need urgent assistance? Our WhatsApp concierge is available 24/7.</p>
-                                            <PrimeryBtn
-                                                title={"Message on WhatsApp"}
-                                                iconLeft={<MessageCircle size={28} />}
-                                                className={"whatsapp-btn w-100 py-2 h5 justify-content-center"}
-                                                btnLink={"https://wa.me/919022093522"}
-                                            />
-                                        </div>
-                                        <div className="card-blob"></div>
-                                    </div>
-                                </Col>
-                               
-                                <Col md={6} lg={12}>
-                                    <div className="location-card shadow-sm">
-                                        <div className="d-flex align-items-center gap-3 h-100 mb-4">
-                                            <div className="location-icon d-flex align-items-center justify-content-center">
-                                                <MapPin size={24} />
-                                            </div>
-                                            <div className="location-text">
-                                                <h3 className="m-0">Central Office</h3>
-                                                <p className="m-0">Panchavati, Nashik, MH 422003</p>
-                                            </div>
-                                        </div>
-                                        <div className="mini-map-container">
-                                            <img
-                                                src="/images/map-placeholder.png"
-                                                alt="Map of Nashik Area"
-                                                className="map-img"
-                                            />
-                                            <div className="map-marker">
-                                                <div className="marker-pulse"></div>
-                                                <div className="marker-dot"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Col>
-                            </Row>
-                        </Col> */}
                     </Row>
                 </Container>
             </section>
 
             {/* faq section */}
             {/* faq section */}
-            <section className="faq-section section-padding">
+            <section className="faq-section section-padding padding-bottom">
                 <Container>
                     {/* Section Header */}
                     <TitleComponent

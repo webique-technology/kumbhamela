@@ -935,27 +935,3 @@ export const faqData = [
     }
 ];
 
-// Hero Slider Data
-export const heroSliderData = [
-    {
-        id: 1,
-        image: "/images/banner-1.webp",
-        subHeading: "Experience Unmatched Delight With Us.",
-        title: "Where Exceptional Memories Begin",
-        description: "Welcome to our Vitour website! We are a professional and reliable tours company that offers a wide range of printing services are many variations of passages.",
-    },
-    {
-        id: 2,
-        image: "/images/banner-2.webp",
-        subHeading: "The Sacred Confluence of Faith & Time",
-        title: "Nashik Kumbh Mela 2027",
-        description: "Where millions gather on the banks of the holy Godavari to seek spiritual liberation. Experience the world's largest spiritual congregation at one of India's most sacred pilgrimage sites."
-    },
-    // {
-    //     id: 3,
-    //     image: "/images/hero-bg-1.webp",
-    //     subHeading: "Experience Unmatched Delight With Us.",
-    //     title: "Hero Slider",
-    //     description: "Hero Slider Description"
-    // }
-];

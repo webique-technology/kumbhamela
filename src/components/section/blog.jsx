@@ -17,7 +17,7 @@ const BlogSection = () => {
         .slice(0, 3); // 2. Take only the top 3
 
     return (
-        <section id="blog-section" className="section-padding bg-light">
+        <section id="blog-section" className="section-padding bg-light position-relative">
             <Container>
                 {/* Heading */}
                 <div className="d-flex mb-3 mb-md-4 mb-lg-5 justify-content-center justify-content-sm-between align-items-center">

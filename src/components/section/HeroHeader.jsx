@@ -1,15 +1,40 @@
 "use client";
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import { SwiperSliderComp } from '../ui/common';
+import { KumbhCountdown, SwiperSliderComp } from '../ui/common';
 import { SwiperSlide } from 'swiper/react';
 import { ArrowRight, ArrowLeft } from "lucide-react";
-import { heroSliderData } from '@/lib/data';
 import { AnimationSecComponent } from "@/components/ui/AnimationSecComponent";
 import { ArrowDown } from 'lucide-react';
 import { motion } from "framer-motion";
 import "../../styles/heroHeader.scss";
 import { EffectFade } from 'swiper/modules';
+
+// Hero Slider Data
+export const heroSliderData = [
+    {
+        id: 1,
+        image: "/images/banner-1.webp",
+        subHeading: "Experience Unmatched Delight With Us.",
+        title: "Kumbh Mela Nashik 2027",
+        description: "Countdown to Kumbh Mela ",
+    },
+    {
+        id: 2,
+        image: "/images/banner-2.webp",
+        subHeading: "The Sacred Confluence of Faith & Time",
+        title: "Nashik Kumbh",
+        description: "Where millions gather on the banks of the holy Godavari to seek spiritual liberation. Experience the world's largest spiritual congregation at one of India's most sacred pilgrimage sites."
+    },
+    // {
+    //     id: 3,
+    //     image: "/images/hero-bg-1.webp",
+    //     subHeading: "Experience Unmatched Delight With Us.",
+    //     title: "Hero Slider",
+    //     description: "Hero Slider Description"
+    // }
+];
+
 const HeroHeader = () => {
     return (
         <>
@@ -24,6 +49,7 @@ const HeroHeader = () => {
                         delay: 6000, // Adjusted down from 450000 to allow smooth automatic rotations
                         disableOnInteraction: false,
                     }}
+                    // disableAutoplay={true}
                     navigation={{
                         prevEl: '.hero-prev-btn',
                         nextEl: '.hero-next-btn',
@@ -37,7 +63,7 @@ const HeroHeader = () => {
                 >
                     {heroSliderData.map((item, index) => (
                         <SwiperSlide
-                            key={index}
+                            key={item.id || index}
                             className='hero-slider-main d-flex align-items-center justify-content-center position-relative overflow-hidden'
                         >
                             {/* Isolated background layer handling the active slide zoom transformation */}
@@ -67,22 +93,36 @@ const HeroHeader = () => {
                                         </AnimationSecComponent>
 
                                         {/* Description Entrance */}
-                                        <AnimationSecComponent type="vertical" direction="up" delay={0.6} distance={30}>
+                                        <AnimationSecComponent
+                                            type="vertical"
+                                            direction="up"
+                                            delay={0.6}
+                                            distance={30}
+                                        // className={"d-none d-sm-block"}
+                                        >
                                             <p className='hero-description text-md mb-4 hero-description-animate'>
                                                 {item.description}
                                             </p>
                                         </AnimationSecComponent>
-
-                                        {/* Button Row Entrance with custom cascade layout */}
-                                        <div className='d-flex align-items-center justify-content-center gap-4 pt-1'>
-                                            <AnimationSecComponent type="vertical" direction="up" delay={0.8} distance={20}>
-                                                <button className='primery-btn'>View Bathing Dates</button>
-                                            </AnimationSecComponent>
-                                            <AnimationSecComponent type="vertical" direction="up" delay={0.8} distance={20}>
-                                                <button className='primery-btn-style-2'>WhatsApp Inquiry</button>
-                                            </AnimationSecComponent>
-                                        </div>
-
+                                        {/* Dynamic content rendering block based on slider data array parameters */}
+                                        {index === 0 ? (
+                                            /* Renders ONLY inside the very first slide block track (Index 0) */
+                                            <div className="mt-2 countdown-embed-frame w-100 d-flex flex-column justify-content-center">
+                                                <KumbhCountdown
+                                                    isActive={true}
+                                                />
+                                            </div>
+                                        ) : (
+                                            /* Renders seamlessly for slide item 2, 3, and onwards dynamically */
+                                            <div className="w-100 d-flex flex-column align-items-center justify-content-center">
+                                                <AnimationSecComponent type="vertical" direction="up" delay={0.8} distance={20}>
+                                                    <div className='d-flex align-items-center justify-content-center gap-4 pt-1 execution-row-layer'>
+                                                        <button className='primery-btn'>View Bathing Dates</button>
+                                                        <button className='primery-btn-style-2'>WhatsApp Inquiry</button>
+                                                    </div>
+                                                </AnimationSecComponent>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </Container>
@@ -107,7 +147,7 @@ const HeroHeader = () => {
                             }
                         }}
                     >
-                        <div className="scroll-oval">
+                        {/* <div className="scroll-oval">
                             <motion.div
                                 animate={{
                                     opacity: [0.6, 1, 0.6],
@@ -121,7 +161,7 @@ const HeroHeader = () => {
                             >
                                 <ArrowDown className="scroll-down-icon" size={32} />
                             </motion.div>
-                        </div>
+                        </div> */}
                     </div>
                 </SwiperSliderComp>
             </section >

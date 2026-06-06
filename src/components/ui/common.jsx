@@ -14,7 +14,7 @@ import { Navigation, Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Col, Row, Tab, Tabs } from 'react-bootstrap';
 import { PaymentTerms } from './card';
 
 
@@ -137,7 +137,7 @@ export const SwiperSliderComp = ({
     );
 };
 
-// search fleet component
+// Search Bar
 export const SearchFleet = () => {
     const router = useRouter();
     const pathname = usePathname();
@@ -154,24 +154,69 @@ export const SearchFleet = () => {
         price: searchParams.get("price") || 'all',
     });
 
+    // Handle temporary dropdown open state flags
+    const [openDropdown, setOpenDropdown] = useState(null); // 'category' | 'price' | null
+
+    // Safe auto-closing event listener if the user clicks anywhere outside the card
+
+    useEffect(() => {
+        const closeAll = () => setOpenDropdown(null);
+        window.addEventListener("click", closeAll);
+        return () => window.removeEventListener("click", closeAll);
+    }, []);
+
+    const toggleDropdown = (e, name) => {
+        e.stopPropagation(); // Stops immediate closing via root click propagation
+        setOpenDropdown(openDropdown === name ? null : name);
+    };
+
+    const handleSelectOption = (field, value) => {
+        setFormData((prev) => ({ ...prev, [field]: value }));
+        setOpenDropdown(null);
+    };
+
     const handleSearch = (e) => {
         e.preventDefault();
         const params = new URLSearchParams();
         if (formData.name) params.set("name", formData.name);
         if (formData.category !== 'all') params.set("category", formData.category);
         if (formData.price !== 'all') params.set("price", formData.price);
-        params.set("page", "1"); // Reset to page 1 on new search
+        params.set("page", "1"); // Reset page offset on filter execution
 
         router.push(`${pathname}?${params.toString()}`);
+    };
+
+    // Label mapping helper to match display values cleanly
+    const getCategoryLabel = (val) => {
+        const labels = {
+            all: "All Types",
+            Sedan: "Sedan", SUV: "SUV", Traveller: "Tempo Traveller",
+            Luxury: "Luxury", Heritage: "Heritage", Budget: "Budget",
+            Essential: "Essential", Premium: "Premium"
+        };
+        return labels[val] || val;
+    };
+
+    const getPriceLabel = (val) => {
+        if (val === "all") return "Any Price";
+        if (val === "0-2000") return "Below ₹2,000";
+        if (val === "2000-10000") return "₹2,000 - ₹10,000";
+        if (val === "10000-999999") return "Above ₹10,000";
+        if (val === "2000-7000") return "₹2,000 - ₹7,000";
+        if (val === "7000-999999") return "Above ₹7,000";
+        if (val === "0-5000") return "Below ₹5,000";
+        if (val === "5000-15000") return "₹5,000 - ₹15,000";
+        if (val === "15000-999999") return "Above ₹15,000";
+        return val;
     };
 
     return (
         <div className="search-fleet-container position-relative z-3">
             <form className="search-fleet-card shadow-sm" onSubmit={handleSearch}>
 
-                {/* 1. Name Search */}
+                {/* 1. Name Search Text Box */}
                 <div className="filter-group">
-                    <label className="filter-label">SEARCH BY NAME</label>
+                    <label className="filter-label">Search By Name</label>
                     <div className="input-wrapper">
                         <input
                             type="text"
@@ -184,72 +229,85 @@ export const SearchFleet = () => {
                     </div>
                 </div>
 
-                {/* 2. Category Dropdown */}
-                <div className="filter-group">
+                {/* 2. Custom Category Selector Dropdown Matrix */}
+                <div className={`filter-group ${openDropdown === 'category' ? 'raise-z-index' : ''}`}>
                     <label className="filter-label">
-                        {isVehiclePage ? "VEHICLE TYPE" : isHotelPage ? "ACCOMMODATION" : "TOUR TYPE"}
+                        {isVehiclePage ? "Vehicle Type" : isHotelPage ? "Accommodation" : "Tour Type"}
                     </label>
-                    <div className="input-wrapper">
-                        <select className="filter-input" value={formData.category} onChange={(e) => setFormData({ ...formData, category: e.target.value })}>
-                            <option value="all">All Types</option>
+                    <div className="input-wrapper position-relative">
+                        <div
+                            className={`custom-select-trigger filter-input ${openDropdown === 'category' ? 'active-dropdown' : ''}`}
+                            onClick={(e) => toggleDropdown(e, 'category')}
+                        >
+                            <span>{getCategoryLabel(formData.category)}</span>
+                            <ChevronDown size={18} className={`select-arrow-transition ${openDropdown === 'category' ? 'rotate-arrow' : ''}`} />
+                        </div>
+
+                        {/* Dropdown item options list panel with collapse entry wrapper styles */}
+                        <div className={`custom-dropdown-options-box shadow-lg ${openDropdown === 'category' ? 'open-expanded' : ''}`}>
+                            <div className="option-item" onClick={() => handleSelectOption("category", "all")}>All Types</div>
                             {isVehiclePage && (
                                 <>
-                                    <option value="Sedan">Sedan</option>
-                                    <option value="SUV">SUV</option>
-                                    <option value="Traveller">Tempo Traveller</option>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Sedan")}>Sedan</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "SUV")}>SUV</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Traveller")}>Tempo Traveller</div>
                                 </>
                             )}
                             {isHotelPage && (
                                 <>
-                                    <option value="Luxury">Luxury</option>
-                                    <option value="Heritage">Heritage</option>
-                                    <option value="Budget">Budget</option>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Luxury")}>Luxury</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Heritage")}>Heritage</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Budget")}>Budget</div>
                                 </>
                             )}
                             {isTourPage && (
                                 <>
-                                    <option value="Essential">Essential</option>
-                                    <option value="Premium">Premium</option>
-                                    <option value="Luxury">Luxury</option>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Essential")}>Essential</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Premium")}>Premium</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Luxury")}>Luxury</div>
                                 </>
                             )}
-                        </select>
-                        <ChevronDown className="input-icon-right" size={16} />
+                        </div>
                     </div>
                 </div>
 
-                {/* 3. Price Filter */}
-                <div className="filter-group">
-                    <label className="filter-label">PRICE RANGE</label>
-                    <div className="input-wrapper">
-                        <select className="filter-input" value={formData.price} onChange={(e) => setFormData({ ...formData, price: e.target.value })}>
-                            <option value="all">Any Price</option>
-                            {/* <option value="0-3000">Below ₹3,000</option>
-                            <option value="3000-15000">₹3,000 - ₹15,000</option>
-                            <option value="15000-999999">Above ₹15,000</option> */}
+                {/* 3. Custom Price Selector Dropdown Matrix */}
+                <div className={`filter-group ${openDropdown === 'price' ? 'raise-z-index' : ''}`}>
+                    <label className="filter-label">Price Range</label>
+                    <div className="input-wrapper position-relative">
+                        <div
+                            className={`custom-select-trigger filter-input ${openDropdown === 'price' ? 'active-dropdown' : ''}`}
+                            onClick={(e) => toggleDropdown(e, 'price')}
+                        >
+                            <span>{getPriceLabel(formData.price)}</span>
+                            <ChevronDown size={18} className={`select-arrow-transition ${openDropdown === 'price' ? 'rotate-arrow' : ''}`} />
+                        </div>
+
+                        {/* Options List Container Box Wrapper */}
+                        <div className={`custom-dropdown-options-box shadow-lg ${openDropdown === 'price' ? 'open-expanded' : ''}`}>
+                            <div className="option-item" onClick={() => handleSelectOption("price", "all")}>Any Price</div>
                             {isVehiclePage && (
                                 <>
-                                    <option value="0-2000">Below ₹2,000</option>
-                                    <option value="2000-10000">Between ₹2,000 - ₹10,000</option>
-                                    <option value="10000-999999">Above ₹10,000</option>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "0-2000")}>Below ₹2,000</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "2000-10000")}>₹2,000 - ₹10,000</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "10000-999999")}>Above ₹10,000</div>
                                 </>
                             )}
                             {isHotelPage && (
                                 <>
-                                    <option value="0-2000">Below ₹2,000</option>
-                                    <option value="2000-7000">Between ₹2,000 - ₹7,000</option>
-                                    <option value="7000-999999">Above ₹7,000</option>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "0-2000")}>Below ₹2,000</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "2000-7000")}>₹2,000 - ₹7,000</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "7000-999999")}>Above ₹7,000</div>
                                 </>
                             )}
                             {isTourPage && (
                                 <>
-                                    <option value="0-5000">Below ₹5,000</option>
-                                    <option value="5000-15000">Between ₹5,000 - ₹15,000</option>
-                                    <option value="15000-999999">Above ₹15,000</option>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "0-5000")}>Below ₹5,000</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "5000-15000")}>₹5,000 - ₹15,000</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "15000-999999")}>Above ₹15,000</div>
                                 </>
                             )}
-                        </select>
-                        <DollarSign className="input-icon-right" size={16} />
+                        </div>
                     </div>
                 </div>
 
@@ -268,7 +326,7 @@ export const SearchFleet = () => {
 export const KumbhCountdown = ({ targetDate, isActive = true }) => {
     // Memoize the target date so the useEffect doesn't re-run unless the date prop changes
     const COUNTDOWN_TARGET = useMemo(() => {
-        return targetDate ? new Date(targetDate) : new Date("2027-10-14T00:00:00Z");
+        return targetDate ? new Date(targetDate) : new Date("2026-11-31T00:00:00Z");
     }, [targetDate]);
 
     const [timeLeft, setTimeLeft] = useState({
@@ -325,18 +383,18 @@ export const KumbhCountdown = ({ targetDate, isActive = true }) => {
         const formattedValue = String(value).padStart(label === "Days" ? 1 : 2, '0');
 
         return (
-            <div className="countdown-box w-100 h-100 shadow-sm flex-column d-flex align-items-center justify-content-center text-center">
-                <div className='countdown-value w-100'>
+            <div className="countdown-box shadow-sm flex-column d-flex align-items-center justify-content-center text-center">
+                <div className='countdown-value'>
                     <h3 className="glitch-text m-0">{formattedValue}</h3>
                 </div>
                 <div className="countdown-divider border-top"></div>
-                <p className="countdown-label m-0">{label}</p>
+                <p className="countdown-label text-primery m-0">{label}</p>
             </div>
         );
     };
 
     return (
-        <div className="d-grid kumbh-countdown-section gap-3 justify-content-center">
+        <div className="d-flex align-items-center gap-2 gap-sm-4 justify-content-center px-0 px-sm-5 kumbh-countdown-section">
             <CountdownBlock value={timeLeft.days} label="Days" />
             <CountdownBlock value={timeLeft.hours} label="Hours" />
             <CountdownBlock value={timeLeft.minutes} label="Mins" />
@@ -517,3 +575,95 @@ export const HighlightsModal = ({ children }) => {
         </>
     );
 };
+
+const BathingDatesSlider = () => {
+    return (
+        <div className="div d-none d-md-block">
+            <SwiperSliderComp
+                slidesPerView={4}
+                navigation={{
+                    prevEl: '.bathing-prev-btn',
+                    nextEl: '.bathing-next-btn',
+                }}
+                disableAutoplay={true}
+                spaceBetween={20}
+                timeDelay={4000}
+                breakpoints={{
+                    0: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                    },
+                    450: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 1,
+                        spaceBetween: 30,
+                    },
+                    865: {
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                    },
+                    992: {
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                    },
+                    1120: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    },
+                    1600: {
+                        slidesPerView: 4,
+                        spaceBetween: 30,
+                    },
+                }}
+            >
+                {bathingDates.map((date, index) => (
+                    <SwiperSlide key={index} className="h-auto">
+                        <div className="festival-card-wrapper snap-start group">
+                            <div className="festival-card glass-card inner-glow position-relative p-4 d-grid rounded-4 transition-card">
+
+                                <div className="festival-card-line position-absolute"></div>
+
+                                <div className="festival-card-header">
+                                    <div className="d-flex align-items-center ">
+                                        <span className="festival-label text-uppercase d-block">
+                                            {date.dateOccation}
+                                        </span>
+                                    </div>
+
+                                    <h3 className="festival-title my-3 text-capitalize">
+                                        {date.title}
+                                    </h3>
+                                </div>
+
+                                <div className="festival-date d-flex align-items-end gap-3">
+                                    <span className="festival-day fw-bold">
+                                        {date.day}
+                                    </span>
+
+                                    <div className="d-flex flex-column">
+                                        <span className="festival-month text-uppercase">
+                                            {date.month}
+                                        </span>
+
+                                        <span className="festival-year">
+                                            2027
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="festival-footer w-100 pt-4 border-top d-flex justify-content-between align-items-center">
+                                    <span className="festival-subtitle">
+                                        Sacred Immersion
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                ))}
+            </SwiperSliderComp>
+        </div>
+    )
+}

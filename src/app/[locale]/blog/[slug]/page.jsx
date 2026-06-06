@@ -100,7 +100,7 @@ const BlogDetails = async ({ params }) => {
 
     return (
         <main>
-            <article className="pb-5 bg-white">
+            <article className="padding-bottom bg-white">
                 {/* blog bg image and sm more than 576px screen heading */}
                 <div className="blog-detailed-bg-img" style={{ backgroundImage: `url(${blog.image_url})` }}>
                     <Container className='z-3'>
@@ -190,30 +190,8 @@ const BlogDetails = async ({ params }) => {
                                     </div>
                                 </div>
 
-                                {/* news letter card */}
-                                {/* <div className="news-letter-card d-flex flex-column gap-3 justify-content-center">
-                                    <div>
-                                        <h4 className="m-0">Stay Updated</h4>
-                                        <p className="m-0">Get the latest updates and insights delivered straight to your inbox.</p>
-                                    </div>
-                                    <div className="d-flex flex-column gap-3">
-                                        <PrimeryBtn
-                                            className="primery-btn w-100 justify-content-center"
-                                            title="Blogs"
-                                            btnLink="/blog"
-                                            iconRight={<ArrowRight size={18} />}
-                                        />
-                                        <PrimeryBtn
-                                            className="primery-btn w-100 justify-content-center"
-                                            title="View All Blogs"
-                                            btnLink="/blog"
-                                            iconRight={<ArrowRight size={18} />}
-                                        />
-                                    </div>
-                                </div> */}
-
                                 {/* treanding card */}
-                                <div className="treanding-card d-flex flex-column gap-3 justify-content-center">
+                                {/* <div className="treanding-card d-flex flex-column gap-3 justify-content-center">
                                     <div>
                                         <h4 className="m-0">Treanding Nearby Places</h4>
                                         <p className="m-0">Get the latest updates and insights delivered straight to your inbox.</p>
@@ -227,7 +205,7 @@ const BlogDetails = async ({ params }) => {
                                             )
                                         })}
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </Col>
                     </Row>
