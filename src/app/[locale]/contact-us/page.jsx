@@ -10,6 +10,8 @@ import { TitleComponent } from "@/components/ui/common";
 import { HeroHeaderCard } from "@/components/ui/card";
 import { MapPin, Phone, Mail, Building2, MessageCircle } from "lucide-react";
 import Link from "next/link";
+import axios from "axios";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const branhesData = [
     {
@@ -54,6 +56,7 @@ const ContactUs = () => {
 
     // 2. Error State for Validation
     const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
 
     // Handle Input Change
     const handleChange = (e) => {
@@ -64,34 +67,130 @@ const ContactUs = () => {
     };
 
     // 3. Validation and WhatsApp Redirect Function
-    const handleWhatsAppSubmit = (e) => {
+    // const handleWhatsAppSubmit = (e) => {
+    //     if (e) e.preventDefault();
+
+    //     const newErrors = {};
+    //     // Basic Validation
+    //     if (!formData.fullName) newErrors.fullName = "Please enter your name";
+    //     if (!formData.email || !formData.email.includes("@")) newErrors.email = "Please enter a valid email";
+    //     if (!formData.mobile || formData.mobile.length < 10) newErrors.mobile = "Please enter a valid mobile number";
+    //     if (!formData.message) newErrors.message = "Please enter your requirement";
+
+    //     if (Object.keys(newErrors).length > 0) {
+    //         setErrors(newErrors);
+    //         return; // Stop if there are errors
+    //     }
+
+    //     // 4. Construct WhatsApp Message
+    //     const phoneNumber = "919022093522"; // Your Business Number
+    //     const text = `*New Inquiry - Nashik Kumbh Concierge*%0A%0A` +
+    //         `*Name:* ${formData.fullName}%0A` +
+    //         `*Email:* ${formData.email}%0A` +
+    //         `*Mobile:* ${formData.mobile}%0A` +
+    //         `*Type:* ${formData.inquiryType}%0A` +
+    //         `*Message:* ${formData.message}`;
+
+    //     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${text}`;
+
+    //     // Redirect to WhatsApp
+    //     window.open(whatsappUrl, "_blank");
+    // };
+
+    const handleWhatsAppSubmit = async (e) => {
         if (e) e.preventDefault();
 
         const newErrors = {};
-        // Basic Validation
-        if (!formData.fullName) newErrors.fullName = "Please enter your name";
-        if (!formData.email || !formData.email.includes("@")) newErrors.email = "Please enter a valid email";
-        if (!formData.mobile || formData.mobile.length < 10) newErrors.mobile = "Please enter a valid mobile number";
-        if (!formData.message) newErrors.message = "Please enter your requirement";
+
+        if (!formData.fullName.trim()) {
+            newErrors.fullName = "Please enter your name";
+        }
+
+        if (
+            !formData.email.trim() ||
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
+        ) {
+            newErrors.email = "Please enter a valid email";
+        }
+
+        if (
+            !formData.mobile.trim() ||
+            formData.mobile.replace(/\D/g, "").length < 10
+        ) {
+            newErrors.mobile = "Please enter a valid mobile number";
+        }
+
+        if (!formData.message.trim()) {
+            newErrors.message = "Please enter your requirement";
+        }
 
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
-            return; // Stop if there are errors
+            return;
         }
 
-        // 4. Construct WhatsApp Message
-        const phoneNumber = "919022093522"; // Your Business Number
-        const text = `*New Inquiry - Nashik Kumbh Concierge*%0A%0A` +
-            `*Name:* ${formData.fullName}%0A` +
-            `*Email:* ${formData.email}%0A` +
-            `*Mobile:* ${formData.mobile}%0A` +
-            `*Type:* ${formData.inquiryType}%0A` +
-            `*Message:* ${formData.message}`;
+        try {
+            setLoading(true);
 
-        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${text}`;
+            const payload = {
+                full_name: formData.fullName,
+                email: formData.email,
+                mobile_number: formData.mobile,
+                inquiry_type: formData.inquiryType,
+                your_message: formData.message,
+            };
 
-        // Redirect to WhatsApp
-        window.open(whatsappUrl, "_blank");
+            const response = await axios.post(
+                `${API_URL}/contact-us`,
+                payload,
+                {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            console.log("Contact Form Success:", response.data);
+
+            // WhatsApp Redirect
+            const phoneNumber = "919022093522";
+
+            const text =
+                `*New Inquiry - Nashik Kumbh Concierge*%0A%0A` +
+                `*Name:* ${formData.fullName}%0A` +
+                `*Email:* ${formData.email}%0A` +
+                `*Mobile:* ${formData.mobile}%0A` +
+                `*Type:* ${formData.inquiryType}%0A` +
+                `*Message:* ${formData.message}`;
+
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${text}`;
+
+            window.open(whatsappUrl, "_blank");
+
+            // Reset Form
+            setFormData({
+                fullName: "",
+                email: "",
+                mobile: "",
+                inquiryType: "Vehicle Rental",
+                message: "",
+            });
+
+            setErrors({});
+        } catch (error) {
+            console.error(
+                "Contact Form Error:",
+                error.response?.data || error.message
+            );
+
+            alert(
+                error.response?.data?.message ||
+                "Something went wrong. Please try again."
+            );
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -133,7 +232,7 @@ const ContactUs = () => {
                                     Our premium concierge team typically responds within 2 hours.
                                 </p>
 
-                                <Form className="contact-form">
+                                <Form className="contact-form" onSubmit={handleWhatsAppSubmit}>
                                     <Row className="g-3">
                                         <Col md={6}>
                                             <Form.Group className="mb-3">
@@ -187,7 +286,7 @@ const ContactUs = () => {
                                                 >
                                                     <option>Vehicle Rental</option>
                                                     <option>Accommodation Concierge</option>
-                                                    <option>VVIP Darshan Support</option>
+                                                    {/* <option>VVIP Darshan Support</option> */}
                                                     <option>Logistics & Travel</option>
                                                 </Form.Select>
                                             </Form.Group>
@@ -210,10 +309,16 @@ const ContactUs = () => {
                                     </Row>
 
                                     {/* form submit button */}
-                                    <WhatsappBtn
+                                    {/* <WhatsappBtn
                                         title={"Send Request"}
                                         className={"whatsapp-btn"}
                                         onClick={handleWhatsAppSubmit}
+                                    /> */}
+                                    <WhatsappBtn
+                                        title={loading ? "Submitting..." : "Send Request"}
+                                        className={"whatsapp-btn"}
+                                        onClick={handleWhatsAppSubmit}
+                                        type="button"
                                     />
                                 </Form>
                             </div>
@@ -234,11 +339,11 @@ const ContactUs = () => {
                                             <p>{branch.branchAddress}</p>
                                         </div>
 
-                                        <div className="branch-info">
+                                        {/* <div className="branch-info">
                                             <Phone size={18} className="primery-color"/>
-                                            <Link href={`tel:+${branch.branchPhone}`}>{branch.branchPhone}</Link>
+                                            <Link href={`tel:+${branch.branchPhone}`}>{branch.branchPhone}</Link> */}
                                             {/* <a href={`tel:+${branch.branchPhone}`}>{branch.branchPhone}</a> */}
-                                        </div>
+                                        {/* </div> */}
 
                                     </Link>
                                 ))}
