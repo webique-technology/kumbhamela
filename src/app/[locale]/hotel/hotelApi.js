@@ -12,3 +12,18 @@ export const getHotels = async () => {
 
   return response.data?.data;
 };
+
+export const createHotelEnquiry = async (data) => {
+    const response = await API.post(
+        "/hotel-enquiries/store",
+        data,
+        {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+        }
+    );
+
+    return response.data;
+};

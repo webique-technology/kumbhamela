@@ -16,7 +16,7 @@ import { getHotels } from "./hotelApi";
 const HotelPageContent = () => {
 
     const [show, setShow] = useState(false);
-    const [selectedHotel, setSelectedHotel] = useState("");
+    // const [selectedHotel, setSelectedHotel] = useState("");
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -25,9 +25,10 @@ const HotelPageContent = () => {
 
     const currentPage = Number(searchParams.get("page")) || 1;
     const itemsPerPage = 6;
+    const [selectedHotel, setSelectedHotel] = useState(null);
 
-    const handleOpenBooking = (hotelName) => {
-        setSelectedHotel(hotelName);
+    const handleOpenBooking = (hotel) => {
+        setSelectedHotel(hotel);
         setShow(true);
     };
 
@@ -72,7 +73,7 @@ const HotelPageContent = () => {
                                 <Col lg={4} md={6} key={index}>
                                     <HotelCards
                                         hotel={hotel}
-                                        onBookNow={() => handleOpenBooking(hotel.name)} />
+                                        onBookNow={() => handleOpenBooking(hotel)} />
                                 </Col>
                             ))}
                         </Row>
@@ -103,7 +104,9 @@ const HotelPageContent = () => {
                         show={show}
                         handleClose={() => setShow(false)}
                         type="hotel"
-                        selectedItem={selectedHotel}
+                        // selectedItem={selectedHotel}
+                        selectedItem={selectedHotel?.name}
+                        hotelId={selectedHotel?.id}
                     />
                 </Container>
             </section>

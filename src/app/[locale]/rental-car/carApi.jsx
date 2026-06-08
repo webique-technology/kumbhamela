@@ -37,3 +37,18 @@ export const getCars = async (
         throw error;
     }
 };
+
+export const createCarEnquiry = async (data) => {
+    const response = await api.post(
+        "/vehicle-enquiries/store",
+        data,
+         {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+        }
+    );
+
+    return response.data;
+};
