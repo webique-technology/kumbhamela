@@ -183,7 +183,7 @@ const BlogDetails = async ({ params }) => {
                                                             {blog.title}
                                                         </h4>
                                                         </Link>
-                                                    <p className="blog-sidebar-widget-item-date m-0">{blog.created_at}</p>
+                                                    <p className="blog-sidebar-widget-item-date m-0">{blog.date}</p>
                                                 </div>
                                             </div>
                                         ))}
