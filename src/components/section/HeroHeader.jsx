@@ -16,7 +16,7 @@ export const heroSliderData = [
         id: 1,
         image: "/images/banner-1.webp",
         subHeading: "Experience Unmatched Delight With Us.",
-        title: "Kumbh Mela Nashik 2027",
+        title: "Simhastha Kumbh Mela Nashik 2027",
         description: "Countdown to Kumbh Mela ",
     },
     {

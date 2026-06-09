@@ -89,8 +89,8 @@ const Navbar = () => {
                     <Link href="/" className="d-flex align-items-center text-decoration-none logo">
                         <div className="logo-icon"><span className="text-white">ॐ</span></div>
                         <div className="logo-text">
-                            <h1>Nashik Kumbh</h1>
-                            <p>Mela 2027</p>
+                            <h1>MAHAKUMBH</h1>
+                            <p>Tours & Travels</p>
                         </div>
                     </Link>
 

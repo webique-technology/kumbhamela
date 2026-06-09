@@ -30,18 +30,17 @@ const Footer = () => {
                                     <span>ॐ</span>
                                 </div>
                                 <div className="ms-2">
-                                    <h3 className="footer-title">Nashik Kumbh</h3>
-                                    <p className="footer-subtitle">Mela 2027</p>
+                                    <h3 className="footer-title">MAHAKUMBH</h3>
+                                    <p className="footer-subtitle">Tours & Travels</p>
                                 </div>
                             </div>
                             <p className="footer-text d-none d-md-block">
-                                Your trusted guide to the sacred Nashik Kumbh Mela pilgrimage.
-                                Experience the divine gathering with complete information and support.
+                                Our fleet of cars and tempo travellers ensures comfortable journeys to Adya Jyotirlinga Trimbakeshwar, Trayambkeshwar, and other sacred destinations.
                             </p>
                             {/* social links */}
                             <div className="d-flex gap-2 mt-3 mb-3">
                                 {/* facebook */}
-                                <a href="#" className="social-icon">
+                                <a href="https://www.facebook.com/people/Mahakumbh-Tours-Travels/61585265510417/?ref=PROFILE_EDIT_xav_ig_profile_page_web#" target='_blank' className="social-icon">
                                     <Image
                                         src="/images/facebook-logo.svg"
                                         alt="Facebook"
@@ -51,7 +50,7 @@ const Footer = () => {
                                     />
                                 </a>
                                 {/* twitter - x */}
-                                <a href="#" className="social-icon">
+                                {/* <a href="#" className="social-icon">
                                     <Image
                                         src="/images/x-logo.svg"
                                         alt="Twitter"
@@ -59,9 +58,9 @@ const Footer = () => {
                                         height={18}
                                         className='img-fluid'
                                     />
-                                </a>
+                                </a> */}
                                 {/* instagram */}
-                                <a href="#" className="social-icon">
+                                <a href="https://www.instagram.com/mahakumbh_tours_travels/" target='_blank' className="social-icon">
                                     <Image
                                         src="/images/instagram-logo.svg"
                                         alt="Instagram"
@@ -120,23 +119,23 @@ const Footer = () => {
 
                             <ul className="list-unstyled footer-contact">
                                 <li className="d-flex mb-3">
-                                    <MapPin size={18} className="me-2 mt-1 icon" />
+                                    <MapPin size={18} className="me-2 mt-1 icon flex-shrink-0" />
                                     <span>
-                                        Nashik Tourism Office <br />
-                                        Panchavati, Nashik 422003 <br />
-                                        Maharashtra, India
+                                        Office Shop No 11, NYSA Business Centre,
+                                        Makhmalabad Rd, Ghadge Nagar, Nashik,
+                                        Maharashtra 422003
                                     </span>
                                 </li>
 
                                 <li className="d-flex mb-3">
                                     <Phone size={18} className="me-2 mt-1 icon" />
                                     <div>
-                                        <a href="tel:+911234567890" className="footer-link d-block">
-                                            +91 1234 567 890
+                                        <a href="tel:+917507778088" className="footer-link d-block">
+                                            +91 75077 78088
                                         </a>
-                                        <a href="tel:1800" className="footer-link d-block">
+                                        {/* <a href="tel:1800" className="footer-link d-block">
                                             Toll Free: 1800-XXX-XXXX
-                                        </a>
+                                        </a> */}
                                     </div>
                                 </li>
 
@@ -156,7 +155,7 @@ const Footer = () => {
                 <div className="footer-bottom">
                     <div className="container py-3 d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
                         <p className="mb-0 small text-center text-md-start">
-                            © 2026 Nashik Kumbh Mela. All rights reserved.
+                            © {new Date().getFullYear()} Mahakumbh Tours & Travels. All rights reserved.
                         </p>
 
                         <div className="d-flex gap-3">

@@ -576,66 +576,104 @@ export const rentalCar = [
 ];
 
 export const sacredDestinations = [
-    {
-        name: 'Trimbakeshwar Temple',
-        description: 'One of the twelve Jyotirlingas, sacred abode of Lord Shiva',
-        location: '28 km from Nashik',
-        image: "/images/sacred-destination-1.jpg"
-    },
-    {
-        name: 'Ramkund',
-        description: 'Sacred bathing ghat on Godavari River, where Lord Rama bathed',
-        location: 'Central Nashik',
-        image: "/images/sacred-destination-2.jpg"
-    },
-    {
-        name: 'Panchavati',
-        description: 'Holy place where Lord Rama, Sita, and Lakshmana resided during exile',
-        location: '8 km from Nashik',
-        image: "/images/kumbhamela-img-3.jpg"
-    },
-    {
-        name: 'Kalaram Temple',
-        description: 'Ancient temple dedicated to Lord Rama with black stone idol',
-        location: 'Panchavati, Nashik',
-        image: "/images/sacred-destination-3.jpg"
-    },
-    {
-        name: "Godavari Ghats",
-        description: "Historic river ghats with spiritual bathing rituals",
-        location: "Nashik",
-        image: "/images/sacred-destination-2.jpg"
-    },
-    {
-        name: 'Saptashrungi Devi',
-        description: 'Famous Shakti Peetha temple of Goddess Saptashrungi on hilltop',
-        location: '60 km from Nashik',
-        image: "/images/sacred-destination-4.jpg"
-    },
-    {
-        name: "Sita Gufa",
-        description: "Sacred cave where Goddess Sita meditated",
-        location: "Nashik",
-        image: "/images/sita-gufa.webp"
-    },
-    {
-        name: 'Muktidham Temple',
-        description: 'White marble temple complex with replicas of 12 Jyotirlingas',
-        location: 'Nashik Road',
-        image: "/images/sacred-destination-5.jpg"
-    },
-    {
-        name: "Kapaleshwar Temple",
-        description: "Ancient Shiva temple on hill with scenic views",
-        location: "Nashik",
-        image: "/images/sacred-destination-2.jpg"
-    },
-    {
-        name: "Anjaneri",
-        description: "Birthplace of Lord Hanuman with trekking path",
-        location: "Near Nashik",
-        image: "/images/anjaneri.webp"
-    }
+  {
+    name: "Trimbakeshwar Temple",
+    history: "Trimbakeshwar Temple is one of the twelve sacred Jyotirlingas of Lord Shiva and is among the most important pilgrimage sites in India. Situated at the foothills of Brahmagiri Hills, the temple is closely associated with the origin of the holy Godavari River. According to Hindu scriptures, Sage Gautama performed severe penance here, after which Lord Shiva brought the sacred Ganga to earth in the form of the Godavari. The present structure was rebuilt in the 18th century by Peshwa Balaji Baji Rao and is admired for its black stone architecture and intricate carvings. Unlike most Jyotirlingas, the sanctum houses three lingas symbolizing Brahma, Vishnu, and Mahesh. Devotees visit throughout the year for darshan, Rudrabhishek rituals, and spiritual ceremonies. The temple gains special significance during Kumbh Mela when millions of pilgrims gather in Nashik and Trimbakeshwar. Its religious importance, mythological connections, and serene surroundings make it one of Maharashtra's most revered spiritual destinations.",
+    routeFromNashik: 'Trimbakeshwar is approximately 28 km west of Nashik via Nashik–Trimbak Road. The journey takes around 45–60 minutes by road.',
+    travelOptions: "Private taxi, rental car, state transport bus, shared jeep, tour package, self-drive vehicle.",
+    routeLink: "/hotel/rental-car",
+    transportOptions:"Visitors can easily reach by local Public transport or taxis",
+    image: "/images/sacred-destination-1.jpg"
+  },
+
+  {
+    name: "Ramkund",
+    history: "Ramkund is one of the holiest locations in Nashik and holds immense importance in Hindu tradition. Situated on the banks of the Godavari River, it is believed to be the sacred bathing place of Lord Rama during his exile. According to legends, Lord Rama performed rituals and offered prayers here while residing in Panchavati with Sita and Lakshmana. The kund is considered highly auspicious for performing ancestral rites and immersion ceremonies. Pilgrims believe that taking a holy dip in Ramkund helps purify the soul and wash away sins. The site has been an important religious center for centuries and plays a central role during Kumbh Mela celebrations. Numerous temples and ghats surrounding Ramkund contribute to its spiritual atmosphere. Saints, devotees, and travelers from across India visit throughout the year to seek blessings and experience the sacred environment. Ramkund remains one of the most recognized symbols of Nashik's religious and cultural heritage.",
+    routeFromNashik: 'Ramkund is located in the heart of Nashik city near Panchavati, approximately 3–5 km from major city areas.',
+    travelOptions: "Auto-rickshaw, city bus, taxi, rental car, local sightseeing package.",
+    routeLink: "/hotel/rental-car",
+    transportOptions:"Visitors can easily reach by local Public transport or taxis",
+    image: "/images/sacred-destination-2.jpg"
+  },
+
+  {
+    name: "Panchavati",
+    history: "Panchavati is one of the most sacred places associated with the Ramayana and forms the spiritual heart of Nashik. The name Panchavati means 'garden of five banyan trees' and refers to the area where Lord Rama, Goddess Sita, and Lakshmana spent a significant portion of their fourteen-year exile. Many events from the Ramayana are believed to have taken place here, including the encounter with Shurpanakha and the events leading to Sita's abduction by Ravana. The region contains several important temples, ghats, caves, and shrines connected to these legends. Pilgrims visit Panchavati to experience the living heritage of the Ramayana and seek blessings from Lord Rama. Over centuries, the area developed into a major religious center with continuous worship and cultural activities. During festivals and Kumbh Mela, Panchavati becomes a vibrant destination for devotees from across India. Its blend of mythology, spirituality, and history makes it one of Nashik's most significant pilgrimage sites.",
+    routeFromNashik: 'Panchavati is located about 5–8 km from most parts of Nashik city and can be reached within 15–20 minutes by road. Comfortable local transport can be arranged through',
+    travelOptions: "Auto-rickshaw, local taxi, city bus, rental car, guided pilgrimage tour.",
+    routeLink: "/hotel/rental-car",
+    transportOptions:"Visitors can easily reach by local Public transport or taxis",
+    image: "/images/kumbhamela-img-3.jpg"
+  },
+
+  {
+    name: "Kalaram Temple",
+    history: "Kalaram Temple is one of the most prominent temples dedicated to Lord Rama in Maharashtra. Located in Panchavati, the temple derives its name from the black-colored stone idol of Lord Rama installed within the sanctum. The temple was constructed in the 18th century by Sardar Rangarao Odhekar and showcases impressive black stone architecture inspired by ancient temple styles. It holds great significance among devotees due to its association with the Ramayana and the Panchavati region. Kalaram Temple also occupies an important place in India's social history because Dr. B. R. Ambedkar led a temple entry movement here in 1930 advocating equal rights and social justice. The temple attracts thousands of pilgrims during Ram Navami and other Hindu festivals. Its elegant structure, spiritual importance, and historical relevance make it one of Nashik's most visited religious landmarks. Visitors often include Kalaram Temple as a key stop during spiritual tours of Nashik.",
+    routeFromNashik: 'Located in Panchavati, Kalaram Temple is approximately 5 km from central Nashik and easily accessible by road.',
+    travelOptions: "Taxi, auto-rickshaw, city bus, rental car, heritage tour package.",
+    routeLink: "/hotel/rental-car",
+    transportOptions:"Visitors can easily reach by local Public transport or taxis",
+    image: "/images/sacred-destination-3.jpg"
+  },
+
+  {
+    name: "Godavari Ghats",
+    history: "The Godavari Ghats of Nashik are among the most sacred riverfronts in India and serve as important centers for religious rituals, pilgrimages, and festivals. Built along the banks of the Godavari River, the ghats have witnessed centuries of spiritual activity and cultural traditions. Devotees gather here for holy baths, prayer ceremonies, ancestral rituals, and festival celebrations. The ghats are closely connected with the legends of Lord Rama and the sacred geography of Panchavati. During the Kumbh Mela, millions of pilgrims visit the Godavari Ghats to participate in ritual bathing, making it one of the largest religious gatherings in the world. Numerous temples and shrines line the riverbanks, creating a spiritually vibrant atmosphere. The architecture of the ghats reflects the historical development of Nashik as a major pilgrimage destination. Today, the Godavari Ghats remain a symbol of faith, devotion, and cultural continuity, attracting visitors from all parts of India and beyond.",
+    routeFromNashik: 'Godavari Ghats are situated in central Nashik near Ramkund and Panchavati. They can be reached within minutes from most city locations. Local transportation and rental vehicles are available through',
+    travelOptions: "Taxi, auto-rickshaw, city bus, rental car, walking tour.",
+    routeLink: "/hotel/rental-car",
+    transportOptions:"Visitors can easily reach by local Public transport or taxis",
+    image: "/images/sacred-destination-2.jpg"
+  },
+//     {
+//     name: "Saptashrungi Devi",
+//     history: "Saptashrungi Devi Temple is one of the most revered Shakti Peethas in Maharashtra and is dedicated to Goddess Saptashrungi Nivasini. Situated amidst seven mountain peaks in the Sahyadri range, the temple derives its name from the Sanskrit words 'Sapta' meaning seven and 'Shrungi' meaning peaks. According to Hindu mythology, the goddess is believed to be an incarnation of Durga who defeated powerful demons to protect righteousness. The idol of the goddess, carved into the mountain rock, stands approximately ten feet tall and is adorned with ornaments and weapons symbolizing divine power. For centuries, devotees have undertaken pilgrimages to seek blessings for prosperity, courage, and protection. The temple holds immense significance during Navratri when thousands of devotees gather to participate in religious celebrations. Surrounded by scenic hills and spiritual ambiance, Saptashrungi has become one of the most important pilgrimage destinations in Maharashtra. Its combination of natural beauty, mythology, and faith attracts devotees and tourists alike throughout the year.",
+//     routeFromNashik: 'Saptashrungi Devi Temple is located near Vani, approximately 60 km from Nashik. The journey takes around 1.5 to 2 hours via Nashik–Vani Road.',
+//     travelOptions: "Private taxi, rental car, state transport bus to Vani, shared jeep, pilgrimage tour package.",
+//     routeLink: "/hotel/rental-car",
+//     transportOptions:"Pilgrims can easily reach by local Public transport or taxis",
+//     image: "/images/sacred-destination-4.jpg"
+//   },
+
+  {
+    name: "Sita Gufa",
+    history: "Sita Gufa is a sacred cave located in Panchavati and is deeply associated with the Ramayana. According to tradition, this cave served as a place where Goddess Sita spent time during her stay in the Panchavati region alongside Lord Rama and Lakshmana. It is also believed to be connected with the events leading to her abduction by Ravana. The cave has become an important pilgrimage site for devotees seeking to experience locations linked to the epic Ramayana. Visitors enter through a narrow passage that leads to small shrines dedicated to Lord Rama, Goddess Sita, and Lakshmana. Over the years, Sita Gufa has become one of the most visited spiritual landmarks in Nashik, attracting pilgrims from across India. The cave's unique atmosphere, mythological significance, and close proximity to other sacred sites in Panchavati make it an essential stop for devotees. It continues to preserve the cultural and religious heritage associated with one of Hinduism's most cherished epics.",
+    routeFromNashik: 'Sita Gufa is situated in Panchavati, around 5 km from central Nashik.',
+    travelOptions: "Auto-rickshaw, taxi, city bus, rental car, guided religious tour.",
+    routeLink: "/hotel/rental-car",
+    transportOptions:"Pilgrims can easily reach by local Public transport or taxis",
+    image: "/images/sita-gufa.webp"
+  },
+
+  {
+    name: "Muktidham Temple",
+    history: "Muktidham Temple is one of Nashik's most recognized modern spiritual landmarks. Constructed entirely from white marble, the temple complex was built by the late Shri Jayrambhai Bytco in memory of his mother. The temple is renowned for housing replicas of all twelve Jyotirlingas of India, allowing devotees to symbolically visit these sacred shrines in one location. The walls of the temple are inscribed with verses from the Bhagavad Gita, offering spiritual inspiration to visitors. The peaceful surroundings and elegant marble architecture create an atmosphere of devotion and reflection. Muktidham has become a popular destination for pilgrims, tourists, and families visiting Nashik. Its convenient location near Nashik Road railway station makes it easily accessible to travelers arriving from different parts of India. Over the years, the temple has established itself as an important center for worship, religious learning, and cultural appreciation. It continues to attract visitors seeking both spiritual fulfillment and architectural beauty.",
+    routeFromNashik: 'Muktidham Temple is located at Nashik Road, approximately 8–10 km from central Nashik city.',
+    travelOptions: "Taxi, auto-rickshaw, city bus, rental car, local sightseeing package.",
+    routeLink: "/hotel/rental-car",
+    transportOptions:"Pilgrims can easily reach by local Public transport or taxis",
+    image: "/images/sacred-destination-5.jpg"
+  },
+
+  {
+    name: "Kapaleshwar Temple",
+    history: "Kapaleshwar Temple is an ancient temple dedicated to Lord Shiva and is considered one of the most unique Shiva temples in India. Located near Ramkund on a small hillock, the temple is associated with a fascinating legend in which Lord Shiva sought redemption after accidentally taking a life. According to local traditions, Shiva was guided by a sacred cow and performed penance at this location. Unlike most Shiva temples, Kapaleshwar Temple does not have a Nandi idol facing the sanctum, making it distinctive among Hindu shrines. The temple has been an important place of worship for centuries and is frequently visited by devotees seeking blessings and spiritual peace. Its elevated location provides scenic views of the surrounding area, adding to its appeal. During festivals such as Mahashivratri, the temple receives large numbers of pilgrims. Kapaleshwar remains an integral part of Nashik's sacred landscape and reflects the city's deep-rooted religious traditions.",
+    routeFromNashik: 'Kapaleshwar Temple is situated near Ramkund and Panchavati, approximately 4–5 km from central Nashik.',
+    travelOptions: "Taxi, auto-rickshaw, city bus, rental car, pilgrimage tour package.",
+    routeLink: "/hotel/rental-car",
+    transportOptions:"It can be conveniently reached through local transport or rental vehicles arranged by",
+    image: "/images/sacred-destination-2.jpg"
+  },
+
+  {
+    name: "Anjaneri",
+    history: "Anjaneri is a historically and spiritually significant hill located near Nashik and is widely believed to be the birthplace of Lord Hanuman. Named after Anjani Mata, the mother of Hanuman, the site holds immense importance in Hindu mythology. The hill is dotted with ancient temples, caves, and ruins that reflect centuries of religious activity. Pilgrims and trekkers alike visit Anjaneri to experience its spiritual atmosphere and scenic beauty. The trek to the summit passes through lush greenery and offers breathtaking views of the surrounding Sahyadri ranges. According to tradition, Lord Hanuman spent his early years in this region before becoming one of the greatest devotees of Lord Rama. The site has gained popularity not only among devotees but also among nature enthusiasts and adventure seekers. Anjaneri beautifully combines mythology, history, and natural landscapes, making it one of the most unique destinations near Nashik. Its spiritual significance continues to attract visitors throughout the year.",
+    routeFromNashik: 'Anjaneri is located approximately 20 km from Nashik on the Nashik–Trimbakeshwar route. The drive takes around 30–40 minutes.',
+    travelOptions: "Private taxi, rental car, state transport bus, trekking group transport, guided tour package.",
+    routeLink: "/hotel/rental-car",
+    transportOptions:"Pilgrims can easily reach by local Public transport or taxis, Visitors can arrange transportation and trekking trips through",
+    image: "/images/anjaneri.webp"
+  }
 ];
 
 export const bathingDates = [

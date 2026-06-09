@@ -320,6 +320,28 @@ p {
         background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
         z-index: 2;
     }
+
+
+}
+
+
+   .booking-modal{
+    .modal-content {
+        border-radius: $border-radius-xl;
+        border: none; overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control,
+    .form-select {
+        border: 1px solid $color-gray-200;
+        background-color: $bg-light;
+
+        &:focus {
+            border-color: $primary-color;
+            box-shadow: 0 0 0 0.25rem rgba($primary-color, 0.1);
+        }
+    }
 }
 
 .card-body {
@@ -591,7 +613,7 @@ p {
 .homepage-demo-design {}
 
 
-
+.model-butt{right:-5px;}
 .top-divider {
     background-image: url("/images/bg-divider-1.png");
     background-size: cover;
@@ -861,4 +883,53 @@ p {
 // Custom utility extending Bootstrap's border system
 .border-dashed {
     //   border-style: dashed !important;
+}
+.modal-header{background-color: $trinery-bg-color;}
+.model-head {
+    border-bottom: 1px solid $color-gray-100;
+    padding: 0 0 7px;
+    font-family: $poppins;
+    position: relative;
+    font-size: 18px;
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 60px;
+        height: 1px;
+        background-color: $primary-color; // Change to your theme color
+    }
+}
+
+.booking-modal {
+    .modal-content {
+        max-height: 85vh;
+        overflow: hidden;
+    }
+
+    .booking-modal-body {
+        max-height: calc(85vh - 80px); // subtract header height
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        // Custom scrollbar
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: #999;
+        }
+    }
 }

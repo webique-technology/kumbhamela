@@ -5,13 +5,22 @@ import { SwiperSliderComp, TitleComponent } from '../ui/common';
 import { sacredDestinations } from '../../lib/data';
 import { SwiperSlide } from 'swiper/react';
 import Image from 'next/image';
+import Link from "next/link";
 import { PrimeryBtn } from '../ui/button';
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { usePathname } from 'next/navigation'; // Fix 1: Import usePathname
-
+import { useState } from "react";
+import Modal from "react-bootstrap/Modal";
+import { X } from "lucide-react";
 const TouristVisitSection = () => {
     const pathname = usePathname(); // Fix 1: Get current path
+    const [selectedCard, setSelectedCard] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
+    const handleCardClick = (card) => {
+        setSelectedCard(card);
+        setShowModal(true);
+    };
     return (
         <section className='section-padding-2 sacred-destinations position-relative'>
             <div className="bottom-divider trinery-bg position-absolute top-0"></div>
@@ -73,7 +82,11 @@ const TouristVisitSection = () => {
                 >
                     {sacredDestinations.map((card, index) => (
                         <SwiperSlide key={index} className="h-auto">
-                            <div className="card card-image-wrapper history-card h-100 border-0 shadow-md overflow-hidden">
+                            <div
+                                className="card card-image-wrapper history-card h-100 border-0 shadow-md overflow-hidden cursor-pointer"
+                                onClick={() => handleCardClick(card)}
+                                style={{ cursor: "pointer" }}
+                            >
                                 {/* Image Container with Overlay */}
                                 <div className="position-relative overflow-hidden">
                                     <Image
@@ -88,7 +101,7 @@ const TouristVisitSection = () => {
                                     {/* Badge Left */}
                                     <div className="position-absolute bottom-0 start-0 m-3 z-2">
                                         <h4 className='text-light mb-1'>{card.name}</h4>
-                                        <p className='text-white text-excerpt m-0'>{card.description}</p>
+                                        <p className='text-white text-excerpt m-0'>{card.history}</p>
                                     </div>
                                 </div>
                             </div >
@@ -98,7 +111,64 @@ const TouristVisitSection = () => {
 
             </Container>
             {/* <div className="top-divider trinery-bg position-absolute bottom-0" style={{ pointerEvents: 'none' }}></div> */}
+
+
+            <Modal
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                centered
+                size="lg"
+                scrollable
+                className="booking-modal"
+            >
+                <Modal.Header className="border-0 px-4 py-3 modal-header justify-content-between modal-header">
+                    <Modal.Title className='text-dark fw-semibold'>{selectedCard?.name}</Modal.Title>
+
+                    <button
+                        type="button"
+                        onClick={() => setShowModal(false)}
+                        className="btn-close bg-transparent"
+                        style={{
+                            width: "40px",
+                            height: "40px",
+                        }}
+                    >
+                        <X size={20} />
+                    </button>
+                </Modal.Header>
+
+                <Modal.Body className='p-4'>
+                    {/* <Image
+                        src={selectedCard?.image}
+                        alt={selectedCard?.name}
+                        width={800}
+                        height={500}
+                        className="w-100 rounded mb-3"
+                        style={{
+                            maxHeight: "500px",
+                            objectFit: "cover",
+                        }}
+                    /> */}
+
+                    <h5 className='primery-color model-head'>History</h5>
+                    <p className='card-text text-muted small blog-excerpt'>{selectedCard?.history}</p>
+
+                    <h5 className='primery-color model-head'>Route from Nashik</h5>
+                    <p className='card-text text-muted small blog-excerpt'>{selectedCard?.routeFromNashik}</p>
+
+                    <h5 className='primery-color model-head'>Transport Options</h5>
+                    <Link
+                        href={selectedCard?.routeLink || "#"}
+                        className="text-primary fw-semibold text-decoration-none"
+                    >
+                        Book Transportation with Mahakumbh Tours & Travels →
+                    </Link>
+                    <p className='card-text text-muted small blog-excerpt'>{selectedCard?.transportOptions}</p>
+
+                </Modal.Body>
+            </Modal>
         </section>
+
     );
 }
 

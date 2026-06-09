@@ -34,7 +34,7 @@ const montez = Montez({
 });
 
 export const metadata = {
-  title: "Nashik Kumbh Mela 2027",
+  title: "Mahakumbh Tours & Travels",
   description: "Official Spiritual Tourism Platform for Nashik Kumbh Mela",
 };
 

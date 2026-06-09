@@ -61,6 +61,12 @@
         border-radius: $border-radius-xl;
         border: none;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+
+        .modal-header {
+            flex-shrink: 0;
+            align-items: center;
+            display: flex;
+        }
     }
 
     .form-control,
@@ -73,7 +79,17 @@
             box-shadow: 0 0 0 0.25rem rgba($primary-color, 0.1);
         }
     }
+
 }
+
+
+.model-head {
+    border-bottom: solid 1px #f2f2f2;
+    padding: 0 0 8px;
+    margin: 0 0 15px;
+    position: relative;
+}
+
 
 .btn-whatsapp {
     background-color: $color-green-500;
