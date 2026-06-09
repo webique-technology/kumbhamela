@@ -51,7 +51,8 @@ export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_widt
                     <div className="d-flex align-items-center gap-1">
                         <Calendar size={14} />
                         {/* <span>{blog.date}</span> */}
-                        <span> {new Date(blog.created_at).toLocaleDateString()}</span>
+                        {/* <span> {new Date(blog.created_at).toLocaleDateString()}</span> */}
+                        <span> {blog.date} </span>
                     </div>
                     {/* <div className="d-flex align-items-center gap-1">
                         <Clock size={14} />

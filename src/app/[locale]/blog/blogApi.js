@@ -6,16 +6,47 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 
 // Get all blogs
-export const getBlogs = async (page = 1) => {
-  try {
-    const response = await api.get(`/blogs?page=${page}`);
+// export const getBlogs = async (page = 1) => {
+//   try {
+//     const response = await api.get(`/blogs?page=${page}`);
 
-     return response.data.data || [];
-  } catch (error) {
-    console.log("Blogs API Error:", error);
-    throw error;
-  }
-};
+//      return response.data.data || [];
+//   } catch (error) {
+//     console.log("Blogs API Error:", error);
+//     throw error;
+//   }
+// };
+
+export const getBlogs = async (
+      page = 1,
+      title = "",
+      limit = ""
+      ) => {
+        try {
+
+            const params = new URLSearchParams();
+
+            params.set("page", page);
+
+            if (title) {
+                params.set("title", title);
+            }
+
+            if (limit) {
+                params.set("limit", limit);
+            }
+
+            const response = await api.get(
+                `/blogs?${params.toString()}`
+            );
+
+            return response.data.data;
+
+        } catch (error) {
+            console.log("Blog API Error:", error);
+            throw error;
+        }
+  };
 
 // Get single blog by id
 export const getBlogById = async (id) => {

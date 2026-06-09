@@ -349,8 +349,8 @@ const TourPackageDetail = ({ tour }) => {
                             </div>
                             <div className="info-box mb-4 p-3 rounded">
                                 {/* <p className="mb-1"><strong>Group:</strong> &nbsp;2-6 People</p> */}
-                                {/* <p className="mb-1"><strong>Duration:</strong> &nbsp;{tour.duration}</p> */}
-                                <p className="mb-1"><strong>Duration:</strong> &nbsp;5 Days / 4 Nights</p>
+                                <p className="mb-1"><strong>Duration:</strong> &nbsp;{tour.duration}</p>
+                                {/* <p className="mb-1"><strong>Duration:</strong> &nbsp;5 Days / 4 Nights</p> */}
                                 {/* <p className="departure-date m-0">
                                     <strong>Departure:</strong> &nbsp;{tour.departureDate || 'Check Availability'}
                                 </p> */}

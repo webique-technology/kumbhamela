@@ -1,20 +1,50 @@
 "use client";
+
+import React, { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import "../../styles/blog.scss"
 import { Col, Container, Row } from "react-bootstrap";
-import { blogs } from "@/lib/blog";
+// import { blogs } from "@/lib/blog";
 import { SwiperSliderComp, TitleComponent } from "../ui/common";
 import { BlogCard } from "../ui/card";
 import { PrimeryBtn } from "../ui/button";
 import { slugify } from "@/lib/utils";
 import { SwiperSlide } from "swiper/react";
+import { getBlogs } from '@/app/[locale]/blog/blogApi';
 
 const BlogSection = () => {
+    const [blogs, setBlogs] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const recentBlogs = blogs;
     // 1. Sort blogs by date (Most Recent first)
     // We create a copy with [...] so we don't change the original array
-    const recentBlogs = [...blogs]
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .slice(0, 3); // 2. Take only the top 3
+    // const recentBlogs = [...blogs]
+    //     .sort((a, b) => new Date(b.date) - new Date(a.date))
+    //     .slice(0, 3); // 2. Take only the top 3
+
+    useEffect(() => {
+        fetchBlogs();
+    }, []);
+
+    const fetchBlogs = async () => {
+        try {
+
+            setLoading(true);
+
+            const response = await getBlogs(
+                1,
+                "",
+                3
+            );
+
+            setBlogs(response || []);
+
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <section id="blog-section" className="section-padding bg-light position-relative">
@@ -49,7 +79,8 @@ const BlogSection = () => {
                                 <BlogCard
                                     blog={blog}
                                     // Ensure you are using slug for the link
-                                    blogLink={`/blog/${slugify(blog.blogTitle)}`}
+                                    // blogLink={`/blog/${slugify(blog.blogTitle)}`}
+                                    blogLink={`/blog/${slugify(blog.title)}`}
                                     img_width={300}
                                     img_height={220}
                                 />
@@ -76,7 +107,8 @@ const BlogSection = () => {
                                 <BlogCard
                                     blog={blog}
                                     // Ensure you are using slug for the link
-                                    blogLink={`/blog/${slugify(blog.blogTitle)}`}
+                                    // blogLink={`/blog/${slugify(blog.blogTitle)}`}
+                                    blogLink={`/blog/${slugify(blog.title)}`}
                                     img_width={300}
                                     img_height={220}
                                 />
