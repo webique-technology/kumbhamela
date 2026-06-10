@@ -80,16 +80,15 @@ export const BathingDates = () => {
                                             <h2>
                                                 <CountUp
                                                     from={0}
-                                                    to={1}
+                                                    to={3}
                                                     separator=","
                                                     direction="up"
-                                                    duration={2}
+                                                    duration={3}
                                                     className="count-up-text text-light"
                                                     delay={0}
                                                 />
-                                                M+
                                             </h2>
-                                            <p className="m-0">Daily Pilgrims</p>
+                                            <p className="m-0">Amrit Snans</p>
                                         </div>
                                     </Col>
                                 </Row>

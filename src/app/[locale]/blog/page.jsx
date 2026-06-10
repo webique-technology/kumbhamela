@@ -3,7 +3,7 @@
 
 import React, { Suspense, useState, useEffect } from "react";
 // import { blogs } from "@/lib/blog";
-import { BlogCard, HeroHeaderCard } from "@/components/ui/card";
+import { BlogCard, HeroHeaderCard, HeroHeaderCard2 } from "@/components/ui/card";
 import { Col, Row, Container, Pagination } from "react-bootstrap";
 import { TitleComponent } from "@/components/ui/common";
 import { slugify } from "@/lib/utils";
@@ -104,9 +104,15 @@ const BlogPageContent = () => {
   return (
     <>
       <section>
-        <HeroHeaderCard
+        {/* <HeroHeaderCard
           heroTitle="All Insights"
           // image="/images/kumbh-place.png"
+          showSearch={false}
+        /> */}
+        <HeroHeaderCard2
+          subTitle={"Knowledge & Insights"}
+          heroTitle={"Kumbh Mela Blogs & Articles"}
+          description={"Explore the rich history, sacred rituals, and practical travel tips for Kumbh Mela Nashik 2027"}
           showSearch={false}
         />
       </section>

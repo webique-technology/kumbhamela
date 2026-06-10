@@ -30,6 +30,26 @@ body {
     }
 }
 
+.hero-subheading {
+    display: inline-block;
+    width: fit-content;
+    background-color: $primary-color;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    border-radius: 55px;
+    font-size: $font-size-xs;
+    color: $text-color-light;
+    // opacity: 0;
+    // display: none;
+}
+
+.hero-para {
+    font-size: clamp(16px, 2vw, $font-size-md);
+    font-weight: 400;
+    max-width: 750px;
+    text-align: center;
+}
+
 .padding-bottom {
     padding-bottom: 140px !important;
 }
@@ -687,17 +707,30 @@ p {
 
 // contact page
 .hero-header-card {
-    background-size: cover;
     height: 350px;
+
+    @media(max-width:576px) {
+        height: 560px;
+    }
+}
+
+.hero-header-card-2 {
+    height: 31vh;
+
+    @media(max-width:992px) {
+        height: 42vh;
+    }
+}
+
+.hero-header-card,
+.hero-header-card-2 {
+    background-size: cover;
     padding: 40px 0;
     position: relative;
     // overflow: hidden;
     background-position: 0;
     background-color: $trinery-bg-color;
 
-    @media(max-width:576px) {
-        height: 560px;
-    }
 
     // &:before {
     //     position: absolute;
@@ -736,6 +769,12 @@ p {
             font-weight: 700;
             color: #a04100;
         }
+    }
+
+    .hero-card-title-2 {
+        font-size: Clamp(32px, 5.5vw, $font-size-3xl);
+        font-weight: 700;
+        line-height: 1.2;
     }
 
     .hero-subtitle {
@@ -828,7 +867,8 @@ p {
             width: 60px;
             height: 60px;
         }
-        .countdown-label{
+
+        .countdown-label {
             font-size: $font-size-base;
         }
     }

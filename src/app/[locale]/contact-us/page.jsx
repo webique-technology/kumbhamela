@@ -7,7 +7,7 @@ import "../../../assets/scss/main.scss";
 import { PrimeryBtn, WhatsappBtn } from "@/components/ui/button";
 import { faqData } from "@/lib/data";
 import { TitleComponent } from "@/components/ui/common";
-import { HeroHeaderCard } from "@/components/ui/card";
+import { HeroHeaderCard2 } from "@/components/ui/card";
 import { MapPin, Phone, Mail, Building2, MessageCircle } from "lucide-react";
 import Link from "next/link";
 
@@ -99,24 +99,10 @@ const ContactUs = () => {
             {/* Header Hero Card */}
             <section className="contact-page-wrapper">
                 {/* <Container> */}
-                {/* <div className="contact-hero-card">
-                        <div className="hero-overlay">
-                            <div className="hero-content">
-                                <span className="hero-subtitle">Connect With Us</span>
-                                <h1 className="hero-title">Pilgrim Concierge & Support</h1>
-                            </div>
-                        </div>
-                        <img
-                            src="/images/contact-page-bg.png"
-                            alt="Godavari River Nashik"
-                            className="hero-img"
-                        />
-                    </div> */}
-                <HeroHeaderCard
-                    heroTitle="Pilgrim Concierge & Support"
-                    // heroSubtitle="Connect With Us"
-                    heroImage="/images/contact-page-bg.png"
-                    imgClass="hero-img"
+                <HeroHeaderCard2
+                    subTitle={"Support & Assistance"}
+                    heroTitle={"Connect With Our Pilgrimage Experts"}
+                    description={"Talk directly to our Kumbh Mela travel specialists for personalized guidance on Yatras, Darshan, and VIP services."}
                     showSearch={false}
                 />
                 {/* </Container> */}
@@ -225,17 +211,17 @@ const ContactUs = () => {
                                 {branhesData.map((branch, index) => (
                                     <Link href={branch.branchURL} className="text-decoration-none shadow-sm branch-card" target="_blank" key={index}>
                                         <div className="branch-city">
-                                            <Building2 size={22} className="primery-color"/>
+                                            <Building2 size={22} className="primery-color" />
                                             <h3>{branch.branchCity}</h3>
                                         </div>
 
                                         <div className="branch-info">
-                                            <MapPin size={18} className="primery-color"/>
+                                            <MapPin size={18} className="primery-color" />
                                             <p>{branch.branchAddress}</p>
                                         </div>
 
                                         <div className="branch-info">
-                                            <Phone size={18} className="primery-color"/>
+                                            <Phone size={18} className="primery-color" />
                                             <Link href={`tel:+${branch.branchPhone}`}>{branch.branchPhone}</Link>
                                             {/* <a href={`tel:+${branch.branchPhone}`}>{branch.branchPhone}</a> */}
                                         </div>

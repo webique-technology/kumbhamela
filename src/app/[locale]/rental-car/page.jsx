@@ -2,7 +2,7 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
 import { TitleComponent, SearchFleet } from "@/components/ui/common";
-import { HeroHeaderCard, RentalCarCard } from "@/components/ui/card";
+import { HeroHeaderCard2, RentalCarCard } from "@/components/ui/card";
 import { BookingForm } from "@/components/ui/bookingFormHandler";
 import { useRouter, useSearchParams, useParams } from "next/navigation";
 import "../../../styles/blog.scss";
@@ -151,7 +151,7 @@ const RentalCarContent = () => {
 
           <Tab.Content>
             <Tab.Pane eventKey={activeTab}>
-              
+
               {/* --- CONTROLLED INNER REGION LOADING STATE LOOP --- */}
               {loading ? (
                 <div className="text-center py-5">
@@ -174,8 +174,8 @@ const RentalCarContent = () => {
                   <h4 className="text-muted">
                     No {activeTab === "all-car" ? "" : activeTab} cars available in this search.
                   </h4>
-                  <button className="primery-btn py-3 mt-3" onClick={() => router.push(`/${locale}/rental-car`)}> 
-                    Clear All Filters 
+                  <button className="primery-btn py-3 mt-3" onClick={() => router.push(`/${locale}/rental-car`)}>
+                    Clear All Filters
                   </button>
                 </div>
               )}
@@ -234,9 +234,13 @@ export default function RentalCar() {
     <main>
       {/* Hero Section Banner remains completely static, unaffected by state changes */}
       <section>
-        <HeroHeaderCard
-          heroTitle="Select your preferred"
-          heroSpan="Transport"
+        <HeroHeaderCard2
+          // 1. Top context identifier matching transport services
+          subTitle="Mela Transit & Fleet"
+          // 2. Direct, actionable main page header
+          heroTitle="Sacred Journeys, Seamless Transit"
+          // 3. Informative description addressing a pilgrim's logistical needs
+          description="Navigate the holy gathering with our vetted fleet. From premium sedans for family darshans to high-capacity tempo travellers for groups, secure your reliable route between Nashik, Trimbakeshwar, and local tirthas."
           // heroTitleClass={"text-light"}
           // heroImage="/images/carrental-page-bg.png"
           imgClass="hero-img"
