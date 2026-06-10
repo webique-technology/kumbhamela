@@ -48,8 +48,11 @@ const RentalCarContent = () => {
   const currentPage = Number(searchParams.get("page")) || 1;
   const totalPages = pagination.last_page;
 
-  const handleOpenBooking = (carName) => {
-    setSelectedCar(carName);
+  const [selectedCarId, setSelectedCarId] = useState(null);
+
+  const handleOpenBooking = (car) => {
+    setSelectedCar(car.name);
+    setSelectedCarId(car.id);
     setShow(true);
   };
 
@@ -160,11 +163,11 @@ const RentalCarContent = () => {
                 </div>
               ) : finalDisplayCars.length > 0 ? (
                 <Row className="g-4">
-                  {finalDisplayCars.map((value, index) => (
+                  {finalDisplayCars.map((car, index) => (
                     <Col key={index} lg={4} md={6}>
                       <RentalCarCard
-                        car={value}
-                        onBook={() => handleOpenBooking(value.name)}
+                        car={car}
+                        onBook={() => handleOpenBooking(car)}
                       />
                     </Col>
                   ))}
@@ -223,6 +226,7 @@ const RentalCarContent = () => {
           handleClose={() => setShow(false)}
           type="car"
           selectedItem={selectedCar}
+          carId={selectedCarId}
         />
       </Container>
     </section>

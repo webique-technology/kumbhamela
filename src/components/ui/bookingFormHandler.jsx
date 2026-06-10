@@ -4,6 +4,8 @@ import { Form, Row, Col, Button, Modal } from 'react-bootstrap';
 import { MessageCircle, Calendar, User, Smartphone, Mail, Hotel, Car } from 'lucide-react';
 
 import { createTourEnquiry } from "../../app/[locale]/tour-package/tourApi";
+import { createHotelEnquiry } from "../../app/[locale]/hotel/hotelApi";
+import { createCarEnquiry } from "../../app/[locale]/rental-car/carApi";
 
 /**
  * @param {string} type - Either 'car' or 'hotel'
@@ -379,7 +381,7 @@ export const BookingFormHandler = ({ tourId,tourName, vehicleCategories = [] }) 
 };
 
 // make this form for Hotel & Car
-export const BookingForm = ({ show, handleClose, type, selectedItem }) => {
+export const BookingForm = ({ show, handleClose, type, selectedItem ,hotelId,carId}) => {
     const [formData, setFormData] = useState({
         name: '',
         mobile: '',
@@ -396,10 +398,50 @@ export const BookingForm = ({ show, handleClose, type, selectedItem }) => {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+    const [loading, setLoading] = useState(false);
+    // const handleWhatsappSubmit = (e) => {
+    //     const form = e.currentTarget;
+    //     e.preventDefault();
 
-    const handleWhatsappSubmit = (e) => {
-        const form = e.currentTarget;
+    //     if (form.checkValidity() === false) {
+    //         e.stopPropagation();
+    //         setValidated(true);
+    //         return;
+    //     }
+
+    //     const phoneNumber = "919022093522";
+    //     const isCar = type === 'car';
+
+    //     // Dynamic Message Construction
+    //     const header = isCar ? "*New Car Rental Inquiry*" : "*New Hotel Booking Inquiry*";
+    //     const itemLabel = isCar ? "*Vehicle:*" : "*Hotel:*";
+    //     const dateStartLabel = isCar ? "*Pickup Date:*" : "*Check-in:*";
+    //     const dateEndLabel = isCar ? "*Return Date:*" : "*Check-out:*";
+    //     const guestLabel = isCar ? "*Passengers:*" : "*Adults:*";
+
+    //     let message = `${header}%0A` +
+    //         `${itemLabel} ${selectedItem}%0A` +
+    //         `*Name:* ${formData.name}%0A` +
+    //         `*Mobile:* ${formData.mobile}%0A`;
+
+    //     if (!isCar) message += `*Email:* ${formData.email}%0A*Room Type:* ${formData.roomType}%0A`;
+
+    //     message += `${dateStartLabel} ${formData.startDate}%0A` +
+    //         `${dateEndLabel} ${formData.endDate}%0A` +
+    //         `${guestLabel} ${formData.guests}%0A`;
+
+    //     if (!isCar && formData.child !== '0') {
+    //         message += `*Children:* ${formData.child === '2' ? "2+" : formData.child}`;
+    //     }
+
+    //     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    //     handleClose();
+    // };
+
+   const handleWhatsappSubmit = async (e) => {
         e.preventDefault();
+
+        const form = e.currentTarget;
 
         if (form.checkValidity() === false) {
             e.stopPropagation();
@@ -407,41 +449,131 @@ export const BookingForm = ({ show, handleClose, type, selectedItem }) => {
             return;
         }
 
-        const phoneNumber = "919022093522";
-        const isCar = type === 'car';
+        try {
+            setLoading(true);
 
-        // Dynamic Message Construction
-        const header = isCar ? "*New Car Rental Inquiry*" : "*New Hotel Booking Inquiry*";
-        const itemLabel = isCar ? "*Vehicle:*" : "*Hotel:*";
-        const dateStartLabel = isCar ? "*Pickup Date:*" : "*Check-in:*";
-        const dateEndLabel = isCar ? "*Return Date:*" : "*Check-out:*";
-        const guestLabel = isCar ? "*Passengers:*" : "*Adults:*";
+            const isCar = type === "car";
 
-        let message = `${header}%0A` +
-            `${itemLabel} ${selectedItem}%0A` +
-            `*Name:* ${formData.name}%0A` +
-            `*Mobile:* ${formData.mobile}%0A`;
+            // ==========================
+            // HOTEL ENQUIRY
+            // ==========================
+            if (!isCar) {
+                await createHotelEnquiry({
+                    hotel_id: hotelId,
+                    full_name: formData.name,
+                    email: formData.email,
+                    mobile_number: formData.mobile,
+                    room_type: formData.roomType,
+                    check_in_date: formData.startDate,
+                    check_out_date: formData.endDate,
+                    adults: formData.guests,
+                    children: formData.child,
+                });
+            }
 
-        if (!isCar) message += `*Email:* ${formData.email}%0A*Room Type:* ${formData.roomType}%0A`;
+            // ==========================
+            // CAR ENQUIRY
+            // ==========================
+            if (isCar) {
+                await createCarEnquiry({
+                    vehicle_id: carId,
+                    full_name: formData.name,
+                    mobile_number: formData.mobile,
+                    pickup_date: formData.startDate,
+                    return_date: formData.endDate,
+                    passengers: formData.guests,
+                });
+            }
 
-        message += `${dateStartLabel} ${formData.startDate}%0A` +
-            `${dateEndLabel} ${formData.endDate}%0A` +
-            `${guestLabel} ${formData.guests}%0A`;
+            // ==========================
+            // WHATSAPP MESSAGE
+            // ==========================
 
-        if (!isCar && formData.child !== '0') {
-            message += `*Children:* ${formData.child === '2' ? "2+" : formData.child}`;
+            const phoneNumber = "919022093522";
+
+            const header = isCar
+                ? "*New Car Rental Inquiry*"
+                : "*New Hotel Booking Inquiry*";
+
+            const itemLabel = isCar
+                ? "*Vehicle:*"
+                : "*Hotel:*";
+
+            const dateStartLabel = isCar
+                ? "*Pickup Date:*"
+                : "*Check-in:*";
+
+            const dateEndLabel = isCar
+                ? "*Return Date:*"
+                : "*Check-out:*";
+
+            const guestLabel = isCar
+                ? "*Passengers:*"
+                : "*Adults:*";
+
+            let message =
+                `${header}%0A` +
+                `${itemLabel} ${selectedItem}%0A` +
+                `*Name:* ${formData.name}%0A` +
+                `*Mobile:* ${formData.mobile}%0A`;
+
+            if (!isCar) {
+                message +=
+                    `*Email:* ${formData.email}%0A` +
+                    `*Room Type:* ${formData.roomType}%0A`;
+            }
+
+            message +=
+                `${dateStartLabel} ${formData.startDate}%0A` +
+                `${dateEndLabel} ${formData.endDate}%0A` +
+                `${guestLabel} ${formData.guests}%0A`;
+
+            if (!isCar && formData.child !== "0") {
+                message +=
+                    `*Children:* ${
+                        formData.child === "2"
+                            ? "2+"
+                            : formData.child
+                    }`;
+            }
+
+            window.open(
+                `https://wa.me/${phoneNumber}?text=${message}`,
+                "_blank"
+            );
+
+            setFormData({
+                name: "",
+                mobile: "",
+                email: "",
+                startDate: "",
+                endDate: "",
+                guests: "1",
+                child: "0",
+                roomType: "AC",
+            });
+
+            handleClose();
+        } catch (error) {
+            console.error(error);
+
+            alert(
+                error?.response?.data?.message ||
+                "Unable to submit enquiry."
+            );
+        } finally {
+            setLoading(false);
         }
-
-        window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
-        handleClose();
     };
 
     return (
         <Modal show={show} onHide={handleClose} centered className="booking-modal">
             <Modal.Header closeButton className="border-0 p-4 pb-0">
                 <Modal.Title className="fw-bold h5 d-flex align-items-center gap-2">
-                    {type === 'car' ? <Car size={20} /> : <Hotel size={20} />}
-                    Book {selectedItem}
+                    {/* {type === 'car' ? <Car size={20} /> : <Hotel size={20} />}
+                    Book {selectedItem} */}
+                     {type === "car" ? <Car size={20} /> : <Hotel size={20} />}
+                     Book {type === "car" ? selectedItem?.name : selectedItem}
                 </Modal.Title>
             </Modal.Header>
 

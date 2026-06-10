@@ -17,7 +17,8 @@ export const getTours = async (
     page = 1,
     name = "",
     category = "",
-    price = ""
+    price = "",
+    limit = ""
     ) => {
         try {
             const params = new URLSearchParams();
@@ -26,6 +27,9 @@ export const getTours = async (
 
             if (name) {
                 params.set("name", name);
+            }
+            if (limit) {
+                params.set("limit", limit);
             }
 
             if (category && category !== "all") {

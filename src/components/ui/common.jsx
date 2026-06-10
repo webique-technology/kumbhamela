@@ -419,14 +419,19 @@ export const TourTabs = ({ tour, cancellationPolicy, paymentPolicy }) => {
             >
                 <Tab
                     eventKey="cancellation-policy"
-                    title="Cancellation Policy"
+                    // title="Cancellation Policy"
+                    title="Terms & Conditions"
                 >
-                    <h4 className="section-title fw-bold mb-3">Privacy Policy</h4>
-                    <p className="text-muted small mb-4">
+                    {/* <h4 className="section-title fw-bold mb-3">Privacy Policy</h4> */}
+                    {/* <p className="text-muted small mb-4">
                         {cancellationPolicy.content}
-                        {/* Cancellation charges rise closer to departure, with the exact amount deducted shown below. */}
-                    </p>
-
+                    </p> */}
+                        <p
+                        className="text-muted small mb-4"
+                        dangerouslySetInnerHTML={{
+                            __html: cancellationPolicy.content,
+                        }}
+                        ></p>
                     {/* <div className="cancellation-timeline">
                         {tour.cancellationPolicy?.map((item, index) => {
                             const charge = Math.round((tour.price * item.percent) / 100);
@@ -450,9 +455,9 @@ export const TourTabs = ({ tour, cancellationPolicy, paymentPolicy }) => {
                         })}
                     </div> */}
                 </Tab>
-                <Tab eventKey="payment-terms" title="Payment Terms">
+                {/* <Tab eventKey="payment-terms" title="Payment Terms">
                     <PaymentTerms policy={paymentPolicy} />
-                </Tab>
+                </Tab> */}
             </Tabs>
         </>
     );

@@ -44,7 +44,7 @@ const AboutSec = () => {
                                 montezSubTitle="Discover the Sacred"
                                 montezClass="montez-sub-heading primery-color d-none d-md-block"
                                 descClass='text-md'
-                                description={"The Kumbh Mela is the world's largest religious and cultural festival, celebrated every 12 years on the sacred banks of the Godavari River in Nashik. This festival stands as a symbol of centuries-old traditions and spiritual heritage."}
+                                description={"Experience the divine with Mahakumbh Tours & Travels Nashik, your trusted car rental company in Nashik, Maharashtra. With 12 years of expertise, we specialize in Trimbakeshwar Joytirling Darshan, Nashik Darshan, Panchavti Tapovan, Shirdi Shani Shingnpur Darshan, and Grishneshwar Joytirling Darshan."}
                             />
                             <Row className='g-4'>
                                 {aboutListData.map((item, index) => (
@@ -65,17 +65,17 @@ const AboutSec = () => {
                         <Col md={6} className='position-relative image-layout mt-4 mt-md-0 d-none d-md-block'>
                             {/* Left Top Image */}
                             <div className="img-box img-1">
-                                <img src="/images/about-sec-1.jpg" alt="group" />
+                                <img src="/images/about-sec-1.jpg" alt="mahakumba - trambakeshwar" />
                             </div>
 
                             {/* Right Main Image */}
                             <div className="img-box img-2">
-                                <img src="/images/about-sec-2.jpg" alt="family" />
+                                <img src="/images/ramkund-1.jpg" alt="mahakumbh - ramkund" />
                             </div>
 
                             {/* Bottom Small Image */}
                             <div className="img-box img-3">
-                                <img src="/images/wcu-img-3.jpg" alt="hiking" />
+                                <img src="/images/bath-2.jpg" alt="mahakumbh - naga sadhus" />
                             </div>
                         </Col>
                     </Row>

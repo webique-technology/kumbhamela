@@ -8,7 +8,8 @@ export const getCars = async (
     page = 1,
     name = "",
     category = "",
-    price = ""
+    price = "",
+    limit = ""
 ) => {
     try {
         const params = new URLSearchParams();
@@ -17,6 +18,9 @@ export const getCars = async (
 
         if (name) {
             params.set("name", name);
+        }
+        if (limit) {
+            params.set("limit", limit);
         }
 
         if (category && category !== "all") {
@@ -36,4 +40,19 @@ export const getCars = async (
         console.log("Cars API Error:", error);
         throw error;
     }
+};
+
+export const createCarEnquiry = async (data) => {
+    const response = await api.post(
+        "/vehicle-enquiries/store",
+        data,
+         {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+        }
+    );
+
+    return response.data;
 };
