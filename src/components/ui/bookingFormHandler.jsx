@@ -13,7 +13,7 @@ import { createCarEnquiry } from "../../app/[locale]/rental-car/carApi";
  */
 
 // Tour package boking form
-export const BookingFormHandler = ({ tourId,tourName, vehicleCategories = [] }) => {
+export const BookingFormHandler = ({ tourId, tourName, vehicleCategories = [] }) => {
     const [formData, setFormData] = useState({
         full_name: '',
         email: '',
@@ -97,109 +97,108 @@ export const BookingFormHandler = ({ tourId,tourName, vehicleCategories = [] }) 
 
 
     const handleSubmit = async (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    const form = e.currentTarget;
+        const form = e.currentTarget;
 
-    const newErrors = {};
+        const newErrors = {};
 
-    Object.keys(formData).forEach((key) => {
-        const error = validateField(
-            key,
-            formData[key]
-        );
+        Object.keys(formData).forEach((key) => {
+            const error = validateField(
+                key,
+                formData[key]
+            );
 
-        if (error) {
-            newErrors[key] = error;
+            if (error) {
+                newErrors[key] = error;
+            }
+        });
+
+        if (
+            Object.keys(newErrors).length > 0 ||
+            form.checkValidity() === false
+        ) {
+            e.stopPropagation();
+            setErrors(newErrors);
+            setValidated(true);
+            return;
         }
-    });
 
-    if (
-        Object.keys(newErrors).length > 0 ||
-        form.checkValidity() === false
-    ) {
-        e.stopPropagation();
-        setErrors(newErrors);
-        setValidated(true);
-        return;
-    }
+        try {
+            setLoading(true);
 
-    try {
-        setLoading(true);
+            // save in database
+            await createTourEnquiry({
+                full_name:
+                    formData.full_name,
 
-        // save in database
-        await createTourEnquiry({
-            full_name:
-                formData.full_name,
+                email:
+                    formData.email,
 
-            email:
-                formData.email,
+                phone_number:
+                    formData.phone_number,
 
-            phone_number:
-                formData.phone_number,
+                number_of_travelers:
+                    formData.number_of_travelers,
 
-            number_of_travelers:
-                formData.number_of_travelers,
+                preferred_dates:
+                    formData.preferred_dates,
 
-            preferred_dates:
-                formData.preferred_dates,
+                special_requirements:
+                    formData.special_requirements,
 
-            special_requirements:
-                formData.special_requirements,
+                // tour_package:
+                //     tourName,
+                tour_id:
+                    tourId,
+                vehicle_category_id:
+                    formData.vehicle_category_id,
+            });
 
-            // tour_package:
-            //     tourName,
-            tour_id:
-                tourId, 
-            vehicle_category_id:
-                formData.vehicle_category_id,
-        });
+            // whatsapp after DB save
+            const phoneNumber =
+                "919022093522";
 
-        // whatsapp after DB save
-        const phoneNumber =
-            "919022093522";
-
-        const message =
-            `*New Booking Enquiry*%0A` +
-            `*Name:* ${formData.full_name}%0A` +
-            `*Mobile No:* ${formData.phone_number}%0A` +
-            `*Email:* ${formData.email}%0A` +
-            `*Tour Package:* ${tourName}%0A` +
-            `*Date:* ${formData.preferred_dates}%0A` +
-            `*Travelers:* ${formData.number_of_travelers}%0A` +
-            `*Requirements:* ${
-                formData.special_requirements ||
+            const message =
+                `*New Booking Enquiry*%0A` +
+                `*Name:* ${formData.full_name}%0A` +
+                `*Mobile No:* ${formData.phone_number}%0A` +
+                `*Email:* ${formData.email}%0A` +
+                `*Tour Package:* ${tourName}%0A` +
+                `*Date:* ${formData.preferred_dates}%0A` +
+                `*Travelers:* ${formData.number_of_travelers}%0A` +
+                `*Requirements:* ${formData.special_requirements ||
                 "no any requirements"
-            }`;
+                }`;
 
-        window.open(
-            `https://wa.me/${phoneNumber}?text=${message}`,
-            "_blank"
-        );
+            window.open(
+                `https://wa.me/${phoneNumber}?text=${message}`,
+                "_blank"
+            );
 
-        // reset form
-        setFormData({
-            full_name: "",
-            email: "",
-            phone_number: "",
-            number_of_travelers:
-                "Solo Pilgrim",
-            preferred_dates: "",
-            special_requirements: "",
-            vehicle_category_id :""
-        });
+            // reset form
+            setFormData({
+                full_name: "",
+                email: "",
+                phone_number: "",
+                number_of_travelers:
+                    "Solo Pilgrim",
+                preferred_dates: "",
+                special_requirements: "",
+                vehicle_category_id: ""
+            });
 
-        setErrors({});
-        setValidated(false);
+            setErrors({});
+            setValidated(false);
 
-    } catch (error) {
-        alert(
-            "Unable to submit booking. Please try again."
-        );
-    } finally {
-        setLoading(false);
-    }
-};
+        } catch (error) {
+            alert(
+                "Unable to submit booking. Please try again."
+            );
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <div>
             <Form noValidate validated={validated} onSubmit={handleSubmit} className="booking-form">
@@ -362,10 +361,6 @@ export const BookingFormHandler = ({ tourId,tourName, vehicleCategories = [] }) 
                     </Col>
                 </Row>
 
-                {/* <Button type="submit" className="whatsapp-btn mt-4 px-4 py-3 border-0">
-                    Confirm & Send on WhatsApp
-                </Button> */}
-
                 <Button
                     type="submit"
                     disabled={loading}
@@ -381,7 +376,7 @@ export const BookingFormHandler = ({ tourId,tourName, vehicleCategories = [] }) 
 };
 
 // make this form for Hotel & Car
-export const BookingForm = ({ show, handleClose, type, selectedItem ,hotelId,carId}) => {
+export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, carId }) => {
     const [formData, setFormData] = useState({
         name: '',
         mobile: '',
@@ -399,46 +394,8 @@ export const BookingForm = ({ show, handleClose, type, selectedItem ,hotelId,car
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
     const [loading, setLoading] = useState(false);
-    // const handleWhatsappSubmit = (e) => {
-    //     const form = e.currentTarget;
-    //     e.preventDefault();
 
-    //     if (form.checkValidity() === false) {
-    //         e.stopPropagation();
-    //         setValidated(true);
-    //         return;
-    //     }
-
-    //     const phoneNumber = "919022093522";
-    //     const isCar = type === 'car';
-
-    //     // Dynamic Message Construction
-    //     const header = isCar ? "*New Car Rental Inquiry*" : "*New Hotel Booking Inquiry*";
-    //     const itemLabel = isCar ? "*Vehicle:*" : "*Hotel:*";
-    //     const dateStartLabel = isCar ? "*Pickup Date:*" : "*Check-in:*";
-    //     const dateEndLabel = isCar ? "*Return Date:*" : "*Check-out:*";
-    //     const guestLabel = isCar ? "*Passengers:*" : "*Adults:*";
-
-    //     let message = `${header}%0A` +
-    //         `${itemLabel} ${selectedItem}%0A` +
-    //         `*Name:* ${formData.name}%0A` +
-    //         `*Mobile:* ${formData.mobile}%0A`;
-
-    //     if (!isCar) message += `*Email:* ${formData.email}%0A*Room Type:* ${formData.roomType}%0A`;
-
-    //     message += `${dateStartLabel} ${formData.startDate}%0A` +
-    //         `${dateEndLabel} ${formData.endDate}%0A` +
-    //         `${guestLabel} ${formData.guests}%0A`;
-
-    //     if (!isCar && formData.child !== '0') {
-    //         message += `*Children:* ${formData.child === '2' ? "2+" : formData.child}`;
-    //     }
-
-    //     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
-    //     handleClose();
-    // };
-
-   const handleWhatsappSubmit = async (e) => {
+    const handleWhatsappSubmit = async (e) => {
         e.preventDefault();
 
         const form = e.currentTarget;
@@ -530,10 +487,9 @@ export const BookingForm = ({ show, handleClose, type, selectedItem ,hotelId,car
 
             if (!isCar && formData.child !== "0") {
                 message +=
-                    `*Children:* ${
-                        formData.child === "2"
-                            ? "2+"
-                            : formData.child
+                    `*Children:* ${formData.child === "2"
+                        ? "2+"
+                        : formData.child
                     }`;
             }
 
@@ -572,8 +528,8 @@ export const BookingForm = ({ show, handleClose, type, selectedItem ,hotelId,car
                 <Modal.Title className="fw-bold h5 d-flex align-items-center gap-2">
                     {/* {type === 'car' ? <Car size={20} /> : <Hotel size={20} />}
                     Book {selectedItem} */}
-                     {type === "car" ? <Car size={20} /> : <Hotel size={20} />}
-                     Book {type === "car" ? selectedItem?.name : selectedItem}
+                    {/* {type === "car" ? <Car size={20} /> : <Hotel size={20} />} */}
+                    Book {type === "car" ? selectedItem?.name : selectedItem}
                 </Modal.Title>
             </Modal.Header>
 

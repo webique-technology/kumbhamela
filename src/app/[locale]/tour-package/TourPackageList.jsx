@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState, Suspense } from "react";
 // import { tourPackages } from "@/lib/data";
-import { HeroHeaderCard, TourPackageCard } from "@/components/ui/card";
+import { HeroHeaderCard, HeroHeaderCard2, TourPackageCard } from "@/components/ui/card";
 import { Col, Row, Container } from "react-bootstrap";
 import { slugify } from "@/lib/utils";
 import { useRouter, useSearchParams, useParams } from "next/navigation";
@@ -88,9 +88,10 @@ const TourPageContent = () => {
     return (
         <section>
             {/* The static banner header stays completely visible and unaffected when components are updating */}
-            <HeroHeaderCard
-                heroTitle="Tour"
-                heroSpan={"Packages"}
+            <HeroHeaderCard2
+                heroTitle="Tour Packages"
+                // heroSpan={"Packages"}
+                heroTitleClass={"text-light"}
                 showSearch={true}
             />
 

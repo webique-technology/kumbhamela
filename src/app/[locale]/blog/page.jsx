@@ -114,6 +114,7 @@ const BlogPageContent = () => {
           heroTitle={"Kumbh Mela Blogs & Articles"}
           description={"Explore the rich history, sacred rituals, and practical travel tips for Kumbh Mela Nashik 2027"}
           showSearch={false}
+          heroTitleClass={"text-light"}
         />
       </section>
       <section className="section-padding padding-bottom bg-light blog-page">

@@ -6,7 +6,7 @@ import { slugify } from "@/lib/utils";
 import "../../../../styles/blog.scss";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { PrimeryBtn } from "@/components/ui/button";
-import { getBlogs,getBlogBySlug } from "../blogApi";
+import { getBlogs, getBlogBySlug } from "../blogApi";
 import { Link } from "@/i18n/routing";
 
 const BASE_URL =
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }) {
     // const blogs = await getBlogs();
     const response = await getBlogs();
     const blogs = response.data || [];
-     const blog = await getBlogBySlug(slug);
+    const blog = await getBlogBySlug(slug);
 
     // const blog = blogs.find(
     //     (item) => slugify(item.title) === slug
@@ -67,17 +67,17 @@ export async function generateMetadata({ params }) {
     return {
         title: blog.title,
         description:
-        blog.description?.replace(/<[^>]+>/g, "").slice(0, 160),
+            blog.description?.replace(/<[^>]+>/g, "").slice(0, 160),
 
         alternates: {
-        canonical: `${BASE_URL}/blog/${slug}`,
+            canonical: `${BASE_URL}/blog/${slug}`,
         },
 
         openGraph: {
-        title: blog.title,
-        description:
-            blog.description?.replace(/<[^>]+>/g, "").slice(0, 160),
-        images: [blog.image_url],
+            title: blog.title,
+            description:
+                blog.description?.replace(/<[^>]+>/g, "").slice(0, 160),
+            images: [blog.image_url],
         },
     };
 }
@@ -88,16 +88,13 @@ const BlogDetails = async ({ params }) => {
     // const blogs = await getBlogs();
     const response = await getBlogs();
     const blogs = response.data || [];
-    console.log("Slug:", slug);
     const blog = await getBlogBySlug(slug);
-    console.log("Blog Found:", blog);
     // const blog = blogs.find(
     //     (item) => slugify(item.title) === slug
     // );
     if (!blog) {
         notFound();
     }
-
     return (
         <main>
             <article className="padding-bottom bg-white">
@@ -149,14 +146,7 @@ const BlogDetails = async ({ params }) => {
                                         }}
                                     />
                                 </div>
-                                {/* <div className="text-secondary"> */}
-                                    {/* <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        In publishing and graphic design, Lorem ipsum is a placeholder text
-                                        commonly used to demonstrate the visual form of a document.
-                                    </p> */}
-                                    {/* Future content from Admin Panel can go here */}
-                                {/* </div> */}
+
                             </div>
                         </Col>
                         {/* blog page sidebar */}
@@ -178,11 +168,11 @@ const BlogDetails = async ({ params }) => {
                                                     <Link
                                                         href={`/blog/${slugify(blog.title)}`}
                                                         className="blog-sidebar-widget-item-link text-decoration-none"
-                                                        >
+                                                    >
                                                         <h4 className="blog-sidebar-widget-item-title">
                                                             {blog.title}
                                                         </h4>
-                                                        </Link>
+                                                    </Link>
                                                     <p className="blog-sidebar-widget-item-date m-0">{blog.date}</p>
                                                 </div>
                                             </div>

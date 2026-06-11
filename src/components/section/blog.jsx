@@ -101,9 +101,10 @@ const BlogSection = () => {
                             },
                         }}
                         navigation={false}
+                        disableAutoplay={true}
                     >
                         {recentBlogs.map((blog, index) => (
-                            <SwiperSlide key={index} className="h-100">
+                            <SwiperSlide key={index} className="h-auto">
                                 <BlogCard
                                     blog={blog}
                                     // Ensure you are using slug for the link

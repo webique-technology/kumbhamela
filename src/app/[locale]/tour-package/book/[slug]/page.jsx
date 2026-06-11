@@ -37,10 +37,6 @@ async function getVehicleCategories(id) {
     const response = await axios.get(
       `${API_URL}/tours/${id}/vehicle-categories`
     );
-    console.log(
-      "Vehicle Categories API:",
-      response.data
-    );
     return response.data || [];
   } catch (error) {
     console.error(

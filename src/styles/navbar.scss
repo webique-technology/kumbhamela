@@ -36,6 +36,10 @@
   font-weight: 800;
   margin: 0;
   color: $text-color-dark;
+
+  @media(max-width:768px) {
+    font-size: $font-size-sm;
+  }
 }
 
 .logo-text p {

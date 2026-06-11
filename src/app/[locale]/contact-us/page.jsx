@@ -151,7 +151,7 @@ const ContactUs = () => {
                 }
             );
 
-            console.log("Contact Form Success:", response.data);
+            // console.log("Contact Form Success:", response.data);
 
             // WhatsApp Redirect
             const phoneNumber = "919022093522";
@@ -203,6 +203,7 @@ const ContactUs = () => {
                     heroTitle={"Connect With Our Pilgrimage Experts"}
                     description={"Talk directly to our Kumbh Mela travel specialists for personalized guidance on Yatras, Darshan, and VIP services."}
                     showSearch={false}
+                    heroTitleClass={"text-light"}
                 />
                 {/* </Container> */}
             </section>

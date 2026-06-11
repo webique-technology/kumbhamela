@@ -91,7 +91,6 @@ export default async function TourDetailPage({
 
   const tours =await getTours();
   const tour = await getTourBySlug(slug);
-  console.log("TOUR DATA", tour);
   // const tour =
   //   tours.find(
   //     (item) =>

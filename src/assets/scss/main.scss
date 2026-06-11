@@ -50,12 +50,24 @@ body {
     text-align: center;
 }
 
+.opacity-8 {
+    opacity: 0.8;
+}
+
 .padding-bottom {
     padding-bottom: 140px !important;
 }
 
 .secondary-bg {
-    background-color: $secondary-bg-color;
+    background-color: $secondary-bg-color !important;
+}
+
+.blur-badge-light {
+    background-color: #ffffff5c !important;
+}
+
+.primary-bg {
+    background-color: $primary-color !important;
 }
 
 .secondary-color {
@@ -345,10 +357,11 @@ p {
 }
 
 
-   .booking-modal{
+.booking-modal {
     .modal-content {
         border-radius: $border-radius-xl;
-        border: none; overflow: hidden;
+        border: none;
+        overflow: hidden;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     }
 
@@ -388,7 +401,7 @@ p {
 }
 
 .text-brand-orange {
-    color: $primary-color;
+    color: $primary-color !important;
     font-weight: 500;
 }
 
@@ -436,7 +449,7 @@ p {
     z-index: 20;
 
     .search-fleet-card {
-        background: rgb(255, 255, 255);
+        background: #ffffff36;
         // border: var(--bs-border-width) var(--bs-border-style) #868686 !important;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(255, 255, 255, 0.3);
         border-radius: 10;
@@ -633,7 +646,10 @@ p {
 .homepage-demo-design {}
 
 
-.model-butt{right:-5px;}
+.model-butt {
+    right: -5px;
+}
+
 .top-divider {
     background-image: url("/images/bg-divider-1.png");
     background-size: cover;
@@ -924,7 +940,11 @@ p {
 .border-dashed {
     //   border-style: dashed !important;
 }
-.modal-header{background-color: $trinery-bg-color;}
+
+.modal-header {
+    background-color: $trinery-bg-color;
+}
+
 .model-head {
     border-bottom: 1px solid $color-gray-100;
     padding: 0 0 7px;

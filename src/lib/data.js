@@ -709,14 +709,14 @@ export const bathingDates = [
         year: "2027",
         isKeyDate: true
     },
-    {
-        dateOccation: "",
-        title: "Rishi Panchami",
-        day: "5",
-        month: "September",
-        year: "2027",
-        isKeyDate: false
-    },
+    // {
+    //     dateOccation: "",
+    //     title: "Rishi Panchami",
+    //     day: "5",
+    //     month: "September",
+    //     year: "2027",
+    //     isKeyDate: false
+    // },
     {
         dateOccation: "Bhadrapada Shuddha Ekadashi",
         title: "Third Amrit Snan - Vaishnava",
@@ -733,46 +733,46 @@ export const bathingDates = [
         year: "2027",
         isKeyDate: true
     },
-    {
-        dateOccation: "",
-        title: "Bhadrapada Purnima",
-        day: "15",
-        month: "September",
-        year: "2027",
-        isKeyDate: false
-    },
-    {
-        dateOccation: "",
-        title: "Ashwin Shudh Ekadashi",
-        day: "11",
-        month: "October",
-        year: "2027",
-        isKeyDate: false
-    },
-    {
-        dateOccation: "",
-        title: "Ashwin Purnima",
-        day: "15",
-        month: "October",
-        year: "2027",
-        isKeyDate: false
-    },
-    {
-        dateOccation: "",
-        title: "Kartik Shudh Ekadashi",
-        day: "10",
-        month: "November",
-        year: "2027",
-        isKeyDate: false
-    },
-    {
-        dateOccation: "",
-        title: "Kartik Purnima",
-        day: "22", // Note: Image only specifies 'November 2027'
-        month: "November",
-        year: "2027",
-        isKeyDate: false
-    },
+    // {
+    //     dateOccation: "",
+    //     title: "Bhadrapada Purnima",
+    //     day: "15",
+    //     month: "September",
+    //     year: "2027",
+    //     isKeyDate: false
+    // },
+    // {
+    //     dateOccation: "",
+    //     title: "Ashwin Shudh Ekadashi",
+    //     day: "11",
+    //     month: "October",
+    //     year: "2027",
+    //     isKeyDate: false
+    // },
+    // {
+    //     dateOccation: "",
+    //     title: "Ashwin Purnima",
+    //     day: "15",
+    //     month: "October",
+    //     year: "2027",
+    //     isKeyDate: false
+    // },
+    // {
+    //     dateOccation: "",
+    //     title: "Kartik Shudh Ekadashi",
+    //     day: "10",
+    //     month: "November",
+    //     year: "2027",
+    //     isKeyDate: false
+    // },
+    // {
+    //     dateOccation: "",
+    //     title: "Kartik Purnima",
+    //     day: "22", // Note: Image only specifies 'November 2027'
+    //     month: "November",
+    //     year: "2027",
+    //     isKeyDate: false
+    // },
     {
         dateOccation: "",
         title: "Mouni Amavasya",
@@ -781,46 +781,46 @@ export const bathingDates = [
         year: "2028",
         isKeyDate: true
     },
-    {
-        dateOccation: "",
-        title: "Vasant Panchami",
-        day: "1",
-        month: "February",
-        year: "2028",
-        isKeyDate: false
-    },
-    {
-        dateOccation: "",
-        title: "Ganga Godavari Mahotsav",
-        day: "8",
-        month: "February",
-        year: "2028",
-        isKeyDate: false
-    },
-    {
-        dateOccation: "",
-        title: "Maha Shivratri",
-        day: "27",
-        month: "February",
-        year: "2028",
-        isKeyDate: false
-    },
-    {
-        dateOccation: "",
-        title: "Ganga Dussehra Utsav",
-        day: "25",
-        month: "May - June",
-        year: "2028",
-        isKeyDate: false
-    },
-    {
-        dateOccation: "Flag Lowering Ceremony",
-        title: "Official Conclusion",
-        day: "24",
-        month: "July",
-        year: "2028",
-        isKeyDate: false
-    },
+    // {
+    //     dateOccation: "",
+    //     title: "Vasant Panchami",
+    //     day: "1",
+    //     month: "February",
+    //     year: "2028",
+    //     isKeyDate: false
+    // },
+    // {
+    //     dateOccation: "",
+    //     title: "Ganga Godavari Mahotsav",
+    //     day: "8",
+    //     month: "February",
+    //     year: "2028",
+    //     isKeyDate: false
+    // },
+    // {
+    //     dateOccation: "",
+    //     title: "Maha Shivratri",
+    //     day: "27",
+    //     month: "February",
+    //     year: "2028",
+    //     isKeyDate: false
+    // },
+    // {
+    //     dateOccation: "",
+    //     title: "Ganga Dussehra Utsav",
+    //     day: "25",
+    //     month: "May - June",
+    //     year: "2028",
+    //     isKeyDate: false
+    // },
+    // {
+    //     dateOccation: "Flag Lowering Ceremony",
+    //     title: "Official Conclusion",
+    //     day: "24",
+    //     month: "July",
+    //     year: "2028",
+    //     isKeyDate: false
+    // },
 ];
 
 export const planTabData = [

@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from "framer-motion";
 
 // swiper imports
-import { Swiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay, EffectFade } from 'swiper/modules';
 
 // Import Swiper styles (Required for it to look right)
@@ -403,7 +403,6 @@ export const KumbhCountdown = ({ targetDate, isActive = true }) => {
     );
 };
 
-
 export const TourTabs = ({ tour, cancellationPolicy, paymentPolicy }) => {
     const [activeTab, setActiveTab] = useState('cancellation-policy');
 
@@ -463,7 +462,6 @@ export const TourTabs = ({ tour, cancellationPolicy, paymentPolicy }) => {
     );
 
 }
-
 
 export const HighlightsModal = ({ children }) => {
     const [open, setOpen] = useState(false);
@@ -581,9 +579,9 @@ export const HighlightsModal = ({ children }) => {
     );
 };
 
-const BathingDatesSlider = () => {
+export const BathingDatesSlider = ({ bathingDates }) => {
     return (
-        <div className="div d-none d-md-block">
+        <div className="div d-none d-lg-block">
             <SwiperSliderComp
                 slidesPerView={4}
                 navigation={{

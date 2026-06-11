@@ -56,7 +56,7 @@ const TouristVisitSection = () => {
                     }}
                     spaceBetween={20}
                     timeDelay={4000}
-                    disableAutoplay={true}
+                    disableAutoplay={false}
                     breakpoints={{
                         0: {
                             slidesPerView: 1.25,
@@ -112,7 +112,7 @@ const TouristVisitSection = () => {
             </Container>
             {/* <div className="top-divider trinery-bg position-absolute bottom-0" style={{ pointerEvents: 'none' }}></div> */}
 
-
+            {/* make this model for the destination information */}
             <Modal
                 show={showModal}
                 onHide={() => setShowModal(false)}
@@ -167,6 +167,7 @@ const TouristVisitSection = () => {
 
                 </Modal.Body>
             </Modal>
+
         </section>
 
     );

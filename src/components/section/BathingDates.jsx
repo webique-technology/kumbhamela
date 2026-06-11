@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { ArrowRight, ArrowLeft, Calendar } from "lucide-react";
 import { SwiperSlide } from "swiper/react";
-import { KumbhCountdown, SwiperSliderComp, TitleComponent } from "@/components/ui/common";
+import { BathingDatesSlider, KumbhCountdown, SwiperSliderComp, TitleComponent } from "@/components/ui/common";
 import { bathingDates } from "@/lib/data";
 import { PrimeryBtn } from "../ui/button";
 import "../../assets/scss/main.scss"
@@ -11,6 +11,17 @@ import "../../styles/bathingDates.scss"
 import { AnimationSecComponent, CountUp } from "../ui/AnimationSecComponent";
 
 export const BathingDates = () => {
+
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => setWidth(window.innerWidth);
+
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     return (
         <>
             {/* bathing dates with slider */}
@@ -95,16 +106,25 @@ export const BathingDates = () => {
                             </div>
                         </div>
                     </Container>
-                    <Container fluid="md" className="bathing-count-right section-padding">
+                    <Container
+                        fluid="md"
+                        className={`bathing-count-right section-padding-2 ${width <= 1199 ? "pt-0" : ""
+                            }`}
+                    >
                         <div className="py-5">
-                            <Container className="px-2">
-                                <div className="bathing-date-grid"> {/* Bootstrap Row handling uniform responsive margins and dynamic wrapping */}
+                            {/* bathing dates slider form 1024 above screen */}
+                            <BathingDatesSlider
+                                bathingDates={bathingDates}
+                            />
+
+                            {/* bathing dates grid for less than 992 */}
+                            <Container className="px-2 d-block d-lg-none">
+                                <div className="bathing-date-grid">
                                     {bathingDates.map((date, index) => (
                                         <div
                                             key={index}
-                                            // xs={4} sm={4} md={3} lg={3} xl={3} xxl={2}
                                             className="bathing-date-col w-100 h-100"
-                                        > {/* Perfectly constraints exactly 3 items per row on mobile layout viewports */}
+                                        >
 
                                             <AnimationSecComponent
                                                 type="vertical"
@@ -115,21 +135,22 @@ export const BathingDates = () => {
                                             >
                                                 <div className={`festival-card border calendar-style text-center d-flex flex-column justify-content-between ${date.isKeyDate ? 'key-date-highlight' : ''}`}>
 
-                                                    {/* Header Title Section of Calendar Badge */}
                                                     <div className="calendar-header p-1">
                                                         <p className="title mb-0 text-truncate px-1" title={date.title}>
                                                             {date.title}
                                                         </p>
                                                     </div>
 
-                                                    {/* Core Date Numerical Representation Block */}
                                                     <div className="calendar-body py-2 d-flex flex-column align-items-center justify-content-center">
-                                                        <span className="display-date m-0 font-weight-bold">
+                                                        <span className="display-date mb-2 m-0 font-weight-bold">
                                                             {date.day}
+                                                        </span>
+
+                                                        <span className="display-occ-text px-1 px-sm-2 m-0 font-weight-bold">
+                                                            {date.dateOccation}
                                                         </span>
                                                     </div>
 
-                                                    {/* Lower Calendar Card Metadata Footer */}
                                                     <div className="calendar-footer p-1">
                                                         <p className="month-year mb-0 text-truncate">
                                                             {date.month} '{date.year.slice(-2)}
@@ -142,11 +163,12 @@ export const BathingDates = () => {
                                     ))}
                                 </div>
                             </Container>
+
                         </div>
                     </Container>
                 </div>
                 <div className="bottom-divider position-absolute z-3 bd-bottom td-trinery-bg" style={{ pointerEvents: 'none' }}></div>
-            </section>
+            </section >
         </>
     );
 };

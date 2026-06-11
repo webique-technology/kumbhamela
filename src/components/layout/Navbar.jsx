@@ -147,7 +147,7 @@ const Navbar = () => {
                     </nav>
 
                     {/* Right Side Actions */}
-                    <div className="d-flex align-items-center gap-3 right-actions">
+                    <div className="d-flex align-items-center gap-2 right-actions">
                         <div className="position-relative">
                             <button className="lang-btn d-flex align-items-center gap-1" onClick={() => setIsLangOpen(!isLangOpen)}>
                                 <Globe size={18} />

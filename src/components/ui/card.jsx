@@ -1,7 +1,7 @@
 "use client";
 import React from 'react'
 import Image from "next/image";
-import { Calendar, Clock, ArrowRight, Star, MapPin, MessageCircle, Users, ChevronRight } from "lucide-react";
+import { Calendar, Clock, ArrowRight, Star, MapPin, MessageCircle, Users, ChevronRight, Subtitles } from "lucide-react";
 import { Link } from '@/i18n/routing';
 import { useParams } from 'next/navigation';
 import { WhatsappBtn } from './button';
@@ -44,15 +44,14 @@ export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_widt
             </div>
 
             {/* Content */}
-            <div className="card-body py-4 px-1">
+            <div className="card-body d-flex flex-column justify-content-between py-4 px-1">
 
                 {/* Meta */}
                 <div className="d-flex gap-3 text-muted small mb-2">
                     <div className="d-flex align-items-center gap-1">
                         <Calendar size={14} />
                         {/* <span>{blog.date}</span> */}
-                        {/* <span> {new Date(blog.created_at).toLocaleDateString()}</span> */}
-                        <span> {blog.date} </span>
+                        <span> {new Date(blog.created_at).toLocaleDateString()}</span>
                     </div>
                     {/* <div className="d-flex align-items-center gap-1">
                         <Clock size={14} />
@@ -71,7 +70,7 @@ export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_widt
                 {/* <p className="card-text text-muted small blog-excerpt">
                     {blog.description}
                 </p> */}
-                <p className="card-text text-muted small blog-excerpt">
+                <p className="text-muted small blog-excerpt">
                     {blog.description
                         ?.replace(/<[^>]*>/g, "")
                         ?.slice(0, 150)}
@@ -216,9 +215,7 @@ export const SacredDestinationsCard = ({ destination }) => {
 export const RentalCarCard = ({ car, onBook }) => {
     const params = useParams();
     const currentLocale = params?.locale || 'en';
-    // console.log("car:", car);
-    // console.log("image:", car?.car_image_url);
-    console.log("final:", imageUrl(car?.car_image_url));
+
     return (
         <div className="card rental-car-card h-100 border-0 shadow-sm overflow-hidden">
             {/* Image Container with Overlay */}
@@ -282,72 +279,6 @@ export const RentalCarCard = ({ car, onBook }) => {
         </div >
     )
 }
-
-// // tour package card
-// export const TourPackageCard = ({ tour, tourLink }) => {
-//     const params = useParams();
-//     const currentLocale = params?.locale || 'en';
-
-//     return (
-//         <>
-//             <div className='tour-package-card card h-100 border-0 shadow-sm overflow-hidden'>
-//                 {/* Image Container with Overlay */}
-//                 <div className="position-relative card-image-wrapper overflow-hidden">
-//                     <Image
-//                         src={tour.image}
-//                         alt={tour.name}
-//                         width={200}
-//                         height={200}
-//                         className="card-img-top object-fit-cover transition-transform"
-//                     />
-//                 </div>
-
-//                 {/* Content Body */}
-//                 <div className="card-body p-4">
-//                     <div className='d-flex flex-column align-items-start justify-content-between'>
-//                         <h3 className="sub-heading text-dark mb-2">
-//                             {tour.name}
-//                         </h3>
-//                         <p className="card-text d-flex align-items-center gap-2 text-muted small mb-2 leading-relaxed">
-//                             <Clock size={16} />
-//                             {tour.duration}
-//                         </p>
-//                     </div>
-
-//                     {/* Footer Logic */}
-//                     <div className="d-flex align-items-center justify-content-between mt-auto mb-2">
-//                         <div className='d-flex align-items-end'>
-//                             <span className="h5 fw-bold text-brand-orange mb-0">{tour.price} /&nbsp;</span>
-//                             <small className="text-muted d-block smaller mb-1">per Person</small>
-//                         </div>
-//                     </div>
-
-//                     {/* Features */}
-//                     <ul className="d-flex flex-column flex-wrap gap-1 mb-3 p-0">
-//                         {tour.features.map((feature, idx) => (
-//                             <li
-//                                 key={idx}
-//                                 className="d-flex paragraph align-items-center justify-content-start gap-1"
-//                             >
-//                                 <span className='primery-color'><ChevronRight size={16} /></span>
-//                                 {feature}
-//                             </li>
-//                         ))}
-//                     </ul>
-
-//                     {/* link btn */}
-//                     <Link
-//                         href={tourLink || "#"}
-//                         className="primery-btn py-2 text-decoration-none w-100 d-flex justify-content-center align-items-center mt-auto"
-//                     >
-//                         View Details
-//                     </Link>
-//                 </div>
-//             </div>
-
-//         </>
-//     )
-// }
 
 // tour package card
 export const TourPackageCard = ({ tour, tourLink }) => {
@@ -468,24 +399,27 @@ export const HeroHeaderCard = ({ showSearch = true, heroTitle, heroTitleClass, d
 }
 
 
-export const HeroHeaderCard2 = ({ showSearch = true, heroTitle, heroTitleClass, description, heroSpan, subTitle, heroImage, imgClass = "hero-img" }) => {
+export const HeroHeaderCard2 = ({ showSearch = true, heroTitle, heroTitleClass, spanClass, description, heroSpan, subTitle, heroImage, imgClass = "hero-img" }) => {
 
     return (
         <>
             <div
-                className="hero-header-card-2 d-flex align-items-center"
+                className="hero-header-card-2 primary-bg d-flex align-items-center"
                 style={{ backgroundImage: heroImage ? `url(${heroImage})` : "none" }}
             >
                 <Container>
                     <div className="hero-content text-center d-flex flex-column align-items-center position-relative z-3 pb-2 pb-sm-0">
-                        <span className='mb-3 hero-subheading d-block'>
-                            {subTitle}
-                        </span>
-                        <h1 className={`hero-card-title-2 mb-3 ${heroTitleClass}`}>
+                        {subTitle && (
+                            <span className='mb-3 hero-subheading blur-badge-light d-block'>
+                                {subTitle}
+                            </span>
+                        )}
+                        <h1 className={`hero-card-title mb-3 ${heroTitleClass}`}>
                             {heroTitle}&nbsp;
-                            <span className="">{heroSpan}</span>
+                            {heroSpan && (<span className={`${spanClass}`}>{heroSpan}</span>)}
                         </h1>
-                        <p className='hero-para m-0'>{description}</p>
+                        {description && (<p className='hero-para opacity-8 m-0 text-white'>{description}</p>)}
+
                     </div>
                     {showSearch && (
                         <div className="hero-search-wrapper mt-4">

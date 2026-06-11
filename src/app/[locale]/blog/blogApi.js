@@ -4,19 +4,6 @@ import { slugify } from "@/lib/utils";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-
-// Get all blogs
-// export const getBlogs = async (page = 1) => {
-//   try {
-//     const response = await api.get(`/blogs?page=${page}`);
-
-//      return response.data.data || [];
-//   } catch (error) {
-//     console.log("Blogs API Error:", error);
-//     throw error;
-//   }
-// };
-
 export const getBlogs = async (
       page = 1,
       title = "",

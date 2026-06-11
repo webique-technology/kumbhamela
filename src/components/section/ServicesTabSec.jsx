@@ -6,7 +6,7 @@ import { HotelCards, RentalCarCard, TourPackageCard } from '../ui/card';
 // import { hotels, rentalCar, tourPackages } from '@/lib/data';
 import { SwiperSlide } from 'swiper/react';
 import { PrimeryBtn, WhatsappBtn } from '../ui/button';
-import { MessageCircle, MapPin, Clock, Users, ArrowRight } from 'lucide-react'
+import { MessageCircle, MapPin, Star, Clock, Users, ArrowRight } from 'lucide-react'
 import { BookingForm } from '../ui/bookingFormHandler';
 import { Link, usePathname } from '@/i18n/routing';
 import { slugify } from '@/lib/utils';
@@ -14,6 +14,148 @@ import "../../styles/servicesSec.scss"
 import { getHotels } from '@/app/[locale]/hotel/hotelApi';
 import { getCars } from '@/app/[locale]/rental-car/carApi';
 import { getTours } from '@/app/[locale]/tour-package/tourApi';
+import Image from 'next/image';
+
+
+const UnifiedServiceCard = ({ type, item, onBook }) => {
+    // 1. Dynamic Attribute Resolvers across distinct API schemas
+    const cardTitle = type === "car" ? item.name : (item.title || item.name);
+    const cardImage = item.image_url || item.images?.[0] || "/images/banner-1.webp";
+
+    const cardCategory = type === "hotel"
+        ? item.category
+        : type === "car"
+            ? (item.category?.category || "Vehicle")
+            : "Tour Package";
+
+    const displayPrice = Number(item.base_price || item.price || 0).toFixed(2);
+
+    const pricingFooterLabel = type === "hotel"
+        ? "per night"
+        : type === "car"
+            ? "per km"
+            : "per person";
+
+    return (
+        <div className="card h-100 border-0 shadow-sm hotel-card overflow-hidden rounded-4 bg-white">
+
+            {/* Top Image Track Area */}
+            <div className="position-relative hotel-img-container" style={{ aspectRatio: '4/3', overflow: 'hidden' }}>
+                {item.images && item.images.length > 1 ? (
+                    <SwiperSliderComp navigation={false} loop={true} timeDelay={3500}>
+                        {item.images.map((img, idx) => (
+                            <SwiperSlide key={idx}>
+                                <Image
+                                    src={img}
+                                    alt={cardTitle}
+                                    width={400}
+                                    height={300}
+                                    className="w-100 h-100 object-fit-cover"
+                                    priority={idx === 0}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </SwiperSliderComp>
+                ) : (
+                    <Image
+                        src={cardImage}
+                        alt={cardTitle}
+                        width={400}
+                        height={300}
+                        className="w-100 h-100 object-fit-cover"
+                        priority
+                    />
+                )}
+
+                {/* Left Floating Category Tag */}
+                <div className="position-absolute top-0 start-0 m-3 z-2">
+                    <span className="primary-bg rounded-pill px-2 py-1 text-white">
+                        {cardCategory}
+                    </span>
+                </div>
+
+                {/* Right Floating Star Rating (Rendered for Hotels or Tours) */}
+                {(item.rating || type === "hotel") && (
+                    <div className="position-absolute top-0 end-0 m-3 badge rounded-pill bg-white text-dark d-flex align-items-center gap-1 px-3 py-2 shadow-sm z-2">
+                        <Star size={14} className="text-warning fill-warning" />
+                        <span className="fw-bold text-dark">{Number(item.rating || 4.0).toFixed(1)}</span>
+                    </div>
+                )}
+            </div>
+
+            {/* Middle Card Details Body */}
+            <div className="card-body p-4 d-flex flex-column justify-content-between">
+                <div>
+                    <h3 className="h4 fw-bold text-brand-dark mb-2 text-truncate" title={cardTitle}>
+                        {cardTitle}
+                    </h3>
+
+                    {/* Context Specific Sub-Metadata Footer Strings */}
+                    <div className="d-flex align-items-center gap-1 text-muted small mb-3">
+                        {type === "hotel" && (
+                            <>
+                                <MapPin size={16} className="text-secondary opacity-70" />
+                                <span className="text-secondary text-truncate">{item.location || "Nashik, Maharashtra"}</span>
+                            </>
+                        )}
+                        {type === "car" && (
+                            <>
+                                <Users size={16} className="text-secondary opacity-70" />
+                                <span className="text-secondary">{item.total_seats || item.seats || 4} Seater Capacity</span>
+                            </>
+                        )}
+                        {type === "tour" && (
+                            <>
+                                <Clock size={16} className="text-secondary opacity-70" />
+                                <span className="text-secondary">{item.duration || "Custom Days"} Duration</span>
+                            </>
+                        )}
+                    </div>
+                </div>
+
+                {/* Bottom Pricing & CTA Layout Track */}
+                <div className="d-flex align-items-center justify-content-between pt-2 mt-auto border-top-0">
+                    <div className="d-flex flex-column">
+                        {/* <small className="text-muted smaller lh-sm">Starting from</small> */}
+                        <span className="fw-semibold text-brand-orange my-1">
+                            ₹ {displayPrice}
+                        </span>
+                        {/* <small className="text-muted smaller lh-sm">{pricingFooterLabel}</small> */}
+                    </div>
+
+                    {/* Integrated Booking Interaction Node */}
+                    {type === "tour" ? (
+                        /* 1. VIEW DETAILS LINK - Exclusively for Tour Packages */
+                        <Link
+                            href={`/tour-package/${slugify(cardTitle || "")}`}
+                            className="service-btn text-decoration-none d-flex justify-content-center align-items-center mt-auto"
+                        >
+                            <span>View Details</span>
+                        </Link>
+                    ) : (
+                        /* 2. WHATSAPP BOOK NOW BUTTON - For Hotels & Car Rental Fleets */
+                        <button
+                            type="button"
+                            onClick={onBook}
+                            className="btn whatsapp-btn d-flex align-items-center gap-2 px-3 py-2 text-white border-0 shadow-sm rounded-pill fw-bold"
+                        >
+                            <MessageCircle size={18} />
+                            <span className="text-light">Book Now</span>
+                        </button>
+                        // <WhatsappBtn
+                        //     type="button"
+                        //     onClick={onBook}
+                        //     iconLeft={<MessageCircle size={18} />}
+                        //     className={"whatsapp-btn"}
+                        //     title={"book"}
+                        // />
+                    )}
+                </div>
+            </div>
+
+        </div>
+    );
+};
 
 const ServicesTabSec = () => {
     const [show, setShow] = useState(false);
@@ -36,11 +178,7 @@ const ServicesTabSec = () => {
 
         setShow(true);
     };
-    // const [selectedItem, setSelectedItem] = useState(null);
-    // const handleOpenBooking = (selectedName) => {
-    //     setSelectedItem(selectedName);
-    //     setShow(true);
-    // };
+
     const [activeTab, setActiveTab] = useState("tour-package");
     const pathname = usePathname();
 
@@ -50,27 +188,6 @@ const ServicesTabSec = () => {
 
     const [loading, setLoading] = useState(true);
 
-    // const tabData = [
-    //     {
-    //         key: "tour-package",
-    //         title: "Tour Packages",
-    //         mapData: tourPackages,
-    //         // We use a function or type string to identify which card to use
-    //         type: "tour"
-    //     },
-    //     {
-    //         key: "rental-car",
-    //         title: "Rental Car",
-    //         mapData: rentalCar,
-    //         type: "car"
-    //     },
-    //     {
-    //         key: "hotel",
-    //         title: "Accommodation",
-    //         mapData: hotels,
-    //         type: "hotel"
-    //     }
-    // ];
     const tabData = [
         {
             key: "tour-package",
@@ -92,19 +209,6 @@ const ServicesTabSec = () => {
         }
     ];
 
-    const [isDesktop, setIsDesktop] = useState(false);
-
-    // useEffect(() => {
-    //     const handleResize = () => {
-    //         setIsDesktop(window.innerWidth >= 1400);
-    //     };
-
-    //     handleResize();
-    //     window.addEventListener("resize", handleResize);
-
-    //     return () => window.removeEventListener("resize", handleResize);
-    // }, []);
-
     useEffect(() => {
         fetchData();
     }, []);
@@ -114,38 +218,13 @@ const ServicesTabSec = () => {
             setLoading(true);
 
             const [tourRes, carRes, hotelRes] = await Promise.all([
-                getTours(1,"", "", "",6),
+                getTours(1, "", "", "", 6),
                 getCars(1, "", "", "", 6),
                 getHotels(1, "", "", "", 6)
             ]);
             setTours(tourRes || []);
             setCars(carRes || []);
             setHotels(hotelRes || []);
-
-            // setTours(
-            //     tourRes?.data ||
-            //     tourRes?.data?.data ||
-            //     []
-            // );
-
-            // setCars(
-            //     carRes?.data ||
-            //     carRes?.data?.data ||
-            //     []
-            // );
-
-            // setHotels(
-            //     hotelRes?.data ||
-            //     hotelRes?.data?.data ||
-            //     []
-            // );
-        console.log("Tours Response", tourRes);
-        console.log("Cars Response", carRes);
-        console.log("Hotels Response", hotelRes);
-
-        console.log("Tours State", tours);
-console.log("Cars State", cars);
-console.log("Hotels State", hotels);
 
         } catch (error) {
             console.log(error);
@@ -156,9 +235,6 @@ console.log("Hotels State", hotels);
 
     const activeTabData = tabData.find(tab => tab.key === activeTab);
 
-    const shouldCenterTabs =
-        activeTabData?.mapData?.length <= 5 &&
-        isDesktop;
     return (
         <section className='section-padding-2 pt-5 position-relative trinery-bg  services-section'>
             {/* <div className="bottom-divider position-absolute top-0"></div> */}
@@ -205,7 +281,7 @@ console.log("Hotels State", hotels);
                                                         spaceBetween: 20
                                                     },
                                                     768: {
-                                                        slidesPerView: 3,
+                                                        slidesPerView: 2.25,
                                                         spaceBetween: 20
                                                     },
                                                     992: {
@@ -224,12 +300,12 @@ console.log("Hotels State", hotels);
                                                 loop={tab.mapData.length >= 4} // Dynamically scale loops to avoid loop errors if items are fewer than slidesPerView
                                                 navigation={false}
                                                 className={`mySwiper`}
-                                                // className={`mySwiper ${shouldCenterTabs ? "center-tabs" : ""}`}
-                                            >   
+                                                disableAutoplay={true}
+                                            >
                                                 {tab.mapData.map((item, i) => {
                                                     let backgroundImagePath = "";
                                                     // check if the images have array
-                                                   if (tab.type === "hotel") {
+                                                    if (tab.type === "hotel") {
                                                         backgroundImagePath =
                                                             item.image_url ||
                                                             item.images?.[0];
@@ -247,24 +323,20 @@ console.log("Hotels State", hotels);
                                                     }
                                                     return (
                                                         <SwiperSlide key={i}>
-                                                            {/* {renderCard(tab.type, item)} */}
-                                                            <div className="service-item-card d-flex align-itemx-end"
+                                                            {/* <div className="service-item-card d-flex align-itemx-end"
                                                                 style={{ backgroundImage: `url(${backgroundImagePath})` }}
                                                             >
                                                                 <div className="service-item-card-content w-100 d-flex flex-column justify-content-end z-3">
-                                                                    {/* <div className="badge service-item-badge">
-                                                                        {tab.title}
-                                                                    </div> */}
-                                                                   <div className="badge service-item-badge">
+                                                                    
+                                                                    <div className="badge service-item-badge">
                                                                         {tab.type === "hotel" && item.category}
                                                                         {tab.type === "car" && item.category?.category}
                                                                         {tab.type === "tour" && "Tour Package"}
                                                                     </div>
-                                                                    {/* FIX: Handled item.title vs item.name discrepancy for tours & hotels */}
                                                                     <h2 className="service-item-card-title text-light">{
-                                                                            tab.type === "tour" || tab.type === "hotel"
-                                                                                ? item.title
-                                                                                : item.name
+                                                                        tab.type === "tour" || tab.type === "hotel"
+                                                                            ? item.title
+                                                                            : item.name
                                                                     }</h2>
                                                                     <div className='d-flex align-items-center justify-content-between mt-2'>
                                                                         <h4 className="service-item-card-text text-light">From :
@@ -275,14 +347,13 @@ console.log("Hotels State", hotels);
                                                                                     0
                                                                                 ).toLocaleString()
                                                                             }
-                                                                            {/* <span className='text-decoration-line-through text-light-25 ms-4'>₹1,450</span> */}
                                                                         </h4>
 
                                                                     </div>
                                                                     <span className='card-divider my-3'></span>
                                                                     <div className='d-flex align-items-center justify-content-between'>
                                                                         <span className='text-light d-flex align-items-center gap-1 service-item-card-text'>
-                                                                           {tab.key === "tour-package" && (
+                                                                            {tab.key === "tour-package" && (
                                                                                 <>
                                                                                     <Clock size={16} />
                                                                                     {item.duration}
@@ -303,7 +374,6 @@ console.log("Hotels State", hotels);
                                                                                 </>
                                                                             )}
                                                                         </span>
-                                                                        {/* Case 1: Only for Tour Packages */}
                                                                         {tab.key === "tour-package" && (
                                                                             <Link
                                                                                 href={`/tour-package/${slugify(item.title || "")}`}
@@ -313,12 +383,10 @@ console.log("Hotels State", hotels);
                                                                             </Link>
                                                                         )}
 
-                                                                        {/* Case 2: For Rental Car OR Hotel */}
                                                                         {(tab.key === "rental-car" || tab.key === "hotel") && (
                                                                             <button
                                                                                 type='button'
-                                                                                // Ensure your component uses onClick internally
-                                                                               onClick={() =>
+                                                                                onClick={() =>
                                                                                     handleOpenBooking(
                                                                                         item,
                                                                                         tab.type
@@ -326,17 +394,15 @@ console.log("Hotels State", hotels);
                                                                                 }
                                                                                 className="service-btn"
                                                                             >Book Now</button>
-                                                                            // <WhatsappBtn
-                                                                            //     type='button'
-                                                                            //     // Ensure your component uses onClick internally
-                                                                            //     onClick={() => handleOpenBooking(item.name)}
-                                                                            //     title="Book Now"
-                                                                            //     className="service-btn"
-                                                                            // />
                                                                         )}
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div> */}
+                                                            <UnifiedServiceCard
+                                                                type={tab.type}
+                                                                item={item}
+                                                                onBook={() => handleOpenBooking(item, tab.type)}
+                                                            />
                                                         </SwiperSlide>
                                                     )
                                                 })}

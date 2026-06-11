@@ -4,7 +4,7 @@ import React, { useState, Suspense, useEffect } from 'react'
 import { TitleComponent, SearchFleet } from '@/components/ui/common';
 import { Col, Container, Row } from 'react-bootstrap';
 // import { hotels } from '@/lib/data';
-import { HeroHeaderCard, HotelCards } from '@/components/ui/card';
+import { HeroHeaderCard, HeroHeaderCard2, HotelCards } from '@/components/ui/card';
 import { BookingForm } from '@/components/ui/bookingFormHandler';
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight, Section } from "lucide-react";
@@ -50,8 +50,6 @@ const HotelPageContent = () => {
     const fetchHotels = async () => {
         try {
             const data = await getHotels();
-
-            console.log("hotel get all data:", data);
 
             setHotels(data.data || []);
         } catch (error) {
@@ -118,11 +116,12 @@ export default function HotelPage() {
     return (
         <main>
             <section>
-                <HeroHeaderCard
+                <HeroHeaderCard2
                     heroTitle="Pilgrim Concierge & Support"
                     heroTitleClass={"text-light"}
+                    spanClass={"text-light"}
                     // heroSubtitle="Connect With Us"
-                    heroImage="/images/contact-page-bg.png"
+                    // heroImage="/images/contact-page-bg.png"
                     imgClass="hero-img"
                     showSearch={true}
                 />

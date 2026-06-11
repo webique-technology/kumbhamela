@@ -396,7 +396,7 @@
 
     .calendar-body {
         .display-date {
-            font-size: $font-size-3xl;
+            font-size: Clamp($font-size-lg, 5vw, $fs-hero-1);
             font-weight: 700;
             line-height: 1.1;
             color: $primary-color;
@@ -404,6 +404,12 @@
             @media(max-width: 425px) {
                 font-size: $font-size-lg;
             }
+        }
+
+        .display-occ-text {
+            font-size: Clamp($font-size-xs, 3vw, $font-size-sm);
+            line-height: 1.2;
+            color: $text-color-light;
         }
 
         @media(max-width: 425px) {
@@ -502,7 +508,7 @@
     display: grid;
     // Fits as many columns as possible. Each is at least 192px, expanding to fill extra space
     grid-template-columns: repeat(auto-fit, minmax(192px, 1fr));
-    grid-auto-rows: 192px;
+    grid-auto-rows: 200px;
     gap: 1rem;
 
     @media(max-width:1400px) {
@@ -522,7 +528,7 @@
     }
 
     @media(max-width:576px) {
-        grid-template-columns: repeat(auto-fit, minmax(124px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(122px, 1fr));
         grid-auto-rows: 175px;
     }
 
@@ -531,7 +537,7 @@
     // }
 
     @media(max-width:380px) {
-        grid-template-columns: repeat(auto-fit, minmax(83px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
         grid-auto-rows: 132px;
     }
 }

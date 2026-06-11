@@ -244,8 +244,8 @@ export default function RentalCar() {
           // 2. Direct, actionable main page header
           heroTitle="Sacred Journeys, Seamless Transit"
           // 3. Informative description addressing a pilgrim's logistical needs
-          description="Navigate the holy gathering with our vetted fleet. From premium sedans for family darshans to high-capacity tempo travellers for groups, secure your reliable route between Nashik, Trimbakeshwar, and local tirthas."
-          // heroTitleClass={"text-light"}
+          description="Our fleet of cars and tempo travellers ensures comfortable journeys to sacred destinations."
+          heroTitleClass={"text-light"}
           // heroImage="/images/carrental-page-bg.png"
           imgClass="hero-img"
           showSearch={false}
