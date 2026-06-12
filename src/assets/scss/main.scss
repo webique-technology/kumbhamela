@@ -43,6 +43,17 @@ body {
     // display: none;
 }
 
+// make this for padding spacing in responsive
+.padding-top {
+    @media(max-width:1400px) {
+        padding-top: 56px !important;
+    }
+
+    @media(max-width:1199px) {
+        padding-top: 0px !important;
+    }
+}
+
 .hero-para {
     font-size: clamp(16px, 2vw, $font-size-md) !important;
     font-weight: 400;

@@ -12,16 +12,6 @@ import { AnimationSecComponent, CountUp } from "../ui/AnimationSecComponent";
 
 export const BathingDates = () => {
 
-    const [width, setWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        const handleResize = () => setWidth(window.innerWidth);
-
-        window.addEventListener("resize", handleResize);
-
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
-
     return (
         <>
             {/* bathing dates with slider */}
@@ -108,8 +98,7 @@ export const BathingDates = () => {
                     </Container>
                     <Container
                         fluid="md"
-                        className={`bathing-count-right section-padding-2 ${width <= 1199 ? "pt-0" : ""
-                            }`}
+                        className={`bathing-count-right section-padding-2 padding-top`}
                     >
                         <div className="py-5">
                             {/* bathing dates slider form 1024 above screen */}
