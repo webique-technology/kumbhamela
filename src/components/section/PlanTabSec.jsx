@@ -21,7 +21,7 @@ const PlanTabSec = () => {
                     className="mb-1 text-center"
                     divider={false}
                     montezSubTitle="Discover the Sacred"
-                    montezClass="montez-sub-heading primery-color d-none d-md-block"
+                    montezClass="playfair-display primery-color d-none d-md-block"
                 />
 
                 <Tab.Container id="left-tabs-example" defaultActiveKey="tab-0">

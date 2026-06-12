@@ -40,7 +40,7 @@ const UnifiedServiceCard = ({ type, item, onBook }) => {
         <div className="card h-100 border-0 shadow-sm hotel-card overflow-hidden rounded-4 bg-white">
 
             {/* Top Image Track Area */}
-            <div className="position-relative hotel-img-container" style={{ aspectRatio: '4/3', overflow: 'hidden' }}>
+            <div className="position-relative hotel-img-container" style={{ aspectRatio: type === "car" ? 'null' : '4/3', overflow: 'hidden' }}>
                 {item.images && item.images.length > 1 ? (
                     <SwiperSliderComp navigation={false} loop={true} timeDelay={3500}>
                         {item.images.map((img, idx) => (
@@ -252,7 +252,7 @@ const ServicesTabSec = () => {
                                 className='text-center'
                                 divider={false}
                                 montezSubTitle={"Our Services"}
-                                montezClass='montez-sub-heading primery-color d-none d-md-block'
+                                montezClass='playfair-display primery-color d-none d-md-block'
                             />
 
                             <Nav variant="pills" className="flex-row gap-2 mt-3 justify-content-center nav-tab-count">

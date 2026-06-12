@@ -44,7 +44,7 @@ body {
 }
 
 .hero-para {
-    font-size: clamp(16px, 2vw, $font-size-md);
+    font-size: clamp(16px, 2vw, $font-size-md) !important;
     font-weight: 400;
     max-width: 750px;
     text-align: center;
@@ -87,6 +87,7 @@ body {
 }
 
 
+
 h1,
 h2,
 h3,
@@ -94,6 +95,12 @@ h4,
 h5,
 h6 {
     font-family: var(--font-heading), sans-serif;
+}
+
+
+
+.playfair-display {
+    font-family: var(--font-playfair), sans-serif !important;
 }
 
 .hero-title,
@@ -109,6 +116,7 @@ h2,
     font-size: clamp($font-size-lg-2, 4.5vw, $font-size-3xl) !important;
     font-weight: 600 !important;
     line-height: calc(1.5 / 1.25) !important;
+    letter-spacing: -2px;
 
     // @media(max-width: 768px) {
     //     font-size: $font-size-lg-1 !important;
@@ -305,6 +313,15 @@ p {
 }
 
 // cards
+
+.rental-car-card {
+    .card-img-top {
+        transition: all 0.3s ease-in;
+        // aspect-ratio: 3/3;
+        scale: 0.8;
+    }
+}
+
 .sacred-dest-card,
 .tour-package-card,
 .rental-car-card,

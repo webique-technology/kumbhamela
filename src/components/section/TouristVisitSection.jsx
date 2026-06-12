@@ -33,7 +33,7 @@ const TouristVisitSection = () => {
                         className="mb-0 mb-md-4 md-md-5"
                         divider={false}
                         montezSubTitle="Must-Visit Temples & Holy Sites"
-                        montezClass="montez-sub-heading primery-color d-none d-md-block"
+                        montezClass="playfair-display primery-color d-none d-md-block"
                     />
 
                     {/* Custom Navigation Buttons */}

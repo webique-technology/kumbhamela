@@ -37,12 +37,12 @@ const AboutSec = () => {
                     <Row>
                         <Col md={6}>
                             <TitleComponent
-                                title="About Nashik Kumbh Mela"
+                                title="The Sacred Legacy of Nashik Kumbh Mela"
                                 // description="Stay Informed About Kumbh Mela"
                                 className="mb-4 md-md-5"
                                 divider={false}
                                 montezSubTitle="Discover the Sacred"
-                                montezClass="montez-sub-heading primery-color d-none d-md-block"
+                                montezClass="playfair-display primery-color d-none d-md-block"
                                 descClass='text-md'
                                 description={"Experience the divine with Mahakumbh Tours & Travels Nashik, your trusted car rental company in Nashik, Maharashtra. With 12 years of expertise, we specialize in Trimbakeshwar Joytirling Darshan, Nashik Darshan, Panchavti Tapovan, Shirdi Shani Shingnpur Darshan, and Grishneshwar Joytirling Darshan."}
                             />

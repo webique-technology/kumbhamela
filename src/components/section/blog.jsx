@@ -57,7 +57,7 @@ const BlogSection = () => {
                         className="m-0 text-center text-sm-start title-width"
                         divider={false}
                         montezSubTitle="Bolgs & Updates"
-                        montezClass="montez-sub-heading primery-color d-none d-md-block"
+                        montezClass="playfair-display primery-color d-none d-md-block"
                     />
                     <div className="d-none d-sm-flex justify-content-center">
                         <PrimeryBtn

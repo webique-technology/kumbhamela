@@ -117,7 +117,7 @@ const VideoGallery = () => {
                         className="mb-0 md-md-5"
                         divider={false}
                         montezSubTitle="video stories"
-                        montezClass="montez-sub-heading primery-color d-none d-md-block"
+                        montezClass="playfair-display primery-color d-none d-md-block"
                     />
 
                     {/* Navigation Handles */}

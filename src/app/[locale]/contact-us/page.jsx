@@ -209,8 +209,8 @@ const ContactUs = () => {
             </section>
 
             {/* form */}
-            <section className="contact-page-wrapper section-padding">
-                <Container>
+            <section className="contact-page-wrapper section-padding-2 pt-5">
+                <Container className="pb-4 pb-sm-5 pb-xl-4">
                     <Row className="g-4 align-items-start">
                         <Col lg={7}>
                             <div className="form-container shadow-sm h-100">
@@ -336,21 +336,14 @@ const ContactUs = () => {
             </section>
 
             {/* faq section */}
-            {/* faq section */}
-            <section className="faq-section section-padding padding-bottom">
+            {/* <section className="faq-section section-padding padding-bottom">
                 <Container>
-                    {/* Section Header */}
                     <TitleComponent
                         title={"Common Inquiries"}
                         className={"text-center mb-5"}
                     />
 
-                    {/* Accordion Map */}
                     <div className="faq-wrapper mx-auto">
-                        {/* 
-                            1. defaultActiveKey={faqData[0]?.id}: This opens the first item in the array.
-                            2. Removing 'flush' if you want the rounded shadow look to stay consistent.
-                        */}
                         <Accordion defaultActiveKey={faqData[0]?.id}>
                             {faqData.map((item) => (
                                 <Accordion.Item
@@ -369,7 +362,7 @@ const ContactUs = () => {
                         </Accordion>
                     </div>
                 </Container>
-            </section>
+            </section> */}
         </main>
     );
 };

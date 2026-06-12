@@ -103,7 +103,7 @@ const RentalCarContent = () => {
             <Col md={7}>
               <TitleComponent
                 className="text-start mb-0"
-                montezClass="primery-color montez-sub-heading"
+                montezClass="primery-color playfair-display"
                 divider={false}
               />
             </Col>
@@ -204,7 +204,7 @@ const RentalCarContent = () => {
                 <button
                   key={pageNum}
                   onClick={() => handlePageChange(pageNum)}
-                  className={`pagination-number number ${currentPage === pageNum ? 'active' : ''}`}
+                  className={`pagination-number shadow-sm border number ${currentPage === pageNum ? 'active' : ''}`}
                 >
                   {pageNum}
                 </button>

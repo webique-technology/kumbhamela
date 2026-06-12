@@ -226,7 +226,7 @@ export const RentalCarCard = ({ car, onBook }) => {
                         alt={car.name}
                         width={200}
                         height={200}
-                        className="card-img-top object-fit-cover transition-transform"
+                        className="card-img-top img-fluid transition-transform"
                     />
                 ) : (
                     <div

@@ -87,7 +87,7 @@ const HeroHeader = () => {
 
                                         {/* Title Entrance */}
                                         <AnimationSecComponent type="vertical" direction="up" delay={0.4} distance={40}>
-                                            <h1 className='hero-title-h1 mb-2 hero-title'>
+                                            <h1 className='hero-title-h1 mb-2 hero-title playfair-display'>
                                                 {item.title}
                                             </h1>
                                         </AnimationSecComponent>

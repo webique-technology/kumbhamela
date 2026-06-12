@@ -92,7 +92,7 @@ const HotelPageContent = () => {
                         <div className="d-flex justify-content-center gap-2">
                             <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="pagination-item"><ChevronLeft /></button>
                             {[...Array(totalPages)].map((_, i) => (
-                                <button key={i} onClick={() => handlePageChange(i + 1)} className={`pagination-number ${currentPage === i + 1 ? 'active' : ''}`}>{i + 1}</button>
+                                <button key={i} onClick={() => handlePageChange(i + 1)} className={`pagination-number border shadow-sm ${currentPage === i + 1 ? 'active' : ''}`}>{i + 1}</button>
                             ))}
                             <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className="pagination-item"><ChevronRight /></button>
                         </div>

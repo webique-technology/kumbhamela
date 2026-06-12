@@ -1,4 +1,4 @@
-import { Poppins, Inter, Montez, Sora } from "next/font/google";
+import { Poppins, Inter, Playfair_Display, Montez, Sora } from "next/font/google";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 
@@ -19,6 +19,12 @@ const poppins = Poppins({
   weight: ['400', '500', '600', '700', '800'],
   subsets: ["latin"],
   variable: "--font-poppins",
+});
+
+const playfair_display = Playfair_Display({
+  weight: ['400', '500', '600', '700', '800'],
+  subsets: ["latin"],
+  variable: "--font-playfair",
 });
 
 const sora2 = Sora({
@@ -45,7 +51,7 @@ export default async function RootLayout({ children, params }) {
   const messages = await getMessages(locale);
 
   return (
-    <html lang={locale} className={`${sora.variable} ${poppins.variable} ${sora2.variable} ${montez.variable}`} suppressHydrationWarning={true}>
+    <html lang={locale} className={`${sora.variable} ${poppins.variable} ${sora2.variable} ${montez.variable} ${playfair_display.variable}`} suppressHydrationWarning={true}>
       <body className="antialiased" suppressHydrationWarning={true}>
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Navbar />

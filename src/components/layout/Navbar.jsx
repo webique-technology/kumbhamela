@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, Globe, MessageCircle, ChevronDown } from "lucide-react";
+import { Menu, X, Globe, ChevronDown } from "lucide-react";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { useTranslations, useLocale } from "next-intl";
 import "../../styles/navbar.scss";
 import NavSidebar from "./Sidebar";
-const Navbar = () => {
 
+const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false); // Controls the Overlay
     const [showSidebar, setShowSidebar] = useState(false); // Controls the Sidebar
     const [scrolled, setScrolled] = useState(false);
@@ -31,10 +31,7 @@ const Navbar = () => {
 
     const toggleMenu = () => {
         if (!isMenuOpen) {
-            // 1. Start Overlay Animation First
             setIsMenuOpen(true);
-
-            // 2. Wait exactly 2.5 seconds before showing Sidebar
             setTimeout(() => {
                 setShowSidebar(true);
             }, 250);
@@ -44,15 +41,20 @@ const Navbar = () => {
     };
 
     const closeMenu = () => {
-        // Reset everything immediately on close
         setShowSidebar(false);
         setIsMenuOpen(false);
     };
 
     const handleLanguageChange = (newLocale) => {
+        // FIX: Pass 'pathname' directly as a string, and configure locale inside the options object
         router.replace(pathname, { locale: newLocale });
+
         setIsLangOpen(false);
-        closeMenu();
+
+        // Brief timeout to let the router switch context before dismantling mobile states
+        setTimeout(() => {
+            closeMenu();
+        }, 100);
     };
 
     useEffect(() => {
@@ -65,16 +67,13 @@ const Navbar = () => {
 
     useEffect(() => {
         if (showSidebar) {
-            // Prevent scrolling
             document.body.style.overflow = 'hidden';
-            document.body.style.paddingRight = '0px'; // Prevents "jumping" if scrollbar disappears
+            document.body.style.paddingRight = '0px';
         } else {
-            // Restore scrolling
             document.body.style.overflow = 'unset';
             document.body.style.paddingRight = '0px';
         }
 
-        // Cleanup when component unmounts
         return () => {
             document.body.style.overflow = 'unset';
             document.body.style.paddingRight = '0px';
@@ -157,34 +156,33 @@ const Navbar = () => {
                             {isLangOpen && (
                                 <div className="lang-dropdown shadow-lg">
                                     {languages.map((lang) => (
-                                        <div key={lang.code} className={`lang-item ${locale === lang.code ? 'active' : ''}`} onClick={() => handleLanguageChange(lang.code)}>
+                                        <div
+                                            key={lang.code}
+                                            className={`lang-item ${locale === lang.code ? 'active' : ''}`}
+                                            onClick={() => handleLanguageChange(lang.code)}
+                                        >
                                             {lang.label}
                                         </div>
                                     ))}
                                 </div>
                             )}
                         </div>
-                        {/* <a href="https://wa.me/919022093522" target="_blank" className="btn whatsapp-btn d-flex align-items-center">
-                            <MessageCircle size={18} />
-                            <span>WhatsApp</span>
-                        </a> */}
+
                         {/* Mobile Toggle */}
                         <button className="mobile-toggle d-lg-none" onClick={toggleMenu}>
                             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
                     </div>
-
-
                 </div>
             </div>
 
-            {/* Background Overlay - Triggered by isMenuOpen */}
+            {/* Background Overlay */}
             <div
                 className={`nav-overlay ${isMenuOpen ? "active" : ""}`}
                 onClick={closeMenu}
             ></div>
 
-            {/* Mobile Sidebar - Triggered by showSidebar (2.5s later) */}
+            {/* Mobile Sidebar */}
             <div className={`mobile-menu d-lg-none ${showSidebar ? "open" : ""}`}>
                 <NavSidebar
                     languages={languages}
@@ -195,4 +193,5 @@ const Navbar = () => {
         </header>
     );
 }
+
 export default Navbar;

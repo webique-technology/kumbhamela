@@ -136,7 +136,7 @@ const TourPageContent = () => {
                                             <button
                                                 key={pageNum}
                                                 onClick={() => handlePageChange(pageNum)}
-                                                className={`pagination-number number ${currentPage === pageNum ? 'active' : ''}`}
+                                                className={`pagination-number shadow-sm border number ${currentPage === pageNum ? 'active' : ''}`}
                                             >
                                                 {pageNum}
                                             </button>

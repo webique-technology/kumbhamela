@@ -7,21 +7,21 @@ import { routing } from './routing';
 import en from '../messages/en.json';
 import hi from '../messages/hi.json';
 import mr from '../messages/mr.json';
-// import sa from '../messages/sa.json';
-// import ta from '../messages/ta.json';
-// import ml from '../messages/ml.json';
-// import te from '../messages/te.json';
-// import gu from '../messages/gu.json';
+import sa from '../messages/sa.json';
+import ta from '../messages/ta.json';
+import ml from '../messages/ml.json';
+import te from '../messages/te.json';
+import gu from '../messages/gu.json';
 
 const messagesMap = {
   en,
   hi,
   mr,
-  // sa,
-  // ta,
-  // ml,
-  // te,
-  // gu
+  sa,
+  ta,
+  ml,
+  te,
+  gu
 };
 
 export default getRequestConfig(({ requestLocale }) => {

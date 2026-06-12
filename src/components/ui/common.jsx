@@ -63,9 +63,9 @@ export const TitleComponent = ({
                 </div>
             )}
 
-            <span className={montezClass}>{montezSubTitle}</span>
+            <span className={`${montezClass} h4`}>{montezSubTitle}</span>
 
-            <h2 className={`${h2_class} display-6 fw-semiboldmb-2`}>
+            <h2 className={`${h2_class} mt-2 display-6 fw-semiboldmb-2`}>
                 {title}
             </h2>
 
@@ -425,12 +425,12 @@ export const TourTabs = ({ tour, cancellationPolicy, paymentPolicy }) => {
                     {/* <p className="text-muted small mb-4">
                         {cancellationPolicy.content}
                     </p> */}
-                        <p
+                    <p
                         className="text-muted small mb-4"
                         dangerouslySetInnerHTML={{
                             __html: cancellationPolicy.content,
                         }}
-                        ></p>
+                    ></p>
                     {/* <div className="cancellation-timeline">
                         {tour.cancellationPolicy?.map((item, index) => {
                             const charge = Math.round((tour.price * item.percent) / 100);
