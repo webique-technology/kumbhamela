@@ -7,13 +7,15 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const getBlogs = async (
       page = 1,
       title = "",
-      limit = ""
+      limit = "",
+      lang = "en"
       ) => {
         try {
 
             const params = new URLSearchParams();
 
             params.set("page", page);
+            params.set("lang", lang);
 
             if (title) {
                 params.set("title", title);
@@ -47,10 +49,11 @@ export const getBlogById = async (id) => {
   }
 };
 
-export const getBlogBySlug = async (slug) => {
+export const getBlogBySlug = async (slug,lang = "en") => {
   try {
     const response = await api.get(
-      `/blogs/slug/${encodeURIComponent(slug)}`
+      // `/blogs/slug/${encodeURIComponent(slug)}`
+       `/blogs/slug/${encodeURIComponent(slug)}?lang=${lang}`
     );
 
     return response.data.data;

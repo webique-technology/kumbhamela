@@ -13,6 +13,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import "../../../styles/blog.scss";
 // import { useState, useEffect, Suspense } from "react";
 import { getBlogs } from "./blogApi";
+import { useLocale } from "next-intl";
 
 const BlogPageContent = () => {
   const router = useRouter();
@@ -24,6 +25,7 @@ const BlogPageContent = () => {
   const [currentPageApi, setCurrentPageApi] = useState(1);
 
   const currentPage = Number(searchParams.get("page")) || 1;
+  const locale = useLocale();
 
 
   // const sortedBlogs = [...blogs].sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -51,7 +53,7 @@ const BlogPageContent = () => {
       try {
         setLoading(true);
 
-        const response = await getBlogs(currentPage);
+        const response = await getBlogs(currentPage,"","",locale);
 
         setBlogs(response?.data || []);
         setTotalPages(response?.last_page || 1);
@@ -138,8 +140,8 @@ const BlogPageContent = () => {
                 <Col lg={colSize} md={6} key={index}>
                   <BlogCard
                     blog={blog}
-                    blogLink={`/blog/${slugify(blog.title)}`}
-                    // blogLink={`/blog/${blog.title}`}
+                    // blogLink={`/blog/${slugify(blog.title)}`}
+                    blogLink={`/blog/${blog.slug}`}
                     img_width={100}
                     img_height={420}
                     img_count_width={"100%"}
