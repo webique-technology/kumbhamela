@@ -1,6 +1,7 @@
+// src/components/layout/Navbar.jsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useTransition } from "react";
 import { Menu, X, Globe, ChevronDown } from "lucide-react";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { useTranslations, useLocale } from "next-intl";
@@ -8,10 +9,13 @@ import "../../styles/navbar.scss";
 import NavSidebar from "./Sidebar";
 
 const Navbar = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false); // Controls the Overlay
-    const [showSidebar, setShowSidebar] = useState(false); // Controls the Sidebar
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [showSidebar, setShowSidebar] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [isLangOpen, setIsLangOpen] = useState(false);
+
+    // React 19 transition thread manager
+    const [isPending, startTransition] = useTransition();
 
     const t = useTranslations('Navbar');
     const locale = useLocale();
@@ -46,15 +50,18 @@ const Navbar = () => {
     };
 
     const handleLanguageChange = (newLocale) => {
-        // FIX: Pass 'pathname' directly as a string, and configure locale inside the options object
-        router.replace(pathname, { locale: newLocale });
+        if (newLocale === locale) {
+            setIsLangOpen(false);
+            return;
+        }
+
+        // Wrap execution in a transition pass to clear route history layers
+        startTransition(() => {
+            router.replace(pathname, { locale: newLocale });
+        });
 
         setIsLangOpen(false);
-
-        // Brief timeout to let the router switch context before dismantling mobile states
-        setTimeout(() => {
-            closeMenu();
-        }, 100);
+        closeMenu();
     };
 
     useEffect(() => {
@@ -68,91 +75,65 @@ const Navbar = () => {
     useEffect(() => {
         if (showSidebar) {
             document.body.style.overflow = 'hidden';
-            document.body.style.paddingRight = '0px';
         } else {
             document.body.style.overflow = 'unset';
-            document.body.style.paddingRight = '0px';
         }
-
-        return () => {
-            document.body.style.overflow = 'unset';
-            document.body.style.paddingRight = '0px';
-        };
+        return () => { document.body.style.overflow = 'unset'; };
     }, [showSidebar]);
 
     return (
-        <header className={`custom-navbar ${scrolled ? "scrolled" : ""}`}>
+        <header className={`custom-navbar ${scrolled ? "scrolled" : ""} ${isPending ? "switching-locale" : ""}`}>
             <div className="container">
                 <div className="d-flex align-items-center justify-content-between navbar-inner">
-                    {/* Logo */}
-                    <Link href="/" className="d-flex align-items-center text-decoration-none logo">
+
+                    {/* Logo Section */}
+                    <Link href="/" className="d-flex align-items-center text-decoration-none logo" onClick={closeMenu}>
                         <div className="logo-icon"><span className="text-white">ॐ</span></div>
                         <div className="logo-text">
-                            <h1>MAHAKUMBH</h1>
-                            <p>Tours & Travels</p>
+                            <h1>{t("logoTitle")}</h1>
+                            <p>{t("logoSubtitle")}</p>
                         </div>
                     </Link>
 
-                    {/* Desktop Menu */}
-                    <nav className="d-none d-lg-flex align-items-center gap-4 nav-links">
-                        <Link
-                            href="/"
-                            className={`nav-link-custom ${pathname === "/" ? "active" : ""}`}
-                        >
+                    {/* Navigation Stream Container Block */}
+                    <nav className="d-none d-lg-flex sora align-items-center gap-4 nav-links">
+                        <Link href="/" className={`nav-link-custom ${pathname === "/" ? "active" : ""}`}>
                             {t("home")}
                         </Link>
-
-                        <Link
-                            href="/about-us"
-                            className={`nav-link-custom ${pathname === "/about-us" ? "active" : ""}`}
-                        >
+                        <Link href="/about-us" className={`nav-link-custom ${pathname === "/about-us" ? "active" : ""}`}>
                             {t("about")}
                         </Link>
-
-                        <Link
-                            href="/hotel"
-                            className={`nav-link-custom ${pathname === "/hotel" ? "active" : ""}`}
-                        >
+                        <Link href="/hotel" className={`nav-link-custom ${pathname === "/hotel" ? "active" : ""}`}>
                             {t("hotel")}
                         </Link>
-
-                        <Link
-                            href="/rental-car"
-                            className={`nav-link-custom ${pathname === "/rental-car" ? "active" : ""}`}
-                        >
+                        <Link href="/rental-car" className={`nav-link-custom ${pathname === "/rental-car" ? "active" : ""}`}>
                             {t("rentalCar")}
                         </Link>
-
-                        <Link
-                            href="/tour-package"
-                            className={`nav-link-custom ${pathname === "/tour-package" ? "active" : ""}`}
-                        >
+                        <Link href="/tour-package" className={`nav-link-custom ${pathname === "/tour-package" ? "active" : ""}`}>
                             {t("tourPackage")}
                         </Link>
-
-                        <Link
-                            href="/blog"
-                            className={`nav-link-custom ${pathname === "/blog" ? "active" : ""}`}
-                        >
+                        <Link href="/blog" className={`nav-link-custom ${pathname === "/blog" ? "active" : ""}`}>
                             {t("blog")}
                         </Link>
-
-                        <Link
-                            href="/contact-us"
-                            className={`nav-link-custom ${pathname === "/contact-us" ? "active" : ""}`}
-                        >
+                        <Link href="/contact-us" className={`nav-link-custom ${pathname === "/contact-us" ? "active" : ""}`}>
                             {t("contact")}
                         </Link>
                     </nav>
 
-                    {/* Right Side Actions */}
+                    {/* Actions Panel Wrapper */}
                     <div className="d-flex align-items-center gap-2 right-actions">
                         <div className="position-relative">
-                            <button className="lang-btn d-flex align-items-center gap-1" onClick={() => setIsLangOpen(!isLangOpen)}>
+                            <button
+                                className="lang-btn d-flex align-items-center gap-1"
+                                onClick={() => setIsLangOpen(!isLangOpen)}
+                                disabled={isPending}
+                                style={{ opacity: isPending ? 0.6 : 1 }}
+                            >
                                 <Globe size={18} />
                                 <span className="text-uppercase">{locale}</span>
                                 <ChevronDown size={14} className={isLangOpen ? "rotate-180" : ""} />
                             </button>
+
                             {isLangOpen && (
                                 <div className="lang-dropdown shadow-lg">
                                     {languages.map((lang) => (
@@ -168,21 +149,16 @@ const Navbar = () => {
                             )}
                         </div>
 
-                        {/* Mobile Toggle */}
                         <button className="mobile-toggle d-lg-none" onClick={toggleMenu}>
                             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
                     </div>
+
                 </div>
             </div>
 
-            {/* Background Overlay */}
-            <div
-                className={`nav-overlay ${isMenuOpen ? "active" : ""}`}
-                onClick={closeMenu}
-            ></div>
+            <div className={`nav-overlay ${isMenuOpen ? "active" : ""}`} onClick={closeMenu}></div>
 
-            {/* Mobile Sidebar */}
             <div className={`mobile-menu d-lg-none ${showSidebar ? "open" : ""}`}>
                 <NavSidebar
                     languages={languages}
@@ -193,5 +169,4 @@ const Navbar = () => {
         </header>
     );
 }
-
 export default Navbar;

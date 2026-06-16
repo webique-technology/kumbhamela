@@ -324,9 +324,11 @@ export const SearchFleet = () => {
 
 // timer component
 export const KumbhCountdown = ({ targetDate, isActive = true }) => {
+    const t = useTranslations("Countdown");
+
     // Memoize the target date so the useEffect doesn't re-run unless the date prop changes
     const COUNTDOWN_TARGET = useMemo(() => {
-        return targetDate ? new Date(targetDate) : new Date("2026-11-31T00:00:00Z");
+        return targetDate ? new Date(targetDate) : new Date("2027-08-01T00:00:00Z"); // Updated fallback closer to Nashik 2027 start
     }, [targetDate]);
 
     const [timeLeft, setTimeLeft] = useState({
@@ -361,7 +363,7 @@ export const KumbhCountdown = ({ targetDate, isActive = true }) => {
         const timerId = setInterval(() => {
             const nextTime = calculateTimeLeft();
 
-            // LAG FIX: Only trigger a re-render if the 'seconds' value actually changed
+            // LAG FIX: Only trigger a re-render if the 'seconds' or 'days' value actually changed
             setTimeLeft(prev => {
                 if (prev.seconds === nextTime.seconds && prev.days === nextTime.days) {
                     return prev; // Returning the exact same object reference skips the render
@@ -374,13 +376,13 @@ export const KumbhCountdown = ({ targetDate, isActive = true }) => {
     }, [COUNTDOWN_TARGET, isActive]);
 
     if (isExpired) {
-        return <div className="countdown-expired text-white h1 text-center">Kumbh Mela Has Begun!</div>;
+        return <div className="countdown-expired text-white h1 text-center">{t("expiredText")}</div>;
     }
 
     // internal sub-component for cleaner rendering
-    const CountdownBlock = ({ value, label }) => {
-        // Format numbers to always have 2 digits (e.g., 05 instead of 5)
-        const formattedValue = String(value).padStart(label === "Days" ? 1 : 2, '0');
+    const CountdownBlock = ({ value, labelKey, fallbackLabel }) => {
+        // Format numbers to always have 2 digits (except for days if single digit logic is preferred)
+        const formattedValue = String(value).padStart(labelKey === "days" ? 1 : 2, '0');
 
         return (
             <div className="countdown-box shadow-sm flex-column d-flex align-items-center justify-content-center text-center">
@@ -388,17 +390,18 @@ export const KumbhCountdown = ({ targetDate, isActive = true }) => {
                     <h3 className="glitch-text m-0">{formattedValue}</h3>
                 </div>
                 <div className="countdown-divider border-top"></div>
-                <p className="countdown-label text-primery m-0">{label}</p>
+                {/* Dynamically matches translated label using the string labelKey */}
+                <p className="countdown-label text-primery m-0">{t(labelKey)}</p>
             </div>
         );
     };
 
     return (
         <div className="d-flex align-items-center gap-2 gap-sm-4 justify-content-center px-0 px-sm-5 kumbh-countdown-section">
-            <CountdownBlock value={timeLeft.days} label="Days" />
-            <CountdownBlock value={timeLeft.hours} label="Hours" />
-            <CountdownBlock value={timeLeft.minutes} label="Mins" />
-            <CountdownBlock value={timeLeft.seconds} label="Seconds" />
+            <CountdownBlock value={timeLeft.days} labelKey="days" />
+            <CountdownBlock value={timeLeft.hours} labelKey="hours" />
+            <CountdownBlock value={timeLeft.minutes} labelKey="minutes" />
+            <CountdownBlock value={timeLeft.seconds} labelKey="seconds" />
         </div>
     );
 };
@@ -579,7 +582,7 @@ export const HighlightsModal = ({ children }) => {
     );
 };
 
-export const BathingDatesSlider = ({ bathingDates }) => {
+export const BathingDatesSlider = ({ bathingDates, t }) => {
     return (
         <div className="div d-none d-lg-block">
             <SwiperSliderComp
@@ -632,12 +635,12 @@ export const BathingDatesSlider = ({ bathingDates }) => {
                                 <div className="festival-card-header">
                                     <div className="d-flex align-items-center ">
                                         <span className="festival-label text-uppercase d-block">
-                                            {date.dateOccation}
+                                            {t(date.dateOccationKey)}
                                         </span>
                                     </div>
 
                                     <h3 className="festival-title my-3 text-capitalize">
-                                        {date.title}
+                                        {t(date.titleKey)}
                                     </h3>
                                 </div>
 
@@ -648,18 +651,18 @@ export const BathingDatesSlider = ({ bathingDates }) => {
 
                                     <div className="d-flex flex-column">
                                         <span className="festival-month text-uppercase">
-                                            {date.month}
+                                            {t(date.monthKey)}
                                         </span>
 
                                         <span className="festival-year">
-                                            2027
+                                            {date.year}
                                         </span>
                                     </div>
                                 </div>
 
                                 <div className="festival-footer w-100 pt-4 border-top d-flex justify-content-between align-items-center">
                                     <span className="festival-subtitle">
-                                        Sacred Immersion
+                                        {t("sacredImmersion")}
                                     </span>
                                 </div>
                             </div>

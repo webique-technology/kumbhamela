@@ -5,17 +5,17 @@ import { Container, Modal } from "react-bootstrap";
 import { SwiperSlide } from "swiper/react";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { SwiperSliderComp, TitleComponent } from "../ui/common";
-
+import { useTranslations } from "next-intl";
 import "swiper/css";
 import "../../styles/videoGallery.scss";
 
 const VideoGallery = () => {
     const videoRefs = useRef([]);
     const swiperRef = useRef(null);
-
+    const t = useTranslations("VideoReels");
     const [showModal, setShowModal] = useState(false);
     const [activeVideoUrl, setActiveVideoUrl] = useState("");
-    
+
     // Track unique custom cover states for your Instagram API fallbacks
     const [instagramCovers, setInstagramCovers] = useState({});
 
@@ -36,7 +36,7 @@ const VideoGallery = () => {
     // Parses diverse social media link formats into clean iframe source links
     const getEmbedUrl = (url) => {
         if (!url) return "";
-        
+
         if (isYouTubeUrl(url)) {
             let videoId = "";
             if (url.includes("/shorts/")) {
@@ -69,7 +69,7 @@ const VideoGallery = () => {
         }
         if (isInstagramUrl(reel.video)) {
             // Fallback backstop image while waiting for a live graph API connection
-            return instagramCovers[reel.id] || "/images/banner1.webp"; 
+            return instagramCovers[reel.id] || "/images/banner1.webp";
         }
         return null;
     };
@@ -77,7 +77,7 @@ const VideoGallery = () => {
     const handleSlideChange = (swiper) => {
         videoRefs.current.forEach((video, index) => {
             if (!video) return;
-            
+
             if (index === swiper.realIndex) {
                 // Instantly play direct local native file assets when swipe finishes
                 if (typeof video.play === "function") {
@@ -113,10 +113,10 @@ const VideoGallery = () => {
             <Container>
                 <div className="d-flex justify-content-center mb-4 mb-md-0 justify-content-sm-between align-items-center">
                     <TitleComponent
-                        title="Divine Experiences"
+                        title={t("mainTitle")}
                         className="mb-0 md-md-5"
                         divider={false}
-                        montezSubTitle="video stories"
+                        montezSubTitle={t("montezSubTitle")}
                         montezClass="playfair-display primery-color d-none d-md-block"
                     />
 
@@ -171,15 +171,15 @@ const VideoGallery = () => {
                             <SwiperSlide key={reel.id}>
                                 <div className="reel-card" onClick={() => openModal(reel.video)}>
                                     <div className="reel-thumbnail-wrapper position-relative w-100 h-100 overflow-hidden">
-                                        
+
                                         {isExternal ? (
                                             /* Static Placeholder Card Layer for Complex Iframe Streams */
-                                            <div 
+                                            <div
                                                 ref={(el) => (videoRefs.current[index] = el)}
                                                 className="external-placeholder-wrapper w-100 h-100 d-flex align-items-center justify-content-center"
                                             >
-                                                <img 
-                                                    src={getThumbnailSrc(reel)} 
+                                                <img
+                                                    src={getThumbnailSrc(reel)}
                                                     alt={reel.title}
                                                     className="w-100 h-100 object-cover"
                                                 />
@@ -222,10 +222,10 @@ const VideoGallery = () => {
                 className="video-modal"
             >
                 <Modal.Body className="p-0 bg-black overflow-hidden position-relative">
-                    <button 
-                        type="button" 
-                        className="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3" 
-                        onClick={closeModal} 
+                    <button
+                        type="button"
+                        className="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3"
+                        onClick={closeModal}
                         aria-label="Close"
                     />
                     {activeVideoUrl && (
