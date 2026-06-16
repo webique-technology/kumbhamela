@@ -1,3 +1,13 @@
+// 1. Static ES6 Import Architecture for Assets
+import sacredDest1 from "../assets/images/sacred-destination-1.jpg";
+import sacredDest2 from "../assets/images/sacred-destination-2.jpg";
+import sacredDest3 from "../assets/images/sacred-destination-3.jpg";
+import sacredDest4 from "../assets/images/sacred-destination-4.jpg";
+import sacredDest5 from "../assets/images/sacred-destination-5.jpg";
+import kumbhaImg3 from "../assets/images/kumbhamela-img-3.jpg";
+import sitaGufa from "../assets/images/sita-gufa.webp";
+import anjaneri from "../assets/images/anjaneri.webp";
+
 export const hotels = [
     {
         name: 'The Gateway Hotel Nashik',
@@ -578,7 +588,7 @@ export const rentalCar = [
 export const sacredDestinations = [
     {
         id: 1,
-        image: "/images/sacred-destination-1.jpg",
+        image: sacredDest1, // Passed as an object reference
         routeLink: "/hotel/rental-car",
         nameKey: "dest1_name",
         historyKey: "dest1_history",
@@ -587,7 +597,7 @@ export const sacredDestinations = [
     },
     {
         id: 2,
-        image: "/images/sacred-destination-2.jpg",
+        image: sacredDest2,
         routeLink: "/hotel/rental-car",
         nameKey: "dest2_name",
         historyKey: "dest2_history",
@@ -596,7 +606,7 @@ export const sacredDestinations = [
     },
     {
         id: 3,
-        image: "/images/kumbhamela-img-3.jpg",
+        image: kumbhaImg3,
         routeLink: "/hotel/rental-car",
         nameKey: "dest3_name",
         historyKey: "dest3_history",
@@ -605,7 +615,7 @@ export const sacredDestinations = [
     },
     {
         id: 4,
-        image: "/images/sacred-destination-3.jpg",
+        image: sacredDest3,
         routeLink: "/hotel/rental-car",
         nameKey: "dest4_name",
         historyKey: "dest4_history",
@@ -614,7 +624,7 @@ export const sacredDestinations = [
     },
     {
         id: 5,
-        image: "/images/sacred-destination-2.jpg",
+        image: sacredDest2, // Reusing imported asset safely
         routeLink: "/hotel/rental-car",
         nameKey: "dest5_name",
         historyKey: "dest5_history",
@@ -623,7 +633,7 @@ export const sacredDestinations = [
     },
     {
         id: 6,
-        image: "/images/sacred-destination-4.jpg",
+        image: sacredDest4,
         routeLink: "/hotel/rental-car",
         nameKey: "dest6_name",
         historyKey: "dest6_history",
@@ -632,7 +642,7 @@ export const sacredDestinations = [
     },
     {
         id: 7,
-        image: "/images/sita-gufa.webp",
+        image: sitaGufa,
         routeLink: "/hotel/rental-car",
         nameKey: "dest7_name",
         historyKey: "dest7_history",
@@ -641,7 +651,7 @@ export const sacredDestinations = [
     },
     {
         id: 8,
-        image: "/images/sacred-destination-5.jpg",
+        image: sacredDest5,
         routeLink: "/hotel/rental-car",
         nameKey: "dest8_name",
         historyKey: "dest8_history",
@@ -650,7 +660,7 @@ export const sacredDestinations = [
     },
     {
         id: 9,
-        image: "/images/sacred-destination-2.jpg",
+        image: sacredDest2,
         routeLink: "/hotel/rental-car",
         nameKey: "dest9_name",
         historyKey: "dest9_history",
@@ -659,7 +669,7 @@ export const sacredDestinations = [
     },
     {
         id: 10,
-        image: "/images/anjaneri.webp",
+        image: anjaneri,
         routeLink: "/hotel/rental-car",
         nameKey: "dest10_name",
         historyKey: "dest10_history",

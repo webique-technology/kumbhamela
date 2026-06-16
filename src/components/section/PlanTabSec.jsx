@@ -7,6 +7,18 @@ import { useTranslations } from 'next-intl';
 import { Plane, Hotel, UtilityPole, MapPin, PhoneCall, Car } from 'lucide-react';
 import "../../styles/planTab.scss";
 
+import byAir from "../../assets/images/by-air.webp";
+import byTrain from "../../assets/images/by-train.webp";
+import byRoad from "../../assets/images/by-road.webp";
+import citilincBus from "../../assets/images/citilinc-bus.webp";
+import autoRickshaw from "../../assets/images/auto-rickshaw.webp";
+import walkingPath from "../../assets/images/walking-path.webp";
+import crowdSafety from "../../assets/images/crowd-safety.webp";
+import hydrationFood from "../../assets/images/hydration-food.webp";
+import personalHygiene from "../../assets/images/personal-hygiene.webp";
+import medicalServices from "../../assets/images/medical-services.webp";
+import Image from 'next/image';
+
 const PlanTabSec = () => {
     // 1. Correct namespace binding initialized
     const t = useTranslations('PlanTab');
@@ -23,17 +35,17 @@ const PlanTabSec = () => {
             tabDescKey: "tab0_desc",
             list: [
                 {
-                    image: "/images/by-air.webp",
+                    image: byAir,
                     titleKey: "tab0_item1_title",
                     descKey: "tab0_item1_desc"
                 },
                 {
-                    image: "/images/by-train.webp",
+                    image: byTrain,
                     titleKey: "tab0_item2_title",
                     descKey: "tab0_item2_desc"
                 },
                 {
-                    image: "/images/by-road.webp",
+                    image: byRoad,
                     titleKey: "tab0_item3_title",
                     descKey: "tab0_item3_desc"
                 }
@@ -45,17 +57,17 @@ const PlanTabSec = () => {
             tabDescKey: "tab1_desc",
             list: [
                 {
-                    image: "/images/citilinc-bus.webp",
+                    image: citilincBus,
                     titleKey: "tab1_item1_title",
                     descKey: "tab1_item1_desc"
                 },
                 {
-                    image: "/images/auto-rickshaw.webp",
+                    image: autoRickshaw,
                     titleKey: "tab1_item2_title",
                     descKey: "tab1_item2_desc"
                 },
                 {
-                    image: "/images/walking-path.webp",
+                    image: walkingPath,
                     titleKey: "tab1_item3_title",
                     descKey: "tab1_item3_desc"
                 }
@@ -67,22 +79,22 @@ const PlanTabSec = () => {
             tabDescKey: "tab2_desc",
             list: [
                 {
-                    image: "/images/crowd-safety.webp",
+                    image: crowdSafety,
                     titleKey: "tab2_item1_title",
                     descKey: "tab2_item1_desc"
                 },
                 {
-                    image: "/images/hydration-food.webp",
+                    image: hydrationFood,
                     titleKey: "tab2_item2_title",
                     descKey: "tab2_item2_desc"
                 },
                 {
-                    image: "/images/personal-hygiene.webp",
+                    image: personalHygiene,
                     titleKey: "tab2_item3_title",
                     descKey: "tab2_item3_desc"
                 },
                 {
-                    image: "/images/medical-services.webp",
+                    image: medicalServices,
                     titleKey: "tab2_item4_title",
                     descKey: "tab2_item4_desc"
                 }
@@ -94,22 +106,22 @@ const PlanTabSec = () => {
             tabDescKey: "tab3_desc",
             list: [
                 {
-                    image: "",
+                    image: null,
                     titleKey: "tab3_item1_title",
                     descKey: "tab3_item1_desc"
                 },
                 {
-                    image: "",
+                    image: null,
                     titleKey: "tab3_item2_title",
                     descKey: "tab3_item2_desc"
                 },
                 {
-                    image: "",
+                    image: null,
                     titleKey: "tab3_item3_title",
                     descKey: "tab3_item3_desc"
                 },
                 {
-                    image: "",
+                    image: null,
                     titleKey: "tab3_item4_title",
                     descKey: "tab3_item4_desc"
                 }
@@ -173,10 +185,15 @@ const PlanTabSec = () => {
                                                             {value.image && (
                                                                 <Col sm={4} className='d-block d-sm-flex align-items-center justify-content-center'>
                                                                     <div className='image-box overflow-hidden rounded-2' style={{ width: '100%', height: '95px' }}>
-                                                                        <img
+                                                                        <Image
                                                                             src={value.image}
-                                                                            className='w-100 h-100 object-fit-cover'
-                                                                            alt={t(value.titleKey)}
+                                                                            alt={t(value.titleKey) || "Plan Image"}
+                                                                            // sizes="100%"
+                                                                            width={145}
+                                                                            height={120}
+                                                                            // className='img-fluid'
+                                                                            style={{ objectFit: 'cover' }}
+                                                                            placeholder="blur"
                                                                         />
                                                                     </div>
                                                                 </Col>

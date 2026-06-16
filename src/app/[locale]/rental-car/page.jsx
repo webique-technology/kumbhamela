@@ -27,10 +27,10 @@ const RentalCarContent = () => {
   const router = useRouter();
   const params = useParams();
   const locale = params.locale;
+  const searchParams = useSearchParams();
 
   const [show, setShow] = useState(false);
   const [selectedCar, setSelectedCar] = useState("");
-  const [activeTab, setActiveTab] = useState("all-car");
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -41,10 +41,10 @@ const RentalCarContent = () => {
     links: [],
   });
 
-  const searchParams = useSearchParams();
-  const nameFilter = searchParams.get("name");
-  const categoryFilter = searchParams.get("category");
-  const priceFilter = searchParams.get("price");
+  // Extract URL States as the absolute Single Source of Truth
+  const nameFilter = searchParams.get("name") || "";
+  const categoryFilter = searchParams.get("category") || "all-car";
+  const priceFilter = searchParams.get("price") || "";
   const currentPage = Number(searchParams.get("page")) || 1;
   const totalPages = pagination.last_page;
 
@@ -56,19 +56,35 @@ const RentalCarContent = () => {
     setShow(true);
   };
 
-  const finalDisplayCars = cars.filter((car) => {
-    if (activeTab === "all-car") return true;
-    return car.category === activeTab;
-  });
+  // Synchronized route handle replacing explicit state mutations
+  const handleTabChange = (targetTab) => {
+    const queryParams = new URLSearchParams(searchParams.toString());
+
+    if (targetTab === "all-car") {
+      queryParams.delete("category");
+    } else {
+      queryParams.set("category", targetTab);
+    }
+
+    // Reset pagination to page 1 whenever switching categories
+    queryParams.set("page", "1");
+
+    router.push(`/${locale}/rental-car?${queryParams.toString()}`);
+  };
 
   const handlePageChange = (pageNum) => {
-    const queryParams = new URLSearchParams(searchParams);
+    const queryParams = new URLSearchParams(searchParams.toString());
     queryParams.set("page", pageNum);
     router.push(`/${locale}/rental-car?${queryParams.toString()}`);
   };
 
+  // Fetch data directly using URL parameters
   useEffect(() => {
-    fetchCars(currentPage, nameFilter, categoryFilter, priceFilter);
+    // Pass an empty string to the API if "all-car" is selected, 
+    // otherwise pass the current active categoryFilter value
+    const apiCategoryParam = categoryFilter === "all-car" ? "" : categoryFilter;
+
+    fetchCars(currentPage, nameFilter, apiCategoryParam, priceFilter);
   }, [currentPage, nameFilter, categoryFilter, priceFilter]);
 
   const fetchCars = async (page = 1, name = "", category = "", price = "") => {
@@ -76,8 +92,11 @@ const RentalCarContent = () => {
       setLoading(true);
       const response = await getCars(page, name, category, price);
       const apiData = response;
-      setCars(apiData.data || []);
 
+      console.log("cars data:", apiData.data);
+
+
+      setCars(apiData.data || []);
       setPagination({
         current_page: apiData.current_page,
         last_page: apiData.last_page,
@@ -85,7 +104,7 @@ const RentalCarContent = () => {
         links: apiData.links || [],
       });
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching vehicles:", error);
     } finally {
       setLoading(false);
     }
@@ -96,8 +115,8 @@ const RentalCarContent = () => {
       <Container>
         <Tab.Container
           id="car-tabs"
-          activeKey={activeTab}
-          onSelect={(k) => setActiveTab(k)}
+          activeKey={categoryFilter}
+          onSelect={(k) => handleTabChange(k || "all-car")}
         >
           <Row className="align-items-center mb-5">
             <Col md={7}>
@@ -138,13 +157,14 @@ const RentalCarContent = () => {
                     Urbania
                   </Nav.Link>
                 </Nav.Item>
+                {/* Updated eventKey strings below to align perfectly with your backend model filters */}
                 <Nav.Item>
-                  <Nav.Link eventKey="Minibus" className="car-tab-item">
+                  <Nav.Link eventKey="Bus" className="car-tab-item">
                     Mini Bus
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="Luxurycar" className="car-tab-item">
+                  <Nav.Link eventKey="luxury" className="car-tab-item">
                     Luxury Car
                   </Nav.Link>
                 </Nav.Item>
@@ -153,18 +173,16 @@ const RentalCarContent = () => {
           </Row>
 
           <Tab.Content>
-            <Tab.Pane eventKey={activeTab}>
-
-              {/* --- CONTROLLED INNER REGION LOADING STATE LOOP --- */}
+            <Tab.Pane eventKey={categoryFilter}>
               {loading ? (
                 <div className="text-center py-5">
                   <div className="spinner-border text-primary mb-3" role="status"></div>
                   <h4 className="text-muted">Loading fleet options...</h4>
                 </div>
-              ) : finalDisplayCars.length > 0 ? (
+              ) : cars.length > 0 ? (
                 <Row className="g-4">
-                  {finalDisplayCars.map((car, index) => (
-                    <Col key={index} lg={4} md={6}>
+                  {cars.map((car, index) => (
+                    <Col key={car.id || index} lg={4} md={6}>
                       <RentalCarCard
                         car={car}
                         onBook={() => handleOpenBooking(car)}
@@ -175,19 +193,18 @@ const RentalCarContent = () => {
               ) : (
                 <div className="text-center py-5">
                   <h4 className="text-muted">
-                    No {activeTab === "all-car" ? "" : activeTab} cars available in this search.
+                    No {categoryFilter === "all-car" ? "" : categoryFilter} cars available in this category.
                   </h4>
                   <button className="primery-btn py-3 mt-3" onClick={() => router.push(`/${locale}/rental-car`)}>
                     Clear All Filters
                   </button>
                 </div>
               )}
-
             </Tab.Pane>
           </Tab.Content>
         </Tab.Container>
 
-        {/* Pagination - Kept inside content flow wrapper safely */}
+        {/* Pagination Controls remain unchanged here */}
         {!loading && totalPages > 1 && (
           <div className="d-flex justify-content-center align-items-center pagination-wrapper gap-2 mt-5">
             <button
@@ -236,28 +253,21 @@ const RentalCarContent = () => {
 export default function RentalCar() {
   return (
     <main>
-      {/* Hero Section Banner remains completely static, unaffected by state changes */}
       <section>
         <HeroHeaderCard2
-          // 1. Top context identifier matching transport services
           subTitle="Mela Transit & Fleet"
-          // 2. Direct, actionable main page header
           heroTitle="Sacred Journeys, Seamless Transit"
-          // 3. Informative description addressing a pilgrim's logistical needs
           description="Our fleet of cars and tempo travellers ensures comfortable journeys to sacred destinations."
           heroTitleClass={"text-light"}
-          // heroImage="/images/carrental-page-bg.png"
           imgClass="hero-img"
           showSearch={false}
         />
       </section>
 
-      {/* Card display grid utilizing React Suspense boundaries for handling query parameters assembly */}
       <Suspense fallback={<div className="text-center py-5">Loading Fleet Module...</div>}>
         <RentalCarContent />
       </Suspense>
 
-      {/* Bento feature matrix - Stays mounted securely below without popping layout layout shifts */}
       <section className="bento-features-section padding-bottom section-padding">
         <Container>
           <TitleComponent

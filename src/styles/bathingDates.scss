@@ -81,6 +81,8 @@
         background-position: center;
         position: relative;
         z-index: 1;
+        min-height: 600px;
+        height: 100%;
 
         // bathing-left
         .bathing-count-left {
@@ -95,6 +97,13 @@
             justify-content: center;
             padding: 50px 32px;
             gap: 60px;
+            min-height: 600px;
+            height: 100%;
+
+            @media(max-width:1199px) {
+                min-height: auto;
+                height: auto;
+            }
 
             .bcl-content-wrapper {
                 max-width: 670px;
@@ -191,10 +200,6 @@
             .bathing-count-left {
                 padding-left: 12px;
                 padding-right: 12px;
-            }
-
-            .bathing-count-right {
-                padding-bottom: 60px !important;
             }
         }
 
@@ -300,7 +305,7 @@
 
     &:before {
         content: "";
-        background-image: url("../../public/images/stars-group-bg.png");
+        background-image: url("../assets/images/stars-group-bg.png");
         background-repeat: no-repeat;
         background-size: cover;
         position: absolute;
@@ -430,7 +435,7 @@
 
     // Highlight modifier variant for Shahi Snan dates (isKeyDate)
     &.key-date-highlight {
-        border-color: #fd7e14; // Vibrant saffron accent color scheme
+        border-color: $primary-color; // Vibrant saffron accent color scheme
 
         .calendar-header {
             background-color: #fff3cd;
@@ -515,14 +520,6 @@
         grid-template-columns: repeat(auto-fit, minmax(142px, 1fr));
     }
 
-    // @media(max-width:1200px) {
-    //     grid-template-columns: repeat(3, 1fr);
-    // }
-
-    // @media(max-width:992px) {
-    //     grid-template-columns: repeat(2, 1fr);
-    // }
-
     @media(max-width:768px) {
         grid-template-columns: repeat(auto-fit, minmax(162px, 1fr));
     }
@@ -531,10 +528,6 @@
         grid-template-columns: repeat(auto-fit, minmax(122px, 1fr));
         grid-auto-rows: 175px;
     }
-
-    // @media(max-width:425px) {
-    //     grid-template-columns: repeat(2, 1fr);
-    // }
 
     @media(max-width:380px) {
         grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));

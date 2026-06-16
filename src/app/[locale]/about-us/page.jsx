@@ -29,6 +29,17 @@ import { SwiperSlide } from "swiper/react";
 import { AnimationSecComponent } from "@/components/ui/AnimationSecComponent";
 import Link from 'next/link';
 
+// --- STATIC IMAGE IMPORTS FROM ASSETS ---
+import aboutHero1 from "../../../assets/images/about-hero-1.png";
+import aboutHero2 from "@/assets/images/about-hero-2.png";
+import history1 from "@/assets/images/history-1.png";
+import history2 from "@/assets/images/history-2.png";
+import history3 from "@/assets/images/history-3.png";
+import sadhusSaints from "@/assets/images/sadhus-saints.webp";
+import yearCycle2 from "@/assets/images/year-cycle-2.png";
+import riverRituals from "@/assets/images/river-rituals.webp";
+import eveningAarti from "@/assets/images/evening-aarti.webp";
+
 const touristTabsData = [
     {
         key: "jyotirlingas-12",
@@ -286,37 +297,6 @@ const AboutUs = () => {
         }
     ];
 
-    // const cycleCards = [
-    //     {
-    //         id: "01",
-    //         title: "Sadhus & Saints",
-    //         text: "Holy men who have renounced worldly life gather from across India, representing ancient spiritual lineages.",
-    //         img: "/images/sadhus-saints.webp",
-    //         variant: "#FF6A00"
-    //     },
-    //     {
-    //         id: "02",
-    //         title: "Akharas",
-    //         text: "The traditional monastic orders that preserve and transmit Hindu spiritual knowledge through generations.",
-    //         img: "/images/year-cycle-2.png",
-    //         variant: "#CBA533"
-    //     },
-    //     {
-    //         id: "03",
-    //         title: "River Rituals",
-    //         text: "Sacred bathing ceremonies performed at auspicious times, believed to cleanse karma and grant liberation.",
-    //         img: "/images/river-rituals.webp",
-    //         variant: "#20BA5A"
-    //     },
-    //     {
-    //         id: "04",
-    //         title: "Evening Aarti",
-    //         text: "Mesmerizing lamp ceremonies on the ghats create a divine atmosphere of devotion and peace.",
-    //         img: "/images/evening-aarti.webp",
-    //         variant: "#6a7282"
-    //     }
-    // ];
-
     const aboutFaqData = [
         {
             id: "faq-1",
@@ -455,28 +435,28 @@ const AboutUs = () => {
             id: "01",
             title: "Sadhus & Saints",
             text: "Holy men who have renounced worldly life gather from across India, representing ancient spiritual lineages.",
-            img: "/images/sadhus-saints.webp",
+            img: sadhusSaints.src,
             variant: "#FF6A00"
         },
         {
             id: "02",
             title: "Akharas",
             text: "The traditional monastic orders that preserve and transmit Hindu spiritual knowledge through generations.",
-            img: "/images/year-cycle-2.png",
+            img: yearCycle2.src,
             variant: "#CBA533"
         },
         {
             id: "03",
             title: "River Rituals",
             text: "Sacred bathing ceremonies performed at auspicious times, believed to cleanse karma and grant liberation.",
-            img: "/images/river-rituals.webp",
+            img: riverRituals.src,
             variant: "#20BA5A"
         },
         {
             id: "04",
             title: "Evening Aarti",
             text: "Mesmerizing lamp ceremonies on the ghats create a divine atmosphere of devotion and peace.",
-            img: "/images/evening-aarti.webp",
+            img: eveningAarti.src,
             variant: "#6a7282"
         }
     ];
@@ -486,7 +466,7 @@ const AboutUs = () => {
             {/* Editorial Hero Section */}
             <section className="kumbh-hero">
                 <div className="hero-bg">
-                    <img src="/images/about-hero-1.png" alt="Godavari River" />
+                    <img src={aboutHero1.src} alt="Godavari River" />
                     <div className="hero-gradient"></div>
                 </div>
                 <Container className="hero-content-wrapper">
@@ -527,7 +507,7 @@ const AboutUs = () => {
                         <Col md={6} className="hero-img-col">
                             <div className="hero-img-wrapper d-flex align-items-center justify-content-center shadow-2xl">
                                 <Image
-                                    src="/images/about-hero-2.png"
+                                    src={aboutHero2.src}
                                     alt="Pilgrims at river"
                                     width={484}
                                     height={100}
@@ -615,7 +595,7 @@ const AboutUs = () => {
                                             </span>
                                         </div>
                                         <div className=''>
-                                            <h3 className="h5 fw-bold text-brand-dark mb-2">
+                                            <h3 className="h5 me-5 pe-4 fw-bold text-brand-dark mb-2">
                                                 {card.title}
                                             </h3>
                                             <p className="card-text d-flex align-items-center mb-2 gap-2 text-muted small leading-relaxed">

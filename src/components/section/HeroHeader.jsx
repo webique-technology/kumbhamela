@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { KumbhCountdown, SwiperSliderComp } from '../ui/common';
 import { SwiperSlide } from 'swiper/react';
@@ -9,24 +9,34 @@ import { useTranslations } from "next-intl";
 import { EffectFade } from 'swiper/modules';
 import "../../styles/heroHeader.scss";
 import { slugify } from '@/lib/utils';
-// Base Configuration Layout Data (Keeps structural elements localized)
 
+// 1. Move the problem banner images from public/images into src/assets/images/
+import banner1 from '../../assets/images/banner-1.webp';
+import banner2 from '@/assets/images/banner-2.webp';
+
+// 2. Pass the direct object reference instead of a text string path
 export const heroSliderConfig = [
     {
         id: 1,
-        image: `/images/banner-1.webp`,
+        image: banner1.src || banner1, // Works flawlessly with Next.js optimization layers
         translationPrefix: "slide1"
     },
     {
         id: 2,
-        image: `/images/banner-2.webp`,
+        image: banner2.src || banner2,
         translationPrefix: "slide2"
     }
-];
+]
 
 const HeroHeader = () => {
-    // Instantiate your next-intl dictionary lookup engine
     const t = useTranslations('HeroHeader');
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
 
     return (
         <>
@@ -57,10 +67,10 @@ const HeroHeader = () => {
                             key={item.id || index}
                             className='hero-slider-main d-flex align-items-center justify-content-center position-relative overflow-hidden'
                         >
-                            {/* Background graphic layers */}
+                            {/* FIX: Ensure style properties use template literals safely */}
                             <div
                                 className="hero-bg-layer"
-                                style={{ backgroundImage: `url(${item.image})` }}
+                                style={{ backgroundImage: `url("${item.image}")` }}
                             />
 
                             <div className="hero-overlay"></div>
@@ -92,12 +102,10 @@ const HeroHeader = () => {
 
                                         {/* Conditional Interactive Footer Area Nodes */}
                                         {index === 0 ? (
-                                            /* Slide 1 Countdown Embed Tracker */
                                             <div className="mt-2 countdown-embed-frame w-100 d-flex flex-column justify-content-center">
                                                 <KumbhCountdown isActive={true} />
                                             </div>
                                         ) : (
-                                            /* Slide 2 Multi-Action Route CTA Buttons */
                                             <div className="w-100 d-flex flex-column align-items-center justify-content-center">
                                                 <AnimationSecComponent type="vertical" direction="up" delay={0.8} distance={20}>
                                                     <div className='d-flex align-items-center justify-content-center gap-4 pt-1 execution-row-layer'>

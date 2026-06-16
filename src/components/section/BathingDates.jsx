@@ -18,7 +18,7 @@ export const BathingDates = () => {
     return (
         <section className={`bathing-count-main position-relative ${isPending ? "opacity-50" : ""}`}>
             <div className="top-divider position-absolute td-trinery-bg z-3 td-top filter-graycsale" style={{ pointerEvents: 'none' }}></div>
-            <div className="bathing-row-count">
+            <div className="bathing-row-count d-flex align-items-center justify-content-center">
                 {/* LEFT BLOCK: Core Dashboard Stat Matrix Counters */}
                 <Container fluid="xl" className="bathing-count-left d-flex flex-column align-items-center justify-content-center">
                     <div className="bcl-content-wrapper d-flex flex-column mt-4 mt-xl-0 align-items-center justify-content-center w-100">
@@ -67,7 +67,7 @@ export const BathingDates = () => {
                 </Container>
 
                 {/* RIGHT BLOCK: Desktop Swiper Slider Loop & Mobile Backup Calendars */}
-                <Container fluid="md" className="bathing-count-right section-padding-2 padding-top">
+                <Container fluid="md" className="bathing-count-right pb-5 pb-xl-0">
                     <div className="py-5">
 
                         {/* 1. Large viewport desktop slider wrapper node component */}

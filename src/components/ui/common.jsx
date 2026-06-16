@@ -143,7 +143,10 @@ export const SearchFleet = () => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
-    // Identify current page
+    // Bind the next-intl lookup hook targeting our fresh namespace
+    const t = useTranslations("SearchFleet");
+
+    // Identify current active page context mapping paths
     const isVehiclePage = pathname.includes('/rental-car');
     const isHotelPage = pathname.includes('/hotel');
     const isTourPage = pathname.includes('/tour-package');
@@ -154,10 +157,8 @@ export const SearchFleet = () => {
         price: searchParams.get("price") || 'all',
     });
 
-    // Handle temporary dropdown open state flags
+    // Handle dropdown open states
     const [openDropdown, setOpenDropdown] = useState(null); // 'category' | 'price' | null
-
-    // Safe auto-closing event listener if the user clicks anywhere outside the card
 
     useEffect(() => {
         const closeAll = () => setOpenDropdown(null);
@@ -166,7 +167,7 @@ export const SearchFleet = () => {
     }, []);
 
     const toggleDropdown = (e, name) => {
-        e.stopPropagation(); // Stops immediate closing via root click propagation
+        e.stopPropagation();
         setOpenDropdown(openDropdown === name ? null : name);
     };
 
@@ -181,33 +182,33 @@ export const SearchFleet = () => {
         if (formData.name) params.set("name", formData.name);
         if (formData.category !== 'all') params.set("category", formData.category);
         if (formData.price !== 'all') params.set("price", formData.price);
-        params.set("page", "1"); // Reset page offset on filter execution
+        params.set("page", "1"); // Reset query matrix pagination offset counter
 
         router.push(`${pathname}?${params.toString()}`);
     };
 
-    // Label mapping helper to match display values cleanly
+    // Label mapping dynamically bound to key paths inside your translation schema arrays
     const getCategoryLabel = (val) => {
-        const labels = {
-            all: "All Types",
-            Sedan: "Sedan", SUV: "SUV", Traveller: "Tempo Traveller",
-            Luxury: "Luxury", Heritage: "Heritage", Budget: "Budget",
-            Essential: "Essential", Premium: "Premium"
-        };
-        return labels[val] || val;
+        // Safe key lookups prevent runtime undefined errors if strange flags match
+        const validKeys = ["all", "Sedan", "SUV", "Traveller", "Luxury", "Heritage", "Budget", "Essential", "Premium"];
+        return validKeys.includes(val) ? t(`categories.${val}`) : val;
     };
 
     const getPriceLabel = (val) => {
-        if (val === "all") return "Any Price";
-        if (val === "0-2000") return "Below ₹2,000";
-        if (val === "2000-10000") return "₹2,000 - ₹10,000";
-        if (val === "10000-999999") return "Above ₹10,000";
-        if (val === "2000-7000") return "₹2,000 - ₹7,000";
-        if (val === "7000-999999") return "Above ₹7,000";
-        if (val === "0-5000") return "Below ₹5,000";
-        if (val === "5000-15000") return "₹5,000 - ₹15,000";
-        if (val === "15000-999999") return "Above ₹15,000";
-        return val;
+        const priceMap = {
+            "all": "all",
+            "0-2000": isHotelPage ? "below2k" : "below2k", // shares same structural value key maps
+            "2000-10000": "2kTo10k",
+            "10000-999999": "above10k",
+            "2000-7000": "2kTo7k",
+            "7000-999999": "above7k",
+            "0-5000": "below5k",
+            "5000-15000": "5kTo15k",
+            "15000-999999": "above15k"
+        };
+
+        const key = priceMap[val];
+        return key ? t(`prices.${key}`) : val;
     };
 
     return (
@@ -216,12 +217,18 @@ export const SearchFleet = () => {
 
                 {/* 1. Name Search Text Box */}
                 <div className="filter-group">
-                    <label className="filter-label">Search By Name</label>
+                    <label className="filter-label">{t("searchByName")}</label>
                     <div className="input-wrapper">
                         <input
                             type="text"
                             className="filter-input"
-                            placeholder={isHotelPage ? "Hotel name..." : isVehiclePage ? "Car model..." : "Package name..."}
+                            placeholder={
+                                isHotelPage
+                                    ? t("placeholderHotel")
+                                    : isVehiclePage
+                                        ? t("placeholderCar")
+                                        : t("placeholderTour")
+                            }
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         />
@@ -232,7 +239,7 @@ export const SearchFleet = () => {
                 {/* 2. Custom Category Selector Dropdown Matrix */}
                 <div className={`filter-group ${openDropdown === 'category' ? 'raise-z-index' : ''}`}>
                     <label className="filter-label">
-                        {isVehiclePage ? "Vehicle Type" : isHotelPage ? "Accommodation" : "Tour Type"}
+                        {isVehiclePage ? t("vehicleType") : isHotelPage ? t("accommodation") : t("tourType")}
                     </label>
                     <div className="input-wrapper position-relative">
                         <div
@@ -243,28 +250,29 @@ export const SearchFleet = () => {
                             <ChevronDown size={18} className={`select-arrow-transition ${openDropdown === 'category' ? 'rotate-arrow' : ''}`} />
                         </div>
 
-                        {/* Dropdown item options list panel with collapse entry wrapper styles */}
                         <div className={`custom-dropdown-options-box shadow-lg ${openDropdown === 'category' ? 'open-expanded' : ''}`}>
-                            <div className="option-item" onClick={() => handleSelectOption("category", "all")}>All Types</div>
+                            <div className="option-item" onClick={() => handleSelectOption("category", "all")}>
+                                {t("categories.all")}
+                            </div>
                             {isVehiclePage && (
                                 <>
-                                    <div className="option-item" onClick={() => handleSelectOption("category", "Sedan")}>Sedan</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("category", "SUV")}>SUV</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("category", "Traveller")}>Tempo Traveller</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Sedan")}>{t("categories.Sedan")}</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "SUV")}>{t("categories.SUV")}</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Traveller")}>{t("categories.Traveller")}</div>
                                 </>
                             )}
                             {isHotelPage && (
                                 <>
-                                    <div className="option-item" onClick={() => handleSelectOption("category", "Luxury")}>Luxury</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("category", "Heritage")}>Heritage</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("category", "Budget")}>Budget</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Luxury")}>{t("categories.Luxury")}</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Heritage")}>{t("categories.Heritage")}</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Budget")}>{t("categories.Budget")}</div>
                                 </>
                             )}
                             {isTourPage && (
                                 <>
-                                    <div className="option-item" onClick={() => handleSelectOption("category", "Essential")}>Essential</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("category", "Premium")}>Premium</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("category", "Luxury")}>Luxury</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Essential")}>{t("categories.Essential")}</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Premium")}>{t("categories.Premium")}</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("category", "Luxury")}>{t("categories.Luxury")}</div>
                                 </>
                             )}
                         </div>
@@ -273,7 +281,7 @@ export const SearchFleet = () => {
 
                 {/* 3. Custom Price Selector Dropdown Matrix */}
                 <div className={`filter-group ${openDropdown === 'price' ? 'raise-z-index' : ''}`}>
-                    <label className="filter-label">Price Range</label>
+                    <label className="filter-label">{t("priceRange")}</label>
                     <div className="input-wrapper position-relative">
                         <div
                             className={`custom-select-trigger filter-input ${openDropdown === 'price' ? 'active-dropdown' : ''}`}
@@ -283,38 +291,40 @@ export const SearchFleet = () => {
                             <ChevronDown size={18} className={`select-arrow-transition ${openDropdown === 'price' ? 'rotate-arrow' : ''}`} />
                         </div>
 
-                        {/* Options List Container Box Wrapper */}
                         <div className={`custom-dropdown-options-box shadow-lg ${openDropdown === 'price' ? 'open-expanded' : ''}`}>
-                            <div className="option-item" onClick={() => handleSelectOption("price", "all")}>Any Price</div>
+                            <div className="option-item" onClick={() => handleSelectOption("price", "all")}>
+                                {t("prices.all")}
+                            </div>
                             {isVehiclePage && (
                                 <>
-                                    <div className="option-item" onClick={() => handleSelectOption("price", "0-2000")}>Below ₹2,000</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("price", "2000-10000")}>₹2,000 - ₹10,000</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("price", "10000-999999")}>Above ₹10,000</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "0-2000")}>{t("prices.below2k")}</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "2000-10000")}>{t("prices.2kTo10k")}</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "10000-999999")}>{t("prices.above10k")}</div>
                                 </>
                             )}
                             {isHotelPage && (
                                 <>
-                                    <div className="option-item" onClick={() => handleSelectOption("price", "0-2000")}>Below ₹2,000</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("price", "2000-7000")}>₹2,000 - ₹7,000</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("price", "7000-999999")}>Above ₹7,000</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "0-2000")}>{t("prices.below2k")}</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "2000-7000")}>{t("prices.2kTo7k")}</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "7000-999999")}>{t("prices.above7k")}</div>
                                 </>
                             )}
                             {isTourPage && (
                                 <>
-                                    <div className="option-item" onClick={() => handleSelectOption("price", "0-5000")}>Below ₹5,000</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("price", "5000-15000")}>₹5,000 - ₹15,000</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("price", "15000-999999")}>Above ₹15,000</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "0-5000")}>{t("prices.below5k")}</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "5000-15000")}>{t("prices.5kTo15k")}</div>
+                                    <div className="option-item" onClick={() => handleSelectOption("price", "15000-999999")}>{t("prices.above15k")}</div>
                                 </>
                             )}
                         </div>
                     </div>
                 </div>
 
+                {/* 4. Action Search Trigger Button */}
                 <div className="filter-group flex-grow-0">
                     <button type="submit" className="search-fleet-btn">
                         <Search size={20} />
-                        <span>Search</span>
+                        <span>{t("searchBtn")}</span>
                     </button>
                 </div>
             </form>

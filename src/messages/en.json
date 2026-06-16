@@ -186,5 +186,69 @@
   "VideoReels": {
     "mainTitle": "Divine Experiences",
     "montezSubTitle": "Video Stories"
+  },
+  "SearchFleet": {
+    "searchByName": "Search By Name",
+    "placeholderHotel": "Hotel name...",
+    "placeholderCar": "Car model...",
+    "placeholderTour": "Package name...",
+    "vehicleType": "Vehicle Type",
+    "accommodation": "Accommodation",
+    "tourType": "Tour Type",
+    "priceRange": "Price Range",
+    "searchBtn": "Search",
+    "categories": {
+      "all": "All Types",
+      "Sedan": "Sedan",
+      "SUV": "SUV",
+      "Traveller": "Tempo Traveller",
+      "Luxury": "Luxury",
+      "Heritage": "Heritage",
+      "Budget": "Budget",
+      "Essential": "Essential",
+      "Premium": "Premium"
+    },
+    "prices": {
+      "all": "Any Price",
+      "below2k": "Below ₹2,000",
+      "2kTo10k": "₹2,000 - ₹10,000",
+      "above10k": "Above ₹10,000",
+      "2kTo7k": "₹2,000 - ₹7,000",
+      "above7k": "Above ₹7,000",
+      "below5k": "Below ₹5,000",
+      "5kTo15k": "₹5,000 - ₹15,000",
+      "above15k": "Above ₹15,000"
+    }
+  },
+  "Footer": {
+    "description": "Our fleet of cars and tempo travellers ensures comfortable journeys to Adya Jyotirlinga Trimbakeshwar, Trayambkeshwar, and other sacred destinations.",
+    "quickLinks": "Quick Links",
+    "otherServices": "Other Services We Offer:",
+    "contactInfo": "Contact Information",
+    "address": "Office Shop No 11, NYSA Business Centre, Makhmalabad Rd, Ghadge Nagar, Nashik, Maharashtra 422003",
+    "rightsReserved": "© {year} Mahakumbh Tours & Travels. All rights reserved.",
+    "developedBy": "Design and Developed by",
+    "servicesList": {
+      "panIndia": "Car Rental Pan India",
+      "marriage": "Luxury Car Marriage Corporate",
+      "traveller": "Traveller & Bus",
+      "flights": "Flight Ticketing",
+      "holidays": "Holidays Packages",
+      "hotels": "Hotel Reservations",
+      "visa": "Visa Services",
+      "passport": "Passport Assistance"
+    }
+  },
+  "HotelPage": {
+    "hotelHeader": {
+      "title": "Hotel Accommodation",
+      "heroTitle": "Pilgrim Concierge & Support",
+      "description": "Find and book comfortable hotels, dharamshalas, and ashram accommodations near the holy ghats.",
+      "noResults": "No accommodations found matching your criteria.",
+      "clearFilters": "Clear All Filters",
+      "loading": "Loading Accommodations...",
+      "metaTitle": "Premium Hotel Accommodation & Dharamshala Bookings",
+      "metaDesc": "Explore and book stays near sacred locations. Verified options with complete amenities for group pilgrims."
+    }
   }
 }
