@@ -1,29 +1,29 @@
 "use client";
 import React, { useEffect, useState, Suspense } from "react";
-// import { tourPackages } from "@/lib/data";
-import { HeroHeaderCard, HeroHeaderCard2, TourPackageCard } from "@/components/ui/card";
+import { HeroHeaderCard2, TourPackageCard } from "@/components/ui/card";
 import { Col, Row, Container } from "react-bootstrap";
 import { slugify } from "@/lib/utils";
 import { useRouter, useSearchParams, useParams } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import "../../../styles/blog.scss";
 import { getTours } from "./tourApi";
 
 const TourPageContent = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
+    const params = useParams();
+    const locale = params.locale;
 
-    // 1. Get Filter Values from URL
+    // Bind translation namespace
+    const t = useTranslations("TourPackages");
+
     const categoryFilter = searchParams.get("category");
     const priceFilter = searchParams.get("price");
     const nameFilter = searchParams.get("name");
     const currentPage = Number(searchParams.get("page")) || 1;
-    const params = useParams();
-
-    const locale = params.locale;
 
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [tours, setTours] = useState([]);
 
     const [pagination, setPagination] = useState({
@@ -43,7 +43,6 @@ const TourPageContent = () => {
 
         if (priceFilter) {
             const [min, max] = priceFilter.split("-").map(Number);
-
             matchesPrice =
                 Number(tour.price || 0) >= min &&
                 Number(tour.price || 0) <= max;
@@ -56,12 +55,11 @@ const TourPageContent = () => {
     const totalPages = pagination.last_page;
 
     const handlePageChange = (pageNum) => {
-        const queryParams = new URLSearchParams(searchParams);
+        const queryParams = new URLSearchParams(searchParams.toString());
         queryParams.set("page", pageNum);
         router.push(`/${locale}/tour-package?${queryParams.toString()}`);
     };
 
-    // API call
     useEffect(() => {
         fetchTours(currentPage, nameFilter, categoryFilter, priceFilter);
     }, [currentPage, nameFilter, categoryFilter, priceFilter]);
@@ -79,7 +77,7 @@ const TourPageContent = () => {
                 total: apiData.total,
             });
         } catch (error) {
-            console.log(error);
+            console.error("Error fetching packages:", error);
         } finally {
             setLoading(false);
         }
@@ -87,39 +85,33 @@ const TourPageContent = () => {
 
     return (
         <section>
-            {/* The static banner header stays completely visible and unaffected when components are updating */}
             <HeroHeaderCard2
-                heroTitle="Tour Packages"
-                // heroSpan={"Packages"}
+                heroTitle={t("Hero.title")}
                 heroTitleClass={"text-light"}
                 showSearch={true}
             />
 
             <section className="section-padding padding-bottom secondary-bg">
                 <Container>
-
-                    {/* --- TARGETED DATA LOADING STATE LAYER --- */}
                     {loading ? (
                         <div className="text-center py-5 section-padding">
                             <div className="spinner-border text-primary mb-3" role="status"></div>
-                            <h4>Loading Tours...</h4>
+                            <h4>{t("Status.loading")}</h4>
                         </div>
                     ) : currentItems.length > 0 ? (
                         <>
-                            {/* --- Equal Grid: 3 cards per row on LG, 2 on MD --- */}
                             <Row className="g-4 mb-5">
                                 {currentItems.map((tour, index) => (
                                     <Col lg={4} md={6} key={tour.id || index}>
                                         <TourPackageCard
                                             tour={tour}
-                                            tourLink={`/tour-package/${slugify(tour.title || "")}`}
+                                            tourLink={`/${locale}/tour-package/${slugify(tour.title || "")}`}
                                             img_height={250}
                                         />
                                     </Col>
                                 ))}
                             </Row>
 
-                            {/* --- Pagination Controls --- */}
                             {totalPages > 1 && (
                                 <div className="d-flex justify-content-center align-items-center pagination-wrapper gap-2">
                                     <button
@@ -155,26 +147,26 @@ const TourPageContent = () => {
                         </>
                     ) : (
                         <div className="text-center py-5">
-                            <h3>No packages found matching your criteria.</h3>
+                            <h3>{t("Status.noResults")}</h3>
                             <button
                                 className="primery-btn py-3 mt-3"
                                 onClick={() => router.push(`/${locale}/tour-package`)}
                             >
-                                Clear All Filters
+                                {t("Status.clearFilters")}
                             </button>
                         </div>
                     )}
-
                 </Container>
             </section>
-        </section >
+        </section>
     );
 };
 
-// Next.js App Router requires useSearchParams to be wrapped globally in Suspense to prevent build compilation errors
 export default function TourDetailPage() {
+    // Dynamic execution loader uses global locale fallback lookup checks
+    const tFallback = useTranslations("TourPackages");
     return (
-        <Suspense fallback={<div className="text-center py-5">Loading Page Layout...</div>}>
+        <Suspense fallback={<div className="text-center py-5">{tFallback("Status.fallback")}</div>}>
             <TourPageContent />
         </Suspense>
     );

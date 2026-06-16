@@ -9,7 +9,6 @@ import { PrimeryBtn } from "@/components/ui/button";
 import { getBlogs, getBlogBySlug } from "../blogApi";
 import { Link } from "@/i18n/routing";
 
-
 const BASE_URL =
     process.env.NEXT_PUBLIC_SITE_URL ||
     "https://yourkumbhdomain.com";
@@ -51,11 +50,11 @@ const BASE_URL =
 
 
 export async function generateMetadata({ params }) {
-    const { slug ,locale } = await params;
+    const { slug } = await params;
     // const blogs = await getBlogs();
-    const response = await getBlogs(1, "", "", locale);
+    const response = await getBlogs();
     const blogs = response.data || [];
-    const blog = await getBlogBySlug(slug,locale);
+    const blog = await getBlogBySlug(slug);
 
     // const blog = blogs.find(
     //     (item) => slugify(item.title) === slug
@@ -85,11 +84,11 @@ export async function generateMetadata({ params }) {
 const BlogDetails = async ({ params }) => {
 
     // const locale = params.locale;
-    const { slug ,locale } = await params;
+    const { slug } = await params;
     // const blogs = await getBlogs();
-    const response = await getBlogs(1, "", "", locale);
+    const response = await getBlogs();
     const blogs = response.data || [];
-    const blog = await getBlogBySlug(slug,locale);
+    const blog = await getBlogBySlug(slug);
     // const blog = blogs.find(
     //     (item) => slugify(item.title) === slug
     // );
@@ -155,7 +154,7 @@ const BlogDetails = async ({ params }) => {
                             <div className="blog-sidebar d-flex flex-column gap-3">
                                 {/* recent post */}
                                 <div className="blog-sidebar-widget">
-                                    <h3 className="blog-sidebar-widget-title">Recent Blogs</h3>
+                                    <h3 className="blog-sidebar-widget-title">Related Blogs</h3>
                                     <div className="blog-sidebar-widget-content d-flex flex-column gap-3">
                                         {blogs.slice(0, 3).map((blog, index) => (
                                             <div className="blog-sidebar-widget-item d-flex gap-3" key={index}>
@@ -167,9 +166,7 @@ const BlogDetails = async ({ params }) => {
                                                         <h4 className="blog-sidebar-widget-item-title">{blog.title}</h4>
                                                     </a> */}
                                                     <Link
-                                                        // href={`/blog/${slugify(blog.title)}`}
-                                                        href={`/blog/${blog.slug}`}
-                                                         locale={locale}
+                                                        href={`/blog/${slugify(blog.title)}`}
                                                         className="blog-sidebar-widget-item-link text-decoration-none"
                                                     >
                                                         <h4 className="blog-sidebar-widget-item-title">
