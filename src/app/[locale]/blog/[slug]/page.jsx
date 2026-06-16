@@ -9,6 +9,7 @@ import { PrimeryBtn } from "@/components/ui/button";
 import { getBlogs, getBlogBySlug } from "../blogApi";
 import { Link } from "@/i18n/routing";
 
+
 const BASE_URL =
     process.env.NEXT_PUBLIC_SITE_URL ||
     "https://yourkumbhdomain.com";
@@ -52,7 +53,7 @@ const BASE_URL =
 export async function generateMetadata({ params }) {
     const { slug ,locale } = await params;
     // const blogs = await getBlogs();
-    const response = await getBlogs();
+    const response = await getBlogs(1, "", "", locale);
     const blogs = response.data || [];
     const blog = await getBlogBySlug(slug,locale);
 
@@ -86,7 +87,7 @@ const BlogDetails = async ({ params }) => {
     // const locale = params.locale;
     const { slug ,locale } = await params;
     // const blogs = await getBlogs();
-    const response = await getBlogs();
+    const response = await getBlogs(1, "", "", locale);
     const blogs = response.data || [];
     const blog = await getBlogBySlug(slug,locale);
     // const blog = blogs.find(
@@ -154,7 +155,7 @@ const BlogDetails = async ({ params }) => {
                             <div className="blog-sidebar d-flex flex-column gap-3">
                                 {/* recent post */}
                                 <div className="blog-sidebar-widget">
-                                    <h3 className="blog-sidebar-widget-title">Related Blogs</h3>
+                                    <h3 className="blog-sidebar-widget-title">Recent Blogs</h3>
                                     <div className="blog-sidebar-widget-content d-flex flex-column gap-3">
                                         {blogs.slice(0, 3).map((blog, index) => (
                                             <div className="blog-sidebar-widget-item d-flex gap-3" key={index}>
@@ -168,6 +169,7 @@ const BlogDetails = async ({ params }) => {
                                                     <Link
                                                         // href={`/blog/${slugify(blog.title)}`}
                                                         href={`/blog/${blog.slug}`}
+                                                         locale={locale}
                                                         className="blog-sidebar-widget-item-link text-decoration-none"
                                                     >
                                                         <h4 className="blog-sidebar-widget-item-title">
