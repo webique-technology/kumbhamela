@@ -50,11 +50,11 @@ const BASE_URL =
 
 
 export async function generateMetadata({ params }) {
-    const { slug } = await params;
+    const { slug ,locale } = await params;
     // const blogs = await getBlogs();
     const response = await getBlogs();
     const blogs = response.data || [];
-    const blog = await getBlogBySlug(slug);
+    const blog = await getBlogBySlug(slug,locale);
 
     // const blog = blogs.find(
     //     (item) => slugify(item.title) === slug
@@ -84,11 +84,11 @@ export async function generateMetadata({ params }) {
 const BlogDetails = async ({ params }) => {
 
     // const locale = params.locale;
-    const { slug } = await params;
+    const { slug ,locale } = await params;
     // const blogs = await getBlogs();
     const response = await getBlogs();
     const blogs = response.data || [];
-    const blog = await getBlogBySlug(slug);
+    const blog = await getBlogBySlug(slug,locale);
     // const blog = blogs.find(
     //     (item) => slugify(item.title) === slug
     // );
@@ -166,7 +166,8 @@ const BlogDetails = async ({ params }) => {
                                                         <h4 className="blog-sidebar-widget-item-title">{blog.title}</h4>
                                                     </a> */}
                                                     <Link
-                                                        href={`/blog/${slugify(blog.title)}`}
+                                                        // href={`/blog/${slugify(blog.title)}`}
+                                                        href={`/blog/${blog.slug}`}
                                                         className="blog-sidebar-widget-item-link text-decoration-none"
                                                     >
                                                         <h4 className="blog-sidebar-widget-item-title">
