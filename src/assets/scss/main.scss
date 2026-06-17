@@ -6,7 +6,8 @@ body {
     font-family: var(--font-body), sans-serif;
 }
 
-.poppins {
+.poppins,
+p {
     font-family: $poppins !important;
 }
 
@@ -169,7 +170,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+label {
     font-family: var(--font-heading), sans-serif;
 }
 

@@ -1,46 +1,17 @@
 import axios from "axios";
 import { notFound } from "next/navigation";
-import { slugify } from "@/lib/utils";
 import TourPackageDetail from "./TourPackageDetail";
 import "../../../../styles/tourPackage.scss";
 import { getTourBySlug } from "../tourApi";
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  "http://localhost:3000";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL;
-
-async function getTours() {
-  try {
-    const response = await axios.get(
-      `${API_URL}/tours`
-    );
-
-    return response.data?.data?.data || [];
-  } catch (error) {
-    console.error(
-      "Tour API Error:",
-      error.response?.data || error.message
-    );
-
-    return [];
-  }
-}
-
-export async function generateMetadata({
-  params,
-}) {
+// 1. DYNAMIC METADATA GENERATION
+export async function generateMetadata({ params }) {
   const { slug, locale } = await params;
 
-  const tours = await getTours();
+  // Optimized: Only fetch the specific tour needed for this slug
   const tour = await getTourBySlug(slug);
-
-  // const tour = tours.find(
-  //   (item) =>
-  //     slugify(item.title || "") === slug
-  // );
 
   if (!tour) {
     return {
@@ -48,21 +19,16 @@ export async function generateMetadata({
     };
   }
 
-  const fullUrl =
-    `${BASE_URL}/${locale}/tour-package/${slug}`;
+  const fullUrl = `${BASE_URL}/${locale}/tour-package/${slug}`;
 
   return {
     title: `${tour.title} | Kumbh Mela Tours`,
-    description:
-      tour.description || "",
-
+    description: tour.description || "",
     openGraph: {
       title: tour.title,
-      description:
-        tour.description || "",
+      description: tour.description || "",
       url: fullUrl,
-      siteName:
-        "Kumbh Mela Tours",
+      siteName: "Kumbh Mela Tours",
       images: [
         {
           url: tour.image_url,
@@ -72,40 +38,25 @@ export async function generateMetadata({
       ],
       type: "website",
     },
-
     twitter: {
-      card:
-        "summary_large_image",
+      card: "summary_large_image",
       title: tour.title,
-      description:
-        tour.description || "",
+      description: tour.description || "",
       images: [tour.image_url],
     },
   };
 }
 
-export default async function TourDetailPage({
-  params,
-}) {
+// 2. MAIN DETAIL PAGE ENTRY
+export default async function TourDetailPage({ params }) {
   const { slug } = await params;
 
-  const tours =await getTours();
+  // Optimized: Removed the heavy getTours() call entirely
   const tour = await getTourBySlug(slug);
-  // const tour =
-  //   tours.find(
-  //     (item) =>
-  //       slugify(
-  //         item.title || ""
-  //       ) === slug
-  //   );
 
   if (!tour) {
     notFound();
   }
 
-  return (
-    <TourPackageDetail
-      tour={tour}
-    />
-  );
+  return <TourPackageDetail tour={tour} />;
 }

@@ -712,5 +712,83 @@
     "heroDescription": "Explore the rich history, sacred rituals, and practical travel tips for Kumbh Mela Nashik 2027",
     "previousPage": "Previous Page",
     "nextPage": "Next Page"
+  },
+  "ContactPage": {
+    "Hero": {
+      "subTitle": "Support & Assistance",
+      "heroTitle": "Connect With Our Pilgrimage Experts",
+      "description": "Talk directly to our Kumbh Mela travel specialists for personalized guidance on Yatras, Darshan, and VIP services."
+    },
+    "Form": {
+      "heading": "Submit an Inquiry",
+      "subheading": "Our premium concierge team typically responds within 2 hours.",
+      "labelName": "Full Name",
+      "labelEmail": "Email Address",
+      "labelMobile": "Mobile Number",
+      "labelType": "Inquiry Type",
+      "labelMessage": "Your Message",
+      "placeholderName": "Your Name",
+      "placeholderEmail": "Email Address",
+      "placeholderMobile": "+91 1234567890",
+      "placeholderMessage": "How can our pilgrimage team assist you today?",
+      "btnSubmitting": "Submitting...",
+      "btnSend": "Send Request",
+      "types": {
+        "vehicle": "Vehicle Rental",
+        "hotel": "Accommodation Concierge",
+        "travel": "Logistics & Travel"
+      },
+      "errors": {
+        "name": "Please enter your name",
+        "email": "Please enter a valid email",
+        "mobile": "Please enter a valid mobile number",
+        "message": "Please enter your requirement",
+        "general": "Something went wrong. Please try again."
+      }
+    },
+    "Branches": {
+      "nashik": {
+        "city": "Nashik",
+        "address": "Sakal Office Basement, BA 4, Thakkar Bazar, New CBS, Police Staff Colony, Nashik, Maharashtra 422002"
+      },
+      "pune": {
+        "city": "Pune",
+        "address": "2nd Floor, Pride Icon, Baner Road, Pune, Maharashtra 411045"
+      },
+      "shirdi": {
+        "city": "Shirdi",
+        "address": "Sai Plaza Complex, Near Temple Road, Shirdi, Maharashtra 423109"
+      },
+      "mumbai": {
+        "city": "Mumbai",
+        "address": "Plot No. 12, CIDCO Area, Chatrapati Sambhaji Nagar, Maharashtra 431001"
+      }
+    }
+  },
+  "BookingForm": {
+    "bookTitle": "Book",
+    "fullName": "Full Name",
+    "placeholderName": "Enter your name",
+    "email": "Email Address",
+    "placeholderEmail": "name@example.com",
+    "mobile": "Mobile Number",
+    "placeholderMobile": "Enter mobile no.",
+    "roomType": "Room Type",
+    "acRoom": "AC Room",
+    "nonAcRoom": "Non-AC Room",
+    "pickupDate": "Pickup Date",
+    "checkInDate": "Check-in Date",
+    "returnDate": "Return Date",
+    "checkOutDate": "Check-out Date",
+    "passengers": "Passengers",
+    "adults": "Adults",
+    "children": "Children",
+    "person": "Person",
+    "people": "People",
+    "child": "Child",
+    "childrenPlus": "2+ Children",
+    "btnConfirm": "Confirm on WhatsApp",
+    "submitting": "Submitting...",
+    "errorMsg": "Unable to submit enquiry."
   }
 }

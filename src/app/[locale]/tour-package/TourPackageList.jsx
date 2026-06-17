@@ -105,7 +105,7 @@ const TourPageContent = () => {
                                     <Col lg={4} md={6} key={tour.id || index}>
                                         <TourPackageCard
                                             tour={tour}
-                                            tourLink={`/${locale}/tour-package/${slugify(tour.title || "")}`}
+                                            tourLink={`/tour-package/${slugify(tour.title || "")}`}
                                             img_height={250}
                                         />
                                     </Col>

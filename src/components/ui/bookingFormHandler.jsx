@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Form, Row, Col, Button, Modal } from 'react-bootstrap';
 import { MessageCircle, Calendar, User, Smartphone, Mail, Hotel, Car } from 'lucide-react';
-
+import { useTranslations } from "next-intl";
 import { createTourEnquiry } from "../../app/[locale]/tour-package/tourApi";
 import { createHotelEnquiry } from "../../app/[locale]/hotel/hotelApi";
 import { createCarEnquiry } from "../../app/[locale]/rental-car/carApi";
@@ -377,6 +377,8 @@ export const BookingFormHandler = ({ tourId, tourName, vehicleCategories = [] })
 
 // make this form for Hotel & Car
 export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, carId }) => {
+    const t = useTranslations("BookingForm");
+
     const [formData, setFormData] = useState({
         name: '',
         mobile: '',
@@ -389,15 +391,14 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
     });
 
     const [validated, setValidated] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-    const [loading, setLoading] = useState(false);
 
     const handleWhatsappSubmit = async (e) => {
         e.preventDefault();
-
         const form = e.currentTarget;
 
         if (form.checkValidity() === false) {
@@ -408,69 +409,53 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
 
         try {
             setLoading(true);
-
             const isCar = type === "car";
 
-            // ==========================
-            // HOTEL ENQUIRY
-            // ==========================
+            // Hotel Enquiry Submit Integration
             if (!isCar) {
-                await createHotelEnquiry({
-                    hotel_id: hotelId,
-                    full_name: formData.name,
-                    email: formData.email,
-                    mobile_number: formData.mobile,
-                    room_type: formData.roomType,
-                    check_in_date: formData.startDate,
-                    check_out_date: formData.endDate,
-                    adults: formData.guests,
-                    children: formData.child,
-                });
+                // Ensure backend functions are properly wrapped or imported if active
+                if (typeof createHotelEnquiry === "function") {
+                    await createHotelEnquiry({
+                        hotel_id: hotelId,
+                        full_name: formData.name,
+                        email: formData.email,
+                        mobile_number: formData.mobile,
+                        room_type: formData.roomType,
+                        check_in_date: formData.startDate,
+                        check_out_date: formData.endDate,
+                        adults: formData.guests,
+                        children: formData.child,
+                    });
+                }
             }
 
-            // ==========================
-            // CAR ENQUIRY
-            // ==========================
+            // Car Enquiry Submit Integration
             if (isCar) {
-                await createCarEnquiry({
-                    vehicle_id: carId,
-                    full_name: formData.name,
-                    mobile_number: formData.mobile,
-                    pickup_date: formData.startDate,
-                    return_date: formData.endDate,
-                    passengers: formData.guests,
-                });
+                if (typeof createCarEnquiry === "function") {
+                    await createCarEnquiry({
+                        vehicle_id: carId,
+                        full_name: formData.name,
+                        mobile_number: formData.mobile,
+                        pickup_date: formData.startDate,
+                        return_date: formData.endDate,
+                        passengers: formData.guests,
+                    });
+                }
             }
 
-            // ==========================
-            // WHATSAPP MESSAGE
-            // ==========================
-
+            // Building structured WhatsApp Notification Markdown Payloads
             const phoneNumber = "919022093522";
+            const currentItemName = isCar ? (selectedItem?.name || selectedItem) : selectedItem;
 
-            const header = isCar
-                ? "*New Car Rental Inquiry*"
-                : "*New Hotel Booking Inquiry*";
-
-            const itemLabel = isCar
-                ? "*Vehicle:*"
-                : "*Hotel:*";
-
-            const dateStartLabel = isCar
-                ? "*Pickup Date:*"
-                : "*Check-in:*";
-
-            const dateEndLabel = isCar
-                ? "*Return Date:*"
-                : "*Check-out:*";
-
-            const guestLabel = isCar
-                ? "*Passengers:*"
-                : "*Adults:*";
+            const header = isCar ? "*New Car Rental Inquiry*" : "*New Hotel Booking Inquiry*";
+            const itemLabel = isCar ? "*Vehicle:*" : "*Hotel:*";
+            const dateStartLabel = isCar ? "*Pickup Date:*" : "*Check-in:*";
+            const dateEndLabel = isCar ? "*Return Date:*" : "*Check-out:*";
+            const guestLabel = isCar ? "*Passengers:*" : "*Adults:*";
 
             let message =
                 `${header}%0A` +
-                `${itemLabel} ${selectedItem}%0A` +
+                `${itemLabel} ${currentItemName}%0A` +
                 `*Name:* ${formData.name}%0A` +
                 `*Mobile:* ${formData.mobile}%0A`;
 
@@ -486,18 +471,12 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
                 `${guestLabel} ${formData.guests}%0A`;
 
             if (!isCar && formData.child !== "0") {
-                message +=
-                    `*Children:* ${formData.child === "2"
-                        ? "2+"
-                        : formData.child
-                    }`;
+                message += `*Children:* ${formData.child === "2" ? "2+" : formData.child}`;
             }
 
-            window.open(
-                `https://wa.me/${phoneNumber}?text=${message}`,
-                "_blank"
-            );
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
 
+            // Form Reset State
             setFormData({
                 name: "",
                 mobile: "",
@@ -508,15 +487,11 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
                 child: "0",
                 roomType: "AC",
             });
-
+            setValidated(false);
             handleClose();
         } catch (error) {
-            console.error(error);
-
-            alert(
-                error?.response?.data?.message ||
-                "Unable to submit enquiry."
-            );
+            console.error("Submission error:", error);
+            alert(error?.response?.data?.message || t("errorMsg"));
         } finally {
             setLoading(false);
         }
@@ -526,52 +501,54 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
         <Modal show={show} onHide={handleClose} centered className="booking-modal">
             <Modal.Header closeButton className="border-0 p-4 pb-0">
                 <Modal.Title className="fw-bold h5 d-flex align-items-center gap-2">
-                    {/* {type === 'car' ? <Car size={20} /> : <Hotel size={20} />}
-                    Book {selectedItem} */}
-                    {/* {type === "car" ? <Car size={20} /> : <Hotel size={20} />} */}
-                    Book {type === "car" ? selectedItem?.name : selectedItem}
+                    {t("bookTitle")} {type === "car" ? (selectedItem?.name || selectedItem) : selectedItem}
                 </Modal.Title>
             </Modal.Header>
 
             <Modal.Body className="p-4">
                 <Form noValidate validated={validated} onSubmit={handleWhatsappSubmit}>
-                    {/* Full Name */}
+
+                    {/* 1. Full Name Entry */}
                     <Form.Group className="mb-3">
-                        <Form.Label className="small fw-bold">Full Name</Form.Label>
+                        <Form.Label className="small fw-bold">{t("fullName")}</Form.Label>
                         <Form.Control
                             required
                             name="name"
                             type="text"
-                            placeholder="Enter your name"
+                            placeholder={t("placeholderName")}
+                            value={formData.name}
                             onChange={handleChange}
                             className="rounded-3 py-2"
                         />
                     </Form.Group>
 
-                    {/* Email - Shown only for Hotel */}
+                    {/* 2. Email Verification Field - Display conditionally for Hotels */}
                     {type === 'hotel' && (
                         <Form.Group className="mb-3">
-                            <Form.Label className="small fw-bold">Email Address</Form.Label>
+                            <Form.Label className="small fw-bold">{t("email")}</Form.Label>
                             <Form.Control
                                 required
                                 name="email"
                                 type="email"
-                                placeholder="name@example.com"
+                                placeholder={t("placeholderEmail")}
+                                value={formData.email}
                                 onChange={handleChange}
                                 className="rounded-3 py-2"
                             />
                         </Form.Group>
                     )}
 
+                    {/* 3. Mobile Input Grid Layout */}
                     <Row>
                         <Col md={type === 'hotel' ? 6 : 12}>
                             <Form.Group className="mb-3">
-                                <Form.Label className="small fw-bold">Mobile Number</Form.Label>
+                                <Form.Label className="small fw-bold">{t("mobile")}</Form.Label>
                                 <Form.Control
                                     required
                                     name="mobile"
                                     type="tel"
-                                    placeholder="Enter mobile no."
+                                    placeholder={t("placeholderMobile")}
+                                    value={formData.mobile}
                                     onChange={handleChange}
                                     className="rounded-3 py-2"
                                 />
@@ -581,26 +558,28 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
                         {type === 'hotel' && (
                             <Col md={6}>
                                 <Form.Group className="mb-3">
-                                    <Form.Label className="small fw-bold">Room Type</Form.Label>
-                                    <Form.Select name="roomType" onChange={handleChange} className="rounded-3 py-2">
-                                        <option value="AC">AC Room</option>
-                                        <option value="Non-AC">Non-AC Room</option>
+                                    <Form.Label className="small fw-bold">{t("roomType")}</Form.Label>
+                                    <Form.Select name="roomType" value={formData.roomType} onChange={handleChange} className="rounded-3 py-2">
+                                        <option value="AC">{t("acRoom")}</option>
+                                        <option value="Non-AC">{t("nonAcRoom")}</option>
                                     </Form.Select>
                                 </Form.Group>
                             </Col>
                         )}
                     </Row>
 
+                    {/* 4. Scheduling Segment Grid */}
                     <Row>
                         <Col md={6}>
                             <Form.Group className="mb-3">
                                 <Form.Label className="small fw-bold">
-                                    {type === 'car' ? 'Pickup Date' : 'Check-in Date'}
+                                    {type === 'car' ? t("pickupDate") : t("checkInDate")}
                                 </Form.Label>
                                 <Form.Control
                                     required
                                     name="startDate"
                                     type="date"
+                                    value={formData.startDate}
                                     onChange={handleChange}
                                     className="rounded-3 py-2"
                                 />
@@ -609,12 +588,13 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
                         <Col md={6}>
                             <Form.Group className="mb-3">
                                 <Form.Label className="small fw-bold">
-                                    {type === 'car' ? 'Return Date' : 'Check-out Date'}
+                                    {type === 'car' ? t("returnDate") : t("checkOutDate")}
                                 </Form.Label>
                                 <Form.Control
                                     required
                                     name="endDate"
                                     type="date"
+                                    value={formData.endDate}
                                     onChange={handleChange}
                                     className="rounded-3 py-2"
                                 />
@@ -622,15 +602,18 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
                         </Col>
                     </Row>
 
+                    {/* 5. Passenger or Guest Matrix Capacity Configuration Loops */}
                     <Row>
                         <Col md={type === 'hotel' ? 6 : 12}>
                             <Form.Group className="mb-3">
                                 <Form.Label className="small fw-bold">
-                                    {type === 'car' ? 'Passengers' : 'Adults'}
+                                    {type === 'car' ? t("passengers") : t("adults")}
                                 </Form.Label>
-                                <Form.Select name="guests" onChange={handleChange} className="rounded-3 py-2">
+                                <Form.Select name="guests" value={formData.guests} onChange={handleChange} className="rounded-3 py-2">
                                     {[1, 2, 3, 4, 5, 6, 7, 8].map(n => (
-                                        <option key={n} value={n}>{n} {n === 1 ? 'Person' : 'People'}</option>
+                                        <option key={n} value={n}>
+                                            {n} {n === 1 ? t("person") : t("people")}
+                                        </option>
                                     ))}
                                 </Form.Select>
                             </Form.Group>
@@ -639,23 +622,25 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
                         {type === 'hotel' && (
                             <Col md={6}>
                                 <Form.Group className="mb-3">
-                                    <Form.Label className="small fw-bold">Children</Form.Label>
-                                    <Form.Select name="child" onChange={handleChange} className="rounded-3 py-2">
-                                        <option value="0">0 Child</option>
-                                        <option value="1">1 Child</option>
-                                        <option value="2">2+ Child</option>
+                                    <Form.Label className="small fw-bold">{t("children")}</Form.Label>
+                                    <Form.Select name="child" value={formData.child} onChange={handleChange} className="rounded-3 py-2">
+                                        <option value="0">0 {t("child")}</option>
+                                        <option value="1">1 {t("child")}</option>
+                                        <option value="2">{t("childrenPlus")}</option>
                                     </Form.Select>
                                 </Form.Group>
                             </Col>
                         )}
                     </Row>
 
+                    {/* 6. WhatsApp CTA Submission Node Trigger Button */}
                     <Button
                         type="submit"
+                        disabled={loading}
                         className="whatsapp-btn w-100 py-3 mt-3 border-0 fw-bold d-flex align-items-center justify-content-center gap-2"
                     >
                         <MessageCircle size={20} />
-                        Confirm on WhatsApp
+                        {loading ? t("submitting") : t("btnConfirm")}
                     </Button>
                 </Form>
             </Modal.Body>
