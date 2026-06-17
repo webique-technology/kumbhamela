@@ -67,15 +67,17 @@ export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_widt
                 </Link>
 
                 {/* Excerpt */}
-                {/* <p className="card-text text-muted small blog-excerpt">
-                    {blog.description}
-                </p> */}
-                <p className="text-muted small blog-excerpt">
+                <div className="text-muted small blog-excerpt"
+                    dangerouslySetInnerHTML={{
+                        __html: blog.description,
+                    }}
+                />
+                {/* <p className="text-muted small blog-excerpt">
                     {blog.description
                         ?.replace(/<[^>]*>/g, "")
                         ?.slice(0, 150)}
                     ...
-                </p>
+                </p> */}
 
                 {/* Button */}
                 <Link href={blogLink} className="btn btn-link p-0 blog-readmore text-decoration-none d-flex align-items-center gap-1">

@@ -17,10 +17,10 @@ export async function generateMetadata() {
       description: "Explore the rich history, sacred rituals, and practical travel tips for Kumbh Mela Nashik 2027",
       type: "website",
     },
-  };
+
+  }
 }
 
-// 2. Main Page Component
 const BlogPage = () => {
   return <BlogPageList />;
 };
