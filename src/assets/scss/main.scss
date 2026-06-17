@@ -6,6 +6,10 @@ body {
     font-family: var(--font-body), sans-serif;
 }
 
+.poppins {
+    font-family: $poppins !important;
+}
+
 .section-padding {
     padding: 56px 0;
 
@@ -20,6 +24,10 @@ body {
     @media(max-width:576) {
         padding: 30px 0;
     }
+}
+
+.color-gray-500 {
+    color: $color-gray-500 !important;
 }
 
 .section-padding-2 {
@@ -42,6 +50,63 @@ body {
     // opacity: 0;
     // display: none;
 }
+
+
+.pagination-container {
+    user-select: none;
+}
+
+// pagination css //
+.pagination-number {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    text-decoration: none;
+    color: $text-color-dark;
+    border-radius: $border-radius-full;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    border: none;
+}
+
+.pagination-number.active {
+    background-color: $primary-color;
+    /* Matching the light peach in your image */
+    color: $text-color-light;
+    /* Matching the brown text in your image */
+}
+
+.pagination-number:hover:not(.active) {
+    background-color: $primary-color;
+    color: $text-color-light;
+}
+
+.pagination-item {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $bg-light;
+    border-radius: 50%;
+    color: $primary-color;
+    transition: 0.3s;
+    border: 1px solid $primary-color;
+}
+
+.pagination-item.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.pagination-item:hover {
+    background-color: $color-gray-100;
+}
+
+// pagination css //
 
 // make this for padding spacing in responsive
 .padding-top {
@@ -108,7 +173,9 @@ h6 {
     font-family: var(--font-heading), sans-serif;
 }
 
-
+.sora {
+    font-family: var(--font-heading), sans-serif !important;
+}
 
 .playfair-display {
     font-family: var(--font-playfair), sans-serif !important;
@@ -127,7 +194,7 @@ h2,
     font-size: clamp($font-size-lg-2, 4.5vw, $font-size-3xl) !important;
     font-weight: 600 !important;
     line-height: calc(1.5 / 1.25) !important;
-    letter-spacing: -2px;
+    // letter-spacing: -2px;
 
     // @media(max-width: 768px) {
     //     font-size: $font-size-lg-1 !important;
@@ -428,6 +495,14 @@ p {
     font-weight: 400 !important;
 }
 
+.features-badge-2 {
+    background-color: $trinery-bg-color;
+    padding: 4px 12px;
+    font-size: $font-size-xxs;
+    z-index: 3;
+    font-weight: 400;
+}
+
 .text-brand-orange {
     color: $primary-color !important;
     font-weight: 500;
@@ -679,7 +754,7 @@ p {
 }
 
 .top-divider {
-    background-image: url("/images/bg-divider-1.png");
+    background-image: url("../../assets/images/bg-divider-1.png");
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
@@ -690,7 +765,7 @@ p {
 }
 
 .bottom-divider {
-    background-image: url("/images/bg-divider-bottom.png");
+    background-image: url("../../assets/images/bg-divider-bottom.png");
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;

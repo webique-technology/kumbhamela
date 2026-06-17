@@ -3,6 +3,10 @@
 .about-kumbh-page {
     // background-color: $secondary-bg-color;
 
+    .hero-span {
+        text-shadow: none;
+    }
+
     // Hero Styles
     .kumbh-hero {
         position: relative;
@@ -277,6 +281,8 @@
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
+
+
 
 .spiritual-legacy {
 

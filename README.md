@@ -48,3 +48,43 @@ Blog	BlogSection.jsx
 lib/ → Brain logic 🧠
 hooks/ → Controller 🎮
 components/ → UI 🎨
+
+
+   <!-- {historyCards.map((card, index) => (
+                            <SwiperSlide key={index} className="h-auto">
+                                <div className="card history-card h-100 border-0 shadow-sm overflow-hidden">
+                                    <div className="position-relative overflow-hidden">
+                                        <img
+                                            src={card.img}
+                                            alt={card.title}
+                                            width={200}
+                                            height={250}
+                                            className="card-img-top object-fit-cover transition-transform"
+                                        />
+
+                                        <div className="position-absolute top-0 start-0 m-3 z-2">
+                                            <span className="features-badge rounded-pill bg-brand-orange">
+                                                {card.badge}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div className="card-body p-4">
+                                        <div className="position-absolute top-0 end-0 m-4 z-2">
+                                            <span className="features-badge rounded-pill bg-brand-orange">
+                                                {card.badge}
+                                            </span>
+                                        </div>
+                                        <div className=''>
+                                            <h3 className="h5 me-5 pe-4 fw-bold text-brand-dark mb-2">
+                                                {card.title}
+                                            </h3>
+                                            <p className="card-text d-flex align-items-center mb-2 gap-2 text-muted small leading-relaxed">
+                                                {card.desc}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div >
+                            </SwiperSlide>
+                        ))}
+                    </SwiperSliderComp> -->

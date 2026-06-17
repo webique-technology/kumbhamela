@@ -145,7 +145,7 @@ export const HotelCards = ({ hotel, onBookNow }) => {
                         {hotel.features?.map((feature, idx) => (
                             <span
                                 key={idx}
-                                className="badge d-flex align-items-center justify-content-center rounded-pill border border-light"
+                                className="badge sora d-flex align-items-center justify-content-center rounded-pill border border-light"
                             >
                                 {feature}
                             </span>
@@ -251,16 +251,17 @@ export const RentalCarCard = ({ car, onBook }) => {
                 </div>
                 {/* Features */}
                 <ul className='d-flex flex-wrap gap-2 mb-4 p-0'>
-                    {car.features.map((feature, idx) => (
-                        <li key={idx} className='badge trinery-bg py-1 d-flex align-items-center justify-content-center rounded-pill border border-light'>
+
+                    <div className="d-flex flex-wrap gap-1">
+                        {car.features?.map((feature, idx) => (
                             <span
-                                className="d-flex align-items-center small-12 gap-2 fw-semibold border-light"
+                                key={idx}
+                                className="features-badge-2 p-1 fw-semibold sora m-0 color-gray-500 trinery-bg d-flex align-items-center justify-content-center rounded-pill border shadow-sm border-light"
                             >
-                                {/* <IconResolver featureName={feature} /> */}
                                 {feature}
                             </span>
-                        </li>
-                    ))}
+                        ))}
+                    </div>
                 </ul>
                 {/* Footer Logic */}
                 < div className="d-flex align-items-center justify-content-between mt-auto border-top pt-3" >

@@ -3,6 +3,8 @@
     "loading": "Loading..."
   },
   "Navbar": {
+    "logoTitle": "MAHAKUMBH",
+    "logoSubtitle": "Tours & Travels",
     "home": "Home",
     "about": "About Us",
     "hotel": "Hotel",
@@ -10,5 +12,705 @@
     "tourPackage": "Tour Package",
     "blog": "Blog",
     "contact": "Contact Us"
+  },
+  "HeroHeader": {
+    "btnBathDates": "View Bathing Dates",
+    "btnInquiry": "WhatsApp Inquiry",
+    "slide1_subHeading": "Experience Unmatched Delight With Us.",
+    "slide1_title": "Simhastha Kumbh Mela Nashik 2027",
+    "slide1_description": "Countdown to Kumbh Mela",
+    "slide2_subHeading": "The Sacred Confluence of Faith & Time",
+    "slide2_title": "Nashik Kumbh",
+    "slide2_description": "Where millions gather on the banks of the holy Godavari to seek spiritual liberation. Experience the world's largest spiritual congregation at one of India's most sacred pilgrimage sites."
+  },
+  "Countdown": {
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Mins",
+    "seconds": "Seconds",
+    "expiredText": "Kumbh Mela Has Begun!"
+  },
+  "AboutSec": {
+    "montezSubTitle": "Discover the Sacred",
+    "mainTitle": "The Sacred Legacy of Nashik Kumbh Mela",
+    "mainDescription": "Experience the divine with Mahakumbh Tours & Travels Nashik, your trusted car rental company in Nashik, Maharashtra. With 12 years of expertise, we specialize in Trimbakeshwar Joytirling Darshan, Nashik Darshan, Panchavti Tapovan, Shirdi Shani Shingnpur Darshan, and Grishneshwar Joytirling Darshan.",
+    "item1_title": "The Holy Godavari",
+    "item1_desc": "A sacred river where Kumbh bathing is believed to cleanse sins and grant moksha.",
+    "item2_title": "Samudra Manthan",
+    "item2_desc": "Myth says drops of Amrit fell in Nashik, making it a holy Kumbh site.",
+    "item3_title": "Ramayana Connection",
+    "item3_desc": "Panchavati in Nashik is linked to Lord Rama’s exile in the Ramayana.",
+    "item4_title": "Spiritual Significance",
+    "item4_desc": "Kumbh Mela in Nashik occurs every 12 years with strong spiritual importance."
+  },
+  "PlanTab": {
+    "montezSubTitle": "Discover the Sacred",
+    "mainTitle": "Plan your Pilgrimage",
+    "tab0_name": "How to Reach",
+    "tab0_desc": "Explore seamless travel options by air, rail, or road, and start your journey effortlessly.",
+    "tab0_item1_title": "By Air (Flights)",
+    "tab0_item1_desc": "Fly into Nashik Ozar Airport (ISK) located 20 km from the center for direct domestic flights from Mumbai and Delhi. Alternatively, international travelers can land at Mumbai Airport (BOM) and take a scenic 3–4 hour road or rail trip to Nashik.",
+    "tab0_item2_title": "By Train (Railways)",
+    "tab0_item2_desc": "Nashik Road Railway Station (NK) is a major central rail hub with excellent connectivity across India. Daily express and superfast trains connect Mumbai (CSMT/Dadar) directly to Nashik, completing the journey in just 3 to 3.5 hours.",
+    "tab0_item3_title": "By Road (Highways & Buses)",
+    "tab0_item3_desc": "Nashik is seamlessly connected via smooth national highways like the Mumbai-Nashik Expressway (NH-160). State-run MSRTC buses, luxury private AC sleepers, and outstation cabs operate 24/7 from Mumbai, Pune, and surrounding regions.",
+    "tab1_name": "Local Transport",
+    "tab1_desc": "Explore our curated list of accommodations and book your serene retreat.",
+    "tab1_item1_title": "Citilinc Public Buses (NMPML)",
+    "tab1_item1_desc": "Nashik's official Citilinc bus network will operate special, high-frequency shuttle services during the event. These routes directly connect the railway station, main bus depots, and key city hubs straight to the primary Mela grounds.",
+    "tab1_item2_title": "Auto-Rickshaws",
+    "tab1_item2_desc": "Three-wheelers are widely available for quick transit across the city. Note that auto-rickshaw access will be restricted or zoned off around the core bathing areas on peak shahi snan (holy bathing) days to manage crowd density.",
+    "tab1_item3_title": "Pedestrian Walkways (On Foot)",
+    "tab1_item3_desc": "Walking is the most efficient way to navigate the immediate Mela zones and reach the bathing ghats. The administration is setting up dedicated pedestrian-only barricaded lanes to ensure safe, smooth, and vehicle-free movement.",
+    "tab2_name": "Safety Guidelines",
+    "tab2_desc": "Categorized list of public utilities, designed to make it accessible for tourists and pilgrims",
+    "tab2_item1_title": "Crowd Safety & Awareness",
+    "tab2_item1_desc": "Stay with your group and establish clear meeting points. Follow directions from police and trained volunteers, and remain highly alert of your personal belongings in crowded areas to avoid pickpockets.",
+    "tab2_item2_title": "Hydration & Safe Eating",
+    "tab2_item2_desc": "Carry a reusable water bottle and stay well-hydrated throughout the day. Avoid unhygienic street food and strictly opt for freshly prepared meals to prevent stomach infections.",
+    "tab2_item3_title": "Personal Hygiene & Protection",
+    "tab2_item3_desc": "Keep a personal hygiene kit handy with hand sanitizer, tissues, and essential medications. Wear a face mask while moving around the grounds to safeguard against heavy dust and airborne pollutants.",
+    "tab2_item4_title": "Emergency Medical Services",
+    "tab2_item4_desc": "Familiarize yourself with the location of emergency medical camps. The Mela administration will have multiple temporary medical tents and fully equipped first-aid centers distributed across the venue.",
+    "tab3_name": "Helpline",
+    "tab3_desc": "Emergency Support Lines available 24 hours a day, 7 days a week.",
+    "tab3_item1_title": "Police Emergency Helpline",
+    "tab3_item1_desc": "Dial 112 / 100 instantly from any operational mobile network for immediate security assistance or law enforcement deployment directly to your current location.",
+    "tab3_item2_title": "Ambulance & Medical Help",
+    "tab3_item2_desc": "Dial 108 for emergency medical response and trauma services. Fully equipped government ambulances are stationed permanently across all major ritual bathing ghat zones.",
+    "tab3_item3_title": "National Tourist Support",
+    "tab3_item3_desc": "Dial 1363 or toll-free 1800-11-1363 for multilingual guidance, regional navigation context assistance, or direct contact resolution support for foreign and domestic traveling pilgrims.",
+    "tab3_item4_title": "Mela Central Control Room",
+    "tab3_item4_desc": "Dedicated local administrative support lines setup specifically for lost-and-found reports, missing person alerts, dynamic crowd scheduling notices, and direct public utility help entries."
+  },
+  "SacredDestinations": {
+    "mainTitle": "Sacred Destinations",
+    "montezSubTitle": "Must-Visit Temples & Holy Sites",
+    "historyHeader": "History",
+    "routeHeader": "Route from Nashik",
+    "transportHeader": "Transport Options",
+    "bookCTA": "Book Transportation with Mahakumbh Tours & Travels →",
+    "dest1_name": "Trimbakeshwar Temple",
+    "dest1_history": "Trimbakeshwar Temple is one of the twelve sacred Jyotirlingas of Lord Shiva and is among the most important pilgrimage sites in India. Situated at the foothills of Brahmagiri Hills, the temple is closely associated with the origin of the holy Godavari River. According to Hindu scriptures, Sage Gautama performed severe penance here, after which Lord Shiva brought the sacred Ganga to earth in the form of the Godavari. The present structure was rebuilt in the 18th century by Peshwa Balaji Baji Rao and is admired for its black stone architecture and intricate carvings. Unlike most Jyotirlingas, the sanctum houses three lingas symbolizing Brahma, Vishnu, and Mahesh. Devotees visit throughout the year for darshan, Rudrabhishek rituals, and spiritual ceremonies. The temple gains special significance during Kumbh Mela when millions of pilgrims gather in Nashik and Trimbakeshwar. Its religious importance, mythological connections, and serene surroundings make it one of Maharashtra's most revered spiritual destinations.",
+    "dest1_route": "Trimbakeshwar is approximately 28 km west of Nashik via Nashik–Trimbak Road. The journey takes around 45–60 minutes by road.",
+    "dest1_transport": "Visitors can easily reach by local Public transport or taxis",
+    "dest2_name": "Ramkund",
+    "dest2_history": "Ramkund is one of the holiest locations in Nashik and holds immense importance in Hindu tradition. Situated on the banks of the Godavari River, it is believed to be the sacred bathing place of Lord Rama during his exile. According to legends, Lord Rama performed rituals and offered prayers here while residing in Panchavati with Sita and Lakshmana. The kund is considered highly auspicious for performing ancestral rites and immersion ceremonies. Pilgrims believe that taking a holy dip in Ramkund helps purify the soul and wash away sins. The site has been an important religious center for centuries and plays a central role during Kumbh Mela celebrations. Numerous temples and ghats surrounding Ramkund contribute to its spiritual atmosphere. Saints, devotees, and travelers from across India visit throughout the year to seek blessings and experience the sacred environment. Ramkund remains one of the most recognized symbols of Nashik's religious and cultural heritage.",
+    "dest2_route": "Ramkund is located in the heart of Nashik city near Panchavati, approximately 3–5 km from major city areas.",
+    "dest2_transport": "Visitors can easily reach by local Public transport or taxis",
+    "dest3_name": "Panchavati",
+    "dest3_history": "Panchavati is one of the most sacred places associated with the Ramayana and forms the spiritual heart of Nashik. The name Panchavati means 'garden of five banyan trees' and refers to the area where Lord Rama, Goddess Sita, and Lakshmana spent a significant portion of their fourteen-year exile. Many events from the Ramayana are believed to have taken place here, including the encounter with Shurpanakha and the events leading to Sita's abduction by Ravana. The region contains several important temples, ghats, caves, and shrines connected to these legends. Pilgrims visit Panchavati to experience the living heritage of the Ramayana and seek blessings from Lord Rama. Over centuries, the area developed into a major religious center with continuous worship and cultural activities. During festivals and Kumbh Mela, Panchavati becomes a vibrant destination for devotees from across India. Its blend of mythology, spirituality, and history makes it one of Nashik's most significant pilgrimage sites.",
+    "dest3_route": "Panchavati is located about 5–8 km from most parts of Nashik city and can be reached within 15–20 minutes by road.",
+    "dest3_transport": "Visitors can easily reach by local Public transport or taxis",
+    "dest4_name": "Kalaram Temple",
+    "dest4_history": "Kalaram Temple is one of the most prominent temples dedicated to Lord Rama in Maharashtra. Located in Panchavati, the temple derives its name from the black-colored stone idol of Lord Rama installed within the sanctum. The temple was constructed in the 18th century by Sardar Rangarao Odhekar and showcases impressive black stone architecture inspired by ancient temple styles. It holds great significance among devotees due to its association with the Ramayana and the Panchavati region. Kalaram Temple also occupies an important place in India's social history because Dr. B. R. Ambedkar led a temple entry movement here in 1930 advocating equal rights and social justice. The temple attracts thousands of pilgrims during Ram Navami and other Hindu festivals. Its elegant structure, spiritual importance, and historical relevance make it one of Nashik's most visited religious landmarks. Visitors often include Kalaram Temple as a key stop during spiritual tours of Nashik.",
+    "dest4_route": "Located in Panchavati, Kalaram Temple is approximately 5 km from central Nashik and easily accessible by road.",
+    "dest4_transport": "Visitors can easily reach by local Public transport or taxis",
+    "dest5_name": "Godavari Ghats",
+    "dest5_history": "The Godavari Ghats of Nashik are among the most sacred riverfronts in India and serve as important centers for religious rituals, pilgrimages, and festivals. Built along the banks of the Godavari River, the ghats have witnessed centuries of spiritual activity and cultural traditions. Devotees gather here for holy baths, prayer ceremonies, ancestral rituals, and festival celebrations. The ghats are closely connected with the legends of Lord Rama and the sacred geography of Panchavati. During the Kumbh Mela, millions of pilgrims visit the Godavari Ghats to participate in ritual bathing, making it one of the largest religious gatherings in the world. Numerous temples and shrines line the riverbanks, creating a spiritually vibrant atmosphere. The architecture of the ghats reflects the historical development of Nashik as a major pilgrimage destination. Today, the Godavari Ghats remain a symbol of faith, devotion, and cultural continuity, attracting visitors from all parts of India and beyond.",
+    "dest5_route": "Godavari Ghats are situated in central Nashik near Ramkund and Panchavati. They can be reached within minutes from most city locations.",
+    "dest5_transport": "Visitors can easily reach by local Public transport or taxis",
+    "dest6_name": "Saptashrungi Devi",
+    "dest6_history": "Saptashrungi Devi Temple is one of the most revered Shakti Peethas in Maharashtra and is dedicated to Goddess Saptashrungi Nivasini. Situated amidst seven mountain peaks in the Sahyadri range, the temple derives its name from the Sanskrit words 'Sapta' meaning seven and 'Shrungi' meaning peaks. According to Hindu mythology, the goddess is believed to be an incarnation of Durga who defeated powerful demons to protect righteousness. The idol of the goddess, carved into the mountain rock, stands approximately ten feet tall and is adorned with ornaments and weapons symbolizing divine power. For centuries, devotees have undertaken pilgrimages to seek blessings for prosperity, courage, and protection. The temple holds immense significance during Navratri when thousands of devotees gather to participate in religious celebrations. Surrounded by scenic hills and spiritual ambiance, Saptashrungi has become one of the most important pilgrimage destinations in Maharashtra. Its combination of natural beauty, mythology, and faith attracts devotees and tourists alike throughout the year.",
+    "dest6_route": "Saptashrungi Devi Temple is located near Vani, approximately 60 km from Nashik. The journey takes around 1.5 to 2 hours via Nashik–Vani Road.",
+    "dest6_transport": "Pilgrims can easily reach by local Public transport or taxis",
+    "dest7_name": "Sita Gufa",
+    "dest7_history": "Sita Gufa is a sacred cave located in Panchavati and is deeply associated with the Ramayana. According to tradition, this cave served as a place where Goddess Sita spent time during her stay in the Panchavati region alongside Lord Rama and Lakshmana. It is also believed to be connected with the events leading to her abduction by Ravana. The cave has become an important pilgrimage site for devotees seeking to experience locations linked to the epic Ramayana. Visitors enter through a narrow passage that leads to small shrines dedicated to Lord Rama, Goddess Sita, and Lakshmana. Over the years, Sita Gufa has become one of the most visited spiritual landmarks in Nashik, attracting pilgrims from across India. The cave's unique atmosphere, mythological significance, and close proximity to other sacred sites in Panchavati make it an essential stop for devotees. It continues to preserve the cultural and religious heritage associated with one of Hinduism's most cherished epics.",
+    "dest7_route": "Sita Gufa is situated in Panchavati, around 5 km from central Nashik.",
+    "dest7_transport": "Pilgrims can easily reach by local Public transport or taxis",
+    "dest8_name": "Muktidham Temple",
+    "dest8_history": "Muktidham Temple is one of Nashik's most recognized modern spiritual landmarks. Constructed entirely from white marble, the temple complex was built by the late Shri Jayrambhai Bytco in memory of his mother. The temple is renowned for housing replicas of all twelve Jyotirlingas of India, allowing devotees to symbolically visit these sacred shrines in one location. The walls of the temple are inscribed with verses from the Bhagavad Gita, offering spiritual inspiration to visitors. The peaceful surroundings and elegant marble architecture create an atmosphere of devotion and reflection. Muktidham has become a popular destination for pilgrims, tourists, and families visiting Nashik. Its convenient location near Nashik Road railway station makes it easily accessible to travelers arriving from different parts of India. Over the years, the temple has established itself as an important center for worship, religious learning, and cultural appreciation. It continues to attract visitors seeking both spiritual fulfillment and architectural beauty.",
+    "dest8_route": "Muktidham Temple is located at Nashik Road, approximately 8–10 km from central Nashik city.",
+    "dest8_transport": "Pilgrims can easily reach by local Public transport or taxis",
+    "dest9_name": "Kapaleshwar Temple",
+    "dest9_history": "Kapaleshwar Temple is an ancient temple dedicated to Lord Shiva and is considered one of the most unique Shiva temples in India. Located near Ramkund on a small hillock, the temple is associated with a fascinating legend in which Lord Shiva sought redemption after accidentally taking a life. According to local traditions, Shiva was guided by a sacred cow and performed penance at this location. Unlike most Shiva temples, Kapaleshwar Temple does not have a Nandi idol facing the sanctum, making it distinctive among Hindu shrines. The temple has been an important place of worship for centuries and is frequently visited by devotees seeking blessings and spiritual peace. Its elevated location provides scenic views of the surrounding area, adding to its appeal. During festivals such as Mahashivratri, the temple receives large numbers of pilgrims. Kapaleshwar remains an integral part of Nashik's sacred landscape and reflects the city's deep-rooted religious traditions.",
+    "dest9_route": "Kapaleshwar Temple is situated near Ramkund and Panchavati, approximately 4–5 km from central Nashik.",
+    "dest9_transport": "It can be conveniently reached through local transport or rental vehicles",
+    "dest10_name": "Anjaneri",
+    "dest10_history": "Anjaneri is a historically and spiritually significant hill located near Nashik and is widely believed to be the birthplace of Lord Hanuman. Named after Anjani Mata, the mother of Hanuman, the site holds immense importance in Hindu mythology. The hill is dotted with ancient temples, caves, and ruins that reflect centuries of religious activity. Pilgrims and trekkers alike visit Anjaneri to experience its spiritual atmosphere and scenic beauty. The trek to the summit passes through lush greenery and offers breathtaking views of the surrounding Sahyadri ranges. According to tradition, Lord Hanuman spent his early years in this region before becoming one of the greatest devotees of Lord Rama. The site has gained popularity not only among devotees but also among nature enthusiasts and adventure seekers. Anjaneri beautifully combines mythology, history, and natural landscapes, making it one of the most unique destinations near Nashik. Its spiritual significance continues to attract visitors throughout the year.",
+    "dest10_route": "Anjaneri is located approximately 20 km from Nashik on the Nashik–Trimbakeshwar route. The drive takes around 30–40 minutes.",
+    "dest10_transport": "Pilgrims can easily reach by local Public transport or taxis, Visitors can arrange transportation and trekking trips."
+  },
+  "BathingDates": {
+    "mainTitle": "Kumbha",
+    "mainSubtitle": "Amrit Snan Dates 2027-28",
+    "yearsCycle": "Years Cycle",
+    "dailyPilgrims": "Daily Pilgrims",
+    "daysFestival": "Days Festival",
+    "amritSnans": "Amrit Snans",
+    "sacredImmersion": "Sacred Immersion",
+    "date1_occ": "Dhwajarohan – Flag Hoisting",
+    "date1_title": "Official Commencement",
+    "date2_occ": "Nashik Kumbh Mela 2027",
+    "date2_title": "Flag Hoisting Ceremony",
+    "date3_occ": "Ashadh Somvati Amavasya",
+    "date3_title": "First Amrit Snan",
+    "date4_occ": "Shravan Amavasya",
+    "date4_title": "Second Amrit Snan",
+    "date5_occ": "Bhadrapada Shuddha Ekadashi",
+    "date5_title": "Third Amrit Snan - Vaishnava",
+    "date6_occ": "Kushavarta Tirtha, Trimbakeshwar",
+    "date6_title": "Third Amrit Snan - Shaiva",
+    "date7_occ": "Mouni Amavasya",
+    "date7_title": "Mouni Amavasya Special",
+    "october": "October",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "january": "January"
+  },
+  "ServicesTab": {
+    "montezSubTitle": "Our Services",
+    "tourPackagesTitle": "Tour Packages",
+    "rentalCarTitle": "Rental Car",
+    "accommodationTitle": "Accommodation",
+    "vehicleFallback": "Vehicle",
+    "tourPackageLabel": "Tour Package",
+    "perNight": "per night",
+    "perKm": "per km",
+    "perPerson": "per person",
+    "seaterCapacity": "Seater Capacity",
+    "customDuration": "Custom Days",
+    "durationLabel": "Duration",
+    "viewDetails": "View Details",
+    "bookNow": "Book Now",
+    "viewAll": "View All",
+    "loading": "Loading available listings...",
+    "noItems": "No items found."
+  },
+  "BlogSection": {
+    "mainTitle": "Latest Updates & Insights",
+    "montezSubTitle": "Blogs & Updates",
+    "viewAll": "View All Blogs"
+  },
+  "VideoReels": {
+    "mainTitle": "Divine Experiences",
+    "montezSubTitle": "Video Stories"
+  },
+  "SearchFleet": {
+    "searchByName": "Search By Name",
+    "placeholderHotel": "Hotel name...",
+    "placeholderCar": "Car model...",
+    "placeholderTour": "Package name...",
+    "vehicleType": "Vehicle Type",
+    "accommodation": "Accommodation",
+    "tourType": "Tour Type",
+    "priceRange": "Price Range",
+    "searchBtn": "Search",
+    "categories": {
+      "all": "All Types",
+      "Sedan": "Sedan",
+      "SUV": "SUV",
+      "Traveller": "Tempo Traveller",
+      "Luxury": "Luxury",
+      "Heritage": "Heritage",
+      "Budget": "Budget",
+      "Essential": "Essential",
+      "Premium": "Premium"
+    },
+    "prices": {
+      "all": "Any Price",
+      "below2k": "Below ₹2,000",
+      "2kTo10k": "₹2,000 - ₹10,000",
+      "above10k": "Above ₹10,000",
+      "2kTo7k": "₹2,000 - ₹7,000",
+      "above7k": "Above ₹7,000",
+      "below5k": "Below ₹5,000",
+      "5kTo15k": "₹5,000 - ₹15,000",
+      "above15k": "Above ₹15,000"
+    }
+  },
+  "Footer": {
+    "description": "Our fleet of cars and tempo travellers ensures comfortable journeys to Adya Jyotirlinga Trimbakeshwar, Trayambkeshwar, and other sacred destinations.",
+    "quickLinks": "Quick Links",
+    "otherServices": "Other Services We Offer:",
+    "contactInfo": "Contact Information",
+    "address": "Office Shop No 11, NYSA Business Centre, Makhmalabad Rd, Ghadge Nagar, Nashik, Maharashtra 422003",
+    "rightsReserved": "© {year} Mahakumbh Tours & Travels. All rights reserved.",
+    "developedBy": "Design and Developed by",
+    "servicesList": {
+      "panIndia": "Car Rental Pan India",
+      "marriage": "Luxury Car Marriage Corporate",
+      "traveller": "Traveller & Bus",
+      "flights": "Flight Ticketing",
+      "holidays": "Holidays Packages",
+      "hotels": "Hotel Reservations",
+      "visa": "Visa Services",
+      "passport": "Passport Assistance"
+    }
+  },
+  "AboutPage": {
+    "Hero": {
+      "tag": "The Great Bathing Festival",
+      "title": "The Soul of",
+      "subtitle": "Nashik",
+      "description": "Experience the convergence of celestial alignment and spiritual devotion. A timeless tradition on the banks of the sacred Godavari River.",
+      "cta": "Explore Journey"
+    },
+    "Legacy": {
+      "tag": "The Simhastha Legacy",
+      "title": "Where Faith Conflues with the",
+      "span": "Godavari",
+      "description": "Discover the spiritual heartbeat of Nashik. A journey through the Kumbh Mela is more than a pilgrimage; it is a profound reconnection with the cosmic rhythm of the universe.",
+      "meta": "Sacred gatherings since time immemorial",
+      "statText": "Years of preparation for a moment of transcendence."
+    },
+    "History": {
+      "title": "Sacred History",
+      "subTitle": "Through the Ages",
+      "cards": {
+        "card1": {
+          "badge": "Origin",
+          "title": "The Celestial Alignment",
+          "desc": "According to the Puranas, a drop of the divine nectar fell at Trimbakeshwar, making the waters of Godavari a portal to liberation."
+        },
+        "card2": {
+          "badge": "Evolution",
+          "title": "The Kumbh Tradition",
+          "desc": "The Nashik-Trimbakeshwar Kumbh Mela is unique as it is celebrated separately by the Shaivite and Vaishnavite sects."
+        },
+        "card3": {
+          "badge": "Vibrancy",
+          "title": "A Cultural Tapestry",
+          "desc": "Beyond the bath, the Mela is a grand gathering of sages, scholars, and seekers from all corners of India."
+        },
+        "card4": {
+          "badge": "Evolution 2",
+          "title": "The Kumbh Tradition 2",
+          "desc": "The Nashik-Trimbakeshwar Kumbh Mela is unique as it is celebrated separately by the Shaivite and Vaishnavite sects."
+        }
+      }
+    },
+    "Insights": {
+      "title": "Simhastha Experience",
+      "subTitle": "Sacred Insights"
+    },
+    "Rituals": {
+      "title": "Rituals & Key Events",
+      "subTitle": "SACRED CEREMONIES",
+      "description": "Experience the profound spiritual practices that have been observed for millennia. Each ritual carries deep significance and offers unique blessings to participants.",
+      "items": {
+        "ritual1": {
+          "title": "Shahi Snan",
+          "subtitle": "Royal Bath",
+          "description": "The most auspicious bathing ritual led by Akharas in grand processions. These dates are determined by celestial alignments and are considered the most spiritually powerful.",
+          "footerTag": "MOST AUSPICIOUS EVENT"
+        },
+        "ritual2": {
+          "title": "Akhara Processions",
+          "subtitle": "Peshwai",
+          "description": "Magnificent processions of Naga Sadhus, Mahamandaleshwars, and saints from various Akharas, accompanied by elephants, horses, and traditional music."
+        },
+        "ritual3": {
+          "title": "Aarti Ceremonies",
+          "subtitle": "Daily Rituals",
+          "description": "Elaborate evening prayers at the ghats with hundreds of oil lamps, creating a mesmerizing spectacle of light and devotion on the Godavari."
+        },
+        "ritual4": {
+          "title": "Kalpavas",
+          "subtitle": "Month-long Stay",
+          "description": "Devout pilgrims who undertake Kalpavas live on the riverbanks for the entire Kumbh period, practicing austerity and spiritual disciplines."
+        },
+        "ritual5": {
+          "title": "Pravachans & Bhajans",
+          "subtitle": "Spiritual Discourses",
+          "description": "Renowned saints and scholars deliver spiritual discourses, while devotional music fills the air throughout the Kumbh grounds."
+        },
+        "ritual6": {
+          "title": "Yagna & Puja",
+          "subtitle": "Sacred Ceremonies",
+          "description": "Ancient Vedic fire rituals and elaborate pujas performed for world peace, prosperity, and spiritual upliftment of all beings."
+        }
+      }
+    },
+    "Quote": {
+      "text": "\"Kumbh is not just a fair, it's a congregation of souls seeking the eternal truth amidst the flow of the Godavari.\"",
+      "author": "The Pilgrim's Wisdom"
+    },
+    "Destinations": {
+      "title": "Tourist Sites & Sacred Destinations",
+      "subTitle": "EXPLORE MAHARASHTRA",
+      "locationsFound": "Locations Found",
+      "moreInfo": "For more Information Click on this link",
+      "readMore": "Read More"
+    },
+    "Showcase": {
+      "title": "Cultural Showcase",
+      "subTitle": "Visual Journey",
+      "cards": {
+        "card1": {
+          "title": "Sadhus & Saints",
+          "text": "Holy men who have renounced worldly life gather from across India, representing ancient spiritual lineages."
+        },
+        "card2": {
+          "title": "Akharas",
+          "text": "The traditional monastic orders that preserve and transmit Hindu spiritual knowledge through generations."
+        },
+        "card3": {
+          "title": "River Rituals",
+          "text": "Sacred bathing ceremonies performed at auspicious times, believed to cleanse karma and grant liberation."
+        },
+        "card4": {
+          "title": "Evening Aarti",
+          "text": "Mesmerizing lamp ceremonies on the ghats create a divine atmosphere of devotion and peace."
+        }
+      }
+    },
+    "touristTabsData": {
+      "jyotirlingas12": {
+        "title": "The 12 Jyotirlingas",
+        "description": "The twelve sacred Jyotirlinga shrines dedicated to Lord Shiva, spread across India. These self-manifested lingams are considered the holiest Shiva temples.",
+        "subItems": {
+          "sub1": {
+            "name": "Somnath",
+            "text": "Located in Gujarat, the first among the 12 Jyotirlingas, rebuilt multiple times as a symbol of resilience."
+          },
+          "sub2": {
+            "name": "Mallikarjuna",
+            "text": "Situated on Srisailam hill in Andhra Pradesh, one of the most ancient and revered Shiva shrines."
+          },
+          "sub3": {
+            "name": "Mahakaleshwar",
+            "text": "In Ujjain, Madhya Pradesh, the only south-facing Jyotirlinga, known for its powerful Bhasma Aarti."
+          },
+          "sub4": {
+            "name": "Omkareshwar",
+            "text": "On an island in the Narmada River, Madhya Pradesh, shaped like the sacred Om symbol."
+          },
+          "sub5": {
+            "name": "Kedarnath",
+            "text": "In the Himalayas of Uttarakhand, one of the highest and most sacred Shiva temples in India."
+          },
+          "sub6": {
+            "name": "Bhimashankar",
+            "text": "In the Sahyadri hills of Maharashtra, surrounded by dense forests and a wildlife sanctuary."
+          },
+          "sub7": {
+            "name": "Kashi Vishwanath",
+            "text": "In Varanasi, Uttar Pradesh, one of the most famous Hindu temples dedicated to Lord Shiva."
+          },
+          "sub8": {
+            "name": "Trimbakeshwar",
+            "text": "Near Nashik, Maharashtra, source of the Godavari River with a unique three-faced lingam."
+          },
+          "sub9": {
+            "name": "Vaidyanath",
+            "text": "In Deoghar, Jharkhand, associated with the legend of Ravana and Lord Shiva's healing powers."
+          },
+          "sub10": {
+            "name": "Nageshwar",
+            "text": "Near Dwarka in Gujarat, where Lord Shiva manifested to protect his devotee from a demon."
+          },
+          "sub11": {
+            "name": "Rameshwaram",
+            "text": "On Pamban Island in Tamil Nadu, established by Lord Rama before his journey to Lanka."
+          },
+          "sub12": {
+            "name": "Grishneshwar",
+            "text": "Near Ellora Caves in Maharashtra, the last of the 12 Jyotirlingas mentioned in Shiva Purana."
+          }
+        }
+      },
+      "mahaJyotirlingas": {
+        "title": "Maharashtra's 5 Jyotirlingas",
+        "description": "Maharashtra is uniquely blessed with 5 of India's 12 Jyotirlingas, the highest concentration in any state.",
+        "subItems": {
+          "sub1": {
+            "name": "Trimbakeshwar",
+            "text": "Near Nashik, source of the Godavari River. One of the most revered Jyotirlingas with a unique three-faced lingam representing Brahma, Vishnu, and Shiva."
+          },
+          "sub2": {
+            "name": "Bhimashankar",
+            "text": "In the Sahyadri hills, surrounded by a wildlife sanctuary. Source of the Bhima River."
+          },
+          "sub3": {
+            "name": "Grishneshwar",
+            "text": "Near Ellora Caves in Aurangabad district. The last of the 12 Jyotirlingas, mentioned in Shiva Purana."
+          },
+          "sub4": {
+            "name": "Aundha Nagnath",
+            "text": "In Hingoli district, believed to be the first Jyotirlinga. Ancient temple with Hemadpanthi architecture."
+          },
+          "sub5": {
+            "name": "Parli Vaijnath",
+            "text": "In Beed district, an ancient temple with beautiful architecture and rich mythological significance."
+          }
+        }
+      },
+      "unescoSites": {
+        "title": "UNESCO & Historic Sites",
+        "description": "Explore Maharashtra's world-renowned heritage sites that showcase centuries of art, architecture, and devotion.",
+        "subItems": {
+          "sub1": {
+            "name": "Ajanta Caves",
+            "text": "UNESCO World Heritage rock-cut Buddhist caves dating from 2nd century BCE, famous for exquisite murals and sculptures."
+          },
+          "sub2": {
+            "name": "Ellora Caves",
+            "text": "UNESCO World Heritage site featuring 34 caves representing Buddhist, Hindu, and Jain traditions carved between 6th-11th century CE."
+          },
+          "sub3": {
+            "name": "Kailasa Temple (Ellora)",
+            "text": "The magnificent monolithic rock-cut temple, carved top-down from a single basalt cliff. Dedicated to Lord Shiva."
+          },
+          "sub4": {
+            "name": "Bhadra Maruti Temple",
+            "text": "Ancient temple in Khuldabad near Ellora, where Lord Hanuman is depicted in a reclining posture - one of only two such temples in India."
+          }
+        }
+      },
+      "shaktiPeethas": {
+        "title": "Shakti Peethas of Maharashtra",
+        "description": "Sacred seats of the Divine Feminine, where the Goddess manifests in her powerful forms. Maharashtra is blessed with some of the most important Shakti Peethas.",
+        "subItems": {
+          "sub1": {
+            "name": "Mahalakshmi Temple, Kolhapur",
+            "text": "One of the most important Shakti Peethas, dedicated to Goddess Mahalakshmi. A 3.5 Shakti Peetha."
+          },
+          "sub2": {
+            "name": "Tulja Bhavani, Tuljapur",
+            "text": "The family deity (Kuladaivat) of many Maharashtrian families. Shivaji Maharaj's patron deity."
+          },
+          "sub3": {
+            "name": "Renuka Devi, Mahurgad",
+            "text": "An ancient hilltop temple dedicated to Goddess Renuka, considered one of the 3.5 Shakti Peethas."
+          },
+          "sub4": {
+            "name": "Sapshrungi Devi, Vani",
+            "text": "A dramatic cliff-top temple near Nashik dedicated to the seven-peaked Goddess. One of the 3.5 Shakti Peethas."
+          }
+        }
+      },
+      "ashtavinayak8": {
+        "title": "Ashtavinayak - Eight Ganesh Temples",
+        "description": "A sacred circuit of eight ancient Ganesh temples in Maharashtra, each with a unique self-manifested (swayambhu) idol of Lord Ganeshas.",
+        "subItems": {
+          "sub1": {
+            "name": "Morgaon (Moreshwar)",
+            "text": "The first temple in the Ashtavinayak circuit, considered the most important."
+          },
+          "sub2": {
+            "name": "Siddhatek (Siddhivinayak)",
+            "text": "Known for granting wishes. Lord Vishnu worshipped Ganesha here before defeating demons Madhu and Kaitabha."
+          },
+          "sub3": {
+            "name": "Pali (Ballaleshwar)",
+            "text": "The only Ashtavinayak named after a devotee rather than Lord Ganesha."
+          },
+          "sub4": {
+            "name": "Mahad (Varadvinayak)",
+            "text": "Known for granting boons to devotees."
+          },
+          "sub5": {
+            "name": "Theur (Chintamani)",
+            "text": "Where sage Kapila worshipped Ganesha. The Chintamani jewel was restored here after being stolen by the demon Gana."
+          },
+          "sub6": {
+            "name": "Lenyadri (Girijatmaj)",
+            "text": "Located in Buddhist rock-cut caves on a hill."
+          },
+          "sub7": {
+            "name": "Ozar (Vighnahar)",
+            "text": "Known as the remover of obstacles."
+          },
+          "sub8": {
+            "name": "Ranjangaon (Mahaganapati)",
+            "text": "The last temple in the circuit, believed to house the most powerful form of Ganesha."
+          }
+        }
+      },
+      "hillStations": {
+        "title": "Scenic Hill Stations",
+        "description": "Maharashtra's beloved hill retreats offering cool climate, stunning views, and natural beauty - perfect for a refreshing break during your pilgrimage.",
+        "subItems": {
+          "sub1": {
+            "name": "Lonavala",
+            "text": "A popular hill station between Mumbai and Pune, famous for Bhushi Dam, Tiger Point, and chikki sweets."
+          },
+          "sub2": {
+            "name": "Khandala",
+            "text": "Twin hill station of Lonavala, known for Duke's Nose viewpoint and scenic valleys."
+          },
+          "sub3": {
+            "name": "Mahabaleshwar",
+            "text": "Maharashtra's most popular hill station with strawberry farms, Arthur Seat, and Pratapgad Fort nearby."
+          }
+        }
+      }
+    },
+    "faqData": {
+      "faq1": {
+        "quest": "Beyond Bathing: The Cultural Life of the Kumbh",
+        "leadText": "While ritual bathing draws the largest attention, the Simhastha is equally sustained by its non-ritual life:",
+        "footerText": "These elements transform the gathering into a temporary civilization rather than a single event.",
+        "listItems": {
+          "item1": {
+            "title": "Spiritual Discourses and Satsangs",
+            "text": "Continuous philosophical dialogue forms the intellectual backbone of the Kumbh."
+          },
+          "item2": {
+            "title": "Seva and Community Kitchens",
+            "text": "Large-scale charitable service reflects the ethic of collective responsibility."
+          },
+          "item3": {
+            "title": "Music, Chanting, and Oral Tradition",
+            "text": "Knowledge is transmitted not through texts alone, but through sound and memory."
+          },
+          "item4": {
+            "title": "Inter-sect Dialogue",
+            "text": "The Kumbh acts as a rare meeting ground for diverse spiritual paths within Hinduism."
+          }
+        }
+      },
+      "faq2": {
+        "quest": "Sacred Landscapes Around the Simhastha",
+        "leadText": "The wider Nashik–Trimbakeshwar region forms an extended sacred map:",
+        "footerText": "Together, these sites provide context rather than itinerary, deepening understanding of why this region has drawn seekers for millennia.",
+        "listItems": {
+          "item1": {
+            "title": "Panchavati and Kalaram Temple",
+            "text": "Anchor Ramayana traditions."
+          },
+          "item2": {
+            "title": "Sita Gufa and Anjaneri Hills",
+            "text": "Connect mythology with geography."
+          },
+          "item3": {
+            "title": "Brahmagiri Hill",
+            "text": "As the river’s source, represents spiritual origin."
+          },
+          "item4": {
+            "title": "The Pandavleni Caves",
+            "text": "Reveal the region’s layered religious history beyond Hinduism."
+          }
+        }
+      },
+      "faq3": {
+        "quest": "A Modern Gathering Rooted in Ancient Wisdom",
+        "paragraphs": [
+          "Contemporary Simhastha Melas reflect a delicate balance between scale and sanctity. Environmental responsibility, technological integration, and crowd coordination now coexist with ritual purity and ascetic discipline.",
+          "Yet despite modern systems, the Kumbh remains fundamentally human-powered, driven by faith, memory, and shared belief rather than spectacle."
+        ]
+      },
+      "faq4": {
+        "quest": "Movement & Participation: What to Keep in Mind",
+        "leadText": "To ensure a smooth pilgrimage experience, keep these core operational realities in mind:",
+        "footerText": "These considerations are part of the Simhastha’s lived reality, reinforcing that participation is as much about adaptation and patience as it is about ritual observance.",
+        "listItems": {
+          "item1": {
+            "title": "Expect altered access patterns",
+            "text": "During key ritual phases, movement within Nashik and Trimbakeshwar follows ceremonial and security-led routes rather than everyday city traffic flows."
+          },
+          "item2": {
+            "title": "Walking is integral to the experience",
+            "text": "Much of the Simhastha is navigated on foot, reflecting both practical necessity and pilgrimage tradition."
+          },
+          "item3": {
+            "title": "Time operates differently",
+            "text": "Distances that appear short on maps often take longer during the Simhastha, not due to inefficiency but due to ritual sequencing and crowd rhythm."
+          },
+          "item4": {
+            "title": "Follow institutional guidance",
+            "text": "Akhara processions, bathing cycles, and administrative instructions shape how spaces are used and accessed during the event."
+          }
+        }
+      },
+      "faq5": {
+        "quest": "Why the Simhastha Still Matters",
+        "paragraphs": [
+          "In an increasingly fragmented world, the Simhastha Kumbh Mela stands as a reminder of collective spiritual identity. It dissolves social hierarchies, compresses time, and reconnects individuals with traditions far older than themselves.",
+          "For some, it is a pilgrimage. For others, a cultural immersion. For many, it is simply an encounter with scale, devotion, and continuity that cannot be replicated elsewhere. The Simhastha Nashik Kumbh Mela 2027 is not just observed, it is entered, endured, and remembered."
+        ]
+      },
+      "faq6": {
+        "quest": "Who is the Simhastha for?",
+        "paragraphs": [
+          "The Simhastha Kumbh Mela is experienced differently by different people, shaped as much by individual intention as by ritual structure. For some, it is a lifelong spiritual commitment, a return to practices observed across generations. For others, it is a moment of cultural immersion, offering a rare window into living traditions that continue to shape Indian civilization.",
+          "At the same time, the Simhastha is physically demanding and emotionally intense. Its scale, pace, and sensory density can be overwhelming for those unprepared for prolonged walking, crowds, and highly structured ritual environments. Approaching the Kumbh with patience, humility, and openness often determines the depth of the experience more than familiarity with the ritual itself.",
+          "This range of responses is not a contradiction but a reflection of the Simhastha’s breadth, a gathering vast enough to accommodate devotion, curiosity, and quiet observation in equal measure."
+        ]
+      },
+      "faq7": {
+        "quest": "Accommodation During the Simhastha: A Temporary Sacred City",
+        "paragraphs": [
+          "During the Simhastha Kumbh Mela, the Nashik–Trimbakeshwar region functions not as a conventional host city but as a vast, temporary settlement system designed to absorb an extraordinary influx of pilgrims and ascetic communities.",
+          "Accommodation during the Simhastha extends beyond permanent hotels and lodgings. Large tented settlements and monastic camps established by Akharas, dharamshalas, and community-run shelters together form a layered housing network that mirrors the social and spiritual diversity of the gathering. These temporary habitats are organized around ritual zones, processional routes, and bathing ghats rather than commercial districts.",
+          "For many participants, accommodation is not merely a matter of rest but an extension of pilgrimage life: shared spaces, simple living conditions, and proximity to ritual activity are often embraced as part of the spiritual discipline associated with the Kumbh.",
+          "This system of temporary habitation is one of the Simhastha’s most remarkable organizational achievements, demonstrating how large-scale human movement has been sustained for centuries through collective effort, institutional coordination, and voluntary service."
+        ]
+      }
+    }
+  },
+  "HotelPage": {
+    "hotelHeader": {
+      "title": "Hotel Accommodation",
+      "heroTitle": "Pilgrim Concierge & Support",
+      "description": "Find and book comfortable hotels, dharamshalas, and ashram accommodations near the holy ghats.",
+      "noResults": "No accommodations found matching your criteria.",
+      "clearFilters": "Clear All Filters",
+      "loading": "Loading Accommodations...",
+      "metaTitle": "Premium Hotel Accommodation & Dharamshala Bookings",
+      "metaDesc": "Explore and book stays near sacred locations. Verified options with complete amenities for group pilgrims."
+    }
+  },
+  "RentalCar": {
+    "Hero": {
+      "subTitle": "Mela Transit & Fleet",
+      "title": "Sacred Journeys, Seamless Transit",
+      "description": "Our fleet of cars and tempo travellers ensures comfortable journeys to sacred destinations."
+    },
+    "Tabs": {
+      "all": "All Cars",
+      "sedan": "Sedan",
+      "suv": "SUV",
+      "traveller": "Tempo Traveller",
+      "urbania": "Urbania",
+      "bus": "Mini Bus",
+      "luxury": "Luxury Car"
+    },
+    "Status": {
+      "loading": "Loading fleet options...",
+      "noResults": "No {category} cars available in this category.",
+      "clearFilters": "Clear All Filters"
+    },
+    "Bento": {
+      "sectionTitle": "The Pilgrim's Standard",
+      "card1": {
+        "title": "Vetted & Verified Drivers",
+        "text": "Every driver undergoes a background check and a specialized orientation for the Nashik city routes and temple etiquettes."
+      },
+      "card2": {
+        "title": "100% Booking Guarantee",
+        "text": "Once confirmed, your vehicle is locked in. No cancellations during the peak mela hours."
+      },
+      "card3": {
+        "title": "Sanitized Fleet",
+        "text": "Vehicles are deep cleaned after every trip following international hygiene protocols."
+      },
+      "card4": {
+        "title": "24/7 Roadside Assistance",
+        "text": "Dedicated helpline for any on-road emergencies, ensuring your journey remains uninterrupted."
+      }
+    }
+  },
+  "TourPackages": {
+    "Hero": {
+      "title": "Tour Packages",
+      "subTitle": "Sacred Itineraries"
+    },
+    "Status": {
+      "loading": "Loading Tours...",
+      "noResults": "No packages found matching your criteria.",
+      "clearFilters": "Clear All Filters",
+      "fallback": "Loading Page Layout..."
+    }
+  },
+  "Blog": {
+    "loading": "Loading blogs...",
+    "heroSubTitle": "Knowledge & Insights",
+    "heroTitle": "Kumbh Mela Blogs & Articles",
+    "heroDescription": "Explore the rich history, sacred rituals, and practical travel tips for Kumbh Mela Nashik 2027",
+    "previousPage": "Previous Page",
+    "nextPage": "Next Page"
   }
 }

@@ -2,32 +2,45 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap';
 import { TitleComponent } from '../ui/common';
+import { useTranslations } from 'next-intl';
 import "../../styles/whyChooseUs.scss"
 
+import historical from '../../assets/images/historical.png';
+import fire from '../../assets/images/fire.png';
+import water from '../../assets/images/water.png';
+import mountain from '../../assets/images/mountain.png';
+
+import aboutSec from '../../assets/images/about-sec-1.jpg';
+import bath from '../../assets/images/bath-2.jpg';
+import ramkund from '../../assets/images/ramkund-1.jpg';
+import Image from 'next/image';
+
+
 const AboutSec = () => {
+    const t = useTranslations('AboutSec');
 
     const aboutListData = [
         {
-            title: "The Holy Godavari",
-            description: "A sacred river where Kumbh bathing is believed to cleanse sins and grant moksha.",
-            icon: "/images/water.png"
+            title: t("item1_title"),
+            description: t("item1_desc"),
+            icon: water
         },
         {
-            title: "Samudra Manthan",
-            description: "Myth says drops of Amrit fell in Nashik, making it a holy Kumbh site.",
-            icon: "/images/mountain.png"
+            title: t("item2_title"),
+            description: t("item2_desc"),
+            icon: mountain
         },
         {
-            title: "Ramayana Connection",
-            description: "Panchavati in Nashik is linked to Lord Rama’s exile in the Ramayana.",
-            icon: "/images/historical.png"
+            title: t("item3_title"),
+            description: t("item3_desc"),
+            icon: historical
         },
         {
-            title: "Spiritual Significance",
-            description: "Kumbh Mela in Nashik occurs every 12 years with strong spiritual importance.",
-            icon: "/images/fire.png"
+            title: t("item4_title"),
+            description: t("item4_desc"),
+            icon: fire
         }
-    ]
+    ];
 
     return (
         <>
@@ -37,21 +50,27 @@ const AboutSec = () => {
                     <Row>
                         <Col md={6}>
                             <TitleComponent
-                                title="The Sacred Legacy of Nashik Kumbh Mela"
-                                // description="Stay Informed About Kumbh Mela"
+                                title={t("mainTitle")}
                                 className="mb-4 md-md-5"
                                 divider={false}
-                                montezSubTitle="Discover the Sacred"
+                                montezSubTitle={t("montezSubTitle")}
                                 montezClass="playfair-display primery-color d-none d-md-block"
                                 descClass='text-md'
-                                description={"Experience the divine with Mahakumbh Tours & Travels Nashik, your trusted car rental company in Nashik, Maharashtra. With 12 years of expertise, we specialize in Trimbakeshwar Joytirling Darshan, Nashik Darshan, Panchavti Tapovan, Shirdi Shani Shingnpur Darshan, and Grishneshwar Joytirling Darshan."}
+                                description={t("mainDescription")}
                             />
+
                             <Row className='g-4'>
                                 {aboutListData.map((item, index) => (
                                     <Col lg={6} key={index}>
                                         <div className="why-choose-us-card d-flex align-items-start gap-2">
                                             <div className="icon shadow-sm">
-                                                <img src={item.icon} alt={item.title} />
+                                                <Image
+                                                    src={item.icon}
+                                                    alt={item.title}
+                                                    width={40}
+                                                    height={40}
+                                                    style={{ objectFit: 'contain' }}
+                                                />
                                             </div>
                                             <div className="content">
                                                 <h3 className="title primery-color">{item.title}</h3>
@@ -65,17 +84,17 @@ const AboutSec = () => {
                         <Col md={6} className='position-relative image-layout mt-4 mt-md-0 d-none d-md-block'>
                             {/* Left Top Image */}
                             <div className="img-box img-1">
-                                <img src="/images/about-sec-1.jpg" alt="mahakumba - trambakeshwar" />
+                                <img src={aboutSec.src} alt="mahakumba - trambakeshwar" />
                             </div>
 
                             {/* Right Main Image */}
                             <div className="img-box img-2">
-                                <img src="/images/ramkund-1.jpg" alt="mahakumbh - ramkund" />
+                                <img src={ramkund.src} alt="mahakumbh - ramkund" />
                             </div>
 
                             {/* Bottom Small Image */}
                             <div className="img-box img-3">
-                                <img src="/images/bath-2.jpg" alt="mahakumbh - naga sadhus" />
+                                <img src={bath.src} alt="mahakumbh - naga sadhus" />
                             </div>
                         </Col>
                     </Row>

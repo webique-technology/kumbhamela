@@ -11,8 +11,10 @@ import { PrimeryBtn } from "../ui/button";
 import { slugify } from "@/lib/utils";
 import { SwiperSlide } from "swiper/react";
 import { getBlogs } from '@/app/[locale]/blog/blogApi';
+import { useTranslations } from "next-intl";
 
 const BlogSection = () => {
+    const t = useTranslations('BlogSection');
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
     const recentBlogs = blogs;
@@ -52,23 +54,21 @@ const BlogSection = () => {
                 {/* Heading */}
                 <div className="d-flex mb-3 mb-md-4 mb-lg-5 justify-content-center justify-content-sm-between align-items-center">
                     <TitleComponent
-                        title="Latest Updates & Insights"
-                        // description="Stay Informed About Kumbh Mela"
+                        title={t("mainTitle")} // Dynamic translation mapping passed cleanly
                         className="m-0 text-center text-sm-start title-width"
                         divider={false}
-                        montezSubTitle="Bolgs & Updates"
+                        montezSubTitle={t("montezSubTitle")} // Dynamic subtitle mapping passed cleanly
                         montezClass="playfair-display primery-color d-none d-md-block"
                     />
                     <div className="d-none d-sm-flex justify-content-center">
                         <PrimeryBtn
                             className="primery-btn"
-                            title="View All Blogs"
+                            title={t("viewAll")} // Dynamic CTA button label mapping passed cleanly
                             btnLink="/blog"
                             iconRight={<ArrowRight size={18} />}
                         />
                     </div>
                 </div>
-
 
                 {/* Blog Grid */}
                 <div className="d-none d-lg-block">
@@ -88,6 +88,7 @@ const BlogSection = () => {
                         ))}
                     </Row>
                 </div>
+                
                 {/* blog card swiper */}
                 <div className="d-lg-none mb-4">
                     <SwiperSliderComp

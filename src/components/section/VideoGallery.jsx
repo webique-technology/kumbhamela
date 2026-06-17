@@ -3,58 +3,73 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Container, Modal } from "react-bootstrap";
 import { SwiperSlide } from "swiper/react";
-import { ArrowRight, ArrowLeft } from "lucide-react";
+import { ArrowRight, ArrowLeft, X } from "lucide-react";
 import { SwiperSliderComp, TitleComponent } from "../ui/common";
-
+import { useTranslations } from "next-intl";
+import Image from "next/image"; // Added for optimized placeholder images
 import "swiper/css";
 import "../../styles/videoGallery.scss";
+const localVideoPath = "/videos/GramFetchr_98506378.mp4";
 
 const VideoGallery = () => {
     const videoRefs = useRef([]);
     const swiperRef = useRef(null);
-
+    const t = useTranslations("VideoReels");
     const [showModal, setShowModal] = useState(false);
     const [activeVideoUrl, setActiveVideoUrl] = useState("");
-    
+    const [mounted, setMounted] = useState(false);
+
     // Track unique custom cover states for your Instagram API fallbacks
     const [instagramCovers, setInstagramCovers] = useState({});
 
+    // FIX: Extract the raw string path from the Next.js imported video asset object (.src)
+
     const reels = [
-        { id: 1, video: "/videos/GramFetchr_98506378.mp4", title: "Kumbh Mela Experience", location: "Prayagraj" },
-        { id: 2, video: "/videos/GramFetchr_98506378.mp4", title: "Holy Dip", location: "Haridwar" },
+        { id: 1, video: localVideoPath, title: "Kumbh Mela Experience", location: "Prayagraj" },
+        { id: 2, video: localVideoPath, title: "Holy Dip", location: "Haridwar" },
         { id: 3, video: "https://youtube.com/shorts/aRRPbm0PiUI?si=nH3hW8xO6vPvTUGO", title: "Sadhu Procession", location: "Ujjain" },
         { id: 4, video: "https://www.instagram.com/reel/DYFGdpLo21j/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==.mp4", title: "Goda Ghat", location: "Nashik" },
         { id: 5, video: "https://youtu.be/SvZoIu-ixPI?si=0TFUn_IpWA3Nh-FO", title: "Goda Ghat", location: "Nashik" },
-        { id: 6, video: "/videos/GramFetchr_98506378.mp4", title: "Goda Ghat", location: "Nashik" },
-        { id: 7, video: "/videos/GramFetchr_98506378.mp4", title: "Goda Ghat", location: "Nashik" }
+        { id: 6, video: localVideoPath, title: "Goda Ghat", location: "Nashik" },
+        { id: 7, video: localVideoPath, title: "Goda Ghat", location: "Nashik" }
     ];
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     // Domain matching pattern verifiers
     const isYouTubeUrl = (url) => url?.includes("youtube.com") || url?.includes("youtu.be");
     const isInstagramUrl = (url) => url?.includes("instagram.com") || url?.includes("instagr.am");
 
+    // FIX: Bulletproof extraction of YouTube IDs from Shorts or Standard link routing formats
+    const getYouTubeId = (url) => {
+        if (!url) return "";
+        if (url.includes("/shorts/")) {
+            return url.split("/shorts/")[1]?.split("?")[0];
+        }
+        if (url.includes("v=")) {
+            return url.split("v=")[1]?.split("&")[0];
+        }
+        if (url.includes("youtu.be/")) {
+            return url.split("youtu.be/")[1]?.split("?")[0];
+        }
+        return "";
+    };
+
     // Parses diverse social media link formats into clean iframe source links
     const getEmbedUrl = (url) => {
         if (!url) return "";
-        
+
         if (isYouTubeUrl(url)) {
-            let videoId = "";
-            if (url.includes("/shorts/")) {
-                videoId = url.split("/shorts/")[1]?.split("?")[0];
-            } else if (url.includes("v=")) {
-                videoId = url.split("v=")[1]?.split("&")[0];
-            } else if (url.includes("youtu.be/")) {
-                videoId = url.split("youtu.be/")[1]?.split("?")[0];
-            }
+            const videoId = getYouTubeId(url);
             return `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&mute=0&controls=1&rel=0`;
         }
 
         if (isInstagramUrl(url)) {
-            // Clean up the trailing ".mp4" string from your dataset safely to prevent broken route pathways
             let sanitizedUrl = url.replace(".mp4", "");
             let baseReelUrl = sanitizedUrl.split("?")[0];
             if (!baseReelUrl.endsWith("/")) baseReelUrl += "/";
-            // Uses standard Instagram embed routing pattern profiles
             return `${baseReelUrl}embed/captioned/?cr=1&v=12`;
         }
 
@@ -64,27 +79,25 @@ const VideoGallery = () => {
     // Dynamically generates safe, crisp asset placeholder images for cloud networks
     const getThumbnailSrc = (reel) => {
         if (isYouTubeUrl(reel.video)) {
-            const videoId = reel.video.split("/shorts/")[1]?.split("?")[0];
+            const videoId = getYouTubeId(reel.video);
             return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
         }
         if (isInstagramUrl(reel.video)) {
-            // Fallback backstop image while waiting for a live graph API connection
-            return instagramCovers[reel.id] || "/images/banner1.webp"; 
+            return instagramCovers[reel.id] || "/images/banner-1.webp"; // Fixed matching fallback filename casing
         }
-        return null;
+        return "";
     };
 
     const handleSlideChange = (swiper) => {
         videoRefs.current.forEach((video, index) => {
             if (!video) return;
-            
+
+            // Stop native loops on non-focused elements
             if (index === swiper.realIndex) {
-                // Instantly play direct local native file assets when swipe finishes
                 if (typeof video.play === "function") {
                     video.play().catch(() => { });
                 }
             } else {
-                // Gracefully pause background videos to preserve CPU memory pools
                 if (typeof video.pause === "function") {
                     video.pause();
                     video.currentTime = 0;
@@ -98,6 +111,13 @@ const VideoGallery = () => {
     };
 
     const openModal = (videoUrl) => {
+        // Stop playing any active inline background video before opening the overlay modal
+        if (swiperRef.current) {
+            const activeVideo = videoRefs.current[swiperRef.current.realIndex];
+            if (activeVideo && typeof activeVideo.pause === "function") {
+                activeVideo.pause();
+            }
+        }
         setActiveVideoUrl(videoUrl);
         setShowModal(true);
     };
@@ -105,7 +125,16 @@ const VideoGallery = () => {
     const closeModal = () => {
         setShowModal(false);
         setActiveVideoUrl("");
+        // Safely resume active background carousel slider item after modal closes
+        if (swiperRef.current) {
+            const activeVideo = videoRefs.current[swiperRef.current.realIndex];
+            if (activeVideo && typeof activeVideo.play === "function") {
+                activeVideo.play().catch(() => { });
+            }
+        }
     };
+
+    if (!mounted) return null;
 
     return (
         <section className="section-padding-2 padding-bottom trinery-bg position-relative video-gallery-main">
@@ -113,10 +142,10 @@ const VideoGallery = () => {
             <Container>
                 <div className="d-flex justify-content-center mb-4 mb-md-0 justify-content-sm-between align-items-center">
                     <TitleComponent
-                        title="Divine Experiences"
-                        className="mb-0 md-md-5"
+                        title={t("mainTitle")}
+                        className="mb-0 mb-md-4 md-md-5"
                         divider={false}
-                        montezSubTitle="video stories"
+                        montezSubTitle={t("montezSubTitle")}
                         montezClass="playfair-display primery-color d-none d-md-block"
                     />
 
@@ -152,7 +181,6 @@ const VideoGallery = () => {
                     onSlideChange={handleSlideChange}
                     onSwiper={(swiper) => {
                         swiperRef.current = swiper;
-                        // Delayed initialization handler ensures video components sync smoothly with DOM loading
                         setTimeout(() => {
                             const initialVideo = videoRefs.current[swiper.realIndex];
                             if (initialVideo && typeof initialVideo.play === "function") {
@@ -169,21 +197,24 @@ const VideoGallery = () => {
 
                         return (
                             <SwiperSlide key={reel.id}>
-                                <div className="reel-card" onClick={() => openModal(reel.video)}>
+                                <div className="reel-card" onClick={() => openModal(reel.video)} style={{ cursor: 'pointer' }}>
                                     <div className="reel-thumbnail-wrapper position-relative w-100 h-100 overflow-hidden">
-                                        
+
                                         {isExternal ? (
                                             /* Static Placeholder Card Layer for Complex Iframe Streams */
-                                            <div 
+                                            <div
                                                 ref={(el) => (videoRefs.current[index] = el)}
-                                                className="external-placeholder-wrapper w-100 h-100 d-flex align-items-center justify-content-center"
+                                                className="external-placeholder-wrapper w-100 h-100 d-flex align-items-center justify-content-center position-relative"
+                                                style={{ minHeight: '300px' }}
                                             >
-                                                <img 
-                                                    src={getThumbnailSrc(reel)} 
+                                                <Image
+                                                    src={getThumbnailSrc(reel)}
                                                     alt={reel.title}
-                                                    className="w-100 h-100 object-cover"
+                                                    fill
+                                                    style={{ objectFit: 'cover' }}
+                                                    unoptimized={isYT} // Bypasses optimization layers for remote YouTube paths
                                                 />
-                                                <div className={`social-play-badge position-absolute ${isIG ? 'instagram-gradient' : 'youtube-red'}`}>
+                                                <div className={`social-play-badge position-absolute z-2 ${isIG ? 'instagram-gradient' : 'youtube-red'}`}>
                                                     ▶
                                                 </div>
                                             </div>
@@ -195,14 +226,15 @@ const VideoGallery = () => {
                                                 muted
                                                 playsInline
                                                 preload="metadata"
-                                                className="reel-video w-100 h-100 object-cover"
+                                                className="reel-video w-100 h-100 object-fit-cover"
+                                                style={{ minHeight: '300px' }}
                                                 onEnded={handleVideoEnd}
                                             />
                                         )}
 
                                         <div className="reel-content position-absolute bottom-0 left-0 w-100 p-3 z-2">
-                                            <h5 className="text-white mb-1">{reel.title}</h5>
-                                            <small className="text-white-50">{reel.location}</small>
+                                            <h5 className="text-white mb-1 fs-6">{reel.title}</h5>
+                                            <small className="text-white-50 xs-text">{reel.location}</small>
                                         </div>
 
                                     </div>
@@ -218,20 +250,21 @@ const VideoGallery = () => {
                 show={showModal}
                 onHide={closeModal}
                 centered
-                size="lg"
+                size="md" // Changed to md since portrait vertical reels look cleaner in a narrower column structure
                 className="video-modal"
             >
-                <Modal.Body className="p-0 bg-black overflow-hidden position-relative">
-                    <button 
-                        type="button" 
-                        className="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3" 
-                        onClick={closeModal} 
+                <Modal.Body className="p-0 bg-black overflow-hidden position-relative rounded-3">
+                    <button
+                        type="button"
+                        className="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3 bg-dark p-2 rounded-circle"
+                        onClick={closeModal}
                         aria-label="Close"
+                        style={{ opacity: 1, width: '30px', height: '30px' }}
                     />
                     {activeVideoUrl && (
                         isYouTubeUrl(activeVideoUrl) || isInstagramUrl(activeVideoUrl) ? (
                             /* Re-routed Iframe Layer for Social Web Providers */
-                            <div className="ratio ratio-9x16 modal-iframe-container">
+                            <div className="ratio ratio-9x16 modal-iframe-container" style={{ minHeight: '75vh' }}>
                                 <iframe
                                     src={getEmbedUrl(activeVideoUrl)}
                                     title="Social Video Player"
@@ -242,13 +275,13 @@ const VideoGallery = () => {
                             </div>
                         ) : (
                             /* Direct Native Storage Streams */
-                            <div className="ratio ratio-9x16">
+                            <div className="ratio ratio-9x16" style={{ minHeight: '75vh' }}>
                                 <video
                                     src={activeVideoUrl}
                                     controls
                                     autoPlay
-                                    preload="metadata"
-                                    className="modal-video w-100 h-100"
+                                    preload="auto"
+                                    className="modal-video w-100 h-100 object-fit-cover"
                                 />
                             </div>
                         )
