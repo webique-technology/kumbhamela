@@ -25,12 +25,12 @@ export async function generateMetadata({ params }) {
             canonical: `${baseUrl}/${locale}/hotel`,
             languages: {
                 "en-US": `${baseUrl}/en/hotel`,
-                "hi-IN": `${baseUrl}/hi/hotel`,
-                "mr-IN": `${baseUrl}/mr/hotel`,
-                "gu-IN": `${baseUrl}/gu/hotel`,
-                "ta-IN": `${baseUrl}/ta/hotel`,
-                "te-IN": `${baseUrl}/te/hotel`,
-                "ml-IN": `${baseUrl}/ml/hotel`,
+                // "hi-IN": `${baseUrl}/hi/hotel`,
+                // "mr-IN": `${baseUrl}/mr/hotel`,
+                // "gu-IN": `${baseUrl}/gu/hotel`,
+                // "ta-IN": `${baseUrl}/ta/hotel`,
+                // "te-IN": `${baseUrl}/te/hotel`,
+                // "ml-IN": `${baseUrl}/ml/hotel`,
             }
         },
         openGraph: {

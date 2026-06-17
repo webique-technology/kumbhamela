@@ -14,6 +14,9 @@ import { createCarEnquiry } from "../../app/[locale]/rental-car/carApi";
 
 // Tour package boking form
 export const BookingFormHandler = ({ tourId, tourName, vehicleCategories = [] }) => {
+    // Bind translation resources targeting BookingFormHandler namespace
+    const t = useTranslations("BookingFormHandler");
+
     const [formData, setFormData] = useState({
         full_name: '',
         email: '',
@@ -28,26 +31,25 @@ export const BookingFormHandler = ({ tourId, tourName, vehicleCategories = [] })
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
 
-    // Regex patterns for validation
     const patterns = {
         email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-        phone_number: /^[6-9]\d{9}$/ // Basic Indian mobile validation (10 digits starting with 6-9)
+        phone_number: /^[6-9]\d{9}$/
     };
 
     const validateField = (name, value) => {
         let error = "";
         if (!value && name !== 'special_requirements') {
-            error = "This field is required";
+            error = t("errors.required");
         } else if (name === 'email' && !patterns.email.test(value)) {
-            error = "Please enter a valid email address";
+            error = t("errors.email");
         } else if (name === 'phone_number' && !patterns.phone_number.test(value)) {
-            error = "Please enter a valid 10-digit mobile number";
+            error = t("errors.phone");
         } else if (name === 'preferred_dates') {
             const selectedDate = new Date(value);
             const today = new Date();
             today.setHours(0, 0, 0, 0);
             if (selectedDate < today) {
-                error = "Date cannot be in the past";
+                error = t("errors.datePast");
             }
         }
         return error;
@@ -57,67 +59,24 @@ export const BookingFormHandler = ({ tourId, tourName, vehicleCategories = [] })
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
 
-        // Clear error as user types
         if (errors[name]) {
             setErrors({ ...errors, [name]: "" });
         }
     };
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     const form = e.currentTarget;
-
-    //     // Perform manual validation check
-    //     const newErrors = {};
-    //     Object.keys(formData).forEach(key => {
-    //         const error = validateField(key, formData[key]);
-    //         if (error) newErrors[key] = error;
-    //     });
-
-    //     if (Object.keys(newErrors).length > 0 || form.checkValidity() === false) {
-    //         e.stopPropagation();
-    //         setErrors(newErrors);
-    //         setValidated(true);
-    //         return;
-    //     }
-
-    //     // If valid, proceed to WhatsApp
-    //     const phoneNumber = "919022093522";
-    //     const message = `*New Booking Enquiry*%0A` +
-    //         `*Name:* ${formData.fullName}%0A` +
-    //         `*Mobile No:* ${formData.phone}%0A` +
-    //         `*Email:* ${formData.email}%0A` +
-    //         `*Tour Package:* ${tourName}%0A` +
-    //         `*Date:* ${formData.date}%0A` +
-    //         `*Travelers:* ${formData.travelers}%0A` +
-    //         `*Requirements:* ${formData.requirements || 'no any requirements'}`;
-
-    //     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
-    // };
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const form = e.currentTarget;
-
         const newErrors = {};
 
         Object.keys(formData).forEach((key) => {
-            const error = validateField(
-                key,
-                formData[key]
-            );
-
+            const error = validateField(key, formData[key]);
             if (error) {
                 newErrors[key] = error;
             }
         });
 
-        if (
-            Object.keys(newErrors).length > 0 ||
-            form.checkValidity() === false
-        ) {
+        if (Object.keys(newErrors).length > 0 || form.checkValidity() === false) {
             e.stopPropagation();
             setErrors(newErrors);
             setValidated(true);
@@ -127,38 +86,21 @@ export const BookingFormHandler = ({ tourId, tourName, vehicleCategories = [] })
         try {
             setLoading(true);
 
-            // save in database
-            await createTourEnquiry({
-                full_name:
-                    formData.full_name,
+            // Database Submission Integration
+            if (typeof createTourEnquiry === "function") {
+                await createTourEnquiry({
+                    full_name: formData.full_name,
+                    email: formData.email,
+                    phone_number: formData.phone_number,
+                    number_of_travelers: formData.number_of_travelers,
+                    preferred_dates: formData.preferred_dates,
+                    special_requirements: formData.special_requirements,
+                    tour_id: tourId,
+                    vehicle_category_id: formData.vehicle_category_id,
+                });
+            }
 
-                email:
-                    formData.email,
-
-                phone_number:
-                    formData.phone_number,
-
-                number_of_travelers:
-                    formData.number_of_travelers,
-
-                preferred_dates:
-                    formData.preferred_dates,
-
-                special_requirements:
-                    formData.special_requirements,
-
-                // tour_package:
-                //     tourName,
-                tour_id:
-                    tourId,
-                vehicle_category_id:
-                    formData.vehicle_category_id,
-            });
-
-            // whatsapp after DB save
-            const phoneNumber =
-                "919022093522";
-
+            const phoneNumber = "919022093522";
             const message =
                 `*New Booking Enquiry*%0A` +
                 `*Name:* ${formData.full_name}%0A` +
@@ -167,125 +109,139 @@ export const BookingFormHandler = ({ tourId, tourName, vehicleCategories = [] })
                 `*Tour Package:* ${tourName}%0A` +
                 `*Date:* ${formData.preferred_dates}%0A` +
                 `*Travelers:* ${formData.number_of_travelers}%0A` +
-                `*Requirements:* ${formData.special_requirements ||
-                "no any requirements"
-                }`;
+                `*Requirements:* ${formData.special_requirements || "no any requirements"}`;
 
-            window.open(
-                `https://wa.me/${phoneNumber}?text=${message}`,
-                "_blank"
-            );
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
 
-            // reset form
             setFormData({
                 full_name: "",
                 email: "",
                 phone_number: "",
-                number_of_travelers:
-                    "Solo Pilgrim",
+                number_of_travelers: "Solo Pilgrim",
                 preferred_dates: "",
                 special_requirements: "",
                 vehicle_category_id: ""
             });
-
             setErrors({});
             setValidated(false);
-
         } catch (error) {
-            alert(
-                "Unable to submit booking. Please try again."
-            );
+            console.error("Booking handler error:", error);
+            alert(t("errors.failed"));
         } finally {
             setLoading(false);
         }
     };
+
     return (
         <div>
             <Form noValidate validated={validated} onSubmit={handleSubmit} className="booking-form">
                 <Row className="g-2 g-sm-3 g-md-4">
-                    {/* full name */}
+
+                    {/* Full Name */}
                     <Col md={6}>
                         <Form.Group controlId="bookingFullName">
-                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">Full Name</Form.Label>
+                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">
+                                {t("labels.fullName")}
+                            </Form.Label>
                             <Form.Control
                                 required
                                 name="full_name"
                                 type="text"
-                                placeholder="Enter Your Name"
+                                placeholder={t("placeholders.name")}
                                 className="custom-input"
                                 isInvalid={!!errors.full_name}
+                                value={formData.full_name}
                                 onChange={handleChange}
                             />
                             <Form.Control.Feedback type="invalid">{errors.full_name}</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
-                    {/* mail */}
+
+                    {/* Email Address */}
                     <Col md={6}>
                         <Form.Group controlId="bookingEmail">
-                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">Email Address</Form.Label>
+                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">
+                                {t("labels.email")}
+                            </Form.Label>
                             <Form.Control
                                 required
                                 name="email"
                                 type="email"
-                                placeholder="Enter your Email"
+                                placeholder={t("placeholders.email")}
                                 className="custom-input"
                                 isInvalid={!!errors.email}
+                                value={formData.email}
                                 onChange={handleChange}
                             />
                             <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
-                    {/* phone number */}
+
+                    {/* Phone Number */}
                     <Col md={6}>
                         <Form.Group controlId="bookingPhone">
-                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">Phone Number</Form.Label>
+                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">
+                                {t("labels.phone")}
+                            </Form.Label>
                             <Form.Control
                                 required
                                 name="phone_number"
                                 type="tel"
-                                placeholder="10-digit mobile number"
+                                placeholder={t("placeholders.phone")}
                                 className="custom-input"
                                 isInvalid={!!errors.phone_number}
+                                value={formData.phone_number}
                                 onChange={handleChange}
                             />
                             <Form.Control.Feedback type="invalid">{errors.phone_number}</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
-                    {/* travelers how many persons */}
+
+                    {/* Number of Travelers */}
                     <Col md={6}>
                         <Form.Group controlId="bookingTravelers">
-                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">Number of Travelers</Form.Label>
+                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">
+                                {t("labels.travelers")}
+                            </Form.Label>
                             <Form.Select
                                 name="number_of_travelers"
                                 className="custom-input"
+                                value={formData.number_of_travelers}
                                 onChange={handleChange}
                             >
-                                <option value="Solo Pilgrim">Solo Pilgrim</option>
-                                <option value="Couple">Couple</option>
-                                <option value="Small Group (3-5)">Small Group (3-5)</option>
-                                <option value="Large Family (5+)">Large Family (5+)</option>
+                                <option value="Solo Pilgrim">{t("options.solo")}</option>
+                                <option value="Couple">{t("options.couple")}</option>
+                                <option value="Small Group (3-5)">{t("options.small")}</option>
+                                <option value="Large Family (5+)">{t("options.large")}</option>
                             </Form.Select>
                         </Form.Group>
                     </Col>
-                    {/* booking date */}
+
+                    {/* Preferred Dates */}
                     <Col md={6}>
                         <Form.Group controlId="bookingDate">
-                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">Preferred Dates</Form.Label>
+                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">
+                                {t("labels.date")}
+                            </Form.Label>
                             <Form.Control
                                 required
                                 name="preferred_dates"
                                 type="date"
                                 className="custom-input"
                                 isInvalid={!!errors.preferred_dates}
+                                value={formData.preferred_dates}
                                 onChange={handleChange}
                             />
                             <Form.Control.Feedback type="invalid">{errors.preferred_dates}</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
-                    {/* tour package */}
+
+                    {/* Tour Package Selection (Read-Only) */}
                     <Col md={6}>
                         <Form.Group controlId="bookingPackage">
-                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">Tour Package Selection</Form.Label>
+                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">
+                                {t("labels.package")}
+                            </Form.Label>
                             <Form.Control
                                 name="tourPackage"
                                 type="text"
@@ -295,29 +251,13 @@ export const BookingFormHandler = ({ tourId, tourName, vehicleCategories = [] })
                             />
                         </Form.Group>
                     </Col>
-                    {/* <Col md={6}>
-                        <Form.Group controlId="bookingTravelers">
-                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">vechicle cateogry</Form.Label>
-                            <Form.Select
-                                name="number_of_travelers"
-                                className="custom-input"
-                                onChange={handleChange}
-                            >
-                                <option value="Sedan">Sedan</option>
-                                <option value="SUV">SUV</option>
-                                <option value="TempoTraveller">Tempo Traveller</option>
-                                <option value="Urbania">Urbania</option>
-                                <option value="MiniBus">Mini Bus</option>
-                                <option value="LuxuryCar">Luxury Car</option>
-                            </Form.Select>
-                        </Form.Group>
-                    </Col> */}
+
+                    {/* Vehicle Category Selector */}
                     <Col md={6}>
                         <Form.Group controlId="bookingVehicleCategory">
                             <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">
-                                Vehicle Category
+                                {t("labels.vehicle")}
                             </Form.Label>
-
                             <Form.Select
                                 required
                                 name="vehicle_category_id"
@@ -326,35 +266,32 @@ export const BookingFormHandler = ({ tourId, tourName, vehicleCategories = [] })
                                 isInvalid={!!errors.vehicle_category_id}
                                 onChange={handleChange}
                             >
-                                <option value="">
-                                    Select Vehicle Category
-                                </option>
-
+                                <option value="">{t("placeholders.vehicle")}</option>
                                 {vehicleCategories.map((item) => (
-                                    <option
-                                        key={item.id}
-                                        value={item.id}
-                                    >
+                                    <option key={item.id} value={item.id}>
                                         {item.category}
                                     </option>
                                 ))}
                             </Form.Select>
-
                             <Form.Control.Feedback type="invalid">
                                 {errors.vehicle_category_id}
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Col>
-                    {/* special requirements */}
+
+                    {/* Special Requirements */}
                     <Col xs={12}>
                         <Form.Group controlId="bookingRequirements">
-                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">Special Requirements</Form.Label>
+                            <Form.Label className="small fw-bold text-uppercase text-secondary mb-2">
+                                {t("labels.requirements")}
+                            </Form.Label>
                             <Form.Control
                                 name="special_requirements"
                                 as="textarea"
                                 rows={4}
-                                placeholder="Food preferences, accessibility needs, etc."
+                                placeholder={t("placeholders.requirements")}
                                 className="custom-input"
+                                value={formData.special_requirements}
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -366,9 +303,7 @@ export const BookingFormHandler = ({ tourId, tourName, vehicleCategories = [] })
                     disabled={loading}
                     className="whatsapp-btn mt-4 px-4 py-3 border-0"
                 >
-                    {loading
-                        ? "Submitting..."
-                        : "Confirm & Send on WhatsApp"}
+                    {loading ? t("buttons.submitting") : t("buttons.confirm")}
                 </Button>
             </Form>
         </div>
