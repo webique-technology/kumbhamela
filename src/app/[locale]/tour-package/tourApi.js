@@ -95,10 +95,15 @@ export const getPaymentPolicy = async () => {
   }
 };
 
-export const getTourBySlug = async (slug) => {
+export const getTourBySlug = async (slug ,lang = "en") => {
   try {
     const response = await api.get(
-      `/tours/slug/${encodeURIComponent(slug)}`
+      `/tours/slug/${encodeURIComponent(slug)}`,
+        {
+            params: {
+            lang,
+            },
+        }
     );
 
     return response.data.data;

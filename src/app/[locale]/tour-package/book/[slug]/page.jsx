@@ -1,9 +1,10 @@
 import React from "react";
 import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
-import { slugify } from "@/lib/utils";
+// import { slugify } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import { BookingFormHandler } from "../../../../../components/ui/bookingFormHandler";
+import { getTourBySlug } from "../../tourApi";
 import {
   CheckCircle2,
   CalendarDays,
@@ -52,16 +53,16 @@ async function getVehicleCategories(id) {
 const BookingPage = async ({
   params,
 }) => {
-  const { slug } = await params;
+  const { slug ,locale  } = await params;
+  const tour = await getTourBySlug(slug ,locale );
+  // const tours =
+  //   await getTours();
 
-  const tours =
-    await getTours();
-
-  const tour = tours.find(
-    (item) =>
-      slugify(item.title || "") ===
-      slug
-  );
+  // const tour = tours.find(
+  //   (item) =>
+  //     slugify(item.title || "") ===
+  //     slug
+  // );
 
   if (!tour) {
     notFound();

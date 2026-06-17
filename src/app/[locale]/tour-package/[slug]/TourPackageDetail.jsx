@@ -343,7 +343,7 @@ const TourPackageDetail = ({ tour }) => {
                                 <h4 className="text-start m-0">Booking Summery</h4>
                             </div>
                             <div className="price mb-4">
-                                <span className="h3 fw-bold primery-color">₹ {Number(tour.base_price || 0).toLocaleString()}</span>
+                                <span className="h3 fw-bold primery-color">₹ {Number(tour.base_price || 0).toLocaleString("en-IN")}</span>
                                 {/* ₹ {(tour.base_price || 0).toLocaleString()}  */}
                                 <span className="text-muted"> / person</span>
                             </div>
@@ -356,7 +356,7 @@ const TourPackageDetail = ({ tour }) => {
                                 </p> */}
                             </div >
                             <Link
-                                href={`/tour-package/book/${slugify(tour.title)}`}
+                                href={`/tour-package/book/${slugify(tour.slug)}`}
                                 className="primery-btn d-flex align-items-center justify-content-center gap-2 w-100 py-3 text-center text-decoration-none fw-bold rounded shadow-sm mb-3"
                             >
                                 <CalendarCheck size={18}/>
