@@ -14,8 +14,8 @@
     "contact": "संपर्क करें"
   },
   "HeroHeader": {
-    "btnBathDates": "स्नान की तिथियां देखें",
-    "btnInquiry": "व्हाट्सएप पूछताछ",
+    "btnName1": "हमारे वाहन",
+    "btnName2": "टूर पैकेज",
     "slide1_subHeading": "हमारे साथ अद्वितीय आनंद का अनुभव करें।",
     "slide1_title": "सिंहस्थ कुंभ मेला नासिक 2027",
     "slide1_description": "कुंभ मेले की उलटी गिनती",
@@ -853,5 +853,21 @@
       "submitting": "भेजा जा रहा है...",
       "confirm": "पुष्टि करें और व्हाट्सएप पर भेजें"
     }
+  },
+  "TranslateBtn": {
+    "BookNow": "अभी बुक करें",
+    "viewDetails": "विवरण देखें",
+    "ReadMore": "अधिक पढ़ें",
+    "SendItinerary": "यात्रा कार्यक्रम भेजें"
+  },
+  "Cards": {
+    "StartingFrom": "शुरुआती कीमत",
+    "PerNight": "प्रति रात"
+  },
+  "BookingSummary": {
+    "Title": "बुकिंग विवरण",
+    "PerPerson": "/ प्रति व्यक्ति",
+    "Duration": "अवधि:",
+    "KumbhNote": "* कुंभ मेला की तारीखों के लिए सीमित सीटें उपलब्ध हैं।"
   }
 }

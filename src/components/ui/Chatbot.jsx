@@ -5,26 +5,28 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, Send, X, Mic, Square } from "lucide-react";
 import "../../styles/chatbot.scss";
 
+import chatWelcome from "../../assets/images/chatbot-img.svg"
+
 export const KumbhChatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
         {
             id: "init",
             sender: "bot",
-            text: "Jai Shree Ram! 🙏 Welcome to Mahakumbh Tours & Travels Nashik. I can guide you through our packages, sacred places, and travel logistics dynamically. Type your questions below or tap the Mic to speak:",
+            text: "Jai Shree Ram! 🙏 Welcome to Mahakumbh Travels. Ask me about our packages, holy places, or transit. Type below or tap Mic to speak:",
         },
     ]);
     const [inputValue, setInputValue] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [isListening, setIsListening] = useState(false);
-
+    const [showWelcomeImg, setShowWelcomeImg] = useState(true);
     const chatEndRef = useRef(null);
     const recognitionRef = useRef(null);
 
     const quickTags = [
         { label: "📅 Snan Dates 2027", query: "shahi snan dates 2027" },
         { label: "🛕 Holy Places", query: "sacred locations in nashik" },
-        { label: "🏆 3 Day Package", query: "3 day darshan package details" },
+        { label: "🏆 Tour Packages", query: "tour packages" },
         { label: "🚕 Vehicle Rental", query: "car rental options and fleet rates" },
         { label: "✈️ Reach Nashik", query: "how to reach nashik by train air road" },
     ];
@@ -107,14 +109,52 @@ export const KumbhChatbot = () => {
     return (
         <div className="kumbh-chatbot-container">
             {/* Floating Action Trigger Button */}
-            <motion.button
-                className="kumbh-launcher-btn"
-                onClick={() => setIsOpen(!isOpen)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-            >
-                <MessageSquare size={20} />
-            </motion.button>
+            {/* Floating Launcher Action Container */}
+            <div className="kumbh-launcher-container" style={{ position: "fixed", bottom: "30px", right: "30px", zIndex: 99999 }}>
+                <AnimatePresence>
+                    {showWelcomeImg && !isOpen && (
+                        <motion.div
+                            className="chat-welcome-bubble-wrapper"
+                            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.8, y: 10 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            {/* Close Button Trigger for Welcome Image Bubble */}
+                            <button
+                                type="button"
+                                className="chat-welcome-close-btn"
+                                onClick={(e) => {
+                                    e.stopPropagation(); // Prevents clicking the close icon from accidentally opening the main chat
+                                    setShowWelcomeImg(false);
+                                }}
+                            >
+                                <X size={14} />
+                            </button>
+
+                            {/* Main Welcome Graphic Asset Banner */}
+                            <img
+                                src={chatWelcome.src}
+                                alt="Welcome Assistant Preview"
+                                className="chat-welcome-img"
+                                onClick={() => setIsOpen(true)} // Clicking the image bubble directly opens the chat window too
+                                style={{ cursor: "pointer" }}
+                            />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                {/* Main Launcher Button Element */}
+                <motion.button
+                    className="kumbh-launcher-btn"
+                    onClick={() => setIsOpen(!isOpen)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    style={{ position: "static" }} // Handled gracefully by the parent container absolute layout wrapper
+                >
+                    <MessageSquare size={20} />
+                </motion.button>
+            </div>
 
             {/* Main Interactive Chat Panel */}
             <AnimatePresence>

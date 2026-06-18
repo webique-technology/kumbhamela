@@ -198,16 +198,29 @@ const ServicesTabSec = () => {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const [tourRes, carRes, hotelRes] = await Promise.all([
+
+            // Using allSettled so one crashing API won't break the others
+            const results = await Promise.allSettled([
                 getTours(1, "", "", "", 6),
                 getCars(1, "", "", "", 6),
                 getHotels(1, "", "", "", 6)
             ]);
-            setTours(tourRes || []);
-            setCars(carRes || []);
-            setHotels(hotelRes || []);
+
+            // Safely extract data or fallback to empty arrays if rejected
+            setTours(results[0].status === "fulfilled" ? results[0].value : []);
+            setCars(results[1].status === "fulfilled" ? results[1].value : []);
+            setHotels(results[2].status === "fulfilled" ? results[2].value : []);
+
+            // Log any specific API errors to console for visibility
+            results.forEach((result, index) => {
+                if (result.status === "rejected") {
+                    const apiNames = ["Tours", "Cars", "Hotels"];
+                    console.error(`${apiNames[index]} API failed to load:`, result.reason);
+                }
+            });
+
         } catch (error) {
-            console.log(error);
+            console.error("Unexpected parsing error:", error);
         } finally {
             setLoading(false);
         }

@@ -9,10 +9,12 @@ import { SearchFleet, SwiperSliderComp } from './common';
 import { SwiperSlide } from 'swiper/react';
 import { Col, Container, Row } from 'react-bootstrap';
 import IconResolver from './iconResolver';
+import { useTranslations } from 'next-intl';
 import { imageUrl } from "@/lib/utils";
 
 // for blogs card
 export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_width = "100%", img_count_height = "220px" }) => {
+    const t = useTranslations("TranslateBtn");
     return (
         <div className="card h-100 border-0 blog-card shadow-sm">
 
@@ -81,7 +83,7 @@ export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_widt
 
                 {/* Button */}
                 <Link href={blogLink} className="btn btn-link p-0 blog-readmore text-decoration-none d-flex align-items-center gap-1">
-                    Read More <ArrowRight size={16} />
+                    {t("ReadMore")} <ArrowRight size={16} />
                 </Link>
             </div>
         </div>
@@ -90,6 +92,7 @@ export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_widt
 
 // for hotels card
 export const HotelCards = ({ hotel, onBookNow }) => {
+    const t = useTranslations();
     return (
         <>
             <div className="card h-100 border-0 shadow-sm hotel-card overflow-hidden">
@@ -155,9 +158,9 @@ export const HotelCards = ({ hotel, onBookNow }) => {
                     {/* Footer Logic */}
                     <div className="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
                         <div>
-                            <small className="text-muted d-block">Starting from</small>
+                            <small className="text-muted d-block">{t("Cards.StartingFrom")}</small>
                             <span className="h4 text-brand-orange mb-0">{hotel.base_price}</span>
-                            <small className="text-muted d-block smaller">per night</small>
+                            <small className="text-muted d-block smaller">{t("Cards.PerNight")}</small>
                         </div>
 
                         {/* whatsapp btn */}
@@ -165,7 +168,7 @@ export const HotelCards = ({ hotel, onBookNow }) => {
                             type='button'
                             onClick={onBookNow}
                             iconLeft={<MessageCircle size={18} />}
-                            title="Book Now"
+                            title={t("TranslateBtn.BookNow")}
                             className="btn btn-whatsapp d-flex align-items-center gap-2 px-3 py-2 text-white border-0 shadow-sm"
                         />
                     </div>
@@ -217,7 +220,7 @@ export const SacredDestinationsCard = ({ destination }) => {
 export const RentalCarCard = ({ car, onBook }) => {
     const params = useParams();
     const currentLocale = params?.locale || 'en';
-
+    const t = useTranslations("TranslateBtn");
     return (
         <div className="card rental-car-card h-100 border-0 shadow-sm overflow-hidden">
             {/* Image Container with Overlay */}
@@ -274,7 +277,7 @@ export const RentalCarCard = ({ car, onBook }) => {
                     <WhatsappBtn
                         type='button'
                         onClick={onBook}
-                        title="Book Now"
+                        title={t("BookNow")}
                         className="whatsapp-btn d-flex align-items-center border-0 shadow-sm"
                     />
                 </div>
@@ -287,7 +290,7 @@ export const RentalCarCard = ({ car, onBook }) => {
 export const TourPackageCard = ({ tour, tourLink }) => {
     const params = useParams();
     const currentLocale = params?.locale || "en";
-
+    const t = useTranslations("TranslateBtn");
     // Features safe for array/string/null
     const features = Array.isArray(tour?.features)
         ? tour.features
@@ -365,7 +368,7 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                         href={tourLink || "#"}
                         className="primery-btn py-2 text-decoration-none w-100 d-flex justify-content-center align-items-center mt-auto"
                     >
-                        View Details
+                        {t("viewDetails")}
                     </Link>
                 </div>
             </div>

@@ -1,11 +1,5 @@
 @use "../assets/scss/variable" as *;
 
-// .plan-tab-section {
-//     // background-color: $bg-drak;
-//     // background-color: $bg-light;
-// }
-
-// plan tab section
 .plan-tab-section {
 
     .plan-tab-item {
@@ -36,14 +30,6 @@
                 font-size: $font-size-xs !important;
             }
         }
-
-        // @media(max-width:500px) {
-        //     .content h3 {
-        //         font-size: $font-size-base !important;
-        //     }
-
-        //     padding: 5px !important;
-        // }
     }
 
     // top grid
@@ -156,6 +142,18 @@
         }
     }
 
+}
+
+.image-box {
+    // aspect-ratio: 4/3;
+
+    @media(max-width:576px) {
+        aspect-ratio: 4/2;
+
+        img {
+            width: 100%;
+        }
+    }
 }
 
 .nav-pills .nav-link.active {

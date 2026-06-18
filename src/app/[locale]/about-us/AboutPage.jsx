@@ -245,7 +245,7 @@ const AboutPage = () => {
                         <Col md={6} className="hero-img-col">
                             <div className="hero-img-wrapper d-flex align-items-center justify-content-center shadow-2xl">
                                 <Image
-                                    src={aboutHero2}
+                                    src={aboutHero2.src}
                                     alt="Pilgrims at river"
                                     width={484}
                                     height={100}

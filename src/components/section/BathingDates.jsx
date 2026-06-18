@@ -89,7 +89,7 @@ export const BathingDates = () => {
 
                                                 <div className="calendar-body py-3 d-flex flex-column align-items-center justify-content-center">
                                                     <span className="display-date mb-1 m-0 font-weight-bold">{date.day}</span>
-                                                    <span className="display-occ-text px-2 m-0 text-muted small lh-sm">{t(date.dateOccationKey)}</span>
+                                                    <span className="display-occ-text px-2 m-0 text-light small lh-sm">{t(date.dateOccationKey)}</span>
                                                 </div>
 
                                                 <div className="calendar-footer p-2 border-top">

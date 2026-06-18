@@ -13,10 +13,10 @@ import { HighlightsModal, TourTabs, } from "@/components/ui/common";
 import { TourPackageSlider } from "@/components/ui/TourPackageSlider";
 import { tourPackages } from "@/lib/data";
 import { getCancellationPolicy, getPaymentPolicy, getTours, getTourBySlug } from "../tourApi";
-
+import { useTranslations } from "next-intl";
 
 const TourPackageDetail = ({ tour }) => {
-
+    const t = useTranslations();
     const [cancellationPolicy, setCancellationPolicy] = useState([]);
     const [paymentPolicy, setPaymentPolicy] = useState([]);
     const [recentPackages, setRecentPackages] = useState([]);
@@ -28,24 +28,6 @@ const TourPackageDetail = ({ tour }) => {
             [index]: !prev[index],
         }));
     };
-
-    // useEffect(() => {
-    // const fetchPolicies = async () => {
-    //     try {
-    //     const [cancelData, paymentData] = await Promise.all([
-    //         getCancellationPolicy(),
-    //         getPaymentPolicy(),
-    //     ]);
-
-    //     setCancellationPolicy(cancelData || []);
-    //     setPaymentPolicy(paymentData || []);
-    //     } catch (error) {
-    //     console.error(error);
-    //     }
-    // };
-
-    // fetchPolicies();
-    // }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -303,25 +285,6 @@ const TourPackageDetail = ({ tour }) => {
                                                     )}
                                                 </Col>
 
-                                                {/* <Col md={3}>
-                                                    {day.itineraries_image_url && (
-                                                        <div
-                                                            className="position-relative"
-                                                            style={{
-                                                                height: "120px",
-                                                            }}
-                                                        >
-                                                            <Image
-                                                                src={day.itineraries_image_url}
-                                                                alt={
-                                                                    day.itinerary_title
-                                                                }
-                                                                fill
-                                                                className="rounded shadow-sm object-fit-cover mt-3"
-                                                            />
-                                                        </div>
-                                                    )}
-                                                </Col> */}
                                                 <Col md={3}>
                                                     {day.itineraries_image_url && (
                                                         <div
@@ -362,16 +325,16 @@ const TourPackageDetail = ({ tour }) => {
                         <aside className="booking-card sticky-top mb-5 mb-md-0 z-3 p-4 rounded bg-white border" style={{ top: '110px' }}>
                             <div className="d-flex align-items-center gap-2 mb-3">
                                 <FileText size={20} />
-                                <h4 className="text-start m-0">Booking Summery</h4>
+                                <h4 className="text-start m-0">{t("BookingSummary.Title")}</h4>
                             </div>
                             <div className="price mb-4">
                                 <span className="h3 fw-bold primery-color">₹ {Number(tour.base_price || 0).toLocaleString()}</span>
                                 {/* ₹ {(tour.base_price || 0).toLocaleString()}  */}
-                                <span className="text-muted"> / person</span>
+                                <span className="text-muted"> {t("BookingSummary.PerPerson")}</span>
                             </div>
                             <div className="info-box mb-4 p-3 rounded">
                                 {/* <p className="mb-1"><strong>Group:</strong> &nbsp;2-6 People</p> */}
-                                <p className="mb-1"><strong>Duration:</strong> &nbsp;{tour.duration}</p>
+                                <p className="mb-1"><strong>{t("BookingSummary.Duration")} :</strong> &nbsp;{tour.duration}</p>
                                 {/* <p className="mb-1"><strong>Duration:</strong> &nbsp;5 Days / 4 Nights</p> */}
                                 {/* <p className="departure-date m-0">
                                     <strong>Departure:</strong> &nbsp;{tour.departureDate || 'Check Availability'}
@@ -382,13 +345,13 @@ const TourPackageDetail = ({ tour }) => {
                                 className="primery-btn d-flex align-items-center justify-content-center gap-2 w-100 py-3 text-center text-decoration-none fw-bold rounded shadow-sm mb-3"
                             >
                                 <CalendarCheck size={18} />
-                                Book Now
+                                {t("TranslateBtn.BookNow")}
                             </Link>
 
                             <WhatsAppShareBtn tour={tour} />
 
                             <p className="note text-center text-muted small-12 italic mt-2">
-                                * Limited slots available for Kumbh Mela dates.
+                               {t("BookingSummary.KumbhNote")}
                             </p>
                         </aside>
                     </Col>

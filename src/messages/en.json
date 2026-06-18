@@ -14,8 +14,8 @@
     "contact": "Contact Us"
   },
   "HeroHeader": {
-    "btnBathDates": "View Bathing Dates",
-    "btnInquiry": "WhatsApp Inquiry",
+    "btnName1": "Our Vehicles",
+    "btnName2": "Tour Packages",
     "slide1_subHeading": "Experience Unmatched Delight With Us.",
     "slide1_title": "Simhastha Kumbh Mela Nashik 2027",
     "slide1_description": "Countdown to Kumbh Mela",
@@ -855,5 +855,21 @@
       "submitting": "Submitting...",
       "confirm": "Confirm & Send on WhatsApp"
     }
+  },
+  "TranslateBtn": {
+    "BookNow": "Book Now",
+    "viewDetails": "View Details",
+    "ReadMore": "Read More",
+    "SendItinerary": "Send Itinerary"
+  },
+  "Cards": {
+    "StartingFrom": "Starting from",
+    "PerNight": "per night"
+  },
+  "BookingSummary": {
+    "Title": "Booking Summary",
+    "PerPerson": "/ person",
+    "Duration": "Duration:",
+    "KumbhNote": "* Limited slots available for Kumbh Mela dates."
   }
 }
