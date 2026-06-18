@@ -61,13 +61,13 @@ const TourPageContent = () => {
     };
 
     useEffect(() => {
-        fetchTours(currentPage, nameFilter, categoryFilter, priceFilter);
-    }, [currentPage, nameFilter, categoryFilter, priceFilter]);
+        fetchTours(currentPage, nameFilter, categoryFilter, priceFilter , locale);
+    }, [currentPage, nameFilter, categoryFilter, priceFilter,locale]);
 
-    const fetchTours = async (page = 1, name = "", category = "", price = "") => {
+    const fetchTours = async (page = 1, name = "", category = "", price = "",lang = "en") => {
         try {
             setLoading(true);
-            const response = await getTours(page, name, category, price);
+            const response = await getTours(page, name, category, price , "", lang);
             const apiData = response;
             setTours(apiData.data || []);
 
@@ -105,7 +105,8 @@ const TourPageContent = () => {
                                     <Col lg={4} md={6} key={tour.id || index}>
                                         <TourPackageCard
                                             tour={tour}
-                                            tourLink={`/tour-package/${slugify(tour.title || "")}`}
+                                            // tourLink={`/tour-package/${slugify(tour.title || "")}`}
+                                            tourLink={`/tour-package/${tour.slug}`}
                                             img_height={250}
                                         />
                                     </Col>

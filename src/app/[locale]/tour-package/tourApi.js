@@ -18,12 +18,14 @@ export const getTours = async (
     name = "",
     category = "",
     price = "",
-    limit = ""
+    limit = "",
+    lang = "en"
     ) => {
         try {
             const params = new URLSearchParams();
 
             params.set("page", page);
+            params.set("lang", lang);
 
             if (name) {
                 params.set("name", name);
@@ -95,10 +97,15 @@ export const getPaymentPolicy = async () => {
   }
 };
 
-export const getTourBySlug = async (slug) => {
+export const getTourBySlug = async (slug ,lang = "en") => {
   try {
     const response = await api.get(
-      `/tours/slug/${encodeURIComponent(slug)}`
+      `/tours/slug/${encodeURIComponent(slug)}`,
+        {
+            params: {
+            lang,
+            },
+        }
     );
 
     return response.data.data;

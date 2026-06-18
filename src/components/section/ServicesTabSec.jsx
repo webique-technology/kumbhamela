@@ -13,6 +13,7 @@ import { getHotels } from '@/app/[locale]/hotel/hotelApi';
 import { getCars } from '@/app/[locale]/rental-car/carApi';
 import { getTours } from '@/app/[locale]/tour-package/tourApi';
 import Image from 'next/image';
+import { useParams } from "next/navigation";
 
 const UnifiedServiceCard = ({ type, item, onBook, t }) => {
     // 1. Dynamic Attribute Resolvers across distinct API schemas
@@ -115,7 +116,8 @@ const UnifiedServiceCard = ({ type, item, onBook, t }) => {
                     {/* Integrated Booking Interaction Node */}
                     {type === "tour" ? (
                         <Link
-                            href={`/tour-package/${slugify(cardTitle || "")}`}
+                            href={`/tour-package/${item.slug}`}
+                            // href={`/tour-package/${slugify(cardTitle || "")}`}
                             className="service-btn text-decoration-none d-flex justify-content-center align-items-center mt-auto"
                         >
                             <span>{t("viewDetails")}</span>
@@ -168,6 +170,8 @@ const ServicesTabSec = () => {
     const [cars, setCars] = useState([]);
     const [hotels, setHotels] = useState([]);
     const [loading, setLoading] = useState(true);
+    const params = useParams();
+    const locale = params.locale;
 
     // Mapped Titles reference dynamic i18n keys
     const tabData = [
@@ -193,34 +197,21 @@ const ServicesTabSec = () => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [locale]);
 
     const fetchData = async () => {
         try {
             setLoading(true);
-
-            // Using allSettled so one crashing API won't break the others
-            const results = await Promise.allSettled([
-                getTours(1, "", "", "", 6),
+            const [tourRes, carRes, hotelRes] = await Promise.all([
+                getTours(1, "", "", "", 6, locale),
                 getCars(1, "", "", "", 6),
                 getHotels(1, "", "", "", 6)
             ]);
-
-            // Safely extract data or fallback to empty arrays if rejected
-            setTours(results[0].status === "fulfilled" ? results[0].value : []);
-            setCars(results[1].status === "fulfilled" ? results[1].value : []);
-            setHotels(results[2].status === "fulfilled" ? results[2].value : []);
-
-            // Log any specific API errors to console for visibility
-            results.forEach((result, index) => {
-                if (result.status === "rejected") {
-                    const apiNames = ["Tours", "Cars", "Hotels"];
-                    console.error(`${apiNames[index]} API failed to load:`, result.reason);
-                }
-            });
-
+            setTours(tourRes || []);
+            setCars(carRes || []);
+            setHotels(hotelRes || []);
         } catch (error) {
-            console.error("Unexpected parsing error:", error);
+            console.log(error);
         } finally {
             setLoading(false);
         }

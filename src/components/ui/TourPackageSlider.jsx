@@ -36,7 +36,7 @@ export const TourPackageSlider = ({ packages, title }) => {
             >
                 {packages.map((item, index) => (
                     <SwiperSlide key={index} className="h-100">
-                        <Link href={`/tour-package/${slugify(item.title)}`} className="h-100 text-decoration-none" aria-label={item.title}>
+                        <Link href={`/tour-package/${item.slug}`} className="h-100 text-decoration-none" aria-label={item.title}>
                             <div className="tour-package-card-small d-flex flex-column justify-content-between rounded-2 shadow-sm border p-3 h-100">
                                 <div className="image-wrapper rounded-2">
                                     <img

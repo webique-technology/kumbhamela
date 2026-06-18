@@ -14,12 +14,16 @@ import { TourPackageSlider } from "@/components/ui/TourPackageSlider";
 import { tourPackages } from "@/lib/data";
 import { getCancellationPolicy, getPaymentPolicy, getTours, getTourBySlug } from "../tourApi";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
+
 
 const TourPackageDetail = ({ tour }) => {
     const t = useTranslations();
     const [cancellationPolicy, setCancellationPolicy] = useState([]);
     const [paymentPolicy, setPaymentPolicy] = useState([]);
     const [recentPackages, setRecentPackages] = useState([]);
+    const params = useParams();
+    const locale = params.locale;
 
     const [expandedItems, setExpandedItems] = useState({});
     const loadMore = (index) => {
@@ -39,7 +43,7 @@ const TourPackageDetail = ({ tour }) => {
                 ] = await Promise.all([
                     getCancellationPolicy(),
                     getPaymentPolicy(),
-                    getTours(1),
+                    getTours(1,"","","","",locale),
                 ]);
 
                 setCancellationPolicy(cancelData || []);
@@ -91,9 +95,15 @@ const TourPackageDetail = ({ tour }) => {
                         {tour.title}
                     </h1>
 
-                    <p className="d-none d-lg-block fs-6 lead text-white-75">
+                    {/* <p className="d-none d-lg-block fs-6 lead text-white-75">
                         {tour.description}
-                    </p>
+                    </p> */}
+                    <div
+                        className="d-none d-lg-block fs-6 lead text-white-75"
+                        dangerouslySetInnerHTML={{
+                            __html: tour.description || ""
+                        }}
+                    />
                     {tour?.routes?.length > 0 && (
                         <ul className="d-none px-2 m-0 bg-light tour-route d-md-flex flex-wrap justify-content-start align-items-center">
                             {(tour.routes || []).map((route, i) => (
@@ -267,12 +277,18 @@ const TourPackageDetail = ({ tour }) => {
                                                         {day.itinerary_title}
                                                     </h5>
 
-                                                    <p
+                                                    {/* <p
                                                         className={`text-secondary ${expandedItems[i] ? "" : "line-clamp-5"
                                                             }`}
                                                     >
                                                         {day.description || ""}
-                                                    </p>
+                                                    </p> */}
+                                                    <div
+                                                        className={`text-secondary ${expandedItems[i] ? "" : "line-clamp-5" }`}
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: day.description || ""
+                                                        }}
+                                                    />
 
                                                     {day.description?.length > 261 && (
                                                         <motion.button
@@ -328,7 +344,7 @@ const TourPackageDetail = ({ tour }) => {
                                 <h4 className="text-start m-0">{t("BookingSummary.Title")}</h4>
                             </div>
                             <div className="price mb-4">
-                                <span className="h3 fw-bold primery-color">₹ {Number(tour.base_price || 0).toLocaleString()}</span>
+                                <span className="h3 fw-bold primery-color">₹ {Number(tour.base_price || 0).toLocaleString("en-IN")}</span>
                                 {/* ₹ {(tour.base_price || 0).toLocaleString()}  */}
                                 <span className="text-muted"> {t("BookingSummary.PerPerson")}</span>
                             </div>
@@ -341,7 +357,7 @@ const TourPackageDetail = ({ tour }) => {
                                 </p> */}
                             </div >
                             <Link
-                                href={`/tour-package/book/${slugify(tour.title)}`}
+                                href={`/tour-package/book/${slugify(tour.slug)}`}
                                 className="primery-btn d-flex align-items-center justify-content-center gap-2 w-100 py-3 text-center text-decoration-none fw-bold rounded shadow-sm mb-3"
                             >
                                 <CalendarCheck size={18} />

@@ -12,12 +12,15 @@ import { slugify } from "@/lib/utils";
 import { SwiperSlide } from "swiper/react";
 import { getBlogs } from '@/app/[locale]/blog/blogApi';
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 
 const BlogSection = () => {
     const t = useTranslations('BlogSection');
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
     const recentBlogs = blogs;
+    const params = useParams();
+    const locale = params.locale;
     // 1. Sort blogs by date (Most Recent first)
     // We create a copy with [...] so we don't change the original array
     // const recentBlogs = [...blogs]
@@ -36,7 +39,8 @@ const BlogSection = () => {
             const response = await getBlogs(
                 1,
                 "",
-                3
+                3,
+                locale
             );
 
             setBlogs(response || []);
@@ -80,7 +84,8 @@ const BlogSection = () => {
                                     blog={blog}
                                     // Ensure you are using slug for the link
                                     // blogLink={`/blog/${slugify(blog.blogTitle)}`}
-                                    blogLink={`/blog/${slugify(blog.title)}`}
+                                    // blogLink={`/blog/${slugify(blog.title)}`}
+                                    blogLink={`/blog/${blog.slug}`}
                                     img_width={300}
                                     img_height={220}
                                 />
@@ -110,7 +115,8 @@ const BlogSection = () => {
                                     blog={blog}
                                     // Ensure you are using slug for the link
                                     // blogLink={`/blog/${slugify(blog.blogTitle)}`}
-                                    blogLink={`/blog/${slugify(blog.title)}`}
+                                    // blogLink={`/blog/${slugify(blog.title)}`}
+                                    blogLink={`/blog/${blog.slug}`}
                                     img_width={300}
                                     img_height={220}
                                 />

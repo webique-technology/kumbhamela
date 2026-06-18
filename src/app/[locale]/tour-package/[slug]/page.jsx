@@ -18,8 +18,8 @@ function cleanDescription(htmlString, maxLength = 160) {
 export async function generateMetadata({ params }) {
   const { slug, locale } = await params;
 
-  // Fetch the specific tour details for this slug
-  const tour = await getTourBySlug(slug);
+  // Optimized: Only fetch the specific tour needed for this slug
+  const tour = await getTourBySlug(slug ,locale);
 
   if (!tour) {
     return {
@@ -67,9 +67,10 @@ export async function generateMetadata({ params }) {
 
 // 2. MAIN DETAIL PAGE ENTRY
 export default async function TourDetailPage({ params }) {
-  const { slug } = await params;
+  const { slug ,locale } = await params;
 
-  const tour = await getTourBySlug(slug);
+  // Optimized: Removed the heavy getTours() call entirely
+  const tour = await getTourBySlug(slug,locale);
 
   if (!tour) {
     notFound();

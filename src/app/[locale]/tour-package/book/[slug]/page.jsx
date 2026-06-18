@@ -1,11 +1,12 @@
 import React from "react";
 import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
-import { slugify } from "@/lib/utils";
+// import { slugify } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import { BookingFormHandler } from "../../../../../components/ui/bookingFormHandler";
 import { getTranslations } from "next-intl/server";
 import { CheckCircle2, CalendarDays, Sparkles } from "lucide-react";
+import { getTourBySlug } from "../../tourApi";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -31,12 +32,12 @@ async function getVehicleCategories(id) {
 
 const BookingPage = async ({ params }) => {
   const { slug, locale } = await params;
-
+  const tour = await getTourBySlug(slug ,locale );
   // Load server-side dictionary instance targeting specific namespace tokens
   const t = await getTranslations({ locale, namespace: "BookingFormPage" });
 
   const tours = await getTours();
-  const tour = tours.find((item) => slugify(item.title || "") === slug);
+  // const tour = tours.find((item) => slugify(item.title || "") === slug);
 
   if (!tour) {
     notFound();
