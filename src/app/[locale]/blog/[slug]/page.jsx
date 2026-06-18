@@ -4,58 +4,21 @@ import Image from "next/image";
 import { Container, Row, Col } from "react-bootstrap";
 import { slugify } from "@/lib/utils";
 import "../../../../styles/blog.scss";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { Calendar, Clock, ArrowRight, ArrowLeft } from "lucide-react";
 import { PrimeryBtn } from "@/components/ui/button";
 import { getBlogs, getBlogBySlug } from "../blogApi";
 import { Link } from "@/i18n/routing";
-
 
 const BASE_URL =
     process.env.NEXT_PUBLIC_SITE_URL ||
     "https://yourkumbhdomain.com";
 
-// export const generateMetadata = async ({ params }) => {
-//     const { slug } = await params;
-//     const blog = blogs.find((b) => slugify(b.blogTitle) === slug);
-//     return {
-//         title: blog.blogTitle,
-//         description: blog.description,
-//         alternates: {
-//             canonical: `${BASE_URL}/blog/${slugify(blog.blogTitle)}`,
-//         },
-//         openGraph: {
-//             title: blog.blogTitle,
-//             description: blog.description,
-//             url: `${BASE_URL}/blog/${slugify(blog.blogTitle)}`,
-//             siteName: "Kumbh Mela",
-//             images: [
-//                 {
-//                     url: blog.image,
-//                     width: 1200,
-//                     height: 630,
-//                 },
-//             ],
-//             locale: "en_US",
-//             type: "article",
-//         },
-//         twitter: {
-//             card: "summary_large_image",
-//             title: blog.blogTitle,
-//             description: blog.description,
-//             images: [blog.image],
-//         },
-//     };
-// };
-
-// 1. Make the component async
-
-
 export async function generateMetadata({ params }) {
-    const { slug ,locale } = await params;
+    const { slug, locale } = await params;
     // const blogs = await getBlogs();
     const response = await getBlogs(1, "", "", locale);
     const blogs = response.data || [];
-    const blog = await getBlogBySlug(slug,locale);
+    const blog = await getBlogBySlug(slug, locale);
 
     // const blog = blogs.find(
     //     (item) => slugify(item.title) === slug
@@ -85,11 +48,11 @@ export async function generateMetadata({ params }) {
 const BlogDetails = async ({ params }) => {
 
     // const locale = params.locale;
-    const { slug ,locale } = await params;
+    const { slug, locale } = await params;
     // const blogs = await getBlogs();
     const response = await getBlogs(1, "", "", locale);
     const blogs = response.data || [];
-    const blog = await getBlogBySlug(slug,locale);
+    const blog = await getBlogBySlug(slug, locale);
     // const blog = blogs.find(
     //     (item) => slugify(item.title) === slug
     // );
@@ -100,10 +63,21 @@ const BlogDetails = async ({ params }) => {
         <main>
             <article className="padding-bottom bg-white">
                 {/* blog bg image and sm more than 576px screen heading */}
-                <div className="blog-detailed-bg-img" style={{ backgroundImage: `url(${blog.image_url})` }}>
+                <div className="blog-detailed-bg-img d-flex flex-column justify-content-between" style={{ backgroundImage: `url(${blog.image_url})` }}>
+                    <Container className="pt-4">
+                        <div className="w-max">
+                            <Link
+                                href="/blog"
+                                className="border position-relative btn primery-btn d-flex align-items-center gap-2 p-1 px-2 rounded-pill"
+                            >
+                                <ArrowLeft size={15} />
+                                <p className="m-0">Back to Blog</p>
+                            </Link>
+                        </div>
+                    </Container>
                     <Container className='z-3'>
                         <div className="d-none d-sm-flex flex-column mb-4 align-items-start">
-                            <span className="badge primary-badge mb-2 text-uppercase">
+                            <span className="badge sora primary-badge mb-2 text-uppercase">
                                 {blog.category}
                             </span>
                             <h1 className="display-4 fw-bold blog-detail-page-title">{blog.title}</h1>
@@ -169,7 +143,7 @@ const BlogDetails = async ({ params }) => {
                                                     <Link
                                                         // href={`/blog/${slugify(blog.title)}`}
                                                         href={`/blog/${blog.slug}`}
-                                                         locale={locale}
+                                                        locale={locale}
                                                         className="blog-sidebar-widget-item-link text-decoration-none"
                                                     >
                                                         <h4 className="blog-sidebar-widget-item-title">
@@ -182,23 +156,6 @@ const BlogDetails = async ({ params }) => {
                                         ))}
                                     </div>
                                 </div>
-
-                                {/* treanding card */}
-                                {/* <div className="treanding-card d-flex flex-column gap-3 justify-content-center">
-                                    <div>
-                                        <h4 className="m-0">Treanding Nearby Places</h4>
-                                        <p className="m-0">Get the latest updates and insights delivered straight to your inbox.</p>
-                                    </div>
-                                    <div className="d-flex flex-wrap gap-2">
-                                        {["Kumbh 2024", "Trimbakeshwar", "Ramkund", "Kalaram Temple", "Panchvati", "Trirashmi Caves"].map((value, i) => {
-                                            return (
-                                                <div className="pill-btns d-flex align-items-center justify-content-center" key={i}>
-                                                    <span className="m-0">{value}</span>
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                </div> */}
                             </div>
                         </Col>
                     </Row>

@@ -338,7 +338,7 @@ export const KumbhCountdown = ({ targetDate, isActive = true }) => {
 
     // Memoize the target date so the useEffect doesn't re-run unless the date prop changes
     const COUNTDOWN_TARGET = useMemo(() => {
-        return targetDate ? new Date(targetDate) : new Date("2027-08-01T00:00:00Z"); // Updated fallback closer to Nashik 2027 start
+        return targetDate ? new Date(targetDate) : new Date("2026-09-31T00:00:00Z"); // Updated fallback closer to Nashik 2027 start
     }, [targetDate]);
 
     const [timeLeft, setTimeLeft] = useState({

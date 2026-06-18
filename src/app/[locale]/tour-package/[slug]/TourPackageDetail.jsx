@@ -1,18 +1,18 @@
 "use client";
 
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from '@/i18n/routing';
 import Image from "next/image";
 import * as Icons from "lucide-react";
-import { Circle, FileText, CalendarCheck } from "lucide-react";
+import { Circle, FileText, CalendarCheck, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { slugify, imageUrl } from "@/lib/utils";
 import { WhatsAppShareBtn } from "@/components/ui/button";
 import { HighlightsModal, TourTabs, } from "@/components/ui/common";
 import { TourPackageSlider } from "@/components/ui/TourPackageSlider";
 import { tourPackages } from "@/lib/data";
-import { getCancellationPolicy, getPaymentPolicy,getTours, getTourBySlug} from "../tourApi";
+import { getCancellationPolicy, getPaymentPolicy, getTours, getTourBySlug } from "../tourApi";
 
 
 const TourPackageDetail = ({ tour }) => {
@@ -48,40 +48,40 @@ const TourPackageDetail = ({ tour }) => {
     // }, []);
 
     useEffect(() => {
-    const fetchData = async () => {
-        try {
-        const [
-            cancelData,
-            paymentData,
-            toursData
-        ] = await Promise.all([
-            getCancellationPolicy(),
-            getPaymentPolicy(),
-            getTours(1),
-        ]);
+        const fetchData = async () => {
+            try {
+                const [
+                    cancelData,
+                    paymentData,
+                    toursData
+                ] = await Promise.all([
+                    getCancellationPolicy(),
+                    getPaymentPolicy(),
+                    getTours(1),
+                ]);
 
-        setCancellationPolicy(cancelData || []);
-        setPaymentPolicy(paymentData || []);
+                setCancellationPolicy(cancelData || []);
+                setPaymentPolicy(paymentData || []);
 
-        const filteredTours =
-            (toursData?.data || toursData || []).filter(
-            (item) => item.id !== tour.id
-            );
+                const filteredTours =
+                    (toursData?.data || toursData || []).filter(
+                        (item) => item.id !== tour.id
+                    );
 
-        setRecentPackages(filteredTours);
-        } catch (error) {
-        console.error(error);
-        }
-    };
+                setRecentPackages(filteredTours);
+            } catch (error) {
+                console.error(error);
+            }
+        };
 
-    fetchData();
+        fetchData();
     }, [tour.id]);
 
     return (
         <main>
             {/* HERO SECTION */}
             <section
-                className="tour-pack-detail-sec d-flex align-items-end justify-content-start position-relative"
+                className="tour-pack-detail-sec d-flex flex-column align-items-end justify-content-between position-relative"
                 style={{
                     backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url(${tour.image_url})`,
                     backgroundSize: "cover",
@@ -89,7 +89,18 @@ const TourPackageDetail = ({ tour }) => {
                     minHeight: "60vh",
                 }}
             >
-                <Container className="hero-content pb-5">
+                <Container className="pt-4 mb-5">
+                    <div className="w-max">
+                        <Link
+                            href="/tour-package"
+                            className="border position-relative btn primery-btn d-flex align-items-center gap-2 p-1 px-2 rounded-pill"
+                        >
+                            <ArrowLeft size={15} />
+                            <p className="m-0">Back to Tour Packages</p>
+                        </Link>
+                    </div>
+                </Container>
+                <Container className="hero-content pb-3 pb-md-4">
                     <div className="tag mb-3">
                         ✨ {tour.duration}
                     </div>
@@ -98,28 +109,21 @@ const TourPackageDetail = ({ tour }) => {
                         {tour.title}
                     </h1>
 
-                    <p className="lead text-white-75">
+                    <p className="d-none d-lg-block fs-6 lead text-white-75">
                         {tour.description}
                     </p>
                     {tour?.routes?.length > 0 && (
-                    <ul className="px-2 m-0 bg-light tour-route d-flex flex-wrap justify-content-start align-items-center">
-                        {(tour.routes || []).map((route, i) => (
-                            <li
-                                key={i}
-                                className="p-1 small-12 rounded bg-primery-color text-decoration-none text-dark"
-                            >
-                                {route} &nbsp; {i !== (tour.routes?.length || 0) - 1 && "---"}
-                            </li>
-                        ))}
-                    </ul>
-                    )}
-                    {/* {tour?.location && (
-                        <ul className="px-2 m-0 bg-light tour-route d-flex flex-wrap justify-content-start align-items-center">
-                            <li className="p-1 small-12 rounded bg-primery-color text-decoration-none text-dark">
-                                {tour.location}
-                            </li>
+                        <ul className="d-none px-2 m-0 bg-light tour-route d-md-flex flex-wrap justify-content-start align-items-center">
+                            {(tour.routes || []).map((route, i) => (
+                                <li
+                                    key={i}
+                                    className="p-1 small-12 rounded bg-primery-color text-decoration-none text-dark"
+                                >
+                                    {route} &nbsp; {i !== (tour.routes?.length || 0) - 1 && "---"}
+                                </li>
+                            ))}
                         </ul>
-                    )} */}
+                    )}
                 </Container>
             </section>
 
@@ -128,6 +132,23 @@ const TourPackageDetail = ({ tour }) => {
                 <Row className="gy-1 gy-md-4 gy-xl-5 m-0">
                     {/* LEFT CONTENT */}
                     <Col lg={8}>
+                        <div className="">
+                            <p className="lead text-dark fs-6 d-block d-lg-none my-2 pb-2">
+                                {tour.description}
+                            </p>
+                            {tour?.routes?.length > 0 && (
+                                <ul className="d-block d-md-none px-2 my-2 m-0 bg-light tour-route d-flex flex-wrap justify-content-start align-items-center">
+                                    {(tour.routes || []).map((route, i) => (
+                                        <li
+                                            key={i}
+                                            className="p-1 small-12 rounded bg-primery-color text-decoration-none text-dark"
+                                        >
+                                            {route} &nbsp; {i !== (tour.routes?.length || 0) - 1 && "---"}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
                         <div className="trinery-bg p-3 mt-4 mt-md-0 rounded-2 shadow-sm">
                             <Row>
                                 {/* EXPERIENCE INCLUSIONS */}
@@ -142,11 +163,11 @@ const TourPackageDetail = ({ tour }) => {
                                                 <div className="d-flex flex-row flex-wrap justify-content-start gap-3 mb-3 mb-md-0">
                                                     {(tour.inclusions || []).map(
                                                         (item, i) => {
-                                                             const iconName = typeof item === "object"
-                                                                        ? item.in_icon
-                                                                        : null;
-                                                            const LucideIcon =iconName && Icons[iconName];
-                                                                // Icons[item.in_icon];
+                                                            const iconName = typeof item === "object"
+                                                                ? item.in_icon
+                                                                : null;
+                                                            const LucideIcon = iconName && Icons[iconName];
+                                                            // Icons[item.in_icon];
 
                                                             return (
                                                                 <div
@@ -179,7 +200,8 @@ const TourPackageDetail = ({ tour }) => {
                                                     )}
                                                 </div>
                                             </div>
-                                        )}
+                                        )
+                                    }
                                 </Col>
 
                                 {/* TOUR HIGHLIGHTS */}
@@ -256,7 +278,7 @@ const TourPackageDetail = ({ tour }) => {
                                                 <Col md={9}>
                                                     <span className="badge bg-brand-light primery-color ms-2 ms-sm-0">
                                                         Day {i + 1}
-                                                         {/* {i + 1} */}
+                                                        {/* {i + 1} */}
                                                     </span>
 
                                                     <h5 className="fw-bold sub-heading text-dark">
@@ -328,10 +350,10 @@ const TourPackageDetail = ({ tour }) => {
 
                         {/* TABS */}
                         <div className="section-block tour-tab-section mb-4 mb-md-0 mt-5 border-top pt-4">
-                            <TourTabs tour={tour} 
-                             cancellationPolicy={cancellationPolicy}
-                             paymentPolicy={paymentPolicy}
-                             />
+                            <TourTabs tour={tour}
+                                cancellationPolicy={cancellationPolicy}
+                                paymentPolicy={paymentPolicy}
+                            />
                         </div>
                     </Col>
 
@@ -359,7 +381,7 @@ const TourPackageDetail = ({ tour }) => {
                                 href={`/tour-package/book/${slugify(tour.slug)}`}
                                 className="primery-btn d-flex align-items-center justify-content-center gap-2 w-100 py-3 text-center text-decoration-none fw-bold rounded shadow-sm mb-3"
                             >
-                                <CalendarCheck size={18}/>
+                                <CalendarCheck size={18} />
                                 Book Now
                             </Link>
 
@@ -372,10 +394,10 @@ const TourPackageDetail = ({ tour }) => {
                     </Col>
 
                     <Col xs={12}>
-                    <TourPackageSlider
-                        packages={recentPackages}
-                        title="Recent Packages"
-                    />
+                        <TourPackageSlider
+                            packages={recentPackages}
+                            title="Recent Packages"
+                        />
                     </Col>
                 </Row>
             </Container>

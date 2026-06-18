@@ -72,12 +72,12 @@ export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_widt
                         __html: blog.description,
                     }}
                 />
-                {/* <p className="text-muted small blog-excerpt">
-                    {blog.description
-                        ?.replace(/<[^>]*>/g, "")
-                        ?.slice(0, 150)}
-                    ...
-                </p> */}
+                {/* {blog.description
+                        ?.replace(/<[^>]*>/g, "") // Regular expression to safely strip out all HTML tags
+                        ?.slice(0, 120)}
+                    {blog.description?.replace(/<[^>]*>/g, "").length > 120 ? "..." : ""}
+                </div> */}
+
 
                 {/* Button */}
                 <Link href={blogLink} className="btn btn-link p-0 blog-readmore text-decoration-none d-flex align-items-center gap-1">

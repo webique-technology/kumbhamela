@@ -19,9 +19,12 @@
     "slide1_subHeading": "Experience Unmatched Delight With Us.",
     "slide1_title": "Simhastha Kumbh Mela Nashik 2027",
     "slide1_description": "Countdown to Kumbh Mela",
-    "slide2_subHeading": "The Sacred Confluence of Faith & Time",
-    "slide2_title": "Nashik Kumbh",
-    "slide2_description": "Where millions gather on the banks of the holy Godavari to seek spiritual liberation. Experience the world's largest spiritual congregation at one of India's most sacred pilgrimage sites."
+    "slide2_subHeading": "Seamless Journeys & Premium Comfort",
+    "slide2_title": "Your Trusted Nashik Kumbh Travel Partner",
+    "slide2_description": "Navigate the grand pilgrimage with absolute ease. From premium car rentals and localized tempo travelers to verified hotel accommodations, we manage all your logistics so you can focus entirely on your spiritual devotion.",
+    "slide3_subHeading": "All-Inclusive Curated Pilgrimages",
+    "slide3_title": "Explore Holy Yatras & Divine Tour Packages",
+    "slide3_description": "Book thoughtfully planned itineraries featuring confirmed darshans, comfortable AC transport, and premium stays. Explore our special 4-Day Akhalkot-Pandharpur or comprehensive 12 Jyotirlinga tour packages today."
   },
   "Countdown": {
     "days": "Days",
@@ -790,5 +793,67 @@
     "btnConfirm": "Confirm on WhatsApp",
     "submitting": "Submitting...",
     "errorMsg": "Unable to submit enquiry."
+  },
+  "BookingFormPage": {
+    "Header": {
+      "title": "Book Your Sacred Path",
+      "description": "Fill in the details below to begin your pilgrimage. Our journey coordinators will contact you within 24 hours to personalize your experience."
+    },
+    "Sidebar": {
+      "title": "Why Book With Us",
+      "feat1": {
+        "title": "Verified Local Guides",
+        "text": "Guided by Nashik scholars who know the hidden stories of every Ghat."
+      },
+      "feat2": {
+        "title": "Guaranteed Access",
+        "text": "Priority slots for restricted ritual areas and VIP viewing platforms."
+      },
+      "feat3": {
+        "title": "Spiritual Concierge",
+        "text": "From Samagri arrangements to personalized Puja planning."
+      },
+      "stats": {
+        "pilgrims": "PILGRIMS",
+        "rating": "RATING",
+        "support": "SUPPORT"
+      }
+    }
+  },
+  "BookingFormHandler": {
+    "labels": {
+      "fullName": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "travelers": "Number of Travelers",
+      "date": "Preferred Dates",
+      "package": "Tour Package Selection",
+      "vehicle": "Vehicle Category",
+      "requirements": "Special Requirements"
+    },
+    "placeholders": {
+      "name": "Enter Your Name",
+      "email": "Enter your Email",
+      "phone": "10-digit mobile number",
+      "vehicle": "Select Vehicle Category",
+      "requirements": "Food preferences, accessibility needs, etc."
+    },
+    "options": {
+      "solo": "Solo Pilgrim",
+      "couple": "Couple",
+      "small": "Small Group (3-5)",
+      "large": "Large Family (5+)"
+    },
+    "errors": {
+      "required": "This field is required",
+      "email": "Please enter a valid email address",
+      "phone": "Please enter a valid 10-digit mobile number",
+      "datePast": "Date cannot be in the past",
+      "failed": "Unable to submit booking. Please try again."
+    },
+    "buttons": {
+      "submitting": "Submitting...",
+      "confirm": "Confirm & Send on WhatsApp"
+    }
   }
 }
