@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { Search, ChevronDown, DollarSign, X } from "lucide-react";
+import { Search, ChevronDown, DollarSign, X, ArrowRight } from "lucide-react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from "framer-motion";
@@ -417,6 +417,7 @@ export const KumbhCountdown = ({ targetDate, isActive = true }) => {
 };
 
 export const TourTabs = ({ tour, cancellationPolicy, paymentPolicy }) => {
+    const t = useTranslations("TranslateBtn")
     const [activeTab, setActiveTab] = useState('cancellation-policy');
 
     const handleTabChange = (tab) => {
@@ -432,44 +433,15 @@ export const TourTabs = ({ tour, cancellationPolicy, paymentPolicy }) => {
                 <Tab
                     eventKey="cancellation-policy"
                     // title="Cancellation Policy"
-                    title="Terms & Conditions"
+                    title={t("TermsAndConditions")}
                 >
-                    {/* <h4 className="section-title fw-bold mb-3">Privacy Policy</h4> */}
-                    {/* <p className="text-muted small mb-4">
-                        {cancellationPolicy.content}
-                    </p> */}
                     <p
                         className="text-muted small mb-4"
                         dangerouslySetInnerHTML={{
                             __html: cancellationPolicy.content,
                         }}
                     ></p>
-                    {/* <div className="cancellation-timeline">
-                        {tour.cancellationPolicy?.map((item, index) => {
-                            const charge = Math.round((tour.price * item.percent) / 100);
-                            const statusColor = item.percent <= 25 ? '#08c718' : item.percent <= 75 ? '#fd7e14' : '#dc3545';
-
-                            return (
-                                <div key={index} className="d-flex align-items-center justify-content-between border p-3 mb-2 bg-white rounded shadow-sm"
-                                    style={{
-                                        borderLeft: `6px solid ${statusColor} !important`,
-                                        transition: 'transform 0.2s ease'
-                                    }}>
-                                    <div>
-                                        <span className="fw-bold h6 mb-0">₹{charge.toLocaleString()}</span>
-                                        <span className="text-muted small ms-2">({item.percent}% deduction from tour amount)</span>
-                                    </div>
-                                    <p className="fw-semibold m-0 text-secondary small-12">
-                                        {item.days} days prior
-                                    </p>
-                                </div>
-                            );
-                        })}
-                    </div> */}
                 </Tab>
-                {/* <Tab eventKey="payment-terms" title="Payment Terms">
-                    <PaymentTerms policy={paymentPolicy} />
-                </Tab> */}
             </Tabs>
         </>
     );
@@ -478,7 +450,7 @@ export const TourTabs = ({ tour, cancellationPolicy, paymentPolicy }) => {
 
 export const HighlightsModal = ({ children }) => {
     const [open, setOpen] = useState(false);
-
+    const t = useTranslations("TranslateBtn")
     const handleToggle = () => {
         setOpen((prev) => !prev);
     };
@@ -504,7 +476,7 @@ export const HighlightsModal = ({ children }) => {
                 className="px-2 py-1 mt-2 small-12 rounded-2 primery-btn text-decoration-none"
                 whileHover={{ scale: 1.01 }}
             >
-                View all highlights →
+                {t("viewAllHighlights")} <ArrowRight size={15}/>
             </motion.button>
 
             <AnimatePresence>

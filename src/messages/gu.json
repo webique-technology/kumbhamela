@@ -858,16 +858,28 @@
         "BookNow": "હમણાં બુક કરો",
         "viewDetails": "વિગતો જુઓ",
         "ReadMore": "વધુ વાંચો",
-        "SendItinerary": "યાત્રા કાર્યક્રમ મોકલો"
+        "SendItinerary": "યાત્રા કાર્યક્રમ મોકલો",
+        "TermsAndConditions": "નિયમો અને શરતો",
+        "viewAllHighlights": "બધા મુખ્ય આકર્ષણો જુઓ"
     },
     "Cards": {
         "StartingFrom": "શરૂઆતની કિંમત",
         "PerNight": "પ્રતિ રાત્રિ"
     },
-    "BookingSummary": {
-        "Title": "બુકિંગ સારાંશ",
-        "PerPerson": "/ વ્યક્તિ દીઠ",
-        "Duration": "સમયગાળો:",
-        "KumbhNote": "* કુંભમેળાની તારીખો માટે મર્યાદિત જગ્યાઓ ઉપલબ્ધ છે."
+    "TourDetail": {
+        "backBtn": "ટૂર પેકેજીસ પર પાછા જાઓ",
+        "includes": "ટૂરમાં શામેલ",
+        "highlights": "ટૂરના મુખ્ય આકર્ષણો",
+        "itinerary": "યાત્રા કાર્યક્રમ",
+        "day": "દિવસ",
+        "showLess": "ઓછું બતાવો",
+        "loadMore": "વધુ લોડ કરો",
+        "recentTitle": "તાજેતરના પેકેજીસ",
+        "Summary": {
+            "title": "બુકિંગ સારાંશ",
+            "perPerson": "વ્યક્તિ દીઠ",
+            "duration": "સમયગાળો",
+            "kumbhNote": "* કુંભમેળાની તારીખો માટે મર્યાદિત જગ્યાઓ ઉપલબ્ધ છે."
+        }
     }
 }

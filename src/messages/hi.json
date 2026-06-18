@@ -858,16 +858,28 @@
     "BookNow": "अभी बुक करें",
     "viewDetails": "विवरण देखें",
     "ReadMore": "अधिक पढ़ें",
-    "SendItinerary": "यात्रा कार्यक्रम भेजें"
+    "SendItinerary": "यात्रा कार्यक्रम भेजें",
+    "TermsAndConditions": "नियम एवं शर्तें",
+    "viewAllHighlights": "सभी मुख्य विशेषताएं देखें"
   },
   "Cards": {
     "StartingFrom": "शुरुआती कीमत",
     "PerNight": "प्रति रात"
   },
-  "BookingSummary": {
-    "Title": "बुकिंग विवरण",
-    "PerPerson": "/ प्रति व्यक्ति",
-    "Duration": "अवधि:",
-    "KumbhNote": "* कुंभ मेला की तारीखों के लिए सीमित सीटें उपलब्ध हैं।"
+  "TourDetail": {
+    "backBtn": "टूर पैकेजेस पर वापस जाएं",
+    "includes": "टूर में शामिल",
+    "highlights": "टूर की मुख्य विशेषताएं",
+    "itinerary": "यात्रा कार्यक्रम",
+    "day": "दिन",
+    "showLess": "कम दिखाएं",
+    "loadMore": "और लोड करें",
+    "recentTitle": "हाल के पैकेजेस",
+    "Summary": {
+      "title": "बुकिंग सारांश",
+      "perPerson": "प्रति व्यक्ति",
+      "duration": "अवधि",
+      "kumbhNote": "* कुंभ मेला की तारीखों के लिए सीमित सीटें उपलब्ध हैं।"
+    }
   }
 }

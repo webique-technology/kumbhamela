@@ -858,16 +858,28 @@
         "BookNow": "इदानीमेव आरक्षयन्तु",
         "viewDetails": "विवरणं पश्यन्तु",
         "ReadMore": "अधिकं पठन्तु",
-        "SendItinerary": "भ्रमणपत्रिकाम् प्रेषयन्तु"
+        "SendItinerary": "भ्रमणपत्रिकाम् प्रेषयन्तु",
+        "TermsAndConditions": "नियम-उपाधयश्च (Terms & Conditions)",
+        "viewAllHighlights": "सर्वान् मुख्यांशान् पश्यन्तु"
     },
     "Cards": {
         "StartingFrom": "प्रारम्भिकमूल्यम्",
         "PerNight": "प्रतिरात्रिः"
     },
-    "BookingSummary": {
-        "Title": "आरक्षणस्य विवरणम्",
-        "PerPerson": "/ प्रतिव्यक्तिः",
-        "Duration": "अवधिः:",
-        "KumbhNote": "* कुम्भमेलातिथिभ्यः सीमिताः प्रकोष्ठाः उपलब्धाः सन्ति।"
+    "TourDetail": {
+        "backBtn": "यात्रासंकुलपुटे प्रतिगच्छतु",
+        "includes": "यात्रायां सम्मिलितम्",
+        "highlights": "यात्रायाः मुख्यांशः",
+        "itinerary": "यात्राविवरणम्",
+        "day": "दिवसः",
+        "showLess": "न्यूनं दर्शयतु",
+        "loadMore": "अधिकं पठन्तु",
+        "recentTitle": "नूतन संकुलानि",
+        "Summary": {
+            "title": "आरक्षणविवरणम्",
+            "perPerson": "/ प्रति जनम्",
+            "duration": "अवधिः",
+            "KumbhNote": "* कुम्भमेलातिथिभ्यः सीमिताः प्रकोष्ठाः उपलब्धाः सन्ति।"
+        }
     }
 }

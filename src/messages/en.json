@@ -860,16 +860,28 @@
     "BookNow": "Book Now",
     "viewDetails": "View Details",
     "ReadMore": "Read More",
-    "SendItinerary": "Send Itinerary"
+    "SendItinerary": "Send Itinerary",
+    "TermsAndConditions": "Terms & Conditions",
+    "viewAllHighlights": "View All Highlights"
   },
   "Cards": {
     "StartingFrom": "Starting from",
     "PerNight": "per night"
   },
-  "BookingSummary": {
-    "Title": "Booking Summary",
-    "PerPerson": "/ person",
-    "Duration": "Duration:",
-    "KumbhNote": "* Limited slots available for Kumbh Mela dates."
+  "TourDetail": {
+    "backBtn": "Back to Tour Packages",
+    "includes": "Tour Includes",
+    "highlights": "Tour Highlights",
+    "itinerary": "The Itinerary",
+    "day": "Day",
+    "showLess": "Show Less",
+    "loadMore": "Load More",
+    "recentTitle": "Recent Packages",
+    "Summary": {
+      "title": "Booking Summary",
+      "perPerson": "Per Person",
+      "duration": "Duration",
+      "kumbhNote": "* Limited slots available for Kumbh Mela dates."
+    }
   }
 }

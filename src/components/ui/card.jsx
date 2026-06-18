@@ -290,7 +290,7 @@ export const RentalCarCard = ({ car, onBook }) => {
 export const TourPackageCard = ({ tour, tourLink }) => {
     const params = useParams();
     const currentLocale = params?.locale || "en";
-    const t = useTranslations("TranslateBtn");
+    const t = useTranslations();
     // Features safe for array/string/null
     const features = Array.isArray(tour?.features)
         ? tour.features
@@ -336,7 +336,7 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                     <div className="d-flex align-items-center justify-content-between mt-auto mb-2">
                         <div className="d-flex align-items-end">
                             <p className="mb-0 fw-semibold">
-                                Starting from : &nbsp;
+                               {t("Cards.StartingFrom")} : &nbsp;
                                 <span className="h5 fw-bold text-brand-orange mb-0">
                                     ₹{tour?.base_price};
                                 </span>
@@ -368,7 +368,7 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                         href={tourLink || "#"}
                         className="primery-btn py-2 text-decoration-none w-100 d-flex justify-content-center align-items-center mt-auto"
                     >
-                        {t("viewDetails")}
+                        {t("TranslateBtn.viewDetails")}
                     </Link>
                 </div>
             </div>

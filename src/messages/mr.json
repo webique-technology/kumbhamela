@@ -858,16 +858,28 @@
     "BookNow": "आत्ताच बुक करा",
     "viewDetails": "तपशील पहा",
     "ReadMore": "पुढे वाचा",
-    "SendItinerary": "इतनेरी (प्रवास आराखडा) पाठवा"
+    "SendItinerary": "इतनेरी (प्रवास आराखडा) पाठवा",
+    "TermsAndConditions": "नियम आणि अटी",
+    "viewAllHighlights": "सर्व प्रमुख वैशिष्ट्ये पहा"
   },
   "Cards": {
     "StartingFrom": "या किंमतीपासून सुरू",
     "PerNight": "प्रति रात्र"
   },
-  "BookingSummary": {
-    "Title": "बुकिंगचा सारांश",
-    "PerPerson": "/ प्रति व्यक्ती",
-    "Duration": "कालावधी:",
-    "KumbhNote": "* कुंभमेळ्याच्या तारखांसाठी मर्यादित जागा उपलब्ध आहेत."
+  "TourDetail": {
+    "backBtn": "टूर पॅकेजेसवर परत जा",
+    "includes": "टूरमध्ये समाविष्ट",
+    "highlights": "टूरची प्रमुख वैशिष्ट्ये",
+    "itinerary": "प्रवास कार्यक्रम (इटिनररी)",
+    "day": "दिवस",
+    "showLess": "कमी दाखवा",
+    "loadMore": "अधिक वाचा",
+    "recentTitle": "अलीकडील पॅकेजेस",
+    "Summary": {
+      "title": "बुकिंग तपशील",
+      "perPerson": "प्रति व्यक्ती",
+      "duration": "कालावधी",
+      "kumbhNote": "* कुंभमेळ्याच्या तारखांसाठी मर्यादित जागा उपलब्ध आहेत."
+    }
   }
 }
