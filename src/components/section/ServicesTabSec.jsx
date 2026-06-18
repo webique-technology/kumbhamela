@@ -13,6 +13,7 @@ import { getHotels } from '@/app/[locale]/hotel/hotelApi';
 import { getCars } from '@/app/[locale]/rental-car/carApi';
 import { getTours } from '@/app/[locale]/tour-package/tourApi';
 import Image from 'next/image';
+import { useParams } from "next/navigation";
 
 const UnifiedServiceCard = ({ type, item, onBook, t }) => {
     // 1. Dynamic Attribute Resolvers across distinct API schemas
@@ -115,7 +116,8 @@ const UnifiedServiceCard = ({ type, item, onBook, t }) => {
                     {/* Integrated Booking Interaction Node */}
                     {type === "tour" ? (
                         <Link
-                            href={`/tour-package/${slugify(cardTitle || "")}`}
+                            href={`/tour-package/${item.slug}`}
+                            // href={`/tour-package/${slugify(cardTitle || "")}`}
                             className="service-btn text-decoration-none d-flex justify-content-center align-items-center mt-auto"
                         >
                             <span>{t("viewDetails")}</span>
@@ -168,6 +170,8 @@ const ServicesTabSec = () => {
     const [cars, setCars] = useState([]);
     const [hotels, setHotels] = useState([]);
     const [loading, setLoading] = useState(true);
+    const params = useParams();
+    const locale = params.locale;
 
     // Mapped Titles reference dynamic i18n keys
     const tabData = [
@@ -193,13 +197,13 @@ const ServicesTabSec = () => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [locale]);
 
     const fetchData = async () => {
         try {
             setLoading(true);
             const [tourRes, carRes, hotelRes] = await Promise.all([
-                getTours(1, "", "", "", 6),
+                getTours(1, "", "", "", 6,locale),
                 getCars(1, "", "", "", 6),
                 getHotels(1, "", "", "", 6)
             ]);

@@ -13,6 +13,7 @@ import { HighlightsModal, TourTabs, } from "@/components/ui/common";
 import { TourPackageSlider } from "@/components/ui/TourPackageSlider";
 import { tourPackages } from "@/lib/data";
 import { getCancellationPolicy, getPaymentPolicy, getTours, getTourBySlug } from "../tourApi";
+import { useParams } from "next/navigation";
 
 
 const TourPackageDetail = ({ tour }) => {
@@ -20,6 +21,8 @@ const TourPackageDetail = ({ tour }) => {
     const [cancellationPolicy, setCancellationPolicy] = useState([]);
     const [paymentPolicy, setPaymentPolicy] = useState([]);
     const [recentPackages, setRecentPackages] = useState([]);
+    const params = useParams();
+    const locale = params.locale;
 
     const [expandedItems, setExpandedItems] = useState({});
     const loadMore = (index) => {
@@ -57,7 +60,7 @@ const TourPackageDetail = ({ tour }) => {
                 ] = await Promise.all([
                     getCancellationPolicy(),
                     getPaymentPolicy(),
-                    getTours(1),
+                    getTours(1,"","","","",locale),
                 ]);
 
                 setCancellationPolicy(cancelData || []);
@@ -109,9 +112,15 @@ const TourPackageDetail = ({ tour }) => {
                         {tour.title}
                     </h1>
 
-                    <p className="d-none d-lg-block fs-6 lead text-white-75">
+                    {/* <p className="d-none d-lg-block fs-6 lead text-white-75">
                         {tour.description}
-                    </p>
+                    </p> */}
+                    <div
+                        className="d-none d-lg-block fs-6 lead text-white-75"
+                        dangerouslySetInnerHTML={{
+                            __html: tour.description || ""
+                        }}
+                    />
                     {tour?.routes?.length > 0 && (
                         <ul className="d-none px-2 m-0 bg-light tour-route d-md-flex flex-wrap justify-content-start align-items-center">
                             {(tour.routes || []).map((route, i) => (
@@ -285,12 +294,18 @@ const TourPackageDetail = ({ tour }) => {
                                                         {day.itinerary_title}
                                                     </h5>
 
-                                                    <p
+                                                    {/* <p
                                                         className={`text-secondary ${expandedItems[i] ? "" : "line-clamp-5"
                                                             }`}
                                                     >
                                                         {day.description || ""}
-                                                    </p>
+                                                    </p> */}
+                                                    <div
+                                                        className={`text-secondary ${expandedItems[i] ? "" : "line-clamp-5" }`}
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: day.description || ""
+                                                        }}
+                                                    />
 
                                                     {day.description?.length > 261 && (
                                                         <motion.button

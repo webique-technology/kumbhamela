@@ -18,12 +18,14 @@ export const getTours = async (
     name = "",
     category = "",
     price = "",
-    limit = ""
+    limit = "",
+    lang = "en"
     ) => {
         try {
             const params = new URLSearchParams();
 
             params.set("page", page);
+            params.set("lang", lang);
 
             if (name) {
                 params.set("name", name);
