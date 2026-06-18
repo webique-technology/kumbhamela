@@ -188,13 +188,14 @@ const PlanTabSec = () => {
                                                                         <Image
                                                                             src={value.image}
                                                                             alt={t(value.titleKey) || "Plan Image"}
-                                                                            // sizes="100%"
+                                                                            sizes="100%"
                                                                             width={145}
                                                                             height={120}
-                                                                            // className='img-fluid'
+                                                                            className='img-fluid'
                                                                             style={{ objectFit: 'cover' }}
                                                                             placeholder="blur"
                                                                         />
+                                                                        <img src={value.image} className='img-fluid' alt="" />
                                                                     </div>
                                                                 </Col>
                                                             )}
