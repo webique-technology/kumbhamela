@@ -10,6 +10,7 @@ import "../../assets/scss/main.scss";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { KumbhChatbot } from "@/components/ui/Chatbot";
 
 const sora = Sora({
   weight: ['400', '500', '600', '700', '800'],
@@ -127,6 +128,7 @@ export default async function RootLayout({ children, params }) {
           <Navbar />
           {children}
           <Footer />
+          <KumbhChatbot />
         </NextIntlClientProvider>
       </body>
     </html>

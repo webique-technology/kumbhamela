@@ -1,0 +1,288 @@
+@use "../assets/scss/variable" as *; // Imports your system's layout variables seamlessly
+
+.kumbh-chatbot-container {
+    position: relative;
+    z-index: 99999;
+
+    .kumbh-launcher-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: linear-gradient(135deg, #ff6f00, #ff9100);
+        color: $text-color-light;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 14px 14px;
+        // padding: 14px 24px;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 6px 24px rgba(255, 111, 0, 0.35);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: $font-size-base;
+        z-index: 1000;
+    }
+
+    .kumbh-window-box {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        width: 380px;
+        height: 540px;
+        background: $bg-light;
+        border-radius: 20px;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.16);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        border: 1px solid rgba(255, 111, 0, 0.1);
+        z-index: 1001;
+
+        @media (max-width: 480px) {
+            bottom: 0;
+            right: 0;
+            width: 90vw;
+            height: 70vh;
+            border-radius: 20px;
+        }
+    }
+
+    .kumbh-header {
+        background: linear-gradient(135deg, #ff6f00, #ff9100);
+        color: $text-color-light;
+        padding: 16px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .kumbh-profile-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .kumbh-avatar {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: $font-size-md;
+        }
+
+        .kumbh-status-title {
+            font-size: $font-size-base;
+            font-weight: 700;
+        }
+
+        .kumbh-status-sub {
+            font-size: $font-size-xs;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .kumbh-close-btn {
+            background: none;
+            border: none;
+            color: $bg-light;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 4px;
+        }
+    }
+
+    .kumbh-body {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        background: #fdfaf6;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .kumbh-msg {
+            max-width: 85%;
+            padding: 12px 16px;
+            font-size: $font-size-base;
+            line-height: 1.5;
+            border-radius: 16px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .kumbh-msg-bot {
+            background: $bg-light;
+            color: #333;
+            border-radius: 16px 16px 16px 4px;
+            align-self: flex-start;
+            border-left: 4px solid $primary-color;
+        }
+
+        .kumbh-msg-user {
+            background: #ffe0b2;
+            color: #2b1d0c;
+            border-radius: 16px 16px 4px 16px;
+            align-self: flex-end;
+        }
+
+        .kumbh-whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #25D366;
+            color: $text-color-light !important;
+            padding: 10px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            margin-top: 8px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+            transition: background 0.2s ease;
+
+            &:hover {
+                background: #1ebd54;
+            }
+        }
+    }
+
+    .kumbh-tags-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    .kumbh-btn-tag {
+        background: $bg-light;
+        border: 1px solid $primary-color;
+        color: $primary-color;
+        padding: 6px 14px;
+        border-radius: 30px;
+        font-size: $font-size-sm;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: $primary-color;
+            color: $text-color-light;
+        }
+    }
+
+    .kumbh-input-footer {
+        display: flex;
+        border-top: 1px solid #f1eeea;
+        padding: 12px;
+        background: $bg-light;
+        align-items: center;
+
+        .kumbh-txt-input {
+            flex: 1;
+            border: 1px solid #e2ded8;
+            padding: 10px 16px;
+            border-radius: 24px;
+            outline: none;
+            font-size: 14px;
+
+            &:focus {
+                border-color: $primary-color;
+            }
+        }
+
+        .kumbh-submit-btn {
+            background: $primary-color;
+            color: $text-color-light;
+            border: none;
+            width: 38px;
+            height: 38px;
+            cursor: pointer;
+            border-radius: 50%;
+            margin-left: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(255, 111, 0, 0.25);
+        }
+    }
+
+    /* Typing Indicator Dots */
+    .typing-indicator {
+        display: flex;
+        gap: 4px;
+        padding: 14px 20px !important;
+
+        .kumbh-dot {
+            width: 6px;
+            height: 6px;
+            background: #ff6f00;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+
+            &:nth-child(1) {
+                animation-delay: -0.32s;
+            }
+
+            &:nth-child(2) {
+                animation-delay: -0.16s;
+            }
+        }
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+
+    40% {
+        transform: scale(1.0);
+    }
+}
+
+.kumbh-mic-btn {
+    border: none;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 6px;
+    transition: all 0.2s ease;
+
+    // Default Idle Listening State Colors
+    background: #f1eeea;
+    color: #333333;
+    cursor: pointer;
+
+    // Active Listening State overrides
+    &.active-listening {
+        background: #d32f2f !important;
+        color: #ffffff !important;
+        animation: voicePulse 1.5s infinite ease-in-out;
+    }
+}
+
+@keyframes voicePulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.4);
+    }
+
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(211, 47, 47, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(211, 47, 47, 0);
+    }
+}

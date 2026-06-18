@@ -15,36 +15,75 @@ const BASE_URL =
 
 export async function generateMetadata({ params }) {
     const { slug, locale } = await params;
-    // const blogs = await getBlogs();
-    const response = await getBlogs(1, "", "", locale);
-    const blogs = response.data || [];
+
+    // Fetch the detailed single blog record asynchronously
     const blog = await getBlogBySlug(slug, locale);
 
-    // const blog = blogs.find(
-    //     (item) => slugify(item.title) === slug
-    // );
+    // Hardcoded production site domain shown in your Orcascan validation panel
+    const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mahakumbhtourtravelsnashik.com";
 
     if (!blog) {
-        return {};
+        return {
+            title: "Blog Post Not Found | Mahakumbh Tours",
+        };
     }
 
-    return {
-        title: blog.title,
-        description:
-            blog.description?.replace(/<[^>]+>/g, "").slice(0, 160),
+    // Safely strip out HTML formatting blocks to get clean plain text strings
+    const cleanDescription = blog.description
+        ?.replace(/<[^>]+>/g, "") // Strip raw HTML tags completely
+        ?.replace(/\s+/g, " ")     // Collapse line-breaks and extra spacing safely
+        ?.trim()
+        ?.slice(0, 160) || "";
 
-        alternates: {
-            canonical: `${BASE_URL}/blog/${slug}`,
+    const fullUrl = `${BASE_URL}/${locale}/blog/${slug}`;
+
+    return {
+        title: `${blog.title} | Blogs & Insights`,
+        description: cleanDescription,
+
+        // Inject the exact non-standard og:logo tag required by tools like Orca Scan
+        other: {
+            "og:logo": `${BASE_URL}/images/logo.png`, // Absolute path to your production image asset
         },
 
+        // Multilingual Canonical Bridge matching real path tracking rules
+        alternates: {
+            canonical: fullUrl,
+            languages: {
+                "en-IN": `${BASE_URL}/en/blog/${slug}`,
+                "hi-IN": `${BASE_URL}/hi/blog/${slug}`,
+                "mr-IN": `${BASE_URL}/mr/blog/${slug}`,
+            }
+        },
+
+        // Fully Compliant OpenGraph Parameters
         openGraph: {
             title: blog.title,
-            description:
-                blog.description?.replace(/<[^>]+>/g, "").slice(0, 160),
-            images: [blog.image_url],
+            description: cleanDescription,
+            url: fullUrl,
+            siteName: "Mahakumbh Tours & Travels",
+            type: "article", // Changed from 'website' to 'article' to pass the missing og:type validation check!
+            locale: locale === "en" ? "en_IN" : `${locale}_IN`,
+            images: [
+                {
+                    url: blog.image_url || `${BASE_URL}/images/default-blog-og.jpg`,
+                    width: 1200,
+                    height: 630,
+                    alt: blog.title,
+                },
+            ],
+        },
+
+        // Twitter Card Mapping Properties
+        twitter: {
+            card: "summary_large_image",
+            title: blog.title,
+            description: cleanDescription,
+            images: [blog.image_url || `${BASE_URL}/images/default-blog-og.jpg`],
         },
     };
 }
+
 const BlogDetails = async ({ params }) => {
 
     // const locale = params.locale;
