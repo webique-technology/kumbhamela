@@ -36,8 +36,68 @@ const montez = Montez({
 });
 
 export const metadata = {
-  title: "Mahakumbh Tours & Travels",
-  description: "Official Spiritual Tourism Platform for Nashik Kumbh Mela",
+  title: {
+    default: "Mahakumbh Tours & Travels | Nashik Kumbh Mela 2027 Packages",
+    template: "%s | Mahakumbh Tours & Travels"
+  },
+  description: "Experience the divine with Mahakumbh Tours & Travels Nashik, your trusted car rental company in Nashik, Maharashtra. With 12 years of expertise, we specialize in Trimbakeshwar Joytirling Darshan, Nashik Darshan, Panchavti Tapovan, Shirdi Shani Shingnpur Darshan, and Grishneshwar Joytirling Darshan.",
+  keywords: [
+    "Nashik Kumbh Mela 2027",
+    "Kumbh Mela tour packages",
+    "Trimbakeshwar Jyotirlinga tour",
+    "Shahi Snan dates 2027",
+    "Nashik pilgrimage packages",
+    "Holy Yatras India",
+    "Panchavati Nashik tour",
+    "Kumbh Mela hotel booking",
+    "Spiritual tour operators Nashik",
+    "Maha Kumbh Snan packages"
+  ],
+  authors: [{ name: "Webique Technology", url: "https://webique.in" }],
+  creator: "Webique Technology",
+  publisher: "Mahakumbh Tours & Travels",
+  metadataBase: new URL('https://nashikkumbhmela.in'), // Replace with your production domain
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-IN': '/en',
+      'mr-IN': '/mr', // For Marathi regional localized indexing if route applies
+    },
+  },
+  openGraph: {
+    title: "Mahakumbh Tours & Travels | Nashik Kumbh Mela 2027 Packages",
+    description: "Explore holy yatras, official Shahi Snan dates, and verified pilgrimage itineraries for Nashik Kumbh Mela.",
+    url: 'https://nashikkumbhmela.in',
+    siteName: 'Mahakumbh Tours & Travels',
+    images: [
+      {
+        url: '/images/tour-section-bg.png', // Fallback social card graphic asset
+        width: 1200,
+        height: 630,
+        alt: 'Mahakumbh Tours & Travels - Nashik Kumbh Mela 2027',
+      },
+    ],
+    locale: 'en_IN',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Mahakumbh Tours & Travels | Nashik Kumbh Mela 2027",
+    description: "Official spiritual tourism platform for premium Nashik Kumbh Mela itineraries and accommodations.",
+    images: ['/images/tour-section-bg.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default async function RootLayout({ children, params }) {
