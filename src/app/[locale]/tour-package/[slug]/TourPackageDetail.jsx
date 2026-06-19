@@ -13,11 +13,12 @@ import { HighlightsModal, TourTabs, } from "@/components/ui/common";
 import { TourPackageSlider } from "@/components/ui/TourPackageSlider";
 import { tourPackages } from "@/lib/data";
 import { getCancellationPolicy, getPaymentPolicy, getTours, getTourBySlug } from "../tourApi";
+import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 
 
 const TourPackageDetail = ({ tour }) => {
-
+    const t = useTranslations();
     const [cancellationPolicy, setCancellationPolicy] = useState([]);
     const [paymentPolicy, setPaymentPolicy] = useState([]);
     const [recentPackages, setRecentPackages] = useState([]);
@@ -32,24 +33,6 @@ const TourPackageDetail = ({ tour }) => {
         }));
     };
 
-    // useEffect(() => {
-    // const fetchPolicies = async () => {
-    //     try {
-    //     const [cancelData, paymentData] = await Promise.all([
-    //         getCancellationPolicy(),
-    //         getPaymentPolicy(),
-    //     ]);
-
-    //     setCancellationPolicy(cancelData || []);
-    //     setPaymentPolicy(paymentData || []);
-    //     } catch (error) {
-    //     console.error(error);
-    //     }
-    // };
-
-    // fetchPolicies();
-    // }, []);
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -60,7 +43,7 @@ const TourPackageDetail = ({ tour }) => {
                 ] = await Promise.all([
                     getCancellationPolicy(locale),
                     getPaymentPolicy(),
-                    getTours(1,"","","","",locale),
+                    getTours(1, "", "", "", "", locale),
                 ]);
 
                 setCancellationPolicy(cancelData || []);
@@ -99,7 +82,7 @@ const TourPackageDetail = ({ tour }) => {
                             className="border position-relative btn primery-btn d-flex align-items-center gap-2 p-1 px-2 rounded-pill"
                         >
                             <ArrowLeft size={15} />
-                            <p className="m-0">Back to Tour Packages</p>
+                            <p className="m-0">{t("TourDetail.backBtn")}</p>
                         </Link>
                     </div>
                 </Container>
@@ -166,7 +149,7 @@ const TourPackageDetail = ({ tour }) => {
                                         tour.inclusions.length > 0 && (
                                             <div className="section-block m-0">
                                                 <h4 className="section-title fw-bold mb-4 h6 text-capitalize">
-                                                    Tour Includes
+                                                    {t("TourDetail.includes")}
                                                 </h4>
 
                                                 <div className="d-flex flex-row flex-wrap justify-content-start gap-3 mb-3 mb-md-0">
@@ -217,7 +200,7 @@ const TourPackageDetail = ({ tour }) => {
                                 <Col md={6} className="pt-4 pt-md-0">
                                     <div className="section-block m-0">
                                         <h4 className="section-title fw-bold mb-4 h6 text-capitalize">
-                                            Tour Highlights
+                                            {t("TourDetail.highlights")}
                                         </h4>
 
                                         <Row>
@@ -269,7 +252,7 @@ const TourPackageDetail = ({ tour }) => {
                             tour.itineraries.length > 0 && (
                                 <div className="section-block mb-0 mt-4">
                                     <h4 className="section-title fw-bold mb-2">
-                                        The Itinerary
+                                        {t("TourDetail.itinerary")}
                                     </h4>
 
                                     {(tour.itineraries || []).map((day, i) => (
@@ -286,7 +269,7 @@ const TourPackageDetail = ({ tour }) => {
                                             <Row className="align-items-start">
                                                 <Col md={9}>
                                                     <span className="badge bg-brand-light primery-color ms-2 ms-sm-0">
-                                                        Day {i + 1}
+                                                        {t("TourDetail.day")} {i + 1}
                                                         {/* {i + 1} */}
                                                     </span>
 
@@ -301,7 +284,7 @@ const TourPackageDetail = ({ tour }) => {
                                                         {day.description || ""}
                                                     </p> */}
                                                     <div
-                                                        className={`text-secondary ${expandedItems[i] ? "" : "line-clamp-5" }`}
+                                                        className={`text-secondary ${expandedItems[i] ? "" : "line-clamp-5"}`}
                                                         dangerouslySetInnerHTML={{
                                                             __html: day.description || ""
                                                         }}
@@ -313,30 +296,11 @@ const TourPackageDetail = ({ tour }) => {
                                                             onClick={() => loadMore(i)}
                                                             className="primery-btn py-1 px-2 small-12 rounded-2"
                                                         >
-                                                            {expandedItems[i] ? "Show Less" : "Load More"}
+                                                            {expandedItems[i] ? t("TourDetail.showLess") : t("TourDetail.loadMore")}
                                                         </motion.button>
                                                     )}
                                                 </Col>
 
-                                                {/* <Col md={3}>
-                                                    {day.itineraries_image_url && (
-                                                        <div
-                                                            className="position-relative"
-                                                            style={{
-                                                                height: "120px",
-                                                            }}
-                                                        >
-                                                            <Image
-                                                                src={day.itineraries_image_url}
-                                                                alt={
-                                                                    day.itinerary_title
-                                                                }
-                                                                fill
-                                                                className="rounded shadow-sm object-fit-cover mt-3"
-                                                            />
-                                                        </div>
-                                                    )}
-                                                </Col> */}
                                                 <Col md={3}>
                                                     {day.itineraries_image_url && (
                                                         <div
@@ -377,16 +341,16 @@ const TourPackageDetail = ({ tour }) => {
                         <aside className="booking-card sticky-top mb-5 mb-md-0 z-3 p-4 rounded bg-white border" style={{ top: '110px' }}>
                             <div className="d-flex align-items-center gap-2 mb-3">
                                 <FileText size={20} />
-                                <h4 className="text-start m-0">Booking Summery</h4>
+                                <h4 className="text-start m-0">{t("TourDetail.Summary.title")}</h4>
                             </div>
                             <div className="price mb-4">
                                 <span className="h3 fw-bold primery-color">₹ {Number(tour.base_price || 0).toLocaleString("en-IN")}</span>
                                 {/* ₹ {(tour.base_price || 0).toLocaleString()}  */}
-                                <span className="text-muted"> / person</span>
+                                <span className="text-muted"> {t("TourDetail.Summary.perPerson")}</span>
                             </div>
                             <div className="info-box mb-4 p-3 rounded">
                                 {/* <p className="mb-1"><strong>Group:</strong> &nbsp;2-6 People</p> */}
-                                <p className="mb-1"><strong>Duration:</strong> &nbsp;{tour.duration}</p>
+                                <p className="mb-1"><strong>{t("TourDetail.Summary.duration")} :</strong> &nbsp;{tour.duration}</p>
                                 {/* <p className="mb-1"><strong>Duration:</strong> &nbsp;5 Days / 4 Nights</p> */}
                                 {/* <p className="departure-date m-0">
                                     <strong>Departure:</strong> &nbsp;{tour.departureDate || 'Check Availability'}
@@ -397,13 +361,13 @@ const TourPackageDetail = ({ tour }) => {
                                 className="primery-btn d-flex align-items-center justify-content-center gap-2 w-100 py-3 text-center text-decoration-none fw-bold rounded shadow-sm mb-3"
                             >
                                 <CalendarCheck size={18} />
-                                Book Now
+                                {t("TranslateBtn.BookNow")}
                             </Link>
 
                             <WhatsAppShareBtn tour={tour} />
 
                             <p className="note text-center text-muted small-12 italic mt-2">
-                                * Limited slots available for Kumbh Mela dates.
+                                {t("TourDetail.Summary.kumbhNote")}
                             </p>
                         </aside>
                     </Col>

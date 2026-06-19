@@ -14,8 +14,8 @@
         "contact": "સંપર્ક કરો"
     },
     "HeroHeader": {
-        "btnBathDates": "સ્નાનની તિથિઓ જુઓ",
-        "btnInquiry": "વોટ્સએપ પૂછપરછ",
+        "btnName1": "અમારા વાહનો",
+        "btnName2": "ટૂર પેકેજીસ",
         "slide1_subHeading": "અમારી સાથે અજોડ આનંદનો અનુભવ કરો.",
         "slide1_title": "સિંહસ્થ કુંભ મેળો નાસિક ૨૦૨૭",
         "slide1_description": "કુંભ મેળાની ઉલટી ગણતરી",
@@ -852,6 +852,34 @@
         "buttons": {
             "submitting": "સબમિટ થઈ રહ્યું છે...",
             "confirm": "કન્ફર્મ કરો અને વોટ્સએપ પર મોકલો"
+        }
+    },
+    "TranslateBtn": {
+        "BookNow": "હમણાં બુક કરો",
+        "viewDetails": "વિગતો જુઓ",
+        "ReadMore": "વધુ વાંચો",
+        "SendItinerary": "યાત્રા કાર્યક્રમ મોકલો",
+        "TermsAndConditions": "નિયમો અને શરતો",
+        "viewAllHighlights": "બધા મુખ્ય આકર્ષણો જુઓ"
+    },
+    "Cards": {
+        "StartingFrom": "શરૂઆતની કિંમત",
+        "PerNight": "પ્રતિ રાત્રિ"
+    },
+    "TourDetail": {
+        "backBtn": "ટૂર પેકેજીસ પર પાછા જાઓ",
+        "includes": "ટૂરમાં શામેલ",
+        "highlights": "ટૂરના મુખ્ય આકર્ષણો",
+        "itinerary": "યાત્રા કાર્યક્રમ",
+        "day": "દિવસ",
+        "showLess": "ઓછું બતાવો",
+        "loadMore": "વધુ લોડ કરો",
+        "recentTitle": "તાજેતરના પેકેજીસ",
+        "Summary": {
+            "title": "બુકિંગ સારાંશ",
+            "perPerson": "વ્યક્તિ દીઠ",
+            "duration": "સમયગાળો",
+            "kumbhNote": "* કુંભમેળાની તારીખો માટે મર્યાદિત જગ્યાઓ ઉપલબ્ધ છે."
         }
     }
 }

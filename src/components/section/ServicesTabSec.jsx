@@ -203,7 +203,7 @@ const ServicesTabSec = () => {
         try {
             setLoading(true);
             const [tourRes, carRes, hotelRes] = await Promise.all([
-                getTours(1, "", "", "", 6,locale),
+                getTours(1, "", "", "", 6, locale),
                 getCars(1, "", "", "", 6),
                 getHotels(1, "", "", "", 6)
             ]);

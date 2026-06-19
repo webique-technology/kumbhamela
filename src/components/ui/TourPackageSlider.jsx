@@ -4,8 +4,10 @@ import { SwiperSliderComp } from "./common";
 import { Link } from '@/i18n/routing';
 import { slugify } from "@/lib/utils";
 import { ArrowRight } from 'lucide-react';
+import { useTranslations } from "next-intl";
 
 export const TourPackageSlider = ({ packages, title }) => {
+    const t = useTranslations();
     return (
         <div className="tour-package-slider-main padding-bottom">
             <h4 className="section-title fw-bold mb-4">{title}</h4>
@@ -49,7 +51,7 @@ export const TourPackageSlider = ({ packages, title }) => {
                                     <h6 className="text-dark mb-1">{item.title}</h6>
                                     <div className="d-flex align-items-center justify-content-between">
                                         <div>
-                                            <span className="small-12">Starting From</span>
+                                            <span className="small-12">{t("Cards.StartingFrom")}</span>
                                             <p className="m-0 fw-medium primery-color">₹ {item.base_price}</p>
                                         </div>
                                         <span className="card-arrow d-flex align-items-center justify-content-center">
