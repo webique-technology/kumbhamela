@@ -184,8 +184,8 @@ const PlanTabSec = () => {
                                                         <Row className='gap-2 gap-sm-0 align-items-center py-2 border-bottom border-light-subtle last-border-0'>
                                                             {value.image && (
                                                                 <Col sm={4} className='d-block d-sm-flex align-items-center justify-content-center'>
-                                                                    <div className='image-box overflow-hidden rounded-2' style={{ width: '100%', height: '95px' }}>
-                                                                        <Image
+                                                                    <div className='image-box overflow-hidden rounded-2'>
+                                                                        {/* <Image
                                                                             src={value.image}
                                                                             alt={t(value.titleKey) || "Plan Image"}
                                                                             sizes="100%"
@@ -194,8 +194,8 @@ const PlanTabSec = () => {
                                                                             className='img-fluid'
                                                                             style={{ objectFit: 'cover' }}
                                                                             placeholder="blur"
-                                                                        />
-                                                                        <img src={value.image} className='img-fluid' alt="" />
+                                                                        /> */}
+                                                                        <img src={value.image.src} className='img-fluid' alt="" />
                                                                     </div>
                                                                 </Col>
                                                             )}

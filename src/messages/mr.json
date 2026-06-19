@@ -14,8 +14,8 @@
     "contact": "संपर्क साधा"
   },
   "HeroHeader": {
-    "btnBathDates": "शाही स्नान तिथी पहा",
-    "btnInquiry": "व्हॉट्सॲप चौकशी",
+    "btnName1": "आमची वाहने",
+    "btnName2": "टूर पॅकेजेस",
     "slide1_subHeading": "आमच्यासोबत अद्वितीय आनंदाचा अनुभव घ्या.",
     "slide1_title": "सिंहस्थ कुंभमेळा नाशिक २०२७",
     "slide1_description": "कुंभमेळ्याची उलटगणती",
@@ -852,6 +852,34 @@
     "buttons": {
       "submitting": "सादर करत आहे...",
       "confirm": "निश्चित करा आणि व्हॉट्सॲपवर पाठवा"
+    }
+  },
+  "TranslateBtn": {
+    "BookNow": "आत्ताच बुक करा",
+    "viewDetails": "तपशील पहा",
+    "ReadMore": "पुढे वाचा",
+    "SendItinerary": "इतनेरी (प्रवास आराखडा) पाठवा",
+    "TermsAndConditions": "नियम आणि अटी",
+    "viewAllHighlights": "सर्व प्रमुख वैशिष्ट्ये पहा"
+  },
+  "Cards": {
+    "StartingFrom": "या किंमतीपासून सुरू",
+    "PerNight": "प्रति रात्र"
+  },
+  "TourDetail": {
+    "backBtn": "टूर पॅकेजेसवर परत जा",
+    "includes": "टूरमध्ये समाविष्ट",
+    "highlights": "टूरची प्रमुख वैशिष्ट्ये",
+    "itinerary": "प्रवास कार्यक्रम (इटिनररी)",
+    "day": "दिवस",
+    "showLess": "कमी दाखवा",
+    "loadMore": "अधिक वाचा",
+    "recentTitle": "अलीकडील पॅकेजेस",
+    "Summary": {
+      "title": "बुकिंग तपशील",
+      "perPerson": "प्रति व्यक्ती",
+      "duration": "कालावधी",
+      "kumbhNote": "* कुंभमेळ्याच्या तारखांसाठी मर्यादित जागा उपलब्ध आहेत."
     }
   }
 }

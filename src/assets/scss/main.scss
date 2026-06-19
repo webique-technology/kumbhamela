@@ -939,13 +939,7 @@ p {
     justify-content: center !important;
 }
 
-.image-box {
-    aspect-ratio: 4/3;
 
-    @media(max-width:576px) {
-        aspect-ratio: 4/2;
-    }
-}
 
 @media(max-width:992px) {
     .title-width {

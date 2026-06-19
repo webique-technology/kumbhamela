@@ -4,7 +4,8 @@ import { BookingFormHandler } from './bookingFormHandler';
 import { MessageCircle } from "lucide-react";
 import { Link, usePathname } from '@/i18n/routing';
 import "../../assets/scss/main.scss"
-
+import { useTranslations } from 'next-intl';
+import whatsappIcon from "../../assets/images/whatsapp.png"
 
 export const PrimeryBtn = ({ iconLeft, iconRight, title, btnLink, className }) => {
     return (
@@ -59,7 +60,7 @@ export const TourBtn = ({ title, className, tourName }) => {
 export const WhatsAppShareBtn = ({ tour }) => {
     // This hook gets the path (e.g., /tour-package/essential-darshan)
     const pathname = usePathname();
-
+    const t = useTranslations()
     const handleWhatsAppShare = () => {
         const origin = window.location.origin;
         const currentUrl = origin + pathname;
@@ -88,12 +89,12 @@ export const WhatsAppShareBtn = ({ tour }) => {
             style={{ cursor: 'pointer', transition: 'all 0.3s ease' }}
         >
             <img
-                src="/images/whatsapp.png"
+                src={whatsappIcon.src}
                 alt="whatsapp"
                 style={{ width: '28px', marginBottom: '5px' }}
             />
             <p className="m-0 fw-bold text-success" style={{ fontSize: '12px' }}>
-                Send Itinerary
+                {t("TranslateBtn.SendItinerary")}
             </p>
         </button>
     );

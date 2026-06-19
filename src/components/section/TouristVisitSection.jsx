@@ -120,12 +120,12 @@ const TouristVisitSection = () => {
 
                 <Modal.Body className='p-4'>
                     <h5 className='primery-color model-head'>{t("historyHeader")}</h5>
-                    <p className='card-text text-muted small blog-excerpt'>
+                    <p className='card-text text-muted small'>
                         {selectedCard ? t(selectedCard.historyKey) : ""}
                     </p>
 
                     <h5 className='primery-color model-head'>{t("routeHeader")}</h5>
-                    <p className='card-text text-muted small blog-excerpt'>
+                    <p className='card-text text-muted small'>
                         {selectedCard ? t(selectedCard.routeKey) : ""}
                     </p>
 
@@ -138,7 +138,7 @@ const TouristVisitSection = () => {
                             {t("bookCTA")}
                         </Link>
                     </div>
-                    <p className='card-text text-muted small blog-excerpt'>
+                    <p className='card-text text-muted small'>
                         {selectedCard ? t(selectedCard.transportKey) : ""}
                     </p>
                 </Modal.Body>

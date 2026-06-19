@@ -10,16 +10,17 @@ import { EffectFade } from 'swiper/modules';
 import "../../styles/heroHeader.scss";
 import { slugify } from '@/lib/utils';
 
-// 1. Move the problem banner images from public/images into src/assets/images/
+// FIX: Import Link from your localized internationalization routing settings
+import { Link } from '@/i18n/routing';
+
 import banner1 from '../../assets/images/banner-1.webp';
 import banner2 from '@/assets/images/banner-3.webp';
 import banner3 from '@/assets/images/banner-4.webp';
 
-// 2. Pass the direct object reference instead of a text string path
 export const heroSliderConfig = [
     {
         id: 1,
-        image: banner1.src || banner1, // Works flawlessly with Next.js optimization layers
+        image: banner1.src || banner1,
         translationPrefix: "slide1"
     },
     {
@@ -32,18 +33,6 @@ export const heroSliderConfig = [
         image: banner3.src || banner3,
         translationPrefix: "slide3"
     },
-    // {
-    //     id: 2,
-    //     subTitle: "Seamless Journeys & Premium Comfort",
-    //     title: "Your Trusted Nashik Kumbh Travel Partner",
-    //     description: "Navigate the grand pilgrimage with absolute ease. From premium car rentals and localized tempo travelers to verified hotel accommodations, we manage all your logistics so you can focus entirely on your spiritual devotion."
-    // },
-    // {
-    //     id: 3,
-    //     subTitle: "All-Inclusive Curated Pilgrimages",
-    //     title: "Explore Holy Yatras & Divine Tour Packages",
-    //     description: "Book thoughtfully planned itineraries featuring confirmed darshans, comfortable AC transport, and premium stays. Explore our special 4-Day Akhalkot-Pandharpur or comprehensive 12 Jyotirlinga tour packages today."
-    // }
 ]
 
 const HeroHeader = () => {
@@ -85,7 +74,6 @@ const HeroHeader = () => {
                             key={item.id || index}
                             className='hero-slider-main d-flex align-items-center justify-content-center position-relative overflow-hidden'
                         >
-                            {/* FIX: Ensure style properties use template literals safely */}
                             <div
                                 className="hero-bg-layer"
                                 style={{ backgroundImage: `url("${item.image}")` }}
@@ -125,19 +113,28 @@ const HeroHeader = () => {
                                             </div>
                                         ) : (
                                             <div className="w-100 d-flex flex-column align-items-center justify-content-center">
-                                                <AnimationSecComponent type="vertical" direction="up" delay={0.8} distance={20}>
-                                                    <div className='d-flex align-items-center justify-content-center gap-4 pt-1 execution-row-layer'>
-                                                        <button className='primery-btn'>
-                                                            {t("btnBathDates")}
-                                                        </button>
-                                                        <button className='primery-btn-style-2'>
-                                                            {t("btnInquiry")}
-                                                        </button>
+                                                <AnimationSecComponent
+                                                    type="vertical"
+                                                    direction="up"
+                                                    delay={0.8}
+                                                    distance={20}
+                                                >
+                                                    <div className="d-flex align-items-center justify-content-center gap-4 pt-1 execution-row-layer">
+                                                        {/* FIX: Corrected "herf" typo to "href" and wrapped with slugify for safe routing safety */}
+                                                        <Link
+                                                            href={index === 1 ? `/${slugify("rental car")}` : index === 2 ? `/${slugify("tour package")}` : "/"}
+                                                            className="primery-btn text-decoration-none"
+                                                        >
+                                                            {index === 1
+                                                                ? t("btnName1")
+                                                                : index === 2
+                                                                    ? t("btnName2")
+                                                                    : ""}
+                                                        </Link>
                                                     </div>
                                                 </AnimationSecComponent>
                                             </div>
                                         )}
-
                                     </div>
                                 </div>
                             </Container>
