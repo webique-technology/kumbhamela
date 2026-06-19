@@ -14,75 +14,80 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 //   }
 // };
 export const getTours = async (
-    page = 1,
-    name = "",
-    category = "",
-    price = "",
-    limit = "",
-    lang = "en"
-    ) => {
-        try {
-            const params = new URLSearchParams();
+  page = 1,
+  name = "",
+  category = "",
+  price = "",
+  limit = "",
+  lang = "en",
+) => {
+  try {
+    const params = new URLSearchParams();
 
-            params.set("page", page);
-            params.set("lang", lang);
+    params.set("page", page);
+    params.set("lang", lang);
 
-            if (name) {
-                params.set("name", name);
-            }
-            if (limit) {
-                params.set("limit", limit);
-            }
-
-            if (category && category !== "all") {
-                params.set("category", category);
-            }
-
-            if (price && price !== "all") {
-                params.set("price", price);
-            }
-
-            const response = await api.get(
-                `/tours?${params.toString()}`
-            );
-
-            return response.data.data;
-        } catch (error) {
-            console.log("Tours API Error:", error);
-            throw error;
-        }
-    };
-
-export const createTourEnquiry = async (payload) => {
-    try {
-        const response = await axios.post(
-            `${API_URL}/tour-enquiries`,
-            payload,
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                },
-            }
-        );
-
-        return response.data;
-    } catch (error) {
-        console.error(
-            "Tour enquiry error:",
-            error.response?.data || error.message
-        );
-
-        throw error;
+    if (name) {
+      params.set("name", name);
     }
+    if (limit) {
+      params.set("limit", limit);
+    }
+
+    if (category && category !== "all") {
+      params.set("category", category);
+    }
+
+    if (price && price !== "all") {
+      params.set("price", price);
+    }
+
+    const response = await api.get(`/tours?${params.toString()}`);
+
+    return response.data.data;
+  } catch (error) {
+    console.log("Tours API Error:", error);
+    throw error;
+  }
 };
 
-export const getCancellationPolicy = async () => {
+export const createTourEnquiry = async (payload) => {
   try {
-    const response = await api.get("/privacy-policy");
+    const response = await axios.post(`${API_URL}/tour-enquiries`, payload, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+
     return response.data;
   } catch (error) {
-    console.log("Cancellation Policy API Error:", error);
+    console.error("Tour enquiry error:", error.response?.data || error.message);
+
+    throw error;
+  }
+};
+
+// export const getCancellationPolicy = async () => {
+//   try {
+//     const response = await api.get("/privacy-policy");
+//     return response.data;
+//   } catch (error) {
+//     console.log("Cancellation Policy API Error:", error);
+//     return [];
+//   }
+// };
+export const getCancellationPolicy = async (lang = "en") => {
+  try {
+    const response = await api.get(`/privacy-policy`, {
+      params: {
+        lang,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
     return [];
   }
 };
@@ -97,16 +102,13 @@ export const getPaymentPolicy = async () => {
   }
 };
 
-export const getTourBySlug = async (slug ,lang = "en") => {
+export const getTourBySlug = async (slug, lang = "en") => {
   try {
-    const response = await api.get(
-      `/tours/slug/${encodeURIComponent(slug)}`,
-        {
-            params: {
-            lang,
-            },
-        }
-    );
+    const response = await api.get(`/tours/slug/${encodeURIComponent(slug)}`, {
+      params: {
+        lang,
+      },
+    });
 
     return response.data.data;
   } catch (error) {
