@@ -8,6 +8,8 @@ import { useTranslations, useLocale } from "next-intl";
 import "../../styles/navbar.scss";
 import NavSidebar from "./Sidebar";
 
+import logo from "../../assets/images/logo.png"
+
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showSidebar, setShowSidebar] = useState(false);
@@ -88,7 +90,8 @@ const Navbar = () => {
 
                     {/* Logo Section */}
                     <Link href="/" className="d-flex align-items-center text-decoration-none logo" onClick={closeMenu}>
-                        <div className="logo-icon"><span className="text-white">ॐ</span></div>
+                        {/* <div className="logo-icon"><span className="text-white">ॐ</span></div> */}
+                        <img src={logo.src} alt="Logo" width={50} height={50} className="me-2"/>
                         <div className="logo-text">
                             <h1>{t("logoTitle")}</h1>
                             <p>{t("logoSubtitle")}</p>

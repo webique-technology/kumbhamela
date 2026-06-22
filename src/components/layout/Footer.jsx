@@ -19,7 +19,7 @@ import "../../assets/scss/main.scss";
 import facebook from "../../assets/images/facebook-logo.svg";
 import insta from "../../assets/images/instagram-logo.svg";
 import youtube from "../../assets/images/youtube-logo.svg";
-
+import logo from "../../assets/images/logo-2.png"
 const Footer = () => {
     // next-intl का उपयोग करके डिक्शनरी हुक को बाइंड किया
     const t = useTranslations("Footer");
@@ -38,8 +38,9 @@ const Footer = () => {
                     {/* 1. About Module Frame Segment */}
                     <Col md={6} lg={3}>
                         <div className="d-flex align-items-center mb-4">
-                            <div className="footer-logo-icon">
-                                <span>ॐ</span>
+                            <div className="">
+                                {/* <span>ॐ</span> */}
+                                <img src={logo.src} alt="Logo" width={50} height={50} className="me-1" />
                             </div>
                             <div className="ms-2">
                                 <h3 className="footer-title">{tNavbar("logoTitle")}</h3>
