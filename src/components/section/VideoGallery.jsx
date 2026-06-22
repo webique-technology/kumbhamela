@@ -10,6 +10,7 @@ import Image from "next/image"; // Added for optimized placeholder images
 import "swiper/css";
 import "../../styles/videoGallery.scss";
 const localVideoPath = "/videos/GramFetchr_98506378.mp4";
+import API from "@/lib/api";
 
 const VideoGallery = () => {
     const videoRefs = useRef([]);
@@ -21,21 +22,61 @@ const VideoGallery = () => {
 
     // Track unique custom cover states for your Instagram API fallbacks
     const [instagramCovers, setInstagramCovers] = useState({});
+    const [reels, setReels] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     // FIX: Extract the raw string path from the Next.js imported video asset object (.src)
 
-    const reels = [
-        { id: 1, video: localVideoPath, title: "Kumbh Mela Experience", location: "Prayagraj" },
-        { id: 2, video: localVideoPath, title: "Holy Dip", location: "Haridwar" },
-        { id: 3, video: "https://youtube.com/shorts/aRRPbm0PiUI?si=nH3hW8xO6vPvTUGO", title: "Sadhu Procession", location: "Ujjain" },
-        { id: 4, video: "https://www.instagram.com/reel/DYFGdpLo21j/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==.mp4", title: "Goda Ghat", location: "Nashik" },
-        { id: 5, video: "https://youtu.be/SvZoIu-ixPI?si=0TFUn_IpWA3Nh-FO", title: "Goda Ghat", location: "Nashik" },
-        { id: 6, video: localVideoPath, title: "Goda Ghat", location: "Nashik" },
-        { id: 7, video: localVideoPath, title: "Goda Ghat", location: "Nashik" }
-    ];
+    // const reels = [
+    //     { id: 1, video: localVideoPath, title: "Kumbh Mela Experience", location: "Prayagraj" },
+    //     { id: 2, video: localVideoPath, title: "Holy Dip", location: "Haridwar" },
+    //     { id: 3, video: "https://youtube.com/shorts/aRRPbm0PiUI?si=nH3hW8xO6vPvTUGO", title: "Sadhu Procession", location: "Ujjain" },
+    //     { id: 4, video: "https://www.instagram.com/reel/DYFGdpLo21j/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==.mp4", title: "Goda Ghat", location: "Nashik" },
+    //     { id: 5, video: "https://youtu.be/SvZoIu-ixPI?si=0TFUn_IpWA3Nh-FO", title: "Goda Ghat", location: "Nashik" },
+    //     { id: 6, video: localVideoPath, title: "Goda Ghat", location: "Nashik" },
+    //     { id: 7, video: localVideoPath, title: "Goda Ghat", location: "Nashik" }
+    // ];
 
     useEffect(() => {
         setMounted(true);
+    }, []);
+    useEffect(() => {
+        const fetchVideos = async () => {
+            try {
+
+                const response = await API.get(
+                    "/videos?per_page=100"
+                );
+
+                const videos = response.data.data || [];
+
+                const formattedVideos = videos
+                    .filter(video => video.status)
+                    .map(video => ({
+                        id: video.id,
+                        video: video.video_link,
+                        title: video.title,
+                        location: video.description || "",
+                        image: video.image_url || null
+                    }));
+
+                setReels(formattedVideos);
+
+            } catch (error) {
+
+                console.error(
+                    "Video Fetch Error:",
+                    error
+                );
+
+            } finally {
+
+                setLoading(false);
+            }
+        };
+
+        fetchVideos();
+
     }, []);
 
     // Domain matching pattern verifiers
@@ -77,15 +118,39 @@ const VideoGallery = () => {
     };
 
     // Dynamically generates safe, crisp asset placeholder images for cloud networks
+    // const getThumbnailSrc = (reel) => {
+    //     if (isYouTubeUrl(reel.video)) {
+    //         const videoId = getYouTubeId(reel.video);
+    //         return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    //     }
+    //     if (isInstagramUrl(reel.video)) {
+    //         return instagramCovers[reel.id] || "/images/banner-1.webp"; // Fixed matching fallback filename casing
+    //     }
+    //     return "";
+    // };
+
     const getThumbnailSrc = (reel) => {
+
+        if (reel.image) {
+            return reel.image;
+        }
+
         if (isYouTubeUrl(reel.video)) {
+
             const videoId = getYouTubeId(reel.video);
+
             return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
         }
+
         if (isInstagramUrl(reel.video)) {
-            return instagramCovers[reel.id] || "/images/banner-1.webp"; // Fixed matching fallback filename casing
+
+            return (
+                instagramCovers[reel.id] ||
+                "/images/banner-1.webp"
+            );
         }
-        return "";
+
+        return "/images/banner-1.webp";
     };
 
     const handleSlideChange = (swiper) => {
@@ -134,8 +199,9 @@ const VideoGallery = () => {
         }
     };
 
-    if (!mounted) return null;
-
+    // if (!mounted) return null;
+    if (!mounted || loading) return null;
+    
     return (
         <section className="section-padding-2 padding-bottom trinery-bg position-relative video-gallery-main">
             <div className="top-divider position-absolute z-3 td-top bd-light-bg" style={{ pointerEvents: 'none' }}></div>
@@ -205,7 +271,6 @@ const VideoGallery = () => {
                                             <div
                                                 ref={(el) => (videoRefs.current[index] = el)}
                                                 className="external-placeholder-wrapper w-100 h-100 d-flex align-items-center justify-content-center position-relative"
-                                                style={{ minHeight: '300px' }}
                                             >
                                                 <Image
                                                     src={getThumbnailSrc(reel)}
@@ -227,7 +292,6 @@ const VideoGallery = () => {
                                                 playsInline
                                                 preload="metadata"
                                                 className="reel-video w-100 h-100 object-fit-cover"
-                                                style={{ minHeight: '300px' }}
                                                 onEnded={handleVideoEnd}
                                             />
                                         )}
@@ -256,11 +320,13 @@ const VideoGallery = () => {
                 <Modal.Body className="p-0 bg-black overflow-hidden position-relative rounded-3">
                     <button
                         type="button"
-                        className="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3 bg-dark p-2 rounded-circle"
+                        className="btn-close d-flex align-items-center justify-content-center position-absolute top-0 end-0 m-3 z-3 bg-dark p-2 rounded-circle"
                         onClick={closeModal}
                         aria-label="Close"
                         style={{ opacity: 1, width: '30px', height: '30px' }}
-                    />
+                    >
+                        <X size={20} color="#fff" />
+                    </button>
                     {activeVideoUrl && (
                         isYouTubeUrl(activeVideoUrl) || isInstagramUrl(activeVideoUrl) ? (
                             /* Re-routed Iframe Layer for Social Web Providers */

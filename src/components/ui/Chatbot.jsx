@@ -32,6 +32,29 @@ export const KumbhChatbot = () => {
     ];
 
     useEffect(() => {
+        if (isOpen) {
+            // Disables standard scrolling on window body elements
+            document.body.style.overflow = "hidden";
+            // Optional: Adds subtle right padding to prevent layout shifts if scrollbars disappear on desktop
+            document.body.style.paddingRight = "var(--removed-body-scrollbar-width, 0px)";
+        } else {
+            // Restores standard scrolling mechanics cleanly
+            document.body.style.overflow = "unset";
+            document.body.style.paddingRight = "0px";
+        }
+
+        // Cleanup function ensures body scroll is safely restored if the component unmounts unexpectedly
+        return () => {
+            document.body.style.overflow = "unset";
+            document.body.style.paddingRight = "0px";
+        };
+    }, [isOpen]);
+
+    useEffect(() => {
+        chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages, isLoading]);
+
+    useEffect(() => {
         chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages, isLoading]);
 

@@ -162,9 +162,10 @@
 }
 
 .mobile-nav {
-  padding-top: 71px; // Padding for the header area
+  // padding-top: 20px; // Padding for the header area
   height: 100%;
   overflow-y: auto;
+  // background-color: $trinery-bg-color
 }
 
 .mobile-toggle {
@@ -180,7 +181,7 @@
   text-decoration: none;
   color: $text-color-dark;
   border-bottom: 1px solid $color-gray-200;
-
+  font-family: var(--font-heading), sans-serif !important;
   &:hover {
     color: $primary-color;
     background: $primery-bg-color;

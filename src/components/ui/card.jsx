@@ -83,7 +83,7 @@ export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_widt
 
                 {/* Button */}
                 <Link href={blogLink} className="btn btn-link p-0 blog-readmore text-decoration-none d-flex align-items-center gap-1">
-                    {t("ReadMore")} <ArrowRight size={16} />
+                    {t("ReadMore")} <ArrowRight size={16} className='primery-color' />
                 </Link>
             </div>
         </div>
@@ -159,7 +159,28 @@ export const HotelCards = ({ hotel, onBookNow }) => {
                     <div className="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
                         <div>
                             <small className="text-muted d-block">{t("Cards.StartingFrom")}</small>
-                            <span className="h4 text-brand-orange mb-0">{hotel.base_price}</span>
+                            {/* <span className="h4 text-brand-orange mb-0">{hotel.base_price}</span> */}
+                            {hotel?.offer_price ? (
+                                <div className="d-flex flex-row align-items-center justify-content-center gap-2">
+                                    {/* Render the discounted offer price */}
+                                    <span className="h4 text-brand-orange mb-0">
+                                        ₹{hotel?.offer_price}
+                                    </span>
+                                    {/* Render the original base price with a strikethrough next to it */}
+                                    <span className="fs-6 text-muted text-decoration-line-through mb-0">
+                                        ₹{hotel?.base_price}
+                                    </span>
+                                </div>
+                            ) : (
+                                hotel?.base_price && (
+                                    // Fallback: If no offer price exists, only show the base price normally
+                                    <div className="text-center">
+                                        <span className="h5 fw-bold text-brand-orange mb-0">
+                                            ₹{hotel?.base_price}
+                                        </span>
+                                    </div>
+                                )
+                            )}
                             <small className="text-muted d-block smaller">{t("Cards.PerNight")}</small>
                         </div>
 
@@ -335,11 +356,29 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                     {/* Footer Logic */}
                     <div className="d-flex align-items-center justify-content-between mt-auto mb-2">
                         <div className="d-flex align-items-end">
-                            <p className="mb-0 fw-semibold">
-                               {t("Cards.StartingFrom")} : &nbsp;
-                                <span className="h5 fw-bold text-brand-orange mb-0">
-                                    ₹{tour?.base_price};
-                                </span>
+                            <p className="mb-0 fw-semibold" style={{ display: "contents" }}>
+                                {t("Cards.StartingFrom")} : &nbsp;
+                                {tour?.offer_price ? (
+                                    <div className="d-flex flex-row align-items-center justify-content-center gap-2">
+                                        {/* Render the discounted offer price */}
+                                        <span className="h5 fw-bold text-brand-orange mb-0">
+                                            ₹{tour?.offer_price}
+                                        </span>
+                                        {/* Render the original base price with a strikethrough next to it */}
+                                        <span className="fs-6 text-muted text-decoration-line-through mb-0">
+                                            ₹{tour?.base_price}
+                                        </span>
+                                    </div>
+                                ) : (
+                                    tour?.base_price && (
+                                        // Fallback: If no offer price exists, only show the base price normally
+                                        <div className="text-center">
+                                            <span className="h5 fw-bold text-brand-orange mb-0">
+                                                ₹{tour?.base_price}
+                                            </span>
+                                        </div>
+                                    )
+                                )}
                                 {/* <small className="text-muted d-block smaller mb-1">
                                     per Person
                                 </small> */}
@@ -405,7 +444,7 @@ export const HeroHeaderCard = ({ showSearch = true, heroTitle, heroTitleClass, d
 }
 
 
-export const HeroHeaderCard2 = ({ showSearch = true, heroTitle, heroTitleClass, spanClass, description, heroSpan, subTitle, heroImage, imgClass = "hero-img" }) => {
+export const HeroHeaderCard2 = ({ showSearch = true, heroTitle, heroTitleClass, redText, spanClass, description, heroSpan, subTitle, heroImage, imgClass = "hero-img" }) => {
 
     return (
         <>
@@ -430,6 +469,11 @@ export const HeroHeaderCard2 = ({ showSearch = true, heroTitle, heroTitleClass, 
                     {showSearch && (
                         <div className="hero-search-wrapper mt-4">
                             <SearchFleet />
+                        </div>
+                    )}
+                    {redText && (
+                        <div className='my-2 text-center'>
+                            <p className='m-0 text-danger fw-semibold fs-6'>{redText}</p>
                         </div>
                     )}
                 </Container>

@@ -8,8 +8,15 @@ const NavSidebar = ({ languages, handleLanguageChange, setIsMenuOpen }) => {
   const locale = useLocale();
 
   return (
-    <div className="container h-100">
-      <nav className="mobile-nav">
+    <div className="container h-100 trinery-bg">
+      <nav className="mobile-nav py-4">
+        <Link href="/" className="d-flex mb-3 align-items-center text-decoration-none logo">
+          <div className="logo-icon"><span className="text-white">ॐ</span></div>
+          <div className="logo-text">
+            <h1>{t("logoTitle")}</h1>
+            <p>{t("logoSubtitle")}</p>
+          </div>
+        </Link>
         <Link href="/" className="mobile-link" onClick={setIsMenuOpen}>{t('home')}</Link>
         <Link href="/about-us" className="mobile-link" onClick={setIsMenuOpen}>{t('about')}</Link>
         <Link href="/hotel" className="mobile-link" onClick={setIsMenuOpen}>{t('hotel')}</Link>
@@ -19,21 +26,6 @@ const NavSidebar = ({ languages, handleLanguageChange, setIsMenuOpen }) => {
         <Link href="/contact-us" className="mobile-link" onClick={setIsMenuOpen}>{t('contact')}</Link>
 
         <div className="mobile-actions mt-4">
-          {/* <div className="mobile-lang-grid mb-3">
-            <p className="small fw-bold text-muted mb-2"><Globe size={14} /> Select Language</p>
-            <div className="d-flex flex-wrap gap-2">
-              {languages.map((lang) => (
-                <button
-                  key={lang.code}
-                  className={`btn btn-sm ${locale === lang.code ? 'btn-warning' : 'btn-outline-secondary'}`}
-                  onClick={() => handleLanguageChange(lang.code)}
-                >
-                  {lang.label}
-                </button>
-              ))}
-            </div>
-          </div> */}
-
           <div>
             <h3 className="footer-heading">Contact Information</h3>
 

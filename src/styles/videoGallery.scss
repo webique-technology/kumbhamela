@@ -4,22 +4,30 @@
 
 /* Ensure swiper slides behave properly */
 .video-swiper .swiper-slide {
-    height: auto !important;
+  height: auto !important;
 }
 
 /* Card */
 .reel-card {
-    border-radius: $border-radius-lg;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    background: $bg-drak;
-    height: 100%;
-    height: 370px;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  background: $bg-drak;
+  height: 100%;
+  height: 370px;
 
-    @media(max-width:768px) {
-        height: 100%;
-    }
+  @media(max-width:768px) {
+    height: 100%;
+  }
+
+  @media(max-width:576px) {
+    height: 300px;
+  }
+
+  @media(max-width:450px) {
+    height: 250px;
+  }
 }
 
 // .reel-card:hover {
@@ -28,86 +36,91 @@
 
 /* Thumbnail wrapper */
 .reel-thumbnail-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    // aspect-ratio: 9 / 16;
-    overflow: hidden;
-    border-radius: $border-radius-lg;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  // aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border-radius: $border-radius-lg;
 
-    // @media(max-width:768px) {
-    //     aspect-ratio: 2 / 3;
-    // }
+  // @media(max-width:768px) {
+  //     aspect-ratio: 2 / 3;
+  // }
 
-    // @media(max-width:576px) {
-    //     aspect-ratio: 2 / 4;
-    // }
+  // @media(max-width:576px) {
+  //     aspect-ratio: 2 / 4;
+  // }
 }
 
 /* Video FIX */
 .reel-video {
-    width: 100%;
-    object-fit: cover;
-    display: block;
+  width: 100%;
+  min-height: 270px;
+  object-fit: cover;
+  display: block;
+
+  @media(max-width:450px) {
+    min-height: 250px;
+  }
 }
 
 /* Bottom overlay content */
 .reel-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px 15px;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    z-index: 2;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 15px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  z-index: 2;
 
-    h5 {
-        color: $text-color-light;
-        font-size: $font-size-sm;
-        margin-bottom: 2px;
-    }
+  h5 {
+    color: $text-color-light;
+    font-size: $font-size-sm;
+    margin-bottom: 2px;
+  }
 
-    small {
-        color: $color-gray-300;
-    }
+  small {
+    color: $color-gray-300;
+  }
 }
 
 /* Optional play overlay (if needed later) */
 .reel-play-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(4px);
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    opacity: 0.8;
-    z-index: 1;
-    transition: all 0.3s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  opacity: 0.8;
+  z-index: 1;
+  transition: all 0.3s ease;
 }
 
 .reel-card:hover .reel-play-overlay {
-    opacity: 1;
-    background: rgba(255, 255, 255, 0.3);
-    scale: 1.1;
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.3);
+  scale: 1.1;
 }
 
 /* Modal styling */
 .video-modal .modal-content {
-    background: transparent;
-    border: none;
-    text-align: center;
+  background: transparent;
+  border: none;
+  text-align: center;
 }
 
 .modal-video {
-    width: 100%;
-    max-height: 80vh;
-    border-radius: 12px;
+  width: 100%;
+  max-height: 80vh;
+  border-radius: 12px;
 }
 
 .video-gallery-main {
@@ -122,7 +135,12 @@
       position: relative;
       width: 100%;
       height: 100%;
-      
+      min-height: 270px;
+
+      @media(max-width:450px) {
+        min-height: 250px;
+      }
+
       .social-play-badge {
         color: #fff;
         width: 46px;
@@ -134,11 +152,11 @@
         font-size: 1.1rem;
         padding-left: 3px; // Optical adjustment for alignment centering
         box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-        
+
         &.youtube-red {
           background: #ff0000;
         }
-        
+
         &.instagram-gradient {
           background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
         }
@@ -151,8 +169,13 @@
   .modal-dialog {
     max-width: 400px; // Sets ideal vertical mobile screen boundaries
     margin: 1.75rem auto;
+    padding: 10px;
+
+    @media(max-width:576px) {
+      margin: 0;
+    }
   }
-  
+
   .modal-body {
     border-radius: 16px;
     background-color: #000;

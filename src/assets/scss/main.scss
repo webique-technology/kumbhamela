@@ -179,7 +179,7 @@ label {
     font-family: var(--font-heading), sans-serif !important;
 }
 
-.w-max{
+.w-max {
     width: fit-content;
 }
 
@@ -862,10 +862,11 @@ p {
 }
 
 .hero-header-card-2 {
-    height: 31vh;
+    height: 100%;
+    min-height: 327px;
 
     @media(max-width:992px) {
-        height: 42vh;
+        min-height: auto;
     }
 }
 

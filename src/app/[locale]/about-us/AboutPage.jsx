@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { SwiperSliderComp, TitleComponent } from "@/components/ui/common";
 import { SwiperSlide } from "swiper/react";
 import { AnimationSecComponent } from "@/components/ui/AnimationSecComponent";
+import { slugify } from "@/lib/utils";
 
 import "../../../styles/aboutPage.scss";
 import "../../../assets/scss/main.scss";
@@ -26,24 +27,24 @@ import eveningAarti from "@/assets/images/evening-aarti.webp";
 
 const TouristDestinations = () => {
     const t = useTranslations("AboutPage");
-    
+
     // Fetch raw nested data maps safely from locale JSON files
     const tabsDataRaw = t.raw("touristTabsData");
     const tDest = useTranslations("AboutPage.Destinations");
 
     // Dynamic icon and link structure config map
     const tabsMeta = {
-        jyotirlingas12: { icon: Crown, packageLink: "/tour-package/12-jyotirlinga-yatra", count: 12 },
-        mahaJyotirlingas: { icon: Milestone, packageLink: "/tour-package/5-jyotirlinga-pilgrimage", count: 5 },
+        jyotirlingas12: { icon: Crown, packageLink: "12-jyotirlinga-yatra-with-mahakumbh-tours-travels-nashik", count: 12 },
+        mahaJyotirlingas: { icon: Milestone, packageLink: "5-jyotirlinga-pilgrimage-in-maharashtra", count: 5 },
         unescoSites: { icon: Landmark, packageLink: "", count: 4 },
-        shaktiPeethas: { icon: ShieldCheck, packageLink: "/tour-package/sade-tin-35-shakti-peeth", count: 4 },
-        ashtavinayak8: { icon: Heart, packageLink: "/tour-package/ashtavinayak-3-days", count: 8 },
+        shaktiPeethas: { icon: ShieldCheck, packageLink: "sade-tin-35-shakti-peeth-tour-package", count: 4 },
+        ashtavinayak8: { icon: Heart, packageLink: "ashtavinayak-tour-package-for-3-days", count: 8 },
         hillStations: { icon: Sparkles, packageLink: "", count: 3 }
     };
 
     const tabKeys = Object.keys(tabsDataRaw);
     const [activeTabKey, setActiveTabKey] = useState(tabKeys[0] || "jyotirlingas12");
-    
+
     const activeTabData = tabsDataRaw[activeTabKey];
     const activeMeta = tabsMeta[activeTabKey] || tabsMeta.jyotirlingas12;
 
@@ -105,7 +106,7 @@ const TouristDestinations = () => {
                                     const tabData = tabsDataRaw[key];
                                     const Meta = tabsMeta[key] || tabsMeta.jyotirlingas12;
                                     const subItemKeys = Object.keys(tabData.subItems || {});
-                                    
+
                                     return (
                                         <Tab.Pane eventKey={key} key={key} className="transition-fade-pane">
                                             <AnimationSecComponent type="vertical" direction="up" delay={0.2}>
@@ -145,7 +146,7 @@ const TouristDestinations = () => {
                                                     {Meta.packageLink && (
                                                         <div className="d-flex justify-content-start mt-4 small-12">
                                                             <p className='m-0 small-12'>{tDest("moreInfo")}</p>
-                                                            <Link href={Meta.packageLink}>
+                                                            <Link href={`/tour-package/${slugify(Meta.packageLink)}`} target='_blank'>
                                                                 <button className="border-0 primery-color bg-white ms-1">
                                                                     <p className='m-0'>{tDest("readMore")}</p>
                                                                 </button>
@@ -168,7 +169,7 @@ const TouristDestinations = () => {
 
 const AboutPage = () => {
     const t = useTranslations("AboutPage");
-    
+
     // Core localized dynamic text array extractions using raw schemas
     const ritualsRaw = t.raw("Rituals.items");
     const faqRaw = t.raw("faqData");
@@ -410,7 +411,7 @@ const AboutPage = () => {
                             const data = ritualsRaw[key];
                             const meta = ritualsMeta[key] || { icon: Crown, isActive: false };
                             const IconComponent = meta.icon;
-                            
+
                             return (
                                 <Col md={6} lg={4} key={key} className="d-flex">
                                     <AnimationSecComponent type="vertical" direction="up" delay={0.2} className="w-100 d-flex">

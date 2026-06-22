@@ -41,7 +41,7 @@ const TourPackageDetail = ({ tour }) => {
                     paymentData,
                     toursData
                 ] = await Promise.all([
-                    getCancellationPolicy(),
+                    getCancellationPolicy(locale),
                     getPaymentPolicy(),
                     getTours(1, "", "", "", "", locale),
                 ]);

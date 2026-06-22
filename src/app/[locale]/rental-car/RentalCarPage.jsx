@@ -116,6 +116,9 @@ const RentalCarContent = () => {
     return (
         <section className="section-padding secondary-bg">
             <Container>
+                <div className='my-2 text-center'>
+                    <p className='m-0 text-danger fw-semibold fs-6'>{t("carNote")}</p>
+                </div>
                 <Tab.Container
                     id="car-tabs"
                     activeKey={categoryFilter}
@@ -260,6 +263,7 @@ export default function RentalCarPage() {
                     heroTitleClass="text-light"
                     imgClass="hero-img"
                     showSearch={false}
+                    // redText={"Our per-km rates may change based on current fuel prices and market trends"}
                 />
             </section>
 

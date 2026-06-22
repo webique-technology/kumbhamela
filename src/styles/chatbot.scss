@@ -38,6 +38,7 @@
         overflow: hidden;
         border: 1px solid rgba(255, 111, 0, 0.1);
         z-index: 1001;
+        touch-action: none;
 
         @media (max-width: 480px) {
             bottom: 100px;
@@ -102,6 +103,8 @@
         display: flex;
         flex-direction: column;
         gap: 12px;
+        touch-action: pan-y;
+        -webkit-overflow-scrolling: touch;
 
         .kumbh-msg {
             max-width: 85%;
@@ -118,6 +121,21 @@
             border-radius: 16px 16px 16px 4px;
             align-self: flex-start;
             border-left: 4px solid $primary-color;
+        }
+
+        .kumbh-msg,
+        .kumbh-msg-bot {
+            br {
+                display: none !important;
+            }
+
+            ul {
+                padding-left: 8px !important;
+            }
+
+            b{
+                display: block;
+            }
         }
 
         .kumbh-msg-user {
