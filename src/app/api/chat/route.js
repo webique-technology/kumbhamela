@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import stringSimilarity from "string-similarity";
 import enLocale from "../../../messages/en.json";
+import { slugify } from "@/lib/utils";
 
 const LARAVEL_API_URL = process.env.NEXT_PUBLIC_API_URL_CHATBOT;
 
@@ -55,7 +56,17 @@ const KNOWLEDGE_BASE = [
 
 export async function POST(request) {
   try {
-    const { message, history } = await request.json();
+    const { message, history, locale } = await request.json();
+
+    // --- DYNAMIC HOST ORIGIN RESOLUTION ---
+    const host = request.headers.get("host") || "localhost:3000";
+    const protocol = request.headers.get("x-forwarded-proto") || "http";
+    const originHostUrl = `${protocol}://${host}`;
+
+    // Fix path routing resolution based on active locale
+    const currentLang = locale && locale !== "en" ? locale : "en";
+    const languagePrefix = currentLang === "en" ? "" : `/${currentLang}`;
+
     if (!message) return NextResponse.json({ reply: "Please type something..." });
 
     const userQuery = message.trim().toLowerCase();
@@ -119,6 +130,7 @@ export async function POST(request) {
     const fleetQuality = `• Drivers: ${enLocale.RentalCar?.Bento?.card1?.text || "Professional guides"}<br />• Booking: ${enLocale.RentalCar?.Bento?.card2?.text || "Instant booking"}`;
     const pricingMetric = enLocale.ServicesTab?.perKm || "per km";
 
+    // REMOVED THE LEADING SLASHS (/) BEFORE [BASE_URL] TO RESOLVE DUPLICATION BUG
     const systemInstructionText =
       "You are the expert pilgrimage AI concierge for Mahakumbh Tours & Travels Nashik. " +
       "You must answer user questions accurately by referencing the provided website context and real-time backend tool data.\n\n" +
@@ -130,7 +142,21 @@ export async function POST(request) {
       "- DATA PRESENTATION RULE: When processing response data for category 'cars', list all available vehicles clearly detailing their Name, Total Seats, Base Price (per km rate), status, and structural key features.\n" +
       "- ABSOLUTE TRUTH CONSTRAINT: You are forbidden from writing mock categories, placeholders, or imaginary vehicles. Only present elements returned from the active function execution database payload.\n" +
       "- SECURE MEDIA REDACTION: Never print, stream, or output raw image properties, filenames, directory strings, or URLs ending in '.jpg' or '.png'. Hide fields like 'car_image_url', 'image_url', 'images', or 'car_image' completely.\n" +
-      "- Format output clean lists using structural HTML breaks (<br />, <b></b>). Do not output markdown code blocks or raw JSON symbols.";
+      "- Format output clean lists using structural HTML breaks (<br />, <b></b>). Do not output markdown code blocks or raw JSON symbols.\n" +
+      "STRICT ACTION BUTTON RULES (TRIGGER ONLY ON BOOKING INTENT):\n" +
+      "- EVERY SINGLE LINK HOOK OR BUTTON HREF GENERATED MUST STRICTLY AND EXACTLY START WITH THE TOKENS: [BASE_URL]\n" +
+      "- DO NOT prepend any forward slash (/) before [BASE_URL].\n" +
+      "- NEVER show, append, or output any action link or button if the user is asking general historical, religious, or informational questions (e.g., 'tell me about nashik kumbha' or 'sacred destinations in nashik city').\n" +
+      "- ONLY output a button if the user explicitly states they want to book, asks how to rent/book, or says 'I like this package/car/hotel' and wants to proceed.\n" +
+      "- FOR HOTELS & CARS: Render a link directing them to the custom funnel format: <br /><br /><a href='/book-now?category=cars' class='chat-btn book-now-btn'>Book Now</a>\n" +
+      `- FOR HOTELS: When a user wants to book a specific hotel or show the list to check, look up its metadata and generate an anchor tag with explicit custom analytics parameters targeting the modal state. Format: <br /><br /><a href='/[BASE_URL]/hotel?action=book&type=hotel&id=[hotel-id-or-slug]&name=[encoded-hotel-name]' class='small-12 d-block fw-bold mb-2'>Book [Hotel Name] Now &#8594;</a>\n` +
+      `- FOR CARS: When a user wants to book a vehicle or show the list to check, match it against your current asset inventory and append the appropriate action queries. Format: <br /><br /><a href='/[BASE_URL]/rental-car?action=book&type=car&id=[car-id-or-slug]&name=[encoded-car-name]' class='small-12 d-block fw-bold mb-2'>Book [Vehicle Name] Now &#8594;</a>\n` +
+      "- FOR A TOUR PACKAGE DETAIL: If the user likes or asks about a specific package (e.g., 'Sade Tin (3.5) Shakti Peeth Tour Package'), you MUST create a dynamic slug. Convert the exact title to lowercase, replace spaces, dots, and parentheses with single hyphens, clean double hyphens, and render it exactly like this at the end of the text:\n" +
+      `  <br /><br /><i><b class='text-danger mt-2'>Note: please visit our package planner</b></i><br /><br /><a href='/[BASE_URL]/tour-package/[slugified-title]' class='mb-3 d-block fw-bold'>View Package Details &#8594;</a>\n` +
+      `- Real-World Validation Example: If the active language is 'mr' and the user asks about 'Nashik Kumbh Darshan Tour', the button link must be exactly outputted as: /mr/tour-package/nashik-kumbh-darshan-tour\n` +
+      "- NO BUTTON FALLBACK: Never show a button or link if the user is asking general informational, historical, or religious questions (e.g., 'tell me about nashik kumbha').\n" +
+      `- Example slug transformation: 'Sade Tin (3.5) Shakti Peeth Tour Package' becomes 'sade-tin-35-shakti-peeth-tour-package', making the link '/[BASE_URL]/tour-packages/sade-tin-35-shakti-peeth-tour-package'.\n` +
+      "- Ensure you never wrap these dynamic custom HTML links inside markdown blocks or raw code blocks.";
 
     const geminiContents = [];
 
@@ -217,8 +243,6 @@ export async function POST(request) {
           console.error("Public Laravel Connection Interface Dropped:", fetchErr);
         }
 
-        // --- STABLE WORKAROUND: Inject the backend payload cleanly as textual context ---
-        // This stops Google's system schema from throwing a validation mismatch error.
         geminiContents.push({
           role: "model",
           parts: [{ text: `Executing backend query lookup for database category: ${activeCategory}.` }]
@@ -226,8 +250,8 @@ export async function POST(request) {
 
         geminiContents.push({
           role: "user",
-          parts: [{ 
-            text: `[SYSTEM DATABASE LOG RESPONSE]: Here is the raw real-time live availability data matching category "${activeCategory}". Synthesize this into your final answer: ${JSON.stringify(fetchedDatabasePayload)}` 
+          parts: [{
+            text: `[SYSTEM DATABASE LOG RESPONSE]: Here is the raw real-time live availability data matching category "${activeCategory}". Synthesize this into your final answer: ${JSON.stringify(fetchedDatabasePayload)}`
           }]
         });
 
@@ -256,7 +280,6 @@ export async function POST(request) {
     }
 
     const rawOutputText = firstCandidate?.parts?.[0]?.text || "System temporarily busy, please re-submit request.";
-    console.log("gemini response", rawOutputText);
 
     const formattedReply = rawOutputText
       .replace(/\n{2,}/g, "<br /><br />")
@@ -265,7 +288,13 @@ export async function POST(request) {
       .replace(/\*(.*?)\*/g, "<i>$1</i>")
       .replace(/<br \/>\s*<br \/>/g, "<br /><br />");
 
-    return NextResponse.json({ reply: formattedReply });
+    const trueUrlTarget = `${originHostUrl}${languagePrefix}`;
+    console.log("trueUrlTarget", trueUrlTarget);
+
+    // Securely swap tokens globally without risking string mutation or layout breaks
+    const finalCleanReply = formattedReply.replaceAll("[BASE_URL]", trueUrlTarget);
+
+    return NextResponse.json({ reply: finalCleanReply });
 
   } catch (error) {
     console.error("Gemini Critical Architecture Crash Log:", error);

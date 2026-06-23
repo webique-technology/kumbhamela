@@ -2,7 +2,7 @@
 
 .kumbh-chatbot-container {
     position: relative;
-    z-index: 99999;
+    z-index: 999;
 
     .kumbh-launcher-btn {
         position: fixed;
@@ -133,7 +133,7 @@
                 padding-left: 8px !important;
             }
 
-            b{
+            b {
                 display: block;
             }
         }
@@ -350,5 +350,41 @@
     100% {
         transform: scale(1);
         box-shadow: 0 0 0 0 rgba(211, 47, 47, 0);
+    }
+}
+
+// Chat component action layout integrations
+.chat-btn {
+    display: inline-block;
+    padding: 6px 10px;
+    margin-top: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+    text-decoration: none !important;
+    border-radius: 6px;
+    transition: all 0.25s ease-in-out;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    &.book-now-btn {
+        background-color: #ff6a00; // Your custom text-brand-orange value
+        color: #ffffff !important;
+
+        &:hover {
+            background-color: #e05db0;
+            transform: translateY(-1px);
+        }
+    }
+
+    &.tour-link-btn {
+        background-color: transparent;
+        border: 2px solid #ff6a00;
+        color: #ff6a00 !important;
+
+        &:hover {
+            background-color: #ff6a00;
+            color: #ffffff !important;
+        }
     }
 }

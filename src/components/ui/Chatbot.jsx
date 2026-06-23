@@ -3,11 +3,20 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, Send, X, Mic, Square } from "lucide-react";
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { BookingForm } from '../ui/bookingFormHandler';
 import "../../styles/chatbot.scss";
 
-import chatWelcome from "../../assets/images/chatbot-img.svg"
+import chatWelcome from "../../assets/images/chatbot-img.svg";
 
 export const KumbhChatbot = () => {
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
+
+    // Dynamically extract the current language locale from the URL path (e.g., /hi/hotels -> hi, /mr -> mr, / -> en)
+    const currentLocale = pathname.split('/')[1] || "en";
+
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
         {
@@ -23,6 +32,15 @@ export const KumbhChatbot = () => {
     const chatEndRef = useRef(null);
     const recognitionRef = useRef(null);
 
+    // Modal State Hooks for Chatbot Bookings
+    const [modalConfig, setModalConfig] = useState({
+        show: false,
+        type: 'hotel', // 'hotel' or 'car'
+        selectedItem: '',
+        hotelId: null,
+        carId: null
+    });
+
     const quickTags = [
         { label: "📅 Snan Dates 2027", query: "shahi snan dates 2027" },
         { label: "🛕 Holy Places", query: "sacred locations in nashik" },
@@ -31,19 +49,75 @@ export const KumbhChatbot = () => {
         { label: "✈️ Reach Nashik", query: "how to reach nashik by train air road" },
     ];
 
+    // Watch URL parameters for external or fallback booking triggers
+    useEffect(() => {
+        const action = searchParams.get('action');
+        const type = searchParams.get('type');
+        const id = searchParams.get('id');
+        const name = searchParams.get('name');
+
+        if (action === 'book' && type && id) {
+            setModalConfig({
+                show: true,
+                type: type,
+                selectedItem: decodeURIComponent(name || ''),
+                hotelId: type === 'hotel' ? id : null,
+                carId: type === 'car' ? id : null
+            });
+
+            const params = new URLSearchParams(searchParams.toString());
+            params.delete('action');
+            params.delete('type');
+            params.delete('id');
+            params.delete('name');
+            router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+        }
+    }, [searchParams, pathname, router]);
+
+    const handleCloseModal = () => {
+        setModalConfig(prev => ({ ...prev, show: false }));
+    };
+
+    // Intercept Chat Link Clicks to completely eliminate page refreshes
+    const handleChatBodyClick = (e) => {
+        const targetLink = e.target.closest('a');
+        if (!targetLink) return;
+
+        const hrefUrl = targetLink.getAttribute('href');
+        
+        // Check if it's an inline action button or deep link parameter structure
+        if (hrefUrl && (hrefUrl.includes('action=book') || hrefUrl.includes('category=cars'))) {
+            e.preventDefault(); // Stop native page reload routing
+
+            try {
+                // Parse out variables using URL query constructor
+                const urlObj = new URL(hrefUrl, window.location.origin);
+                const action = urlObj.searchParams.get('action') || 'book';
+                const type = urlObj.searchParams.get('type') || (urlObj.searchParams.get('category') === 'cars' ? 'car' : 'hotel');
+                const id = urlObj.searchParams.get('id') || 'fleet';
+                const name = urlObj.searchParams.get('name') || '';
+
+                setModalConfig({
+                    show: true,
+                    type: type,
+                    selectedItem: decodeURIComponent(name),
+                    hotelId: type === 'hotel' ? id : null,
+                    carId: type === 'car' ? id : null
+                });
+            } catch (err) {
+                console.error("Failed to intercept component link routing smoothly:", err);
+            }
+        }
+    };
+
     useEffect(() => {
         if (isOpen) {
-            // Disables standard scrolling on window body elements
             document.body.style.overflow = "hidden";
-            // Optional: Adds subtle right padding to prevent layout shifts if scrollbars disappear on desktop
             document.body.style.paddingRight = "var(--removed-body-scrollbar-width, 0px)";
         } else {
-            // Restores standard scrolling mechanics cleanly
             document.body.style.overflow = "unset";
             document.body.style.paddingRight = "0px";
         }
-
-        // Cleanup function ensures body scroll is safely restored if the component unmounts unexpectedly
         return () => {
             document.body.style.overflow = "unset";
             document.body.style.paddingRight = "0px";
@@ -55,30 +129,21 @@ export const KumbhChatbot = () => {
     }, [messages, isLoading]);
 
     useEffect(() => {
-        chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, [messages, isLoading]);
-
-    // Initialize Speech Recognition cleanly within the client runtime mount cycle
-    useEffect(() => {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (SpeechRecognition) {
             const rec = new SpeechRecognition();
             rec.continuous = false;
             rec.interimResults = false;
-            rec.lang = "en-IN"; // Sets regional dialect recognition default optimization
-
+            rec.lang = typeof navigator !== "undefined" ? navigator.language : "en-IN";
             rec.onstart = () => setIsListening(true);
-
             rec.onresult = (event) => {
                 const transcript = event.results[0][0].transcript;
                 if (transcript.trim()) {
                     handleSendMessage(transcript);
                 }
             };
-
             rec.onerror = () => setIsListening(false);
             rec.onend = () => setIsListening(false);
-
             recognitionRef.current = rec;
         }
     }, []);
@@ -88,7 +153,6 @@ export const KumbhChatbot = () => {
             alert("Voice command features are not fully supported by your current browser profile.");
             return;
         }
-
         if (isListening) {
             recognitionRef.current.stop();
         } else {
@@ -100,7 +164,6 @@ export const KumbhChatbot = () => {
         const targetQuery = queryText || inputValue.trim();
         if (!targetQuery) return;
 
-        // Append User Message Locally
         const userMsgId = Date.now().toString();
         setMessages((prev) => [...prev, { id: userMsgId, sender: "user", text: targetQuery }]);
         if (!queryText) setInputValue("");
@@ -110,7 +173,11 @@ export const KumbhChatbot = () => {
             const response = await fetch("/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: targetQuery, history: messages }),
+                body: JSON.stringify({ 
+                    message: targetQuery, 
+                    history: messages,
+                    locale: currentLocale // Passed dynamically to back-end
+                }),
             });
 
             const data = await response.json();
@@ -131,8 +198,6 @@ export const KumbhChatbot = () => {
 
     return (
         <div className="kumbh-chatbot-container">
-            {/* Floating Action Trigger Button */}
-            {/* Floating Launcher Action Container */}
             <div className="kumbh-launcher-container" style={{ position: "fixed", bottom: "30px", right: "30px", zIndex: 99999 }}>
                 <AnimatePresence>
                     {showWelcomeImg && !isOpen && (
@@ -143,43 +208,39 @@ export const KumbhChatbot = () => {
                             exit={{ opacity: 0, scale: 0.8, y: 10 }}
                             transition={{ duration: 0.2 }}
                         >
-                            {/* Close Button Trigger for Welcome Image Bubble */}
                             <button
                                 type="button"
                                 className="chat-welcome-close-btn"
                                 onClick={(e) => {
-                                    e.stopPropagation(); // Prevents clicking the close icon from accidentally opening the main chat
+                                    e.stopPropagation();
                                     setShowWelcomeImg(false);
                                 }}
                             >
                                 <X size={14} />
                             </button>
 
-                            {/* Main Welcome Graphic Asset Banner */}
                             <img
                                 src={chatWelcome.src}
                                 alt="Welcome Assistant Preview"
                                 className="chat-welcome-img"
-                                onClick={() => setIsOpen(true)} // Clicking the image bubble directly opens the chat window too
+                                onClick={() => setIsOpen(true)}
                                 style={{ cursor: "pointer" }}
                             />
                         </motion.div>
                     )}
                 </AnimatePresence>
 
-                {/* Main Launcher Button Element */}
                 <motion.button
                     className="kumbh-launcher-btn"
                     onClick={() => setIsOpen(!isOpen)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    style={{ position: "static" }} // Handled gracefully by the parent container absolute layout wrapper
+                    style={{ position: "static" }}
                 >
                     <MessageSquare size={20} />
                 </motion.button>
             </div>
 
-            {/* Main Interactive Chat Panel */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -189,7 +250,6 @@ export const KumbhChatbot = () => {
                         exit={{ opacity: 0, y: 50, scale: 0.9 }}
                         transition={{ type: "spring", damping: 25, stiffness: 300 }}
                     >
-                        {/* Header Block */}
                         <div className="kumbh-header">
                             <div className="kumbh-profile-area">
                                 <div className="kumbh-avatar">🕉️</div>
@@ -203,8 +263,8 @@ export const KumbhChatbot = () => {
                             </button>
                         </div>
 
-                        {/* Chat Body Tracking System */}
-                        <div className="kumbh-body">
+                        {/* Capture clicks inside the chat area safely */}
+                        <div className="kumbh-body" onClick={handleChatBodyClick}>
                             {messages.map((msg) => (
                                 <div
                                     key={msg.id}
@@ -213,7 +273,6 @@ export const KumbhChatbot = () => {
                                 />
                             ))}
 
-                            {/* Dynamic Loader Component */}
                             {isLoading && (
                                 <div className="kumbh-msg kumbh-msg-bot typing-indicator">
                                     <span className="kumbh-dot"></span>
@@ -222,7 +281,6 @@ export const KumbhChatbot = () => {
                                 </div>
                             )}
 
-                            {/* Render Navigation Tags only when conversation state stays natural */}
                             {!isLoading && messages.length < 3 && (
                                 <div className="kumbh-tags-wrapper">
                                     {quickTags.map((tag, idx) => (
@@ -239,7 +297,6 @@ export const KumbhChatbot = () => {
                             <div ref={chatEndRef} />
                         </div>
 
-                        {/* Input Submission Footer Form with Native Voice Integration */}
                         <form
                             className="kumbh-input-footer"
                             onSubmit={(e) => {
@@ -256,7 +313,6 @@ export const KumbhChatbot = () => {
                                 disabled={isLoading || isListening}
                             />
 
-                            {/* Mic Icon Action Button */}
                             <button
                                 type="button"
                                 onClick={toggleVoiceRecognition}
@@ -276,6 +332,15 @@ export const KumbhChatbot = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            <BookingForm
+                show={modalConfig.show}
+                handleClose={handleCloseModal}
+                type={modalConfig.type}
+                selectedItem={modalConfig.selectedItem}
+                hotelId={modalConfig.hotelId}
+                carId={modalConfig.carId}
+            />
         </div>
     );
 };

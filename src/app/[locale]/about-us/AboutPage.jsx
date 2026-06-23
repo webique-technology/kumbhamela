@@ -219,9 +219,9 @@ const AboutPage = () => {
                         <p className="hero-para text-center text-lg-start mb-3">
                             {t("Hero.description")}
                         </p>
-                        <button className="primery-btn py-3 px-5">
+                        {/* <button className="primery-btn py-3 px-5">
                             {t("Hero.cta")} <ArrowRight size={20} className="ms-2" />
-                        </button>
+                        </button> */}
                     </div>
                 </Container>
             </section>
