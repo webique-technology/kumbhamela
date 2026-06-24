@@ -57,11 +57,38 @@
 
 // hotel form to fill
 .booking-modal {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    /* Forces the horizontal scrollbar to vanish */
+
+    /* 2. Hide scrollbar for Chrome, Safari, Opera, and edge chromium profiles */
+    &::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    /* 3. Hide scrollbar completely for Firefox */
+    scrollbar-width: none !important;
+
+    /* 4. Hide scrollbar for Internet Explorer and Legacy Edge layouts */
+    -ms-overflow-style: none !important;
+
     .modal-content {
         border-radius: $border-radius-xl;
         border: none;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        overflow: scroll !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+
+        &::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
 
         .modal-header {
             flex-shrink: 0;
