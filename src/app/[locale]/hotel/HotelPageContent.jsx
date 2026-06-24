@@ -139,7 +139,7 @@ export const HotelPageContent = () => {
                         show={show}
                         handleClose={() => setShow(false)}
                         type="hotel"
-                        selectedItem={selectedHotel?.name}
+                        selectedItem={selectedHotel?.title}
                         hotelId={selectedHotel?.id}
                     />
                 </Container>

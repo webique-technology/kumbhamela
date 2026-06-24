@@ -11,7 +11,8 @@
     "rentalCar": "Rental Car",
     "tourPackage": "Tour Package",
     "blog": "Blog",
-    "contact": "Contact Us"
+    "contact": "Contact Us",
+    "contactInformation": "Contact Information"
   },
   "HeroHeader": {
     "btnName1": "Our Vehicles",
@@ -191,8 +192,8 @@
     "montezSubTitle": "Video Stories"
   },
   "SearchFleet": {
-    "searchByName": "Search By Name",
-    "placeholderHotel": "Hotel name...",
+    "searchByName": "Search By Location",
+    "placeholderHotel": "Hotel location...",
     "placeholderCar": "Car model...",
     "placeholderTour": "Package name...",
     "vehicleType": "Vehicle Type",
@@ -753,7 +754,7 @@
     "Branches": {
       "nashik": {
         "city": "Nashik",
-        "address": "Sakal Office Basement, BA 4, Thakkar Bazar, New CBS, Police Staff Colony, Nashik, Maharashtra 422002"
+        "address": "Office Shop No 11, NYSA Business Centre, Makhmalabad Rd, Ghadge Nagar, Nashik, Maharashtra 422003"
       },
       "pune": {
         "city": "Pune",
@@ -778,8 +779,13 @@
     "mobile": "Mobile Number",
     "placeholderMobile": "Enter mobile no.",
     "roomType": "Room Type",
-    "acRoom": "AC Room",
-    "nonAcRoom": "Non-AC Room",
+    "singleRoom": "Single Room",
+    "doubleRoom": "Double Room",
+    "twinRoom": "win Room",
+    "tripleRoom": "Triple Room",
+    "familyRoom": "Family Room",
+    "suiteRoom": "Suite Room",
+    "deluxeRoom": "Deluxe Room",
     "pickupDate": "Pickup Date",
     "checkInDate": "Check-in Date",
     "returnDate": "Return Date",

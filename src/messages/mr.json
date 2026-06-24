@@ -3,7 +3,7 @@
     "loading": "लोड होत आहे..."
   },
   "Navbar": {
-    "logoTitle": "MAHAKUMBH",
+    "logoTitle": "महाकुंभ",
     "logoSubtitle": "टूर आणि ट्रॅव्हल्स",
     "home": "मुख्यपृष्ठ",
     "about": "आमच्याबद्दल",
@@ -11,7 +11,8 @@
     "rentalCar": "कार भाड्याने",
     "tourPackage": "टूर पॅकेज",
     "blog": "ब्लॉग",
-    "contact": "संपर्क साधा"
+    "contact": "संपर्क साधा",
+    "contactInformation": "संपर्क माहिती"
   },
   "HeroHeader": {
     "btnName1": "आमची वाहने",
@@ -191,8 +192,8 @@
     "montezSubTitle": "व्हिडिओ कथा"
   },
   "SearchFleet": {
-    "searchByName": "नावाने शोधा",
-    "placeholderHotel": "हॉटेलचे नाव...",
+    "searchByName": "स्थानानुसार शोधा",
+    "placeholderHotel": "हॉटेलचे स्थान...",
     "placeholderCar": "गाडीचे मॉडेल...",
     "placeholderTour": "पॅकेजचे नाव...",
     "vehicleType": "वाहनाचा प्रकार",
@@ -751,7 +752,7 @@
     "Branches": {
       "nashik": {
         "city": "नाशिक",
-        "address": "सकाळ ऑफिस तळमजला, बीए ४, ठक्कर बाजार, नवीन सीबीएस, पोलीस स्टाफ कॉलनी, नाशिक, महाराष्ट्र ४२२००२"
+        "address": "कार्यालय दुकान क्र. ११, नायसा बिझनेस सेंटर, मखमलाबाद रोड, घाडगे नगर, नाशिक, महाराष्ट्र ४२२००३"
       },
       "pune": {
         "city": "पुणे",
@@ -776,8 +777,13 @@
     "mobile": "मोबाईल नंबर",
     "placeholderMobile": "मोबाईल नंबर प्रविष्ट करा",
     "roomType": "खोलीचा प्रकार",
-    "acRoom": "एसी खोली (AC)",
-    "nonAcRoom": "विना-एसी खोली (Non-AC)",
+    "singleRoom": "सिंगल रूम (Single Room)",
+    "doubleRoom": "डबल रूम (Double Room)",
+    "twinRoom": "ट्विन रूम (Twin Room)",
+    "tripleRoom": "ट्रिपल room (Triple Room)",
+    "familyRoom": "फॅमिली रूम (Family Room)",
+    "suiteRoom": "स्वीट रूम (Suite Room)",
+    "deluxeRoom": "डेक्सल रूम (Deluxe Room)",
     "pickupDate": "पिकअप तारीख",
     "checkInDate": "चेक-इन तारीख",
     "returnDate": "रिटर्न तारीख",

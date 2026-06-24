@@ -61,6 +61,7 @@
         border-radius: $border-radius-xl;
         border: none;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        overflow: scroll !important;
 
         .modal-header {
             flex-shrink: 0;

@@ -3,7 +3,7 @@
     "loading": "लोड हो रहा है..."
   },
   "Navbar": {
-    "logoTitle": "MAHAKUMBH",
+    "logoTitle": "महाकुंभ",
     "logoSubtitle": "टूर एंड ट्रेवल्स",
     "home": "होम",
     "about": "हमारे बारे में",
@@ -11,7 +11,8 @@
     "rentalCar": "किराए की कार",
     "tourPackage": "टूर पैकेज",
     "blog": "ब्लॉग",
-    "contact": "संपर्क करें"
+    "contact": "संपर्क करें",
+    "contactInformation": "संपर्क जानकारी"
   },
   "HeroHeader": {
     "btnName1": "हमारे वाहन",
@@ -191,8 +192,8 @@
     "montezSubTitle": "वीडियो कहानियाँ"
   },
   "SearchFleet": {
-    "searchByName": "नाम से खोजें",
-    "placeholderHotel": "होटल का नाम...",
+    "searchByName": "स्थान के अनुसार खोजें",
+    "placeholderHotel": "होटल का स्थान...",
     "placeholderCar": "गाड़ी का मॉडल...",
     "placeholderTour": "पैकेज का नाम...",
     "vehicleType": "वाहन का प्रकार",
@@ -751,7 +752,7 @@
     "Branches": {
       "nashik": {
         "city": "नाशिक",
-        "address": "सकाल ऑफिस बेसमेंट, बीए 4, ठक्कर बाजार, न्यू सीबीएस, पुलिस स्टाफ कॉलोनी, नाशिक, महाराष्ट्र 422002"
+        "address": "कार्यालय दुकान नंबर 11, नायसा बिजनेस सेंटर, मखमलाबाद रोड, घाडगे नगर, नाशिक, महाराष्ट्र 422003"
       },
       "pune": {
         "city": "पुणे",
@@ -776,8 +777,13 @@
     "mobile": "मोबाइल नंबर",
     "placeholderMobile": "मोबाइल नंबर दर्ज करें",
     "roomType": "कमरे का प्रकार",
-    "acRoom": "एसी कमरा",
-    "nonAcRoom": "नॉन-एसी कमरा",
+    "singleRoom": "सिंगल रूम",
+    "doubleRoom": "डबल रूम",
+    "twinRoom": "ट्विन रूम",
+    "tripleRoom": "ट्रिपल रूम",
+    "familyRoom": "फैमिली रूम",
+    "suiteRoom": "सुइट रूम",
+    "deluxeRoom": "डीलक्स रूम",
     "pickupDate": "पिकअप तिथि",
     "checkInDate": "चेक-इन तिथि",
     "returnDate": "वापसी तिथि",

@@ -3,7 +3,7 @@
         "loading": "ലോഡ് ചെയ്യുന്നു..."
     },
     "Navbar": {
-        "logoTitle": "MAHAKUMBH",
+        "logoTitle": "മഹാകുംഭ്",
         "logoSubtitle": "ടൂർസ് ആൻഡ് ട്രാവൽസ്",
         "home": "ഹോം",
         "about": "ഞങ്ങളെക്കുറിച്ച്",
@@ -11,7 +11,8 @@
         "rentalCar": "കാർ വാടകയ്ക്ക്",
         "tourPackage": "ടൂർ പാക്കേജ്",
         "blog": "ബ്ലോഗ്",
-        "contact": "ബന്ധപ്പെടുക"
+        "contact": "ബന്ധപ്പെടുക",
+        "contactInformation": "ബന്ധപ്പെടാനുള്ള വിവരങ്ങൾ"
     },
     "HeroHeader": {
         "btnName1": "ഞങ്ങളുടെ വാഹനങ്ങൾ",
@@ -191,8 +192,8 @@
         "montezSubTitle": "വീഡിയോ കഥകൾ"
     },
     "SearchFleet": {
-        "searchByName": "പേര് ഉപയോഗിച്ച് തിരയുക",
-        "placeholderHotel": "ഹോട്ടലിന്റെ പേര്...",
+        "searchByName": "സ്ഥലം അനുസരിച്ച് തിരയുക",
+        "placeholderHotel": "ഹോട്ടൽ സ്ഥലം...",
         "placeholderCar": "കാർ മോഡൽ...",
         "placeholderTour": "ടൂർ പാക്കേജ് പേര്...",
         "vehicleType": "വാഹനത്തിന്റെ തരം",
@@ -751,7 +752,7 @@
         "Branches": {
             "nashik": {
                 "city": "നാസിക്",
-                "address": "സകാൽ ഓഫീസ് ബേസ്മെന്റ്, BA 4, തക്കർ ബസാർ, ന്യൂ CBS, പോലീസ് സ്റ്റാഫ് കോളനി, നാസിക്, മഹാരാഷ്ട്ര 422002"
+                "address": "ഓഫീസ് ഷോപ്പ് നമ്പർ 11, നൈസ ബിസിനസ് സെന്റർ, മഖ്മലാബാദ് റോഡ്, ഘാഡ്ഗെ നഗർ, നാസിക്, മഹാരാഷ്ട്ര 422003"
             },
             "pune": {
                 "city": "പൂനെ",
@@ -776,8 +777,13 @@
         "mobile": "മൊബൈൽ നമ്പർ",
         "placeholderMobile": "മൊബൈൽ നമ്പർ നൽകുക",
         "roomType": "റൂം തരം",
-        "acRoom": "എസി റൂം",
-        "nonAcRoom": "നോൺ-എസി റൂം",
+        "singleRoom": "സിംഗിൾ റൂം",
+        "doubleRoom": "ഡബിൾ റൂം",
+        "twinRoom": "ട്വിൻ റൂം",
+        "tripleRoom": "ട്രിപ്പിൾ റൂം",
+        "familyRoom": "ഫാമിലി റൂം",
+        "suiteRoom": "സ്യൂട്ട് റൂം",
+        "deluxeRoom": "ഡീലക്സ് റൂം",
         "pickupDate": "പിക്ക്അപ്പ് തീയതി",
         "checkInDate": "ചെക്ക്-ഇൻ തീയതി",
         "returnDate": "റിട്ടേൺ തീയതി",

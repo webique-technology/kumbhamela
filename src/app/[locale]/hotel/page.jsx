@@ -111,7 +111,7 @@ export default async function HotelPage({ params }) {
                     heroTitleClass="text-light"
                     spanClass="text-light"
                     heroSubtitle={t("heroTitle")}
-                    heroImage="/images/contact-page-bg.png"
+                    // heroImage="/images/contact-page-bg.png"
                     imgClass="hero-img"
                     showSearch={true}
                 />

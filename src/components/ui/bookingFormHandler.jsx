@@ -100,7 +100,7 @@ export const BookingFormHandler = ({ tourId, tourName, vehicleCategories = [] })
                 });
             }
 
-            const phoneNumber = "919022093522";
+            const phoneNumber = "917507778088";
             const message =
                 `*New Booking Enquiry*%0A` +
                 `*Name:* ${formData.full_name}%0A` +
@@ -379,7 +379,7 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
             }
 
             // Building structured WhatsApp Notification Markdown Payloads
-            const phoneNumber = "919022093522";
+            const phoneNumber = "917507778088";
             const currentItemName = isCar ? (selectedItem?.name || selectedItem) : selectedItem;
 
             const header = isCar ? "*New Car Rental Inquiry*" : "*New Hotel Booking Inquiry*";
@@ -434,7 +434,7 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
 
     return (
         <Modal show={show} onHide={handleClose} centered className="booking-modal">
-            <Modal.Header closeButton className="border-0 p-4 pb-0">
+            <Modal.Header closeButton className="border-0 p-3 pb-2">
                 <Modal.Title className="fw-bold h5 d-flex align-items-center gap-2">
                     {t("bookTitle")} {type === "car" ? (selectedItem?.name || selectedItem) : selectedItem}
                 </Modal.Title>
@@ -495,8 +495,13 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
                                 <Form.Group className="mb-3">
                                     <Form.Label className="small fw-bold">{t("roomType")}</Form.Label>
                                     <Form.Select name="roomType" value={formData.roomType} onChange={handleChange} className="rounded-3 py-2">
-                                        <option value="AC">{t("acRoom")}</option>
-                                        <option value="Non-AC">{t("nonAcRoom")}</option>
+                                        <option value="single_room">{t("singleRoom")}</option>
+                                        <option value="double_room">{t("doubleRoom")}</option>
+                                        <option value="twin_room">{t("twinRoom")}</option>
+                                        <option value="triple_room">{t("tripleRoom")}</option>
+                                        <option value="family_room">{t("familyRoom")}</option>
+                                        <option value="suite_room">{t("suiteRoom")}</option>
+                                        <option value="deluxe_room">{t("deluxeRoom")}</option>
                                     </Form.Select>
                                 </Form.Group>
                             </Col>

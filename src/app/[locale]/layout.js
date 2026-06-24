@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { KumbhChatbot } from "@/components/ui/Chatbot";
+import MarqueeSliderSec from "@/components/section/MarqueeSliderSec";
 
 const sora = Sora({
   weight: ['400', '500', '600', '700', '800'],
@@ -132,6 +133,7 @@ export default async function RootLayout({ children, params }) {
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Navbar />
           {children}
+          <MarqueeSliderSec />
           <Footer />
           <KumbhChatbot />
         </NextIntlClientProvider>

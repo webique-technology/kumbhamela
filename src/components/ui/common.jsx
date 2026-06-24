@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo, useRef, useState, useEffect, useId } from 'react';
 import { Search, ChevronDown, DollarSign, X, ArrowRight } from "lucide-react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useTranslations } from 'next-intl';
@@ -230,54 +230,69 @@ export const SearchFleet = () => {
                                         : t("placeholderTour")
                             }
                             value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            onChange={(e) => {
+                                const newValue = e.target.value;
+                                setFormData((prev) => ({ ...prev, name: newValue }));
+
+                                const params = new URLSearchParams(searchParams.toString());
+                                if (newValue.trim()) {
+                                    params.set("name", newValue);
+                                } else {
+                                    params.delete("name");
+                                }
+                                params.set("page", "1");
+
+                                router.push(`${pathname}?${params.toString()}`, { scroll: false });
+                            }}
                         />
                         <Search size={16} className="input-icon-right" />
                     </div>
                 </div>
 
                 {/* 2. Custom Category Selector Dropdown Matrix */}
-                <div className={`filter-group ${openDropdown === 'category' ? 'raise-z-index' : ''}`}>
-                    <label className="filter-label">
-                        {isVehiclePage ? t("vehicleType") : isHotelPage ? t("accommodation") : t("tourType")}
-                    </label>
-                    <div className="input-wrapper position-relative">
-                        <div
-                            className={`custom-select-trigger filter-input ${openDropdown === 'category' ? 'active-dropdown' : ''}`}
-                            onClick={(e) => toggleDropdown(e, 'category')}
-                        >
-                            <span>{getCategoryLabel(formData.category)}</span>
-                            <ChevronDown size={18} className={`select-arrow-transition ${openDropdown === 'category' ? 'rotate-arrow' : ''}`} />
-                        </div>
-
-                        <div className={`custom-dropdown-options-box shadow-lg ${openDropdown === 'category' ? 'open-expanded' : ''}`}>
-                            <div className="option-item" onClick={() => handleSelectOption("category", "all")}>
-                                {t("categories.all")}
+                {(isVehiclePage || isHotelPage) && (
+                    <div className={`filter-group ${openDropdown === 'category' ? 'raise-z-index' : ''}`}>
+                        <label className="filter-label">
+                            {isVehiclePage ? t("vehicleType") : isHotelPage ? t("accommodation") : t("tourType")}
+                        </label>
+                        <div className="input-wrapper position-relative">
+                            <div
+                                className={`custom-select-trigger filter-input ${openDropdown === 'category' ? 'active-dropdown' : ''}`}
+                                onClick={(e) => toggleDropdown(e, 'category')}
+                            >
+                                <span>{getCategoryLabel(formData.category)}</span>
+                                <ChevronDown size={18} className={`select-arrow-transition ${openDropdown === 'category' ? 'rotate-arrow' : ''}`} />
                             </div>
-                            {isVehiclePage && (
-                                <>
-                                    <div className="option-item" onClick={() => handleSelectOption("category", "Sedan")}>{t("categories.Sedan")}</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("category", "SUV")}>{t("categories.SUV")}</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("category", "Traveller")}>{t("categories.Traveller")}</div>
-                                </>
-                            )}
-                            {isHotelPage && (
-                                <>
-                                    <div className="option-item" onClick={() => handleSelectOption("category", "Luxury")}>{t("categories.Luxury")}</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("category", "Heritage")}>{t("categories.Heritage")}</div>
-                                    <div className="option-item" onClick={() => handleSelectOption("category", "Budget")}>{t("categories.Budget")}</div>
-                                </>
-                            )}
-                            {isTourPage && (
+
+                            <div className={`custom-dropdown-options-box shadow-lg ${openDropdown === 'category' ? 'open-expanded' : ''}`}>
+                                <div className="option-item" onClick={() => handleSelectOption("category", "all")}>
+                                    {t("categories.all")}
+                                </div>
+                                {isVehiclePage && (
+                                    <>
+                                        <div className="option-item" onClick={() => handleSelectOption("category", "Sedan")}>{t("categories.Sedan")}</div>
+                                        <div className="option-item" onClick={() => handleSelectOption("category", "SUV")}>{t("categories.SUV")}</div>
+                                        <div className="option-item" onClick={() => handleSelectOption("category", "Traveller")}>{t("categories.Traveller")}</div>
+                                    </>
+                                )}
+                                {isHotelPage && (
+                                    <>
+                                        <div className="option-item" onClick={() => handleSelectOption("category", "Luxury")}>{t("categories.Luxury")}</div>
+                                        <div className="option-item" onClick={() => handleSelectOption("category", "Heritage")}>{t("categories.Heritage")}</div>
+                                        <div className="option-item" onClick={() => handleSelectOption("category", "Budget")}>{t("categories.Budget")}</div>
+                                    </>
+                                )}
+                                {/* {isTourPage && (
                                 <>
                                     <div className="option-item" onClick={() => handleSelectOption("category", "Essential")}>{t("categories.Essential")}</div>
                                     <div className="option-item" onClick={() => handleSelectOption("category", "Premium")}>{t("categories.Premium")}</div>
                                     <div className="option-item" onClick={() => handleSelectOption("category", "Luxury")}>{t("categories.Luxury")}</div>
                                 </>
-                            )}
+                            )} */}
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
 
                 {/* 3. Custom Price Selector Dropdown Matrix */}
                 <div className={`filter-group ${openDropdown === 'price' ? 'raise-z-index' : ''}`}>
@@ -476,7 +491,7 @@ export const HighlightsModal = ({ children }) => {
                 className="px-2 py-1 mt-2 small-12 rounded-2 primery-btn text-decoration-none"
                 whileHover={{ scale: 1.01 }}
             >
-                {t("viewAllHighlights")} <ArrowRight size={15}/>
+                {t("viewAllHighlights")} <ArrowRight size={15} />
             </motion.button>
 
             <AnimatePresence>
@@ -655,3 +670,4 @@ export const BathingDatesSlider = ({ bathingDates, t }) => {
         </div>
     )
 }
+

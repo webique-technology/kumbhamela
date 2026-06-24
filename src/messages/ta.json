@@ -3,7 +3,7 @@
         "loading": "ஏற்றപ്പെടുന്നു..."
     },
     "Navbar": {
-        "logoTitle": "MAHAKUMBH",
+        "logoTitle": "மகாபகும்ப்",
         "logoSubtitle": "டூர்ஸ் & டிராவல்ஸ்",
         "home": "முகப்பு",
         "about": "எங்களைப் பற்றி",
@@ -11,7 +11,8 @@
         "rentalCar": "கார் வாடகை",
         "tourPackage": "சுற்றுலா தொகுப்பு",
         "blog": "வலைப்பதிவு",
-        "contact": "தொடர்பு கொள்ள"
+        "contact": "தொடர்பு கொள்ள",
+        "contactInformation": "தொடர்பு தகவல்"
     },
     "HeroHeader": {
         "btnName1": "எங்கள் வாகனங்கள்",
@@ -191,8 +192,8 @@
         "montezSubTitle": "வீடியோ கதைகள்"
     },
     "SearchFleet": {
-        "searchByName": "பெயரால் தேடவும்",
-        "placeholderHotel": "ஹோட்டல் பெயர்...",
+        "searchByName": "இடம் மூலம் தேடுக",
+        "placeholderHotel": "ஹோட்டல் இடம்...",
         "placeholderCar": "கார் மாடல்...",
         "placeholderTour": "சுற்றுலா தொகுப்பு பெயர்...",
         "vehicleType": "வாகன வகை",
@@ -751,7 +752,7 @@
         "Branches": {
             "nashik": {
                 "city": "நாசிக்",
-                "address": "சகால் அலுவலக அடித்தளம், BA 4, தக்கர் பஜார், புதிய CBS, போலீஸ் ஸ்டாப் காலனி, நாசிக், மகாராஷ்டிரா 422002"
+                "address": "அலுவலகம் கடை எண் 11, நைசா பிசினஸ் சென்டர், மக்மலாபாத் சாலை, காட்கே நகர், നാസിക്, மகாராஷ்டிரா 422003"
             },
             "pune": {
                 "city": "புனே",
@@ -776,8 +777,13 @@
         "mobile": "கைபேசி எண்",
         "placeholderMobile": "கைபேசி எண் உள்ளிடவும்",
         "roomType": "அறை வகை",
-        "acRoom": "ஏசி அறை",
-        "nonAcRoom": "ஏசி இல்லாத அறை",
+        "singleRoom": "தனி நபர் அறை (Single Room)",
+        "doubleRoom": "இரட்டை நபர் அறை (Double Room)",
+        "twinRoom": "ட்வின் அறை (Twin Room)",
+        "tripleRoom": "முப்படுக்கை அறை (Triple Room)",
+        "familyRoom": "குடும்ப அறை (Family Room)",
+        "suiteRoom": "சூட் அறை (Suite Room)",
+        "deluxeRoom": "டிலக்ஸ் அறை (Deluxe Room)",
         "pickupDate": "பிக்கப் தேதி",
         "checkInDate": "செக்-இன் தேதி",
         "returnDate": "திரும்பும் தேதி",

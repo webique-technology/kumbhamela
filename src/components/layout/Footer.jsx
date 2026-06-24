@@ -151,11 +151,16 @@ const Footer = () => {
                                     </a>
                                 </div>
                             </li>
-                            <li className="d-flex">
+                            <li className="d-flex align-items-center">
                                 <Mail size={18} className="me-2 mt-1 icon" />
-                                <a href="mailto:info@nashikkumbh.in" className="footer-link">
-                                    info@nashikkumbh.in
-                                </a>
+                                <div className="d-flex flex-column">
+                                    <a href="mailto:kumbhtourstravels@gmail.com" className="footer-link">
+                                        kumbhtourstravels@gmail.com
+                                    </a>
+                                    <a href="mailto:mahakumbhtourstravels@gmail.com" className="footer-link">
+                                        mahakumbhtourstravels@gmail.com
+                                    </a>
+                                </div>
                             </li>
                         </ul>
                     </Col>

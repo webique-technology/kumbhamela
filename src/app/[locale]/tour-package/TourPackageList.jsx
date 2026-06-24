@@ -6,6 +6,7 @@ import { slugify } from "@/lib/utils";
 import { useRouter, useSearchParams, useParams } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useSearchFilter } from "@/hooks/useSearchFilter";
 import "../../../styles/blog.scss";
 import { getTours } from "./tourApi";
 
@@ -51,7 +52,16 @@ const TourPageContent = () => {
         return matchesCategory && matchesPrice;
     });
 
-    const currentItems = filteredTours;
+    // const currentItems = filteredTours;
+    // const totalPages = pagination.last_page;
+
+    // const handlePageChange = (pageNum) => {
+    //     const queryParams = new URLSearchParams(searchParams.toString());
+    //     queryParams.set("page", pageNum);
+    //     router.push(`/${locale}/tour-package?${queryParams.toString()}`);
+    // };
+
+    const currentItems = useSearchFilter(tours);
     const totalPages = pagination.last_page;
 
     const handlePageChange = (pageNum) => {
@@ -61,13 +71,13 @@ const TourPageContent = () => {
     };
 
     useEffect(() => {
-        fetchTours(currentPage, nameFilter, categoryFilter, priceFilter , locale);
-    }, [currentPage, nameFilter, categoryFilter, priceFilter,locale]);
+        fetchTours(currentPage, nameFilter, categoryFilter, priceFilter, locale);
+    }, [currentPage, nameFilter, categoryFilter, priceFilter, locale]);
 
-    const fetchTours = async (page = 1, name = "", category = "", price = "",lang = "en") => {
+    const fetchTours = async (page = 1, name = "", category = "", price = "", lang = "en") => {
         try {
             setLoading(true);
-            const response = await getTours(page, name, category, price , "", lang);
+            const response = await getTours(page, name, category, price, "", lang);
             const apiData = response;
             setTours(apiData.data || []);
 

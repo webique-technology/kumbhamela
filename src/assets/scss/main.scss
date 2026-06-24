@@ -27,6 +27,10 @@ p {
     }
 }
 
+.lh-auto {
+    line-height: normal !important;
+}
+
 .color-gray-500 {
     color: $color-gray-500 !important;
 }
@@ -132,7 +136,11 @@ p {
 }
 
 .padding-bottom {
-    padding-bottom: 140px !important;
+    padding-bottom: 60px !important;
+
+    @media(max-width:768px) {
+        padding-bottom: 30px !important;
+    }
 }
 
 .secondary-bg {
@@ -240,6 +248,10 @@ p {
 
 .small-12 {
     font-size: $font-size-xs;
+}
+
+.small-base {
+    font-size: $font-size-base !important;
 }
 
 .departure-date-l {
@@ -462,7 +474,7 @@ p {
     .modal-content {
         border-radius: $border-radius-xl;
         border: none;
-        overflow: hidden;
+        overflow: scroll;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     }
 
@@ -1095,5 +1107,93 @@ p {
         &::-webkit-scrollbar-thumb:hover {
             background: #999;
         }
+    }
+}
+
+
+// Layout Configurations
+$logo-width-desktop: 180px;
+$logo-width-mobile: 110px;
+$animation-speed: 45s;
+/* Slightly accelerated for a smoother flow with 30 items */
+
+.marqueeContainer {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    mask-image: linear-gradient(to right,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 1) 10%,
+            rgba(0, 0, 0, 1) 90%,
+            rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-image: linear-gradient(to right,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 1) 10%,
+            rgba(0, 0, 0, 1) 90%,
+            rgba(0, 0, 0, 0) 100%);
+}
+
+.marqueeTrack {
+    display: flex;
+    width: max-content;
+    flex-wrap: nowrap;
+
+    &:hover {
+        .marqueeGroup {
+            animation-play-state: paused;
+        }
+    }
+}
+
+.marqueeGroup {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+
+    /* Hard locked 20px gap constraints */
+    gap: 20px;
+    padding-right: 20px;
+
+    /* Removed min-width & justify-content center to avoid layout expansion gaps */
+    animation: scrollInfinite $animation-speed linear infinite;
+}
+
+.imageWrapper {
+    width: $logo-width-desktop;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    @media (max-width: 768px) {
+        width: $logo-width-mobile;
+        height: 60px;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        // filter: grayscale(20%) contrast(90%);
+        opacity: 0.85;
+        transition: all 0.3s ease;
+
+        &:hover {
+            //   filter: grayscale(0%) contrast(100%);
+            opacity: 1;
+        }
+    }
+}
+
+@keyframes scrollInfinite {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        /* Translates perfectly across the native width of one group component */
+        transform: translateX(-100%);
     }
 }

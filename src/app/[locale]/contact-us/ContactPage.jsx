@@ -18,7 +18,7 @@ const branchesStaticData = [
     {
         id: "nashik",
         branchURL: "https://maps.app.goo.gl/GbHZtkYPSYTcdxhFA",
-        branchPhone: "7507778070",
+        branchPhone: "7507778088",
     },
     {
         id: "pune",
@@ -116,7 +116,7 @@ const ContactUsPage = () => {
                 }
             );
 
-            const phoneNumber = "919022093522";
+            const phoneNumber = "917507778088";
             const text =
                 `*New Inquiry - Nashik Kumbh Concierge*%0A%0A` +
                 `*Name:* ${formData.fullName}%0A` +

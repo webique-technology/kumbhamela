@@ -94,7 +94,7 @@ const Navbar = () => {
                         <img src={logo.src} alt="Logo" width={50} height={50} className="me-2"/>
                         <div className="logo-text">
                             <h1>{t("logoTitle")}</h1>
-                            <p>{t("logoSubtitle")}</p>
+                            <p className="lh-auto">{t("logoSubtitle")}</p>
                         </div>
                     </Link>
 

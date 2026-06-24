@@ -3,7 +3,7 @@
         "loading": "भारवाह्यते..."
     },
     "Navbar": {
-        "logoTitle": "MAHAKUMBH",
+        "logoTitle": "महाकुम्भः",
         "logoSubtitle": "भ्रमणं च पर्यटनम्",
         "home": "मुख्यपृष्ठम्",
         "about": "अस्मद्विषये",
@@ -11,7 +11,8 @@
         "rentalCar": "वाहनभाटकम्",
         "tourPackage": "भ्रमणसंकुलम्",
         "blog": "विचारपत्रिका",
-        "contact": "सम्पर्कं कुर्वन्तु"
+        "contact": "सम्पर्कं कुर्वन्तु",
+        "contactInformation": "सम्पर्कविवरणम्"
     },
     "HeroHeader": {
         "btnName1": "अस्माकं वाहनानि",
@@ -191,8 +192,8 @@
         "montezSubTitle": "चलच्चित्रकथाः"
     },
     "SearchFleet": {
-        "searchByName": "नाम्ना अन्वेषणं करोतु",
-        "placeholderHotel": "होटल नाम...",
+        "searchByName": "स्थानधारेण अन्वेषणम् करोतु",
+        "placeholderHotel": "होटल स्थानम्...",
         "placeholderCar": "वाहन प्रकारः...",
         "placeholderTour": "यात्रा संकुल नाम...",
         "vehicleType": "वाहनस्य प्रकारः",
@@ -751,7 +752,7 @@
         "Branches": {
             "nashik": {
                 "city": "नासिकम्",
-                "address": "सकाल कार्यालय भूमिगृहम्, BA ४, ठक्कर आपणशृङ्खला, नव-CBS, आरक्षकवृन्दजनपदम्, नासिकम्, महाराष्ट्रम् ४२२००२"
+                "address": "कार्यालय आपण संख्या ११, नायसा व्यापार केन्द्रम्, मखमलाबाद मार्गः, घाडगे नगरम्, नाशिक, महाराष्ट्रम् ४२२००३"
             },
             "pune": {
                 "city": "पुण्यपत्तनम्",
@@ -776,8 +777,13 @@
         "mobile": "चलभाषसङ्ख्या",
         "placeholderMobile": "चलभाषसङ्ख्यां लिखन्तु",
         "roomType": "प्रकोष्ठप्रकारः",
-        "acRoom": "वातानुकूलितप्रकोष्ठः (AC)",
-        "nonAcRoom": "साधारणप्रकोष्ठः (Non-AC)",
+        "singleRoom": "एकलप्रकोष्ठः",
+        "doubleRoom": "द्विप्रकोष्ठः",
+        "twinRoom": "यमप्रकोष्ठः",
+        "tripleRoom": "त्रिप्रकोष्ठः",
+        "familyRoom": "परिवारप्रकोष्ठः",
+        "suiteRoom": "विशिष्टप्रकोष्ठः (Suite)",
+        "deluxeRoom": "उत्कृष्टप्रकोष्ठः (Deluxe)",
         "pickupDate": "वाहनग्रहणतिथिः",
         "checkInDate": "प्रवेशतिथिः (Check-in)",
         "returnDate": "वाहनप्रत्यर्पणतिथिः",

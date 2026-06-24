@@ -263,7 +263,7 @@ export default function RentalCarPage() {
                     heroTitleClass="text-light"
                     imgClass="hero-img"
                     showSearch={false}
-                    // redText={"Our per-km rates may change based on current fuel prices and market trends"}
+                // redText={"Our per-km rates may change based on current fuel prices and market trends"}
                 />
             </section>
 

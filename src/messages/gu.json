@@ -3,7 +3,7 @@
         "loading": "લોડ થઈ રહ્યું છે..."
     },
     "Navbar": {
-        "logoTitle": "MAHAKUMBH",
+        "logoTitle": "મહાકુંભ",
         "logoSubtitle": "ટૂર્સ એન્ડ ટ્રાવેલ્સ",
         "home": "મુખ્ય પૃષ્ઠ",
         "about": "અમારા વિશે",
@@ -11,7 +11,8 @@
         "rentalCar": "કાર ભાડે",
         "tourPackage": "ટૂર પેકેજ",
         "blog": "બ્લોગ",
-        "contact": "સંપર્ક કરો"
+        "contact": "સંપર્ક કરો",
+        "contactInformation": "સંપર્ક માહિતી"
     },
     "HeroHeader": {
         "btnName1": "અમારા વાહનો",
@@ -191,8 +192,8 @@
         "montezSubTitle": "વિડિઓ વાર્તાઓ"
     },
     "SearchFleet": {
-        "searchByName": "નામ દ્વારા શોધો",
-        "placeholderHotel": "હોટેલનું નામ...",
+        "searchByName": "સ્થાન દ્વારા શોધો",
+        "placeholderHotel": "હોટેલનું સ્થાન...",
         "placeholderCar": "ગાડીનું મોડેલ...",
         "placeholderTour": "પેકેજનું નામ...",
         "vehicleType": "વાહનનો પ્રકાર",
@@ -751,7 +752,7 @@
         "Branches": {
             "nashik": {
                 "city": "નાસિક",
-                "address": "સકાળ ઓફિસ બેઝમેન્ટ, BA 4, ઠક્કર બજાર, ન્યુ CBS, પોલીસ સ્ટાફ કોલોની, નાસિક, મહારાષ્ટ્ર 422002"
+                "address": "ઓફિસ દુકાન નંબર 11, નાયસા બિઝનેસ સેન્ટર, મખમલાબાદ રોડ, ઘાડગે નગર, નાસિક, મહારાષ્ટ્ર 422003"
             },
             "pune": {
                 "city": "પુણે",
@@ -776,8 +777,13 @@
         "mobile": "મોબાઈલ નંબર",
         "placeholderMobile": "મોબાઈલ નંબર દાખલ કરો",
         "roomType": "રૂમનો પ્રકાર",
-        "acRoom": "એસી રૂમ",
-        "nonAcRoom": "નોન-એસી રૂમ",
+        "singleRoom": "સિંગલ રૂમ",
+        "doubleRoom": "ડબલ રૂમ",
+        "twinRoom": "ટ્વિન રૂમ",
+        "tripleRoom": "ટ્રિપલ રૂમ",
+        "familyRoom": "ફેમિલી રૂમ",
+        "suiteRoom": "સુઈટ રૂમ",
+        "deluxeRoom": "ડીલક્સ રૂમ",
         "pickupDate": "પિકઅપ તારીખ",
         "checkInDate": "ચેક-ઇન તારીખ",
         "returnDate": "રિટર્ન તારીખ",
