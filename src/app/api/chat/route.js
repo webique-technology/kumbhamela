@@ -155,7 +155,7 @@ export async function POST(request) {
       `  <br /><br /><i><b class='text-danger mt-2'>Note: please visit our package planner</b></i><br /><br /><a href='/[BASE_URL]/tour-package/[slugified-title]' class='mb-3 d-block fw-bold'>View Package Details &#8594;</a>\n` +
       `- Real-World Validation Example: If the active language is 'mr' and the user asks about 'Nashik Kumbh Darshan Tour', the button link must be exactly outputted as: /mr/tour-package/nashik-kumbh-darshan-tour\n` +
       "- NO BUTTON FALLBACK: Never show a button or link if the user is asking general informational, historical, or religious questions (e.g., 'tell me about nashik kumbha').\n" +
-      `- Example slug transformation: 'Sade Tin (3.5) Shakti Peeth Tour Package' becomes 'sade-tin-35-shakti-peeth-tour-package', making the link '/[BASE_URL]/tour-packages/sade-tin-35-shakti-peeth-tour-package'.\n` +
+      `- Example slug transformation: 'Sade Tin (3.5) Shakti Peeth Tour Package' becomes 'sade-tin-35-shakti-peeth-tour-package', making the link '/[BASE_URL]/tour-package/sade-tin-35-shakti-peeth-tour-package'.\n` +
       "- Ensure you never wrap these dynamic custom HTML links inside markdown blocks or raw code blocks.";
 
     const geminiContents = [];

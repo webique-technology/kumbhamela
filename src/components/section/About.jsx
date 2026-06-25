@@ -4,6 +4,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { TitleComponent } from '../ui/common';
 import { useTranslations } from 'next-intl';
 import "../../styles/whyChooseUs.scss"
+import Image from 'next/image';
 
 import historical from '../../assets/images/historical.png';
 import fire from '../../assets/images/fire.png';
@@ -13,7 +14,9 @@ import mountain from '../../assets/images/mountain.png';
 import aboutSec from '../../assets/images/about-sec-1.jpg';
 import bath from '../../assets/images/bath-2.jpg';
 import ramkund from '../../assets/images/ramkund-1.jpg';
-import Image from 'next/image';
+import googleLogo from "../../assets/images/google-logo.png";
+import tripAdvisorLogo from "../../assets/images/trip-advisor.png";
+import Link from 'next/link';
 
 
 const AboutSec = () => {
@@ -81,7 +84,7 @@ const AboutSec = () => {
                                 ))}
                             </Row>
                         </Col>
-                        <Col md={6} className='position-relative image-layout mt-4 mt-md-0 d-none d-md-block'>
+                        <Col md={6} className='position-relative image-layout mt-4 mt-md-0 d-none d-md-flex align-items-end'>
                             {/* Left Top Image */}
                             <div className="img-box img-1">
                                 <img src={aboutSec.src} alt="mahakumba - trambakeshwar" />
@@ -93,8 +96,39 @@ const AboutSec = () => {
                             </div>
 
                             {/* Bottom Small Image */}
-                            <div className="img-box img-3">
-                                <img src={bath.src} alt="mahakumbh - naga sadhus" />
+                            <div>
+                                <div className="d-flex flex-wrap align-items-center gap-3 justify-content-center">
+                                    {/* Apple App Store Button */}
+                                    <Link
+                                        href={"#"}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="d-inline-block transition-hover"
+                                        style={{ height: "45px" }} // Explicit height forces matching scale
+                                    >
+                                        <img
+                                            src={googleLogo.src} // Update this path to where your image is saved
+                                            alt="Download on the App Store"
+                                            className="w-auto h-100 object-fit-contain rounded-2"
+                                            style={{ maxHeight: "45px" }}
+                                        />
+                                    </Link>
+                                    {/* Google Play Store Button */}
+                                    <Link
+                                        href={"#"}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="d-inline-block transition-hover"
+                                        style={{ height: "45px" }} // Identical explicit height
+                                    >
+                                        <img
+                                            src={tripAdvisorLogo.src}// Update this path to where your image is saved
+                                            alt="Get it on Google Play"
+                                            className="w-auto h-100 object-fit-contain rounded-2"
+                                            style={{ maxHeight: "45px" }}
+                                        />
+                                    </Link>
+                                </div>
                             </div>
                         </Col>
                     </Row>

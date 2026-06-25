@@ -26,7 +26,8 @@ export async function generateMetadata({ params, searchParams }) {
         "Trimbakeshwar pilgrimage booking",
         "Shirdi tour booking helpdesk",
         "24/7 travel assistance Kumbh Mela",
-        "Emergency travel support Nashik"
+        "Emergency travel support Nashik",
+        "Travel agency in Nashik"
     ];
 
     // Automated regional multi-language mapping anchors

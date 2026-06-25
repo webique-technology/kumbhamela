@@ -93,6 +93,9 @@ export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_widt
 // for hotels card
 export const HotelCards = ({ hotel, onBookNow }) => {
     const t = useTranslations();
+
+    // console.log(hotel?.room_type);
+
     return (
         <>
             <div className="card h-100 border-0 shadow-sm hotel-card overflow-hidden">
@@ -144,16 +147,32 @@ export const HotelCards = ({ hotel, onBookNow }) => {
                     </div>
 
                     {/* Features */}
-                    <div className="d-flex flex-wrap gap-2 mb-4">
-                        {hotel.features?.map((feature, idx) => (
-                            <span
-                                key={idx}
-                                className="badge sora d-flex align-items-center justify-content-center rounded-pill border border-light"
-                            >
-                                {feature}
-                            </span>
-                        ))}
-                    </div>
+                    {hotel.features && (
+                        <div className="d-flex flex-wrap gap-2 mb-2">
+                            {hotel.features?.map((feature, idx) => (
+                                <span
+                                    key={idx}
+                                    className="badge sora d-flex align-items-center justify-content-center rounded-pill border border-light"
+                                >
+                                    {feature}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+
+                    {/* room type */}
+                    {hotel.room_type && (
+                        <div className="d-flex flex-wrap gap-2 mb-2">
+                            {hotel.room_type?.map((feature, idx) => (
+                                <span
+                                    key={idx}
+                                    className="badge sora d-flex align-items-center justify-content-center rounded-pill border border-light"
+                                >
+                                    {feature}
+                                </span>
+                            ))}
+                        </div>
+                    )}
 
                     {/* Footer Logic */}
                     <div className="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
@@ -335,7 +354,6 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                         alt={tour?.title || "Tour"}
                         width={200}
                         height={200}
-
                         className="card-img-top object-fit-cover transition-transform"
                     />
                 </div>
@@ -356,7 +374,7 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                     {/* Footer Logic */}
                     <div className="d-flex align-items-center justify-content-between mt-auto mb-2">
                         <div className="d-flex align-items-end">
-                            <p className="mb-0 fw-semibold" style={{ display: "contents" }}>
+                            <div className="mb-0 fw-semibold" style={{ display: "contents" }}>
                                 {t("Cards.StartingFrom")} : &nbsp;
                                 {tour?.offer_price ? (
                                     <div className="d-flex flex-row align-items-center justify-content-center gap-2">
@@ -382,7 +400,7 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                                 {/* <small className="text-muted d-block smaller mb-1">
                                     per Person
                                 </small> */}
-                            </p>
+                            </div>
                         </div>
                     </div>
 

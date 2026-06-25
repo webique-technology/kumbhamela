@@ -70,6 +70,9 @@ export const HotelPageContent = () => {
         fetchHotels();
     }, [currentPage]);
 
+    // console.log("selected hotel:", selectedHotel?.room_type);
+
+
     return (
         <>
             <section className="section-padding padding-bottom">
@@ -141,6 +144,7 @@ export const HotelPageContent = () => {
                         type="hotel"
                         selectedItem={selectedHotel?.title}
                         hotelId={selectedHotel?.id}
+                        roomType={selectedHotel?.room_types || selectedHotel?.room_type || []}
                     />
                 </Container>
             </section>

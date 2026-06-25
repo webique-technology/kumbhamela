@@ -39,8 +39,8 @@ const montez = Montez({
 
 export const metadata = {
   title: {
-    default: "Mahakumbh Tours & Travels | Nashik Kumbh Mela 2027 Packages",
-    template: "%s | Mahakumbh Tours & Travels"
+    default: "Mahakumbh Tours & Travels Nashik | Simhastha Kumbh Mela Nashik 2027",
+    template: "%s | Mahakumbh Tours & Travels Nashik"
   },
   icons: {
     icon: "/icon.png",
@@ -58,7 +58,21 @@ export const metadata = {
     "Panchavati Nashik tour",
     "Kumbh Mela hotel booking",
     "Spiritual tour operators Nashik",
-    "Maha Kumbh Snan packages"
+    "Maha Kumbh Snan packages",
+    "Simhastha Kumbh Mela Nashik 2027",
+    "Nashik Kumbh Mela tour packages",
+    "Nashik Kumbh travel agency",
+    "Book Kumbh Mela package Nashik",
+    "Best tour operator for Nashik Kumbh Mela",
+    "Nashik Kumbh tour from Maharashtra",
+    "Rental Vehicle services in Nashik",
+    "Car rental in Nashik for Kumbh Mela",
+    "Nashik to Shirdi taxi booking",
+    "Nashik Trimbakeshwar taxi fare",
+    "Nashik Darshan car with driver",
+    "Shirdi Shani Shingnapur tour from Nashik",
+    "Panchavti Tapovan tour Nashik",
+    "Grishneshwar Jyotirlinga tour from Nashik"
   ],
   authors: [{ name: "Webique Technology", url: "https://webique.in" }],
   creator: "Webique Technology",
@@ -73,9 +87,9 @@ export const metadata = {
   },
   openGraph: {
     title: "Mahakumbh Tours & Travels | Nashik Kumbh Mela 2027 Packages",
-    description: "Explore holy yatras, official Shahi Snan dates, and verified pilgrimage itineraries for Nashik Kumbh Mela.",
-    url: 'https://nashikkumbhmela.in',
-    siteName: 'Mahakumbh Tours & Travels',
+    description: "Experience the divine with Mahakumbh Tours & Travels Nashik, your trusted car rental company in Nashik, Maharashtra. With 12 years of expertise, we specialize in Trimbakeshwar Joytirling Darshan, Nashik Darshan, Panchavti Tapovan, Shirdi Shani Shingnpur Darshan, and Grishneshwar Joytirling Darshan.",
+    url: 'https://mahakumbhtourstravelsnashik.com',
+    siteName: 'Mahakumbh Tours & Travels Nashik',
     images: [
       {
         url: '/images/tour-section-bg.png', // Fallback social card graphic asset
@@ -90,7 +104,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Mahakumbh Tours & Travels | Nashik Kumbh Mela 2027",
-    description: "Official spiritual tourism platform for premium Nashik Kumbh Mela itineraries and accommodations.",
+    description: "Experience the divine with Mahakumbh Tours & Travels Nashik, your trusted car rental company in Nashik, Maharashtra. With 12 years of expertise, we specialize in Trimbakeshwar Joytirling Darshan, Nashik Darshan, Panchavti Tapovan, Shirdi Shani Shingnpur Darshan, and Grishneshwar Joytirling Darshan.",
     images: ['/images/tour-section-bg.png'],
   },
   robots: {

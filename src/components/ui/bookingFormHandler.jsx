@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Row, Col, Button, Modal } from 'react-bootstrap';
 import { MessageCircle, Calendar, User, Smartphone, Mail, Hotel, Car } from 'lucide-react';
 import { useTranslations } from "next-intl";
@@ -311,13 +311,14 @@ export const BookingFormHandler = ({ tourId, tourName, vehicleCategories = [] })
 };
 
 // make this form for Hotel & Car
-export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, carId }) => {
+export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, roomType, carId }) => {
     const t = useTranslations("BookingForm");
 
     const [formData, setFormData] = useState({
         name: '',
         mobile: '',
         email: '',
+        pickupLocation: '',
         startDate: '',     // Pickup or Check-in
         endDate: '',       // Return or Check-out
         guests: '1',
@@ -327,6 +328,33 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
 
     const [validated, setValidated] = useState(false);
     const [loading, setLoading] = useState(false);
+
+    // Dynamic Helper Function: Maps raw backend strings cleanly to i18n JSON keys
+    const getLocalizedRoomName = (roomString) => {
+        if (!roomString) return "";
+
+        // Normalize strings like "Twin Room" or "twin_room" to lowercase alphanumeric match bases
+        const normalized = roomString.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+        if (normalized.includes("single")) return t("singleRoom");
+        if (normalized.includes("double")) return t("doubleRoom");
+        if (normalized.includes("twin")) return t("twinRoom");
+        if (normalized.includes("triple")) return t("tripleRoom");
+        if (normalized.includes("family")) return t("familyRoom");
+        if (normalized.includes("suite")) return t("suiteRoom");
+        if (normalized.includes("deluxe")) return t("deluxeRoom");
+
+        return roomString;
+    };
+
+    // Auto-set the first available room type when the modal changes items
+    useEffect(() => {
+        if (type === 'hotel' && Array.isArray(roomType) && roomType.length > 0) {
+            setFormData(prev => ({ ...prev, roomType: roomType[0] }));
+        } else {
+            setFormData(prev => ({ ...prev, roomType: 'AC' }));
+        }
+    }, [roomType, type]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -348,7 +376,6 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
 
             // Hotel Enquiry Submit Integration
             if (!isCar) {
-                // Ensure backend functions are properly wrapped or imported if active
                 if (typeof createHotelEnquiry === "function") {
                     await createHotelEnquiry({
                         hotel_id: hotelId,
@@ -371,6 +398,7 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
                         vehicle_id: carId,
                         full_name: formData.name,
                         mobile_number: formData.mobile,
+                        pickup_location: formData.pickupLocation,
                         pickup_date: formData.startDate,
                         return_date: formData.endDate,
                         passengers: formData.guests,
@@ -400,6 +428,11 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
                     `*Room Type:* ${formData.roomType}%0A`;
             }
 
+            // FIX: Append Pickup address layout to WhatsApp text string if type equals car
+            if (isCar && formData.pickupLocation) {
+                message += `*Pickup Address:* ${formData.pickupLocation}%0A`;
+            }
+
             message +=
                 `${dateStartLabel} ${formData.startDate}%0A` +
                 `${dateEndLabel} ${formData.endDate}%0A` +
@@ -411,11 +444,12 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
 
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
 
-            // Form Reset State
+            // Form Reset State (FIXED: string primitive declaration)
             setFormData({
                 name: "",
                 mobile: "",
                 email: "",
+                pickupLocation: "",
                 startDate: "",
                 endDate: "",
                 guests: "1",
@@ -473,9 +507,9 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
                         </Form.Group>
                     )}
 
-                    {/* 3. Mobile Input Grid Layout */}
+                    {/* 3. Mobile Input & Pickup / Room Type Dynamic Layouts */}
                     <Row>
-                        <Col md={type === 'hotel' ? 6 : 12}>
+                        <Col md={type === "car" ? 12 : 6}>
                             <Form.Group className="mb-3">
                                 <Form.Label className="small fw-bold">{t("mobile")}</Form.Label>
                                 <Form.Control
@@ -490,18 +524,50 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
                             </Form.Group>
                         </Col>
 
+                        {type === 'car' && (
+                            <Col xs={12}>
+                                <Form.Group className="mb-3">
+                                    <Form.Label className="small fw-bold">{t("pickupLocation")}</Form.Label>
+                                    <Form.Control
+                                        required
+                                        name="pickupLocation"
+                                        type="text"
+                                        placeholder={t("placeholderPickupLocation")}
+                                        value={formData.pickupLocation}
+                                        onChange={handleChange}
+                                        className="rounded-3 py-2"
+                                    />
+                                </Form.Group>
+                            </Col>
+                        )}
+
                         {type === 'hotel' && (
                             <Col md={6}>
                                 <Form.Group className="mb-3">
                                     <Form.Label className="small fw-bold">{t("roomType")}</Form.Label>
-                                    <Form.Select name="roomType" value={formData.roomType} onChange={handleChange} className="rounded-3 py-2">
-                                        <option value="single_room">{t("singleRoom")}</option>
-                                        <option value="double_room">{t("doubleRoom")}</option>
-                                        <option value="twin_room">{t("twinRoom")}</option>
-                                        <option value="triple_room">{t("tripleRoom")}</option>
-                                        <option value="family_room">{t("familyRoom")}</option>
-                                        <option value="suite_room">{t("suiteRoom")}</option>
-                                        <option value="deluxe_room">{t("deluxeRoom")}</option>
+                                    <Form.Select
+                                        name="roomType"
+                                        value={formData.roomType}
+                                        onChange={handleChange}
+                                        className="rounded-3 py-2"
+                                    >
+                                        {Array.isArray(roomType) && roomType.length > 0 ? (
+                                            roomType.map((room, idx) => (
+                                                <option key={idx} value={room}>
+                                                    {getLocalizedRoomName(room)}
+                                                </option>
+                                            ))
+                                        ) : (
+                                            <>
+                                                <option value="Single Room">{t("singleRoom")}</option>
+                                                <option value="Double Room">{t("doubleRoom")}</option>
+                                                <option value="Twin Room">{t("twinRoom")}</option>
+                                                <option value="Triple Room">{t("tripleRoom")}</option>
+                                                <option value="Family Room">{t("familyRoom")}</option>
+                                                <option value="Suite Room">{t("suiteRoom")}</option>
+                                                <option value="Deluxe Room">{t("deluxeRoom")}</option>
+                                            </>
+                                        )}
                                     </Form.Select>
                                 </Form.Group>
                             </Col>
@@ -573,7 +639,7 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ca
                         )}
                     </Row>
 
-                    {/* 6. WhatsApp CTA Submission Node Trigger Button */}
+                    {/* 6. WhatsApp CTA Submission Button */}
                     <Button
                         type="submit"
                         disabled={loading}

@@ -83,14 +83,14 @@ export const KumbhChatbot = () => {
         const targetLink = e.target.closest('a');
         if (!targetLink) return;
 
-        const hrefUrl = targetLink.getAttribute('href');
-        
-        // Check if it's an inline action button or deep link parameter structure
-        if (hrefUrl && (hrefUrl.includes('action=book') || hrefUrl.includes('category=cars'))) {
-            e.preventDefault(); // Stop native page reload routing
+        let hrefUrl = targetLink.getAttribute('href');
+        if (!hrefUrl) return;
+
+        // --- CASE 1: Inline booking forms or modal parameters ---
+        if (hrefUrl.includes('action=book') || hrefUrl.includes('category=cars')) {
+            e.preventDefault();
 
             try {
-                // Parse out variables using URL query constructor
                 const urlObj = new URL(hrefUrl, window.location.origin);
                 const action = urlObj.searchParams.get('action') || 'book';
                 const type = urlObj.searchParams.get('type') || (urlObj.searchParams.get('category') === 'cars' ? 'car' : 'hotel');
@@ -107,6 +107,24 @@ export const KumbhChatbot = () => {
             } catch (err) {
                 console.error("Failed to intercept component link routing smoothly:", err);
             }
+        }
+        // --- CASE 2: Regular Page Redirection (Tour Packages) ---
+        else if (hrefUrl.startsWith('/') || hrefUrl.startsWith(window.location.origin)) {
+            e.preventDefault();
+
+            // Clean absolute paths down to relative paths if necessary
+            let targetPath = hrefUrl.startsWith('http')
+                ? hrefUrl.replace(window.location.origin, '')
+                : hrefUrl;
+
+            // Dynamic Runtime Patch: If the generated link has plural "/tour-packages/", 
+            // fix it to singular "/tour-package/" so it maps to your Next.js folder setup
+            if (targetPath.includes('/tour-packages/')) {
+                targetPath = targetPath.replace('/tour-packages/', '/tour-package/');
+            }
+
+            // Route using Next.js engine. The page updates, but chatbot state is fully preserved!
+            router.push(targetPath);
         }
     };
 
@@ -173,8 +191,8 @@ export const KumbhChatbot = () => {
             const response = await fetch("/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ 
-                    message: targetQuery, 
+                body: JSON.stringify({
+                    message: targetQuery,
                     history: messages,
                     locale: currentLocale // Passed dynamically to back-end
                 }),

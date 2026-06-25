@@ -277,9 +277,13 @@ export const SearchFleet = () => {
                                 )}
                                 {isHotelPage && (
                                     <>
-                                        <div className="option-item" onClick={() => handleSelectOption("category", "Luxury")}>{t("categories.Luxury")}</div>
-                                        <div className="option-item" onClick={() => handleSelectOption("category", "Heritage")}>{t("categories.Heritage")}</div>
-                                        <div className="option-item" onClick={() => handleSelectOption("category", "Budget")}>{t("categories.Budget")}</div>
+                                        <div className="option-item" onClick={() => handleSelectOption("category", "singleRoom")}>{t("categories.singleRoom")}</div>
+                                        <div className="option-item" onClick={() => handleSelectOption("category", "doubleRoom")}>{t("categories.doubleRoom")}</div>
+                                        <div className="option-item" onClick={() => handleSelectOption("category", "twinRoom")}>{t("categories.twinRoom")}</div>
+                                        <div className="option-item" onClick={() => handleSelectOption("category", "tripleRoom")}>{t("categories.tripleRoom")}</div>
+                                        <div className="option-item" onClick={() => handleSelectOption("category", "familyRoom")}>{t("categories.familyRoom")}</div>
+                                        <div className="option-item" onClick={() => handleSelectOption("category", "suiteRoom")}>{t("categories.suiteRoom")}</div>
+                                        <div className="option-item" onClick={() => handleSelectOption("category", "deluxeRoom")}>{t("categories.deluxeRoom")}</div>
                                     </>
                                 )}
                                 {/* {isTourPage && (
