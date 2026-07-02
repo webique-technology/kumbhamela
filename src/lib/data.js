@@ -685,6 +685,7 @@ export const bathingDatesConfig = [
         year: "2026",
         dateOccationKey: "date1_occ",
         titleKey: "date1_title",
+        descKey: "date1_desc",
         isKeyDate: false
     },
     {
@@ -693,6 +694,7 @@ export const bathingDatesConfig = [
         year: "2027",
         dateOccationKey: "date2_occ",
         titleKey: "date2_title",
+        descKey: "date2_desc",
         isKeyDate: false
     },
     {
@@ -701,6 +703,7 @@ export const bathingDatesConfig = [
         year: "2027",
         dateOccationKey: "date3_occ",
         titleKey: "date3_title",
+        descKey: "date3_desc",
         isKeyDate: true
     },
     {
@@ -709,6 +712,7 @@ export const bathingDatesConfig = [
         year: "2027",
         dateOccationKey: "date4_occ",
         titleKey: "date4_title",
+        descKey: "date4_desc",
         isKeyDate: true
     },
     {
@@ -717,6 +721,7 @@ export const bathingDatesConfig = [
         year: "2027",
         dateOccationKey: "date5_occ",
         titleKey: "date5_title",
+        descKey: "date5_desc",
         isKeyDate: true
     },
     {
@@ -725,6 +730,7 @@ export const bathingDatesConfig = [
         year: "2027",
         dateOccationKey: "date6_occ",
         titleKey: "date6_title",
+        descKey: "date6_desc",
         isKeyDate: true
     },
     {
@@ -733,6 +739,7 @@ export const bathingDatesConfig = [
         year: "2028",
         dateOccationKey: "date7_occ",
         titleKey: "date7_title",
+        descKey: "date7_desc",
         isKeyDate: true
     }
 ];

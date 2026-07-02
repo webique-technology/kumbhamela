@@ -96,40 +96,44 @@ const AboutSec = () => {
                             </div>
 
                             {/* Bottom Small Image */}
-                            <div>
+                            {/* <div>
                                 <div className="d-flex flex-wrap align-items-center gap-3 justify-content-center">
-                                    {/* Apple App Store Button */}
                                     <Link
                                         href={"#"}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="d-inline-block transition-hover"
-                                        style={{ height: "45px" }} // Explicit height forces matching scale
+                                        className="play-style-btn p-1 px-2 d-flex gap-2 align-items-center flex-row transition-hover"
                                     >
                                         <img
                                             src={googleLogo.src} // Update this path to where your image is saved
                                             alt="Download on the App Store"
                                             className="w-auto h-100 object-fit-contain rounded-2"
-                                            style={{ maxHeight: "45px" }}
+                                            style={{ maxHeight: "35px" }}
                                         />
+                                        <div className='d-flex flex-column align-items-start'>
+                                            <p className='small-12 mb-0'>Get It On</p>
+                                            <h4 className="fs-6 m-0">Google Search</h4>
+                                        </div>
                                     </Link>
-                                    {/* Google Play Store Button */}
                                     <Link
                                         href={"#"}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="d-inline-block transition-hover"
-                                        style={{ height: "45px" }} // Identical explicit height
+                                        className="play-style-btn p-1 px-2 d-flex gap-2 align-items-center flex-row transition-hover"
                                     >
                                         <img
                                             src={tripAdvisorLogo.src}// Update this path to where your image is saved
                                             alt="Get it on Google Play"
                                             className="w-auto h-100 object-fit-contain rounded-2"
-                                            style={{ maxHeight: "45px" }}
+                                            style={{ maxHeight: "35px" }}
                                         />
+                                        <div className='d-flex flex-column align-items-start'>
+                                            <p className='small-12 mb-0'>Get It On</p>
+                                            <h4 className="fs-6 m-0">Tour Advisor</h4>
+                                        </div>
                                     </Link>
                                 </div>
-                            </div>
+                            </div> */}
                         </Col>
                     </Row>
 

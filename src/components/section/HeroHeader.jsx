@@ -9,13 +9,14 @@ import { useTranslations } from "next-intl";
 import { EffectFade } from 'swiper/modules';
 import "../../styles/heroHeader.scss";
 import { slugify } from '@/lib/utils';
-
-// FIX: Import Link from your localized internationalization routing settings
 import { Link } from '@/i18n/routing';
 
 import banner1 from '../../assets/images/banner-1.webp';
 import banner2 from '@/assets/images/banner-3.webp';
 import banner3 from '@/assets/images/banner-4.webp';
+// NOTE: Make sure to drop matching image files into your assets directory
+import banner4 from '@/assets/images/jyotirlinga-banner.webp';
+import banner5 from '@/assets/images/ashtavinayak-banner.webp';
 
 export const heroSliderConfig = [
     {
@@ -33,7 +34,17 @@ export const heroSliderConfig = [
         image: banner3.src || banner3,
         translationPrefix: "slide3"
     },
-]
+    {
+        id: 4,
+        image: banner4.src || banner4,
+        translationPrefix: "slide4"
+    },
+    {
+        id: 5,
+        image: banner5.src || banner5,
+        translationPrefix: "slide5"
+    }
+];
 
 const HeroHeader = () => {
     const t = useTranslations('HeroHeader');
@@ -44,6 +55,22 @@ const HeroHeader = () => {
     }, []);
 
     if (!mounted) return null;
+
+    // Helper mapping configuration to keep JSX super clean and maintainable
+    const getButtonDetails = (index) => {
+        switch (index) {
+            case 1:
+                return { label: t("btnName1"), link: `/${slugify("rental car")}` };
+            case 2:
+                return { label: t("btnName2"), link: `/${slugify("tour package")}` };
+            case 3:
+                return { label: t("btnName3"), link: `/tour-package/${slugify("12-jyotirlinga-yatra-with-mahakumbh-tours-travels-nashik")}` };
+            case 4:
+                return { label: t("btnName4"), link: `/tour-package/${slugify("ashtavinayak-tour-package-for-3-days")}` };
+            default:
+                return { label: "", link: "/" };
+        }
+    };
 
     return (
         <>
@@ -69,77 +96,76 @@ const HeroHeader = () => {
                         }
                     }}
                 >
-                    {heroSliderConfig.map((item, index) => (
-                        <SwiperSlide
-                            key={item.id || index}
-                            className='hero-slider-main d-flex align-items-center justify-content-center position-relative overflow-hidden'
-                        >
-                            <div
-                                className="hero-bg-layer"
-                                style={{ backgroundImage: `url("${item.image}")` }}
-                            />
+                    {heroSliderConfig.map((item, index) => {
+                        const btnDetails = getButtonDetails(index);
+                        return (
+                            <SwiperSlide
+                                key={item.id || index}
+                                className='hero-slider-main d-flex align-items-center justify-content-center position-relative overflow-hidden'
+                            >
+                                <div
+                                    className="hero-bg-layer"
+                                    style={{ backgroundImage: `url("${item.image}")` }}
+                                />
 
-                            <div className="hero-overlay"></div>
+                                <div className="hero-overlay"></div>
 
-                            <Container className="position-relative z-index-2">
-                                <div className="d-flex align-items-center justify-content-center">
-                                    <div className="hero-slide-content text-center d-flex flex-column align-items-center justify-content-center">
+                                <Container className="position-relative z-index-2">
+                                    <div className="d-flex align-items-center justify-content-center">
+                                        <div className="hero-slide-content text-center d-flex flex-column align-items-center justify-content-center">
 
-                                        {/* Subheading Entrance */}
-                                        <AnimationSecComponent type="vertical" direction="up" delay={0.2} distance={40}>
-                                            <span className='mb-3 hero-subheading d-block'>
-                                                {t(`${item.translationPrefix}_subHeading`)}
-                                            </span>
-                                        </AnimationSecComponent>
+                                            {/* Subheading Entrance */}
+                                            <AnimationSecComponent type="vertical" direction="up" delay={0.2} distance={40}>
+                                                <span className='mb-3 hero-subheading d-block'>
+                                                    {t(`${item.translationPrefix}_subHeading`)}
+                                                </span>
+                                            </AnimationSecComponent>
 
-                                        {/* Title Entrance */}
-                                        <AnimationSecComponent type="vertical" direction="up" delay={0.4} distance={40}>
-                                            <h1 className='hero-title-h1 mb-2 hero-title playfair-display'>
-                                                {t(`${item.translationPrefix}_title`)}
-                                            </h1>
-                                        </AnimationSecComponent>
+                                            {/* Title Entrance */}
+                                            <AnimationSecComponent type="vertical" direction="up" delay={0.4} distance={40}>
+                                                <h1 className='hero-title-h1 mb-2 hero-title playfair-display'>
+                                                    {t(`${item.translationPrefix}_title`)}
+                                                </h1>
+                                            </AnimationSecComponent>
 
-                                        {/* Description Entrance */}
-                                        <AnimationSecComponent type="vertical" direction="up" delay={0.6} distance={30}>
-                                            <p className='hero-description text-md mb-4 hero-description-animate'>
-                                                {t(`${item.translationPrefix}_description`)}
-                                            </p>
-                                        </AnimationSecComponent>
+                                            {/* Description Entrance */}
+                                            <AnimationSecComponent type="vertical" direction="up" delay={0.6} distance={30}>
+                                                <p className='hero-description text-md mb-4 hero-description-animate'>
+                                                    {t(`${item.translationPrefix}_description`)}
+                                                </p>
+                                            </AnimationSecComponent>
 
-                                        {/* Conditional Interactive Footer Area Nodes */}
-                                        {index === 0 ? (
-                                            <div className="mt-2 countdown-embed-frame w-100 d-flex flex-column justify-content-center">
-                                                <KumbhCountdown isActive={true} />
-                                            </div>
-                                        ) : (
-                                            <div className="w-100 d-flex flex-column align-items-center justify-content-center">
-                                                <AnimationSecComponent
-                                                    type="vertical"
-                                                    direction="up"
-                                                    delay={0.8}
-                                                    distance={20}
-                                                >
-                                                    <div className="d-flex align-items-center justify-content-center gap-4 pt-1 execution-row-layer">
-                                                        {/* FIX: Corrected "herf" typo to "href" and wrapped with slugify for safe routing safety */}
-                                                        <Link
-                                                            href={index === 1 ? `/${slugify("rental car")}` : index === 2 ? `/${slugify("tour package")}` : "/"}
-                                                            className="primery-btn text-decoration-none"
-                                                        >
-                                                            {index === 1
-                                                                ? t("btnName1")
-                                                                : index === 2
-                                                                    ? t("btnName2")
-                                                                    : ""}
-                                                        </Link>
-                                                    </div>
-                                                </AnimationSecComponent>
-                                            </div>
-                                        )}
+                                            {/* Interactive Footer Area Nodes */}
+                                            {index === 0 ? (
+                                                <div className="mt-2 countdown-embed-frame w-100 d-flex flex-column justify-content-center">
+                                                    <KumbhCountdown isActive={true} />
+                                                </div>
+                                            ) : (
+                                                <div className="w-100 d-flex flex-column align-items-center justify-content-center">
+                                                    <AnimationSecComponent
+                                                        type="vertical"
+                                                        direction="up"
+                                                        delay={0.8}
+                                                        distance={20}
+                                                    >
+                                                        <div className="d-flex align-items-center justify-content-center gap-4 pt-1 execution-row-layer">
+                                                            <Link
+                                                                href={btnDetails.link}
+                                                                target='_blank'
+                                                                className="primery-btn text-decoration-none"
+                                                            >
+                                                                {btnDetails.label}
+                                                            </Link>
+                                                        </div>
+                                                    </AnimationSecComponent>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
-                            </Container>
-                        </SwiperSlide>
-                    ))}
+                                </Container>
+                            </SwiperSlide>
+                        );
+                    })}
 
                     {/* Navigation Controls */}
                     <button className="hero-prev-btn nav-custom-btn">

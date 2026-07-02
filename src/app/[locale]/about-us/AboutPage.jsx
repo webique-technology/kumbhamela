@@ -36,10 +36,10 @@ const TouristDestinations = () => {
     const tabsMeta = {
         jyotirlingas12: { icon: Crown, packageLink: "12-jyotirlinga-yatra-with-mahakumbh-tours-travels-nashik", count: 12 },
         mahaJyotirlingas: { icon: Milestone, packageLink: "5-jyotirlinga-pilgrimage-in-maharashtra", count: 5 },
-        unescoSites: { icon: Landmark, packageLink: "", count: 4 },
+        unescoSites: { icon: Landmark, packageLink: "2-nights-3-days-unesco-heritage-ajanta-ellora-caves-tour-from-nashik", count: 4 },
         shaktiPeethas: { icon: ShieldCheck, packageLink: "sade-tin-35-shakti-peeth-tour-package", count: 4 },
         ashtavinayak8: { icon: Heart, packageLink: "ashtavinayak-tour-package-for-3-days", count: 8 },
-        hillStations: { icon: Sparkles, packageLink: "", count: 3 }
+        hillStations: { icon: Sparkles, packageLink: "5-nights-6-days-lonavala-khandala-mahabaleshwar-tour-package-from-nashik", count: 3 }
     };
 
     const tabKeys = Object.keys(tabsDataRaw);

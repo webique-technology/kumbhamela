@@ -592,44 +592,24 @@ export const BathingDatesSlider = ({ bathingDates, t }) => {
                     prevEl: '.bathing-prev-btn',
                     nextEl: '.bathing-next-btn',
                 }}
-                disableAutoplay={true}
+                disableAutoplay={false}
                 spaceBetween={20}
                 timeDelay={4000}
                 breakpoints={{
-                    0: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                    },
-                    450: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
-                    },
-                    768: {
-                        slidesPerView: 1,
-                        spaceBetween: 30,
-                    },
-                    865: {
-                        slidesPerView: 2,
-                        spaceBetween: 30,
-                    },
-                    992: {
-                        slidesPerView: 2,
-                        spaceBetween: 30,
-                    },
-                    1120: {
-                        slidesPerView: 3,
-                        spaceBetween: 30,
-                    },
-                    1600: {
-                        slidesPerView: 4,
-                        spaceBetween: 30,
-                    },
+                    0: { slidesPerView: 1, spaceBetween: 20 },
+                    450: { slidesPerView: 2, spaceBetween: 20 },
+                    768: { slidesPerView: 1, spaceBetween: 30 },
+                    865: { slidesPerView: 2, spaceBetween: 30 },
+                    992: { slidesPerView: 2, spaceBetween: 30 },
+                    1120: { slidesPerView: 3, spaceBetween: 30 },
+                    1600: { slidesPerView: 4, spaceBetween: 30 },
                 }}
             >
                 {bathingDates.map((date, index) => (
                     <SwiperSlide key={index} className="h-auto">
                         <div className="festival-card-wrapper snap-start group">
-                            <div className="festival-card glass-card inner-glow position-relative p-4 d-grid rounded-4 transition-card">
+                            {/* Added festival-card-relative for styling context */}
+                            <div className="festival-card festival-card-relative glass-card inner-glow position-relative p-4 d-grid rounded-4 transition-card">
 
                                 <div className="festival-card-line position-absolute"></div>
 
@@ -654,7 +634,6 @@ export const BathingDatesSlider = ({ bathingDates, t }) => {
                                         <span className="festival-month text-uppercase">
                                             {t(date.monthKey)}
                                         </span>
-
                                         <span className="festival-year">
                                             {date.year}
                                         </span>
@@ -666,12 +645,21 @@ export const BathingDatesSlider = ({ bathingDates, t }) => {
                                         {t("sacredImmersion")}
                                     </span>
                                 </div>
+
+                                {/* NEW: Absolute Hover Pop-up info window */}
+                                <div className="festival-info-popup position-absolute w-100 h-100 rounded-4 d-flex flex-column justify-content-center p-4">
+                                    <h5 className="mb-2 small primery-color">{date.day} {t(date.monthKey)} {date.year}</h5>
+                                    <span className="popup-desc mb-2 small text-white-50">{t(date.dateOccationKey)}</span>
+                                    <h4 className="popup-title mb-2 text-capitalize">{t(date.titleKey)}</h4>
+                                    <p className="popup-desc m-0 small text-white-50">{t(date.descKey)}</p>
+                                </div>
+
                             </div>
                         </div>
                     </SwiperSlide>
                 ))}
             </SwiperSliderComp>
         </div>
-    )
-}
+    );
+};
 

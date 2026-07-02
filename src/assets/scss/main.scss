@@ -27,6 +27,26 @@ p {
     }
 }
 
+.play-style-btn {
+    border: 1px solid $bg-drak;
+    border-radius: $border-radius-md;
+    background-color: $bg-light;
+    text-decoration: none;
+    color: $text-color-dark;
+    transition: all 0.2s ease-in-out;
+
+    p {
+        line-height: 16px !important;
+    }
+
+    &:hover {
+        background-color: $bg-drak;
+        color: $bg-light;
+        border-color: $bg-light;
+    }
+
+}
+
 .lh-auto {
     line-height: normal !important;
 }
@@ -247,7 +267,7 @@ p {
 }
 
 .small-12 {
-    font-size: $font-size-xs;
+    font-size: $font-size-xs !important;
 }
 
 .small-base {
@@ -1206,7 +1226,8 @@ $animation-speed: 45s;
 
 .imageWrapper {
     width: $logo-width-desktop;
-    height: 90px;
+    
+    height: 135px;
     display: flex;
     align-items: center;
     justify-content: center;

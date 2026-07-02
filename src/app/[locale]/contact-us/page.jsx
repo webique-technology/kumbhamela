@@ -18,6 +18,7 @@ export async function generateMetadata({ params, searchParams }) {
 
     // Strategic commercial keywords extracted directly from the contact image assets
     const contactKeywords = [
+        "Connect With Our Pilgrimage Experts",
         "Kumbh Mela 2027 booking support",
         "Nashik tour packages contact",
         "Jyotirlinga Yatra booking number",

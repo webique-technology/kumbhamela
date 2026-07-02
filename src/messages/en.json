@@ -17,15 +17,23 @@
   "HeroHeader": {
     "btnName1": "Our Vehicles",
     "btnName2": "Tour Packages",
+    "btnName3": "Explore Jyotirlinga",
+    "btnName4": "Book Ashtavinayak",
     "slide1_subHeading": "Experience Unmatched Delight With Us.",
     "slide1_title": "Simhastha Kumbh Mela Nashik 2027",
-    "slide1_description": "Countdown to Kumbh Mela",
+    "slide1_description": "The countdown to the world's largest spiritual gathering has officially begun.",
     "slide2_subHeading": "Seamless Journeys & Premium Comfort",
     "slide2_title": "Your Trusted Nashik Kumbh Travel Partner",
-    "slide2_description": "Navigate the grand pilgrimage with absolute ease. From premium car rentals and localized tempo travelers to verified hotel accommodations, we manage all your logistics so you can focus entirely on your spiritual devotion.",
+    "slide2_description": "Premium car rentals, localized tempo travelers, and verified hotel stays for a hassle-free pilgrimage.",
     "slide3_subHeading": "All-Inclusive Curated Pilgrimages",
     "slide3_title": "Explore Holy Yatras & Divine Tour Packages",
-    "slide3_description": "Book thoughtfully planned itineraries featuring confirmed darshans, comfortable AC transport, and premium stays. Explore our special 4-Day Akhalkot-Pandharpur or comprehensive 12 Jyotirlinga tour packages today."
+    "slide3_description": "Thoughtfully planned divine itineraries featuring confirmed darshans, luxury transport, and premium hotels.",
+    "slide4_subHeading": "Sacred Devotion & Divine Journeys",
+    "slide4_title": "Jyotirlinga Yatra with Mahakumbh Tours & Travels",
+    "slide4_description": "Soul-awakening pilgrimages to India's sacred Shiva temples, seamlessly tied with our Kumbh travel setups.",
+    "slide5_subHeading": "8 Auspicious Ganesha Shrines",
+    "slide5_title": "Exclusive Ashtavinayak Tour Package for 3 Days",
+    "slide5_description": "A perfectly structured 3-day spiritual circuit across Maharashtra's eight self-manifested Ganesha temples."
   },
   "Countdown": {
     "days": "Days",
@@ -53,39 +61,39 @@
     "tab0_name": "How to Reach",
     "tab0_desc": "Explore seamless travel options by air, rail, or road, and start your journey effortlessly.",
     "tab0_item1_title": "By Air (Flights)",
-    "tab0_item1_desc": "Fly into Nashik Ozar Airport (ISK) located 20 km from the center for direct domestic flights from Mumbai and Delhi. Alternatively, international travelers can land at Mumbai Airport (BOM) and take a scenic 3–4 hour road or rail trip to Nashik.",
+    "tab0_item1_desc": "Fly directly to Nashik Ozar Airport or arrive at Mumbai Airport and continue by road or rail to Nashik.",
     "tab0_item2_title": "By Train (Railways)",
-    "tab0_item2_desc": "Nashik Road Railway Station (NK) is a major central rail hub with excellent connectivity across India. Daily express and superfast trains connect Mumbai (CSMT/Dadar) directly to Nashik, completing the journey in just 3 to 3.5 hours.",
+    "tab0_item2_desc": "Reach Nashik Road Railway Station with direct express and superfast trains from major cities across India.",
     "tab0_item3_title": "By Road (Highways & Buses)",
-    "tab0_item3_desc": "Nashik is seamlessly connected via smooth national highways like the Mumbai-Nashik Expressway (NH-160). State-run MSRTC buses, luxury private AC sleepers, and outstation cabs operate 24/7 from Mumbai, Pune, and surrounding regions.",
+    "tab0_item3_desc": "Travel comfortably via national highways with frequent buses and cabs from Mumbai, Pune, and nearby regions.",
     "tab1_name": "Local Transport",
     "tab1_desc": "Explore our curated list of accommodations and book your serene retreat.",
     "tab1_item1_title": "Citilinc Public Buses (NMPML)",
-    "tab1_item1_desc": "Nashik's official Citilinc bus network will operate special, high-frequency shuttle services during the event. These routes directly connect the railway station, main bus depots, and key city hubs straight to the primary Mela grounds.",
+    "tab1_item1_desc": "Special Citilinc shuttle buses connect railway stations, bus terminals, and major city hubs to the Mela grounds.",
     "tab1_item2_title": "Auto-Rickshaws",
-    "tab1_item2_desc": "Three-wheelers are widely available for quick transit across the city. Note that auto-rickshaw access will be restricted or zoned off around the core bathing areas on peak shahi snan (holy bathing) days to manage crowd density.",
+    "tab1_item2_desc": "Auto-rickshaws are widely available, though access near bathing ghats may be restricted on peak Shahi Snan days.",
     "tab1_item3_title": "Pedestrian Walkways (On Foot)",
-    "tab1_item3_desc": "Walking is the most efficient way to navigate the immediate Mela zones and reach the bathing ghats. The administration is setting up dedicated pedestrian-only barricaded lanes to ensure safe, smooth, and vehicle-free movement.",
+    "tab1_item3_desc": "Dedicated pedestrian pathways provide a safe and convenient way to reach the Mela grounds and bathing ghats.",
     "tab2_name": "Safety Guidelines",
     "tab2_desc": "Categorized list of public utilities, designed to make it accessible for tourists and pilgrims",
     "tab2_item1_title": "Crowd Safety & Awareness",
-    "tab2_item1_desc": "Stay with your group and establish clear meeting points. Follow directions from police and trained volunteers, and remain highly alert of your personal belongings in crowded areas to avoid pickpockets.",
+    "tab2_item1_desc": "Stay with your group, follow official instructions, and keep your belongings secure in crowded areas.",
     "tab2_item2_title": "Hydration & Safe Eating",
-    "tab2_item2_desc": "Carry a reusable water bottle and stay well-hydrated throughout the day. Avoid unhygienic street food and strictly opt for freshly prepared meals to prevent stomach infections.",
+    "tab2_item2_desc": "Stay hydrated, carry a water bottle, and choose clean, freshly prepared food whenever possible.",
     "tab2_item3_title": "Personal Hygiene & Protection",
-    "tab2_item3_desc": "Keep a personal hygiene kit handy with hand sanitizer, tissues, and essential medications. Wear a face mask while moving around the grounds to safeguard against heavy dust and airborne pollutants.",
+    "tab2_item3_desc": "Carry basic hygiene essentials, wear a mask in dusty areas, and keep essential medicines with you.",
     "tab2_item4_title": "Emergency Medical Services",
-    "tab2_item4_desc": "Familiarize yourself with the location of emergency medical camps. The Mela administration will have multiple temporary medical tents and fully equipped first-aid centers distributed across the venue.",
+    "tab2_item4_desc": "Locate nearby medical camps and first-aid centers for quick assistance during emergencies.",
     "tab3_name": "Helpline",
     "tab3_desc": "Emergency Support Lines available 24 hours a day, 7 days a week.",
     "tab3_item1_title": "Police Emergency Helpline",
-    "tab3_item1_desc": "Dial 112 / 100 instantly from any operational mobile network for immediate security assistance or law enforcement deployment directly to your current location.",
+    "tab3_item1_desc": "Call 112 or 100 for immediate police assistance.",
     "tab3_item2_title": "Ambulance & Medical Help",
-    "tab3_item2_desc": "Dial 108 for emergency medical response and trauma services. Fully equipped government ambulances are stationed permanently across all major ritual bathing ghat zones.",
+    "tab3_item2_desc": "Dial 108 for emergency ambulance and medical services.",
     "tab3_item3_title": "National Tourist Support",
-    "tab3_item3_desc": "Dial 1363 or toll-free 1800-11-1363 for multilingual guidance, regional navigation context assistance, or direct contact resolution support for foreign and domestic traveling pilgrims.",
+    "tab3_item3_desc": "Call 1363 or 1800-11-1363 for tourist assistance.",
     "tab3_item4_title": "Mela Central Control Room",
-    "tab3_item4_desc": "Dedicated local administrative support lines setup specifically for lost-and-found reports, missing person alerts, dynamic crowd scheduling notices, and direct public utility help entries."
+    "tab3_item4_desc": "Contact the control room for lost items, emergencies, and public assistance."
   },
   "SacredDestinations": {
     "mainTitle": "Sacred Destinations",
@@ -145,18 +153,25 @@
     "sacredImmersion": "Sacred Immersion",
     "date1_occ": "Dhwajarohan – Flag Hoisting",
     "date1_title": "Official Commencement",
+    "date1_desc": "Marks the formal beginning of the Kumbh Mela rituals with the traditional hoisting of the sacred flag.",
     "date2_occ": "Nashik Kumbh Mela 2027",
     "date2_title": "Flag Hoisting Ceremony",
+    "date2_desc": "Ceremonial launch event specifically celebrating the traditional lineage of the upcoming Nashik gathering.",
     "date3_occ": "Ashadh Somvati Amavasya",
     "date3_title": "First Amrit Snan",
+    "date3_desc": "The primary holy dip. Taking a bath on Somvati Amavasya washes away lifelong sins and brings profound peace.",
     "date4_occ": "Shravan Amavasya",
     "date4_title": "Second Amrit Snan",
+    "date4_desc": "A highly vital spiritual phase happening during the highly auspicious holy month of Shravan.",
     "date5_occ": "Bhadrapada Shuddha Ekadashi",
     "date5_title": "Third Amrit Snan - Vaishnava",
+    "date5_desc": "The major bathing day dedicated exclusively to the Vaishnava Akhadas and devotees at Ram Kunda.",
     "date6_occ": "Kushavarta Tirtha, Trimbakeshwar",
     "date6_title": "Third Amrit Snan - Shaiva",
+    "date6_desc": "The royal Snan window reserved for the Shaiva Naga Sadhus at the historical Kushavarta reservoir.",
     "date7_occ": "Mouni Amavasya",
     "date7_title": "Mouni Amavasya Special",
+    "date7_desc": "The ultimate cosmic alignment day. Devotees observe strict silence (Mauna) during this highly powerful holy dip.",
     "october": "October",
     "july": "July",
     "august": "August",
@@ -237,14 +252,78 @@
     "rightsReserved": "© {year} Mahakumbh Tours & Travels. All rights reserved.",
     "developedBy": "Design and Developed by",
     "servicesList": {
-      "panIndia": "Car Rental Pan India",
-      "marriage": "Luxury Car Marriage Corporate",
-      "traveller": "Traveller & Bus",
-      "flights": "Flight Ticketing",
-      "holidays": "Holidays Packages",
-      "hotels": "Hotel Reservations",
-      "visa": "Visa Services",
-      "passport": "Passport Assistance"
+      "panIndia": {
+        "title": "Car Rental Pan India",
+        "points": [
+          "Available across all major cities in India.",
+          "Chauffeur-driven and self-drive rental options.",
+          "Flexible hourly, daily, and weekly packages.",
+          "Wide fleet ranging from hatchbacks to SUVs."
+        ]
+      },
+      "marriage": {
+        "title": "Luxury Car Marriage Corporate",
+        "points": [
+          "Premium luxury cars for weddings and VIP guests.",
+          "Professional executive rides for corporate events.",
+          "Immaculately maintained high-end vehicles.",
+          "Punctual and well-trained uniform chauffeurs."
+        ]
+      },
+      "traveller": {
+        "title": "Traveller & Bus",
+        "points": [
+          "Spacious Tempo Travellers and luxury buses.",
+          "Ideal for family trips, tours, and corporate groups.",
+          "Ample luggage space and comfortable seating.",
+          "Push-back seats and fully air-conditioned vehicles."
+        ]
+      },
+      "flights": {
+        "title": "Flight Ticketing",
+        "points": [
+          "Instant domestic and international flight bookings.",
+          "Access to competitive fares and exclusive deals.",
+          "Easy cancellations and hassle-free date changes.",
+          "24/7 support for urgent booking modifications."
+        ]
+      },
+      "holidays": {
+        "title": "Holidays Packages",
+        "points": [
+          "Customized domestic and international itineraries.",
+          "All-inclusive deals featuring stay, travel, and sightseeing.",
+          "Tailored for families, couples, and solo travelers.",
+          "Expert guidance for destination planning."
+        ]
+      },
+      "hotels": {
+        "title": "Hotel Reservations",
+        "points": [
+          "Budget-friendly to 5-star luxury stays.",
+          "Curated options in prime global locations.",
+          "Best price guarantee with transparent pricing.",
+          "Flexible check-in options and free cancellation on select rooms."
+        ]
+      },
+      "visa": {
+        "title": "Visa Services",
+        "points": [
+          "End-to-end tourist and business visa assistance.",
+          "Expert verification of documents to prevent rejection.",
+          "Step-by-step guidance for embassy interviews.",
+          "Real-time tracking of your visa application status."
+        ]
+      },
+      "passport": {
+        "title": "Passport Assistance",
+        "points": [
+          "Streamlined support for new passport applications.",
+          "Fast-track assistance for renewals and damaged passports.",
+          "Error-free online form filling and slot booking.",
+          "Clear checklist for required legal documentation."
+        ]
+      }
     }
   },
   "AboutPage": {
@@ -797,8 +876,8 @@
     "passengers": "Passengers",
     "adults": "Adults",
     "children": "Children ( Below 12 Y )",
-    "pickupLocation":"Pickup Address",
-    "placeholderPickupLocation":"Your pickup address",
+    "pickupLocation": "Pickup Address",
+    "placeholderPickupLocation": "Your pickup address",
     "person": "Person",
     "people": "People",
     "child": "Child",

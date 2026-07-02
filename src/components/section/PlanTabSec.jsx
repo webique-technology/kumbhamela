@@ -1,11 +1,33 @@
 "use client";
 
 import React, { useTransition } from 'react';
-import { Col, Container, Row, Tab, Nav } from 'react-bootstrap';
+import { Col, Container, Row, Tab, Nav, Accordion } from 'react-bootstrap';
 import { TitleComponent } from '../ui/common';
 import { useTranslations } from 'next-intl';
-import { Plane, Hotel, UtilityPole, MapPin, PhoneCall, Car } from 'lucide-react';
+import {
+    Plane,
+    Hotel,
+    UtilityPole,
+    MapPin,
+    PhoneCall,
+    Car,
+    TrainFront,
+    Bus,
+    BusFront,
+    CarFront,
+    Footprints,
+    UsersRound,
+    UtensilsCrossed,
+    ShieldCheck,
+    Activity,
+    ShieldAlert,
+    Ambulance,
+    Info,
+    Headphones
+} from 'lucide-react';
 import "../../styles/planTab.scss";
+
+
 
 import byAir from "../../assets/images/by-air.webp";
 import byTrain from "../../assets/images/by-train.webp";
@@ -17,7 +39,12 @@ import crowdSafety from "../../assets/images/crowd-safety.webp";
 import hydrationFood from "../../assets/images/hydration-food.webp";
 import personalHygiene from "../../assets/images/personal-hygiene.webp";
 import medicalServices from "../../assets/images/medical-services.webp";
+import planImg from "../../assets/images/plantab.webp";
+import googleLogo from "../../assets/images/google-logo.png";
+import tripAdvisorLogo from "../../assets/images/trip-advisor.png";
 import Image from 'next/image';
+import Link from 'next/link';
+
 
 const PlanTabSec = () => {
     // 1. Correct namespace binding initialized
@@ -35,17 +62,17 @@ const PlanTabSec = () => {
             tabDescKey: "tab0_desc",
             list: [
                 {
-                    image: byAir,
+                    icon: <Plane />,
                     titleKey: "tab0_item1_title",
                     descKey: "tab0_item1_desc"
                 },
                 {
-                    image: byTrain,
+                    icon: <TrainFront />,
                     titleKey: "tab0_item2_title",
                     descKey: "tab0_item2_desc"
                 },
                 {
-                    image: byRoad,
+                    icon: <Bus />,
                     titleKey: "tab0_item3_title",
                     descKey: "tab0_item3_desc"
                 }
@@ -57,17 +84,17 @@ const PlanTabSec = () => {
             tabDescKey: "tab1_desc",
             list: [
                 {
-                    image: citilincBus,
+                    icon: <BusFront />,
                     titleKey: "tab1_item1_title",
                     descKey: "tab1_item1_desc"
                 },
                 {
-                    image: autoRickshaw,
+                    icon: <CarFront />,
                     titleKey: "tab1_item2_title",
                     descKey: "tab1_item2_desc"
                 },
                 {
-                    image: walkingPath,
+                    icon: <Footprints />,
                     titleKey: "tab1_item3_title",
                     descKey: "tab1_item3_desc"
                 }
@@ -79,22 +106,22 @@ const PlanTabSec = () => {
             tabDescKey: "tab2_desc",
             list: [
                 {
-                    image: crowdSafety,
+                    icon: <UsersRound />,
                     titleKey: "tab2_item1_title",
                     descKey: "tab2_item1_desc"
                 },
                 {
-                    image: hydrationFood,
+                    icon: <UtensilsCrossed />,
                     titleKey: "tab2_item2_title",
                     descKey: "tab2_item2_desc"
                 },
                 {
-                    image: personalHygiene,
+                    icon: <ShieldCheck />,
                     titleKey: "tab2_item3_title",
                     descKey: "tab2_item3_desc"
                 },
                 {
-                    image: medicalServices,
+                    icon: <Activity />,
                     titleKey: "tab2_item4_title",
                     descKey: "tab2_item4_desc"
                 }
@@ -106,22 +133,22 @@ const PlanTabSec = () => {
             tabDescKey: "tab3_desc",
             list: [
                 {
-                    image: null,
+                    icon: <ShieldAlert />,
                     titleKey: "tab3_item1_title",
                     descKey: "tab3_item1_desc"
                 },
                 {
-                    image: null,
+                    icon: <Ambulance />,
                     titleKey: "tab3_item2_title",
                     descKey: "tab3_item2_desc"
                 },
                 {
-                    image: null,
+                    icon: <Info />,
                     titleKey: "tab3_item3_title",
                     descKey: "tab3_item3_desc"
                 },
                 {
-                    image: null,
+                    icon: <Headphones />,
                     titleKey: "tab3_item4_title",
                     descKey: "tab3_item4_desc"
                 }
@@ -132,99 +159,97 @@ const PlanTabSec = () => {
     return (
         <section className={`section-padding trinery-bg plan-tab-section position-relative ${isPending ? "opacity-50" : ""}`}>
             <Container>
-                <TitleComponent
-                    title={t("mainTitle")}
-                    className="mb-1 text-center"
-                    divider={false}
-                    montezSubTitle={t("montezSubTitle")}
-                    montezClass="playfair-display primery-color d-none d-md-block"
-                />
+
 
                 {/* FIXED: eventKeys match configuration items cleanly */}
                 <Tab.Container id="pilgrimage-plan-tabs" defaultActiveKey="tab-0">
-                    <Row className="mt-2 mt-md-4 g-4">
+                    <Row className="mt-2 mt-md-4 g-4 justify-content-between">
+
+                        {/* RIGHT SIDE: Dynamic Panel Layout Content Streams */}
+                        <Col lg={5} className='d-none d-md-flex'>
+                            <div className='position-relative'>
+                                <img src={planImg.src} alt="" className='image-box' />
+                                {/* <div className="app-btn-box d-flex flex-column flex-wrap align-items-center gap-3 justify-content-center">
+                                    <Link
+                                        href={"#"}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="play-style-btn p-2 d-flex gap-2 align-items-center flex-row transition-hover"
+                                    >
+                                        <img
+                                            src={googleLogo.src} // Update this path to where your image is saved
+                                            alt="Download on the App Store"
+                                            className="w-auto h-100 object-fit-contain rounded-2"
+                                            style={{ maxHeight: "45px" }}
+                                        />
+                                    </Link>
+                                    <Link
+                                        href={"#"}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="play-style-btn p-2 d-flex gap-2 align-items-center flex-row transition-hover"
+                                    >
+                                        <img
+                                            src={tripAdvisorLogo.src}// Update this path to where your image is saved
+                                            alt="Get it on Google Play"
+                                            className="w-auto h-100 object-fit-contain rounded-2"
+                                            style={{ maxHeight: "45px" }}
+                                        />
+                                    </Link>
+                                </div> */}
+                            </div>
+                        </Col>
 
                         {/* LEFT SIDE: Navigation Trigger Buttons */}
-                        <Col lg={6} className='tab-btn-count'>
-                            <Nav variant="pills" className="flex-row flex-lg-column w-100 gap-2 gap-md-3 plan-nav-pills">
+                        <Col lg={7} className='tab-btn-count'>
+                            <TitleComponent
+                                title={t("mainTitle")}
+                                className="mb-3 text-center text-md-start"
+                                divider={false}
+                                montezSubTitle={t("montezSubTitle")}
+                                montezClass="playfair-display primery-color"
+                            />
+                            <Accordion defaultActiveKey="1" className=''>
                                 {planTabsConfig.map((tab, i) => {
                                     const Icon = icons[i] || MapPin;
                                     return (
-                                        <Nav.Item key={tab.id}>
-                                            <Nav.Link eventKey={`tab-${i}`} className="plan-tab-item p-2 p-lg-4 shadow-sm">
-                                                <div className='d-flex align-items-center gap-2 gap-md-3 gap-lg-4 text-start'>
-                                                    <div className='icon-box text-white d-none d-md-block'>
-                                                        <Icon size={18} />
+                                        <div key={i}>
+                                            <Accordion.Item eventKey={i.toString()} className='mb-3'>
+                                                <Accordion.Header className='fw-bold'>{t(tab.tabNameKey)}</Accordion.Header>
+                                                <Accordion.Body className='p-2'>
+                                                    {/* {t(tab.tabDescKey)} */}
+                                                    <div>
+                                                        {tab.list.map((value, num) => {
+                                                            const hasTitle = t(value.titleKey) !== "";
+                                                            return (
+                                                                <div className='p-2 h-100' key={num}>
+                                                                    <div className='content-box d-flex gap-2'>
+                                                                        <span className='flex-shrink-0 border icon-box'>{value.icon}</span>
+                                                                        <p className='m-0 small opacity-75 text-secondary lh-base'>
+                                                                            {hasTitle && (
+                                                                                <span className='fw-semibold text-dark fs-6 d-block mb-1'>
+                                                                                    {t(value.titleKey)}
+                                                                                </span>
+                                                                            )}
+                                                                            {t(value.descKey)}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            );
+                                                        })}
                                                     </div>
-                                                    <div className='content'>
-                                                        <h3 className='m-0'>{t(tab.tabNameKey)}</h3>
-                                                        <p className='m-0 small opacity-75 d-none d-lg-block'>
-                                                            {t(tab.tabDescKey)}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </Nav.Link>
-                                        </Nav.Item>
+                                                </Accordion.Body>
+                                            </Accordion.Item>
+                                        </div>
                                     );
                                 })}
-                            </Nav>
-                        </Col>
-
-                        {/* RIGHT SIDE: Dynamic Panel Layout Content Streams */}
-                        <Col lg={6}>
-                            <Tab.Content className="ps-lg-5 h-100">
-                                {planTabsConfig.map((tab, i) => (
-                                    <Tab.Pane eventKey={`tab-${i}`} key={tab.id} className="h-100">
-                                        <div className="h-100 rounded-4 overflow-hidden bg-white d-flex flex-column gap-3 justify-content-between p-3 shadow-sm">
-                                            {tab.list.map((value, num) => {
-                                                const hasTitle = t(value.titleKey) !== "";
-
-                                                return (
-                                                    <React.Fragment key={`list-group-${num}`}>
-                                                        <Row className='gap-2 gap-sm-0 align-items-center py-2 border-bottom border-light-subtle last-border-0'>
-                                                            {value.image && (
-                                                                <Col sm={4} className='d-block d-sm-flex align-items-center justify-content-center'>
-                                                                    <div className='image-box overflow-hidden rounded-2'>
-                                                                        {/* <Image
-                                                                            src={value.image}
-                                                                            alt={t(value.titleKey) || "Plan Image"}
-                                                                            sizes="100%"
-                                                                            width={145}
-                                                                            height={120}
-                                                                            className='img-fluid'
-                                                                            style={{ objectFit: 'cover' }}
-                                                                            placeholder="blur"
-                                                                        /> */}
-                                                                        <img src={value.image.src} className='img-fluid' alt="" />
-                                                                    </div>
-                                                                </Col>
-                                                            )}
-                                                            <Col sm={value.image ? 8 : 12}>
-                                                                <div className='content-box'>
-                                                                    <p className='m-0 small opacity-75 text-secondary lh-base'>
-                                                                        {hasTitle && (
-                                                                            <span className='fw-bold text-dark fs-6 d-block mb-1'>
-                                                                                {t(value.titleKey)}
-                                                                            </span>
-                                                                        )}
-                                                                        {t(value.descKey)}
-                                                                    </p>
-                                                                </div>
-                                                            </Col>
-                                                        </Row>
-                                                    </React.Fragment>
-                                                );
-                                            })}
-                                        </div>
-                                    </Tab.Pane>
-                                ))}
-                            </Tab.Content>
+                            </Accordion>
                         </Col>
 
                     </Row>
                 </Tab.Container>
             </Container>
-        </section>
+        </section >
     );
 };
 
