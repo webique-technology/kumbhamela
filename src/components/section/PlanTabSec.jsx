@@ -209,7 +209,7 @@ const PlanTabSec = () => {
                                 montezSubTitle={t("montezSubTitle")}
                                 montezClass="playfair-display primery-color"
                             />
-                            <Accordion defaultActiveKey="1" className=''>
+                            <Accordion defaultActiveKey="0" className=''>
                                 {planTabsConfig.map((tab, i) => {
                                     const Icon = icons[i] || MapPin;
                                     return (
