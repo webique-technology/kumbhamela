@@ -24,27 +24,35 @@ import tripAdvisorLogo from "../../assets/images/trip-advisor.png";
 import justdial from "../../assets/images/justdial-logo.png";
 
 const ServicesList = () => {
-    // 1. Tell useTranslations to target the "Footer" namespace scope where servicesList lives
     const t = useTranslations("Footer");
 
     const serviceKeys = ['panIndia', 'marriage', 'traveller', 'flights', 'holidays', 'hotels', 'visa', 'passport'];
 
+    // Map each service translation key directly to its folder slug shown in image_82dfe4.png
+    const slugMapping = {
+        panIndia: "car-rental-pan-india",
+        marriage: "luxury-car-marriage-corporate",
+        traveller: "traveller-&-bus",
+        flights: "flight-ticketing",
+        holidays: "holidays-packages",
+        hotels: "hotel-reservations",
+        visa: "visa-services",
+        passport: "passport-assistance"
+    };
+
     return (
         <ul className='services-link list-unstyled'>
             {serviceKeys.map((key) => {
-                // 2. Use t.raw() to pull out the array successfully in next-intl
-                const points = t.raw(`servicesList.${key}.points`) || [];
+                const slug = slugMapping[key];
 
                 return (
                     <li key={key} className='mb-2'>
-                        {t(`servicesList.${key}.title`)}
-                        <div className='p-2 footer-description-box fw-normal'>
-                            <ul className='mb-0 ps-0'>
-                                {Array.isArray(points) && points.map((point, index) => (
-                                    <li key={index}>{point}</li>
-                                ))}
-                            </ul>
-                        </div>
+                        <Link
+                            href={`/services/${slug}`}
+                            className="footer-link text-decoration-none hover:underline" // Add styling classes as preferred
+                        >
+                            {t(`servicesList.${key}.title`)}
+                        </Link>
                     </li>
                 );
             })}
@@ -75,8 +83,8 @@ const Footer = () => {
                                 <img src={logo.src} alt="Logo" width={50} height={50} className="me-1" />
                             </div>
                             <div className="ms-2">
-                                <h3 className="footer-title">{tNavbar("logoTitle")}</h3>
-                                <p className="footer-subtitle">{tNavbar("logoSubtitle")}</p>
+                                <h3 className="footer-title">{t("logoName")}</h3>
+                                <p className="footer-subtitle">{t("logoDescription")}</p>
                             </div>
                         </div>
                         <p className="footer-text d-none d-md-block">

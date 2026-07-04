@@ -244,6 +244,8 @@
     }
   },
   "Footer": {
+    "logoName": "Maharashtra",
+    "logoDescription": "Tourism",
     "description": "Our fleet of cars and tempo travellers ensures comfortable journeys to Adya Jyotirlinga Trimbakeshwar, Trayambkeshwar, and other sacred destinations.",
     "quickLinks": "Quick Links",
     "otherServices": "Other Services We Offer:",
@@ -974,6 +976,208 @@
       "perPerson": "Per Person",
       "duration": "Duration",
       "kumbhNote": "* Limited slots available for Kumbh Mela dates."
+    }
+  },
+  "CarRentalPanIndia": {
+    "meta": {
+      "title": "Car Rental Pan India | Outstation & Local Taxi Services",
+      "description": "Book reliable car rental services across India. We provide sedans, SUVs, luxury cars, tempo travellers, and buses for business, family, and pilgrimage tours.",
+      "keywords": "Car Rental India, Taxi Service India, Cab Booking, Outstation Cab, Airport Taxi"
+    },
+    "hero": {
+      "subTitle": "Car Rental",
+      "title": "Car Rental Pan India"
+    },
+    "content": {
+      "subTitle": "Pan India Fleet",
+      "h1": "Car Rental Services Across India",
+      "statText": "Outstation & Local Taxi Services",
+      "descriptionBody": "Looking for reliable Car Rental Services in India? Mahakumbh Tours & Travels offers safe, affordable, and comfortable taxi services for local sightseeing, outstation travel, airport transfers, corporate travel, and pilgrimage tours. Our fleet includes hatchbacks, sedans, SUVs, luxury vehicles, tempo travellers, and buses driven by experienced chauffeurs. Whether you're travelling with family, friends, or a corporate team, we ensure punctual service, transparent pricing, and 24/7 customer support.",
+      "servicesInclude": [
+        "Local Taxi Booking",
+        "Outstation Cab",
+        "Airport Transfers",
+        "One Way & Round Trip",
+        "Corporate Car Rental",
+        "Pilgrimage Tours",
+        "Group Transportation"
+      ]
+    }
+  },
+  "LuxuryCarWeddingCorporate": {
+    "meta": {
+      "title": "Luxury Car Rental for Wedding & Corporate Events",
+      "description": "Make every occasion memorable with our premium luxury car rental services. We provide elegant vehicles for weddings, VIP guests, business meetings, and corporate travel.",
+      "keywords": "Wedding Car Rental, Luxury Car Hire, Corporate Car Rental, Chauffeur Service"
+    },
+    "hero": {
+      "subTitle": "Premium Fleet",
+      "title": "Luxury Car for Wedding & Corporate"
+    },
+    "content": {
+      "subTitle": "Elite Mobility",
+      "h1": "Luxury Car Rental Services",
+      "statText": "Premium Chauffeur Driven Fleet",
+      "descriptionBody": "Make every occasion memorable with our premium luxury car rental services. We provide elegant vehicles for weddings, VIP guests, business meetings, conferences, airport pickups, celebrity events, and corporate travel. Choose from premium sedans, luxury SUVs, executive cars, and chauffeur-driven vehicles maintained to the highest standards.",
+      "suitableFor": [
+        "Wedding Cars",
+        "Corporate Events",
+        "VIP Transfers",
+        "Airport Pickup",
+        "Business Meetings",
+        "Hotel Transfers"
+      ]
+    }
+  },
+  "TravellerAndBus": {
+    "meta": {
+      "title": "Tempo Traveller & Bus Rental Services",
+      "description": "Book luxury Tempo Travellers and group buses in Nashik for picnics, corporate outings, pilgrimages, and family trips. Safe, affordable group travel with professional drivers.",
+      "keywords": "Tempo Traveller Nashik, Bus Rental, Group Tour Vehicle, Mini Bus Rental"
+    },
+    "hero": {
+      "subTitle": "Group Transportation",
+      "title": "Traveller & Bus Rental"
+    },
+    "content": {
+      "subTitle": "Large Fleet Transport",
+      "h1": "Traveller & Bus Booking",
+      "statText": "Group Tours & Luxury Coaches",
+      "descriptionBody": "Travel together comfortably with our Tempo Traveller and Bus Rental services. We provide premium vehicles for family trips, school tours, corporate outings, weddings, religious tours, and holiday packages. All vehicles are regularly serviced, deeply sanitized, and driven by highly trained, professional drivers to guarantee peace of mind.",
+      "availableVehicles": [
+        "12 Seater Traveller",
+        "17 Seater Traveller",
+        "20 Seater Mini Bus",
+        "Luxury Coach",
+        "AC & Non AC Buses"
+      ]
+    }
+  },
+  "FlightTicketing": {
+    "meta": {
+      "title": "Domestic & International Flight Ticket Booking",
+      "description": "Book cheap domestic and international flight tickets with Mahakumbh Tours & Travels. Get the lowest airfares, group booking choices, and 24/7 travel assistance.",
+      "keywords": "Flight Booking, Air Ticket Booking, Cheap Flights, International Flights"
+    },
+    "hero": {
+      "subTitle": "Air Travel",
+      "title": "Flight Ticket Booking"
+    },
+    "content": {
+      "subTitle": "Global Connectivity",
+      "h1": "Flight Ticket Booking Services",
+      "statText": "Domestic & Global Airfares",
+      "descriptionBody": "Book affordable domestic and international flight tickets with Mahakumbh Tours & Travels. We help you find the best airfare deals while ensuring smooth booking assistance. Our travel experts compare multiple top airlines across the globe to provide highly competitive prices for your next corporate or leisure trip.",
+      "whatWeProvide": [
+        "Domestic Flights",
+        "International Flights",
+        "Group Booking",
+        "Business Travel",
+        "Last Minute Tickets",
+        "Holiday Flight Packages"
+      ]
+    }
+  },
+  "HolidayPackages": {
+    "meta": {
+      "title": "Domestic & International Holiday Tour Packages",
+      "description": "Discover custom domestic and international holiday tour packages with Mahakumbh Tours & Travels. Enjoy tailored family vacations, honeymoons, and comprehensive travel support.",
+      "keywords": "Holiday Packages India, Tour Packages, Family Tour, Honeymoon Packages"
+    },
+    "hero": {
+      "subTitle": "Explore the World",
+      "title": "Holiday Packages"
+    },
+    "content": {
+      "subTitle": "Custom Itineraries",
+      "h1": "Holiday Tour Packages",
+      "statText": "All-Inclusive Tour Packages",
+      "descriptionBody": "Discover India's most beautiful destinations alongside premium international paths with our customized holiday packages. We organize seamless family vacations, romantic honeymoon trips, group tours, religious pilgrimages, adventure holidays, and corporate getaways. All packages are systematically bundled to include hassle-free transportation, premium hotel accommodations, verified sightseeing tours, and end-to-end dedicated travel assistance.",
+      "popularDestinations": [
+        "Kashmir",
+        "Goa",
+        "Kerala",
+        "Rajasthan",
+        "Himachal Pradesh",
+        "North East",
+        "Maharashtra",
+        "International Tours"
+      ]
+    }
+  },
+  "HotelReservations": {
+    "meta": {
+      "title": "Hotel Booking & Reservation Services",
+      "description": "Book comfortable budget, deluxe, and luxury hotels across India with Mahakumbh Tours & Travels. Get the best accommodation rates for business, family, and pilgrimage stays.",
+      "keywords": "Hotel Booking India, Hotel Reservation, Budget Hotel, Luxury Hotel"
+    },
+    "hero": {
+      "subTitle": "Accommodations",
+      "title": "Hotel Reservations"
+    },
+    "content": {
+      "subTitle": "Comfortable Stays",
+      "h1": "Hotel Reservation Services",
+      "statText": "Handpicked Hotels & Resorts",
+      "descriptionBody": "Need a comfortable, secure stay during your trip? We offer comprehensive hotel reservation services across India at highly affordable prices. Whether you are traveling for corporate meetings, religious pilgrimages, or sweet family leisure, we help you find and instantly lock in the right accommodation tailored to your budget.",
+      "chooseFrom": [
+        "Budget Hotels",
+        "Deluxe Hotels",
+        "Luxury Hotels",
+        "Resorts",
+        "Business Hotels",
+        "Family Rooms"
+      ]
+    }
+  },
+  "VisaServices": {
+    "meta": {
+      "title": "Visa Assistance & Documentation Services",
+      "description": "Simplify your international travel with expert visa assistance and documentation services from Mahakumbh Tours & Travels. Get hassle-free application guidance, reviews, and tracking.",
+      "keywords": "Visa Services, Tourist Visa, Business Visa, Visa Assistance India"
+    },
+    "hero": {
+      "subTitle": "Global Travel",
+      "title": "Visa Services"
+    },
+    "content": {
+      "subTitle": "Global Access",
+      "h1": "Visa Assistance Services",
+      "statText": "Document Verification & Filing",
+      "descriptionBody": "Planning an international trip? Our comprehensive visa assistance service helps simplify the complex application process from start to finish. Our seasoned global travel experts assist with strict document checks, appointment scheduling, thorough file reviews, and dynamic submission guidance.",
+      "guidanceFor": [
+        "Tourist Visa",
+        "Business Visa",
+        "Student Visa",
+        "Visitor Visa",
+        "Family Visa"
+      ]
+    }
+  },
+  "PassportAssistance": {
+    "meta": {
+      "title": "Passport Assistance & Renewal Services",
+      "description": "Get complete assistance for new passport applications, renewals, Tatkal passports, and corrections with Mahakumbh Tours & Travels. Fast, hassle-free processing with proper document verification.",
+      "keywords": "Passport Services, Passport Renewal, Tatkal Passport, Passport Assistance"
+    },
+    "hero": {
+      "subTitle": "Travel Documents",
+      "title": "Passport Assistance"
+    },
+    "content": {
+      "subTitle": "Official Verification",
+      "h1": "Passport Assistance Services",
+      "statText": "Hassle-Free Application Processing",
+      "descriptionBody": "Get complete assistance for new passport applications, renewals, Tatkal urgent passports, and passport modifications. Our dedicated documentation team thoroughly reviews your profiles to ensure a completely error-free application process with proper document guidance.",
+      "helpWith": [
+        "New Passport",
+        "Passport Renewal",
+        "Tatkal Passport",
+        "Address Change",
+        "Name Correction",
+        "Lost Passport Guidance",
+        "Document Verification"
+      ]
     }
   }
 }

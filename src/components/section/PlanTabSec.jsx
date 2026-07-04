@@ -245,7 +245,6 @@ const PlanTabSec = () => {
                                 })}
                             </Accordion>
                         </Col>
-
                     </Row>
                 </Tab.Container>
             </Container>

@@ -15,8 +15,8 @@ import banner1 from '../../assets/images/banner-1.webp';
 import banner2 from '@/assets/images/banner-3.webp';
 import banner3 from '@/assets/images/banner-4.webp';
 // NOTE: Make sure to drop matching image files into your assets directory
-import banner4 from '@/assets/images/jyotirlinga-banner.webp';
-import banner5 from '@/assets/images/ashtavinayak-banner.webp';
+import banner4 from '@/assets/images/jyotirlinga-banner-2.webp';
+import banner5 from '@/assets/images/ashtavinayak-banner-img.webp';
 
 export const heroSliderConfig = [
     {

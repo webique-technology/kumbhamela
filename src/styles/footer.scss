@@ -62,8 +62,8 @@ footer {
       }
     }
 
-    ul li{
-      &::marker{
+    ul li {
+      &::marker {
         display: none;
       }
     }
@@ -93,6 +93,7 @@ footer {
     color: $color-gray-400;
     text-decoration: none;
     transition: 0.3s;
+    font-family: $poppins !important;
   }
 
   .footer-link--webname {
