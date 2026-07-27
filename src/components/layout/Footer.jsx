@@ -172,48 +172,6 @@ const Footer = () => {
                     {/* 3. Operational B2B Core Services Render Module */}
                     <Col md={6} lg={3}>
                         <h3 className="footer-heading">{t("otherServices")}</h3>
-                        {/* <ul className='services-link list-unstyled'>
-                            <li className='mb-2'>{t("servicesList.panIndia.title")}
-                                <div className='p-2 footer-description-box'>
-                                    {t("servicesList.panIndia.points")}
-                                </div>
-                            </li>
-                            <li className='mb-2'>{t("servicesList.marriage.title")}
-                                <div className='p-2 footer-description-box'>
-                                    {t("servicesList.marriage.points")}
-                                </div>
-                            </li>
-                            <li className='mb-2'>{t("servicesList.traveller.title")}
-                                <div className='p-2 footer-description-box'>
-                                    {t("servicesList.traveller.points")}
-                                </div>
-                            </li>
-                            <li className='mb-2'>{t("servicesList.flights.title")}
-                                <div className='p-2 footer-description-box'>
-                                    {t("servicesList.flights.points")}
-                                </div>
-                            </li>
-                            <li className='mb-2'>{t("servicesList.holidays.title")}
-                                <div className='p-2 footer-description-box'>
-                                    {t("servicesList.holidays.points")}
-                                </div>
-                            </li>
-                            <li className='mb-2'>{t("servicesList.hotels.title")}
-                                <div className='p-2 footer-description-box'>
-                                    {t("servicesList.hotels.points")}
-                                </div>
-                            </li>
-                            <li className='mb-2'>{t("servicesList.visa.title")}
-                                <div className='p-2 footer-description-box'>
-                                    {t("servicesList.visa.points")}
-                                </div>
-                            </li>
-                            <li className='mb-2'>{t("servicesList.passport.title")}
-                                <div className='p-2 footer-description-box'>
-                                    {t("servicesList.passport.points")}
-                                </div>
-                            </li>
-                        </ul> */}
                         <ServicesList />
                     </Col>
 
@@ -271,7 +229,7 @@ const Footer = () => {
                             </Link>
                             {/* Google Play Store Button */}
                             <Link
-                                href={"https://www.tripadvisor.in/"}
+                                href={"https://www.tripadvisor.in/Profile/Mahakumbhtoursandtra"}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="play-style-btn p-1 px-2 d-flex gap-2 align-items-center flex-row transition-hover"
@@ -290,7 +248,7 @@ const Footer = () => {
                             </Link>
                             {/* Just dail btn */}
                             <Link
-                                href={"https://www.justdial.com/"}
+                                href={"https://jsdl.in/DT-46DSGBYT1NY"}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="play-style-btn p-1 px-2 d-flex gap-2 align-items-center flex-row transition-hover"
