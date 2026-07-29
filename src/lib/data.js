@@ -591,7 +591,7 @@ export const sacredDestinations = [
     {
         id: 1,
         image: sacredDest1, // Passed as an object reference
-        routeLink: "/hotel/rental-car",
+        routeLink: "/rental-car",
         nameKey: "dest1_name",
         historyKey: "dest1_history",
         routeKey: "dest1_route",
@@ -600,7 +600,7 @@ export const sacredDestinations = [
     {
         id: 2,
         image: sacredDest2,
-        routeLink: "/hotel/rental-car",
+        routeLink: "/rental-car",
         nameKey: "dest2_name",
         historyKey: "dest2_history",
         routeKey: "dest2_route",
@@ -609,7 +609,7 @@ export const sacredDestinations = [
     {
         id: 3,
         image: kumbhaImg3,
-        routeLink: "/hotel/rental-car",
+        routeLink: "/rental-car",
         nameKey: "dest3_name",
         historyKey: "dest3_history",
         routeKey: "dest3_route",
@@ -618,7 +618,7 @@ export const sacredDestinations = [
     {
         id: 4,
         image: sacredDest3,
-        routeLink: "/hotel/rental-car",
+        routeLink: "/rental-car",
         nameKey: "dest4_name",
         historyKey: "dest4_history",
         routeKey: "dest4_route",
@@ -627,7 +627,7 @@ export const sacredDestinations = [
     {
         id: 5,
         image: sacredDest5, // Reusing imported asset safely
-        routeLink: "/hotel/rental-car",
+        routeLink: "/rental-car",
         nameKey: "dest5_name",
         historyKey: "dest5_history",
         routeKey: "dest5_route",
@@ -636,7 +636,7 @@ export const sacredDestinations = [
     {
         id: 6,
         image: sacredDest4,
-        routeLink: "/hotel/rental-car",
+        routeLink: "/rental-car",
         nameKey: "dest6_name",
         historyKey: "dest6_history",
         routeKey: "dest6_route",
@@ -645,7 +645,7 @@ export const sacredDestinations = [
     {
         id: 7,
         image: sitaGufa,
-        routeLink: "/hotel/rental-car",
+        routeLink: "/rental-car",
         nameKey: "dest7_name",
         historyKey: "dest7_history",
         routeKey: "dest7_route",
@@ -654,7 +654,7 @@ export const sacredDestinations = [
     {
         id: 8,
         image: sacredDest6,
-        routeLink: "/hotel/rental-car",
+        routeLink: "/rental-car",
         nameKey: "dest8_name",
         historyKey: "dest8_history",
         routeKey: "dest8_route",
@@ -663,7 +663,7 @@ export const sacredDestinations = [
     {
         id: 9,
         image: sacredDest7,
-        routeLink: "/hotel/rental-car",
+        routeLink: "/rental-car",
         nameKey: "dest9_name",
         historyKey: "dest9_history",
         routeKey: "dest9_route",
@@ -672,7 +672,7 @@ export const sacredDestinations = [
     {
         id: 10,
         image: anjaneri,
-        routeLink: "/hotel/rental-car",
+        routeLink: "/rental-car",
         nameKey: "dest10_name",
         historyKey: "dest10_history",
         routeKey: "dest10_route",
