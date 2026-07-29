@@ -108,7 +108,7 @@ export default function MarqueeSliderSec() {
           </div>
         </div>
         <div className="mb-2 md-sm-0 pt-4 pb-4 text-center">
-          <p className="m-0 text-danger fw-semibold fs-6">{t("marqueeDisclaimer")}</p>
+          <p className="m-0 text-danger fw-semibold">{t("marqueeDisclaimer")}</p>
         </div>
       </div>
     </Container>

@@ -68,7 +68,7 @@ const TouristVisitSection = () => {
                     {sacredDestinations.map((card, index) => (
                         <SwiperSlide key={index} className="h-auto">
                             <div
-                                className="card card-image-wrapper history-card h-100 border-0 shadow-md overflow-hidden cursor-pointer"
+                                className="card card-image-wrapper-2 history-card h-100 border-0 shadow-md overflow-hidden cursor-pointer"
                                 onClick={() => handleCardClick(card)}
                                 style={{ cursor: "pointer" }}
                             >
@@ -84,7 +84,7 @@ const TouristVisitSection = () => {
 
                                     {/* Text Badge Overlays translated via key references */}
                                     <div className="position-absolute bottom-0 start-0 m-3 z-2">
-                                        <h4 className='text-light mb-1'>{t(card.nameKey)}</h4>
+                                        <h4 className='text-light mb-1 fs-6'>{t(card.nameKey)}</h4>
                                         <p className='text-white text-excerpt m-0'>{t(card.historyKey)}</p>
                                     </div>
                                 </div>

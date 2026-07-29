@@ -182,7 +182,7 @@ const Footer = () => {
                             <ul className="list-unstyled footer-contact">
                                 <li className="d-flex mb-3">
                                     <MapPin size={18} className="me-2 mt-1 icon flex-shrink-0" />
-                                    <a href="https://maps.app.goo.gl/2snH44TGiHw6UATM7" target='_blank' className='footer-link d-block'>
+                                    <a href="https://maps.app.goo.gl/jmXZeK4ETp27DPaq9" target='_blank' className='footer-link d-block'>
                                         <span>{t("address")}</span>
                                     </a>
                                 </li>

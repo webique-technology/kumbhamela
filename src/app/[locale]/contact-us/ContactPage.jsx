@@ -17,7 +17,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const branchesStaticData = [
     {
         id: "nashik",
-        branchURL: "https://maps.app.goo.gl/2snH44TGiHw6UATM7",
+        branchURL: "https://maps.app.goo.gl/jmXZeK4ETp27DPaq9",
         branchPhone: "7507778088",
     },
     {

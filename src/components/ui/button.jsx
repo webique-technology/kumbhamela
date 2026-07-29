@@ -58,43 +58,57 @@ export const TourBtn = ({ title, className, tourName }) => {
 };
 
 export const WhatsAppShareBtn = ({ tour }) => {
-    // This hook gets the path (e.g., /tour-package/essential-darshan)
     const pathname = usePathname();
-    const t = useTranslations()
+    const t = useTranslations();
+
     const handleWhatsAppShare = () => {
+        // Safe check if tour object exists
+        if (!tour) return;
+
         const origin = window.location.origin;
         const currentUrl = origin + pathname;
 
-        const itinerarySummary = tour.journey
-            .map((day, i) => `Day ${i + 1}: ${day.journey_title}`)
-            .join("\n");
+        // Extract title & description safely from the logged keys
+        const tourTitle = tour.title || tour.name || "Tour Package";
+        const tourDuration = tour.duration || "";
+        const tourDesc = tour.description || tour.mainDesc || "";
 
-        // Remove the Preview Image link line. 
-        // The main link at the bottom triggers the SEO card.
+        // Map over 'itineraries' array safely instead of non-existent 'journey'
+        const itineraryList = tour.itineraries || tour.journey || [];
+        const itinerarySummary = itineraryList.length > 0
+            ? itineraryList
+                .map((day, i) => `Day ${i + 1}: ${day.itinerary_title || day.journey_title || ""}`)
+                .join("\n")
+            : "Detailed itinerary available on link.";
+
+        // Construct message
         const message =
-            `*Tour Itinerary: ${tour.name}*\n\n` +
-            `*Duration:* ${tour.duration}\n` +
-            `*Description:* ${tour.mainDesc}\n\n` +
+            `*Tour Itinerary: ${tourTitle}*\n\n` +
+            (tourDuration ? `*Duration:* ${tourDuration}\n` : "") +
+            (tourDesc ? `*Description:* ${tourDesc.replace(/\*\*/g, "")}\n\n` : "\n") + // Optional: strip markdown ** if any
             `*Itinerary Overview:*\n${itinerarySummary}\n\n` +
             `*Full Details:* ${currentUrl}`;
 
         const encodedMessage = encodeURIComponent(message);
-        window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");
+        
+        // Open WhatsApp web / mobile app safely
+        window.open(`https://api.whatsapp.com/send?text=${encodedMessage}`, "_blank");
     };
 
     return (
         <button
+            type="button"
             onClick={handleWhatsAppShare}
             className="itinerary-summary p-2 border-0 bg-white rounded d-flex flex-column align-items-center justify-content-center mt-3"
             style={{ cursor: 'pointer', transition: 'all 0.3s ease' }}
         >
             <img
-                src={whatsappIcon.src}
-                alt="whatsapp"
+                src={whatsappIcon.src || whatsappIcon}
+                alt="WhatsApp"
                 style={{ width: '28px', marginBottom: '5px' }}
             />
             <p className="m-0 fw-bold text-success" style={{ fontSize: '12px' }}>
-                {t("TranslateBtn.SendItinerary")}
+                {t ? t("TranslateBtn.SendItinerary") : "Send Itinerary"}
             </p>
         </button>
     );

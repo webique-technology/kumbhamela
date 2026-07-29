@@ -1,12 +1,14 @@
 // 1. Static ES6 Import Architecture for Assets
-import sacredDest1 from "../assets/images/sacred-destination-1.jpg";
-import sacredDest2 from "../assets/images/sacred-destination-2.jpg";
-import sacredDest3 from "../assets/images/sacred-destination-3.jpg";
+import sacredDest1 from "../assets/images/triambakeshwar-tempel.jpg";
+import sacredDest2 from "../assets/images/ramkund.jpg";
+import sacredDest3 from "../assets/images/kalaram-temple.jpg";
 import sacredDest4 from "../assets/images/sacred-destination-4.jpg";
-import sacredDest5 from "../assets/images/sacred-destination-5.jpg";
-import kumbhaImg3 from "../assets/images/kumbhamela-img-3.jpg";
-import sitaGufa from "../assets/images/sita-gufa.webp";
-import anjaneri from "../assets/images/anjaneri.webp";
+import sacredDest5 from "../assets/images/goda-ghat.jpg";
+import sacredDest6 from "../assets/images/sacred-destination-5.jpg";
+import sacredDest7 from "../assets/images/kapaleshwar-tempal.jpg";
+import kumbhaImg3 from "../assets/images/panchavati.jpg";
+import sitaGufa from "../assets/images/sita-gufa.jpg";
+import anjaneri from "../assets/images/anjaneri-img.jpg";
 
 export const hotels = [
     {
@@ -624,7 +626,7 @@ export const sacredDestinations = [
     },
     {
         id: 5,
-        image: sacredDest2, // Reusing imported asset safely
+        image: sacredDest5, // Reusing imported asset safely
         routeLink: "/hotel/rental-car",
         nameKey: "dest5_name",
         historyKey: "dest5_history",
@@ -651,7 +653,7 @@ export const sacredDestinations = [
     },
     {
         id: 8,
-        image: sacredDest5,
+        image: sacredDest6,
         routeLink: "/hotel/rental-car",
         nameKey: "dest8_name",
         historyKey: "dest8_history",
@@ -660,7 +662,7 @@ export const sacredDestinations = [
     },
     {
         id: 9,
-        image: sacredDest2,
+        image: sacredDest7,
         routeLink: "/hotel/rental-car",
         nameKey: "dest9_name",
         historyKey: "dest9_history",

@@ -1,7 +1,7 @@
 {
   "Common": {
     "loading": "Loading...",
-    "marqueeDisclaimer": "Note: The logos displayed on this website are the property of their respective State Tourism Departments and are shown for informational purposes only. Their display does not imply any official partnership, affiliation, or endorsement."
+    "marqueeDisclaimer" : "Note : Tourism logos belong to their respective State Tourism Departments, used for informational purposes only, and do not represent any official partnership or endorsement."
   },
   "Navbar": {
     "logoTitle": "MAHAKUMBH",
