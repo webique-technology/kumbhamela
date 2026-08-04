@@ -1,513 +1,565 @@
 "use client";
-import React from 'react'
+import React from "react";
 import Image from "next/image";
-import { Calendar, Clock, ArrowRight, Star, MapPin, MessageCircle, Users, ChevronRight, Subtitles } from "lucide-react";
-import { Link } from '@/i18n/routing';
-import { useParams } from 'next/navigation';
-import { WhatsappBtn } from './button';
-import { SearchFleet, SwiperSliderComp } from './common';
-import { SwiperSlide } from 'swiper/react';
-import { Col, Container, Row } from 'react-bootstrap';
-import IconResolver from './iconResolver';
-import { useTranslations } from 'next-intl';
+import {
+  Calendar,
+  Clock,
+  ArrowRight,
+  Star,
+  MapPin,
+  MessageCircle,
+  Users,
+  ChevronRight,
+  Subtitles,
+} from "lucide-react";
+import { Link } from "@/i18n/routing";
+import { useParams } from "next/navigation";
+import { WhatsappBtn, WhatsAppCardDataShareBtn } from "./button";
+import { SearchFleet, SwiperSliderComp } from "./common";
+import { SwiperSlide } from "swiper/react";
+import { Col, Container, Row } from "react-bootstrap";
+import IconResolver from "./iconResolver";
+import { useTranslations } from "next-intl";
 import { imageUrl } from "@/lib/utils";
 
 // for blogs card
-export const BlogCard = ({ blog, blogLink, img_width, img_height, img_count_width = "100%", img_count_height = "220px" }) => {
-    const t = useTranslations("TranslateBtn");
-    return (
-        <div className="card h-100 border-0 blog-card shadow-sm">
-
-            {/* Image */}
-            <div
-                className="blog-img-count position-relative overflow-hidden"
-                style={{
-                    width: img_count_width,
-                    maxHeight: img_count_height
-                }}
-            >
-                {/* <img
+export const BlogCard = ({
+  blog,
+  blogLink,
+  img_width,
+  img_height,
+  img_count_width = "100%",
+  img_count_height = "220px",
+}) => {
+  const t = useTranslations("TranslateBtn");
+  return (
+    <div className="card h-100 border-0 blog-card shadow-sm">
+      {/* Image */}
+      <div
+        className="blog-img-count position-relative overflow-hidden"
+        style={{
+          width: img_count_width,
+          maxHeight: img_count_height,
+        }}
+      >
+        {/* <img
                     src={blog.image}
                     alt={blog.title}
                     className="blog-img"
                 /> */}
-                <img
-                    src={blog.image_url || "/images/tour-section-bg.png"}
-                    alt={blog.title}
-                    width={img_width}
-                    height={img_height}
-                    className="blog-img card-img-top"
-                />
+        <img
+          src={blog.image_url || "/images/tour-section-bg.png"}
+          alt={blog.title}
+          width={img_width}
+          height={img_height}
+          className="blog-img card-img-top"
+        />
 
-                {/* Category */}
-                <span className="badge blog-badge position-absolute d-flex align-items-center justify-content-center top-0 start-0 m-3">
-                    {blog.category}
-                </span>
-            </div>
+        {/* Category */}
+        <span className="badge blog-badge position-absolute d-flex align-items-center justify-content-center top-0 start-0 m-3">
+          {blog.category}
+        </span>
+      </div>
 
-            {/* Content */}
-            <div className="card-body d-flex flex-column justify-content-between py-4 px-1">
-
-                {/* Meta */}
-                <div className="d-flex gap-3 text-muted small mb-2">
-                    <div className="d-flex align-items-center gap-1">
-                        <Calendar size={14} />
-                        {/* <span>{blog.date}</span> */}
-                        <span> {new Date(blog.created_at).toLocaleDateString()}</span>
-                    </div>
-                    {/* <div className="d-flex align-items-center gap-1">
+      {/* Content */}
+      <div className="card-body d-flex flex-column justify-content-between py-4 px-1">
+        {/* Meta */}
+        <div className="d-flex gap-3 text-muted small mb-2">
+          <div className="d-flex align-items-center gap-1">
+            <Calendar size={14} />
+            {/* <span>{blog.date}</span> */}
+            <span> {new Date(blog.created_at).toLocaleDateString()}</span>
+          </div>
+          {/* <div className="d-flex align-items-center gap-1">
                         <Clock size={14} />
                         <span>{blog.readTime}</span>
                     </div> */}
-                </div>
+        </div>
 
-                {/* Title */}
-                <Link href={blogLink} className="text-decoration-none">
-                    <h3 className="card-title mb-3 fw-semibold text-dark blog-title">
-                        {blog.title}
-                    </h3>
-                </Link>
+        {/* Title */}
+        <Link href={blogLink} className="text-decoration-none">
+          <h3 className="card-title mb-3 fw-semibold text-dark blog-title">
+            {blog.title}
+          </h3>
+        </Link>
 
-                {/* Excerpt */}
-                <div className="text-muted small blog-excerpt"
-                    dangerouslySetInnerHTML={{
-                        __html: blog.description,
-                    }}
-                />
-                {/* {blog.description
+        {/* Excerpt */}
+        <div
+          className="text-muted small blog-excerpt"
+          dangerouslySetInnerHTML={{
+            __html: blog.description,
+          }}
+        />
+        {/* {blog.description
                         ?.replace(/<[^>]*>/g, "") // Regular expression to safely strip out all HTML tags
                         ?.slice(0, 120)}
                     {blog.description?.replace(/<[^>]*>/g, "").length > 120 ? "..." : ""}
                 </div> */}
 
-
-                {/* Button */}
-                <Link href={blogLink} className="btn btn-link p-0 blog-readmore text-decoration-none d-flex align-items-center gap-1">
-                    {t("ReadMore")} <ArrowRight size={16} className='primery-color' />
-                </Link>
-            </div>
-        </div>
-    )
-}
+        {/* Button */}
+        <Link
+          href={blogLink}
+          className="btn btn-link p-0 blog-readmore text-decoration-none d-flex align-items-center gap-1"
+        >
+          {t("ReadMore")} <ArrowRight size={16} className="primery-color" />
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 // for hotels card
 export const HotelCards = ({ hotel, onBookNow }) => {
-    const t = useTranslations();
+  const t = useTranslations();
 
-    // console.log(hotel?.room_type);
+  // console.log(hotel?.room_type);
 
-    return (
-        <>
-            <div className="card h-100 border-0 shadow-sm hotel-card overflow-hidden">
+  return (
+    <>
+      <div className="card h-100 border-0 shadow-sm hotel-card overflow-hidden">
+        {/* Image Header */}
+        <div className="position-relative hotel-img-container">
+          <SwiperSliderComp
+            navigation={false}
+            loop={hotel.images?.length > 1}
+            timeDelay={3000}
+          >
+            {hotel.images?.map((value, index) => (
+              <SwiperSlide key={index}>
+                <Image
+                  src={value}
+                  alt={value.title || "Hotel Image"}
+                  width={400}
+                  height={250}
+                  className="card-img-top object-fit-cover"
+                  style={{ width: "100%", height: "auto", maxWidth: "100%" }}
+                  priority
+                  unoptimized={process.env.NODE_ENV === "development"}
+                />
+              </SwiperSlide>
+            ))}
+          </SwiperSliderComp>
 
-                {/* Image Header */}
-                <div className="position-relative hotel-img-container">
-                    <SwiperSliderComp
-                        navigation={false}
-                        loop={hotel.images?.length > 1}
-                        timeDelay={3000}
-                    >
-                        {hotel.images?.map((value, index) => (
-                            <SwiperSlide key={index}>
-                                <Image
-                                    src={value}
-                                    alt={value.title || "Hotel Image"}
-                                    width={400}
-                                    height={250}
-                                    className="card-img-top object-fit-cover"
-                                    style={{ width: '100%', height: 'auto', maxWidth: '100%' }}
-                                    priority
-                                    unoptimized={process.env.NODE_ENV === "development"}
-                                />
-                            </SwiperSlide>
-                        ))}
-                    </SwiperSliderComp>
+          {/* Badge Left */}
+          <div className="position-absolute top-0 start-0 m-3 z-2">
+            <span className="badge badge-left rounded-pill bg-brand-orange">
+              {hotel.category}
+            </span>
+          </div>
 
-                    {/* Badge Left */}
-                    <div className="position-absolute top-0 start-0 m-3 z-2">
-                        <span className="badge badge-left rounded-pill bg-brand-orange">
-                            {hotel.category}
-                        </span>
-                    </div>
+          {/* Rating Right */}
+          {/* <div className="position-absolute top-0 end-0 mt-3 me-5 badge rounded-pill bg-white text-dark d-flex align-items-center gap-1 shadow-sm">
+            <Star size={14} className="text-warning fill-warning" />
+            <span className="fw-bold text-dark">{hotel.rating}</span>
+          </div> */}
+          <div className="position-absolute z-3 top-0 end-0 m-3">
+            <WhatsAppCardDataShareBtn data={hotel} type="hotel" mode="icon" />
+          </div>
+        </div>
 
-                    {/* Rating Right */}
-                    <div className="position-absolute top-0 end-0 m-3 badge rounded-pill bg-white text-dark d-flex align-items-center gap-1 shadow-sm">
-                        <Star size={14} className="text-warning fill-warning" />
-                        <span className="fw-bold text-dark">{hotel.rating}</span>
-                    </div>
-                </div>
+        {/* Card Body */}
+        <div className="card-body p-4">
+          <h3 className="h5 fw-bold text-brand-dark mb-2">{hotel.title}</h3>
 
-                {/* Card Body */}
-                <div className="card-body p-4">
-                    <h3 className="h5 fw-bold text-brand-dark mb-2">{hotel.title}</h3>
+          <div className="d-flex align-items-center gap-2 text-muted small mb-3">
+            <MapPin size={16} className="text-brand-orange" />
+            <span>{hotel.location}</span>
+          </div>
 
-                    <div className="d-flex align-items-center gap-2 text-muted small mb-3">
-                        <MapPin size={16} className="text-brand-orange" />
-                        <span>{hotel.location}</span>
-                    </div>
-
-                    {/* Features */}
-                    {hotel.features && (
-                        <div className="d-flex flex-wrap gap-2 mb-2">
-                            {hotel.features?.map((feature, idx) => (
-                                <span
-                                    key={idx}
-                                    className="badge sora d-flex align-items-center justify-content-center rounded-pill border border-light"
-                                >
-                                    {feature}
-                                </span>
-                            ))}
-                        </div>
-                    )}
-
-                    {/* room type */}
-                    {hotel.room_type && (
-                        <div className="d-flex flex-wrap gap-2 mb-2">
-                            {hotel.room_type?.map((feature, idx) => (
-                                <span
-                                    key={idx}
-                                    className="badge sora d-flex align-items-center justify-content-center rounded-pill border border-light"
-                                >
-                                    {feature}
-                                </span>
-                            ))}
-                        </div>
-                    )}
-
-                    {/* Footer Logic */}
-                    <div className="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
-                        <div>
-                            <small className="text-muted d-block">{t("Cards.StartingFrom")}</small>
-                            {/* <span className="h4 text-brand-orange mb-0">{hotel.base_price}</span> */}
-                            {hotel?.offer_price ? (
-                                <div className="d-flex flex-row align-items-center justify-content-center gap-2">
-                                    {/* Render the discounted offer price */}
-                                    <span className="h4 text-brand-orange mb-0">
-                                        ₹{hotel?.offer_price}
-                                    </span>
-                                    {/* Render the original base price with a strikethrough next to it */}
-                                    <span className="fs-6 text-muted text-decoration-line-through mb-0">
-                                        ₹{hotel?.base_price}
-                                    </span>
-                                </div>
-                            ) : (
-                                hotel?.base_price && (
-                                    // Fallback: If no offer price exists, only show the base price normally
-                                    <div className="text-center">
-                                        <span className="h5 fw-bold text-brand-orange mb-0">
-                                            ₹{hotel?.base_price}
-                                        </span>
-                                    </div>
-                                )
-                            )}
-                            <small className="text-muted d-block smaller">{t("Cards.PerNight")}</small>
-                        </div>
-
-                        {/* whatsapp btn */}
-                        <WhatsappBtn
-                            type='button'
-                            onClick={onBookNow}
-                            iconLeft={<MessageCircle size={18} />}
-                            title={t("TranslateBtn.BookNow")}
-                            className="btn btn-whatsapp d-flex align-items-center gap-2 px-3 py-2 text-white border-0 shadow-sm"
-                        />
-                    </div>
-                </div>
+          {/* Features */}
+          {hotel.features && (
+            <div className="d-flex flex-wrap gap-2 mb-2">
+              {hotel.features?.map((feature, idx) => (
+                <span
+                  key={idx}
+                  className="badge sora d-flex align-items-center justify-content-center rounded-pill border border-light"
+                >
+                  {feature}
+                </span>
+              ))}
             </div>
-        </>
-    )
-}
+          )}
+
+          {/* room type */}
+          {hotel.room_type && (
+            <div className="d-flex flex-wrap gap-2 mb-2">
+              {hotel.room_type?.map((feature, idx) => (
+                <span
+                  key={idx}
+                  className="badge sora d-flex align-items-center justify-content-center rounded-pill border border-light"
+                >
+                  {feature}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {/* Footer Logic */}
+          <div className="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
+            <div>
+              <small className="text-muted d-block">
+                {t("Cards.StartingFrom")}
+              </small>
+              {/* <span className="h4 text-brand-orange mb-0">{hotel.base_price}</span> */}
+              {hotel?.offer_price ? (
+                <div className="d-flex flex-row align-items-center justify-content-center gap-2">
+                  {/* Render the discounted offer price */}
+                  <span className="h4 text-brand-orange mb-0">
+                    ₹{hotel?.offer_price}
+                  </span>
+                  {/* Render the original base price with a strikethrough next to it */}
+                  <span className="fs-6 text-muted text-decoration-line-through mb-0">
+                    ₹{hotel?.base_price}
+                  </span>
+                </div>
+              ) : (
+                hotel?.base_price && (
+                  // Fallback: If no offer price exists, only show the base price normally
+                  <div className="text-center">
+                    <span className="h5 fw-bold text-brand-orange mb-0">
+                      ₹{hotel?.base_price}
+                    </span>
+                  </div>
+                )
+              )}
+              <small className="text-muted d-block smaller">
+                {t("Cards.PerNight")}
+              </small>
+            </div>
+
+            {/* whatsapp btn */}
+            <WhatsappBtn
+              type="button"
+              onClick={onBookNow}
+              iconLeft={<MessageCircle size={18} />}
+              title={t("TranslateBtn.BookNow")}
+              className="btn btn-whatsapp d-flex align-items-center gap-2 px-3 py-2 text-white border-0 shadow-sm"
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
 // for sacred destinations card
 export const SacredDestinationsCard = ({ destination }) => {
-    return (
-        <>
-            <div className="card sacred-dest-card h-100 border-0 shadow-sm overflow-hidden">
-                {/* Image Container with Overlay */}
-                <div className="position-relative card-image-wrapper overflow-hidden">
-                    <Image
-                        src={destination.image}
-                        alt={destination.name}
-                        width={400}
-                        height={250}
-                        className="card-img-top object-fit-cover transition-transform"
-                    />
+  return (
+    <>
+      <div className="card sacred-dest-card h-100 border-0 shadow-sm overflow-hidden">
+        {/* Image Container with Overlay */}
+        <div className="position-relative card-image-wrapper overflow-hidden">
+          <Image
+            src={destination.image}
+            alt={destination.name}
+            width={400}
+            height={250}
+            className="card-img-top object-fit-cover transition-transform"
+          />
 
-                    {/* Dark Gradient Overlay for readability */}
-                    <div className="card-img-overlay-gradient position-absolute bottom-0 start-0 w-100 p-3 z-3">
-                        <div className="d-flex align-items-center gap-2 text-white">
-                            <MapPin size={18} className="flex-shrink-0" />
-                            <span className="fw-medium small text-light">{destination.location}</span>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Content Body */}
-                <div className="card-body p-4">
-                    <h3 className="h5 fw-bold text-brand-dark mb-2">
-                        {destination.name}
-                    </h3>
-                    <p className="card-text text-muted small mb-4 leading-relaxed">
-                        {destination.description}
-                    </p>
-                </div>
+          {/* Dark Gradient Overlay for readability */}
+          <div className="card-img-overlay-gradient position-absolute bottom-0 start-0 w-100 p-3 z-3">
+            <div className="d-flex align-items-center gap-2 text-white">
+              <MapPin size={18} className="flex-shrink-0" />
+              <span className="fw-medium small text-light">
+                {destination.location}
+              </span>
             </div>
-        </>
-    )
-}
+          </div>
+        </div>
+
+        {/* Content Body */}
+        <div className="card-body p-4">
+          <h3 className="h5 fw-bold text-brand-dark mb-2">
+            {destination.name}
+          </h3>
+          <p className="card-text text-muted small mb-4 leading-relaxed">
+            {destination.description}
+          </p>
+        </div>
+      </div>
+    </>
+  );
+};
 
 // rental car card
 export const RentalCarCard = ({ car, onBook }) => {
-    const params = useParams();
-    const currentLocale = params?.locale || 'en';
-    const t = useTranslations("TranslateBtn");
-    return (
-        <div className="card rental-car-card h-100 border-0 shadow-sm overflow-hidden">
-            {/* Image Container with Overlay */}
-            <div className="position-relative overflow-hidden">
-                {car?.car_image_url ? (
-                    <img
-                        src={imageUrl(car.car_image_url)}
-                        alt={car.name}
-                        width={200}
-                        height={200}
-                        className="card-img-top img-fluid transition-transform"
-                    />
-                ) : (
-                    <div
-                        style={{ width: "100%", height: "200px" }}
-                        className="card-img-top bg-light"
-                    />
-                )}
-            </div>
+  const params = useParams();
+  const currentLocale = params?.locale || "en";
+  const t = useTranslations("TranslateBtn");
+  return (
+    <div className="card rental-car-card h-100 border-0 shadow-sm overflow-hidden">
+      {/* Image Container with Overlay */}
+      <div className="position-relative overflow-hidden">
+        {car?.car_image_url ? (
+          <img
+            src={imageUrl(car.car_image_url)}
+            alt={car.name}
+            width={200}
+            height={200}
+            className="card-img-top-car img-fluid transition-transform"
+          />
+        ) : (
+          <div
+            style={{ width: "100%", height: "200px" }}
+            className="card-img-top-car bg-light"
+          />
+        )}
+        <div className="position-absolute z-3 top-0 end-0 m-3">
+          <WhatsAppCardDataShareBtn data={car} type="car" mode="icon" />
+        </div>
+      </div>
 
-            {/* Content Body */}
-            <div className="card-body p-4">
-                <div className='d-flex align-items-center justify-content-between'>
-                    <h3 className="h5 fw-bold text-brand-dark mb-2">
-                        {car.name}
-                    </h3>
-                    <p className="card-text d-flex align-items-center mb-2 gap-2 text-muted small leading-relaxed">
-                        <Users size={16} />
-                        {car.total_seats}
-                    </p>
-                </div>
-                {/* Features */}
-                <ul className='d-flex flex-wrap gap-2 mb-4 p-0'>
+      {/* Content Body */}
+      <div className="card-body p-4">
+        <div className="d-flex align-items-center justify-content-between">
+          <h3 className="h5 fw-bold text-brand-dark mb-2">{car.name}</h3>
+          <p className="card-text d-flex align-items-center mb-2 gap-2 text-muted small leading-relaxed">
+            <Users size={16} />
+            {car.total_seats}
+          </p>
+        </div>
+        {/* Features */}
+        <ul className="d-flex flex-wrap gap-2 mb-4 p-0">
+          <div className="d-flex flex-wrap gap-1">
+            {car.features?.map((feature, idx) => (
+              <span
+                key={idx}
+                className="features-badge-2 p-1 fw-semibold sora m-0 color-gray-500 trinery-bg d-flex align-items-center justify-content-center rounded-pill border shadow-sm border-light"
+              >
+                {feature}
+              </span>
+            ))}
+          </div>
+        </ul>
+        {/* Footer Logic */}
+        <div className="d-flex align-items-center justify-content-between mt-auto border-top pt-3">
+          <div className="d-flex align-items-end">
+            <span className="h4 fw-bold text-brand-orange mb-0">
+              {car.base_price}
+            </span>
+            &nbsp;/&nbsp;
+            <small className="text-muted d-block smaller mb-1">per km</small>
+          </div>
 
-                    <div className="d-flex flex-wrap gap-1">
-                        {car.features?.map((feature, idx) => (
-                            <span
-                                key={idx}
-                                className="features-badge-2 p-1 fw-semibold sora m-0 color-gray-500 trinery-bg d-flex align-items-center justify-content-center rounded-pill border shadow-sm border-light"
-                            >
-                                {feature}
-                            </span>
-                        ))}
-                    </div>
-                </ul>
-                {/* Footer Logic */}
-                < div className="d-flex align-items-center justify-content-between mt-auto border-top pt-3" >
-                    <div className='d-flex align-items-end'>
-                        <span className="h4 fw-bold text-brand-orange mb-0">{car.base_price}</span>&nbsp;/&nbsp;
-                        <small className="text-muted d-block smaller mb-1">per km</small>
-                    </div>
-
-                    {/* whatsapp btn */}
-                    <WhatsappBtn
-                        type='button'
-                        onClick={onBook}
-                        title={t("BookNow")}
-                        className="whatsapp-btn d-flex align-items-center border-0 shadow-sm"
-                    />
-                </div>
-            </div>
-        </div >
-    )
-}
+          {/* whatsapp btn */}
+          <WhatsappBtn
+            type="button"
+            onClick={onBook}
+            title={t("BookNow")}
+            className="whatsapp-btn d-flex align-items-center border-0 shadow-sm"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 // tour package card
 export const TourPackageCard = ({ tour, tourLink }) => {
-    const params = useParams();
-    const currentLocale = params?.locale || "en";
-    const t = useTranslations();
-    // Features safe for array/string/null
-    const features = Array.isArray(tour?.features)
-        ? tour.features
-        : tour?.features
-            ? tour.features.split(",")
-            : [];
+  const params = useParams();
+  const currentLocale = params?.locale || "en";
+  const t = useTranslations();
+  // Features safe for array/string/null
+  const features = Array.isArray(tour?.features)
+    ? tour.features
+    : tour?.features
+      ? tour.features.split(",")
+      : [];
 
-    // Image safe
-    const imageSrc =
-        // tour?.image || "/images/default-tour.jpg";
-        tour?.image_url && tour.image_url.trim() !== "" ? tour.image_url : "/images/river-rituals.webp";
+  // Image safe
+  const imageSrc =
+    // tour?.image || "/images/default-tour.jpg";
+    tour?.image_url && tour.image_url.trim() !== ""
+      ? tour.image_url
+      : "/images/river-rituals.webp";
 
+  return (
+    <>
+      <div className="tour-package-card card h-100 border-0 shadow-sm overflow-hidden">
+        {/* Image Container with Overlay */}
+        <div className="position-relative card-image-wrapper overflow-hidden">
+          <img
+            src={imageSrc}
+            alt={tour?.title || "Tour"}
+            width={200}
+            height={200}
+            className="card-img-top object-fit-cover transition-transform"
+          />
+          {/* <div className="position-absolute z-3 top-0 end-0 p-4">
+            <WhatsAppCardDataShareBtn data={tour} type="tour" mode="icon" />
+          </div> */}
+        </div>
 
-    return (
-        <>
-            <div className="tour-package-card card h-100 border-0 shadow-sm overflow-hidden">
-                {/* Image Container with Overlay */}
-                <div className="position-relative card-image-wrapper overflow-hidden">
-                    <img
-                        src={imageSrc}
-                        alt={tour?.title || "Tour"}
-                        width={200}
-                        height={200}
-                        className="card-img-top object-fit-cover transition-transform"
-                    />
-                </div>
+        {/* Content Body */}
+        <div className="card-body p-4">
+          <div className="d-flex flex-column align-items-start justify-content-between">
+            <h3 className="sub-heading text-dark mb-2">{tour?.title}</h3>
 
-                {/* Content Body */}
-                <div className="card-body p-4">
-                    <div className="d-flex flex-column align-items-start justify-content-between">
-                        <h3 className="sub-heading text-dark mb-2">
-                            {tour?.title}
-                        </h3>
-
-                        {/* <p className="card-text d-flex align-items-center gap-2 text-muted small mb-2 leading-relaxed">
+            {/* <p className="card-text d-flex align-items-center gap-2 text-muted small mb-2 leading-relaxed">
                             <Clock size={16} />
                             {tour?.duration}
                         </p> */}
-                    </div>
+          </div>
 
-                    {/* Footer Logic */}
-                    <div className="d-flex align-items-center justify-content-between mt-auto mb-2">
-                        <div className="d-flex align-items-end">
-                            <div className="mb-0 fw-semibold" style={{ display: "contents" }}>
-                                {t("Cards.StartingFrom")} : &nbsp;
-                                {tour?.offer_price ? (
-                                    <div className="d-flex flex-row align-items-center justify-content-center gap-2">
-                                        {/* Render the discounted offer price */}
-                                        <span className="h5 fw-bold text-brand-orange mb-0">
-                                            ₹{tour?.offer_price}
-                                        </span>
-                                        {/* Render the original base price with a strikethrough next to it */}
-                                        <span className="fs-6 text-muted text-decoration-line-through mb-0">
-                                            ₹{tour?.base_price}
-                                        </span>
-                                    </div>
-                                ) : (
-                                    tour?.base_price && (
-                                        // Fallback: If no offer price exists, only show the base price normally
-                                        <div className="text-center">
-                                            <span className="h5 fw-bold text-brand-orange mb-0">
-                                                ₹{tour?.base_price}
-                                            </span>
-                                        </div>
-                                    )
-                                )}
-                                {/* <small className="text-muted d-block smaller mb-1">
+          {/* Footer Logic */}
+          <div className="d-flex align-items-center justify-content-between mt-auto mb-2">
+            <div className="d-flex align-items-end">
+              <div className="mb-0 fw-semibold" style={{ display: "contents" }}>
+                {t("Cards.StartingFrom")} : &nbsp;
+                {tour?.offer_price ? (
+                  <div className="d-flex flex-row align-items-center justify-content-center gap-2">
+                    {/* Render the discounted offer price */}
+                    <span className="h5 fw-bold text-brand-orange mb-0">
+                      ₹{tour?.offer_price}
+                    </span>
+                    {/* Render the original base price with a strikethrough next to it */}
+                    <span className="fs-6 text-muted text-decoration-line-through mb-0">
+                      ₹{tour?.base_price}
+                    </span>
+                  </div>
+                ) : (
+                  tour?.base_price && (
+                    // Fallback: If no offer price exists, only show the base price normally
+                    <div className="text-center">
+                      <span className="h5 fw-bold text-brand-orange mb-0">
+                        ₹{tour?.base_price}
+                      </span>
+                    </div>
+                  )
+                )}
+                {/* <small className="text-muted d-block smaller mb-1">
                                     per Person
                                 </small> */}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Features */}
-                    <ul className="d-flex flex-column flex-wrap gap-1 mb-3 p-0">
-                        {tour?.highlights.map((feature, idx) => (
-                            <li
-                                key={idx}
-                                className="d-flex paragraph align-items-center justify-content-start gap-1"
-                            >
-                                <span className="primery-color">
-                                    <ChevronRight size={16} />
-                                </span>
-
-                                {feature}
-                            </li>
-                        ))}
-                    </ul>
-
-                    {/* link btn */}
-                    <Link
-                        href={tourLink || "#"}
-                        className="primery-btn py-2 text-decoration-none w-100 d-flex justify-content-center align-items-center mt-auto"
-                    >
-                        {t("TranslateBtn.viewDetails")}
-                    </Link>
-                </div>
+              </div>
             </div>
-        </>
-    );
+          </div>
+
+          {/* Features */}
+          <ul className="d-flex flex-column flex-wrap gap-1 mb-3 p-0">
+            {tour?.highlights.map((feature, idx) => (
+              <li
+                key={idx}
+                className="d-flex paragraph align-items-center justify-content-start gap-1"
+              >
+                <span className="primery-color">
+                  <ChevronRight size={16} />
+                </span>
+
+                {feature}
+              </li>
+            ))}
+          </ul>
+
+          {/* link btn */}
+          <Link
+            href={tourLink || "#"}
+            className="primery-btn py-2 text-decoration-none w-100 d-flex justify-content-center align-items-center mt-auto"
+          >
+            {t("TranslateBtn.viewDetails")}
+          </Link>
+        </div>
+      </div>
+    </>
+  );
 };
 
 // Header Hero Card
-export const HeroHeaderCard = ({ showSearch = true, heroTitle, heroTitleClass, description, heroSpan, heroImage, imgClass = "hero-img" }) => {
-
-    return (
-        <>
-            <div
-                className="hero-header-card d-flex align-items-center"
-                style={{ backgroundImage: heroImage ? `url(${heroImage})` : "none" }}
-            >
-                <Container>
-                    <div className="hero-content position-relative z-3 pb-2 pb-sm-0">
-                        <h1 className={`hero-card-title ${heroTitleClass}`}>
-                            {heroTitle}&nbsp;
-                            <span className="">{heroSpan}</span>
-                        </h1>
-                        <p>{description}</p>
-                    </div>
-                    {showSearch && (
-                        <div className="hero-search-wrapper mt-4">
-                            <SearchFleet />
-                        </div>
-                    )}
-                </Container>
+export const HeroHeaderCard = ({
+  showSearch = true,
+  heroTitle,
+  heroTitleClass,
+  description,
+  heroSpan,
+  heroImage,
+  imgClass = "hero-img",
+}) => {
+  return (
+    <>
+      <div
+        className="hero-header-card d-flex align-items-center"
+        style={{ backgroundImage: heroImage ? `url(${heroImage})` : "none" }}
+      >
+        <Container>
+          <div className="hero-content position-relative z-3 pb-2 pb-sm-0">
+            <h1 className={`hero-card-title ${heroTitleClass}`}>
+              {heroTitle}&nbsp;
+              <span className="">{heroSpan}</span>
+            </h1>
+            <p>{description}</p>
+          </div>
+          {showSearch && (
+            <div className="hero-search-wrapper mt-4">
+              <SearchFleet />
             </div>
-        </>
-    )
-}
+          )}
+        </Container>
+      </div>
+    </>
+  );
+};
 
-
-export const HeroHeaderCard2 = ({ showSearch = true, heroTitle, heroTitleClass, redText, spanClass, description, heroSpan, subTitle, heroImage, imgClass = "hero-img" }) => {
-
-    return (
-        <>
-            <div
-                className="hero-header-card-2 primary-bg d-flex align-items-center"
-                style={{ backgroundImage: heroImage ? `url(${heroImage})` : "none" }}
-            >
-                <Container>
-                    <div className="hero-content text-center d-flex flex-column align-items-center position-relative z-3 pb-2 pb-sm-0">
-                        {subTitle && (
-                            <span className='mb-3 hero-subheading blur-badge-light d-block'>
-                                {subTitle}
-                            </span>
-                        )}
-                        <h1 className={`hero-card-title mb-3 ${heroTitleClass}`}>
-                            {heroTitle}&nbsp;
-                            {heroSpan && (<span className={`${spanClass}`}>{heroSpan}</span>)}
-                        </h1>
-                        {description && (<p className='hero-para opacity-8 m-0 text-white'>{description}</p>)}
-
-                    </div>
-                    {showSearch && (
-                        <div className="hero-search-wrapper mt-4">
-                            <SearchFleet />
-                        </div>
-                    )}
-                    {redText && (
-                        <div className='my-2 text-center'>
-                            <p className='m-0 text-danger fw-semibold fs-6'>{redText}</p>
-                        </div>
-                    )}
-                </Container>
+export const HeroHeaderCard2 = ({
+  showSearch = true,
+  heroTitle,
+  heroTitleClass,
+  redText,
+  spanClass,
+  description,
+  heroSpan,
+  subTitle,
+  heroImage,
+  imgClass = "hero-img",
+}) => {
+  return (
+    <>
+      <div
+        className="hero-header-card-2 primary-bg d-flex align-items-center"
+        style={{ backgroundImage: heroImage ? `url(${heroImage})` : "none" }}
+      >
+        <Container>
+          <div className="hero-content text-center d-flex flex-column align-items-center position-relative z-3 pb-2 pb-sm-0">
+            {subTitle && (
+              <span className="mb-3 hero-subheading blur-badge-light d-block">
+                {subTitle}
+              </span>
+            )}
+            <h1 className={`hero-card-title mb-3 ${heroTitleClass}`}>
+              {heroTitle}&nbsp;
+              {heroSpan && <span className={`${spanClass}`}>{heroSpan}</span>}
+            </h1>
+            {description && (
+              <p className="hero-para opacity-8 m-0 text-white">
+                {description}
+              </p>
+            )}
+          </div>
+          {showSearch && (
+            <div className="hero-search-wrapper mt-4">
+              <SearchFleet />
             </div>
-        </>
-    )
-}
-
-
-export const PaymentTerms = ({ terms = "No cancellation charges for booking modification or cancellation done 24 hours before the scheduled tour date.A 5% charge will be applicable for cancellations made within 24 hours of the tour.", policy }) => {
-    return (
-        <>
-            <div className="p-3 bg-light rounded">
-                <h6 className="fw-bold">Payment Terms</h6>
-                <p className="text-secondary small mb-0">{policy.content}</p>
+          )}
+          {redText && (
+            <div className="my-2 text-center">
+              <p className="m-0 text-danger fw-semibold fs-6">{redText}</p>
             </div>
-        </>
-    )
-}
+          )}
+        </Container>
+      </div>
+    </>
+  );
+};
+
+export const PaymentTerms = ({
+  terms = "No cancellation charges for booking modification or cancellation done 24 hours before the scheduled tour date.A 5% charge will be applicable for cancellations made within 24 hours of the tour.",
+  policy,
+}) => {
+  return (
+    <>
+      <div className="p-3 bg-light rounded">
+        <h6 className="fw-bold">Payment Terms</h6>
+        <p className="text-secondary small mb-0">{policy.content}</p>
+      </div>
+    </>
+  );
+};

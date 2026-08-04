@@ -6,6 +6,20 @@
     overflow: hidden;
 }
 
+.rental-car-card {
+    .card-img-top-car {
+        width: auto;
+        scale: 0.8;
+        transition: all 0.2s ease-in-out;
+    }
+
+    &:hover {
+        .card-img-top-car {
+            scale: 0.9;
+        }
+    }
+}
+
 // tab section
 .car-nav-pills {
     // background: $trinery-bg-color;

@@ -1,147 +1,146 @@
 "use client";
-import React from 'react'
-import { Col, Container, Row } from 'react-bootstrap';
-import { TitleComponent } from '../ui/common';
-import { useTranslations } from 'next-intl';
-import "../../styles/whyChooseUs.scss"
-import Image from 'next/image';
+import React, { useState } from "react";
+import { Col, Container, Row, Modal } from "react-bootstrap";
+import { CommonPopup, TitleComponent } from "../ui/common";
+import { useTranslations } from "next-intl";
+import "../../styles/whyChooseUs.scss";
+import Image from "next/image";
+import Link from "next/link";
+import { X } from "lucide-react";
 
-import historical from '../../assets/images/historical.png';
-import fire from '../../assets/images/fire.png';
-import water from '../../assets/images/water.png';
-import mountain from '../../assets/images/mountain.png';
+import historical from "../../assets/images/historical.png";
+import fire from "../../assets/images/fire.png";
+import water from "../../assets/images/water.png";
+import mountain from "../../assets/images/mountain.png";
 
-import aboutSec from '../../assets/images/about-sec-1.jpg';
-import bath from '../../assets/images/bath-2.jpg';
-import ramkund from '../../assets/images/ramkund-1.jpg';
-import googleLogo from "../../assets/images/google-logo.png";
-import tripAdvisorLogo from "../../assets/images/trip-advisor.png";
-import Link from 'next/link';
-
+import aboutSec from "../../assets/images/about-sec-1.jpg";
+import ramkund from "../../assets/images/ramkund-1.jpg";
 
 const AboutSec = () => {
-    const t = useTranslations('AboutSec');
+  const t = useTranslations("AboutSec");
+  const tr = useTranslations("Common");
 
-    const aboutListData = [
-        {
-            title: t("item1_title"),
-            description: t("item1_desc"),
-            icon: water
-        },
-        {
-            title: t("item2_title"),
-            description: t("item2_desc"),
-            icon: mountain
-        },
-        {
-            title: t("item3_title"),
-            description: t("item3_desc"),
-            icon: historical
-        },
-        {
-            title: t("item4_title"),
-            description: t("item4_desc"),
-            icon: fire
-        }
-    ];
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
-    return (
-        <>
-            <section id="whyChooseUs" className="why-choose-us-section section-padding-2 position-relative">
-                {/* <div className="bottom-divider position-absolute z-3 top-0"></div> */}
-                <Container>
-                    <Row>
-                        <Col md={6}>
-                            <TitleComponent
-                                title={t("mainTitle")}
-                                className="mb-4 md-md-5"
-                                divider={false}
-                                montezSubTitle={t("montezSubTitle")}
-                                montezClass="playfair-display primery-color d-none d-md-block"
-                                descClass='text-md'
-                                description={t("mainDescription")}
-                            />
+  const handleOpenPopup = (item) => {
+    setSelectedItem(item);
+    setIsOpen(true);
+  };
 
-                            <Row className='g-4'>
-                                {aboutListData.map((item, index) => (
-                                    <Col lg={6} key={index}>
-                                        <div className="why-choose-us-card d-flex align-items-start gap-2">
-                                            <div className="icon shadow-sm">
-                                                <Image
-                                                    src={item.icon}
-                                                    alt={item.title}
-                                                    width={40}
-                                                    height={40}
-                                                    style={{ objectFit: 'contain' }}
-                                                />
-                                            </div>
-                                            <div className="content">
-                                                <h3 className="title primery-color">{item.title}</h3>
-                                                <p className="description">{item.description}</p>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                ))}
-                            </Row>
-                        </Col>
-                        <Col md={6} className='position-relative image-layout mt-4 mt-md-0 d-none d-md-flex align-items-end'>
-                            {/* Left Top Image */}
-                            <div className="img-box img-1">
-                                <img src={aboutSec.src} alt="mahakumba - trambakeshwar" />
-                            </div>
+  const aboutListData = [
+    {
+      title: t("item1_title"),
+      description: t("item1_desc"),
+      icon: water,
+      history: t.has("item1_history") ? t("item1_history") : "",
+      route: t.has("item1_route") ? t("item1_route") : "",
+      transport: t.has("item1_transport") ? t("item1_transport") : "",
+      routeLink: "/contact",
+    },
+    {
+      title: t("item2_title"),
+      description: t("item2_desc"),
+      icon: mountain,
+      history: t.has("item2_history") ? t("item2_history") : "",
+      route: t.has("item2_route") ? t("item2_route") : "",
+      transport: t.has("item2_transport") ? t("item2_transport") : "",
+      routeLink: "/contact",
+    },
+    {
+      title: t("item3_title"),
+      description: t("item3_desc"),
+      icon: historical,
+      history: t.has("item3_history") ? t("item3_history") : "",
+      route: t.has("item3_route") ? t("item3_route") : "",
+      transport: t.has("item3_transport") ? t("item3_transport") : "",
+      routeLink: "/contact",
+    },
+    {
+      title: t("item4_title"),
+      description: t("item4_desc"),
+      icon: fire,
+      history: t.has("item4_history") ? t("item4_history") : "",
+      route: t.has("item4_route") ? t("item4_route") : "",
+      transport: t.has("item4_transport") ? t("item4_transport") : "",
+      routeLink: "/contact",
+    },
+  ];
 
-                            {/* Right Main Image */}
-                            <div className="img-box img-2">
-                                <img src={ramkund.src} alt="mahakumbh - ramkund" />
-                            </div>
+  return (
+    <>
+      <section
+        id="whyChooseUs"
+        className="why-choose-us-section section-padding-2 position-relative"
+      >
+        <Container>
+          <Row>
+            <Col md={6}>
+              <TitleComponent
+                title={t("mainTitle")}
+                className="mb-4 md-md-5"
+                divider={false}
+                montezSubTitle={t("montezSubTitle")}
+                montezClass="playfair-display primery-color d-none d-md-block"
+                descClass="text-md"
+                description={t("mainDescription")}
+              />
 
-                            {/* Bottom Small Image */}
-                            {/* <div>
-                                <div className="d-flex flex-wrap align-items-center gap-3 justify-content-center">
-                                    <Link
-                                        href={"#"}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="play-style-btn p-1 px-2 d-flex gap-2 align-items-center flex-row transition-hover"
-                                    >
-                                        <img
-                                            src={googleLogo.src} // Update this path to where your image is saved
-                                            alt="Download on the App Store"
-                                            className="w-auto h-100 object-fit-contain rounded-2"
-                                            style={{ maxHeight: "35px" }}
-                                        />
-                                        <div className='d-flex flex-column align-items-start'>
-                                            <p className='small-12 mb-0'>Get It On</p>
-                                            <h4 className="fs-6 m-0">Google Search</h4>
-                                        </div>
-                                    </Link>
-                                    <Link
-                                        href={"#"}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="play-style-btn p-1 px-2 d-flex gap-2 align-items-center flex-row transition-hover"
-                                    >
-                                        <img
-                                            src={tripAdvisorLogo.src}// Update this path to where your image is saved
-                                            alt="Get it on Google Play"
-                                            className="w-auto h-100 object-fit-contain rounded-2"
-                                            style={{ maxHeight: "35px" }}
-                                        />
-                                        <div className='d-flex flex-column align-items-start'>
-                                            <p className='small-12 mb-0'>Get It On</p>
-                                            <h4 className="fs-6 m-0">Tour Advisor</h4>
-                                        </div>
-                                    </Link>
-                                </div>
-                            </div> */}
-                        </Col>
-                    </Row>
+              <Row className="g-4">
+                {aboutListData.map((item, index) => (
+                  <Col lg={6} key={index}>
+                    <div className="why-choose-us-card d-flex align-items-start gap-2">
+                      <div className="icon shadow-sm">
+                        <Image
+                          src={item.icon}
+                          alt={item.title}
+                          width={40}
+                          height={40}
+                          style={{ objectFit: "contain" }}
+                        />
+                      </div>
+                      <div className="content">
+                        <h3 className="title primery-color">{item.title}</h3>
+                        <p className="description">{item.description}</p>
+                        <button
+                          className="bg-transparent p-0 border-0 border-none d-inline description"
+                          onClick={() => handleOpenPopup(item)}
+                        >
+                          <span className="primery-color small-12">
+                            {tr("ReadMore")} <span>&rarr;</span>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+            </Col>
 
-                </Container>
-                <div className="top-divider trinery-bg position-absolute bottom-0"></div>
-            </section>
-        </>
-    )
-}
+            <Col
+              md={6}
+              className="position-relative image-layout mt-4 mt-md-0 d-none d-md-flex align-items-end"
+            >
+              <div className="img-box img-1">
+                <img src={aboutSec.src} alt="mahakumbh - trambakeshwar" />
+              </div>
+
+              <div className="img-box img-2">
+                <img src={ramkund.src} alt="mahakumbh - ramkund" />
+              </div>
+            </Col>
+          </Row>
+
+          <CommonPopup
+            data={selectedItem}
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+          />
+        </Container>
+        <div className="top-divider trinery-bg position-absolute bottom-0"></div>
+      </section>
+    </>
+  );
+};
 
 export default AboutSec;

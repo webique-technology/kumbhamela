@@ -7,7 +7,8 @@ body {
 }
 
 .poppins,
-p {
+p,
+span {
     font-family: $poppins !important;
 }
 
@@ -1238,7 +1239,7 @@ $animation-speed: 45s;
 
 .imageWrapper {
     width: $logo-width-desktop;
-    
+
     height: 135px;
     display: flex;
     align-items: center;

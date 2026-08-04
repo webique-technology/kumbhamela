@@ -224,7 +224,7 @@
 .blog-sidebar {
   .blog-sidebar-widget {
     .blog-sidebar-widget-title {
-      font-size: $font-size-lg;
+      font-size: $font-size-sm !important;
       font-weight: 500;
       margin-bottom: 12px;
     }
@@ -250,7 +250,7 @@
           }
 
           .blog-sidebar-widget-item-title {
-            font-size: $font-size-sm !important;
+            font-size: $font-size-base !important;
             font-weight: 500;
             margin-bottom: 4px;
             display: -webkit-box;

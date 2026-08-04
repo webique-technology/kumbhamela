@@ -86,6 +86,12 @@
                 margin-bottom: 0;
             }
         }
+
+        @media(max-width:450px) {
+            &:last-child {
+                padding-bottom: 20px;
+            }
+        }
     }
 
     .image-layout {

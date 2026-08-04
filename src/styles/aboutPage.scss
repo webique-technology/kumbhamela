@@ -1,5 +1,26 @@
 @use "../assets/scss/variable" as *;
 
+/* Line Clamping for 3 - 4 Lines */
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.line-clamp-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.faq-list-bullet-item{
+    font-size: $font-size-base;
+}
+
 .about-kumbh-page {
     // background-color: $secondary-bg-color;
 
@@ -291,7 +312,7 @@
         text-shadow: none;
     }
 
-    ul{
+    ul {
         list-style: none;
     }
 
@@ -464,9 +485,16 @@
     .cycle-card {
         .img-box {
             position: relative;
-            aspect-ratio: 4 / 3;
+            // aspect-ratio: 4 / 3;
             border-radius: $border-radius-2xl;
             background: $color-gray-200;
+            width: 100%;
+            max-width: 250px !important;
+            // max-height: 250px;
+            // height: 100%;
+            @media(max-width:1200px){
+                display: none;
+            }
 
             img {
                 width: 100%;

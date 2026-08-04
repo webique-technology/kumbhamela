@@ -39,7 +39,7 @@ import crowdSafety from "../../assets/images/crowd-safety.webp";
 import hydrationFood from "../../assets/images/hydration-food.webp";
 import personalHygiene from "../../assets/images/personal-hygiene.webp";
 import medicalServices from "../../assets/images/medical-services.webp";
-import planImg from "../../assets/images/plantab.webp";
+import planImg from "../../assets/images/plan-your-pilgram.jpg";
 import googleLogo from "../../assets/images/google-logo.png";
 import tripAdvisorLogo from "../../assets/images/trip-advisor.png";
 import Image from 'next/image';
@@ -166,7 +166,7 @@ const PlanTabSec = () => {
                     <Row className="mt-2 mt-md-4 g-4 justify-content-between">
 
                         {/* RIGHT SIDE: Dynamic Panel Layout Content Streams */}
-                        <Col lg={5} className='d-none d-md-flex'>
+                        <Col lg={4} className='d-none d-md-flex'>
                             <div className='position-relative'>
                                 <img src={planImg.src} alt="" className='image-box' />
                                 {/* <div className="app-btn-box d-flex flex-column flex-wrap align-items-center gap-3 justify-content-center">
@@ -201,7 +201,7 @@ const PlanTabSec = () => {
                         </Col>
 
                         {/* LEFT SIDE: Navigation Trigger Buttons */}
-                        <Col lg={7} className='tab-btn-count'>
+                        <Col lg={8} className='tab-btn-count'>
                             <TitleComponent
                                 title={t("mainTitle")}
                                 className="mb-3 text-center text-md-start"
