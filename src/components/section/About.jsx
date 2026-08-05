@@ -1,13 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { Col, Container, Row, Modal } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { CommonPopup, TitleComponent } from "../ui/common";
 import { useTranslations } from "next-intl";
 import "../../styles/whyChooseUs.scss";
 import Image from "next/image";
-import Link from "next/link";
-import { X } from "lucide-react";
-
 import historical from "../../assets/images/historical.png";
 import fire from "../../assets/images/fire.png";
 import water from "../../assets/images/water.png";
