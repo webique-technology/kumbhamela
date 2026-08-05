@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && rm -rf nodejs && mkdir -p nodejs/.next && cp -r .next/standalone/* nodejs/ && cp -r .next/static nodejs/.next/ && cp -r public nodejs/",
+    "build": "next build && cp .next/standalone/server.js ./server.js && cp -r .next/standalone/node_modules ./node_modules && cp -r .next/static ./.next/static && cp -r public ./public && mkdir -p ../nodejs && ln -sf $(pwd)/server.js ../nodejs/server.js && ln -sf $(pwd)/node_modules ../nodejs/node_modules && ln -sf $(pwd)/.next ../nodejs/.next && ln -sf $(pwd)/public ../nodejs/public",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint"
   },
   "dependencies": {
     "@google/genai": "^2.8.0",
