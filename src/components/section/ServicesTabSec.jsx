@@ -105,7 +105,7 @@ const UnifiedServiceCard = ({ type, item, onBook, t }) => {
 
       {/* Middle Card Details Body */}
       <div className="card-body d-flex flex-column justify-content-between" style={{padding:"18px"}}>
-        <div className="border-bottom pb-2 mb-2 d-grid">
+        <div className="d-grid">
           <h3
             className="h4 fw-bold text-brand-dark mb-2 text-truncate"
             title={cardTitle}
@@ -137,7 +137,7 @@ const UnifiedServiceCard = ({ type, item, onBook, t }) => {
                   {item.facilities.map((facility, idx) => (
                     <span
                       key={idx}
-                      className="badge bg-light py-1 text-dark border font-normal small-11 rounded-2 fw-normal"
+                      className="features-badge-2 py-1 text-dark border font-normal small-11 rounded-4 fw-normal"
                     >
                       {facility}
                     </span>
@@ -166,7 +166,7 @@ const UnifiedServiceCard = ({ type, item, onBook, t }) => {
         </div>
 
         {/* Bottom Pricing & CTA */}
-        <div className="d-flex align-items-center justify-content-between pt-2 mt-auto border-top-0">
+        <div className="d-flex align-items-center justify-content-between pt-2 mt-auto border-top">
           <div className="d-flex flex-column">
             <span className="fw-semibold text-brand-orange my-1">
               ₹ {displayPrice}
