@@ -23,8 +23,6 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { WhatsAppCardDataShareBtn } from "../ui/button";
 
-// Note: Ensure your local static images are placed inside the Next.js `public/` directory
-// e.g., public/images/delux-tent.webp -> referenced as "/images/delux-tent.webp"
 import deluxTent from "../../assets/images/delux-tent.webp";
 import premiumTent from "../../assets/images/premium-tent.webp";
 import economyCottage from "../../assets/images/economy-cottage.webp";
