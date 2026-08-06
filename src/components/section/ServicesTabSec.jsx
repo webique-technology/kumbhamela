@@ -23,20 +23,32 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { WhatsAppCardDataShareBtn } from "../ui/button";
 
+// Note: Ensure your local static images are placed inside the Next.js `public/` directory
+// e.g., public/images/delux-tent.webp -> referenced as "/images/delux-tent.webp"
+import deluxTent from "../../assets/images/delux-tent.webp";
+import premiumTent from "../../assets/images/premium-tent.webp";
+import economyCottage from "../../assets/images/economy-cottage.webp";
+import dormitoryCottage from "../../assets/images/dormitory-cottage.webp";
+
 const UnifiedServiceCard = ({ type, item, onBook, t }) => {
-  // 1. Dynamic Attribute Resolvers across distinct API schemas
   const cardTitle = type === "car" ? item.name : item.title || item.name;
+
   const cardImage =
     item.image_url || item.images?.[0] || "/images/banner-1.webp";
 
   const cardCategory =
     type === "hotel"
-      ? item.category
+      ? item.category || t("accommodationTitle")
       : type === "car"
         ? item.category?.category || t("vehicleFallback")
-        : t("tourPackageLabel");
+        : type === "tent"
+          ? item.category || "Camping"
+          : t("tourPackageLabel");
 
-  const displayPrice = Number(item.base_price || item.price || 0).toFixed(2);
+  const rawPrice = item.base_price || item.price || 0;
+  const displayPrice = !isNaN(Number(rawPrice))
+    ? Number(rawPrice).toFixed(2)
+    : rawPrice;
 
   return (
     <div className="card h-100 border-0 shadow-sm hotel-card overflow-hidden rounded-4 bg-white">
@@ -76,6 +88,7 @@ const UnifiedServiceCard = ({ type, item, onBook, t }) => {
             />
           )}
         </div>
+
         {/* Left Floating Category Tag */}
         <div className="position-absolute top-0 start-0 m-3 z-2">
           <span className="primary-bg small-12 rounded-pill px-2 py-1 text-white">
@@ -83,14 +96,7 @@ const UnifiedServiceCard = ({ type, item, onBook, t }) => {
           </span>
         </div>
 
-        {/* Right Floating Star Rating (Rendered for Hotels or Tours) */}
-        {/* {(item.rating || type === "hotel") && (
-                    <div className="position-absolute top-0 end-0 m-3 badge rounded-pill bg-white text-dark d-flex align-items-center gap-1 px-3 py-2 shadow-sm z-2">
-                        <Star size={14} className="text-warning fill-warning" />
-                        <span className="fw-bold text-dark">{Number(item.rating || 4.0).toFixed(1)}</span>
-                    </div>
-                )} */}
-        {(type === "car" || type === "hotel") && (
+        {(type === "car" || type === "hotel" || type === "tent") && (
           <div className="position-absolute z-3 top-0 end-0 m-3">
             <WhatsAppCardDataShareBtn data={item} type={type} mode="icon" />
           </div>
@@ -98,8 +104,8 @@ const UnifiedServiceCard = ({ type, item, onBook, t }) => {
       </div>
 
       {/* Middle Card Details Body */}
-      <div className="card-body p-4 d-flex flex-column justify-content-between">
-        <div className="border-bottom">
+      <div className="card-body d-flex flex-column justify-content-between" style={{padding:"18px"}}>
+        <div className="border-bottom pb-2 mb-2 d-grid">
           <h3
             className="h4 fw-bold text-brand-dark mb-2 text-truncate"
             title={cardTitle}
@@ -107,36 +113,59 @@ const UnifiedServiceCard = ({ type, item, onBook, t }) => {
             {cardTitle}
           </h3>
 
-          {/* Context Specific Sub-Metadata Footer Strings */}
-          <div className="d-flex align-items-center gap-1 text-muted small mb-3">
-            {type === "hotel" && (
-              <>
+          {/* Context Specific Sub-Metadata */}
+          <div
+            className={`${
+              type === "tent"
+                ? "d-flex align-items-center justify-content-between gap-1 flex-wrap"
+                : "d-flex align-items-center gap-1"
+            } text-muted small mb-3`}
+          >
+            {(type === "hotel" || type === "tent") && (
+              <div className="d-flex align-items-center gap-2">
                 <MapPin size={16} className="text-secondary opacity-70" />
                 <span className="text-secondary text-truncate">
                   {item.location || "Nashik, Maharashtra"}
                 </span>
-              </>
+              </div>
             )}
+
+            {type === "tent" &&
+              item.facilities &&
+              Array.isArray(item.facilities) && (
+                <div className="d-flex align-items-center gap-1 flex-wrap mt-2">
+                  {item.facilities.map((facility, idx) => (
+                    <span
+                      key={idx}
+                      className="badge bg-light py-1 text-dark border font-normal small-11 rounded-2 fw-normal"
+                    >
+                      {facility}
+                    </span>
+                  ))}
+                </div>
+              )}
+
             {type === "car" && (
-              <>
+              <div className="d-flex align-items-center gap-2">
                 <Users size={16} className="text-secondary opacity-70" />
                 <span className="text-secondary">
                   {item.total_seats || item.seats || 4} {t("seaterCapacity")}
                 </span>
-              </>
+              </div>
             )}
+
             {type === "tour" && (
-              <>
+              <div className="d-flex align-items-center gap-2">
                 <Clock size={16} className="text-secondary opacity-70" />
                 <span className="text-secondary">
                   {item.duration || t("customDuration")}
                 </span>
-              </>
+              </div>
             )}
           </div>
         </div>
 
-        {/* Bottom Pricing & CTA Layout Track */}
+        {/* Bottom Pricing & CTA */}
         <div className="d-flex align-items-center justify-content-between pt-2 mt-auto border-top-0">
           <div className="d-flex flex-column">
             <span className="fw-semibold text-brand-orange my-1">
@@ -144,11 +173,10 @@ const UnifiedServiceCard = ({ type, item, onBook, t }) => {
             </span>
           </div>
 
-          {/* Integrated Booking Interaction Node */}
+          {/* Booking Button */}
           {type === "tour" ? (
             <Link
               href={`/tour-package/${item.slug}`}
-              // href={`/tour-package/${slugify(cardTitle || "")}`}
               className="service-btn text-decoration-none d-flex justify-content-center align-items-center mt-auto"
             >
               <span>{t("viewDetails")}</span>
@@ -159,8 +187,8 @@ const UnifiedServiceCard = ({ type, item, onBook, t }) => {
               onClick={onBook}
               className="btn whatsapp-btn d-flex align-items-center gap-2 px-3 py-2 text-white border-0 shadow-sm rounded-pill fw-bold"
             >
-              <MessageCircle size={18} />
-              <span className="text-light">{t("bookNow")}</span>
+              <MessageCircle size={14} />
+              <span className="text-light small-12">{t("bookNow")}</span>
             </button>
           )}
         </div>
@@ -170,12 +198,72 @@ const UnifiedServiceCard = ({ type, item, onBook, t }) => {
 };
 
 const ServicesTabSec = () => {
-  const t = useTranslations("ServicesTab"); // Initialized Namespace Lookups
+  const t = useTranslations("ServicesTab");
 
   const [show, setShow] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
   const [selectedHotelId, setSelectedHotelId] = useState(null);
   const [selectedCarId, setSelectedCarId] = useState(null);
+  const [selectedTentId, setSelectedTentId] = useState(null);
+
+  const tentData = [
+    {
+      id: 101,
+      title: t("tent101_title"),
+      base_price: 5500,
+      // description: t("capacity3Person"),
+      category: t("categoryLuxuryTent"),
+      location: t("nashikLocation"),
+      image_url: deluxTent.src,
+      facilities: [
+        t("facility_ac"),
+        t("facility_attachedBath"),
+        t("facility_wifi"),
+      ],
+    },
+    {
+      id: 102,
+      title: t("tent102_title"),
+      base_price: 4000,
+      // description: t("capacity4Person"),
+      category: t("categoryPremiumTent"),
+      location: t("nashikLocation"),
+      image_url: premiumTent.src,
+      facilities: [
+        t("facility_attachedBath"),
+        t("facility_meals"),
+        t("facility_wifi"),
+      ],
+    },
+    {
+      id: 103,
+      title: t("tent103_title"),
+      base_price: 2000,
+      // description: t("capacity2Person"),
+      category: t("categoryCottage"),
+      location: t("nashikLocation"),
+      image_url: economyCottage.src,
+      facilities: [
+        t("facility_bed"),
+        t("facility_charging"),
+        t("facility_attachedBath"),
+      ],
+    },
+    {
+      id: 104,
+      title: t("tent104_title"),
+      base_price: 4000,
+      // description: t("capacity4Person"),
+      category: t("categoryDormitory"),
+      location: t("nashikLocation"),
+      image_url: dormitoryCottage.src,
+      facilities: [
+        t("facility_locker"),
+        t("facility_charging"),
+        t("facility_wifi"),
+      ],
+    },
+  ];
 
   const handleOpenBooking = (item, type) => {
     setSelectedItem(item.name || item.title);
@@ -183,10 +271,18 @@ const ServicesTabSec = () => {
     if (type === "hotel") {
       setSelectedHotelId(item.id);
       setSelectedCarId(null);
+      setSelectedTentId(null);
     }
 
     if (type === "car") {
       setSelectedCarId(item.id);
+      setSelectedHotelId(null);
+      setSelectedTentId(null);
+    }
+
+    if (type === "tent") {
+      setSelectedTentId(item.id);
+      setSelectedCarId(null);
       setSelectedHotelId(null);
     }
 
@@ -203,7 +299,6 @@ const ServicesTabSec = () => {
   const params = useParams();
   const locale = params.locale;
 
-  // Mapped Titles reference dynamic i18n keys
   const tabData = [
     {
       key: "tour-package",
@@ -222,6 +317,12 @@ const ServicesTabSec = () => {
       title: t("accommodationTitle"),
       mapData: hotels,
       type: "hotel",
+    },
+    {
+      key: "tent",
+      title: t("tentTitle"),
+      mapData: tentData,
+      type: "tent",
     },
   ];
 
@@ -304,12 +405,12 @@ const ServicesTabSec = () => {
                         disableAutoplay={true}
                       >
                         {tab.mapData.map((item, i) => (
-                          <SwiperSlide key={i}>
+                          <SwiperSlide key={i} className="h-auto">
                             <UnifiedServiceCard
                               type={tab.type}
                               item={item}
                               onBook={() => handleOpenBooking(item, tab.type)}
-                              t={t} // Pass down translation configuration bundle
+                              t={t}
                             />
                           </SwiperSlide>
                         ))}
@@ -322,21 +423,25 @@ const ServicesTabSec = () => {
                   </Tab.Pane>
                 ))}
 
-                <div className="w-100 text-center">
-                  <Link
-                    href={
-                      activeTab === "hotel"
-                        ? "/hotel"
-                        : activeTab === "rental-car"
-                          ? "/rental-car"
-                          : "/tour-package"
-                    }
-                    className="primery-btn mt-5 text-white text-decoration-none d-inline-flex align-items-center gap-2"
-                  >
-                    {t("viewAll")}
-                    <ArrowRight size={20} />
-                  </Link>
-                </div>
+                {activeTab === "tent" ? (
+                  <div className="pb-5 pb-lg-4"></div>
+                ) : (
+                  <div className="w-100 text-center">
+                    <Link
+                      href={
+                        activeTab === "hotel"
+                          ? "/hotel"
+                          : activeTab === "rental-car"
+                            ? "/rental-car"
+                            : "/tour-package"
+                      }
+                      className="primery-btn mt-5 text-white text-decoration-none d-inline-flex align-items-center gap-2"
+                    >
+                      {t("viewAll")}
+                      <ArrowRight size={20} />
+                    </Link>
+                  </div>
+                )}
               </Tab.Content>
             </Col>
           </Row>
@@ -346,7 +451,13 @@ const ServicesTabSec = () => {
       <BookingForm
         show={show}
         handleClose={() => setShow(false)}
-        type={activeTab === "hotel" ? "hotel" : "car"}
+        type={
+          activeTab === "hotel"
+            ? "hotel"
+            : activeTab === "tent"
+              ? "tent"
+              : "car"
+        }
         selectedItem={selectedItem}
         hotelId={selectedHotelId}
         carId={selectedCarId}

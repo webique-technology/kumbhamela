@@ -205,6 +205,17 @@ export const WhatsAppCardDataShareBtn = ({
       if (Array.isArray(data.highlights) && data.highlights.length > 0) {
         details.push(`Highlights: ${data.highlights.join(" | ")}`);
       }
+    } else if (type === "tent") {
+      title = data.title || "Tent Details";
+
+      const price = data.offer_price || data.base_price;
+      if (price) {
+        details.push(`Price: Starting from ₹${price}`);
+      }
+
+      if (Array.isArray(data.facilities) && data.facilities.length > 0) {
+        details.push(`Facilities: ${data.facilities.join(" | ")}`);
+      }
     }
 
     // Construct final clean message
@@ -232,7 +243,9 @@ export const WhatsAppCardDataShareBtn = ({
       title="Share on WhatsApp"
       type="button"
     >
-      {(mode === "both" || mode === "icon") && <Share2 size={18} className="text-light"/>}
+      {(mode === "both" || mode === "icon") && (
+        <Share2 size={18} className="text-light" />
+      )}
       {(mode === "both" || mode === "text") && <span>{label}</span>}
     </button>
   );

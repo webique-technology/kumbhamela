@@ -1196,6 +1196,7 @@ $animation-speed: 45s;
 /* Slightly accelerated for a smoother flow with 30 items */
 
 .marqueeContainer {
+    padding: 12px;
     position: relative;
     display: flex;
     overflow: hidden;

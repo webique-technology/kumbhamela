@@ -166,7 +166,7 @@ const PlanTabSec = () => {
                     <Row className="mt-2 mt-md-4 g-4 justify-content-between">
 
                         {/* RIGHT SIDE: Dynamic Panel Layout Content Streams */}
-                        <Col lg={4} className='d-none d-md-flex'>
+                        <Col xs={0} lg={4} className='d-none d-lg-flex'>
                             <div className='position-relative'>
                                 <img src={planImg.src} alt="" className='image-box' />
                                 {/* <div className="app-btn-box d-flex flex-column flex-wrap align-items-center gap-3 justify-content-center">
@@ -201,7 +201,7 @@ const PlanTabSec = () => {
                         </Col>
 
                         {/* LEFT SIDE: Navigation Trigger Buttons */}
-                        <Col lg={8} className='tab-btn-count'>
+                        <Col xs={12} lg={8} className='tab-btn-count'>
                             <TitleComponent
                                 title={t("mainTitle")}
                                 className="mb-3 text-center text-md-start"

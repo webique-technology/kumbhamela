@@ -492,7 +492,7 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ro
                     </Form.Group>
 
                     {/* 2. Email Verification Field - Display conditionally for Hotels */}
-                    {type === 'hotel' && (
+                    {(type === 'hotel' || type === 'tent') && (
                         <Form.Group className="mb-3">
                             <Form.Label className="small fw-bold">{t("email")}</Form.Label>
                             <Form.Control
@@ -509,7 +509,7 @@ export const BookingForm = ({ show, handleClose, type, selectedItem, hotelId, ro
 
                     {/* 3. Mobile Input & Pickup / Room Type Dynamic Layouts */}
                     <Row>
-                        <Col md={type === "car" ? 12 : 6}>
+                        <Col md={["car", "tent"].includes(type) ? 12 : 6}>
                             <Form.Group className="mb-3">
                                 <Form.Label className="small fw-bold">{t("mobile")}</Form.Label>
                                 <Form.Control
