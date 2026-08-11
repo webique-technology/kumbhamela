@@ -167,7 +167,7 @@ const TourPackageDetail = ({ tour }) => {
                         {tour.description}
                     </p> */}
           <div
-            className="d-none d-lg-block fs-6 lead text-white-75"
+            className="d-none d-lg-block fs-6 mb-2 lead text-white-75"
             dangerouslySetInnerHTML={{
               __html: tour.description || "",
             }}
@@ -188,7 +188,7 @@ const TourPackageDetail = ({ tour }) => {
       </section>
 
       {/* MAIN CONTENT */}
-      <Container className="main-section pb-5 pt-0">
+      <Container className="main-section pb-0 pt-0">
         <Row className="gy-1 gy-md-4 gy-xl-5 m-0">
           {/* LEFT CONTENT */}
           <Col lg={8}>

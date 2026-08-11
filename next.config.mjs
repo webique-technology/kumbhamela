@@ -21,9 +21,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: process.env.NEXT_PUBLIC_IMAGE_PROTOCOL || "https",
-        hostname:
-          process.env.NEXT_PUBLIC_IMAGE_HOSTNAME ||
-          "api.mahakumbhtourstravelsnashik.com",
+        hostname: process.env.NEXT_PUBLIC_IMAGE_HOSTNAME || "",
         port: process.env.NEXT_PUBLIC_IMAGE_PORT || "",
         pathname: "/uploads/**",
       },

@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 export const TourPackageSlider = ({ packages, title }) => {
     const t = useTranslations();
     return (
-        <div className="tour-package-slider-main padding-bottom">
+        <div className="tour-package-slider-main pb-2">
             <h4 className="section-title fw-bold mb-4">{title}</h4>
             <SwiperSliderComp
                 className={"py-1"}

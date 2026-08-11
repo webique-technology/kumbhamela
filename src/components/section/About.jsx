@@ -33,7 +33,7 @@ const AboutSec = () => {
       history: t.has("item1_history") ? t("item1_history") : "",
       route: t.has("item1_route") ? t("item1_route") : "",
       transport: t.has("item1_transport") ? t("item1_transport") : "",
-      routeLink: "/contact",
+      // routeLink: "/contact",
     },
     {
       title: t("item2_title"),
@@ -42,7 +42,7 @@ const AboutSec = () => {
       history: t.has("item2_history") ? t("item2_history") : "",
       route: t.has("item2_route") ? t("item2_route") : "",
       transport: t.has("item2_transport") ? t("item2_transport") : "",
-      routeLink: "/contact",
+      // routeLink: "/contact",
     },
     {
       title: t("item3_title"),
@@ -51,7 +51,7 @@ const AboutSec = () => {
       history: t.has("item3_history") ? t("item3_history") : "",
       route: t.has("item3_route") ? t("item3_route") : "",
       transport: t.has("item3_transport") ? t("item3_transport") : "",
-      routeLink: "/contact",
+      // routeLink: "/contact",
     },
     {
       title: t("item4_title"),
@@ -60,7 +60,7 @@ const AboutSec = () => {
       history: t.has("item4_history") ? t("item4_history") : "",
       route: t.has("item4_route") ? t("item4_route") : "",
       transport: t.has("item4_transport") ? t("item4_transport") : "",
-      routeLink: "/contact",
+      // routeLink: "/contact",
     },
   ];
 
