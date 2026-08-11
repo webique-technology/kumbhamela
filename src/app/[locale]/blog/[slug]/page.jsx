@@ -15,6 +15,19 @@ import { truncateText, getValidUrl } from "@/lib/seo";
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://mahakumbhtourstravelsnashik.com";
 
+function resolveImageUrl(
+  imagePath,
+  fallbackPath = "/images/tour-section-bg.jpg",
+) {
+  if (!imagePath) return getValidUrl(BASE_URL, fallbackPath);
+
+  if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+    return imagePath;
+  }
+
+  return getValidUrl(BASE_URL, imagePath);
+}
+
 export async function generateMetadata({ params }) {
   const { slug, locale } = await params;
   const blog = await getBlogBySlug(slug, locale);
@@ -49,11 +62,9 @@ export async function generateMetadata({ params }) {
     120,
   ); // Social card limit: 120 chars
 
-  // 3. Absolute URLs & Alternates
+  // 3. Dynamic Backend Image Resolution
   const fullUrl = getValidUrl(BASE_URL, `/${locale}/blog/${slug}`);
-  const ogImageUrl = blog.image_url
-    ? getValidUrl(BASE_URL, blog.image_url)
-    : getValidUrl(BASE_URL, "/images/tour-section-bg.jpg");
+  const ogImageUrl = resolveImageUrl(blog.image_url);
 
   const supportLocales = ["en", "hi", "mr", "gu", "ta", "te", "ml", "sa"];
   const languageAlternates = {};
@@ -93,7 +104,7 @@ export async function generateMetadata({ params }) {
       locale: locale === "en" ? "en_IN" : `${locale}_IN`,
       images: [
         {
-          url: ogImageUrl,
+          url: ogImageUrl, // Now outputs the clean, valid backend image URL!
           width: 1200,
           height: 630,
           alt: searchTitle,

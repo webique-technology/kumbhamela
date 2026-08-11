@@ -12,6 +12,20 @@ function cleanHtml(htmlString) {
   return htmlString.replace(/<[^>]*>/g, "").trim();
 }
 
+function resolveImageUrl(
+  imagePath,
+  fallbackPath = "/images/tour-section-bg.jpg",
+) {
+  if (!imagePath) return getValidUrl(BASE_URL, fallbackPath);
+  if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+    return imagePath;
+  }
+  return getValidUrl(BASE_URL, imagePath);
+}
+
+// Inside generateMetadata:
+// const ogImageUrl = resolveImageUrl(tour.image_url);
+
 export async function generateMetadata({ params }) {
   const { slug, locale } = await params;
 
@@ -42,13 +56,9 @@ export async function generateMetadata({ params }) {
     120,
   ); // Max 120 chars for Social Cards
 
-  // --- 3. ABSOLUTE URLS & FALLBACKS ---
   const fullUrl = getValidUrl(BASE_URL, `/${locale}/tour-package/${slug}`);
 
-  // Use dynamic tour image if available, otherwise fall back to 1200x630 static banner
-  const ogImageUrl = tour.image_url
-    ? getValidUrl(BASE_URL, tour.image_url)
-    : getValidUrl(BASE_URL, "/images/tour-section-bg.jpg");
+  const ogImageUrl = resolveImageUrl(tour.image_url);
 
   const supportLocales = ["en", "hi", "mr", "gu", "ta", "te", "ml", "sa"];
   const languageAlternates = {};
