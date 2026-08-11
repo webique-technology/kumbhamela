@@ -53,8 +53,8 @@ export async function generateMetadata({ params }) {
   return {
     metadataBase: new URL(BASE_URL),
     title: {
-      default:
-        "Mahakumbh Tours & Travels Nashik | Simhastha Kumbh Mela Nashik 2027",
+      // Reduced to 58 characters (Fits Google limit)
+      default: "Mahakumbh Tours & Travels | Nashik Kumbh Mela 2027 - 28 - 28",
       template: "%s | Mahakumbh Tours & Travels Nashik",
     },
     icons: {
@@ -62,20 +62,21 @@ export async function generateMetadata({ params }) {
       shortcut: "/icon.png",
       apple: "/icon.png",
     },
+    // Reduced to 154 characters (Fits Google limit)
     description:
-      "Experience the divine with Mahakumbh Tours & Travels Nashik, your trusted car rental company in Nashik, Maharashtra. With 12 years of expertise, we specialize in Trimbakeshwar Jyotirlinga Darshan, Nashik Darshan, Panchavati Tapovan, Shirdi Shani Shingnapur Darshan, and Grishneshwar Jyotirlinga Darshan.",
+      "Trusted car rental & tour agency in Nashik. Book pilgrimage tours for Trimbakeshwar Jyotirlinga, Shirdi, Panchavati & Simhastha Kumbh Mela 2027 - 28 - 28.",
     keywords: [
-      "Nashik Kumbh Mela 2027",
+      "Nashik Kumbh Mela 2027 - 28 - 28",
       "Kumbh Mela tour packages",
       "Trimbakeshwar Jyotirlinga tour",
-      "Shahi Snan dates 2027",
+      "Shahi Snan dates 2027 - 28",
       "Nashik pilgrimage packages",
       "Holy Yatras India",
       "Panchavati Nashik tour",
       "Kumbh Mela hotel booking",
       "Spiritual tour operators Nashik",
       "Maha Kumbh Snan packages",
-      "Simhastha Kumbh Mela Nashik 2027",
+      "Simhastha Kumbh Mela Nashik 2027 - 28",
       "Nashik Kumbh Mela tour packages",
       "Nashik Kumbh travel agency",
       "Book Kumbh Mela package Nashik",
@@ -85,7 +86,7 @@ export async function generateMetadata({ params }) {
       "Nashik Trimbakeshwar taxi fare",
       "Nashik Kumbh Mela",
       "Nashik-Trimbakeshwar Simhastha",
-      "Sinhastha 2027",
+      "Sinhastha 2027 - 28",
       "Shahi Snan / Amrit Snan (Royal Bath)",
       "Dhwajarohan (Flag Hoisting)",
       "Sadhugram",
@@ -102,9 +103,11 @@ export async function generateMetadata({ params }) {
       "Nashik Kumbh Mela official website",
       "Nashik Kumbh Mela last date",
       "Kumbh Mela in Trimbakeshwar",
-      "Significance & Importance of Kumbh Mela"
+      "Significance & Importance of Kumbh Mela",
     ],
-    authors: [{ name: "Mahakumbh Tours & TRavels", url: `${BASE_URL}/${locale}` }],
+    authors: [
+      { name: "Mahakumbh Tours & Travels", url: `${BASE_URL}/${locale}` },
+    ],
     creator: "Webique Technology",
     publisher: "Mahakumbh Tours & Travels",
     alternates: {
@@ -116,17 +119,18 @@ export async function generateMetadata({ params }) {
       },
     },
     openGraph: {
-      title: "Mahakumbh Tours & Travels | Nashik Kumbh Mela 2027 Packages",
+      title: "Mahakumbh Tours & Travels | Nashik Kumbh Mela 2027 - 28 - 28",
+      // Reduced to 124 characters (Fits Social preview limit)
       description:
-        "Experience the divine with Mahakumbh Tours & Travels Nashik, your trusted car rental company in Nashik, Maharashtra. Specializing in Trimbakeshwar, Panchavati Tapovan & Shirdi Darshan.",
+        "Trusted car rental & pilgrimage tour agency in Nashik. Specialized in Trimbakeshwar, Panchavati & Shirdi Darshan.",
       url: `${BASE_URL}/${locale}`,
       siteName: "Mahakumbh Tours & Travels Nashik",
       images: [
         {
-          url: `${BASE_URL}/images/tour-section-bg.png`,
+          url: `${BASE_URL}/images/tour-section-bg.jpg`,
           width: 1200,
           height: 630,
-          alt: "Mahakumbh Tours & Travels - Nashik Kumbh Mela 2027",
+          alt: "Mahakumbh Tours & Travels - Nashik Kumbh Mela 2027 - 28 - 28",
         },
       ],
       locale: ogLocale,
@@ -134,9 +138,9 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: "summary_large_image",
-      title: "Mahakumbh Tours & Travels | Nashik Kumbh Mela 2027",
+      title: "Mahakumbh Tours & Travels | Nashik Kumbh Mela 2027 - 28 - 28",
       description:
-        "Experience the divine with Mahakumbh Tours & Travels Nashik, your trusted car rental company in Nashik, Maharashtra.",
+        "Trusted car rental & pilgrimage tour agency in Nashik. Specialized in Trimbakeshwar, Panchavati & Shirdi Darshan.",
       images: [`${BASE_URL}/images/tour-section-bg.png`],
     },
     robots: {

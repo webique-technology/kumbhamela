@@ -12,46 +12,56 @@ const geminiToolsConfiguration = [
     functionDeclarations: [
       {
         name: "fetchDynamicInventory",
-        description: "Queries the public production database for real-time listings concerning tours (packages), hotels, rental cars (vehicles), or blog posts updates.",
+        description:
+          "Queries the public production database for real-time listings concerning tours (packages), hotels, rental cars (vehicles), or blog posts updates.",
         parameters: {
           type: "OBJECT",
           properties: {
             category: {
               type: "STRING",
               enum: ["tours", "hotels", "cars", "blogs"],
-              description: "The dynamic inventory category to pull. Pass 'cars' for rental vehicles, 'tours' for tour package lists."
-            }
+              description:
+                "The dynamic inventory category to pull. Pass 'cars' for rental vehicles, 'tours' for tour package lists.",
+            },
           },
-          required: ["category"]
-        }
-      }
-    ]
-  }
+          required: ["category"],
+        },
+      },
+    ],
+  },
 ];
 
 const KNOWLEDGE_BASE = [
   {
     inputs: [
-      "what is nashik mahakumbh 2027", "mahakumbh 2027 basics", "simhastha kumbh mela",
-      "what is kumbha", "simhastha rashi", "jupiter enters leo"
+      "what is nashik mahakumbh 2027 - 28",
+      "mahakumbh 2027 - 28 basics",
+      "simhastha kumbh mela",
+      "what is kumbha",
+      "simhastha rashi",
+      "jupiter enters leo",
     ],
-    reply: `<b>🕉️ Mahakumbh 2027 Basics & Legacy:</b><br />
+    reply: `<b>🕉️ Mahakumbh 2027 - 28 Basics & Legacy:</b><br />
         • Nashik Mahakumbh (Simhastha Kumbh) is one of the world's largest Hindu spiritual gatherings, held every 12 years on the banks of the Godavari River in Nashik and Trimbakeshwar. Millions of devotees visit for holy bathing, prayers, and spiritual activities.<br />
-        • Simhastha Kumbh occurs when Jupiter enters Leo (Simha Rashi), making Nashik the host city for the sacred event.`
+        • Simhastha Kumbh occurs when Jupiter enters Leo (Simha Rashi), making Nashik the host city for the sacred event.`,
   },
   {
     inputs: [
-      "when will nashik mahakumbh 2027 take place", "kumbh mela dates", "amrit snan dates 2027",
-      "shahi snan date", "auspicious bathing days", "mela calendar"
+      "when will nashik mahakumbh 2027 - 28 take place",
+      "kumbh mela dates",
+      "amrit snan dates 2027 - 28",
+      "shahi snan date",
+      "auspicious bathing days",
+      "mela calendar",
     ],
-    reply: `<b>📅 Official Mahakumbh 2027 Timings & Auspicious Snan Dates:</b><br />
-        • The main Kumbh period is expected during 2027, while the broader Simhastha cycle officially runs from October 2026 to July 2028.<br />
+    reply: `<b>📅 Official Mahakumbh 2027 - 28 Timings & Auspicious Snan Dates:</b><br />
+        • The main Kumbh period is expected during 2027 - 28, while the broader Simhastha cycle officially runs from October 2026 to July 2028.<br />
         • The major Amrit Snan dates are:<br />
-          - 2 August 2027<br />
-          - 31 August 2027<br />
-          - 11–12 September 2027<br />
-        • These are considered the most auspicious bathing days.`
-  }
+          - 2 August 2027 - 28<br />
+          - 31 August 2027 - 28<br />
+          - 11–12 September 2027 - 28<br />
+        • These are considered the most auspicious bathing days.`,
+  },
 ];
 
 export async function POST(request) {
@@ -67,7 +77,8 @@ export async function POST(request) {
     const currentLang = locale && locale !== "en" ? locale : "en";
     const languagePrefix = currentLang === "en" ? "" : `/${currentLang}`;
 
-    if (!message) return NextResponse.json({ reply: "Please type something..." });
+    if (!message)
+      return NextResponse.json({ reply: "Please type something..." });
 
     const userQuery = message.trim().toLowerCase();
     let bestMatch = null;
@@ -76,13 +87,16 @@ export async function POST(request) {
     // --- 1. LOCAL SEARCH ACROSS SACRED DESTINATIONS (en.json) ---
     if (enLocale.SacredDestinations) {
       for (let i = 1; i <= 10; i++) {
-        const destName = enLocale.SacredDestinations[`dest${i}_name`]?.toLowerCase();
+        const destName =
+          enLocale.SacredDestinations[`dest${i}_name`]?.toLowerCase();
         if (destName && userQuery.includes(destName)) {
-          const historyText = enLocale.SacredDestinations[`dest${i}_history`] || "";
+          const historyText =
+            enLocale.SacredDestinations[`dest${i}_history`] || "";
           const routeText = enLocale.SacredDestinations[`dest${i}_route`] || "";
-          const transportText = enLocale.SacredDestinations[`dest${i}_transport`] || "";
+          const transportText =
+            enLocale.SacredDestinations[`dest${i}_transport`] || "";
           return NextResponse.json({
-            reply: `<b>🛕 ${enLocale.SacredDestinations[`dest${i}_name`]} Details:</b><br /><br />${historyText}<br /><br /><b>🚗 Route from Nashik:</b><br />${routeText}<br /><br /><b>🚌 Transport Options:</b><br />${transportText}`
+            reply: `<b>🛕 ${enLocale.SacredDestinations[`dest${i}_name`]} Details:</b><br /><br />${historyText}<br /><br /><b>🚗 Route from Nashik:</b><br />${routeText}<br /><br /><b>🚌 Transport Options:</b><br />${transportText}`,
           });
         }
       }
@@ -92,11 +106,12 @@ export async function POST(request) {
     if (enLocale.PlanTab) {
       for (let t = 0; t <= 3; t++) {
         for (let item = 1; item <= 4; item++) {
-          const itemTitle = enLocale.PlanTab[`tab${t}_item${item}_title`]?.toLowerCase();
+          const itemTitle =
+            enLocale.PlanTab[`tab${t}_item${item}_title`]?.toLowerCase();
           if (itemTitle && userQuery.includes(itemTitle)) {
             const itemDesc = enLocale.PlanTab[`tab${t}_item${item}_desc`] || "";
             return NextResponse.json({
-              reply: `<b>ℹ️ ${enLocale.PlanTab[`tab${t}_item${item}_title`]}:</b><br />${itemDesc}`
+              reply: `<b>ℹ️ ${enLocale.PlanTab[`tab${t}_item${item}_title`]}:</b><br />${itemDesc}`,
             });
           }
         }
@@ -107,12 +122,18 @@ export async function POST(request) {
     for (const item of KNOWLEDGE_BASE) {
       if (!item.inputs) continue;
       for (const sampleInput of item.inputs) {
-        if (userQuery.includes(sampleInput) || sampleInput.includes(userQuery)) {
+        if (
+          userQuery.includes(sampleInput) ||
+          sampleInput.includes(userQuery)
+        ) {
           highestScore = 1.0;
           bestMatch = item;
           break;
         }
-        const score = stringSimilarity.compareTwoStrings(userQuery, sampleInput);
+        const score = stringSimilarity.compareTwoStrings(
+          userQuery,
+          sampleInput,
+        );
         if (score > highestScore) {
           highestScore = score;
           bestMatch = item;
@@ -161,18 +182,18 @@ export async function POST(request) {
     const geminiContents = [];
 
     if (history && history.length > 0) {
-      history.forEach(msg => {
+      history.forEach((msg) => {
         if (msg.id === "init" || !msg.text) return;
         geminiContents.push({
           role: msg.sender === "user" ? "user" : "model",
-          parts: [{ text: String(msg.text) }]
+          parts: [{ text: String(msg.text) }],
         });
       });
     }
 
     geminiContents.push({
       role: "user",
-      parts: [{ text: message }]
+      parts: [{ text: message }],
     });
 
     const TARGET_GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${process.env.GEMINI_API_KEY}`;
@@ -185,19 +206,24 @@ export async function POST(request) {
         contents: geminiContents,
         systemInstruction: { parts: [{ text: systemInstructionText }] },
         tools: geminiToolsConfiguration,
-        generationConfig: { temperature: 0.1 }
-      })
+        generationConfig: { temperature: 0.1 },
+      }),
     });
 
     let geminiData = await geminiResponse.json();
 
     if (geminiData.error) {
-      console.error("Gemini API Engine rejected initial parameters:", geminiData.error);
+      console.error(
+        "Gemini API Engine rejected initial parameters:",
+        geminiData.error,
+      );
       throw new Error(geminiData.error.message);
     }
 
     let firstCandidate = geminiData.candidates?.[0]?.content;
-    let functionCallNode = firstCandidate?.parts?.find(part => part.functionCall);
+    let functionCallNode = firstCandidate?.parts?.find(
+      (part) => part.functionCall,
+    );
 
     // --- 4. DYNAMIC TOOL INTERCEPTION ROUTER ---
     if (functionCallNode) {
@@ -208,7 +234,7 @@ export async function POST(request) {
           tours: "/tours",
           hotels: "/hotels",
           cars: "/vehicles",
-          blogs: "/blogs"
+          blogs: "/blogs",
         };
 
         const activeCategory = toolArgs?.category || "tours";
@@ -216,10 +242,13 @@ export async function POST(request) {
 
         let fetchedDatabasePayload = [];
         try {
-          const laravelFetch = await fetch(`${LARAVEL_API_URL}${activeSegment}`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" }
-          });
+          const laravelFetch = await fetch(
+            `${LARAVEL_API_URL}${activeSegment}`,
+            {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+            },
+          );
 
           if (laravelFetch.ok) {
             const contentType = laravelFetch.headers.get("content-type");
@@ -240,19 +269,28 @@ export async function POST(request) {
             }
           }
         } catch (fetchErr) {
-          console.error("Public Laravel Connection Interface Dropped:", fetchErr);
+          console.error(
+            "Public Laravel Connection Interface Dropped:",
+            fetchErr,
+          );
         }
 
         geminiContents.push({
           role: "model",
-          parts: [{ text: `Executing backend query lookup for database category: ${activeCategory}.` }]
+          parts: [
+            {
+              text: `Executing backend query lookup for database category: ${activeCategory}.`,
+            },
+          ],
         });
 
         geminiContents.push({
           role: "user",
-          parts: [{
-            text: `[SYSTEM DATABASE LOG RESPONSE]: Here is the raw real-time live availability data matching category "${activeCategory}". Synthesize this into your final answer: ${JSON.stringify(fetchedDatabasePayload)}`
-          }]
+          parts: [
+            {
+              text: `[SYSTEM DATABASE LOG RESPONSE]: Here is the raw real-time live availability data matching category "${activeCategory}". Synthesize this into your final answer: ${JSON.stringify(fetchedDatabasePayload)}`,
+            },
+          ],
         });
 
         // SECOND PASS: Final response assembly
@@ -262,16 +300,20 @@ export async function POST(request) {
           body: JSON.stringify({
             contents: geminiContents,
             systemInstruction: { parts: [{ text: systemInstructionText }] },
-            generationConfig: { temperature: 0.1 }
-          })
+            generationConfig: { temperature: 0.1 },
+          }),
         });
 
         geminiData = await geminiResponse.json();
 
         if (geminiData.error) {
-          console.error("Gemini API Secondary Pass Failed. Details:", JSON.stringify(geminiData.error));
+          console.error(
+            "Gemini API Secondary Pass Failed. Details:",
+            JSON.stringify(geminiData.error),
+          );
           return NextResponse.json({
-            reply: "Jai Shree Ram! 🙏 We are having trouble syncing our live inventory database right now. Please try again in a few moments."
+            reply:
+              "Jai Shree Ram! 🙏 We are having trouble syncing our live inventory database right now. Please try again in a few moments.",
           });
         }
 
@@ -279,7 +321,9 @@ export async function POST(request) {
       }
     }
 
-    const rawOutputText = firstCandidate?.parts?.[0]?.text || "System temporarily busy, please re-submit request.";
+    const rawOutputText =
+      firstCandidate?.parts?.[0]?.text ||
+      "System temporarily busy, please re-submit request.";
 
     const formattedReply = rawOutputText
       .replace(/\n{2,}/g, "<br /><br />")
@@ -292,14 +336,20 @@ export async function POST(request) {
     console.log("trueUrlTarget", trueUrlTarget);
 
     // Securely swap tokens globally without risking string mutation or layout breaks
-    const finalCleanReply = formattedReply.replaceAll("[BASE_URL]", trueUrlTarget);
+    const finalCleanReply = formattedReply.replaceAll(
+      "[BASE_URL]",
+      trueUrlTarget,
+    );
 
     return NextResponse.json({ reply: finalCleanReply });
-
   } catch (error) {
     console.error("Gemini Critical Architecture Crash Log:", error);
-    return NextResponse.json({
-      reply: "Jai Shree Ram! 🙏 Server connection latency encountered. Please feel free to request guidance directly via our official WhatsApp connection below."
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        reply:
+          "Jai Shree Ram! 🙏 Server connection latency encountered. Please feel free to request guidance directly via our official WhatsApp connection below.",
+      },
+      { status: 500 },
+    );
   }
 }

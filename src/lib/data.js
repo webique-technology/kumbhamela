@@ -11,862 +11,932 @@ import sitaGufa from "../assets/images/sita-gufa.jpg";
 import anjaneri from "../assets/images/anjaneri-img.jpg";
 
 export const hotels = [
-    {
-        name: 'The Gateway Hotel Nashik',
-        location: 'Ambad, Nashik',
-        price: 5999,
-        rating: 4.5,
-        images: ['/images/hotel-1.jpg', '/images/the-gatway-hotel-nashik-2.webp', '/images/the-gatway-hotel-nashik-3.webp'],
-        features: ['Free WiFi', 'Free Parking', 'Restaurant', 'Pool'],
-        type: 'Luxury',
-    },
-    {
-        name: 'Heritage Inn Nashik',
-        location: 'Panchavati, Nashik',
-        price: 3499,
-        rating: 4.2,
-        images: ['/images/hotel-2.jpg', '/images/heritage-inn-nashik-2.avif'],
-        features: ['Free WiFi', 'Breakfast', 'AC Rooms', 'Valet'],
-        type: 'Heritage',
-    },
-    {
-        name: 'Kumbh Residency',
-        location: 'Nashik Road, Nashik',
-        price: 2299,
-        rating: 4.0,
-        images: ['/images/hotel-3.jpg', '/images/kumbh-residency-2.avif', '/images/kumbh-residency-3.avif'],
-        features: ['Free WiFi', 'Breakfast', 'Ghat View', 'Travel Desk'],
-        type: 'Budget',
-    },
-    {
-        name: 'The Gateway Hotel Nashik',
-        location: 'Ambad, Nashik',
-        price: 5999,
-        rating: 4.5,
-        images: ['/images/hotel-1.jpg', '/images/the-gatway-hotel-nashik-2.webp', '/images/the-gatway-hotel-nashik-3.webp'],
-        features: ['Free WiFi', 'Free Parking', 'Restaurant', 'Pool'],
-        type: 'Luxury',
-    },
-    {
-        name: 'Heritage Inn Nashik',
-        location: 'Panchavati, Nashik',
-        price: 3499,
-        rating: 4.2,
-        images: ['/images/hotel-2.jpg', '/images/heritage-inn-nashik-2.avif'],
-        features: ['Free WiFi', 'Breakfast', 'AC Rooms', 'Valet'],
-        type: 'Heritage',
-    },
+  {
+    name: "The Gateway Hotel Nashik",
+    location: "Ambad, Nashik",
+    price: 5999,
+    rating: 4.5,
+    images: [
+      "/images/hotel-1.jpg",
+      "/images/the-gatway-hotel-nashik-2.webp",
+      "/images/the-gatway-hotel-nashik-3.webp",
+    ],
+    features: ["Free WiFi", "Free Parking", "Restaurant", "Pool"],
+    type: "Luxury",
+  },
+  {
+    name: "Heritage Inn Nashik",
+    location: "Panchavati, Nashik",
+    price: 3499,
+    rating: 4.2,
+    images: ["/images/hotel-2.jpg", "/images/heritage-inn-nashik-2.avif"],
+    features: ["Free WiFi", "Breakfast", "AC Rooms", "Valet"],
+    type: "Heritage",
+  },
+  {
+    name: "Kumbh Residency",
+    location: "Nashik Road, Nashik",
+    price: 2299,
+    rating: 4.0,
+    images: [
+      "/images/hotel-3.jpg",
+      "/images/kumbh-residency-2.avif",
+      "/images/kumbh-residency-3.avif",
+    ],
+    features: ["Free WiFi", "Breakfast", "Ghat View", "Travel Desk"],
+    type: "Budget",
+  },
+  {
+    name: "The Gateway Hotel Nashik",
+    location: "Ambad, Nashik",
+    price: 5999,
+    rating: 4.5,
+    images: [
+      "/images/hotel-1.jpg",
+      "/images/the-gatway-hotel-nashik-2.webp",
+      "/images/the-gatway-hotel-nashik-3.webp",
+    ],
+    features: ["Free WiFi", "Free Parking", "Restaurant", "Pool"],
+    type: "Luxury",
+  },
+  {
+    name: "Heritage Inn Nashik",
+    location: "Panchavati, Nashik",
+    price: 3499,
+    rating: 4.2,
+    images: ["/images/hotel-2.jpg", "/images/heritage-inn-nashik-2.avif"],
+    features: ["Free WiFi", "Breakfast", "AC Rooms", "Valet"],
+    type: "Heritage",
+  },
 ];
 
 export const tourPackages = [
-    {
-        id: 1,
-        name: "Essential Darshan",
-        image: "/images/essential.png",
-        duration: "3 Days / 2 Nights",
-        price: 12999,
-        priceUnit: "per person",
-        mainDesc: "A curated immersion into Nashik’s spiritual heritage, featuring private ceremonies and sunset meditations.",
-        inclusion: [
-            {
-                in_title: "Hotel",
-                in_icon: "Building2"
-            },
-            {
-                in_title: "Meals",
-                in_icon: "Utensils"
-            },
-            {
-                in_title: "Sightseeing",
-                in_icon: "Camera"
-            },
-            {
-                in_title: "Transport",
-                in_icon: "CarTaxiFront"
-            }
-        ],
-        journey: [
-            {
-                journey_title: "Arrival & Purification at Ramkund",
-                journey_desc: "Welcome to the spiritual heart of Maharashtra. Upon arrival, check into your heritage suite. As the sun dips below the horizon, witness the mesmerizing Ganga Aarti at Ramkund, where thousands of diyas light up the Godavari. Welcome to the spiritual heart of Maharashtra. Upon arrival, check into your heritage suite. As the sun dips below the horizon, witness the mesmerizing Ganga Aarti at Ramkund, where thousands of diyas light up the Godavari.",
-                journey_src: "/images/tour-demo-1.png"
-            },
-            {
-                journey_title: "Trimbakeshwar: The Source of Life",
-                journey_desc: "A pre-dawn luxury transfer takes you to the foothills of Brahmagiri. Experience a private 'Rudrabhishek' ceremony at the ancient Trimbakeshwar Temple, one of the twelve Jyotirlingas, before exploring the origin of the Godavari.",
-                journey_src: "/images/tour-demo-2.png"
-            },
-            {
-                journey_title: "Vineyards & Verses",
-                journey_desc: "Nashik is also the wine capital of India. Spend your afternoon at a premier boutique vineyard for a private tasting and organic farm-to-table lunch, blending the sacred with the earthly delights of the region.",
-                journey_src: "/images/tour-demo-3.png"
-            }
-        ],
-        features: [
-            "Accommodation",
-            "Shahi Snan Access",
-            "Temple Visits",
-            "Local Transport"
-        ],
-        tourRoute: ["Nashik", "Trimbakeshwar", "Ramkund", "Saptashrungi Temple"],
-        cancellationPolicy: [
-            { days: "61-120", percent: 10 },
-            { days: "31-60", percent: 25 },
-            { days: "15-30", percent: 50 },
-            { days: "0-14", percent: 100 },
-        ],
-        isPopular: false,
-        departureDate: "19 Oct 2026",
-        type: "Essential"
-    },
-    {
-        id: 2,
-        name: "Premium Pilgrimage",
-        image: "/images/premium.png",
-        duration: "5 Days / 4 Nights",
-        price: 24999,
-        priceUnit: "per person",
-        mainDesc: "A curated immersion into Nashik’s spiritual heritage, featuring private ceremonies and sunset meditations.",
-        inclusion: [
-            {
-                in_title: "Hotel",
-                in_icon: "Building2"
-            },
-            {
-                in_title: "Meals",
-                in_icon: "Utensils"
-            },
-            {
-                in_title: "Sightseeing",
-                in_icon: "Camera"
-            },
-            {
-                in_title: "Transport",
-                in_icon: "CarTaxiFront"
-            }
-        ],
-        journey: [
-            {
-                journey_title: "Spiritual Experience Day 1",
-                journey_desc: "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
-                journey_src: ""
-            },
-            {
-                journey_title: "Spiritual Experience Day 2",
-                journey_desc: "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
-                journey_src: ""
-            },
-            {
-                journey_title: "Spiritual Experience Day 3",
-                journey_desc: "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
-                journey_src: ""
-            }
-        ],
-        features: [
-            "Deluxe Hotel Stay",
-            "All Meals Included",
-            "Guided Tours",
-            "VIP Darshan Pass"
-        ],
-        tourRoute: ["Nashik", "Trimbakeshwar", "Ramkund", "Saptashrungi Temple"],
-        cancellationPolicy: [
-            { days: "91-180", percent: 10, color: "green" },
-            { days: "46-90", percent: 20, color: "green" },
-            { days: "16-45", percent: 40, color: "orange" },
-            { days: "0-15", percent: 100, color: "red" },
-        ],
-        isPopular: true, // For the "Most Popular" badge
-        departureDate: "20 Oct 2026",
-        type: "Premium"
-    },
-    {
-        id: 3,
-        name: "Luxury Spiritual",
-        image: "/images/luxury.png",
-        duration: "7 Days / 6 Nights",
-        price: 49999,
-        priceUnit: "per person",
-        mainDesc: "A curated immersion into Nashik’s spiritual heritage, featuring private ceremonies and sunset meditations.",
-        inclusion: [
-            {
-                in_title: "Hotel",
-                in_icon: "Building2"
-            },
-            {
-                in_title: "Meals",
-                in_icon: "Utensils"
-            },
-            {
-                in_title: "Sightseeing",
-                in_icon: "Camera"
-            },
-            {
-                in_title: "Transport",
-                in_icon: "CarTaxiFront"
-            }
-        ],
-        journey: [
-            {
-                journey_title: "Spiritual Experience Day 1",
-                journey_desc: "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
-                journey_src: ""
-            },
-            {
-                journey_title: "Spiritual Experience Day 2",
-                journey_desc: "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
-                journey_src: ""
-            },
-            {
-                journey_title: "Spiritual Experience Day 3",
-                journey_desc: "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
-                journey_src: ""
-            }
-        ],
-        features: [
-            "5-Star Accommodation",
-            "Private Car & Driver",
-            "Personal Guide",
-            "Airport Transfers"
-        ],
-        tourRoute: ["Nashik", "Trimbakeshwar", "Ramkund", "Saptashrungi Temple"],
-        cancellationPolicy: [
-            { days: "121-365", percent: 5, color: "green" },
-            { days: "61-120", percent: 15, color: "green" },
-            { days: "31-60", percent: 30, color: "orange" },
-            { days: "0-30", percent: 100, color: "red" },
-        ],
-        isPopular: false,
-        departureDate: "21 Oct 2026",
-        type: "Luxury"
-    },
-    {
-        id: 4,
-        name: "Jyotirlinga Maharashtra Darshan",
-        image: "/images/jyotirlinga-banner.jpg", // main banner
-        duration: "6 Days / 5 Nights",
-        price: 28999,
-        priceUnit: "per person",
-        mainDesc: "Embark on a divine journey to Maharashtra’s sacred Jyotirlinga shrines. Experience the spiritual energy of Trimbakeshwar, Grishneshwar, Bhimashankar, and seek blessings at Shirdi and Shani Shingnapur. A perfect blend of devotion, culture, and natural beauty.",
-        inclusion: [
-            {
-                in_title: "Hotel",
-                in_icon: "Building2"
-            },
-            {
-                in_title: "Meals",
-                in_icon: "Utensils"
-            },
-            {
-                in_title: "Sightseeing",
-                in_icon: "Camera"
-            },
-            {
-                in_title: "Transport",
-                in_icon: "CarTaxiFront"
-            }
-        ],
-        journey: [
-            {
-                journey_title: "Trimbakeshwar – Origin of Godavari",
-                journey_desc: "Begin your sacred journey at Trimbakeshwar Jyotirlinga, nestled in the Brahmagiri hills. Perform rituals and explore the origin of the holy Godavari river.",
-                journey_src: ""
-            },
-            {
-                journey_title: "Grishneshwar & Ellora Caves",
-                journey_desc: "Visit Grishneshwar Jyotirlinga near Ellora caves. Witness ancient rock-cut architecture and divine spiritual vibrations.",
-                journey_src: ""
-            },
-            {
-                journey_title: "Bhimashankar – Forest Shrine",
-                journey_desc: "Travel through scenic Sahyadri forests to Bhimashankar Jyotirlinga. Experience peaceful surroundings and sacred darshan.",
-                journey_src: ""
-            },
-            {
-                journey_title: "Shirdi – Sai Baba Darshan",
-                journey_desc: "Seek blessings at the holy town of Shirdi. Visit Sai Baba Temple and experience spiritual peace and devotion.",
-                journey_src: ""
-            },
-            {
-                journey_title: "Shani Shingnapur – Divine Justice",
-                journey_desc: "Visit the famous Shani temple village known for houses without doors and strong faith in Lord Shani.",
-                journey_src: ""
-            }
-        ],
-        features: [
-            "Jyotirlinga Temple Visits",
-            "Comfortable Stay",
-            "Private Transport",
-            "Spiritual Guide",
-            "Daily Meals"
-        ],
-        tourRoute: ["Nashik", "Trimbakeshwar", "Grishneshwar", "Ellora Caves", "Bhimashankar"],
-        cancellationPolicy: [
-            { days: "45-90", percent: 15, color: "green" },
-            { days: "15-44", percent: 50, color: "orange" },
-            { days: "0-14", percent: 100, color: "red" },
-        ],
-        isPopular: true,
-        departureDate: "17 Oct 2026",
-        type: "Jyotirlinga"
-    },
-    {
-        id: 5,
-        name: "Nashik to Saptashrungi & Dindori Darshan",
-        image: "/images/saptashrungi-tour-banner.jpg",
-        duration: "1 Day Trip",
-        price: 1999,
-        priceUnit: "per person",
-        inclusion: [
-            {
-                in_title: "Hotel",
-                in_icon: "Building2"
-            },
-            {
-                in_title: "Meals",
-                in_icon: "Utensils"
-            },
-            {
-                in_title: "Sightseeing",
-                in_icon: "Camera"
-            },
-            {
-                in_title: "Transport",
-                in_icon: "CarTaxiFront"
-            }
-        ],
-        journey: [
-            {
-                journey_title: "Departure from Nashik",
-                journey_desc: "Start your spiritual journey early morning from Nashik with a comfortable drive towards the sacred hills of Vani.",
-                journey_src: "/images/nashik-start.jpg"
-            },
-            {
-                journey_title: "Saptashrungi Devi Darshan",
-                journey_desc: "Visit the powerful Saptashrungi Mata temple located in the Sahyadri hills. Seek blessings of the goddess and enjoy scenic surroundings.",
-                journey_src: "/images/saptashrungi.jpg"
-            },
-            {
-                journey_title: "Swami Samarth Mandir Dindori",
-                journey_desc: "Proceed to Dindori to visit the peaceful Swami Samarth temple. Experience divine calm and spiritual energy.",
-                journey_src: "/images/dindori-swami-samarth.jpg"
-            },
-            {
-                journey_title: "Return to Nashik",
-                journey_desc: "After completing darshan, return comfortably to Nashik by evening with divine memories.",
-                journey_src: "/images/return-nashik.jpg"
-            }
-        ],
-        features: [
-            "Same Day Return",
-            "Temple Darshan",
-            "Comfort Travel",
-            "Scenic Route",
-            "Spiritual Experience"
-        ],
-        tourRoute: ["Nashik", "Saptashrungi Devi", "Swami Samarth Mandir Dindori"],
-        cancellationPolicy: [
-            { days: "45-90", percent: 15, color: "green" },
-            { days: "15-44", percent: 50, color: "orange" },
-            { days: "0-14", percent: 100, color: "red" },
-        ],
-        isPopular: false,
-        departureDate: "19 Oct 2026",
-        type: "One Day Trip"
-    },
-    {
-        id: 6,
-        name: "Nashik to Shani Shingnapur & Shirdi Sai Darshan",
-        image: "/images/shani-shignapur-tour-banner.jpg",
-        duration: "1 Day Trip",
-        price: 2499,
-        priceUnit: "per person",
-        inclusion: [
-            {
-                in_title: "Hotel",
-                in_icon: "Building2"
-            },
-            {
-                in_title: "Meals",
-                in_icon: "Utensils"
-            },
-            {
-                in_title: "Sightseeing",
-                in_icon: "Camera"
-            },
-            {
-                in_title: "Transport",
-                in_icon: "CarTaxiFront"
-            }
-        ],
-        journey: [
-            {
-                journey_title: "Early Departure from Nashik",
-                journey_desc: "Begin your journey early morning from Nashik towards Shani Shingnapur with a comfortable drive.",
-                journey_src: "/images/nashik-start.jpg"
-            },
-            {
-                journey_title: "Shani Shingnapur Darshan",
-                journey_desc: "Visit the famous Shani temple known for its unique open shrine and strong faith traditions.",
-                journey_src: "/images/shani-shingnapur.jpg"
-            },
-            {
-                journey_title: "Shirdi Sai Baba Temple",
-                journey_desc: "Proceed to Shirdi for Sai Baba darshan. Experience devotion at one of India's most sacred pilgrimage sites.",
-                journey_src: "/images/shirdi.jpg"
-            },
-            {
-                journey_title: "Return to Nashik",
-                journey_desc: "After completing darshan, return to Nashik by evening with peaceful and divine memories.",
-                journey_src: "/images/return-nashik.jpg"
-            }
-        ],
-        features: [
-            "Same Day Return",
-            "Shani & Sai Darshan",
-            "Comfort Travel",
-            "Spiritual Experience",
-            "Well-Planned Route"
-        ],
-        tourRoute: ["Nashik", "Shani Shingnapur", "Shirdi Sai Baba Temple"],
-        cancellationPolicy: [
-            { days: "45-90", percent: 15, color: "green" },
-            { days: "15-44", percent: 50, color: "orange" },
-            { days: "0-14", percent: 100, color: "red" },
-        ],
-        isPopular: true,
-        departureDate: "25 Oct 2026",
-        type: "One Day Trip"
-    },
-    {
-        id: 9,
-        name: "Trimbakeshwar Jyotirling & Nashik Sightseeing",
-        image: "/images/trimbakeshwar-tour-banner.jpg",
-        duration: "1 Day Trip",
-        price: 1799,
-        priceUnit: "per person",
-        inclusion: [
-            {
-                in_title: "Hotel",
-                in_icon: "Building2"
-            },
-            {
-                in_title: "Meals",
-                in_icon: "Utensils"
-            },
-            {
-                in_title: "Sightseeing",
-                in_icon: "Camera"
-            },
-            {
-                in_title: "Transport",
-                in_icon: "CarTaxiFront"
-            }
-        ],
-        journey: [
-            {
-                journey_title: "Departure from Nashik",
-                journey_desc: "Start your journey from Nashik with a scenic drive towards Trimbakeshwar through lush green hills.",
-                journey_src: "/images/nashik-start.jpg"
-            },
-            {
-                journey_title: "Trimbakeshwar Jyotirling Darshan",
-                journey_desc: "Visit the sacred Trimbakeshwar temple, one of the twelve Jyotirlingas and source of the Godavari river.",
-                journey_src: "/images/trimbakeshwar.jpg"
-            },
-            {
-                journey_title: "Nashik Local Sightseeing",
-                journey_desc: "Explore Ramkund, Panchavati, Sita Gufa and Kalaram Temple, key spiritual and historical landmarks.",
-                journey_src: "/images/panchavati.jpg"
-            },
-            {
-                journey_title: "Return to Nashik",
-                journey_desc: "Complete your trip and return comfortably with divine blessings and memorable experiences.",
-                journey_src: "/images/return-nashik.jpg"
-            }
-        ],
-        features: [
-            "Jyotirlinga Darshan",
-            "Local Sightseeing",
-            "Same Day Return",
-            "Comfort Travel",
-            "Spiritual Experience"
-        ],
-        tourRoute: ["Nashik", "Trimbakeshwar", "Ramkund", "Sita Gufa", "Kalaram Temple"],
-        cancellationPolicy: [
-            { days: "45-90", percent: 15, color: "green" },
-            { days: "15-44", percent: 50, color: "orange" },
-            { days: "0-14", percent: 100, color: "red" },
-        ],
-        isPopular: true,
-        departureDate: "28 Oct 2026",
-        type: "One Day Trip"
-    }
+  {
+    id: 1,
+    name: "Essential Darshan",
+    image: "/images/essential.png",
+    duration: "3 Days / 2 Nights",
+    price: 12999,
+    priceUnit: "per person",
+    mainDesc:
+      "A curated immersion into Nashik’s spiritual heritage, featuring private ceremonies and sunset meditations.",
+    inclusion: [
+      {
+        in_title: "Hotel",
+        in_icon: "Building2",
+      },
+      {
+        in_title: "Meals",
+        in_icon: "Utensils",
+      },
+      {
+        in_title: "Sightseeing",
+        in_icon: "Camera",
+      },
+      {
+        in_title: "Transport",
+        in_icon: "CarTaxiFront",
+      },
+    ],
+    journey: [
+      {
+        journey_title: "Arrival & Purification at Ramkund",
+        journey_desc:
+          "Welcome to the spiritual heart of Maharashtra. Upon arrival, check into your heritage suite. As the sun dips below the horizon, witness the mesmerizing Ganga Aarti at Ramkund, where thousands of diyas light up the Godavari. Welcome to the spiritual heart of Maharashtra. Upon arrival, check into your heritage suite. As the sun dips below the horizon, witness the mesmerizing Ganga Aarti at Ramkund, where thousands of diyas light up the Godavari.",
+        journey_src: "/images/tour-demo-1.png",
+      },
+      {
+        journey_title: "Trimbakeshwar: The Source of Life",
+        journey_desc:
+          "A pre-dawn luxury transfer takes you to the foothills of Brahmagiri. Experience a private 'Rudrabhishek' ceremony at the ancient Trimbakeshwar Temple, one of the twelve Jyotirlingas, before exploring the origin of the Godavari.",
+        journey_src: "/images/tour-demo-2.png",
+      },
+      {
+        journey_title: "Vineyards & Verses",
+        journey_desc:
+          "Nashik is also the wine capital of India. Spend your afternoon at a premier boutique vineyard for a private tasting and organic farm-to-table lunch, blending the sacred with the earthly delights of the region.",
+        journey_src: "/images/tour-demo-3.png",
+      },
+    ],
+    features: [
+      "Accommodation",
+      "Shahi Snan Access",
+      "Temple Visits",
+      "Local Transport",
+    ],
+    tourRoute: ["Nashik", "Trimbakeshwar", "Ramkund", "Saptashrungi Temple"],
+    cancellationPolicy: [
+      { days: "61-120", percent: 10 },
+      { days: "31-60", percent: 25 },
+      { days: "15-30", percent: 50 },
+      { days: "0-14", percent: 100 },
+    ],
+    isPopular: false,
+    departureDate: "19 Oct 2026",
+    type: "Essential",
+  },
+  {
+    id: 2,
+    name: "Premium Pilgrimage",
+    image: "/images/premium.png",
+    duration: "5 Days / 4 Nights",
+    price: 24999,
+    priceUnit: "per person",
+    mainDesc:
+      "A curated immersion into Nashik’s spiritual heritage, featuring private ceremonies and sunset meditations.",
+    inclusion: [
+      {
+        in_title: "Hotel",
+        in_icon: "Building2",
+      },
+      {
+        in_title: "Meals",
+        in_icon: "Utensils",
+      },
+      {
+        in_title: "Sightseeing",
+        in_icon: "Camera",
+      },
+      {
+        in_title: "Transport",
+        in_icon: "CarTaxiFront",
+      },
+    ],
+    journey: [
+      {
+        journey_title: "Spiritual Experience Day 1",
+        journey_desc:
+          "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
+        journey_src: "",
+      },
+      {
+        journey_title: "Spiritual Experience Day 2",
+        journey_desc:
+          "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
+        journey_src: "",
+      },
+      {
+        journey_title: "Spiritual Experience Day 3",
+        journey_desc:
+          "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
+        journey_src: "",
+      },
+    ],
+    features: [
+      "Deluxe Hotel Stay",
+      "All Meals Included",
+      "Guided Tours",
+      "VIP Darshan Pass",
+    ],
+    tourRoute: ["Nashik", "Trimbakeshwar", "Ramkund", "Saptashrungi Temple"],
+    cancellationPolicy: [
+      { days: "91-180", percent: 10, color: "green" },
+      { days: "46-90", percent: 20, color: "green" },
+      { days: "16-45", percent: 40, color: "orange" },
+      { days: "0-15", percent: 100, color: "red" },
+    ],
+    isPopular: true, // For the "Most Popular" badge
+    departureDate: "20 Oct 2026",
+    type: "Premium",
+  },
+  {
+    id: 3,
+    name: "Luxury Spiritual",
+    image: "/images/luxury.png",
+    duration: "7 Days / 6 Nights",
+    price: 49999,
+    priceUnit: "per person",
+    mainDesc:
+      "A curated immersion into Nashik’s spiritual heritage, featuring private ceremonies and sunset meditations.",
+    inclusion: [
+      {
+        in_title: "Hotel",
+        in_icon: "Building2",
+      },
+      {
+        in_title: "Meals",
+        in_icon: "Utensils",
+      },
+      {
+        in_title: "Sightseeing",
+        in_icon: "Camera",
+      },
+      {
+        in_title: "Transport",
+        in_icon: "CarTaxiFront",
+      },
+    ],
+    journey: [
+      {
+        journey_title: "Spiritual Experience Day 1",
+        journey_desc:
+          "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
+        journey_src: "",
+      },
+      {
+        journey_title: "Spiritual Experience Day 2",
+        journey_desc:
+          "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
+        journey_src: "",
+      },
+      {
+        journey_title: "Spiritual Experience Day 3",
+        journey_desc:
+          "Detailed spiritual journey description with rituals, guided tours, and premium experiences.",
+        journey_src: "",
+      },
+    ],
+    features: [
+      "5-Star Accommodation",
+      "Private Car & Driver",
+      "Personal Guide",
+      "Airport Transfers",
+    ],
+    tourRoute: ["Nashik", "Trimbakeshwar", "Ramkund", "Saptashrungi Temple"],
+    cancellationPolicy: [
+      { days: "121-365", percent: 5, color: "green" },
+      { days: "61-120", percent: 15, color: "green" },
+      { days: "31-60", percent: 30, color: "orange" },
+      { days: "0-30", percent: 100, color: "red" },
+    ],
+    isPopular: false,
+    departureDate: "21 Oct 2026",
+    type: "Luxury",
+  },
+  {
+    id: 4,
+    name: "Jyotirlinga Maharashtra Darshan",
+    image: "/images/jyotirlinga-banner.jpg", // main banner
+    duration: "6 Days / 5 Nights",
+    price: 28999,
+    priceUnit: "per person",
+    mainDesc:
+      "Embark on a divine journey to Maharashtra’s sacred Jyotirlinga shrines. Experience the spiritual energy of Trimbakeshwar, Grishneshwar, Bhimashankar, and seek blessings at Shirdi and Shani Shingnapur. A perfect blend of devotion, culture, and natural beauty.",
+    inclusion: [
+      {
+        in_title: "Hotel",
+        in_icon: "Building2",
+      },
+      {
+        in_title: "Meals",
+        in_icon: "Utensils",
+      },
+      {
+        in_title: "Sightseeing",
+        in_icon: "Camera",
+      },
+      {
+        in_title: "Transport",
+        in_icon: "CarTaxiFront",
+      },
+    ],
+    journey: [
+      {
+        journey_title: "Trimbakeshwar – Origin of Godavari",
+        journey_desc:
+          "Begin your sacred journey at Trimbakeshwar Jyotirlinga, nestled in the Brahmagiri hills. Perform rituals and explore the origin of the holy Godavari river.",
+        journey_src: "",
+      },
+      {
+        journey_title: "Grishneshwar & Ellora Caves",
+        journey_desc:
+          "Visit Grishneshwar Jyotirlinga near Ellora caves. Witness ancient rock-cut architecture and divine spiritual vibrations.",
+        journey_src: "",
+      },
+      {
+        journey_title: "Bhimashankar – Forest Shrine",
+        journey_desc:
+          "Travel through scenic Sahyadri forests to Bhimashankar Jyotirlinga. Experience peaceful surroundings and sacred darshan.",
+        journey_src: "",
+      },
+      {
+        journey_title: "Shirdi – Sai Baba Darshan",
+        journey_desc:
+          "Seek blessings at the holy town of Shirdi. Visit Sai Baba Temple and experience spiritual peace and devotion.",
+        journey_src: "",
+      },
+      {
+        journey_title: "Shani Shingnapur – Divine Justice",
+        journey_desc:
+          "Visit the famous Shani temple village known for houses without doors and strong faith in Lord Shani.",
+        journey_src: "",
+      },
+    ],
+    features: [
+      "Jyotirlinga Temple Visits",
+      "Comfortable Stay",
+      "Private Transport",
+      "Spiritual Guide",
+      "Daily Meals",
+    ],
+    tourRoute: [
+      "Nashik",
+      "Trimbakeshwar",
+      "Grishneshwar",
+      "Ellora Caves",
+      "Bhimashankar",
+    ],
+    cancellationPolicy: [
+      { days: "45-90", percent: 15, color: "green" },
+      { days: "15-44", percent: 50, color: "orange" },
+      { days: "0-14", percent: 100, color: "red" },
+    ],
+    isPopular: true,
+    departureDate: "17 Oct 2026",
+    type: "Jyotirlinga",
+  },
+  {
+    id: 5,
+    name: "Nashik to Saptashrungi & Dindori Darshan",
+    image: "/images/saptashrungi-tour-banner.jpg",
+    duration: "1 Day Trip",
+    price: 1999,
+    priceUnit: "per person",
+    inclusion: [
+      {
+        in_title: "Hotel",
+        in_icon: "Building2",
+      },
+      {
+        in_title: "Meals",
+        in_icon: "Utensils",
+      },
+      {
+        in_title: "Sightseeing",
+        in_icon: "Camera",
+      },
+      {
+        in_title: "Transport",
+        in_icon: "CarTaxiFront",
+      },
+    ],
+    journey: [
+      {
+        journey_title: "Departure from Nashik",
+        journey_desc:
+          "Start your spiritual journey early morning from Nashik with a comfortable drive towards the sacred hills of Vani.",
+        journey_src: "/images/nashik-start.jpg",
+      },
+      {
+        journey_title: "Saptashrungi Devi Darshan",
+        journey_desc:
+          "Visit the powerful Saptashrungi Mata temple located in the Sahyadri hills. Seek blessings of the goddess and enjoy scenic surroundings.",
+        journey_src: "/images/saptashrungi.jpg",
+      },
+      {
+        journey_title: "Swami Samarth Mandir Dindori",
+        journey_desc:
+          "Proceed to Dindori to visit the peaceful Swami Samarth temple. Experience divine calm and spiritual energy.",
+        journey_src: "/images/dindori-swami-samarth.jpg",
+      },
+      {
+        journey_title: "Return to Nashik",
+        journey_desc:
+          "After completing darshan, return comfortably to Nashik by evening with divine memories.",
+        journey_src: "/images/return-nashik.jpg",
+      },
+    ],
+    features: [
+      "Same Day Return",
+      "Temple Darshan",
+      "Comfort Travel",
+      "Scenic Route",
+      "Spiritual Experience",
+    ],
+    tourRoute: ["Nashik", "Saptashrungi Devi", "Swami Samarth Mandir Dindori"],
+    cancellationPolicy: [
+      { days: "45-90", percent: 15, color: "green" },
+      { days: "15-44", percent: 50, color: "orange" },
+      { days: "0-14", percent: 100, color: "red" },
+    ],
+    isPopular: false,
+    departureDate: "19 Oct 2026",
+    type: "One Day Trip",
+  },
+  {
+    id: 6,
+    name: "Nashik to Shani Shingnapur & Shirdi Sai Darshan",
+    image: "/images/shani-shignapur-tour-banner.jpg",
+    duration: "1 Day Trip",
+    price: 2499,
+    priceUnit: "per person",
+    inclusion: [
+      {
+        in_title: "Hotel",
+        in_icon: "Building2",
+      },
+      {
+        in_title: "Meals",
+        in_icon: "Utensils",
+      },
+      {
+        in_title: "Sightseeing",
+        in_icon: "Camera",
+      },
+      {
+        in_title: "Transport",
+        in_icon: "CarTaxiFront",
+      },
+    ],
+    journey: [
+      {
+        journey_title: "Early Departure from Nashik",
+        journey_desc:
+          "Begin your journey early morning from Nashik towards Shani Shingnapur with a comfortable drive.",
+        journey_src: "/images/nashik-start.jpg",
+      },
+      {
+        journey_title: "Shani Shingnapur Darshan",
+        journey_desc:
+          "Visit the famous Shani temple known for its unique open shrine and strong faith traditions.",
+        journey_src: "/images/shani-shingnapur.jpg",
+      },
+      {
+        journey_title: "Shirdi Sai Baba Temple",
+        journey_desc:
+          "Proceed to Shirdi for Sai Baba darshan. Experience devotion at one of India's most sacred pilgrimage sites.",
+        journey_src: "/images/shirdi.jpg",
+      },
+      {
+        journey_title: "Return to Nashik",
+        journey_desc:
+          "After completing darshan, return to Nashik by evening with peaceful and divine memories.",
+        journey_src: "/images/return-nashik.jpg",
+      },
+    ],
+    features: [
+      "Same Day Return",
+      "Shani & Sai Darshan",
+      "Comfort Travel",
+      "Spiritual Experience",
+      "Well-Planned Route",
+    ],
+    tourRoute: ["Nashik", "Shani Shingnapur", "Shirdi Sai Baba Temple"],
+    cancellationPolicy: [
+      { days: "45-90", percent: 15, color: "green" },
+      { days: "15-44", percent: 50, color: "orange" },
+      { days: "0-14", percent: 100, color: "red" },
+    ],
+    isPopular: true,
+    departureDate: "25 Oct 2026",
+    type: "One Day Trip",
+  },
+  {
+    id: 9,
+    name: "Trimbakeshwar Jyotirling & Nashik Sightseeing",
+    image: "/images/trimbakeshwar-tour-banner.jpg",
+    duration: "1 Day Trip",
+    price: 1799,
+    priceUnit: "per person",
+    inclusion: [
+      {
+        in_title: "Hotel",
+        in_icon: "Building2",
+      },
+      {
+        in_title: "Meals",
+        in_icon: "Utensils",
+      },
+      {
+        in_title: "Sightseeing",
+        in_icon: "Camera",
+      },
+      {
+        in_title: "Transport",
+        in_icon: "CarTaxiFront",
+      },
+    ],
+    journey: [
+      {
+        journey_title: "Departure from Nashik",
+        journey_desc:
+          "Start your journey from Nashik with a scenic drive towards Trimbakeshwar through lush green hills.",
+        journey_src: "/images/nashik-start.jpg",
+      },
+      {
+        journey_title: "Trimbakeshwar Jyotirling Darshan",
+        journey_desc:
+          "Visit the sacred Trimbakeshwar temple, one of the twelve Jyotirlingas and source of the Godavari river.",
+        journey_src: "/images/trimbakeshwar.jpg",
+      },
+      {
+        journey_title: "Nashik Local Sightseeing",
+        journey_desc:
+          "Explore Ramkund, Panchavati, Sita Gufa and Kalaram Temple, key spiritual and historical landmarks.",
+        journey_src: "/images/panchavati.jpg",
+      },
+      {
+        journey_title: "Return to Nashik",
+        journey_desc:
+          "Complete your trip and return comfortably with divine blessings and memorable experiences.",
+        journey_src: "/images/return-nashik.jpg",
+      },
+    ],
+    features: [
+      "Jyotirlinga Darshan",
+      "Local Sightseeing",
+      "Same Day Return",
+      "Comfort Travel",
+      "Spiritual Experience",
+    ],
+    tourRoute: [
+      "Nashik",
+      "Trimbakeshwar",
+      "Ramkund",
+      "Sita Gufa",
+      "Kalaram Temple",
+    ],
+    cancellationPolicy: [
+      { days: "45-90", percent: 15, color: "green" },
+      { days: "15-44", percent: 50, color: "orange" },
+      { days: "0-14", percent: 100, color: "red" },
+    ],
+    isPopular: true,
+    departureDate: "28 Oct 2026",
+    type: "One Day Trip",
+  },
 ];
 
 export const rentalCar = [
-    {
-        id: 1,
-        name: "Sedan Car",
-        image: "/images/rental-car-1.png",
-        capacity: "4 Seater",
-        features: ["AC", "Driver", "Fuel"],
-        price: 1999,
-        type: "Sedan"
-    },
-    {
-        id: 2,
-        name: "SUV / MUV",
-        image: "/images/rental-car-2.png",
-        capacity: "7 Seater",
-        features: ["AC", "Driver", "Fuel", "Luggage"],
-        price: 2999,
-        type: "SUV"
-    },
-    {
-        id: 3,
-        name: "Tempo Traveller",
-        image: "/images/rental-car-3.png",
-        capacity: "12 Seater",
-        features: ["AC", "Driver", "Fuel", "Group Travel"],
-        price: 4999,
-        type: "Traveller"
-    },
-    {
-        id: 4,
-        name: "Luxury Car",
-        image: "/images/rental-car-1.png",
-        capacity: "4 Seater",
-        features: ["AC", "Driver", "Fuel"],
-        price: 1999,
-        type: "Luxury"
-    },
-    {
-        id: 5,
-        name: "SUV / MUV",
-        image: "/images/rental-car-2.png",
-        capacity: "7 Seater",
-        features: ["AC", "Driver", "Fuel", "Luggage"],
-        price: 2999,
-        type: "SUV"
-    },
-    // {
-    //     id: 6,
-    //     name: "Tempo Traveller",
-    //     image: "/images/rental-car-3.png",
-    //     capacity: "12 Seater",
-    //     features: ["AC", "Driver", "Fuel", "Group Travel"],
-    //     price: 4999,
-    //     type: "Traveller"
-    // },
-    // {
-    //     id: 7,
-    //     name: "Sedan Car",
-    //     image: "/images/rental-car-1.png",
-    //     capacity: "4 Seater",
-    //     features: ["AC", "Driver", "Fuel"],
-    //     price: 1999,
-    //     type: "Sedan"
-    // },
-    // {
-    //     id: 8,
-    //     name: "SUV / MUV",
-    //     image: "/images/rental-car-2.png",
-    //     capacity: "7 Seater",
-    //     features: ["AC", "Driver", "Fuel", "Luggage"],
-    //     price: 2999,
-    //     type: "SUV"
-    // },
-    // {
-    //     id: 9,
-    //     name: "Tempo Traveller",
-    //     image: "/images/rental-car-3.png",
-    //     capacity: "12 Seater",
-    //     features: ["AC", "Driver", "Fuel", "Group Travel"],
-    //     price: 4999,
-    //     type: "Traveller"
-    // },
+  {
+    id: 1,
+    name: "Sedan Car",
+    image: "/images/rental-car-1.png",
+    capacity: "4 Seater",
+    features: ["AC", "Driver", "Fuel"],
+    price: 1999,
+    type: "Sedan",
+  },
+  {
+    id: 2,
+    name: "SUV / MUV",
+    image: "/images/rental-car-2.png",
+    capacity: "7 Seater",
+    features: ["AC", "Driver", "Fuel", "Luggage"],
+    price: 2999,
+    type: "SUV",
+  },
+  {
+    id: 3,
+    name: "Tempo Traveller",
+    image: "/images/rental-car-3.png",
+    capacity: "12 Seater",
+    features: ["AC", "Driver", "Fuel", "Group Travel"],
+    price: 4999,
+    type: "Traveller",
+  },
+  {
+    id: 4,
+    name: "Luxury Car",
+    image: "/images/rental-car-1.png",
+    capacity: "4 Seater",
+    features: ["AC", "Driver", "Fuel"],
+    price: 1999,
+    type: "Luxury",
+  },
+  {
+    id: 5,
+    name: "SUV / MUV",
+    image: "/images/rental-car-2.png",
+    capacity: "7 Seater",
+    features: ["AC", "Driver", "Fuel", "Luggage"],
+    price: 2999,
+    type: "SUV",
+  },
+  // {
+  //     id: 6,
+  //     name: "Tempo Traveller",
+  //     image: "/images/rental-car-3.png",
+  //     capacity: "12 Seater",
+  //     features: ["AC", "Driver", "Fuel", "Group Travel"],
+  //     price: 4999,
+  //     type: "Traveller"
+  // },
+  // {
+  //     id: 7,
+  //     name: "Sedan Car",
+  //     image: "/images/rental-car-1.png",
+  //     capacity: "4 Seater",
+  //     features: ["AC", "Driver", "Fuel"],
+  //     price: 1999,
+  //     type: "Sedan"
+  // },
+  // {
+  //     id: 8,
+  //     name: "SUV / MUV",
+  //     image: "/images/rental-car-2.png",
+  //     capacity: "7 Seater",
+  //     features: ["AC", "Driver", "Fuel", "Luggage"],
+  //     price: 2999,
+  //     type: "SUV"
+  // },
+  // {
+  //     id: 9,
+  //     name: "Tempo Traveller",
+  //     image: "/images/rental-car-3.png",
+  //     capacity: "12 Seater",
+  //     features: ["AC", "Driver", "Fuel", "Group Travel"],
+  //     price: 4999,
+  //     type: "Traveller"
+  // },
 ];
 
 export const sacredDestinations = [
-    {
-        id: 1,
-        image: sacredDest1, // Passed as an object reference
-        routeLink: "/rental-car",
-        nameKey: "dest1_name",
-        historyKey: "dest1_history",
-        routeKey: "dest1_route",
-        transportKey: "dest1_transport"
-    },
-    {
-        id: 2,
-        image: sacredDest2,
-        routeLink: "/rental-car",
-        nameKey: "dest2_name",
-        historyKey: "dest2_history",
-        routeKey: "dest2_route",
-        transportKey: "dest2_transport"
-    },
-    {
-        id: 3,
-        image: kumbhaImg3,
-        routeLink: "/rental-car",
-        nameKey: "dest3_name",
-        historyKey: "dest3_history",
-        routeKey: "dest3_route",
-        transportKey: "dest3_transport"
-    },
-    {
-        id: 4,
-        image: sacredDest3,
-        routeLink: "/rental-car",
-        nameKey: "dest4_name",
-        historyKey: "dest4_history",
-        routeKey: "dest4_route",
-        transportKey: "dest4_transport"
-    },
-    {
-        id: 5,
-        image: sacredDest5, // Reusing imported asset safely
-        routeLink: "/rental-car",
-        nameKey: "dest5_name",
-        historyKey: "dest5_history",
-        routeKey: "dest5_route",
-        transportKey: "dest5_transport"
-    },
-    {
-        id: 6,
-        image: sacredDest4,
-        routeLink: "/rental-car",
-        nameKey: "dest6_name",
-        historyKey: "dest6_history",
-        routeKey: "dest6_route",
-        transportKey: "dest6_transport"
-    },
-    {
-        id: 7,
-        image: sitaGufa,
-        routeLink: "/rental-car",
-        nameKey: "dest7_name",
-        historyKey: "dest7_history",
-        routeKey: "dest7_route",
-        transportKey: "dest7_transport"
-    },
-    {
-        id: 8,
-        image: sacredDest6,
-        routeLink: "/rental-car",
-        nameKey: "dest8_name",
-        historyKey: "dest8_history",
-        routeKey: "dest8_route",
-        transportKey: "dest8_transport"
-    },
-    {
-        id: 9,
-        image: sacredDest7,
-        routeLink: "/rental-car",
-        nameKey: "dest9_name",
-        historyKey: "dest9_history",
-        routeKey: "dest9_route",
-        transportKey: "dest9_transport"
-    },
-    {
-        id: 10,
-        image: anjaneri,
-        routeLink: "/rental-car",
-        nameKey: "dest10_name",
-        historyKey: "dest10_history",
-        routeKey: "dest10_route",
-        transportKey: "dest10_transport"
-    }
+  {
+    id: 1,
+    image: sacredDest1, // Passed as an object reference
+    routeLink: "/rental-car",
+    nameKey: "dest1_name",
+    historyKey: "dest1_history",
+    routeKey: "dest1_route",
+    transportKey: "dest1_transport",
+  },
+  {
+    id: 2,
+    image: sacredDest2,
+    routeLink: "/rental-car",
+    nameKey: "dest2_name",
+    historyKey: "dest2_history",
+    routeKey: "dest2_route",
+    transportKey: "dest2_transport",
+  },
+  {
+    id: 3,
+    image: kumbhaImg3,
+    routeLink: "/rental-car",
+    nameKey: "dest3_name",
+    historyKey: "dest3_history",
+    routeKey: "dest3_route",
+    transportKey: "dest3_transport",
+  },
+  {
+    id: 4,
+    image: sacredDest3,
+    routeLink: "/rental-car",
+    nameKey: "dest4_name",
+    historyKey: "dest4_history",
+    routeKey: "dest4_route",
+    transportKey: "dest4_transport",
+  },
+  {
+    id: 5,
+    image: sacredDest5, // Reusing imported asset safely
+    routeLink: "/rental-car",
+    nameKey: "dest5_name",
+    historyKey: "dest5_history",
+    routeKey: "dest5_route",
+    transportKey: "dest5_transport",
+  },
+  {
+    id: 6,
+    image: sacredDest4,
+    routeLink: "/rental-car",
+    nameKey: "dest6_name",
+    historyKey: "dest6_history",
+    routeKey: "dest6_route",
+    transportKey: "dest6_transport",
+  },
+  {
+    id: 7,
+    image: sitaGufa,
+    routeLink: "/rental-car",
+    nameKey: "dest7_name",
+    historyKey: "dest7_history",
+    routeKey: "dest7_route",
+    transportKey: "dest7_transport",
+  },
+  {
+    id: 8,
+    image: sacredDest6,
+    routeLink: "/rental-car",
+    nameKey: "dest8_name",
+    historyKey: "dest8_history",
+    routeKey: "dest8_route",
+    transportKey: "dest8_transport",
+  },
+  {
+    id: 9,
+    image: sacredDest7,
+    routeLink: "/rental-car",
+    nameKey: "dest9_name",
+    historyKey: "dest9_history",
+    routeKey: "dest9_route",
+    transportKey: "dest9_transport",
+  },
+  {
+    id: 10,
+    image: anjaneri,
+    routeLink: "/rental-car",
+    nameKey: "dest10_name",
+    historyKey: "dest10_history",
+    routeKey: "dest10_route",
+    transportKey: "dest10_transport",
+  },
 ];
 
 export const bathingDatesConfig = [
-    {
-        day: "31",
-        monthKey: "october",
-        year: "2026",
-        dateOccationKey: "date1_occ",
-        titleKey: "date1_title",
-        descKey: "date1_desc",
-        isKeyDate: false
-    },
-    {
-        day: "24",
-        monthKey: "july",
-        year: "2027",
-        dateOccationKey: "date2_occ",
-        titleKey: "date2_title",
-        descKey: "date2_desc",
-        isKeyDate: false
-    },
-    {
-        day: "02",
-        monthKey: "august",
-        year: "2027",
-        dateOccationKey: "date3_occ",
-        titleKey: "date3_title",
-        descKey: "date3_desc",
-        isKeyDate: true
-    },
-    {
-        day: "31",
-        monthKey: "august",
-        year: "2027",
-        dateOccationKey: "date4_occ",
-        titleKey: "date4_title",
-        descKey: "date4_desc",
-        isKeyDate: true
-    },
-    {
-        day: "11",
-        monthKey: "september",
-        year: "2027",
-        dateOccationKey: "date5_occ",
-        titleKey: "date5_title",
-        descKey: "date5_desc",
-        isKeyDate: true
-    },
-    {
-        day: "12",
-        monthKey: "september",
-        year: "2027",
-        dateOccationKey: "date6_occ",
-        titleKey: "date6_title",
-        descKey: "date6_desc",
-        isKeyDate: true
-    },
-    {
-        day: "26",
-        monthKey: "january",
-        year: "2028",
-        dateOccationKey: "date7_occ",
-        titleKey: "date7_title",
-        descKey: "date7_desc",
-        isKeyDate: true
-    }
+  {
+    day: "31",
+    monthKey: "october",
+    year: "2026",
+    dateOccationKey: "date1_occ",
+    titleKey: "date1_title",
+    descKey: "date1_desc",
+    isKeyDate: false,
+  },
+  {
+    day: "24",
+    monthKey: "july",
+    year: "2027 - 28",
+    dateOccationKey: "date2_occ",
+    titleKey: "date2_title",
+    descKey: "date2_desc",
+    isKeyDate: false,
+  },
+  {
+    day: "02",
+    monthKey: "august",
+    year: "2027 - 28",
+    dateOccationKey: "date3_occ",
+    titleKey: "date3_title",
+    descKey: "date3_desc",
+    isKeyDate: true,
+  },
+  {
+    day: "31",
+    monthKey: "august",
+    year: "2027 - 28",
+    dateOccationKey: "date4_occ",
+    titleKey: "date4_title",
+    descKey: "date4_desc",
+    isKeyDate: true,
+  },
+  {
+    day: "11",
+    monthKey: "september",
+    year: "2027 - 28",
+    dateOccationKey: "date5_occ",
+    titleKey: "date5_title",
+    descKey: "date5_desc",
+    isKeyDate: true,
+  },
+  {
+    day: "12",
+    monthKey: "september",
+    year: "2027 - 28",
+    dateOccationKey: "date6_occ",
+    titleKey: "date6_title",
+    descKey: "date6_desc",
+    isKeyDate: true,
+  },
+  {
+    day: "26",
+    monthKey: "january",
+    year: "2028",
+    dateOccationKey: "date7_occ",
+    titleKey: "date7_title",
+    descKey: "date7_desc",
+    isKeyDate: true,
+  },
 ];
 
 export const planTabData = [
-    {
-        id: 1,
-        tabIcon: "",
-        tabName: "How to Reach",
-        tabDesc: "Explore seamless travel options by air, rail, or road, and start your journey effortlessly.",
-        list: [
-            {
-                image: "/images/by-air.webp", // Replace with your actual image path
-                title: "By Air (Flights)",
-                description: "Fly into Nashik Ozar Airport (ISK) located 20 km from the center for direct domestic flights from Mumbai and Delhi. Alternatively, international travelers can land at Mumbai Airport (BOM) and take a scenic 3–4 hour road or rail trip to Nashik."
-            },
-            {
-                image: "/images/by-train.webp", // Replace with your actual image path
-                title: "By Train (Railways)",
-                description: "Nashik Road Railway Station (NK) is a major central rail hub with excellent connectivity across India. Daily express and superfast trains connect Mumbai (CSMT/Dadar) directly to Nashik, completing the journey in just 3 to 3.5 hours."
-            },
-            {
-                image: "/images/by-road.webp", // Replace with your actual image path
-                title: "By Road (Highways & Buses)",
-                description: "Nashik is seamlessly connected via smooth national highways like the Mumbai-Nashik Expressway (NH-160). State-run MSRTC buses, luxury private AC sleepers, and outstation cabs operate 24/7 from Mumbai, Pune, and surrounding regions."
-            }
-        ]
-    },
-    {
-        id: 2,
-        tabIcon: "",
-        tabName: "Local Transport",
-        tabDesc: "Explore our curated list of accommodations and book your serene retreat.",
-        list: [
-            {
-                image: "/images/citilinc-bus.webp", // Replace with your actual image path
-                title: "Citilinc Public Buses (NMPML)",
-                description: "Nashik's official Citilinc bus network will operate special, high-frequency shuttle services during the event. These routes directly connect the railway station, main bus depots, and key city hubs straight to the primary Mela grounds."
-            },
-            {
-                image: "/images/auto-rickshaw.webp", // Replace with your actual image path
-                title: "Auto-Rickshaws",
-                description: "Three-wheelers are widely available for quick transit across the city. Note that auto-rickshaw access will be restricted or zoned off around the core bathing areas on peak shahi snan (holy bathing) days to manage crowd density."
-            },
-            {
-                image: "/images/walking-path.webp", // Replace with your actual image path
-                title: "Pedestrian Walkways (On Foot)",
-                description: "Walking is the most efficient way to navigate the immediate Mela zones and reach the bathing ghats. The administration is setting up dedicated pedestrian-only barricaded lanes to ensure safe, smooth, and vehicle-free movement."
-            }
-        ]
-    },
-    {
-        id: 3,
-        tabIcon: "",
-        tabName: "Safety Guidelines",
-        tabDesc: "Categorized list of public utilities, designed to make it accessible for tourists and pilgrims",
-        list: [
-            {
-                image: "/images/crowd-safety.webp", // Replace with your actual image path
-                title: "Crowd Safety & Awareness",
-                description: "Stay with your group and establish clear meeting points. Follow directions from police and trained volunteers, and remain highly alert of your personal belongings in crowded areas to avoid pickpockets."
-            },
-            {
-                image: "/images/hydration-food.webp", // Replace with your actual image path
-                title: "Hydration & Safe Eating",
-                description: "Carry a reusable water bottle and stay well-hydrated throughout the day. Avoid unhygienic street food and strictly opt for freshly prepared meals to prevent stomach infections."
-            },
-            {
-                image: "/images/personal-hygiene.webp", // Replace with your actual image path
-                title: "Personal Hygiene & Protection",
-                description: "Keep a personal hygiene kit handy with hand sanitizer, tissues, and essential medications. Wear a face mask while moving around the grounds to safeguard against heavy dust and airborne pollutants."
-            },
-            {
-                image: "/images/medical-services.webp", // Replace with your actual image path
-                title: "Emergency Medical Services",
-                description: "Familiarize yourself with the location of emergency medical camps. The Mela administration will have multiple temporary medical tents and fully equipped first-aid centers distributed across the venue."
-            }
-        ]
-    },
-    {
-        id: 4,
-        tabIcon: "",
-        tabName: "Helpline",
-        tabDesc: "Emergency: 100 | Tourist Helpline: 1800-XXX-XXXX | Medical Help: 108 | Available 24/7",
-        list: [
-            {
-                image: "",
-                title: "",
-                description: ""
-            },
-            {
-                image: "",
-                title: "",
-                description: ""
-            },
-            {
-                image: "",
-                title: "",
-                description: ""
-            },
-            {
-                image: "",
-                title: "",
-                description: ""
-            }
-        ],
-    },
-]
+  {
+    id: 1,
+    tabIcon: "",
+    tabName: "How to Reach",
+    tabDesc:
+      "Explore seamless travel options by air, rail, or road, and start your journey effortlessly.",
+    list: [
+      {
+        image: "/images/by-air.webp", // Replace with your actual image path
+        title: "By Air (Flights)",
+        description:
+          "Fly into Nashik Ozar Airport (ISK) located 20 km from the center for direct domestic flights from Mumbai and Delhi. Alternatively, international travelers can land at Mumbai Airport (BOM) and take a scenic 3–4 hour road or rail trip to Nashik.",
+      },
+      {
+        image: "/images/by-train.webp", // Replace with your actual image path
+        title: "By Train (Railways)",
+        description:
+          "Nashik Road Railway Station (NK) is a major central rail hub with excellent connectivity across India. Daily express and superfast trains connect Mumbai (CSMT/Dadar) directly to Nashik, completing the journey in just 3 to 3.5 hours.",
+      },
+      {
+        image: "/images/by-road.webp", // Replace with your actual image path
+        title: "By Road (Highways & Buses)",
+        description:
+          "Nashik is seamlessly connected via smooth national highways like the Mumbai-Nashik Expressway (NH-160). State-run MSRTC buses, luxury private AC sleepers, and outstation cabs operate 24/7 from Mumbai, Pune, and surrounding regions.",
+      },
+    ],
+  },
+  {
+    id: 2,
+    tabIcon: "",
+    tabName: "Local Transport",
+    tabDesc:
+      "Explore our curated list of accommodations and book your serene retreat.",
+    list: [
+      {
+        image: "/images/citilinc-bus.webp", // Replace with your actual image path
+        title: "Citilinc Public Buses (NMPML)",
+        description:
+          "Nashik's official Citilinc bus network will operate special, high-frequency shuttle services during the event. These routes directly connect the railway station, main bus depots, and key city hubs straight to the primary Mela grounds.",
+      },
+      {
+        image: "/images/auto-rickshaw.webp", // Replace with your actual image path
+        title: "Auto-Rickshaws",
+        description:
+          "Three-wheelers are widely available for quick transit across the city. Note that auto-rickshaw access will be restricted or zoned off around the core bathing areas on peak shahi snan (holy bathing) days to manage crowd density.",
+      },
+      {
+        image: "/images/walking-path.webp", // Replace with your actual image path
+        title: "Pedestrian Walkways (On Foot)",
+        description:
+          "Walking is the most efficient way to navigate the immediate Mela zones and reach the bathing ghats. The administration is setting up dedicated pedestrian-only barricaded lanes to ensure safe, smooth, and vehicle-free movement.",
+      },
+    ],
+  },
+  {
+    id: 3,
+    tabIcon: "",
+    tabName: "Safety Guidelines",
+    tabDesc:
+      "Categorized list of public utilities, designed to make it accessible for tourists and pilgrims",
+    list: [
+      {
+        image: "/images/crowd-safety.webp", // Replace with your actual image path
+        title: "Crowd Safety & Awareness",
+        description:
+          "Stay with your group and establish clear meeting points. Follow directions from police and trained volunteers, and remain highly alert of your personal belongings in crowded areas to avoid pickpockets.",
+      },
+      {
+        image: "/images/hydration-food.webp", // Replace with your actual image path
+        title: "Hydration & Safe Eating",
+        description:
+          "Carry a reusable water bottle and stay well-hydrated throughout the day. Avoid unhygienic street food and strictly opt for freshly prepared meals to prevent stomach infections.",
+      },
+      {
+        image: "/images/personal-hygiene.webp", // Replace with your actual image path
+        title: "Personal Hygiene & Protection",
+        description:
+          "Keep a personal hygiene kit handy with hand sanitizer, tissues, and essential medications. Wear a face mask while moving around the grounds to safeguard against heavy dust and airborne pollutants.",
+      },
+      {
+        image: "/images/medical-services.webp", // Replace with your actual image path
+        title: "Emergency Medical Services",
+        description:
+          "Familiarize yourself with the location of emergency medical camps. The Mela administration will have multiple temporary medical tents and fully equipped first-aid centers distributed across the venue.",
+      },
+    ],
+  },
+  {
+    id: 4,
+    tabIcon: "",
+    tabName: "Helpline",
+    tabDesc:
+      "Emergency: 100 | Tourist Helpline: 1800-XXX-XXXX | Medical Help: 108 | Available 24/7",
+    list: [
+      {
+        image: "",
+        title: "",
+        description: "",
+      },
+      {
+        image: "",
+        title: "",
+        description: "",
+      },
+      {
+        image: "",
+        title: "",
+        description: "",
+      },
+      {
+        image: "",
+        title: "",
+        description: "",
+      },
+    ],
+  },
+];
 
 // faq
 export const faqData = [
-    {
-        id: "0",
-        question: "How do I book a private vehicle for the Shahi Snan?",
-        answer: "Private vehicle access is restricted near the main ghats on Shahi Snan days. We recommend booking at least 48 hours in advance. Our premium fleet includes specialized permissions for inner-city transit to authorized drop-off points."
-    },
-    {
-        id: "1",
-        question: "Is there specialized VVIP assistance available for seniors?",
-        answer: "Yes, we offer a 'Seamless Pilgrimage' package specifically designed for senior citizens and those with limited mobility, including electric cart transfers and reserved seating for spiritual discourses."
-    },
-    {
-        id: "2",
-        question: "Can you arrange for helicopter transfers?",
-        answer: "Helicopter transfers from Mumbai and Pune are available through our luxury partner network. Please submit a custom inquiry via the form above for flight paths and landing permissions."
-    }
+  {
+    id: "0",
+    question: "How do I book a private vehicle for the Shahi Snan?",
+    answer:
+      "Private vehicle access is restricted near the main ghats on Shahi Snan days. We recommend booking at least 48 hours in advance. Our premium fleet includes specialized permissions for inner-city transit to authorized drop-off points.",
+  },
+  {
+    id: "1",
+    question: "Is there specialized VVIP assistance available for seniors?",
+    answer:
+      "Yes, we offer a 'Seamless Pilgrimage' package specifically designed for senior citizens and those with limited mobility, including electric cart transfers and reserved seating for spiritual discourses.",
+  },
+  {
+    id: "2",
+    question: "Can you arrange for helicopter transfers?",
+    answer:
+      "Helicopter transfers from Mumbai and Pune are available through our luxury partner network. Please submit a custom inquiry via the form above for flight paths and landing permissions.",
+  },
 ];
-

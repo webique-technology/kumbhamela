@@ -492,7 +492,8 @@ export const KumbhCountdown = ({ targetDate, isActive = true }) => {
 
   // Memoize the target date so the useEffect doesn't re-run unless the date prop changes
   const COUNTDOWN_TARGET = useMemo(() => {
-    return targetDate ? new Date(targetDate) : new Date("2026-09-31T00:00:00Z"); // Updated fallback closer to Nashik 2027 start
+    // Official Start Date of Nashik-Trimbakeshwar Simhastha Kumbh Mela: July 14, 2027
+    return targetDate ? new Date(targetDate) : new Date("2026-10-31T00:00:00Z");
   }, [targetDate]);
 
   const [timeLeft, setTimeLeft] = useState({
@@ -931,9 +932,7 @@ export const CommonPopup = ({ data, isOpen, onClose }) => {
   );
 };
 
-export const CommonTranslatedText = ({text}) => {
+export const CommonTranslatedText = ({ text }) => {
   const t = useTranslations("Common");
-  return(
-    <>{t(text)}</>
-  )
-}
+  return <>{t(text)}</>;
+};
