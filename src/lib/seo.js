@@ -1,8 +1,7 @@
 // src/lib/seo.js
 
-/**
- * Cleanly truncates text at the nearest word boundary without breaking words.
- */
+const PRIMARY_DOMAIN = "https://mahakumbhtourstravelsnashik.com";
+
 export function truncateText(text, maxLength = 155) {
   if (!text) return "";
   const trimmed = text.trim();
@@ -17,19 +16,24 @@ export function truncateText(text, maxLength = 155) {
 }
 
 /**
- * Constructs a valid absolute URL, ensuring clean slash formatting.
+ * Constructs guaranteed absolute URLs anchored to the correct domain.
  */
 export function getValidUrl(base, relativePath) {
-  const cleanBase = (base || "https://mahakumbhtours.com").replace(/\/+$/, "");
+  const envBase = process.env.NEXT_PUBLIC_BASE_URL || PRIMARY_DOMAIN;
+
+  let cleanOrigin;
+  try {
+    cleanOrigin = new URL(base || envBase).origin;
+  } catch {
+    cleanOrigin = PRIMARY_DOMAIN;
+  }
+
   const cleanPath = relativePath.startsWith("/")
     ? relativePath
     : `/${relativePath}`;
-  return `${cleanBase}${cleanPath}`;
+  return `${cleanOrigin}${cleanPath}`;
 }
 
-/**
- * Standardized metadata builder for Next.js pages.
- */
 export function buildPageMetadata({
   locale,
   pageSlug,
@@ -38,25 +42,31 @@ export function buildPageMetadata({
   keywords = [],
   ogImage = "/images/tour-section-bg.jpg",
   supportLocales = ["en", "hi", "mr", "gu", "ta", "te", "ml", "sa"],
-  baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://mahakumbhtours.com",
+  // Explicitly update default fallback here:
+  baseUrl = process.env.NEXT_PUBLIC_BASE_URL || PRIMARY_DOMAIN,
 }) {
-  const shortTitle = truncateText(title, 60);
+  const shortTitle = truncateText(title, 35);
   const metaTitle = `${shortTitle} | Mahakumbh Tours`;
-  const socialTitle = `${shortTitle} | Nashik Kumbh 2027 - 28`;
+  const socialTitle = `${shortTitle} | Nashik Kumbh 2027`;
 
   const searchDescription = truncateText(description, 155);
   const socialDescription = truncateText(description, 120);
 
-  const canonicalUrl = getValidUrl(baseUrl, `/${locale}/${pageSlug}`);
+  // Force image to route through the real domain
   const ogImageUrl = getValidUrl(baseUrl, ogImage);
+
+  const rootOrigin = getValidUrl(baseUrl, "");
+  const cleanSlug = pageSlug.replace(/^\/+/, "");
+  const canonicalUrl = `${rootOrigin}/${locale}/${cleanSlug}`;
 
   const languageAlternates = {};
   supportLocales.forEach((loc) => {
     const regionKey = loc === "en" ? "en-IN" : `${loc}-IN`;
-    languageAlternates[regionKey] = getValidUrl(baseUrl, `/${loc}/${pageSlug}`);
+    languageAlternates[regionKey] = `${rootOrigin}/${loc}/${cleanSlug}`;
   });
 
   return {
+    metadataBase: new URL(rootOrigin),
     title: metaTitle,
     description: searchDescription,
     keywords,
@@ -73,7 +83,7 @@ export function buildPageMetadata({
       siteName: "Mahakumbh Tours & Travels",
       images: [
         {
-          url: ogImageUrl,
+          url: ogImageUrl, // Now outputs: https://mahakumbhtourstravelsnashik.com/images/tour-section-bg.jpg
           width: 1200,
           height: 630,
           alt: metaTitle,
