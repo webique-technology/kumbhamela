@@ -2,6 +2,7 @@
 
 const PRIMARY_DOMAIN = "https://mahakumbhtourstravelsnashik.com";
 
+// Helper to cleanly truncate strings at word boundaries
 export function truncateText(text, maxLength = 155) {
   if (!text) return "";
   const trimmed = text.trim();
@@ -36,44 +37,56 @@ export function getValidUrl(base, relativePath) {
 
 export function buildPageMetadata({
   locale,
-  pageSlug,
+  pageSlug = "",
   title,
   description,
   keywords = [],
   ogImage = "/images/tour-section-bg.jpg",
   supportLocales = ["en", "hi", "mr", "gu", "ta", "te", "ml", "sa"],
-  // Explicitly update default fallback here:
   baseUrl = process.env.NEXT_PUBLIC_BASE_URL || PRIMARY_DOMAIN,
 }) {
+  // 1. Truncate base title to 35 chars -> Total ~53 chars with suffix (Safely under 60 char limit)
   const shortTitle = truncateText(title, 35);
   const metaTitle = `${shortTitle} | Mahakumbh Tours`;
   const socialTitle = `${shortTitle} | Nashik Kumbh 2027`;
 
+  // 2. Truncate descriptions for Search & Social
   const searchDescription = truncateText(description, 155);
   const socialDescription = truncateText(description, 120);
 
-  // Force image to route through the real domain
+  // 3. Absolute Image & Path URLs
   const ogImageUrl = getValidUrl(baseUrl, ogImage);
-
   const rootOrigin = getValidUrl(baseUrl, "");
-  const cleanSlug = pageSlug.replace(/^\/+/, "");
-  const canonicalUrl = `${rootOrigin}/${locale}/${cleanSlug}`;
 
+  // Formats slug cleanly (handles empty slug, leading slashes)
+  const cleanSlug = pageSlug.replace(/^\/+/, "");
+  const pathSuffix = cleanSlug ? `/${cleanSlug}` : "";
+
+  const canonicalUrl = `${rootOrigin}/${locale}${pathSuffix}`;
+
+  // 4. Language Alternates (en-IN, hi-IN, mr-IN, etc.)
   const languageAlternates = {};
   supportLocales.forEach((loc) => {
     const regionKey = loc === "en" ? "en-IN" : `${loc}-IN`;
-    languageAlternates[regionKey] = `${rootOrigin}/${loc}/${cleanSlug}`;
+    languageAlternates[regionKey] = `${rootOrigin}/${loc}${pathSuffix}`;
   });
 
   return {
     metadataBase: new URL(rootOrigin),
-    title: metaTitle,
+
+    // Explicit title object prevents root layout template duplication
+    title: {
+      absolute: metaTitle,
+    },
+
     description: searchDescription,
     keywords,
+
     alternates: {
       canonical: canonicalUrl,
       languages: languageAlternates,
     },
+
     openGraph: {
       title: socialTitle,
       description: socialDescription,
@@ -83,19 +96,21 @@ export function buildPageMetadata({
       siteName: "Mahakumbh Tours & Travels",
       images: [
         {
-          url: ogImageUrl, // Now outputs: https://mahakumbhtourstravelsnashik.com/images/tour-section-bg.jpg
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: metaTitle,
         },
       ],
     },
+
     twitter: {
       card: "summary_large_image",
       title: socialTitle,
       description: socialDescription,
       images: [ogImageUrl],
     },
+
     robots: {
       index: true,
       follow: true,

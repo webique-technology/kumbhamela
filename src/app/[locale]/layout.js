@@ -52,7 +52,6 @@ export async function generateMetadata({ params }) {
     locale === "mr" ? "mr_IN" : locale === "hi" ? "hi_IN" : "en_IN";
 
   // --- SHORTENED & CLEANED METADATA STRINGS ---
-  // Title: Exactly 50 characters (Fits Google's 60-character limit)
   const metaTitle = "Mahakumbh Tours & Travels | Nashik Kumbh Mela 2027";
 
   // Description: Exactly 143 characters (Fits Google's 155-character limit)
@@ -70,7 +69,8 @@ export async function generateMetadata({ params }) {
     metadataBase: new URL(BASE_URL),
     title: {
       default: metaTitle,
-      template: "%s | Mahakumbh Tours & Travels Nashik",
+      // Shortened template suffix prevents double-brand expansion
+      template: "%s | Mahakumbh Tours",
     },
     icons: {
       icon: "/icon.png",
@@ -139,7 +139,6 @@ export async function generateMetadata({ params }) {
       images: [
         {
           url: ogImageUrl,
-          // Updated dimensions to match expected 1200x630 ratio
           width: 1200,
           height: 630,
           alt: "Mahakumbh Tours & Travels - Nashik Kumbh Mela 2027",
