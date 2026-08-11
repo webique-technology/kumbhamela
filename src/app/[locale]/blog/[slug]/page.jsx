@@ -10,17 +10,14 @@ import { getBlogs, getBlogBySlug } from "../blogApi";
 import { Link } from "@/i18n/routing";
 import { decode } from "html-entities";
 import { CommonTranslatedText } from "@/components/ui/common";
+import { truncateText, getValidUrl } from "@/lib/seo";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://yourkumbhdomain.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://mahakumbhtourstravelsnashik.com";
 
 export async function generateMetadata({ params }) {
   const { slug, locale } = await params;
   const blog = await getBlogBySlug(slug, locale);
-
-  const BASE_URL =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://mahakumbhtourtravelsnashik.com";
 
   if (!blog) {
     return {
@@ -28,57 +25,92 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  // 1. Decode HTML entities (converts &#2325; -> कु)
-  // 2. Strip HTML tags (<p>, <br>, etc.)
-  // 3. Collapse whitespace and safely slice clean text
+  // 1. Clean HTML tags and decode entities
   const rawDesc = decode(blog.description || "");
-  const cleanDescription = rawDesc
+  const cleanPlainText = rawDesc
     .replace(/<[^>]+>/g, "") // Strip HTML tags
-    .replace(/\s+/g, " ") // Normalize spaces/newlines
-    .trim()
-    .slice(0, 160); // Safe slice after decoding!
+    .replace(/\s+/g, " ") // Collapse whitespace
+    .trim();
 
-  const fullUrl = `${BASE_URL}/${locale}/blog/${slug}`;
+  // 2. Safe character truncation limits
+  const shortTitle = truncateText(blog.title || "Blog", 35);
+  const searchTitle = `${shortTitle} | Mahakumbh Tours`;
+  const socialTitle = `${shortTitle} | Nashik Kumbh 2027`;
+
+  const searchDescription = truncateText(
+    cleanPlainText ||
+      "Read spiritual insights, guides, and travel tips for Nashik Kumbh Mela 2027.",
+    155,
+  ); // Google limit: 155 chars
+
+  const socialDescription = truncateText(
+    cleanPlainText ||
+      "Read spiritual insights, guides, and travel tips for Nashik Kumbh Mela 2027.",
+    120,
+  ); // Social card limit: 120 chars
+
+  // 3. Absolute URLs & Alternates
+  const fullUrl = getValidUrl(BASE_URL, `/${locale}/blog/${slug}`);
+  const ogImageUrl = blog.image_url
+    ? getValidUrl(BASE_URL, blog.image_url)
+    : getValidUrl(BASE_URL, "/images/tour-section-bg.jpg");
+
+  const supportLocales = ["en", "hi", "mr", "gu", "ta", "te", "ml", "sa"];
+  const languageAlternates = {};
+  supportLocales.forEach((loc) => {
+    const regionKey = loc === "en" ? "en-IN" : `${loc}-IN`;
+    languageAlternates[regionKey] = getValidUrl(
+      BASE_URL,
+      `/${loc}/blog/${slug}`,
+    );
+  });
 
   return {
-    title: `${blog.title} | Blogs & Insights`,
-    description: cleanDescription,
+    metadataBase: new URL(BASE_URL),
+
+    // Bypasses layout.js template to prevent double brand duplication
+    title: {
+      absolute: searchTitle,
+    },
+
+    description: searchDescription,
 
     other: {
-      "og:logo": `${BASE_URL}/images/logo.png`,
+      "og:logo": getValidUrl(BASE_URL, "/images/icon.png"),
     },
 
     alternates: {
       canonical: fullUrl,
-      languages: {
-        "en-IN": `${BASE_URL}/en/blog/${slug}`,
-        "hi-IN": `${BASE_URL}/hi/blog/${slug}`,
-        "mr-IN": `${BASE_URL}/mr/blog/${slug}`,
-      },
+      languages: languageAlternates,
     },
 
     openGraph: {
-      title: blog.title,
-      description: cleanDescription,
+      title: socialTitle,
+      description: socialDescription,
       url: fullUrl,
       siteName: "Mahakumbh Tours & Travels",
       type: "article",
       locale: locale === "en" ? "en_IN" : `${locale}_IN`,
       images: [
         {
-          url: blog.image_url || `${BASE_URL}/images/default-blog-og.jpg`,
+          url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: blog.title,
+          alt: searchTitle,
         },
       ],
     },
 
     twitter: {
       card: "summary_large_image",
-      title: blog.title,
-      description: cleanDescription,
-      images: [blog.image_url || `${BASE_URL}/images/default-blog-og.jpg`],
+      title: socialTitle,
+      description: socialDescription,
+      images: [ogImageUrl],
+    },
+
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }

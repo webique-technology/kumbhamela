@@ -1,25 +1,22 @@
-import axios from "axios";
 import { notFound } from "next/navigation";
 import TourPackageDetail from "./TourPackageDetail";
 import "../../../../styles/tourPackage.scss";
 import { getTourBySlug } from "../tourApi";
+import { truncateText, getValidUrl } from "@/lib/seo";
 
-// Ensure this matches your actual production domain where assets exist
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mahakumbhtourtravelsnashik.com";
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://mahakumbhtourstravelsnashik.com";
 
-// Helper function to safely strip raw HTML tags and clean description lengths
-function cleanDescription(htmlString, maxLength = 160) {
+function cleanHtml(htmlString) {
   if (!htmlString) return "";
-  const plainText = htmlString.replace(/<[^>]*>/g, "").trim();
-  return plainText.length > maxLength ? `${plainText.slice(0, maxLength)}...` : plainText;
+  return htmlString.replace(/<[^>]*>/g, "").trim();
 }
 
-// 1. DYNAMIC METADATA GENERATION
 export async function generateMetadata({ params }) {
   const { slug, locale } = await params;
 
-  // Optimized: Only fetch the specific tour needed for this slug
-  const tour = await getTourBySlug(slug ,locale);
+  // Fetch tour data
+  const tour = await getTourBySlug(slug, locale);
 
   if (!tour) {
     return {
@@ -27,50 +24,97 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const fullUrl = `${BASE_URL}/${locale}/tour-package/${slug}`;
-  const seoDescription = cleanDescription(tour.description);
+  // --- 1. TITLE TRUNCATION (Keeps total string ~50-53 chars max) ---
+  const shortTourTitle = truncateText(tour.title || "Tour Package", 35);
+  const searchTitle = `${shortTourTitle} | Mahakumbh Tours`;
+  const socialTitle = `${shortTourTitle} | Nashik Kumbh 2027`;
+
+  // --- 2. DESCRIPTION TRUNCATION ---
+  const rawPlainText = cleanHtml(tour.description);
+  const searchDescription = truncateText(
+    rawPlainText ||
+      "Explore sacred pilgrimage tour packages for Nashik Kumbh Mela 2027.",
+    155,
+  ); // Max 155 chars for Google
+  const socialDescription = truncateText(
+    rawPlainText ||
+      "Explore sacred pilgrimage tour packages for Nashik Kumbh Mela 2027.",
+    120,
+  ); // Max 120 chars for Social Cards
+
+  // --- 3. ABSOLUTE URLS & FALLBACKS ---
+  const fullUrl = getValidUrl(BASE_URL, `/${locale}/tour-package/${slug}`);
+
+  // Use dynamic tour image if available, otherwise fall back to 1200x630 static banner
+  const ogImageUrl = tour.image_url
+    ? getValidUrl(BASE_URL, tour.image_url)
+    : getValidUrl(BASE_URL, "/images/tour-section-bg.jpg");
+
+  const supportLocales = ["en", "hi", "mr", "gu", "ta", "te", "ml", "sa"];
+  const languageAlternates = {};
+  supportLocales.forEach((loc) => {
+    const regionKey = loc === "en" ? "en-IN" : `${loc}-IN`;
+    languageAlternates[regionKey] = getValidUrl(
+      BASE_URL,
+      `/${loc}/tour-package/${slug}`,
+    );
+  });
 
   return {
-    title: `Sacred tour: ${tour.title} | Mahakumbh tour & travel`,
-    description: seoDescription,
+    metadataBase: new URL(BASE_URL),
 
-    // Custom metadata extension to force-feed the non-standard og:logo tag Orca Scan wants
+    // Absolute title stops Next.js layout.js template from doubling up
+    title: {
+      absolute: searchTitle,
+    },
+
+    description: searchDescription,
+
     other: {
-      "og:logo": `${BASE_URL}/images/logo.png`, // Point this directly to your brand logo asset file
+      "og:logo": getValidUrl(BASE_URL, "/images/icon.png"),
+    },
+
+    alternates: {
+      canonical: fullUrl,
+      languages: languageAlternates,
     },
 
     openGraph: {
-      title: tour.title,
-      description: seoDescription,
+      title: socialTitle,
+      description: socialDescription,
       url: fullUrl,
       siteName: "Mahakumbh Tours & Travels",
-      type: "website", // Next.js outputs this, but keeping it explicitly defined inside openGraph ensures parsing
+      type: "website",
+      locale: locale === "en" ? "en_IN" : `${locale}_IN`,
       images: [
         {
-          url: tour.image_url || `${BASE_URL}/images/tour-packages-og.jpg`,
+          url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: tour.title,
+          alt: searchTitle,
         },
       ],
-      locale: locale === "en" ? "en_IN" : `${locale}_IN`,
     },
 
     twitter: {
       card: "summary_large_image",
-      title: tour.title,
-      description: seoDescription,
-      images: [tour.image_url || `${BASE_URL}/images/tour-packages-og.jpg`],
+      title: socialTitle,
+      description: socialDescription,
+      images: [ogImageUrl],
+    },
+
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }
 
 // 2. MAIN DETAIL PAGE ENTRY
 export default async function TourDetailPage({ params }) {
-  const { slug ,locale } = await params;
+  const { slug, locale } = await params;
 
-  // Optimized: Removed the heavy getTours() call entirely
-  const tour = await getTourBySlug(slug,locale);
+  const tour = await getTourBySlug(slug, locale);
 
   if (!tour) {
     notFound();
