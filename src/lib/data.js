@@ -1,14 +1,14 @@
 // 1. Static ES6 Import Architecture for Assets
-import sacredDest1 from "../assets/images/triambakeshwar-tempel.jpg";
-import sacredDest2 from "../assets/images/ramkund.jpg";
-import sacredDest3 from "../assets/images/kalaram-temple.jpg";
-import sacredDest4 from "../assets/images/sacred-destination-4.jpg";
-import sacredDest5 from "../assets/images/goda-ghat.jpg";
-import sacredDest6 from "../assets/images/sacred-destination-5.jpg";
-import sacredDest7 from "../assets/images/kapaleshwar-tempal.jpg";
-import kumbhaImg3 from "../assets/images/panchavati.jpg";
-import sitaGufa from "../assets/images/sita-gufa.jpg";
-import anjaneri from "../assets/images/anjaneri-img.jpg";
+import sacredDest1 from "../assets/images/triambakeshwar-tempel-2.webp";
+import sacredDest2 from "../assets/images/ramkund-2.webp";
+import sacredDest3 from "../assets/images/kalaram-tempal-2.webp";
+import sacredDest4 from "../assets/images/sacred-destination-4.webp";
+import sacredDest5 from "../assets/images/goda-ghat-2.webp";
+import sacredDest6 from "../assets/images/sacred-destination-5.webp";
+import sacredDest7 from "../assets/images/kapaleshwar-tempal-2.webp";
+import kumbhaImg3 from "../assets/images/panchavati-2.webp";
+import sitaGufa from "../assets/images/sita-gufa.webp";
+import anjaneri from "../assets/images/anjaneri-2.webp";
 
 export const hotels = [
   {

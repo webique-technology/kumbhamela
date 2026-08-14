@@ -19,6 +19,7 @@ import {
   Sparkles,
   MapPin,
   Layers,
+  MoveRight,
 } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -39,6 +40,7 @@ import "../../../assets/scss/main.scss";
 import aboutHero1 from "../../../assets/images/about-hero-1.png";
 import aboutHero2 from "@/assets/images/about-hero-2.png";
 import sadhusSaints from "@/assets/images/sadhus-saints.webp";
+import sadhugram from "@/assets/images/sadhugram.webp";
 import yearCycle2 from "@/assets/images/year-cycle-2.png";
 import riverRituals from "@/assets/images/river-rituals.webp";
 import eveningAarti from "@/assets/images/evening-aarti.webp";
@@ -664,16 +666,50 @@ const AboutPage = () => {
         </Container>
       </section>
 
-      {/* Significance Quote */}
-      <section className="quote-section section-padding secondary-bg">
-        <Container className="text-center">
-          <CheckCircle size={60} className="text-primary-light mb-4" />
-          <h2 className="quote-main mb-4">{t("Quote.text")}</h2>
-          <div className="quote-footer d-flex align-items-center justify-content-center gap-3">
-            <div className="line"></div>
-            <span className="author-label">{t("Quote.author")}</span>
-            <div className="line"></div>
-          </div>
+      {/* Sadhugram */}
+      <section className="section-padding secondary-bg">
+        <Container>
+          <Row className="align-items-center justify-content-center">
+            <Col md={6} className="hero-img-col">
+              <div className="hero-img-wrapper rounded-3 overflow-hidden d-flex align-items-center justify-content-center shadow-2xl">
+                <Image
+                  src={sadhugram.src}
+                  alt="Pilgrims at river"
+                  width={484}
+                  height={100}
+                  className="img-fluid rounded-4"
+                />
+                {/* <div className="floating-stat-card shadow-sm d-none d-md-block">
+                  <p className="stat-number mb-2">12</p>
+                  <p className="stat-text mb-0">{t("Legacy.statText")}</p>
+                </div> */}
+              </div>
+            </Col>
+            <Col md={6} className="hero-text-col">
+              <span className="playfair-display h4 primery-color">
+                {t("Sadhugram.tag")}
+              </span>
+              <h1 className="hero-title fw-bold mt-3 fs-1">
+                {t("Sadhugram.title")}{" "}
+                <span className="hero-span primery-color fw-bold fs-1">
+                  {t("Sadhugram.span")}
+                </span>
+              </h1>
+              <p className="description-text mt-2">
+                {t("Sadhugram.description")}
+              </p>
+              <div className="shrine-meta mb-3 mb-md-0 d-flex align-items-center gap-3 mt-4">
+                <Link
+                  href={"/blog/sadhugram-at-nashik-kumbh-mela-2027-complete-visitor-guide"}
+                  className="text-decoration-none primery-color"
+                  target="_blank"
+                >
+                  <span className="italic-meta me-3">{tr("ReadMore")}</span>
+                  <MoveRight />
+                </Link>
+              </div>
+            </Col>
+          </Row>
         </Container>
       </section>
 

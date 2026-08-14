@@ -167,7 +167,7 @@
   },
   "BathingDates": {
     "mainTitle": "Kumbha",
-    "mainSubtitle": "Amrit Snan Dates 2027 - 28",
+    "mainSubtitle": "Amrit Snan Dates 2027",
     "yearsCycle": "Years Cycle",
     "dailyPilgrims": "Daily Pilgrims",
     "daysFestival": "Days Festival",
@@ -462,6 +462,14 @@
     "Quote": {
       "text": "\"Kumbh is not just a fair, it's a congregation of souls seeking the eternal truth amidst the flow of the Godavari.\"",
       "author": "The Pilgrim's Wisdom"
+    },
+    "Sadhugram": {
+      "tag": "Sadhugram",
+      "title": "Sadhugram at Nashik Kumbh Mela 2027",
+      "span": "Complete Visitor Guide",
+      "description": "Millions of people attend Kumbh Mela for the holy bath. But far fewer know about Sadhugram — and those who do often describe it as the most extraordinary part of the entire Kumbh experience. This guide tells you exactly what Sadhugram is, where it is, what you will find inside and how visitors can access it during Nashik Kumbh Mela 2027.",
+      "meta": "Thousands of sadhus, 100+ Akhadas, countless seekers — all coming together in one sacred space.",
+      "statText": "Thousands of sadhus, 100+ Akhadas, countless seekers — all coming together in one sacred space."
     },
     "Destinations": {
       "title": "Tourist Sites & Sacred Destinations",
