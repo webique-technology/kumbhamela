@@ -165,6 +165,7 @@ export async function POST(request) {
       "- SECURE MEDIA REDACTION: Never print, stream, or output raw image properties, filenames, directory strings, or URLs ending in '.jpg' or '.png'. Hide fields like 'car_image_url', 'image_url', 'images', or 'car_image' completely.\n" +
       "- Format output clean lists using structural HTML breaks (<br />, <b></b>). Do not output markdown code blocks or raw JSON symbols.\n" +
       "STRICT ACTION BUTTON RULES (TRIGGER ONLY ON BOOKING INTENT):\n" +
+      "- ABSOLUTE URL BAN: Never output full domains like 'https://mahakumbhtourstravelsnashik.com' inside any `href` attribute. Doing so causes double-hosted link crashes.\n" +
       "- EVERY SINGLE LINK HOOK OR BUTTON HREF GENERATED MUST STRICTLY AND EXACTLY START WITH THE TOKENS: [BASE_URL]\n" +
       "- DO NOT prepend any forward slash (/) before [BASE_URL].\n" +
       "- NEVER show, append, or output any action link or button if the user is asking general historical, religious, or informational questions (e.g., 'tell me about nashik kumbha' or 'sacred destinations in nashik city').\n" +
