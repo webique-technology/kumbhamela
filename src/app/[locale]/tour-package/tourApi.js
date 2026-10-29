@@ -3,16 +3,6 @@ import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-// Get all tours
-// export const getTours = async (page = 1) => {
-//   try {
-//     const response = await api.get(`/tours?page=${page}`);
-//     return response.data.data;
-//   } catch (error) {
-//     console.log("Tours API Error:", error);
-//     throw error;
-//   }
-// };
 export const getTours = async (
   page = 1,
   name = "",
@@ -63,20 +53,10 @@ export const createTourEnquiry = async (payload) => {
     return response.data;
   } catch (error) {
     console.error("Tour enquiry error:", error.response?.data || error.message);
-
     throw error;
   }
 };
 
-// export const getCancellationPolicy = async () => {
-//   try {
-//     const response = await api.get("/privacy-policy");
-//     return response.data;
-//   } catch (error) {
-//     console.log("Cancellation Policy API Error:", error);
-//     return [];
-//   }
-// };
 export const getCancellationPolicy = async (lang = "en") => {
   try {
     const response = await api.get(`/privacy-policy`, {
@@ -87,14 +67,19 @@ export const getCancellationPolicy = async (lang = "en") => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log("Cancellation Policy API Error:", error);
     return [];
   }
 };
 
-export const getPaymentPolicy = async () => {
+export const getPaymentPolicy = async (lang = "en") => {
   try {
-    const response = await api.get("/payment-policy");
+    const response = await api.get("/payment-policy", {
+      params: {
+        lang,
+      },
+    });
+
     return response.data;
   } catch (error) {
     console.log("Payment Policy API Error:", error);
@@ -104,7 +89,9 @@ export const getPaymentPolicy = async () => {
 
 export const getTourBySlug = async (slug, lang = "en") => {
   try {
-    const response = await api.get(`/tours/slug/${encodeURIComponent(slug)}`, {
+    // Normalizes slug to prevent %25 double-encoding issues
+    const normalizedSlug = encodeURIComponent(decodeURIComponent(slug));
+    const response = await api.get(`/tours/slug/${normalizedSlug}`, {
       params: {
         lang,
       },

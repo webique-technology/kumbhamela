@@ -167,7 +167,8 @@ const UnifiedServiceCard = ({ type, item, onBook, t }) => {
         <div className="d-flex align-items-center justify-content-between pt-2 mt-auto border-top">
           <div className="d-flex flex-column">
             <span className="fw-semibold text-brand-orange my-1">
-              ₹ {displayPrice}
+              {/* ₹ {displayPrice} */}
+              On Request
             </span>
           </div>
 

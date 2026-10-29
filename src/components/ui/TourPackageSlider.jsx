@@ -52,7 +52,10 @@ export const TourPackageSlider = ({ packages, title }) => {
                                     <div className="d-flex align-items-center justify-content-between">
                                         <div>
                                             <span className="small-12">{t("Cards.StartingFrom")}</span>
-                                            <p className="m-0 fw-medium primery-color">₹ {item.base_price}</p>
+                                            <p className="m-0 fw-medium primery-color">
+                                                {/* ₹ {item.base_price} */}
+                                                On Request
+                                            </p>
                                         </div>
                                         <span className="card-arrow d-flex align-items-center justify-content-center">
                                             <ArrowRight size={16}/>

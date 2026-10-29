@@ -4,7 +4,7 @@ import { BookingFormHandler } from "./bookingFormHandler";
 import { MessageCircle, Share2 } from "lucide-react";
 import { Link, usePathname } from "@/i18n/routing";
 import "../../assets/scss/main.scss";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import whatsappIcon from "../../assets/images/whatsapp.png";
 
 /**
@@ -16,6 +16,28 @@ import whatsappIcon from "../../assets/images/whatsapp.png";
  * @param {string} className - Optional custom styles
  * @param {string} label - Custom button text (default: 'Share')
  */
+
+// make for whatsapp ahre btn
+
+// Utility: Strips HTML tags, trims whitespace, and limits character count
+function cleanPlainText(input = "", maxLength = 160) {
+  if (!input) return "";
+  const stripped = String(input)
+    .replace(/<[^>]+>/g, " ") // Strip HTML tags (<p>, <br>, etc.)
+    .replace(/&[a-z0-9#]+;/gi, " ") // Strip HTML entities (&amp;, &nbsp;, etc.)
+    .replace(/\s+/g, " ") // Collapse duplicate spaces
+    .trim();
+
+  if (stripped.length <= maxLength) return stripped;
+  const boundary = stripped.lastIndexOf(" ", maxLength);
+  return (
+    (boundary > 0
+      ? stripped.slice(0, boundary)
+      : stripped.slice(0, maxLength)) + "..."
+  );
+}
+
+// make for whatsapp ahre btn
 
 export const PrimeryBtn = ({
   iconLeft,
@@ -84,49 +106,69 @@ export const TourBtn = ({ title, className, tourName }) => {
 };
 
 export const WhatsAppShareBtn = ({ tour }) => {
-  const pathname = usePathname();
+  const locale = useLocale();
   const t = useTranslations();
 
   const handleWhatsAppShare = () => {
-    // Safe check if tour object exists
     if (!tour) return;
 
-    const origin = window.location.origin;
-    const currentUrl = origin + pathname;
+    // 1. Construct canonical localized URL directly from active locale & backend slug
+    const origin = typeof window !== "undefined" ? window.location.origin : "";
+    const tourSlug = tour.slug || "";
+    const currentUrl = `${origin}/${locale}/tour-package/${tourSlug}`;
 
-    // Extract title & description safely from the logged keys
-    const tourTitle = tour.title || tour.name || "Tour Package";
-    const tourDuration = tour.duration || "";
-    const tourDesc = tour.description || tour.mainDesc || "";
+    // 2. Sanitize and trim fields to prevent URI overflow (> 2000 chars)
+    const tourTitle = cleanPlainText(
+      tour.title || tour.name || "Tour Package",
+      70,
+    );
+    const tourDuration = cleanPlainText(tour.duration || "", 30);
+    const tourDesc = cleanPlainText(
+      tour.description || tour.mainDesc || "",
+      150,
+    );
 
-    // Map over 'itineraries' array safely instead of non-existent 'journey'
-    const itineraryList = tour.itineraries || tour.journey || [];
+    // 3. Format Price
+    const tourPrice = tour.offer_price
+      ? `₹${Number(tour.offer_price).toLocaleString("en-IN")}`
+      : tour.base_price
+        ? `₹${Number(tour.base_price).toLocaleString("en-IN")}`
+        : "";
+
+    // 4. Summarize Itinerary (Max 4 days to prevent link cut-off)
+    const itineraryList = Array.isArray(tour.itineraries)
+      ? tour.itineraries
+      : [];
     const itinerarySummary =
       itineraryList.length > 0
         ? itineraryList
-            .map(
-              (day, i) =>
-                `Day ${i + 1}: ${day.itinerary_title || day.journey_title || ""}`,
-            )
+            .slice(0, 4)
+            .map((day, i) => {
+              const dayTitle = cleanPlainText(
+                day.itinerary_title || day.journey_title || `Day ${i + 1}`,
+                40,
+              );
+              return `• Day ${i + 1}: ${dayTitle}`;
+            })
             .join("\n")
         : "Detailed itinerary available on link.";
 
-    // Construct message
+    // 5. Construct message (URL isolated on its own line to prevent Markdown merge errors)
     const message =
       `*Tour Itinerary: ${tourTitle}*\n\n` +
       (tourDuration ? `*Duration:* ${tourDuration}\n` : "") +
-      (tourDesc
-        ? `*Description:* ${tourDesc.replace(/\*\*/g, "")}\n\n`
-        : "\n") + // Optional: strip markdown ** if any
-      `*Itinerary Overview:*\n${itinerarySummary}\n\n` +
-      `*Full Details:* ${currentUrl}`;
+      (tourPrice ? `*Starting From:* ${tourPrice} per person\n` : "") +
+      (tourDesc ? `*Overview:* ${tourDesc}\n\n` : "\n") +
+      `*Day-wise Highlights:*\n${itinerarySummary}\n\n` +
+      `*View Full Itinerary & Book:*\n${currentUrl}`;
 
     const encodedMessage = encodeURIComponent(message);
 
-    // Open WhatsApp web / mobile app safely
+    // 6. Use universal wa.me protocol with noopener,noreferrer
     window.open(
-      `https://api.whatsapp.com/send?text=${encodedMessage}`,
+      `https://wa.me/?text=${encodedMessage}`,
       "_blank",
+      "noopener,noreferrer",
     );
   };
 
@@ -138,7 +180,7 @@ export const WhatsAppShareBtn = ({ tour }) => {
       style={{ cursor: "pointer", transition: "all 0.3s ease" }}
     >
       <img
-        src={whatsappIcon.src || whatsappIcon}
+        src={whatsappIcon?.src || whatsappIcon}
         alt="WhatsApp"
         style={{ width: "28px", marginBottom: "5px" }}
       />

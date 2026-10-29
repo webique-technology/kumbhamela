@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
-import * as Icons from "lucide-react";
 import {
   Circle,
   FileText,
@@ -16,32 +15,28 @@ import {
   Trees,
   Bus,
   TramFront,
-  HelpCircle
+  HelpCircle,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { slugify, imageUrl } from "@/lib/utils";
+import { imageUrl } from "@/lib/utils";
 import { WhatsAppShareBtn } from "@/components/ui/button";
 import { HighlightsModal, TourTabs } from "@/components/ui/common";
 import { TourPackageSlider } from "@/components/ui/TourPackageSlider";
-import { tourPackages } from "@/lib/data";
-import {
-  getCancellationPolicy,
-  getPaymentPolicy,
-  getTours,
-  getTourBySlug,
-} from "../tourApi";
+import { getCancellationPolicy, getPaymentPolicy, getTours } from "../tourApi";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
+import { DownloadBrochureBtn } from "@/components/ui/DownloadBrochureBtn";
 
 const getInclusionIcon = (item) => {
   // 1. First check if there's an explicit English key or icon identifier
-  const iconKey = typeof item === "object" ? item?.in_icon || item?.key || item?.id : null;
-  
+  const iconKey =
+    typeof item === "object" ? item?.in_icon || item?.key || item?.id : null;
+
   // 2. Extract the display string (either translated or raw English)
-  const rawText = typeof item === "string" ? item : item?.label || item?.title || item?.in_icon || "";
-  
-  console.log(item);
-  
+  const rawText =
+    typeof item === "string"
+      ? item
+      : item?.label || item?.title || item?.in_icon || "";
 
   // Normalize string for lowercased checks
   const searchKey = (iconKey || rawText).trim().toLowerCase();
@@ -51,44 +46,113 @@ const getInclusionIcon = (item) => {
   // ----------------------------------------------------
   // MULTI-LANGUAGE KEYWORD MATCHING DICTIONARY
   // ----------------------------------------------------
-  
+
   // HOTEL: English, Hindi, Marathi, Gujarati, Tamil, Telugu, Malayalam, Sanskrit
-  const hotelKeywords = ["hotel", "हॉटेल", "होटल", "હોટેલ", "ஹோட்டல்", "హోటల్", "ഹോട്ടൽ", "होटल-", "वसतिगृह"];
+  const hotelKeywords = [
+    "hotel",
+    "हॉटेल",
+    "होटल",
+    "હોટેલ",
+    "ஹோட்டல்",
+    "హోటల్",
+    "ഹോട്ടൽ",
+    "होटल-",
+    "वसतिगृह",
+  ];
   if (hotelKeywords.some((kw) => searchKey.includes(kw))) {
     return Hotel;
   }
 
   // MEALS / FOOD: English, Hindi, Marathi, Gujarati, Tamil, Telugu, Malayalam, Sanskrit
-  const mealKeywords = ["meal", "food", "अन्न", "जेवण", "भोजन", "ભોજન", "சாப்பாடு", "భోజనం", "ഭക്ഷണം", "आहार", "उत्स"];
+  const mealKeywords = [
+    "meal",
+    "food",
+    "अन्न",
+    "जेवण",
+    "भोजन",
+    "ભોજન",
+    "சாப்பாடு",
+    "భోజనం",
+    "ഭക്ഷണം",
+    "आहार",
+    "उत्स",
+  ];
   if (mealKeywords.some((kw) => searchKey.includes(kw))) {
     return Utensils;
   }
 
   // FLIGHT: English, Hindi, Marathi, Gujarati, Tamil, Telugu, Malayalam, Sanskrit
-  const flightKeywords = ["flight", "plane", "विमान", "फ्लाईट", "ફ્લાઇટ", "விமானம்", "విమాన", "വിമാനം", "उड्डयन"];
+  const flightKeywords = [
+    "flight",
+    "plane",
+    "विमान",
+    "फ्लाईट",
+    "ફ્લાઇટ",
+    "விமானம்",
+    "విమాన",
+    "വിമാനം",
+    "उड्डयन",
+  ];
   if (flightKeywords.some((kw) => searchKey.includes(kw))) {
     return Plane;
   }
 
   // SIGHTSEEING: English, Hindi, Marathi, Gujarati, Tamil, Telugu, Malayalam, Sanskrit
-  const sightseeingKeywords = ["sightseeing", "दर्शनीय", "दर्शन", "देखने", "સ્થળો", "சுற்றுலா", "சுற்றிப்பார்த்தல்", "సందర్శనా స్థలం", "കാഴ്ചകൾ", "पर्यटन", "परि- ईक्ष्"];
+  const sightseeingKeywords = [
+    "sightseeing",
+    "दर्शनीय",
+    "दर्शन",
+    "देखने",
+    "સ્થળો",
+    "சுற்றுலா",
+    "சுற்றிப்பார்த்தல்",
+    "సందర్శనా స్థలం",
+    "കാഴ്ചകൾ",
+    "पर्यटन",
+    "परि- ईक्ष्",
+  ];
   if (sightseeingKeywords.some((kw) => searchKey.includes(kw))) {
     return Trees;
   }
 
   // TRANSPORT / BUS: English, Hindi, Marathi, Gujarati, Tamil, Telugu, Malayalam, Sanskrit
-  const transportKeywords = ["transport", "bus", "वाहतूक", "परिवहन", "પરિવહન", "போக்குவரத்து", "రవాణా", "ഗതാഗതം", "यातायात", "बस", "बसों", "બસો", "பேருந்து", "బస్సులు", "ബസുകൾ"];
+  const transportKeywords = [
+    "transport",
+    "bus",
+    "वाहतूक",
+    "परिवहन",
+    "પરિવહન",
+    "போக்குவரத்து",
+    "రవాణా",
+    "ഗതാഗതം",
+    "यातायात",
+    "बस",
+    "बसों",
+    "બસો",
+    "பேருந்து",
+    "బస్సులు",
+    "ബസുകൾ",
+  ];
   if (transportKeywords.some((kw) => searchKey.includes(kw))) {
     return Bus;
   }
 
   // TRAIN / RAILWAYS: English, Hindi, Marathi, Gujarati, Tamil, Telugu, Malayalam, Sanskrit
-  const trainKeywords = ["train", "rail", "रेल", "रेल्वे", "રેલવે", "ரயில்", "రైలు", "ട്രെയിൻ", "लोहपथగామీ"];
+  const trainKeywords = [
+    "train",
+    "rail",
+    "रेल",
+    "रेल्वे",
+    "રેલવે",
+    "ரயில்",
+    "రైలు",
+    "ട്രെയിൻ",
+    "लोहपथगाమీ",
+  ];
   if (trainKeywords.some((kw) => searchKey.includes(kw))) {
     return TramFront;
   }
 
-  // Default fallback if no language match is found
   return HelpCircle;
 };
 
@@ -98,7 +162,7 @@ const TourPackageDetail = ({ tour }) => {
   const [paymentPolicy, setPaymentPolicy] = useState([]);
   const [recentPackages, setRecentPackages] = useState([]);
   const params = useParams();
-  const locale = params.locale;
+  const locale = params?.locale || "en";
 
   const [expandedItems, setExpandedItems] = useState({});
   const loadMore = (index) => {
@@ -108,14 +172,12 @@ const TourPackageDetail = ({ tour }) => {
     }));
   };
 
-  //   console.log(tour);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [cancelData, paymentData, toursData] = await Promise.all([
           getCancellationPolicy(locale),
-          getPaymentPolicy(),
+          getPaymentPolicy(locale),
           getTours(1, "", "", "", "", locale),
         ]);
 
@@ -128,12 +190,12 @@ const TourPackageDetail = ({ tour }) => {
 
         setRecentPackages(filteredTours);
       } catch (error) {
-        console.error(error);
+        console.error("Failed to load tour detail supplemental data:", error);
       }
     };
 
     fetchData();
-  }, [tour.id]);
+  }, [tour.id, locale]);
 
   return (
     <main>
@@ -163,9 +225,6 @@ const TourPackageDetail = ({ tour }) => {
 
           <h1 className="display-4 fw-bold text-white">{tour.title}</h1>
 
-          {/* <p className="d-none d-lg-block fs-6 lead text-white-75">
-                        {tour.description}
-                    </p> */}
           <div
             className="d-none d-lg-block fs-6 mb-2 lead text-white-75"
             dangerouslySetInnerHTML={{
@@ -192,15 +251,13 @@ const TourPackageDetail = ({ tour }) => {
         <Row className="gy-1 gy-md-4 gy-xl-5 m-0">
           {/* LEFT CONTENT */}
           <Col lg={8}>
-            <div className="">
+            <div>
               <p
                 className="lead text-dark fs-6 d-block d-lg-none my-2 pb-2"
                 dangerouslySetInnerHTML={{
                   __html: tour.description || "",
                 }}
               />
-              {/* {tour.description}
-                            </p> */}
               {tour?.routes?.length > 0 && (
                 <ul className="d-block d-md-none px-2 my-2 m-0 bg-light tour-route d-flex flex-wrap justify-content-start align-items-center">
                   {(tour.routes || []).map((route, i) => (
@@ -234,7 +291,10 @@ const TourPackageDetail = ({ tour }) => {
                               key={i}
                               className="inclusion-item d-flex flex-column align-items-center"
                             >
-                              <span className="bg-white rounded-circle d-flex align-items-center justify-content-center" style={{width:"40px", height:"40px"}}>
+                              <span
+                                className="bg-white rounded-circle d-flex align-items-center justify-content-center"
+                                style={{ width: "40px", height: "40px" }}
+                              >
                                 <IconComponent
                                   size={24}
                                   className="primery-color"
@@ -293,13 +353,16 @@ const TourPackageDetail = ({ tour }) => {
             {/* ITINERARY */}
             {tour.itineraries && tour.itineraries.length > 0 && (
               <div className="section-block mb-0 mt-4">
-                <h4 className="section-title fw-bold mb-2">
-                  {t("TourDetail.itinerary")}
-                </h4>
+                <div className="d-flex align-items-center justify-content-between">
+                  <h4 className="section-title fw-bold mb-2">
+                    {t("TourDetail.itinerary")}
+                  </h4>
+                  <DownloadBrochureBtn tour={tour} />
+                </div>
 
                 {(tour.itineraries || []).map((day, i) => (
                   <div
-                    key={day.id}
+                    key={day.id || i}
                     className={`timeline-item mb-0 position-relative ps-0 ps-sm-4 ${
                       i !== (tour.itineraries?.length || 0) - 1 ? "pb-4" : ""
                     }`}
@@ -310,19 +373,12 @@ const TourPackageDetail = ({ tour }) => {
                       <Col md={9}>
                         <span className="badge bg-brand-light primery-color ms-2 ms-sm-0">
                           {t("TourDetail.day")} {i + 1}
-                          {/* {i + 1} */}
                         </span>
 
                         <h5 className="fw-bold sub-heading text-dark">
                           {day.itinerary_title}
                         </h5>
 
-                        {/* <p
-                                                        className={`text-secondary ${expandedItems[i] ? "" : "line-clamp-5"
-                                                            }`}
-                                                    >
-                                                        {day.description || ""}
-                                                    </p> */}
                         <div
                           className={`text-secondary ${expandedItems[i] ? "" : "line-clamp-5"}`}
                           dangerouslySetInnerHTML={{
@@ -393,27 +449,24 @@ const TourPackageDetail = ({ tour }) => {
               </div>
               <div className="price mb-4">
                 <span className="h3 fw-bold primery-color">
-                  ₹ {Number(tour.base_price || 0).toLocaleString("en-IN")}
+                  {/* ₹ {Number(tour.base_price || 0).toLocaleString("en-IN")} */}
+                  ₹ Price on-request
                 </span>
-                {/* ₹ {(tour.base_price || 0).toLocaleString()}  */}
-                <span className="text-muted">
+                {/* <span className="text-muted">
                   {" "}
                   {t("TourDetail.Summary.perPerson")}
-                </span>
+                </span> */}
               </div>
               <div className="info-box mb-4 p-3 rounded">
-                {/* <p className="mb-1"><strong>Group:</strong> &nbsp;2-6 People</p> */}
                 <p className="mb-1">
                   <strong>{t("TourDetail.Summary.duration")} :</strong> &nbsp;
                   {tour.duration}
                 </p>
-                {/* <p className="mb-1"><strong>Duration:</strong> &nbsp;5 Days / 4 Nights</p> */}
-                {/* <p className="departure-date m-0">
-                                    <strong>Departure:</strong> &nbsp;{tour.departureDate || 'Check Availability'}
-                                </p> */}
               </div>
+
+              {/* Direct slug reference without ASCII-only slugify() */}
               <Link
-                href={`/tour-package/book/${slugify(tour.slug)}`}
+                href={`/tour-package/book/${tour.slug}`}
                 className="primery-btn d-flex align-items-center justify-content-center gap-2 w-100 py-3 text-center text-decoration-none fw-bold rounded shadow-sm mb-3"
               >
                 <CalendarCheck size={18} />
@@ -421,6 +474,10 @@ const TourPackageDetail = ({ tour }) => {
               </Link>
 
               <WhatsAppShareBtn tour={tour} />
+
+             <div className="w-100 d-flex align-items-center justify-content-center">
+               <DownloadBrochureBtn tour={tour} />
+             </div>
 
               <p className="note text-center text-muted small-12 italic mt-2">
                 {t("TourDetail.Summary.kumbhNote")}

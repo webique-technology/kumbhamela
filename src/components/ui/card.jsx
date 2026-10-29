@@ -197,33 +197,34 @@ export const HotelCards = ({ hotel, onBookNow }) => {
           {/* Footer Logic */}
           <div className="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
             <div>
-              <small className="text-muted d-block">
+              {/* <small className="text-muted d-block">
                 {t("Cards.StartingFrom")}
-              </small>
+              </small> */}
               {/* <span className="h4 text-brand-orange mb-0">{hotel.base_price}</span> */}
               {hotel?.offer_price ? (
                 <div className="d-flex flex-row align-items-center justify-content-center gap-2">
                   {/* Render the discounted offer price */}
-                  <span className="h4 text-brand-orange mb-0">
-                    ₹{hotel?.offer_price}
+                  <span className="h5 text-brand-orange mb-0">
+                    {/* ₹{hotel?.offer_price} */}
+                    On Request
                   </span>
                   {/* Render the original base price with a strikethrough next to it */}
-                  <span className="fs-6 text-muted text-decoration-line-through mb-0">
+                  {/* <span className="fs-6 text-muted text-decoration-line-through mb-0">
                     ₹{hotel?.base_price}
-                  </span>
+                  </span> */}
                 </div>
               ) : (
                 hotel?.base_price && (
                   // Fallback: If no offer price exists, only show the base price normally
                   <div className="text-center">
                     <span className="h5 fw-bold text-brand-orange mb-0">
-                      ₹{hotel?.base_price}
+                      {/* ₹{hotel?.base_price} */}
                     </span>
                   </div>
                 )
               )}
               <small className="text-muted d-block smaller">
-                {t("Cards.PerNight")}
+                {/* {t("Cards.PerNight")} */}Customize Quote
               </small>
             </div>
 
@@ -232,7 +233,7 @@ export const HotelCards = ({ hotel, onBookNow }) => {
               type="button"
               onClick={onBookNow}
               iconLeft={<MessageCircle size={18} />}
-              title={t("TranslateBtn.BookNow")}
+              title={t("TranslateBtn.inquiry")}
               className="btn btn-whatsapp d-flex align-items-center gap-2 px-3 py-2 text-white border-0 shadow-sm"
             />
           </div>
@@ -403,24 +404,21 @@ export const TourPackageCard = ({ tour, tourLink }) => {
           </div>
 
           {/* Footer Logic */}
-          <div className="d-flex align-items-center justify-content-between mt-auto mb-2">
+          {/* <div className="d-flex align-items-center justify-content-between mt-auto mb-2">
             <div className="d-flex align-items-end">
               <div className="mb-0 fw-semibold" style={{ display: "contents" }}>
                 {t("Cards.StartingFrom")} : &nbsp;
                 {tour?.offer_price ? (
                   <div className="d-flex flex-row align-items-center justify-content-center gap-2">
-                    {/* Render the discounted offer price */}
                     <span className="h5 fw-bold text-brand-orange mb-0">
                       ₹{tour?.offer_price}
                     </span>
-                    {/* Render the original base price with a strikethrough next to it */}
-                    <span className="fs-6 text-muted text-decoration-line-through mb-0">
+                    <span className="fs-6 text-muted mb-0">
                       ₹{tour?.base_price}
                     </span>
                   </div>
                 ) : (
                   tour?.base_price && (
-                    // Fallback: If no offer price exists, only show the base price normally
                     <div className="text-center">
                       <span className="h5 fw-bold text-brand-orange mb-0">
                         ₹{tour?.base_price}
@@ -428,12 +426,12 @@ export const TourPackageCard = ({ tour, tourLink }) => {
                     </div>
                   )
                 )}
-                {/* <small className="text-muted d-block smaller mb-1">
-                                    per Person
-                                </small> */}
+                <small className="text-muted d-block smaller mb-1">
+                  per Person
+                </small>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Features */}
           <ul className="d-flex flex-column flex-wrap gap-1 mb-3 p-0">
