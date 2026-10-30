@@ -4,7 +4,10 @@ import React, { useState } from "react";
 import { Download, Loader2 } from "lucide-react";
 import { generateTourBrochure } from "@/lib/pdfGenerator";
 
-export const DownloadBrochureBtn = ({ tour }) => {
+export const DownloadBrochureBtn = ({
+  tour,
+  btnTitle = "",
+}) => {
   const [loading, setLoading] = useState(false);
 
   const handleDownload = async () => {
@@ -46,12 +49,12 @@ export const DownloadBrochureBtn = ({ tour }) => {
       {loading ? (
         <>
           <Loader2 size={16} className="spinner-border spinner-border-sm" />
-          <span>Generating PDF...</span>
+          <span>PDF...</span>
         </>
       ) : (
         <>
           <Download size={16} />
-          <span>Download Itinerary Brochure</span>
+          {btnTitle && <span>{btnTitle}</span>}
         </>
       )}
     </button>

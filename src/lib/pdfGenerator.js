@@ -1,28 +1,36 @@
 // src/lib/pdfGenerator.js
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 import logoImg from "../assets/images/logo-2.png";
 
 // Helper: Loads image path/object into a base64 Data URL for jsPDF
 const loadImageBase64 = (imageSource) => {
   return new Promise((resolve) => {
-    if (!imageSource) return resolve(null);
+    if (
+      typeof window === "undefined" ||
+      typeof document === "undefined" ||
+      !imageSource
+    ) {
+      return resolve(null);
+    }
     const img = new Image();
     img.crossOrigin = "Anonymous";
     img.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0);
-      resolve(canvas.toDataURL("image/png"));
+      try {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        resolve(canvas.toDataURL("image/png"));
+      } catch (e) {
+        resolve(null);
+      }
     };
     img.onerror = () => resolve(null);
-    img.src = typeof imageSource === "object" ? imageSource.src : imageSource;
+    img.src =
+      typeof imageSource === "object" ? imageSource?.src || "" : imageSource;
   });
 };
 
-// Helper: Strip HTML tags and entities
 function stripHtml(html = "") {
   return String(html)
     .replace(/<[^>]+>/g, " ")
@@ -31,11 +39,13 @@ function stripHtml(html = "") {
     .trim();
 }
 
-// Fixed: marked as async
 export const generateTourBrochure = async (tour) => {
-  if (!tour) return;
+  if (typeof window === "undefined" || !tour) return;
 
-  // Load the logo before PDF generation begins
+  // Dynamically import jsPDF so Next.js never executes it during SSR build
+  const { default: jsPDF } = await import("jspdf");
+  await import("jspdf-autotable");
+
   const logoDataUrl = await loadImageBase64(logoImg);
 
   const doc = new jsPDF({
@@ -49,7 +59,6 @@ export const generateTourBrochure = async (tour) => {
   const margin = 14;
   const contentWidth = pageWidth - margin * 2;
 
-  // Primary Theme Colors (matches your sample)
   const BRAND_RED = [235, 59, 90];
   const BRAND_DARK = [30, 39, 46];
   const BRAND_MUTED = [100, 100, 100];
@@ -65,27 +74,27 @@ export const generateTourBrochure = async (tour) => {
   doc.rect(margin, currentY, contentWidth, 1.2, "F");
   currentY += 6;
 
-  // ==========================================
-  // 1. HEADER SECTION
-  // ==========================================
+  // --- HEADER SECTION ---
   let brandTextStartX = margin;
 
-  // Render Brand Logo if available
   if (logoDataUrl) {
-    const logoWidth = 11; // Width in mm
-    const logoHeight = 11; // Height in mm
-    doc.addImage(
-      logoDataUrl,
-      "PNG",
-      margin,
-      currentY - 1,
-      logoWidth,
-      logoHeight,
-    );
-    brandTextStartX = margin + logoWidth + 3; // Shift text right to sit beside the logo
+    try {
+      const logoWidth = 11;
+      const logoHeight = 11;
+      doc.addImage(
+        logoDataUrl,
+        "PNG",
+        margin,
+        currentY - 1,
+        logoWidth,
+        logoHeight,
+      );
+      brandTextStartX = margin + logoWidth + 3;
+    } catch (e) {
+      brandTextStartX = margin;
+    }
   }
 
-  // Left: Brand Name (aligned next to logo)
   doc.setFont("helvetica", "bold");
   doc.setFontSize(13);
   doc.setTextColor(...BRAND_DARK);
@@ -100,7 +109,6 @@ export const generateTourBrochure = async (tour) => {
     currentY + 7.5,
   );
 
-  // Right: Tour Itinerary Pill Badge
   doc.setFillColor(254, 242, 242);
   doc.setDrawColor(...BRAND_RED);
   doc.setLineWidth(0.3);
@@ -112,7 +120,6 @@ export const generateTourBrochure = async (tour) => {
     align: "center",
   });
 
-  // Right: Contact info under badge
   const headerRightX = pageWidth - margin;
   let contactY = currentY + 9;
   doc.setFontSize(7);
@@ -136,28 +143,22 @@ export const generateTourBrochure = async (tour) => {
 
   currentY = contactY + 3;
 
-  // Divider
   doc.setDrawColor(220, 220, 220);
   doc.setLineWidth(0.3);
   doc.line(margin, currentY, pageWidth - margin, currentY);
   currentY += 6;
 
-  // ==========================================
-  // 2. PACKAGE TITLE & SUMMARY CARD
-  // ==========================================
+  // --- 2. PACKAGE TITLE & SUMMARY CARD ---
   const startBoxY = currentY;
 
-  // Card Outer Box
   doc.setFillColor(255, 255, 255);
   doc.setDrawColor(...CARD_BORDER);
   doc.setLineWidth(0.4);
   doc.roundedRect(margin, startBoxY, contentWidth, 27, 2, 2, "FD");
 
-  // Left Red Accent Vertical Line
   doc.setFillColor(...BRAND_RED);
   doc.rect(margin, startBoxY, 1.4, 27, "F");
 
-  // Title & Subtitle inside Card
   doc.setFont("helvetica", "bold");
   doc.setFontSize(12);
   doc.setTextColor(...BRAND_DARK);
@@ -173,11 +174,9 @@ export const generateTourBrochure = async (tour) => {
     startBoxY + 10.5,
   );
 
-  // Sub-grid: Duration | Destination | Starting Cost
   const subBoxY = startBoxY + 13.5;
   const colWidth = (contentWidth - 8) / 3;
 
-  // Duration
   doc.setFont("helvetica", "bold");
   doc.setFontSize(6.5);
   doc.setTextColor(...BRAND_MUTED);
@@ -187,7 +186,6 @@ export const generateTourBrochure = async (tour) => {
   doc.setTextColor(...BRAND_DARK);
   doc.text(tour.duration || "Custom", margin + 4, subBoxY + 8);
 
-  // Vertical line 1
   doc.setDrawColor(...CARD_BORDER);
   doc.line(
     margin + 4 + colWidth,
@@ -196,15 +194,47 @@ export const generateTourBrochure = async (tour) => {
     subBoxY + 10.5,
   );
 
-  // Destination
+  // Destination Label
   doc.setFont("helvetica", "bold");
   doc.setFontSize(6.5);
   doc.setTextColor(...BRAND_MUTED);
   doc.text("DESTINATION", margin + 6 + colWidth, subBoxY + 3);
+
+  // Extract dynamic destination from API / tour object
+  const rawDestination =
+    tour.destination ||
+    tour.location ||
+    tour.city ||
+    (Array.isArray(tour.routes) && tour.routes.length > 0
+      ? tour.routes.join(", ")
+      : "") ||
+    "Nashik / Kumbh";
+
+  // Strip any accidental HTML and trim
+  const cleanDestination = stripHtml(rawDestination);
+
+  // Truncate to fit column width cleanly (max column printable width ~48-50mm)
+  const availableColWidth = colWidth - 8;
+  let displayDestination = cleanDestination;
   doc.setFont("helvetica", "bold");
   doc.setFontSize(9);
+
+  if (doc.getTextWidth(displayDestination) > availableColWidth) {
+    // If it's slightly long, scale font size down to 7.5; if still too long, truncate with ellipsis
+    doc.setFontSize(7.5);
+    if (doc.getTextWidth(displayDestination) > availableColWidth) {
+      while (
+        displayDestination.length > 3 &&
+        doc.getTextWidth(displayDestination + "...") > availableColWidth
+      ) {
+        displayDestination = displayDestination.slice(0, -1);
+      }
+      displayDestination += "...";
+    }
+  }
+
   doc.setTextColor(...BRAND_DARK);
-  doc.text("Nashik / Kumbh", margin + 6 + colWidth, subBoxY + 8);
+  doc.text(displayDestination, margin + 6 + colWidth, subBoxY + 8);
 
   // Vertical line 2
   doc.line(
@@ -214,9 +244,7 @@ export const generateTourBrochure = async (tour) => {
     subBoxY + 10.5,
   );
 
-  // Starting Cost
   const formattedPrice = "On Request";
-
   doc.setFont("helvetica", "bold");
   doc.setFontSize(6.5);
   doc.setTextColor(...BRAND_MUTED);
@@ -228,9 +256,7 @@ export const generateTourBrochure = async (tour) => {
 
   currentY = startBoxY + 32;
 
-  // ==========================================
-  // 3. TOUR OVERVIEW
-  // ==========================================
+  // --- 3. TOUR OVERVIEW ---
   const rawDesc = stripHtml(tour.description || tour.mainDesc || "");
   if (rawDesc) {
     doc.setFont("helvetica", "bold");
@@ -244,11 +270,8 @@ export const generateTourBrochure = async (tour) => {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7.5);
     doc.setTextColor(70, 70, 70);
-
-    // First line next to label
     doc.text(splitDesc[0] || "", margin + prefixWidth, currentY);
 
-    // Remaining lines below
     if (splitDesc.length > 1) {
       const restLines = splitDesc.slice(1, 4);
       doc.text(restLines, margin, currentY + 3.8);
@@ -258,9 +281,7 @@ export const generateTourBrochure = async (tour) => {
     }
   }
 
-  // ==========================================
-  // 4. DAY-WISE ITINERARY
-  // ==========================================
+  // --- 4. DAY-WISE ITINERARY ---
   doc.setFont("helvetica", "bold");
   doc.setFontSize(9);
   doc.setTextColor(...BRAND_DARK);
@@ -281,23 +302,19 @@ export const generateTourBrochure = async (tour) => {
     const splitDayDesc = doc.splitTextToSize(dayDesc, contentWidth - 8);
     const boxHeight = 11 + splitDayDesc.length * 3.4;
 
-    // Check page overflow
     if (currentY + boxHeight > pageHeight - 16) {
       doc.addPage();
       currentY = 16;
     }
 
-    // Box container
     doc.setFillColor(...CARD_BG);
     doc.setDrawColor(...CARD_BORDER);
     doc.setLineWidth(0.3);
     doc.roundedRect(margin, currentY, contentWidth, boxHeight, 1.5, 1.5, "FD");
 
-    // Red left highlight
     doc.setFillColor(...BRAND_RED);
     doc.rect(margin, currentY, 1.2, boxHeight, "F");
 
-    // DAY badge
     doc.setFillColor(...BRAND_RED);
     doc.roundedRect(margin + 3, currentY + 2.5, 12, 4.5, 1, 1, "F");
     doc.setFont("helvetica", "bold");
@@ -305,13 +322,11 @@ export const generateTourBrochure = async (tour) => {
     doc.setTextColor(255, 255, 255);
     doc.text(dayNumber, margin + 9, currentY + 5.7, { align: "center" });
 
-    // Day Title
     doc.setFont("helvetica", "bold");
     doc.setFontSize(8);
     doc.setTextColor(...BRAND_DARK);
     doc.text(dayTitle, margin + 18, currentY + 5.8);
 
-    // Day Description
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7);
     doc.setTextColor(80, 80, 80);
@@ -320,13 +335,10 @@ export const generateTourBrochure = async (tour) => {
     currentY += boxHeight + 2.5;
   });
 
-  // ==========================================
-  // PAGE 2: INCLUSIONS, EXCLUSIONS & NOTES
-  // ==========================================
+  // --- PAGE 2: INCLUSIONS, EXCLUSIONS & NOTES ---
   doc.addPage();
   currentY = 16;
 
-  // Title: PACKAGE INCLUSIONS & EXCLUSIONS
   doc.setFont("helvetica", "bold");
   doc.setFontSize(9.5);
   doc.setTextColor(...BRAND_DARK);
@@ -342,13 +354,11 @@ export const generateTourBrochure = async (tour) => {
   const halfWidth = (contentWidth - 4) / 2;
   const colHeight = 55;
 
-  // --- INCLUSIONS BOX (Left) ---
   doc.setFillColor(246, 252, 247);
   doc.setDrawColor(210, 235, 215);
   doc.setLineWidth(0.3);
   doc.roundedRect(margin, currentY, halfWidth, colHeight, 1.5, 1.5, "FD");
 
-  // Inclusions Header
   doc.setFont("helvetica", "bold");
   doc.setFontSize(7.5);
   doc.setTextColor(...GREEN_COLOR);
@@ -382,14 +392,12 @@ export const generateTourBrochure = async (tour) => {
     incY += splitText.length * 3.4 + 2.2;
   });
 
-  // --- EXCLUSIONS BOX (Right) ---
   const rightColX = margin + halfWidth + 4;
   doc.setFillColor(254, 247, 247);
   doc.setDrawColor(245, 215, 215);
   doc.setLineWidth(0.3);
   doc.roundedRect(rightColX, currentY, halfWidth, colHeight, 1.5, 1.5, "FD");
 
-  // Exclusions Header
   doc.setFont("helvetica", "bold");
   doc.setFontSize(7.5);
   doc.setTextColor(...RED_COLOR);
@@ -425,16 +433,13 @@ export const generateTourBrochure = async (tour) => {
 
   currentY += colHeight + 6;
 
-  // ==========================================
-  // IMPORTANT TRAVEL NOTES & GUIDELINES
-  // ==========================================
+  // --- IMPORTANT TRAVEL NOTES ---
   const notesHeight = 28;
   doc.setFillColor(255, 251, 240);
   doc.setDrawColor(254, 215, 170);
   doc.setLineWidth(0.3);
   doc.roundedRect(margin, currentY, contentWidth, notesHeight, 1.5, 1.5, "FD");
 
-  // Left Amber Line
   doc.setFillColor(245, 158, 11);
   doc.rect(margin, currentY, 1.2, notesHeight, "F");
 
@@ -450,7 +455,7 @@ export const generateTourBrochure = async (tour) => {
   const notes = [
     {
       bold: "• Valid ID Proof: ",
-      text: "All travelers must carry an original government-issued photo ID (Aadhaar Card, Passport, or Voter ID) during travel and hotel check-in.",
+      text: "All travelers must carry an original government-issued photo ID during travel and hotel check-in.",
     },
     {
       bold: "• Itinerary & Schedule: ",
@@ -475,9 +480,7 @@ export const generateTourBrochure = async (tour) => {
 
   currentY += notesHeight + 6;
 
-  // ==========================================
-  // FOOTER CTA BANNER (Dark Navy)
-  // ==========================================
+  // --- FOOTER CTA BANNER ---
   const footerCtaHeight = 22;
   doc.setFillColor(15, 23, 42);
   doc.roundedRect(
@@ -490,7 +493,6 @@ export const generateTourBrochure = async (tour) => {
     "F",
   );
 
-  // Left: Call to action text
   doc.setFont("helvetica", "bold");
   doc.setFontSize(9);
   doc.setTextColor(255, 255, 255);
@@ -511,7 +513,6 @@ export const generateTourBrochure = async (tour) => {
     currentY + 13.5,
   );
 
-  // Right: Quick Contact details
   const ctaRightX = pageWidth - margin - 5;
   doc.setFontSize(7);
   doc.setTextColor(255, 255, 255);
@@ -534,9 +535,7 @@ export const generateTourBrochure = async (tour) => {
     { align: "right" },
   );
 
-  // ==========================================
-  // PAGE NUMBERS & FOOTER STAMP
-  // ==========================================
+  // --- FOOTER PAGINATION ---
   const totalPages = doc.internal.getNumberOfPages();
   for (let i = 1; i <= totalPages; i++) {
     doc.setPage(i);
@@ -544,30 +543,22 @@ export const generateTourBrochure = async (tour) => {
     doc.setFontSize(6.5);
     doc.setTextColor(150, 150, 150);
 
-    // Left timestamp
     doc.text(
       "Mahakumbh Tours & Travels  •  Kumbh Mela 2027",
       margin,
       pageHeight - 6,
     );
-
-    // Center page number
     doc.text(`Page ${i} of ${totalPages}`, pageWidth / 2, pageHeight - 6, {
       align: "center",
     });
-
-    // Right website
     doc.text(
       "mahakumbhtourstravelsnashik.com",
       pageWidth - margin,
       pageHeight - 6,
-      {
-        align: "right",
-      },
+      { align: "right" },
     );
   }
 
-  // Save the PDF
   const sanitizedSlug = (tour.slug || "tour-package").replace(
     /[^a-zA-Z0-9_-]/g,
     "",

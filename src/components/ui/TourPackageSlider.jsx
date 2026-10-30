@@ -51,10 +51,10 @@ export const TourPackageSlider = ({ packages, title }) => {
                                     <h6 className="text-dark mb-1">{item.title}</h6>
                                     <div className="d-flex align-items-center justify-content-between">
                                         <div>
-                                            <span className="small-12">{t("Cards.StartingFrom")}</span>
+                                            {/* <span className="small-12">{t("Cards.StartingFrom")}</span> */}
                                             <p className="m-0 fw-medium primery-color">
                                                 {/* ₹ {item.base_price} */}
-                                                On Request
+                                                Price On Request
                                             </p>
                                         </div>
                                         <span className="card-arrow d-flex align-items-center justify-content-center">

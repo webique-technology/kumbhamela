@@ -16,6 +16,7 @@ import {
   Bus,
   TramFront,
   HelpCircle,
+  Download,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { imageUrl } from "@/lib/utils";
@@ -357,7 +358,7 @@ const TourPackageDetail = ({ tour }) => {
                   <h4 className="section-title fw-bold mb-2">
                     {t("TourDetail.itinerary")}
                   </h4>
-                  <DownloadBrochureBtn tour={tour} />
+                  <DownloadBrochureBtn tour={tour} btnTitle="Download Itinerary"/>
                 </div>
 
                 {(tour.itineraries || []).map((day, i) => (
@@ -473,11 +474,14 @@ const TourPackageDetail = ({ tour }) => {
                 {t("TranslateBtn.BookNow")}
               </Link>
 
-              <WhatsAppShareBtn tour={tour} />
+              <div className="d-flex align-iems-center justify-content-start gap-2">
+                <WhatsAppShareBtn tour={tour} />
 
-             <div className="w-100 d-flex align-items-center justify-content-center">
-               <DownloadBrochureBtn tour={tour} />
-             </div>
+                <div className="d-flex gap-1 flex-column align-items-center justify-content-center">
+                  <DownloadBrochureBtn tour={tour} />
+                  <span className="small-12 fw-bold">Download</span>
+                </div>
+              </div>
 
               <p className="note text-center text-muted small-12 italic mt-2">
                 {t("TourDetail.Summary.kumbhNote")}

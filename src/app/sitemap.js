@@ -1,11 +1,10 @@
-import { getBlogs } from "./[locale]/blog/blogApi"; // Update this path to match your blogApi location
+import { getBlogs } from "./[locale]/blog/blogApi";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://mahakumbhtourstravelsnashik.com";
 
 const locales = ["en", "hi", "mr"];
 
-// Exact static routes from your project directory
 const staticRoutes = [
   "",
   "/about-us",
@@ -25,32 +24,33 @@ export default async function sitemap() {
     locales.forEach((locale) => {
       sitemapEntries.push({
         url: `${BASE_URL}/${locale}${route}`,
-        lastModified: new Date().toISOString(),
+        lastModified: new Date(),
         changeFrequency: route === "" ? "daily" : "weekly",
         priority: route === "" ? 1.0 : 0.8,
       });
     });
   });
 
-  // 2. Dynamic Blog Routes
+  // 2. Dynamic Blog Routes (fetched concurrently)
   try {
-    for (const locale of locales) {
+    const blogPromises = locales.map(async (locale) => {
       const response = await getBlogs(1, "", "", locale);
       const blogs = response?.data || [];
 
-      blogs.forEach((blog) => {
-        if (blog.slug) {
-          sitemapEntries.push({
-            url: `${BASE_URL}/${locale}/blog/${blog.slug}`,
-            lastModified: blog.updated_at
-              ? new Date(blog.updated_at).toISOString()
-              : new Date().toISOString(),
-            changeFrequency: "weekly",
-            priority: 0.7,
-          });
-        }
-      });
-    }
+      return blogs
+        .filter((blog) => Boolean(blog?.slug))
+        .map((blog) => ({
+          url: `${BASE_URL}/${locale}/blog/${blog.slug}`,
+          lastModified: blog.updated_at
+            ? new Date(blog.updated_at)
+            : new Date(),
+          changeFrequency: "weekly",
+          priority: 0.7,
+        }));
+    });
+
+    const blogResults = await Promise.all(blogPromises);
+    sitemapEntries.push(...blogResults.flat());
   } catch (error) {
     console.error("Error generating dynamic blog sitemap entries:", error);
   }
