@@ -14,9 +14,9 @@ const nextConfig = {
   output: "standalone",
 
   // 2. Prevent CI/Hostinger build failure on minor lint or type checks
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // eslint: {
+  //   ignoreDuringBuilds: true,
+  // },
   typescript: {
     ignoreBuildErrors: true,
   },
