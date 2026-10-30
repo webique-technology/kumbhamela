@@ -1,16 +1,20 @@
 // src/lib/pdfGenerator.js
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import logoImg from "../assets/images/logo-2.png";
 
-// Helper: Loads image path/object into a base64 Data URL for jsPDF
+function stripHtml(html = "") {
+  return String(html)
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&[a-z0-9#]+;/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+// Helper: Pre-converts image to Base64 so html2canvas renders it instantly without CORS delay
 const loadImageBase64 = (imageSource) => {
   return new Promise((resolve) => {
-    if (
-      typeof window === "undefined" ||
-      typeof document === "undefined" ||
-      !imageSource
-    ) {
-      return resolve(null);
-    }
+    if (typeof window === "undefined" || !imageSource) return resolve(null);
     const img = new Image();
     img.crossOrigin = "Anonymous";
     img.onload = () => {
@@ -31,537 +35,373 @@ const loadImageBase64 = (imageSource) => {
   });
 };
 
-function stripHtml(html = "") {
-  return String(html)
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&[a-z0-9#]+;/gi, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-export const generateTourBrochure = async (tour) => {
+export const generateTourBrochure = async (tour, locale = "en") => {
   if (typeof window === "undefined" || !tour) return;
 
-  // Dynamically import jsPDF so Next.js never executes it during SSR build
-  const { default: jsPDF } = await import("jspdf");
-  await import("jspdf-autotable");
+  // 1. Create a measurement/render container
+  const PAGE_WIDTH_PX = 794; // Standard A4 width at 96 DPI
+  const PAGE_HEIGHT_PX = 1123; // Standard A4 height at 96 DPI
+  const USABLE_PAGE_HEIGHT = 1040; // Leaves room for top/bottom margins & page number
 
   const logoDataUrl = await loadImageBase64(logoImg);
 
-  const doc = new jsPDF({
-    orientation: "portrait",
-    unit: "mm",
-    format: "a4",
-  });
+  const root = document.createElement("div");
+  root.id = "pdf-measurement-root";
+  root.style.position = "fixed";
+  root.style.left = "-9999px";
+  root.style.top = "0";
+  root.style.width = `${PAGE_WIDTH_PX}px`;
+  root.style.background = "#ffffff";
+  root.style.color = "#1E272E";
+  root.style.fontFamily =
+    "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+  root.style.boxSizing = "border-box";
+  document.body.appendChild(root);
 
-  const pageWidth = doc.internal.pageSize.getWidth();
-  const pageHeight = doc.internal.pageSize.getHeight();
-  const margin = 14;
-  const contentWidth = pageWidth - margin * 2;
+  try {
+    // ----------------------------------------------------
+    // HTML BLOCKS DEFINITIONS
+    // ----------------------------------------------------
 
-  const BRAND_RED = [235, 59, 90];
-  const BRAND_DARK = [30, 39, 46];
-  const BRAND_MUTED = [100, 100, 100];
-  const CARD_BG = [249, 250, 251];
-  const CARD_BORDER = [225, 230, 235];
-  const GREEN_COLOR = [46, 125, 50];
-  const RED_COLOR = [211, 47, 47];
+    const logoHtml = logoDataUrl
+      ? `<img src="${logoDataUrl}" alt="Logo" style="width: 44px; height: 44px; object-fit: contain; border-radius: 50%;" />`
+      : "";
 
-  let currentY = 14;
+    // Header (Page 1 Only)
+    const headerHtml = `
+      <div style="height: 3.5px; background: #EB3B5A; margin-bottom: 10px; border-radius: 2px;"></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid #E2E8F0; margin-bottom: 10px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          ${logoHtml}
+          <div>
+            <h1 style="margin: 0; font-size: 18px; font-weight: 800; color: #1E272E; letter-spacing: -0.3px;">MAHAKUMBH TOURS & TRAVELS</h1>
+            <div style="font-size: 9.5px; font-weight: 700; color: #EB3B5A; margin-top: 1px;">TOURS, TRAVELS & PILGRIMAGE PACKAGES</div>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <div style="display: inline-block; background: #FEF2F2; color: #EB3B5A; border: 1px solid #EB3B5A; padding: 2px 9px; border-radius: 20px; font-size: 9px; font-weight: 700; margin-bottom: 3px;">
+            TOUR ITINERARY
+          </div>
+          <div style="font-size: 8.5px; color: #4A5568; line-height: 1.3;">Helpline: +91 75077 78088</div>
+          <div style="font-size: 8.5px; color: #4A5568; line-height: 1.3;">Email: mahakumbhtourstravels@gmail.com</div>
+          <div style="font-size: 8.5px; color: #4A5568; line-height: 1.3;">Website: www.mahakumbhtourstravelsnashik.com</div>
+        </div>
+      </div>
+    `;
 
-  // --- TOP RED ACCENT BAR ---
-  doc.setFillColor(...BRAND_RED);
-  doc.rect(margin, currentY, contentWidth, 1.2, "F");
-  currentY += 6;
+    // Summary Card (Page 1 Only)
+    const rawDestination =
+      tour.destination ||
+      tour.location ||
+      tour.city ||
+      (Array.isArray(tour.routes) && tour.routes.length > 0
+        ? tour.routes.join(", ")
+        : "") ||
+      "Nashik / Kumbh";
 
-  // --- HEADER SECTION ---
-  let brandTextStartX = margin;
+    const summaryHtml = `
+      <div style="border: 1px solid #E2E8F0; border-left: 4px solid #EB3B5A; border-radius: 6px; padding: 10px 12px; margin-bottom: 12px; background: #FFFFFF;">
+        <h2 style="margin: 0 0 4px 0; font-size: 15px; font-weight: 700; color: #1E272E;">${stripHtml(tour.title || tour.name || "")}</h2>
+        <div style="font-size: 10px; color: #718096; margin-bottom: 8px;">Mahakumbh Tours • Destination: Nashik & Sacred Circuits</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; border-top: 1px solid #EDF2F7; padding-top: 6px;">
+          <div>
+            <div style="font-size: 8.5px; font-weight: 700; color: #718096;">DURATION</div>
+            <div style="font-size: 11px; font-weight: 700; color: #1E272E;">${stripHtml(tour.duration || "Custom")}</div>
+          </div>
+          <div>
+            <div style="font-size: 8.5px; font-weight: 700; color: #718096;">DESTINATION</div>
+            <div style="font-size: 11px; font-weight: 700; color: #1E272E;">${stripHtml(rawDestination)}</div>
+          </div>
+          <div>
+            <div style="font-size: 8.5px; font-weight: 700; color: #718096;">STARTING COST</div>
+            <div style="font-size: 11px; font-weight: 700; color: #EB3B5A;">On Request</div>
+          </div>
+        </div>
+      </div>
+    `;
 
-  if (logoDataUrl) {
-    try {
-      const logoWidth = 11;
-      const logoHeight = 11;
-      doc.addImage(
-        logoDataUrl,
-        "PNG",
-        margin,
-        currentY - 1,
-        logoWidth,
-        logoHeight,
-      );
-      brandTextStartX = margin + logoWidth + 3;
-    } catch (e) {
-      brandTextStartX = margin;
-    }
-  }
+    // Tour Overview (Page 1 Only)
+    const overviewHtml =
+      tour.description || tour.mainDesc
+        ? `
+      <div style="margin-bottom: 12px;">
+        <span style="font-size: 11px; font-weight: bold; color: #1E272E;">Tour Overview: </span>
+        <span style="font-size: 10.5px; color: #4A5568; line-height: 1.45;">${stripHtml(tour.description || tour.mainDesc)}</span>
+      </div>
+    `
+        : "";
 
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(13);
-  doc.setTextColor(...BRAND_DARK);
-  doc.text("MAHAKUMBH TOURS & TRAVELS", brandTextStartX, currentY + 3);
+    // Day-wise Section Header
+    const itineraryTitleHtml = `
+      <div style="font-size: 11.5px; font-weight: 800; color: #1E272E; margin-bottom: 8px;">
+        DAY-WISE <span style="color: #EB3B5A;">ITINERARY</span>
+      </div>
+    `;
 
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(7);
-  doc.setTextColor(...BRAND_RED);
-  doc.text(
-    "TOURS, TRAVELS & PILGRIMAGE PACKAGES",
-    brandTextStartX,
-    currentY + 7.5,
-  );
+    // Function to create an individual day card
+    const createDayCardHtml = (day, index) => `
+      <div style="margin-bottom: 10px; border: 1px solid #E1E6EB; border-left: 4px solid #EB3B5A; border-radius: 6px; padding: 8px 12px; background: #F9FAFB;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+          <span style="background: #EB3B5A; color: #fff; font-size: 9.5px; font-weight: bold; padding: 1px 6px; border-radius: 3px;">DAY ${index + 1}</span>
+          <span style="font-size: 11.5px; font-weight: bold; color: #1E272E;">${stripHtml(day.itinerary_title || day.journey_title || `Day ${index + 1}`)}</span>
+        </div>
+        <p style="margin: 0; font-size: 10px; line-height: 1.45; color: #4A5568;">
+          ${stripHtml(day.description || "")}
+        </p>
+      </div>
+    `;
 
-  doc.setFillColor(254, 242, 242);
-  doc.setDrawColor(...BRAND_RED);
-  doc.setLineWidth(0.3);
-  doc.roundedRect(pageWidth - margin - 36, currentY - 2, 36, 7, 3, 3, "FD");
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(7.5);
-  doc.setTextColor(...BRAND_RED);
-  doc.text("TOUR ITINERARY", pageWidth - margin - 18, currentY + 2.5, {
-    align: "center",
-  });
+    // Inclusions & Exclusions block
+    const defaultInclusions = [
+      "Hotel Accommodation in comfortable category",
+      "Daily Breakfast and Dinner",
+      "Private AC vehicle for all transfers & sightseeing",
+      "Kumbh Mela sacred ghats & temple darshan assistance",
+      "Driver allowances, tolls, and parking fees",
+    ];
+    const inclusions =
+      Array.isArray(tour.inclusions) && tour.inclusions.length > 0
+        ? tour.inclusions
+        : defaultInclusions;
 
-  const headerRightX = pageWidth - margin;
-  let contactY = currentY + 9;
-  doc.setFontSize(7);
-  doc.setFont("helvetica", "normal");
-  doc.setTextColor(...BRAND_DARK);
+    const defaultExclusions = [
+      "Train, flight, or interstate bus tickets",
+      "VIP / Priority temple darshan pass charges",
+      "Special puja, dakshina, and personal ritual charges",
+      "Personal expenses like laundry, beverages & tips",
+      "Travel & medical insurance",
+    ];
+    const exclusions =
+      Array.isArray(tour.exclusions) && tour.exclusions.length > 0
+        ? tour.exclusions
+        : defaultExclusions;
 
-  doc.text("Helpline: +91 75077 78088", headerRightX, contactY, {
-    align: "right",
-  });
-  contactY += 3.5;
-  doc.text("Email: mahakumbhtourstravels@gmail.com", headerRightX, contactY, {
-    align: "right",
-  });
-  contactY += 3.5;
-  doc.text(
-    "Website: www.mahakumbhtourstravelsnashik.com",
-    headerRightX,
-    contactY,
-    { align: "right" },
-  );
+    const inclusionsHtml = inclusions
+      .slice(0, 6)
+      .map(
+        (inc) =>
+          `<div style="font-size: 10px; margin-bottom: 4px; color: #2D3748;"><span style="color: #2E7D32; font-weight: bold; margin-right: 6px;">✓</span>${stripHtml(typeof inc === "object" ? inc.label || inc.title : inc)}</div>`,
+      )
+      .join("");
 
-  currentY = contactY + 3;
+    const exclusionsHtml = exclusions
+      .slice(0, 6)
+      .map(
+        (exc) =>
+          `<div style="font-size: 10px; margin-bottom: 4px; color: #2D3748;"><span style="color: #D32F2F; font-weight: bold; margin-right: 6px;">✕</span>${stripHtml(typeof exc === "object" ? exc.label || exc.title : exc)}</div>`,
+      )
+      .join("");
 
-  doc.setDrawColor(220, 220, 220);
-  doc.setLineWidth(0.3);
-  doc.line(margin, currentY, pageWidth - margin, currentY);
-  currentY += 6;
+    const inclusionsExclusionsBlock = `
+      <div style="margin-top: 10px; margin-bottom: 12px;">
+        <div style="font-size: 12px; font-weight: 800; color: #1E272E; margin-bottom: 6px;">
+          PACKAGE <span style="color: #EB3B5A;">INCLUSIONS & EXCLUSIONS</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div style="border: 1px solid #D2EBD7; background: #F6FCF7; border-radius: 6px; padding: 10px;">
+            <div style="font-size: 10.5px; font-weight: bold; color: #2E7D32; margin-bottom: 6px; border-bottom: 1px solid #D2EBD7; padding-bottom: 4px;">
+              PACKAGE INCLUSIONS
+            </div>
+            ${inclusionsHtml}
+          </div>
+          <div style="border: 1px solid #F5D7D7; background: #FEF7F7; border-radius: 6px; padding: 10px;">
+            <div style="font-size: 10.5px; font-weight: bold; color: #D32F2F; margin-bottom: 6px; border-bottom: 1px solid #F5D7D7; padding-bottom: 4px;">
+              PACKAGE EXCLUSIONS
+            </div>
+            ${exclusionsHtml}
+          </div>
+        </div>
+      </div>
+    `;
 
-  // --- 2. PACKAGE TITLE & SUMMARY CARD ---
-  const startBoxY = currentY;
+    // Notes & Final Helpline CTA Box (Only on the final page)
+    const finalFooterCtaHtml = `
+      <div style="border: 1px solid #FED7AA; border-left: 4px solid #F59E0B; background: #FFFBF0; border-radius: 6px; padding: 10px 12px; margin-bottom: 14px;">
+        <div style="font-size: 10.5px; font-weight: bold; color: #B45309; margin-bottom: 4px;">IMPORTANT TRAVEL NOTES & GUIDELINES</div>
+        <div style="font-size: 9px; color: #4A5568; line-height: 1.45;">
+          <div><b>• Valid ID Proof:</b> All travelers must carry an original government-issued photo ID during travel and hotel check-in.</div>
+          <div><b>• Itinerary & Schedule:</b> Tour schedules may vary depending on local weather conditions, traffic, or Kumbh Mela administration guidelines.</div>
+          <div><b>• Terms & Cancellations:</b> Bookings are subject to Mahakumbh Tours & Travels standard cancellation policies.</div>
+        </div>
+      </div>
 
-  doc.setFillColor(255, 255, 255);
-  doc.setDrawColor(...CARD_BORDER);
-  doc.setLineWidth(0.4);
-  doc.roundedRect(margin, startBoxY, contentWidth, 27, 2, 2, "FD");
+      <div style="background: #0F172A; border-radius: 6px; padding: 12px 16px; color: #FFFFFF; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-size: 12.5px; font-weight: bold;">Plan Your Pilgrimage With <span style="color: #EB3B5A;">Mahakumbh Tours</span></div>
+          <div style="font-size: 9.5px; color: #CBD5E1; margin-top: 2px;">Reach out to our team for bookings, customized packages, and Kumbh guidance.</div>
+        </div>
+        <div style="text-align: right; font-size: 9.5px;">
+          <div style="font-weight: bold;">Helpline: +91 75077 78088</div>
+          <div style="color: #CBD5E1;">mahakumbhtourstravels@gmail.com</div>
+        </div>
+      </div>
+    `;
 
-  doc.setFillColor(...BRAND_RED);
-  doc.rect(margin, startBoxY, 1.4, 27, "F");
+    // ----------------------------------------------------
+    // DYNAMIC CONTENT HEIGHT-AWARE PACKING
+    // ----------------------------------------------------
+    const measureBox = document.createElement("div");
+    measureBox.style.padding = "36px 40px 22px 40px";
+    measureBox.style.boxSizing = "border-box";
+    measureBox.style.width = `${PAGE_WIDTH_PX}px`;
+    root.appendChild(measureBox);
 
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(12);
-  doc.setTextColor(...BRAND_DARK);
-  const titleText = tour.title || tour.name || "Nashik Kumbh Mela Tour Package";
-  doc.text(titleText, margin + 4, startBoxY + 6);
+    const pages = [];
+    let currentPageHtml = "";
+    let currentHeight = 0;
 
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(7.5);
-  doc.setTextColor(...BRAND_MUTED);
-  doc.text(
-    "Mahakumbh Tours  •  Destination: Nashik & Sacred Circuits",
-    margin + 4,
-    startBoxY + 10.5,
-  );
+    // Helper: test-measures height before committing
+    const measureHtml = (html) => {
+      measureBox.innerHTML = html;
+      return measureBox.offsetHeight;
+    };
 
-  const subBoxY = startBoxY + 13.5;
-  const colWidth = (contentWidth - 8) / 3;
+    // 1. Start Page 1 with Top Elements
+    currentPageHtml = `
+      ${headerHtml}
+      ${summaryHtml}
+      ${overviewHtml}
+      ${itineraryTitleHtml}
+    `;
+    currentHeight = measureHtml(currentPageHtml);
 
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(6.5);
-  doc.setTextColor(...BRAND_MUTED);
-  doc.text("DURATION", margin + 4, subBoxY + 3);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9);
-  doc.setTextColor(...BRAND_DARK);
-  doc.text(tour.duration || "Custom", margin + 4, subBoxY + 8);
+    // 2. Add each Day Card, creating a new page only when height runs out
+    const itineraries = Array.isArray(tour.itineraries) ? tour.itineraries : [];
+    itineraries.forEach((day, idx) => {
+      const cardHtml = createDayCardHtml(day, idx);
+      const cardHeight = measureHtml(cardHtml);
 
-  doc.setDrawColor(...CARD_BORDER);
-  doc.line(
-    margin + 4 + colWidth,
-    subBoxY,
-    margin + 4 + colWidth,
-    subBoxY + 10.5,
-  );
+      if (currentHeight + cardHeight > USABLE_PAGE_HEIGHT) {
+        // Current page is full, push it and start a clean new page
+        pages.push(currentPageHtml);
 
-  // Destination Label
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(6.5);
-  doc.setTextColor(...BRAND_MUTED);
-  doc.text("DESTINATION", margin + 6 + colWidth, subBoxY + 3);
-
-  // Extract dynamic destination from API / tour object
-  const rawDestination =
-    tour.destination ||
-    tour.location ||
-    tour.city ||
-    (Array.isArray(tour.routes) && tour.routes.length > 0
-      ? tour.routes.join(", ")
-      : "") ||
-    "Nashik / Kumbh";
-
-  // Strip any accidental HTML and trim
-  const cleanDestination = stripHtml(rawDestination);
-
-  // Truncate to fit column width cleanly (max column printable width ~48-50mm)
-  const availableColWidth = colWidth - 8;
-  let displayDestination = cleanDestination;
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9);
-
-  if (doc.getTextWidth(displayDestination) > availableColWidth) {
-    // If it's slightly long, scale font size down to 7.5; if still too long, truncate with ellipsis
-    doc.setFontSize(7.5);
-    if (doc.getTextWidth(displayDestination) > availableColWidth) {
-      while (
-        displayDestination.length > 3 &&
-        doc.getTextWidth(displayDestination + "...") > availableColWidth
-      ) {
-        displayDestination = displayDestination.slice(0, -1);
+        // Continuation page starts with a clean top red line
+        currentPageHtml = `
+          <div style="height: 3px; background: #EB3B5A; margin-bottom: 14px; border-radius: 2px;"></div>
+          <div style="font-size: 11.5px; font-weight: 800; color: #1E272E; margin-bottom: 10px;">
+            DAY-WISE <span style="color: #EB3B5A;">ITINERARY (CONTINUED)</span>
+          </div>
+          ${cardHtml}
+        `;
+        currentHeight = measureHtml(currentPageHtml);
+      } else {
+        currentPageHtml += cardHtml;
+        currentHeight += cardHeight;
       }
-      displayDestination += "...";
-    }
-  }
-
-  doc.setTextColor(...BRAND_DARK);
-  doc.text(displayDestination, margin + 6 + colWidth, subBoxY + 8);
-
-  // Vertical line 2
-  doc.line(
-    margin + 4 + colWidth * 2,
-    subBoxY,
-    margin + 4 + colWidth * 2,
-    subBoxY + 10.5,
-  );
-
-  const formattedPrice = "On Request";
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(6.5);
-  doc.setTextColor(...BRAND_MUTED);
-  doc.text("STARTING COST", margin + 6 + colWidth * 2, subBoxY + 3);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9);
-  doc.setTextColor(...BRAND_RED);
-  doc.text(`${formattedPrice}`, margin + 6 + colWidth * 2, subBoxY + 8);
-
-  currentY = startBoxY + 32;
-
-  // --- 3. TOUR OVERVIEW ---
-  const rawDesc = stripHtml(tour.description || tour.mainDesc || "");
-  if (rawDesc) {
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(8);
-    doc.setTextColor(...BRAND_DARK);
-    doc.text("Tour Overview: ", margin, currentY);
-
-    const prefixWidth = doc.getTextWidth("Tour Overview: ");
-    const splitDesc = doc.splitTextToSize(rawDesc, contentWidth - prefixWidth);
-
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(7.5);
-    doc.setTextColor(70, 70, 70);
-    doc.text(splitDesc[0] || "", margin + prefixWidth, currentY);
-
-    if (splitDesc.length > 1) {
-      const restLines = splitDesc.slice(1, 4);
-      doc.text(restLines, margin, currentY + 3.8);
-      currentY += (restLines.length + 1) * 3.8 + 3;
-    } else {
-      currentY += 6;
-    }
-  }
-
-  // --- 4. DAY-WISE ITINERARY ---
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9);
-  doc.setTextColor(...BRAND_DARK);
-  doc.text("DAY-WISE ", margin, currentY);
-  doc.setTextColor(...BRAND_RED);
-  doc.text("ITINERARY", margin + doc.getTextWidth("DAY-WISE "), currentY);
-  currentY += 3;
-
-  const itineraries = Array.isArray(tour.itineraries) ? tour.itineraries : [];
-
-  itineraries.forEach((day, index) => {
-    const dayNumber = `DAY ${index + 1}`;
-    const dayTitle = stripHtml(
-      day.itinerary_title || day.journey_title || `Day ${index + 1}`,
-    );
-    const dayDesc = stripHtml(day.description || "");
-
-    const splitDayDesc = doc.splitTextToSize(dayDesc, contentWidth - 8);
-    const boxHeight = 11 + splitDayDesc.length * 3.4;
-
-    if (currentY + boxHeight > pageHeight - 16) {
-      doc.addPage();
-      currentY = 16;
-    }
-
-    doc.setFillColor(...CARD_BG);
-    doc.setDrawColor(...CARD_BORDER);
-    doc.setLineWidth(0.3);
-    doc.roundedRect(margin, currentY, contentWidth, boxHeight, 1.5, 1.5, "FD");
-
-    doc.setFillColor(...BRAND_RED);
-    doc.rect(margin, currentY, 1.2, boxHeight, "F");
-
-    doc.setFillColor(...BRAND_RED);
-    doc.roundedRect(margin + 3, currentY + 2.5, 12, 4.5, 1, 1, "F");
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(6.5);
-    doc.setTextColor(255, 255, 255);
-    doc.text(dayNumber, margin + 9, currentY + 5.7, { align: "center" });
-
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(8);
-    doc.setTextColor(...BRAND_DARK);
-    doc.text(dayTitle, margin + 18, currentY + 5.8);
-
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(7);
-    doc.setTextColor(80, 80, 80);
-    doc.text(splitDayDesc, margin + 3, currentY + 10.5);
-
-    currentY += boxHeight + 2.5;
-  });
-
-  // --- PAGE 2: INCLUSIONS, EXCLUSIONS & NOTES ---
-  doc.addPage();
-  currentY = 16;
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9.5);
-  doc.setTextColor(...BRAND_DARK);
-  doc.text("PACKAGE ", margin, currentY);
-  doc.setTextColor(...BRAND_RED);
-  doc.text(
-    "INCLUSIONS & EXCLUSIONS",
-    margin + doc.getTextWidth("PACKAGE "),
-    currentY,
-  );
-  currentY += 4;
-
-  const halfWidth = (contentWidth - 4) / 2;
-  const colHeight = 55;
-
-  doc.setFillColor(246, 252, 247);
-  doc.setDrawColor(210, 235, 215);
-  doc.setLineWidth(0.3);
-  doc.roundedRect(margin, currentY, halfWidth, colHeight, 1.5, 1.5, "FD");
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(7.5);
-  doc.setTextColor(...GREEN_COLOR);
-  doc.text("PACKAGE INCLUSIONS", margin + 4, currentY + 5.5);
-  doc.setDrawColor(210, 235, 215);
-  doc.line(margin, currentY + 8, margin + halfWidth, currentY + 8);
-
-  const inclusions =
-    Array.isArray(tour.inclusions) && tour.inclusions.length > 0
-      ? tour.inclusions
-      : [
-          "Hotel Accommodation in comfortable category",
-          "Daily Breakfast and Dinner",
-          "Private AC vehicle for all transfers & sightseeing",
-          "Kumbh Mela sacred ghats & temple darshan assistance",
-          "Driver allowances, tolls, and parking fees",
-        ];
-
-  let incY = currentY + 12;
-  inclusions.slice(0, 7).forEach((inc) => {
-    const text = typeof inc === "object" ? inc.label || inc.title : inc;
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor(...GREEN_COLOR);
-    doc.text("✓", margin + 4, incY);
-
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(7);
-    doc.setTextColor(50, 50, 50);
-    const splitText = doc.splitTextToSize(String(text), halfWidth - 11);
-    doc.text(splitText, margin + 8, incY);
-    incY += splitText.length * 3.4 + 2.2;
-  });
-
-  const rightColX = margin + halfWidth + 4;
-  doc.setFillColor(254, 247, 247);
-  doc.setDrawColor(245, 215, 215);
-  doc.setLineWidth(0.3);
-  doc.roundedRect(rightColX, currentY, halfWidth, colHeight, 1.5, 1.5, "FD");
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(7.5);
-  doc.setTextColor(...RED_COLOR);
-  doc.text("PACKAGE EXCLUSIONS", rightColX + 4, currentY + 5.5);
-  doc.setDrawColor(245, 215, 215);
-  doc.line(rightColX, currentY + 8, rightColX + halfWidth, currentY + 8);
-
-  const exclusions =
-    Array.isArray(tour.exclusions) && tour.exclusions.length > 0
-      ? tour.exclusions
-      : [
-          "Train, flight, or interstate bus tickets",
-          "VIP / Priority temple darshan pass charges",
-          "Special puja, dakshina, and personal ritual charges",
-          "Personal expenses like laundry, beverages & tips",
-          "Travel & medical insurance",
-        ];
-
-  let excY = currentY + 12;
-  exclusions.slice(0, 7).forEach((exc) => {
-    const text = typeof exc === "object" ? exc.label || exc.title : exc;
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor(...RED_COLOR);
-    doc.text("✕", rightColX + 4, excY);
-
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(7);
-    doc.setTextColor(50, 50, 50);
-    const splitText = doc.splitTextToSize(String(text), halfWidth - 11);
-    doc.text(splitText, rightColX + 8, excY);
-    excY += splitText.length * 3.4 + 2.2;
-  });
-
-  currentY += colHeight + 6;
-
-  // --- IMPORTANT TRAVEL NOTES ---
-  const notesHeight = 28;
-  doc.setFillColor(255, 251, 240);
-  doc.setDrawColor(254, 215, 170);
-  doc.setLineWidth(0.3);
-  doc.roundedRect(margin, currentY, contentWidth, notesHeight, 1.5, 1.5, "FD");
-
-  doc.setFillColor(245, 158, 11);
-  doc.rect(margin, currentY, 1.2, notesHeight, "F");
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(7.5);
-  doc.setTextColor(180, 83, 9);
-  doc.text("IMPORTANT TRAVEL NOTES & GUIDELINES", margin + 4, currentY + 5);
-
-  doc.setFontSize(6.8);
-  doc.setTextColor(70, 70, 70);
-
-  let noteY = currentY + 9.5;
-  const notes = [
-    {
-      bold: "• Valid ID Proof: ",
-      text: "All travelers must carry an original government-issued photo ID during travel and hotel check-in.",
-    },
-    {
-      bold: "• Itinerary & Schedule: ",
-      text: "Tour schedules and sightseeing order may vary depending on local weather conditions, traffic, or Kumbh Mela administration guidelines.",
-    },
-    {
-      bold: "• Terms & Cancellations: ",
-      text: "Package bookings, transport, and hotel reservations are subject to Mahakumbh Tours & Travels standard booking and cancellation policies.",
-    },
-  ];
-
-  notes.forEach((note) => {
-    doc.setFont("helvetica", "bold");
-    doc.text(note.bold, margin + 4, noteY);
-    const bWidth = doc.getTextWidth(note.bold);
-
-    doc.setFont("helvetica", "normal");
-    const wrapped = doc.splitTextToSize(note.text, contentWidth - 8 - bWidth);
-    doc.text(wrapped, margin + 4 + bWidth, noteY);
-    noteY += wrapped.length * 3.2 + 2;
-  });
-
-  currentY += notesHeight + 6;
-
-  // --- FOOTER CTA BANNER ---
-  const footerCtaHeight = 22;
-  doc.setFillColor(15, 23, 42);
-  doc.roundedRect(
-    margin,
-    currentY,
-    contentWidth,
-    footerCtaHeight,
-    1.5,
-    1.5,
-    "F",
-  );
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9);
-  doc.setTextColor(255, 255, 255);
-  doc.text("Plan Your Pilgrimage With ", margin + 5, currentY + 8);
-  doc.setTextColor(...BRAND_RED);
-  doc.text(
-    "Mahakumbh Tours",
-    margin + 5 + doc.getTextWidth("Plan Your Pilgrimage With "),
-    currentY + 8,
-  );
-
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(6.8);
-  doc.setTextColor(203, 213, 225);
-  doc.text(
-    "Reach out to our team for bookings, customized packages, and Kumbh guidance.",
-    margin + 5,
-    currentY + 13.5,
-  );
-
-  const ctaRightX = pageWidth - margin - 5;
-  doc.setFontSize(7);
-  doc.setTextColor(255, 255, 255);
-  doc.setFont("helvetica", "bold");
-  doc.text("Call / Helpline: +91 75077 78088", ctaRightX, currentY + 6.5, {
-    align: "right",
-  });
-  doc.setFont("helvetica", "normal");
-  doc.setTextColor(203, 213, 225);
-  doc.text(
-    "Email: mahakumbhtourstravels@gmail.com",
-    ctaRightX,
-    currentY + 11.5,
-    { align: "right" },
-  );
-  doc.text(
-    "Website: www.mahakumbhtourstravelsnashik.com",
-    ctaRightX,
-    currentY + 16,
-    { align: "right" },
-  );
-
-  // --- FOOTER PAGINATION ---
-  const totalPages = doc.internal.getNumberOfPages();
-  for (let i = 1; i <= totalPages; i++) {
-    doc.setPage(i);
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(6.5);
-    doc.setTextColor(150, 150, 150);
-
-    doc.text(
-      "Mahakumbh Tours & Travels  •  Kumbh Mela 2027",
-      margin,
-      pageHeight - 6,
-    );
-    doc.text(`Page ${i} of ${totalPages}`, pageWidth / 2, pageHeight - 6, {
-      align: "center",
     });
-    doc.text(
-      "mahakumbhtourstravelsnashik.com",
-      pageWidth - margin,
-      pageHeight - 6,
-      { align: "right" },
-    );
-  }
 
-  const sanitizedSlug = (tour.slug || "tour-package").replace(
-    /[^a-zA-Z0-9_-]/g,
-    "",
-  );
-  doc.save(`${sanitizedSlug}-itinerary-brochure.pdf`);
+    // 3. Try packing Inclusions & Footer onto the current page if it fits
+    const finalBlockHtml = `
+      ${inclusionsExclusionsBlock}
+      <div style="margin-top: auto;">
+        ${finalFooterCtaHtml}
+      </div>
+    `;
+    const finalBlockHeight = measureHtml(finalBlockHtml);
+
+    if (currentHeight + finalBlockHeight <= USABLE_PAGE_HEIGHT) {
+      // It fits on the same page! No half-empty sheet.
+      currentPageHtml += finalBlockHtml;
+      pages.push(currentPageHtml);
+    } else {
+      // It doesn't fit, close the itinerary page and start the dedicated final page
+      pages.push(currentPageHtml);
+
+      const standaloneFinalHtml = `
+        <div style="height: 3px; background: #EB3B5A; margin-bottom: 14px; border-radius: 2px;"></div>
+        ${inclusionsExclusionsBlock}
+        <div style="margin-top: auto;">
+          ${finalFooterCtaHtml}
+        </div>
+      `;
+      pages.push(standaloneFinalHtml);
+    }
+
+    // Clean up temporary measurement element
+    root.removeChild(measureBox);
+
+    // ----------------------------------------------------
+    // BUILD THE FINAL PAGINATED DOM
+    // ----------------------------------------------------
+    const totalPages = pages.length;
+    const pageNodes = [];
+
+    pages.forEach((pageHtml, index) => {
+      const pageNum = index + 1;
+      const pageEl = document.createElement("div");
+      pageEl.style.width = `${PAGE_WIDTH_PX}px`;
+      pageEl.style.height = `${PAGE_HEIGHT_PX}px`;
+      pageEl.style.padding = "36px 40px 22px 40px";
+      pageEl.style.boxSizing = "border-box";
+      pageEl.style.background = "#ffffff";
+      pageEl.style.color = "#1E272E";
+      pageEl.style.position = "relative";
+      pageEl.style.display = "flex";
+      pageEl.style.flexDirection = "column";
+      pageEl.style.justifyContent = "space-between";
+      pageEl.style.overflow = "hidden";
+
+      pageEl.innerHTML = `
+        <div style="flex: 1; display: flex; flex-direction: column;">
+          ${pageHtml}
+        </div>
+        <div style="border-top: 1px solid #E2E8F0; padding-top: 6px; margin-top: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 9.5px; color: #718096;">
+          <span>Mahakumbh Tours & Travels • Kumbh Mela 2027</span>
+          <span>Page ${pageNum} of ${totalPages}</span>
+          <span>mahakumbhtourstravelsnashik.com</span>
+        </div>
+      `;
+
+      root.appendChild(pageEl);
+      pageNodes.push(pageEl);
+    });
+
+    // ----------------------------------------------------
+    // FAST HIGH-RES PDF GENERATION (Optimized)
+    // ----------------------------------------------------
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4",
+      compress: true,
+    });
+
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+
+    for (let i = 0; i < pageNodes.length; i++) {
+      const pageEl = pageNodes[i];
+
+      const canvas = await html2canvas(pageEl, {
+        scale: 1.5, // 1.5x resolution provides crisp text while cutting rasterization time by >50%
+        useCORS: true,
+        logging: false,
+        backgroundColor: "#ffffff",
+      });
+
+      const imgData = canvas.toDataURL("image/jpeg", 0.9);
+
+      if (i > 0) pdf.addPage();
+      pdf.addImage(
+        imgData,
+        "JPEG",
+        0,
+        0,
+        pdfWidth,
+        pdfHeight,
+        undefined,
+        "FAST",
+      );
+    }
+
+    const sanitizedSlug = (tour.slug || "tour-package").replace(
+      /[^a-zA-Z0-9_-]/g,
+      "",
+    );
+    pdf.save(`${sanitizedSlug}-${locale}-itinerary-brochure.pdf`);
+  } finally {
+    if (document.body.contains(root)) {
+      document.body.removeChild(root);
+    }
+  }
 };

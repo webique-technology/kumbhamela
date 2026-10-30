@@ -451,7 +451,7 @@ const TourPackageDetail = ({ tour }) => {
               <div className="price mb-4">
                 <span className="h3 fw-bold primery-color">
                   {/* ₹ {Number(tour.base_price || 0).toLocaleString("en-IN")} */}
-                  ₹ Price on-request
+                 Price on-request
                 </span>
                 {/* <span className="text-muted">
                   {" "}

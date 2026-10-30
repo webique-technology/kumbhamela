@@ -159,6 +159,7 @@ export async function POST(request) {
       `[Pricing Framework]: Vehicles operate strictly on a '${pricingMetric}' basis. Assurances: ${fleetQuality}\n\n` +
       "CRITICAL BEHAVIOR RULES:\n" +
       "- Start every single turn response with 'Jai Shree Ram! 🙏'.\n" +
+      "- NEVER nest or repeat URLs (e.g., NEVER generate `https://domain.com/en/https:/domain.com/...`).'.\n" +
       "- When users ask for tours, packages, vehicles, rental choices, cars list, fleet details, hotels, or blogs, you MUST execute the fetchDynamicInventory tool execution.\n" +
       "- DATA PRESENTATION RULE: When processing response data for category 'cars', list all available vehicles clearly detailing their Name, Total Seats, Base Price (per km rate), status, and structural key features.\n" +
       "- ABSOLUTE TRUTH CONSTRAINT: You are forbidden from writing mock categories, placeholders, or imaginary vehicles. Only present elements returned from the active function execution database payload.\n" +
