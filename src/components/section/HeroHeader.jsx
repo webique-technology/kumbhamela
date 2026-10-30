@@ -11,7 +11,7 @@ import "../../styles/heroHeader.scss";
 import { slugify } from '@/lib/utils';
 import { Link } from '@/i18n/routing';
 
-import banner1 from '../../assets/images/banner-1.webp';
+import banner1 from '@/assets/images/banner-1.webp';
 import banner2 from '@/assets/images/banner-3.webp';
 import banner3 from '@/assets/images/banner-4.webp';
 // NOTE: Make sure to drop matching image files into your assets directory
