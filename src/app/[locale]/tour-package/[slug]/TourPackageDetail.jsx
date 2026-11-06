@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { imageUrl } from "@/lib/utils";
-import { WhatsAppShareBtn } from "@/components/ui/button";
+import { FacebookShareBtn, InstagramShareBtn, WhatsAppShareBtn } from "@/components/ui/button";
 import { HighlightsModal, TourTabs } from "@/components/ui/common";
 import { TourPackageSlider } from "@/components/ui/TourPackageSlider";
 import { getCancellationPolicy, getPaymentPolicy, getTours } from "../tourApi";
@@ -474,8 +474,12 @@ const TourPackageDetail = ({ tour }) => {
                 {t("TranslateBtn.BookNow")}
               </Link>
 
-              <div className="d-flex align-iems-center justify-content-start gap-2">
+              <div className="d-flex align-iems-center justify-content-start gap-1">
                 <WhatsAppShareBtn tour={tour} />
+
+                <FacebookShareBtn tour={tour} />
+
+                <InstagramShareBtn tour={tour} />
 
                 <div className="d-flex gap-1 flex-column align-items-center justify-content-center">
                   <DownloadBrochureBtn tour={tour} />

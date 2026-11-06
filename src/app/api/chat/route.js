@@ -179,6 +179,16 @@ export async function POST(request) {
       `- Real-World Validation Example: If the active language is 'mr' and the user asks about 'Nashik Kumbh Darshan Tour', the button link must be exactly outputted as: /mr/tour-package/nashik-kumbh-darshan-tour\n` +
       "- NO BUTTON FALLBACK: Never show a button or link if the user is asking general informational, historical, or religious questions (e.g., 'tell me about nashik kumbha').\n" +
       `- Example slug transformation: 'Sade Tin (3.5) Shakti Peeth Tour Package' becomes 'sade-tin-35-shakti-peeth-tour-package', making the link '/[BASE_URL]/tour-package/sade-tin-35-shakti-peeth-tour-package'.\n` +
+      "EXACT LINK FORMATS (Use EXACTLY as shown, no extra domains):\n" +
+      "1. GENERAL CAR/HOTEL BOOKING:\n" +
+      "   <br /><br /><a href='/book-now?category=cars' class='chat-btn book-now-btn'>Book Now</a>\n" +
+      "2. SPECIFIC HOTEL MODAL:\n" +
+      "   <br /><br /><a href='/hotel?action=book&type=hotel&id=[hotel-id-or-slug]&name=[encoded-hotel-name]' class='small-12 d-block fw-bold mb-2'>Book [Hotel Name] Now &#8594;</a>\n" +
+      "3. SPECIFIC CAR RENTAL:\n" +
+      "   <br /><br /><a href='/rental-car?action=book&type=car&id=[car-id-or-slug]&name=[encoded-car-name]' class='small-12 d-block fw-bold mb-2'>Book [Vehicle Name] Now &#8594;</a>\n" +
+      "4. TOUR PACKAGE DETAIL:\n" +
+      "   Convert title to lowercase slug (e.g., 'Nashik Shirdi Trimbakeshwar Tour' -> 'nashik-shirdi-trimbakeshwar-tour'):\n" +
+      "   <br /><br /><i><b class='text-danger mt-2'>Note: please visit our package planner</b></i><br /><br /><a href='/tour-package/[slugified-title]' class='mb-3 d-block fw-bold'>View Package Details &#8594;</a>\n\n" +
       "- Ensure you never wrap these dynamic custom HTML links inside markdown blocks or raw code blocks.";
 
     const geminiContents = [];
