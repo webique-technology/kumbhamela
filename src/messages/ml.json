@@ -1047,9 +1047,12 @@
         "inquiry": "അന്വേഷണം ചെയ്യുക",
         "viewDetails": "വിശദാംശങ്ങൾ കാണുക",
         "ReadMore": "കൂടുതൽ വായിക്കുക",
-        "SendItinerary": "യാത്രാവിവരണം അയക്കുക",
+        "SendItinerary": "സോഷ്യൽ മീഡിയയിൽ യാത്രാ വിവരങ്ങൾ പങ്കിടുക",
         "TermsAndConditions": "വ്യവസ്ഥകളും നിബന്ധനകളും",
-        "viewAllHighlights": "എല്ലാ ഹൈലൈറ്റുകളും കാണുക"
+        "viewAllHighlights": "എല്ലാ ഹൈലൈറ്റുകളും കാണുക",
+        "WhatsApp": "വാട്‌സ്ആപ്പിൽ",
+        "Facebook": "ഫേസ്ബുക്കിൽ",
+        "insta": "ഇൻസ്റ്റാഗ്രാമിൽ"
     },
     "Cards": {
         "StartingFrom": "തുടക്ക വില",

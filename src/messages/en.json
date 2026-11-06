@@ -1049,9 +1049,12 @@
     "inquiry": "inquiry",
     "viewDetails": "View Details",
     "ReadMore": "Read More",
-    "SendItinerary": "Send Itinerary",
     "TermsAndConditions": "Terms & Conditions",
-    "viewAllHighlights": "View All Highlights"
+    "viewAllHighlights": "View All Highlights",
+    "SendItinerary": "Send Itinerary to Social Media",
+    "WhatsApp":"WhatsApp",
+    "Facebook":"Facebook",
+    "insta":"Instagram"
   },
   "Cards": {
     "StartingFrom": "Starting from",

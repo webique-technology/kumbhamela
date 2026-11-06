@@ -1047,9 +1047,12 @@
     "inquiry": "चौकशी करा",
     "viewDetails": "तपशील पहा",
     "ReadMore": "पुढे वाचा",
-    "SendItinerary": "इतनेरी (प्रवास आराखडा) पाठवा",
+    "SendItinerary": "सोशल मीडियावर प्रवास योजना पाठवा",
     "TermsAndConditions": "नियम आणि अटी",
-    "viewAllHighlights": "सर्व प्रमुख वैशिष्ट्ये पहा"
+    "viewAllHighlights": "सर्व प्रमुख वैशिष्ट्ये पहा",
+    "WhatsApp": "व्हॉट्सॲपवर",
+    "Facebook": "फेसबुकवर",
+    "insta": "इन्स्टाग्रामवर"
   },
   "Cards": {
     "StartingFrom": "या किंमतीपासून सुरू",

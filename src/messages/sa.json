@@ -1047,9 +1047,12 @@
         "inquiry": "पृच्छा आरक्षयन्तु",
         "viewDetails": "विवरणं पश्यन्तु",
         "ReadMore": "अधिकं पठन्तु",
-        "SendItinerary": "भ्रमणपत्रिकाम् प्रेषयन्तु",
+        "SendItinerary": "सामाजिक-माध्यमे यात्रा-विवरणं प्रेषयतु",
         "TermsAndConditions": "नियम-उपाधयश्च (Terms & Conditions)",
-        "viewAllHighlights": "सर्वान् मुख्यांशान् पश्यन्तु"
+        "viewAllHighlights": "सर्वान् मुख्यांशान् पश्यन्तु",
+        "WhatsApp": "व्हॉट्सॲप्-माध्यमेन",
+        "Facebook": "फेस्बुक्-माध्यमेन",
+        "insta": "इन्स्टाग्राम्-माध्यमेन"
     },
     "Cards": {
         "StartingFrom": "प्रारम्भिकमूल्यम्",

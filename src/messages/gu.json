@@ -1047,9 +1047,12 @@
         "inquiry": "પૂછપરછ કરો",
         "viewDetails": "વિગતો જુઓ",
         "ReadMore": "વધુ વાંચો",
-        "SendItinerary": "યાત્રા કાર્યક્રમ મોકલો",
+        "SendItinerary": "સોશિયલ મીડિયા પર પ્રવાસ કાર્યક્રમ મોકલો",
         "TermsAndConditions": "નિયમો અને શરતો",
-        "viewAllHighlights": "બધા મુખ્ય આકર્ષણો જુઓ"
+        "viewAllHighlights": "બધા મુખ્ય આકર્ષણો જુઓ",
+        "WhatsApp": "વોટ્સએપ",
+        "Facebook": "ફેસબુક",
+        "insta": "ઇન્સ્ટાગ્રામ"
     },
     "Cards": {
         "StartingFrom": "શરૂઆતની કિંમત",

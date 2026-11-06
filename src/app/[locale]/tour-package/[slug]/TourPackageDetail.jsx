@@ -159,6 +159,8 @@ const getInclusionIcon = (item) => {
 
 const TourPackageDetail = ({ tour }) => {
   const t = useTranslations();
+  const SendItinerary = useTranslations("TranslateBtn");
+
   const [cancellationPolicy, setCancellationPolicy] = useState([]);
   const [paymentPolicy, setPaymentPolicy] = useState([]);
   const [recentPackages, setRecentPackages] = useState([]);
@@ -474,8 +476,12 @@ const TourPackageDetail = ({ tour }) => {
                 {t("TranslateBtn.BookNow")}
               </Link>
 
-              <div className="d-flex align-iems-center justify-content-start gap-1">
-                <WhatsAppShareBtn tour={tour} />
+              <div className="d-flex flex-column align-iems-center justify-content-start gap-1">
+                 <h4 className="text-start mt-1">
+                  {SendItinerary("SendItinerary")}
+                </h4>
+               <div className="d-flex align-iems-center justify-content-start gap-1">
+                 <WhatsAppShareBtn tour={tour} />
 
                 <FacebookShareBtn tour={tour} />
 
@@ -485,6 +491,7 @@ const TourPackageDetail = ({ tour }) => {
                   <DownloadBrochureBtn tour={tour} />
                   <span className="small-12 fw-bold">Download</span>
                 </div>
+               </div>
               </div>
 
               <p className="note text-center text-muted small-12 italic mt-2">

@@ -185,7 +185,7 @@ export const WhatsAppShareBtn = ({ tour }) => {
         style={{ width: "28px", marginBottom: "5px" }}
       />
       <span className="m-0 fw-bold text-success" style={{ fontSize: "11px", lineHeight: 1.2 }}>
-        {t ? t("TranslateBtn.SendItinerary") : "Send Itinerary"}
+        {t ? t("TranslateBtn.WhatsApp") : "Send Itinerary"}
       </span>
     </button>
   );
@@ -342,7 +342,7 @@ export const FacebookShareBtn = ({ tour }) => {
         className="fw-bold"
         style={{ fontSize: "11px", color: "#1877F2", lineHeight: 1.2 }}
       >
-        {t ? t("TranslateBtn.SendItinerary") : "Send Itinerary"}
+        {t ? t("TranslateBtn.Facebook") : "Send Itinerary"}
       </span>
     </button>
   );
@@ -438,7 +438,7 @@ export const InstagramShareBtn = ({ tour }) => {
         className="fw-bold"
         style={{ fontSize: "11px", color: "#d6249f", lineHeight: 1.2 }}
       >
-         {t ? t("TranslateBtn.SendItinerary") : "Send Itinerary"}
+         {t ? t("TranslateBtn.insta") : "Send Itinerary"}
       </span>
     </button>
   );

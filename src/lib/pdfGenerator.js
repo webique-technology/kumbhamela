@@ -75,16 +75,16 @@ export const generateTourBrochure = async (tour, locale = "en") => {
           ${logoHtml}
           <div>
             <h1 style="margin: 0; font-size: 18px; font-weight: 800; color: #1E272E; letter-spacing: -0.3px;">MAHAKUMBH TOURS & TRAVELS</h1>
-            <div style="font-size: 9.5px; font-weight: 700; color: #EB3B5A; margin-top: 1px;">TOURS, TRAVELS & PILGRIMAGE PACKAGES</div>
+            <div style="ffont-size: 12px; font-weight: 700; color: #EB3B5A; margin-top: 1px;">TOURS, TRAVELS & PILGRIMAGE PACKAGES</div>
           </div>
         </div>
         <div style="text-align: right;">
-          <div style="display: inline-block; background: #FEF2F2; color: #EB3B5A; border: 1px solid #EB3B5A; padding: 2px 9px; border-radius: 20px; font-size: 9px; font-weight: 700; margin-bottom: 3px;">
+          <div style="display: inline-block; background: #FEF2F2; color: #EB3B5A; border: 1px solid #EB3B5A; padding: 2px 9px; border-radius: 20px; ffont-size: 12px; font-weight: 700; margin-bottom: 3px;">
             TOUR ITINERARY
           </div>
-          <div style="font-size: 8.5px; color: #4A5568; line-height: 1.3;">Helpline: +91 75077 78088</div>
-          <div style="font-size: 8.5px; color: #4A5568; line-height: 1.3;">Email: mahakumbhtourstravels@gmail.com</div>
-          <div style="font-size: 8.5px; color: #4A5568; line-height: 1.3;">Website: www.mahakumbhtourstravelsnashik.com</div>
+          <div style="ffont-size: 11px; color: #212325ff; line-height: 1.3;">Helpline: +91 75077 78088</div>
+          <div style="ffont-size: 11px; color: #212325ff; line-height: 1.3;">Email: mahakumbhtourstravels@gmail.com</div>
+          <div style="ffont-size: 11px; color: #212325ff; line-height: 1.3;">Website: www.mahakumbhtourstravelsnashik.com</div>
         </div>
       </div>
     `;
@@ -101,19 +101,19 @@ export const generateTourBrochure = async (tour, locale = "en") => {
 
     const summaryHtml = `
       <div style="border: 1px solid #E2E8F0; border-left: 4px solid #EB3B5A; border-radius: 6px; padding: 10px 12px; margin-bottom: 12px; background: #FFFFFF;">
-        <h2 style="margin: 0 0 4px 0; font-size: 15px; font-weight: 700; color: #1E272E;">${stripHtml(tour.title || tour.name || "")}</h2>
-        <div style="font-size: 10px; color: #718096; margin-bottom: 8px;">Mahakumbh Tours • Destination: Nashik & Sacred Circuits</div>
+        <h2 style="margin: 0 0 4px 0; font-size: 14px; font-weight: 700; color: #1E272E;">${stripHtml(tour.title || tour.name || "")}</h2>
+        <div style="font-size: 12.5px; color: #718096; margin-bottom: 8px;">Mahakumbh Tours • Destination: Nashik & Sacred Circuits</div>
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; border-top: 1px solid #EDF2F7; padding-top: 6px;">
           <div>
-            <div style="font-size: 8.5px; font-weight: 700; color: #718096;">DURATION</div>
+            <div style="ffont-size: 11px; font-weight: 700; color: #718096;">DURATION</div>
             <div style="font-size: 11px; font-weight: 700; color: #1E272E;">${stripHtml(tour.duration || "Custom")}</div>
           </div>
           <div>
-            <div style="font-size: 8.5px; font-weight: 700; color: #718096;">DESTINATION</div>
+            <div style="ffont-size: 11px; font-weight: 700; color: #718096;">DESTINATION</div>
             <div style="font-size: 11px; font-weight: 700; color: #1E272E;">${stripHtml(rawDestination)}</div>
           </div>
           <div>
-            <div style="font-size: 8.5px; font-weight: 700; color: #718096;">STARTING COST</div>
+            <div style="ffont-size: 11px; font-weight: 700; color: #718096;">STARTING COST</div>
             <div style="font-size: 11px; font-weight: 700; color: #EB3B5A;">On Request</div>
           </div>
         </div>
@@ -125,15 +125,15 @@ export const generateTourBrochure = async (tour, locale = "en") => {
       tour.description || tour.mainDesc
         ? `
       <div style="margin-bottom: 12px;">
-        <span style="font-size: 11px; font-weight: bold; color: #1E272E;">Tour Overview: </span>
-        <span style="font-size: 10.5px; color: #4A5568; line-height: 1.45;">${stripHtml(tour.description || tour.mainDesc)}</span>
+        <span style="font-size: 13px; font-weight: bold; color: #1E272E;">Tour Overview: </span>
+        <span style="ffont-size: 12px; color: #212325ff; line-height: 1.45;">${stripHtml(tour.description || tour.mainDesc)}</span>
       </div>
     `
         : "";
 
     // Day-wise Section Header
     const itineraryTitleHtml = `
-      <div style="font-size: 11.5px; font-weight: 800; color: #1E272E; margin-bottom: 8px;">
+      <div style="font-size: 12.5px; font-weight: 800; color: #1E272E; margin-bottom: 8px;">
         DAY-WISE <span style="color: #EB3B5A;">ITINERARY</span>
       </div>
     `;
@@ -142,10 +142,10 @@ export const generateTourBrochure = async (tour, locale = "en") => {
     const createDayCardHtml = (day, index) => `
       <div style="margin-bottom: 10px; border: 1px solid #E1E6EB; border-left: 4px solid #EB3B5A; border-radius: 6px; padding: 8px 12px; background: #F9FAFB;">
         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-          <span style="background: #EB3B5A; color: #fff; font-size: 9.5px; font-weight: bold; padding: 1px 6px; border-radius: 3px;">DAY ${index + 1}</span>
-          <span style="font-size: 11.5px; font-weight: bold; color: #1E272E;">${stripHtml(day.itinerary_title || day.journey_title || `Day ${index + 1}`)}</span>
+          <span style="background: #EB3B5A; color: #fff; ffont-size: 11px; font-weight: bold; padding: 1px 6px; border-radius: 3px;">DAY ${index + 1}</span>
+          <span style="font-size: 12.5px; font-weight: bold; color: #1E272E;">${stripHtml(day.itinerary_title || day.journey_title || `Day ${index + 1}`)}</span>
         </div>
-        <p style="margin: 0; font-size: 10px; line-height: 1.45; color: #4A5568;">
+        <p style="margin: 0; font-size: 13.5px; line-height: 1.45; color: #212325ff;">
           ${stripHtml(day.description || "")}
         </p>
       </div>
@@ -180,7 +180,7 @@ export const generateTourBrochure = async (tour, locale = "en") => {
       .slice(0, 6)
       .map(
         (inc) =>
-          `<div style="font-size: 10px; margin-bottom: 4px; color: #2D3748;"><span style="color: #2E7D32; font-weight: bold; margin-right: 6px;">✓</span>${stripHtml(typeof inc === "object" ? inc.label || inc.title : inc)}</div>`,
+          `<div style="font-size: 14px; margin-bottom: 4px; color: #2D3748;"><span style="color: #2E7D32; font-weight: bold; margin-right: 6px;">✓</span>${stripHtml(typeof inc === "object" ? inc.label || inc.title : inc)}</div>`,
       )
       .join("");
 
@@ -188,24 +188,24 @@ export const generateTourBrochure = async (tour, locale = "en") => {
       .slice(0, 6)
       .map(
         (exc) =>
-          `<div style="font-size: 10px; margin-bottom: 4px; color: #2D3748;"><span style="color: #D32F2F; font-weight: bold; margin-right: 6px;">✕</span>${stripHtml(typeof exc === "object" ? exc.label || exc.title : exc)}</div>`,
+          `<div style="font-size: 14px; margin-bottom: 4px; color: #2D3748;"><span style="color: #D32F2F; font-weight: bold; margin-right: 6px;">✕</span>${stripHtml(typeof exc === "object" ? exc.label || exc.title : exc)}</div>`,
       )
       .join("");
 
     const inclusionsExclusionsBlock = `
       <div style="margin-top: 10px; margin-bottom: 12px;">
-        <div style="font-size: 12px; font-weight: 800; color: #1E272E; margin-bottom: 6px;">
+        <div style="font-size: 14px; font-weight: 800; color: #1E272E; margin-bottom: 6px;">
           PACKAGE <span style="color: #EB3B5A;">INCLUSIONS & EXCLUSIONS</span>
         </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
           <div style="border: 1px solid #D2EBD7; background: #F6FCF7; border-radius: 6px; padding: 10px;">
-            <div style="font-size: 10.5px; font-weight: bold; color: #2E7D32; margin-bottom: 6px; border-bottom: 1px solid #D2EBD7; padding-bottom: 4px;">
+            <div style="ffont-size: 12px; font-weight: bold; color: #2E7D32; margin-bottom: 6px; border-bottom: 1px solid #D2EBD7; padding-bottom: 4px;">
               PACKAGE INCLUSIONS
             </div>
             ${inclusionsHtml}
           </div>
           <div style="border: 1px solid #F5D7D7; background: #FEF7F7; border-radius: 6px; padding: 10px;">
-            <div style="font-size: 10.5px; font-weight: bold; color: #D32F2F; margin-bottom: 6px; border-bottom: 1px solid #F5D7D7; padding-bottom: 4px;">
+            <div style="ffont-size: 12px; font-weight: bold; color: #D32F2F; margin-bottom: 6px; border-bottom: 1px solid #F5D7D7; padding-bottom: 4px;">
               PACKAGE EXCLUSIONS
             </div>
             ${exclusionsHtml}
@@ -217,8 +217,8 @@ export const generateTourBrochure = async (tour, locale = "en") => {
     // Notes & Final Helpline CTA Box (Only on the final page)
     const finalFooterCtaHtml = `
       <div style="border: 1px solid #FED7AA; border-left: 4px solid #F59E0B; background: #FFFBF0; border-radius: 6px; padding: 10px 12px; margin-bottom: 14px;">
-        <div style="font-size: 10.5px; font-weight: bold; color: #B45309; margin-bottom: 4px;">IMPORTANT TRAVEL NOTES & GUIDELINES</div>
-        <div style="font-size: 9px; color: #4A5568; line-height: 1.45;">
+        <div style="ffont-size: 12px; font-weight: bold; color: #B45309; margin-bottom: 4px;">IMPORTANT TRAVEL NOTES & GUIDELINES</div>
+        <div style="ffont-size: 12px; color: #212325ff; line-height: 1.45;">
           <div><b>• Valid ID Proof:</b> All travelers must carry an original government-issued photo ID during travel and hotel check-in.</div>
           <div><b>• Itinerary & Schedule:</b> Tour schedules may vary depending on local weather conditions, traffic, or Kumbh Mela administration guidelines.</div>
           <div><b>• Terms & Cancellations:</b> Bookings are subject to Mahakumbh Tours & Travels standard cancellation policies.</div>
@@ -228,9 +228,9 @@ export const generateTourBrochure = async (tour, locale = "en") => {
       <div style="background: #0F172A; border-radius: 6px; padding: 12px 16px; color: #FFFFFF; display: flex; justify-content: space-between; align-items: center;">
         <div>
           <div style="font-size: 12.5px; font-weight: bold;">Plan Your Pilgrimage With <span style="color: #EB3B5A;">Mahakumbh Tours</span></div>
-          <div style="font-size: 9.5px; color: #CBD5E1; margin-top: 2px;">Reach out to our team for bookings, customized packages, and Kumbh guidance.</div>
+          <div style="ffont-size: 12px; color: #CBD5E1; margin-top: 2px;">Reach out to our team for bookings, customized packages, and Kumbh guidance.</div>
         </div>
-        <div style="text-align: right; font-size: 9.5px;">
+        <div style="text-align: right; ffont-size: 12px;">
           <div style="font-weight: bold;">Helpline: +91 75077 78088</div>
           <div style="color: #CBD5E1;">mahakumbhtourstravels@gmail.com</div>
         </div>
@@ -278,7 +278,7 @@ export const generateTourBrochure = async (tour, locale = "en") => {
         // Continuation page starts with a clean top red line
         currentPageHtml = `
           <div style="height: 3px; background: #EB3B5A; margin-bottom: 14px; border-radius: 2px;"></div>
-          <div style="font-size: 11.5px; font-weight: 800; color: #1E272E; margin-bottom: 10px;">
+          <div style="font-size: 12.5px; font-weight: 800; color: #1E272E; margin-bottom: 10px;">
             DAY-WISE <span style="color: #EB3B5A;">ITINERARY (CONTINUED)</span>
           </div>
           ${cardHtml}
@@ -345,7 +345,7 @@ export const generateTourBrochure = async (tour, locale = "en") => {
         <div style="flex: 1; display: flex; flex-direction: column;">
           ${pageHtml}
         </div>
-        <div style="border-top: 1px solid #E2E8F0; padding-top: 6px; margin-top: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 9.5px; color: #718096;">
+        <div style="border-top: 1px solid #E2E8F0; padding-top: 6px; margin-top: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #292b2eff;">
           <span>Mahakumbh Tours & Travels • Kumbh Mela 2027</span>
           <span>Page ${pageNum} of ${totalPages}</span>
           <span>mahakumbhtourstravelsnashik.com</span>

@@ -1047,9 +1047,12 @@
     "inquiry": "पूछताछ करें",
     "viewDetails": "विवरण देखें",
     "ReadMore": "अधिक पढ़ें",
-    "SendItinerary": "यात्रा कार्यक्रम भेजें",
+    "SendItinerary": "सोशल मीडिया पर यात्रा कार्यक्रम भेजें",
     "TermsAndConditions": "नियम एवं शर्तें",
-    "viewAllHighlights": "सभी मुख्य विशेषताएं देखें"
+    "viewAllHighlights": "सभी मुख्य विशेषताएं देखें",
+    "WhatsApp": "व्हाट्सएप",
+    "Facebook": "फेसबुक",
+    "insta": "इंस्टाग्राम"
   },
   "Cards": {
     "StartingFrom": "शुरुआती कीमत",

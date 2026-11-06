@@ -1047,9 +1047,12 @@
     "inquiry": "విచారణ",
     "viewDetails": "వివరాలను వీక్షించండి",
     "ReadMore": "ఇంకా చదవండి",
-    "SendItinerary": "రూట్ మ్యాప్/వివరాలు పంపండి",
+    "SendItinerary": "సోషల్ మీడియాలో ప్రయాణ ప్రణాళికను పంపండి",
     "TermsAndConditions": "నిబంధనలు మరియు షరతులు",
-    "viewAllHighlights": "అన్ని ముఖ్యాంశాలను చూడండి"
+    "viewAllHighlights": "అన్ని ముఖ్యాంశాలను చూడండి",
+    "WhatsApp": "వాట్సాప్‌లో",
+    "Facebook": "ఫేస్‌బుక్‌లో",
+    "insta": "ఇన్‌స్టాగ్రామ్‌లో"
   },
   "Cards": {
     "StartingFrom": "ప్రారంభ ధర",
