@@ -9,6 +9,30 @@ import "../../styles/chatbot.scss";
 
 import chatWelcome from "../../assets/images/chatbot-img.svg";
 
+// 1. HELPER FUNCTION (KumbhChatbot)
+const sanitizeChatHtml = (rawHtml, locale = "en") => {
+  if (!rawHtml) return "";
+
+  return rawHtml
+    // Convert any raw newlines into HTML <br /> tags so numbered points never merge
+    .replace(/\n+/g, "<br />")
+    // Strip accidental markdown backticks if any appear
+    .replace(/`+/g, "")
+    // Sanitize all href URLs
+    .replace(/href=(['"])(.*?)\1/gi, (match, quote, url) => {
+      let cleanPath = url
+        .replace(/\[BASE_URL\]/gi, "")
+        .replace(/https?:\/\/[^/]+/gi, "")
+        .replace(/https?:\/[^/]+/gi, "");
+
+      cleanPath = "/" + cleanPath.replace(/^\/+/, "").replace(/\/{2,}/g, "/");
+      cleanPath = cleanPath.replace(/^\/(en|hi|mr|sa|ta|ml|te|gu)(\/|$)/, "/");
+
+      const finalHref = `/${locale}${cleanPath}`;
+      return `href=${quote}${finalHref}${quote}`;
+    });
+};
+
 export const KumbhChatbot = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -117,24 +141,31 @@ export const KumbhChatbot = () => {
       }
     }
     // --- CASE 2: Regular Page Redirection (Tour Packages) ---
-    else if (
-      hrefUrl.startsWith("/") ||
-      hrefUrl.startsWith(window.location.origin)
-    ) {
+    else {
       e.preventDefault();
 
-      // Clean absolute paths down to relative paths if necessary
-      let targetPath = hrefUrl.startsWith("http")
-        ? hrefUrl.replace(window.location.origin, "")
-        : hrefUrl;
+      // Strip any accidental domain or malformed protocol anywhere in the string
+      let targetPath = hrefUrl
+        .replace(/https?:\/\/[^/]+/gi, "")
+        .replace(/https?:\/[^/]+/gi, "");
 
-      // Dynamic Runtime Patch: If the generated link has plural "/tour-packages/",
-      // fix it to singular "/tour-package/" so it maps to your Next.js folder setup
+      // Ensure single leading slash
+      targetPath = "/" + targetPath.replace(/^\/+/, "").replace(/\/{2,}/g, "/");
+
+      // Fix plural "/tour-packages/" to singular "/tour-package/"
       if (targetPath.includes("/tour-packages/")) {
         targetPath = targetPath.replace("/tour-packages/", "/tour-package/");
       }
 
-      // Route using Next.js engine. The page updates, but chatbot state is fully preserved!
+      // Ensure currentLocale prefix is present once
+      if (!targetPath.startsWith(`/${currentLocale}/`)) {
+        targetPath = targetPath.replace(
+          /^\/(en|hi|mr|sa|ta|ml|te|gu)(\/|$)/,
+          "/",
+        );
+        targetPath = `/${currentLocale}${targetPath}`;
+      }
+
       router.push(targetPath);
     }
   };
@@ -325,7 +356,12 @@ export const KumbhChatbot = () => {
                 <div
                   key={msg.id}
                   className={`kumbh-msg ${msg.sender === "bot" ? "kumbh-msg-bot" : "kumbh-msg-user"}`}
-                  dangerouslySetInnerHTML={{ __html: msg.text }}
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      msg.sender === "bot"
+                        ? sanitizeChatHtml(msg.text, currentLocale)
+                        : msg.text,
+                  }}
                 />
               ))}
 

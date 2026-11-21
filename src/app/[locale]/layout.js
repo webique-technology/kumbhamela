@@ -40,7 +40,7 @@ const montez = Montez({
 });
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://mahakumbhtourstravelsnashik.com";
+  (process.env.NEXT_PUBLIC_SITE_URL || "https://mahakumbhtourstravelsnashik.com").replace(/\/+$/, "");
 
 // Dynamic Metadata Handler for Multilingual SEO
 export async function generateMetadata({ params }) {
