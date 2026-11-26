@@ -68,7 +68,7 @@ const AboutSec = () => {
     <>
       <section
         id="whyChooseUs"
-        className="why-choose-us-section section-padding-2 position-relative"
+        className="why-choose-us-section section-padding position-relative"
       >
         <Container>
           <Row>

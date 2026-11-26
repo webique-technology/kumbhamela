@@ -22,7 +22,7 @@ const TouristVisitSection = () => {
   };
 
   return (
-    <section className="section-padding-2 sacred-destinations position-relative">
+    <section className="section-padding-2 pb-5 sacred-destinations position-relative">
       <div className="bottom-divider trinery-bg position-absolute top-0"></div>
 
       <Container>

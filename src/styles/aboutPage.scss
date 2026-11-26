@@ -17,7 +17,7 @@
     text-overflow: ellipsis;
 }
 
-.faq-list-bullet-item{
+.faq-list-bullet-item {
     font-size: $font-size-base;
 }
 
@@ -79,6 +79,10 @@
                 margin-bottom: 40px;
                 line-height: 1.6;
             }
+        }
+
+        @media(max-width:768px) {
+            height: 50vh;
         }
     }
 
@@ -490,9 +494,10 @@
             background: $color-gray-200;
             width: 100%;
             max-width: 250px !important;
+
             // max-height: 250px;
             // height: 100%;
-            @media(max-width:1200px){
+            @media(max-width:1200px) {
                 display: none;
             }
 
