@@ -39,8 +39,9 @@ const montez = Montez({
   variable: "--font-montez",
 });
 
-const BASE_URL =
-  (process.env.NEXT_PUBLIC_SITE_URL || "https://mahakumbhtourstravelsnashik.com").replace(/\/+$/, "");
+const BASE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://mahakumbhtourstravelsnashik.com"
+).replace(/\/+$/, "");
 
 // Dynamic Metadata Handler for Multilingual SEO
 export async function generateMetadata({ params }) {
@@ -117,6 +118,43 @@ export async function generateMetadata({ params }) {
       "Nashik Kumbh Mela last date",
       "Kumbh Mela in Trimbakeshwar",
       "Significance & Importance of Kumbh Mela",
+      "Simhastha Kumbh Mela Nashik 2027",
+      "Nashik Kumbh Mela 2027	High",
+      "Nashik Kumbh Mela 2028	High",
+      "Simhastha Kumbh Mela 2027-28",
+      "Nashik Trimbakeshwar Kumbh Mela",
+      "Kumbh Mela Nashik Maharashtra",
+      "Nashik Kumbh Mela Dates 2027",
+      "Nashik Kumbh Mela 2027-2028",
+      "Nashik Kumbh Mela Snan Dates 2027",
+      "Nashik Kumbh Mela Amrut Snan",
+      "Shahi Snan Nashik 2027",
+      "Amrit Snan Dates 2027 Nashik",
+      "Kumbh Mela Snan Schedule",
+      "Trimbakeshwar Kumbh Mela Snan",
+      "Godavari River Kumbh Snan",
+      "Kumbh Mela Punyakal 2027",
+      "Nashik Kumbh Mela Muhurat",
+      "Nashik Kumbh Mela Tour Package",
+      "Nashik Kumbh Mela Travel Package",
+      "Kumbh Mela Nashik Hotel Booking",
+      "Hotels Near Nashik Kumbh Mela",
+      "Accommodation in Nashik for Kumbh Mela",
+      "Trimbakeshwar Tour Package 2027",
+      "Nashik Kumbh Mela Taxi Service",
+      "Nashik Kumbh Mela Bus Booking",
+      "Nashik Airport to Kumbh Mela",
+      "Mumbai to Nashik Kumbh Mela Travel",
+      "Pune to Nashik Kumbh Mela Travel",
+      "Kumbh Mela Nashik Travel Guide",
+      "Nashik Kumbh Mela Tapovan",
+      "Trimbakeshwar Simhastha Kumbh Mela",
+      "Ramkund Nashik Kumbh Mela",
+      "Panchavati Nashik Kumbh Mela",
+      "Godavari Ghat Nashik",
+      "Kumbh Mela Sadhugram Nashik",
+      "Kushavarta Tirth Kumbh Mela",
+      "Ramtirth Nashik Kumbh Mela",
     ],
     authors: [
       { name: "Mahakumbh Tours & Travels", url: `${BASE_URL}/${locale}` },

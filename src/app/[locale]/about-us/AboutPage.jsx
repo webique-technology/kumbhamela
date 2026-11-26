@@ -419,10 +419,11 @@ const AboutPage = () => {
                 </span>
               </h1>
               <p className="description-text mt-4">{t("Legacy.description")}</p>
-              <div className="shrine-meta mb-3 mb-md-0 d-flex align-items-center gap-3 mt-4">
+              <p className="description-text mt-4">{t("Legacy.description2")}</p>
+              {/* <div className="shrine-meta mb-3 mb-md-0 d-flex align-items-center gap-3 mt-4">
                 <CheckCircle className="text-secondary" />
                 <span className="italic-meta">{t("Legacy.meta")}</span>
-              </div>
+              </div> */}
             </Col>
             <Col md={6} className="hero-img-col">
               <div className="hero-img-wrapper d-flex align-items-center justify-content-center shadow-2xl">

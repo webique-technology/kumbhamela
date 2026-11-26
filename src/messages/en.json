@@ -15,6 +15,7 @@
     "rentalCar": "Rental Car",
     "tourPackage": "Tour Package",
     "blog": "Blog",
+    "faq": "Faq",
     "contact": "Contact Us",
     "contactInformation": "Contact Information"
   },
@@ -379,10 +380,11 @@
       "cta": "Explore Journey"
     },
     "Legacy": {
-      "tag": "The Simhastha Legacy",
-      "title": "Where Faith Conflues with the",
-      "span": "Godavari",
-      "description": "Discover the spiritual heartbeat of Nashik, where millions of devotees converge along the sacred banks of the Godavari River for the legendary Simhastha Kumbh Mela. A journey through this sacred gathering is far more than a pilgrimage—it is a profound reconnection with centuries of divine energy, Vedic traditions, and cosmic harmony. As the sacred river flows through Ramkund and Panchavati, every dip offers a soul-cleansing experience rooted in ancient heritage. With over a decade of local travel expertise, Mahakumbh Tours & Travels ensures your holy pilgrimage is seamless, comfortable, and deeply memorable. Let us guide your spiritual path through Nashik, Trimbakeshwar, and beyond.",
+      "tag": "Our Story",
+      "title": "Who We ",
+      "span": "Are",
+      "description": "Founded in Nashik with over 12 years of on-ground travel and pilgrimage expertise, Mahakumbh Tours & Travels is a trusted local tour operator and car rental partner dedicated to serving devotees, families, senior citizens, and international visitors.",
+      "description2": "Planning a pilgrimage—especially during monumental gatherings like the Nashik–Trimbakeshwar Simhastha Kumbh Mela 2027–28—requires far more than a standard cab booking. Road diversions, crowd-controlled zones, temple darshan timings, and peak-season hotel shortages demand a team that knows every street, ghat, and route of Nashik firsthand. Operating directly from our office at NYSA Business Centre, Makhmalabad Road, Nashik, our team handles every detail of your journey from arrival to departure.",
       "meta": "Sacred gatherings since time immemorial",
       "statText": "Years of preparation for a moment of transcendence."
     },
@@ -1052,9 +1054,9 @@
     "TermsAndConditions": "Terms & Conditions",
     "viewAllHighlights": "View All Highlights",
     "SendItinerary": "Send Itinerary to Social Media",
-    "WhatsApp":"WhatsApp",
-    "Facebook":"Facebook",
-    "insta":"Instagram"
+    "WhatsApp": "WhatsApp",
+    "Facebook": "Facebook",
+    "insta": "Instagram"
   },
   "Cards": {
     "StartingFrom": "Starting from",
@@ -1276,6 +1278,86 @@
         "Lost Passport Guidance",
         "Document Verification"
       ]
+    }
+  },
+  "FaqPage": {
+    "metaTitle": "Frequently Asked Questions (FAQ) | Mahakumbh Tours & Travels Nashik",
+    "metaDescription": "Answers to common questions about Nashik–Trimbakeshwar Simhastha Kumbh Mela 2027–28, Shahi Snan dates, car rentals, verified hotels, and Jyotirlinga tour packages.",
+    "eyebrow": "Pilgrim Help Center",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know about Simhastha Kumbh Mela 2027–28, Nashik–Trimbakeshwar darshan, car rentals, and customized pilgrimage tours.",
+    "searchPlaceholder": "Search questions (e.g., Shahi Snan, Innova, Mumbai Airport, Hotel)...",
+    "noResultsTitle": "No matching questions found",
+    "noResultsDesc": "Try clearing your search filter or ask our Nashik travel desk directly.",
+    "resetButton": "Reset Filters",
+    "categories": {
+      "all": "All Questions",
+      "kumbh": "Kumbh Mela 2027–28",
+      "transport": "Car Rentals & Transfers",
+      "packages": "Packages & Stays",
+      "booking": "Pricing & Support"
+    },
+    "items": [
+      {
+        "id": "kumbh-dates",
+        "category": "kumbh",
+        "question": "When is the Nashik–Trimbakeshwar Simhastha Kumbh Mela 2027–28 taking place?",
+        "answer": "The Simhastha Kumbh Mela commenced with Dhwajarohan (Flag Hoisting) on 31 October 2026, with the primary Akhara Flag Hoisting on 24 July 2027 and major Amrit Snan (Shahi Snan) bathing dates taking place between August 2027 and January 2028 across Ramkund (Nashik) and Kushavarta Tirtha (Trimbakeshwar)."
+      },
+      {
+        "id": "advance-booking",
+        "category": "kumbh",
+        "question": "How early should we book hotels and vehicles for the Nashik Kumbh Mela?",
+        "answer": "We strongly recommend booking at least 4 to 6 months in advance, especially if you plan to visit around major Amrit Snan dates (02 August, 31 August, 11 September, and 12 September 2027). Early booking secures verified hotels closer to transit corridors and locks in standard vehicle rates."
+      },
+      {
+        "id": "shahi-snan-access",
+        "category": "kumbh",
+        "question": "Will private vehicles be allowed near Ramkund and Trimbakeshwar on Shahi Snan days?",
+        "answer": "During peak Shahi Snan days, local authorities enforce strict vehicular restrictions around core bathing ghats for pilgrim safety. Because our team is based in Nashik, our drivers drop you at the closest authorized parking or shuttle drop-off zones and coordinate seamless pick-ups afterward."
+      },
+      {
+        "id": "airport-transfers",
+        "category": "transport",
+        "question": "Do you provide pick-up and drop-off from Mumbai Airport, Pune, and Nashik stations?",
+        "answer": "Yes. We offer 24/7 private transfers from Mumbai International Airport (CSMIA), Nashik Ozar Airport, Nashik Road Railway Station, Shirdi, and Pune directly to your hotel or pilgrimage starting point in Nashik."
+      },
+      {
+        "id": "fleet-options",
+        "category": "transport",
+        "question": "What types of vehicles are available in your fleet?",
+        "answer": "We offer well-maintained, air-conditioned Sedans (Dzire, Etios) for couples and small families, SUVs (Innova Crysta, Maruti Ertiga) for 6–7 passengers, Tempo Travellers (13, 17, 20, and 26-seaters) for medium groups, and Luxury Buses/Coaches for large pilgrim groups."
+      },
+      {
+        "id": "custom-packages",
+        "category": "packages",
+        "question": "Can we customize a multi-temple tour package from Nashik?",
+        "answer": "Absolutely. Every itinerary can be customized to your schedule and budget. Popular combinations include Nashik Panchavati + Trimbakeshwar (1–2 Days), Nashik + Shirdi + Shani Shingnapur (2 Days), 3 Jyotirlinga Yatra (Trimbakeshwar, Grishneshwar & Bhimashankar), and the 3-Day Ashtavinayak Darshan Tour."
+      },
+      {
+        "id": "senior-citizens",
+        "category": "packages",
+        "question": "Are your tours suitable for senior citizens and families with children?",
+        "answer": "Yes. We specialize in senior-citizen-friendly pilgrimages. Our itineraries avoid rushed schedules, prioritize hotels with lift or ground-floor access where available, and assign patient, experienced drivers familiar with senior accessibility points near temples."
+      },
+      {
+        "id": "transparent-pricing",
+        "category": "booking",
+        "question": "Are tolls, parking, and driver allowances included in your quotes?",
+        "answer": "We provide complete, itemized quotations before you confirm your booking—clearly specifying whether tolls, state taxes, parking fees, and driver allowances are included—so there are no hidden charges during your trip."
+      },
+      {
+        "id": "how-to-book",
+        "category": "booking",
+        "question": "How can I book a tour package, hotel, or rental car with Mahakumbh Tours & Travels?",
+        "answer": "You can book directly through our website's inquiry form, call or WhatsApp our Nashik desk at +91 7507778088, email us at mahakumbhtourstravels@gmail.com, or visit our office at Shop No. 11, NYSA Business Centre, Makhmalabad Road, Nashik."
+      }
+    ],
+    "cta": {
+      "title": "Still Have Questions About Your Pilgrimage?",
+      "subtitle": "Speak directly with our Nashik travel experts for custom Kumbh Mela itineraries, group Tempo Travellers, and verified hotel availability.",
+      "whatsapp": "WhatsApp Us",
+      "call": "Call +91 7507778088"
     }
   }
 }

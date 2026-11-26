@@ -7,7 +7,7 @@ export const NAV_LINKS = [
   { name: "Rental Car", path: "/rental-car" },
   { name: "Tour Package", path: "/tour-package" },
   { name: "Blog", path: "/blog" },
-  // { name: "Contact", path: "/contact-us" },
+  { name: "Faq", path: "/faq" },
 ];
 
 export const API_URL = "http://localhost:3000/api";
