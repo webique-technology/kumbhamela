@@ -53,7 +53,7 @@ export async function generateMetadata({ params }) {
     locale === "mr" ? "mr_IN" : locale === "hi" ? "hi_IN" : "en_IN";
 
   // --- SHORTENED & CLEANED METADATA STRINGS ---
-  const metaTitle = "Mahakumbh Tours & Travels | Nashik Kumbh Mela 2027";
+  const metaTitle = "Simhastha Mahakumbh Mela Nashik Trimbakeshwar 2027 - 28";
 
   // Description: Exactly 143 characters (Fits Google's 155-character limit)
   const metaDescription =
